@@ -1,0 +1,27 @@
+============================================================
+  WHEAT_TEST Disease Detection - Classification Report
+============================================================
+
+Overall Accuracy: 0.8720 (87.20%)
+
+                      precision    recall  f1-score   support
+
+               Aphid       0.96      0.94      0.95        50
+          Black Rust       0.97      0.76      0.85        50
+               Blast       0.89      1.00      0.94        50
+          Brown Rust       0.82      0.90      0.86        50
+     Common Root Rot       1.00      1.00      1.00        50
+Fusarium Head Blight       1.00      0.88      0.94        50
+             Healthy       0.29      0.08      0.12        50
+         Leaf Blight       0.97      0.76      0.85        50
+              Mildew       0.98      0.96      0.97        50
+                Mite       0.96      0.90      0.93        50
+            Septoria       1.00      0.94      0.97        50
+                Smut       1.00      1.00      1.00        50
+            Stem fly       0.98      1.00      0.99        50
+            Tan spot       0.73      0.96      0.83        50
+         Yellow Rust       0.53      1.00      0.69        50
+
+            accuracy                           0.87       750
+           macro avg       0.87      0.87      0.86       750
+        weighted avg       0.87      0.87      0.86       750

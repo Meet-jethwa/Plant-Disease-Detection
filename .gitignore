@@ -1,0 +1,41 @@
+# ─── Datasets (large files) ───
+rice paddy disease dataset/
+wheat/
+paddy-disease-classification.zip
+
+# ─── Trained model weights (large .keras files) ───
+models/*.keras
+models/*.h5
+
+# ─── Python / Virtual Environment ───
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+env/
+venv/
+.env/
+.venv/
+ENV/
+
+# ─── OS files ───
+.DS_Store
+Thumbs.db
+Desktop.ini
+System Volume Information/
+$RECYCLE.BIN/
+
+# ─── IDE ───
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ─── Jupyter ───
+.ipynb_checkpoints/
+
+# ─── Logs ───
+*.log

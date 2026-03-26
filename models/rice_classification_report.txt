@@ -1,0 +1,22 @@
+============================================================
+  RICE Disease Detection - Classification Report
+============================================================
+
+Overall Accuracy: 0.8943 (89.43%)
+
+                          precision    recall  f1-score   support
+
+   bacterial_leaf_blight       0.00      0.00      0.00         0
+   bacterial_leaf_streak       0.00      0.00      0.00         0
+bacterial_panicle_blight       0.00      0.00      0.00         0
+                   blast       0.00      0.00      0.00         0
+              brown_spot       0.00      0.00      0.00         0
+              dead_heart       0.00      0.00      0.00         0
+            downy_mildew       0.00      0.00      0.00         0
+                   hispa       0.00      0.00      0.00         0
+                  normal       0.99      0.86      0.92       993
+                  tungro       0.98      0.93      0.95      1088
+
+                accuracy                           0.89      2081
+               macro avg       0.20      0.18      0.19      2081
+            weighted avg       0.98      0.89      0.94      2081

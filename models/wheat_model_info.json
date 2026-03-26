@@ -1,0 +1,35 @@
+{
+  "crop": "wheat",
+  "architecture": "EfficientNetB0 (Transfer Learning)",
+  "input_size": 224,
+  "num_classes": 15,
+  "class_names": [
+    "Aphid",
+    "Black Rust",
+    "Blast",
+    "Brown Rust",
+    "Common Root Rot",
+    "Fusarium Head Blight",
+    "Healthy",
+    "Leaf Blight",
+    "Mildew",
+    "Mite",
+    "Septoria",
+    "Smut",
+    "Stem fly",
+    "Tan spot",
+    "Yellow Rust"
+  ],
+  "validation_accuracy": 0.89,
+  "techniques_used": [
+    "Transfer Learning (EfficientNetB0)",
+    "Data Augmentation (Flip, Rotate, Zoom, Contrast, Brightness)",
+    "Progressive Fine-tuning",
+    "Class Weight Balancing",
+    "Label Smoothing (0.1)",
+    "Dropout (0.4)",
+    "ReduceLROnPlateau",
+    "EarlyStopping",
+    "BatchNormalization"
+  ]
+}
