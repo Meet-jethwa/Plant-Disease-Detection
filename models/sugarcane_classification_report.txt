@@ -1,0 +1,15 @@
+============================================================
+  SUGARCANE Disease Detection
+============================================================
+
+Overall Accuracy: 0.9632 (96.32%)
+
+                precision    recall  f1-score   support
+
+Mosaic_Disease       0.95      0.96      0.95        95
+          Rust       0.97      0.97      0.97        93
+       Healthy       0.97      0.96      0.97       111
+
+      accuracy                           0.96       299
+     macro avg       0.96      0.96      0.96       299
+  weighted avg       0.96      0.96      0.96       299

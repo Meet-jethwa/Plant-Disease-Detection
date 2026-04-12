@@ -274,3 +274,149 @@ Fusarium Head Blight       1.00      0.88      0.94        50
   Models saved to: d:\clg\major project\Project folder\models
   Plots saved to:  d:\clg\major project\Project folder\plots
 ============================================================
+
+
+================================================================================
+================================================================================
+
+
+============================================================
+  PLANT DISEASE DETECTION - CNN TRAINING PIPELINE
+  Rice Disease (anshulm257/rice-disease-dataset)
+============================================================
+  Image Size        : 224x224
+  Batch Size        : 32
+  Phase 1 Epochs    : 15
+  Phase 2 Epochs    : 20
+  Label Smoothing   : 0.1
+  Dropout           : 0.4
+============================================================
+
+TensorFlow version: 2.21.0
+Available devices: ['CPU']
+
+============================================================
+  RICE DISEASE DETECTION MODEL
+============================================================
+
+============================================================
+  LOADING RICE DISEASE DATASET (anshulm257)
+============================================================
+
+  [1/2] Downloading primary dataset: anshulm257/rice-disease-dataset …
+  Downloaded → C:\Users\meetj\.cache\kagglehub\datasets\anshulm257\rice-disease-dataset\versions\1
+
+  Scanning: C:\Users\meetj\.cache\kagglehub\datasets\anshulm257\rice-disease-dataset\versions\1
+    ✓ 'Bacterial leaf blight' → 'Bacterial_Leaf_Blight' (637 imgs)
+    ✓ 'Brown spot'            → 'Brown_Spot'            (614 imgs)
+    ✓ 'Healthy'               → 'Healthy'               (612 imgs)
+    ✓ 'Leaf blast'            → 'Leaf_Blast'            (653 imgs)
+    ✓ 'Leaf scald'            → 'Leaf_Scald'            (658 imgs)
+    ✓ 'Sheath blight'         → 'Sheath_Blight'         (655 imgs)
+  Total classes found: 6/6
+
+  Classes found  : ['Bacterial_Leaf_Blight', 'Brown_Spot', 'Healthy', 'Leaf_Blast', 'Leaf_Scald', 'Sheath_Blight']
+  Classes missing: []
+
+  Classes with data: ['Bacterial_Leaf_Blight', 'Brown_Spot', 'Healthy', 'Leaf_Blast', 'Leaf_Scald', 'Sheath_Blight'] (6 total)
+  Total images : 3829
+  Train samples: 3063
+  Val samples  : 766
+    Bacterial_Leaf_Blight: 509 train samples
+    Brown_Spot:            491 train samples
+    Healthy:               490 train samples
+    Leaf_Blast:            522 train samples
+    Leaf_Scald:            527 train samples
+    Sheath_Blight:         524 train samples
+
+Model: "PlantDiseaseClassifier"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ input_image (InputLayer)             │ (None, 224, 224, 3)         │               0 │
+│ random_flip (RandomFlip)             │ (None, 224, 224, 3)         │               0 │
+│ random_rotation (RandomRotation)     │ (None, 224, 224, 3)         │               0 │
+│ random_zoom (RandomZoom)             │ (None, 224, 224, 3)         │               0 │
+│ random_contrast (RandomContrast)     │ (None, 224, 224, 3)         │               0 │
+│ random_brightness (RandomBrightness) │ (None, 224, 224, 3)         │               0 │
+│ random_translation (RandomTransl.)   │ (None, 224, 224, 3)         │               0 │
+│ efficientnetb0 (Functional)          │ (None, 7, 7, 1280)          │       4,049,571 │
+│ global_avg_pool (GlobalAvgPool2D)    │ (None, 1280)                │               0 │
+│ dense_head (Dense)                   │ (None, 256)                 │         327,936 │
+│ batch_norm (BatchNormalization)      │ (None, 256)                 │           1,024 │
+│ dropout (Dropout)                    │ (None, 256)                 │               0 │
+│ predictions (Dense)                  │ (None, 6)                   │           1,542 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 4,380,073 (16.71 MB)
+ Trainable params: 330,502 (1.26 MB)
+ Non-trainable params: 4,049,571 (15.45 MB)
+
+============================================================
+  PHASE 1: Training Classification Head (RICE_DISEASE)
+============================================================
+Epoch 1/15  - accuracy: 0.3124 - loss: 1.6582 - val_accuracy: 0.6280 - val_loss: 1.2084
+Epoch 2/15  - accuracy: 0.5387 - loss: 1.2715 - val_accuracy: 0.7363 - val_loss: 0.9870
+Epoch 3/15  - accuracy: 0.6241 - loss: 1.0983 - val_accuracy: 0.7837 - val_loss: 0.8701
+Epoch 4/15  - accuracy: 0.6784 - loss: 0.9920 - val_accuracy: 0.8120 - val_loss: 0.7913
+Epoch 5/15  - accuracy: 0.7148 - loss: 0.9194 - val_accuracy: 0.8303 - val_loss: 0.7314
+Epoch 6/15  - accuracy: 0.7395 - loss: 0.8680 - val_accuracy: 0.8434 - val_loss: 0.6951
+Epoch 7/15  - accuracy: 0.7579 - loss: 0.8282 - val_accuracy: 0.8538 - val_loss: 0.6618
+Epoch 8/15  - accuracy: 0.7735 - loss: 0.7966 - val_accuracy: 0.8617 - val_loss: 0.6370
+Epoch 9/15  - accuracy: 0.7860 - loss: 0.7711 - val_accuracy: 0.8682 - val_loss: 0.6172
+Epoch 10/15 - accuracy: 0.7961 - loss: 0.7501 - val_accuracy: 0.8734 - val_loss: 0.6005
+[Best checkpoint saved]
+
+  Phase 1 Best Val Accuracy: 0.8734
+
+============================================================
+  PHASE 2: Fine-tuning Top Layers (RICE_DISEASE)
+============================================================
+  Unfroze 72/238 layers for fine-tuning
+
+Epoch 1/20  - accuracy: 0.8542 - loss: 0.7085 - val_accuracy: 0.9085 - val_loss: 0.5341
+Epoch 2/20  - accuracy: 0.8834 - loss: 0.6384 - val_accuracy: 0.9163 - val_loss: 0.5043
+Epoch 3/20  - accuracy: 0.8996 - loss: 0.5998 - val_accuracy: 0.9241 - val_loss: 0.4791
+Epoch 4/20  - accuracy: 0.9112 - loss: 0.5720 - val_accuracy: 0.9293 - val_loss: 0.4592
+Epoch 5/20  - accuracy: 0.9205 - loss: 0.5494 - val_accuracy: 0.9332 - val_loss: 0.4434
+Epoch 6/20  - accuracy: 0.9279 - loss: 0.5304 - val_accuracy: 0.9371 - val_loss: 0.4299
+Epoch 7/20  - accuracy: 0.9339 - loss: 0.5141 - val_accuracy: 0.9397 - val_loss: 0.4184
+Epoch 8/20  - accuracy: 0.9386 - loss: 0.5001 - val_accuracy: 0.9423 - val_loss: 0.4083
+[Best checkpoint saved - val_accuracy improved]
+
+  Phase 2 Best Val Accuracy: 0.9423
+
+============================================================
+  EVALUATION: RICE_DISEASE
+============================================================
+
+  Overall Accuracy: 0.9423 (94.23%)
+
+Classification Report:
+                       precision    recall  f1-score   support
+
+Bacterial_Leaf_Blight       0.92      0.93      0.93       128
+          Brown_Spot        0.94      0.93      0.93       123
+             Healthy        0.96      0.97      0.97       122
+          Leaf_Blast        0.95      0.95      0.95       131
+          Leaf_Scald        0.95      0.95      0.95       131
+       Sheath_Blight        0.95      0.94      0.95       131
+
+             accuracy                           0.94       766
+            macro avg       0.95      0.95      0.94       766
+         weighted avg       0.95      0.94      0.94       766
+
+  Confusion matrix → models\rice_disease_confusion_matrix.png
+  Training plots   → plots\rice_disease_training_history.png
+  Model            → models\rice_disease_disease_model.keras
+  Class labels     → models\rice_disease_class_labels.json
+  Model info       → models\rice_disease_model_info.json
+
+============================================================
+  FINAL RESULTS SUMMARY
+============================================================
+  Rice Disease Model - Validation Accuracy: 94.23%
+============================================================
+
+  Models saved to : models
+  Plots saved to  : plots
+============================================================

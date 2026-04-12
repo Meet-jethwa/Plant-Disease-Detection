@@ -1,0 +1,15 @@
+============================================================
+  COTTON Disease Detection
+============================================================
+
+Overall Accuracy: 0.9661 (96.61%)
+
+                      precision    recall  f1-score   support
+
+    Bacterial_Blight       1.00      0.89      0.94         9
+Alternaria_Leaf_Spot       0.93      1.00      0.96        13
+             Healthy       0.97      0.97      0.97        37
+
+            accuracy                           0.97        59
+           macro avg       0.97      0.95      0.96        59
+        weighted avg       0.97      0.97      0.97        59

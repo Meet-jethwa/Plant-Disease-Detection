@@ -1,0 +1,18 @@
+============================================================
+  RICE_DISEASE Disease Detection
+============================================================
+
+Overall Accuracy: 0.9660 (96.60%)
+
+                       precision    recall  f1-score   support
+
+Bacterial_Leaf_Blight       0.96      0.95      0.95       131
+           Brown_Spot       0.96      0.97      0.96       145
+              Healthy       0.98      1.00      0.99       125
+           Leaf_Blast       0.95      0.97      0.96       122
+           Leaf_Scald       0.96      0.98      0.97       134
+        Sheath_Blight       1.00      0.94      0.97       108
+
+             accuracy                           0.97       765
+            macro avg       0.97      0.97      0.97       765
+         weighted avg       0.97      0.97      0.97       765

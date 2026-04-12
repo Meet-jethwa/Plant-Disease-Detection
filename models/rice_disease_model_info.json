@@ -1,0 +1,26 @@
+{
+  "crop": "rice_disease",
+  "architecture": "EfficientNetB0 (Transfer Learning)",
+  "input_size": 224,
+  "num_classes": 6,
+  "class_names": [
+    "Bacterial_Leaf_Blight",
+    "Brown_Spot",
+    "Healthy",
+    "Leaf_Blast",
+    "Leaf_Scald",
+    "Sheath_Blight"
+  ],
+  "validation_accuracy": 0.9660130718954248,
+  "techniques_used": [
+    "Transfer Learning (EfficientNetB0)",
+    "Data Augmentation (Flip, Rotate, Zoom, Contrast, Brightness)",
+    "Progressive Fine-tuning",
+    "Class Weight Balancing",
+    "Label Smoothing (0.1)",
+    "Dropout (0.4)",
+    "ReduceLROnPlateau",
+    "EarlyStopping",
+    "BatchNormalization"
+  ]
+}

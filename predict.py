@@ -101,10 +101,10 @@ def display_result(result):
     print("\n" + "=" * 50)
     print("  🌱 PLANT DISEASE PREDICTION RESULT")
     print("=" * 50)
-    print(f"  📷 Image:      {result['image']}")
-    print(f"  🌿 Crop:       {result['crop'].title()}")
-    print(f"  🔬 Disease:    {result['predicted_disease']}")
-    print(f"  📊 Confidence: {result['confidence']*100:.2f}%")
+    print(f"  Image:      {result['image']}")
+    print(f"  Crop:       {result['crop'].title()}")
+    print(f"  Disease:    {result['predicted_disease']}")
+    print(f"  Confidence: {result['confidence']*100:.2f}%")
     print("-" * 50)
     print("  Top 3 Predictions:")
     for i, pred in enumerate(result['top_3_predictions'], 1):
@@ -135,5 +135,5 @@ if __name__ == "__main__":
         result = predict_disease(args.image, args.crop)
         display_result(result)
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\nError: {e}")
         exit(1)
