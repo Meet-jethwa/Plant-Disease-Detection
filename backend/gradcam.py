@@ -32,45 +32,71 @@ def _get_gradcam_heatmap(img_array: np.ndarray, model, last_conv_layer_name: str
     if base_model is None:
         return None
 
+    last_conv_layer = None
     try:
         last_conv_layer = base_model.get_layer(last_conv_layer_name)
     except ValueError:
-        # Fallback: find the last Conv2D-type layer by scanning
+        # Fallback: find the last Conv2D or DepthwiseConv2D layer by scanning.
+        # EfficientNetB0 uses both Conv2D (top_conv) and DepthwiseConv2D blocks.
         for layer in reversed(base_model.layers):
-            if isinstance(layer, (tf.keras.layers.Conv2D,)):
+            if isinstance(layer, (tf.keras.layers.Conv2D, tf.keras.layers.DepthwiseConv2D)):
                 last_conv_layer = layer
                 break
-        else:
-            return None
 
-    # Build a sub-model: input → (last_conv_output, final_predictions)
-    grad_model = tf.keras.models.Model(
-        inputs=model.inputs,
-        outputs=[last_conv_layer.output, model.output],
-    )
+    if last_conv_layer is None:
+        return None
 
-    with tf.GradientTape() as tape:
+    # Build a sub-model: input → (last_conv_output, final_predictions).
+    # Some exported/stacked models expose a last conv tensor that is not connected
+    # to the top-level model input graph. In that case, Grad-CAM is unavailable.
+    try:
+        grad_model = tf.keras.models.Model(
+            inputs=model.inputs,
+            outputs=[last_conv_layer.output, model.output],
+        )
+    except Exception:
+        return None
+
+    try:
         inputs = tf.cast(img_array, tf.float32)
-        conv_outputs, predictions = grad_model(inputs, training=False)
-        top_class_idx = tf.argmax(predictions[0])
-        loss = predictions[:, top_class_idx]
+        # IMPORTANT: tape.watch must be set up BEFORE the forward pass produces the
+        # tensor we want to differentiate with respect to.  We watch `inputs` so the
+        # full computation graph (inputs → conv_outputs → predictions) is recorded,
+        # then ask for d(loss)/d(conv_outputs).
+        with tf.GradientTape() as tape:
+            tape.watch(inputs)
+            conv_outputs, predictions = grad_model(inputs, training=False)
+            top_class_idx = tf.argmax(predictions[0])
+            loss = predictions[:, top_class_idx]
 
-    # Gradients of the top class score w.r.t. last conv layer output
-    grads = tape.gradient(loss, conv_outputs)            # (1, H, W, C)
+        # Gradients of the top class score w.r.t. last conv layer output
+        grads = tape.gradient(loss, conv_outputs)  # (1, H, W, C)
+    except Exception:
+        return None
+
+    if grads is None:
+        return None
 
     # Global Average Pooling of gradients → per-channel importance
     pooled_grads = tf.reduce_mean(grads, axis=(0, 1, 2))  # (C,)
 
     # Weight each channel map by its importance
-    conv_outputs = conv_outputs[0]                        # (H, W, C)
+    conv_outputs = conv_outputs[0]                           # (H, W, C)
     heatmap = conv_outputs @ pooled_grads[..., tf.newaxis]  # (H, W, 1)
-    heatmap = tf.squeeze(heatmap)                         # (H, W)
+    heatmap = tf.squeeze(heatmap)                           # (H, W)
+
+    # Guard against scalar result (edge case with 1x1 feature maps)
+    if heatmap.shape.rank == 0:
+        return None
 
     # ReLU + normalise to [0, 1]
     heatmap = tf.maximum(heatmap, 0)
     max_val = tf.reduce_max(heatmap)
-    if max_val > 0:
+    if max_val > 1e-8:
         heatmap = heatmap / max_val
+    else:
+        # All activations are zero or negligible — heatmap would be blank
+        return None
 
     return heatmap.numpy()
 

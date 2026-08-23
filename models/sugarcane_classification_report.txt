@@ -2,14 +2,21 @@
   SUGARCANE Disease Detection
 ============================================================
 
-Overall Accuracy: 0.9632 (96.32%)
+Overall Accuracy: 0.9596 (95.96%)
 
-                precision    recall  f1-score   support
+                  precision    recall  f1-score   support
 
-Mosaic_Disease       0.95      0.96      0.95        95
-          Rust       0.97      0.97      0.97        93
-       Healthy       0.97      0.96      0.97       111
+Banded_Chlorosis       0.89      0.98      0.93        87
+      Brown_Spot       0.99      0.96      0.98       351
+    Dried_Leaves       0.96      1.00      0.98        81
+    Grassy_Shoot       0.99      0.99      0.99        70
+         Healthy       0.98      0.99      0.99       182
+          Mosaic       0.96      0.95      0.96        84
+    Pokkah_Boeng       0.78      0.89      0.83        66
+        Sett_Rot       1.00      1.00      1.00       124
+          Yellow       0.99      0.98      0.99       102
+            Smut       0.86      0.74      0.80        66
 
-      accuracy                           0.96       299
-     macro avg       0.96      0.96      0.96       299
-  weighted avg       0.96      0.96      0.96       299
+        accuracy                           0.96      1213
+       macro avg       0.94      0.95      0.94      1213
+    weighted avg       0.96      0.96      0.96      1213
