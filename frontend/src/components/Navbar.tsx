@@ -1,4 +1,4 @@
-// Navbar.tsx — Pathology Diagnostic Workbench Topbar
+// Navbar.tsx — Flora AI Diagnostic Workbench Topbar
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
@@ -77,9 +77,14 @@ export function Navbar({ locationData, isLocating, onFetchLocation, backendHealt
               <Microscope style={{ width: '18px', height: '18px', color: '#ffffff' }} />
             </div>
             <div>
-              <span style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A', display: 'block', lineHeight: 1 }}>
-                Plant Pathology
-              </span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px' }}>
+                <span style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', lineHeight: 1 }}>
+                  Flora
+                </span>
+                <span style={{ fontSize: '16px', fontWeight: 800, color: '#159A70', lineHeight: 1 }}>
+                  AI
+                </span>
+              </div>
               <span style={{ fontSize: '10px', fontWeight: 600, color: '#64748B', letterSpacing: '0.04em' }}>
                 DIAGNOSTIC WORKBENCH
               </span>
