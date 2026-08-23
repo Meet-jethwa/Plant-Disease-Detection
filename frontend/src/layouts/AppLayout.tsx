@@ -1,4 +1,4 @@
-// AppLayout.tsx — Wraps all pages with proper large-scale website layout
+// AppLayout.tsx — Standardized Engineering Container
 import type { ReactNode } from 'react'
 import { Navbar } from '../components/Navbar'
 import { MobileHeader } from '../components/MobileHeader'
@@ -19,8 +19,7 @@ interface AppLayoutProps {
 
 export function AppLayout({ children, locationData, isLocating, onFetchLocation, backendHealthy }: AppLayoutProps) {
   return (
-    <div className="min-h-screen min-h-dvh flex flex-col bg-[#F7F8F3]">
-      {/* Desktop nav (lg+) */}
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#F8FAFC' }}>
       <Navbar
         locationData={locationData}
         isLocating={isLocating}
@@ -28,20 +27,16 @@ export function AppLayout({ children, locationData, isLocating, onFetchLocation,
         backendHealthy={backendHealthy}
       />
 
-      {/* Mobile/tablet header (< lg) */}
       <MobileHeader />
 
-      {/* Main content — allow full-bleed hero sections while keeping app spacing consistent */}
-      <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 pb-20 lg:pb-16">
+      <main style={{ flex: 1, width: '100%', maxWidth: '1280px', margin: '0 auto', padding: '24px 20px 48px 20px' }}>
         {children}
       </main>
 
-      {/* Desktop footer */}
       <div className="hidden lg:block">
         <Footer />
       </div>
 
-      {/* Mobile bottom navigation */}
       <BottomNav />
     </div>
   )

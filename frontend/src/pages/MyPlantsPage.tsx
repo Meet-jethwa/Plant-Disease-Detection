@@ -1,7 +1,7 @@
-// MyPlantsPage.tsx — Website-scale plant grid with search and filter
+// MyPlantsPage.tsx — Monitored Specimens Dashboard
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Plus, Leaf, Search } from 'lucide-react'
+import { Plus, Search, Layers } from 'lucide-react'
 import { PlantCard } from '../components/PlantCard'
 import { EmptyState } from '../components/ui/EmptyState'
 import { MOCK_PLANTS } from '../data/mockData'
@@ -14,23 +14,24 @@ interface MyPlantsPageProps {
 }
 
 const FILTER_TABS: { key: Filter; label: string }[] = [
-  { key: 'all',       label: 'All Plants' },
-  { key: 'healthy',   label: 'Healthy' },
+  { key: 'all', label: 'All Crops' },
+  { key: 'healthy', label: 'Healthy' },
   { key: 'attention', label: 'Needs Attention' },
-  { key: 'risk',      label: 'At Risk' },
+  { key: 'risk', label: 'High Pathology Risk' },
 ]
 
 function filterPlants(plants: Plant[], filter: Filter, query: string): Plant[] {
   let result = plants
-  if (filter === 'healthy')   result = result.filter(p => p.status === 'Healthy')
-  if (filter === 'attention') result = result.filter(p => p.status === 'Needs Attention')
-  if (filter === 'risk')      result = result.filter(p => p.status === 'At Risk' || p.status === 'Critical')
+  if (filter === 'healthy') result = result.filter((p) => p.status === 'Healthy')
+  if (filter === 'attention') result = result.filter((p) => p.status === 'Needs Attention')
+  if (filter === 'risk') result = result.filter((p) => p.status === 'At Risk' || p.status === 'Critical')
   if (query.trim()) {
     const q = query.toLowerCase()
-    result = result.filter(p =>
-      p.name.toLowerCase().includes(q) ||
-      p.species.toLowerCase().includes(q) ||
-      p.scientificName.toLowerCase().includes(q)
+    result = result.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.species.toLowerCase().includes(q) ||
+        p.scientificName.toLowerCase().includes(q)
     )
   }
   return result
@@ -44,119 +45,107 @@ export function MyPlantsPage({ plants = MOCK_PLANTS }: MyPlantsPageProps) {
   const filtered = filterPlants(plants, filter, query)
 
   const counts = {
-    all:       plants.length,
-    healthy:   plants.filter(p => p.status === 'Healthy').length,
-    attention: plants.filter(p => p.status === 'Needs Attention').length,
-    risk:      plants.filter(p => p.status === 'At Risk' || p.status === 'Critical').length,
+    all: plants.length,
+    healthy: plants.filter((p) => p.status === 'Healthy').length,
+    attention: plants.filter((p) => p.status === 'Needs Attention').length,
+    risk: plants.filter((p) => p.status === 'At Risk' || p.status === 'Critical').length,
   }
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
-
-      {/* Page header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+    <div style={{ maxWidth: '1240px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px', paddingBottom: '40px' }}>
+      
+      {/* ── Top Header ── */}
+      <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', padding: '20px 24px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <p className="eyebrow mb-2">Garden Monitor</p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-[#17211D]">My Plants</h1>
-          <p className="text-[#66736C] mt-1.5">{plants.length} plants being monitored by AI</p>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#159A70' }} />
+            <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#159A70', letterSpacing: '0.05em' }}>
+              Crop Monitoring
+            </span>
+          </div>
+          <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0F172A', margin: 0 }}>
+            Active Crop Health Registry
+          </h1>
         </div>
+
         <button
           type="button"
           onClick={() => navigate('/scan')}
-          className="btn btn-primary gap-2 shrink-0"
-          id="my-plants-add-btn"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 16px', background: '#159A70', color: '#ffffff', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}
         >
-          <Plus className="w-4 h-4" />
-          Add Plant
+          <Plus style={{ width: '15px', height: '15px' }} />
+          Register New Specimen
         </button>
       </div>
 
-      {/* Stats row */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="stat-card">
-          <p className="text-xs text-[#66736C] font-medium mb-2">Healthy</p>
-          <p className="text-4xl font-bold text-[#159A70]">{counts.healthy}</p>
+      {/* ── Metric Summary Cards ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>Healthy Specimens</span>
+          <div style={{ fontSize: '24px', fontWeight: 800, color: '#159A70', marginTop: '4px' }}>{counts.healthy}</div>
         </div>
-        <div className="stat-card">
-          <p className="text-xs text-[#66736C] font-medium mb-2">Need Attention</p>
-          <p className="text-4xl font-bold text-[#E89B24]">{counts.attention}</p>
+        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>Attention Required</span>
+          <div style={{ fontSize: '24px', fontWeight: 800, color: '#D97706', marginTop: '4px' }}>{counts.attention}</div>
         </div>
-        <div className="stat-card">
-          <p className="text-xs text-[#66736C] font-medium mb-2">At Risk</p>
-          <p className="text-4xl font-bold text-[#D9534F]">{counts.risk}</p>
+        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>High Pathogen Risk</span>
+          <div style={{ fontSize: '24px', fontWeight: 800, color: '#DC2626', marginTop: '4px' }}>{counts.risk}</div>
         </div>
       </div>
 
-      {/* Search bar */}
-      <div className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#96A39D] pointer-events-none" />
-        <input
-          type="text"
-          placeholder="Search plants by name or species..."
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          className="input pl-11 text-sm"
-          aria-label="Search plants"
-          id="my-plants-search"
-        />
-      </div>
+      {/* ── Search & Filter Tabs ── */}
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ position: 'relative', flex: 1, minWidth: '260px' }}>
+          <Search style={{ width: '15px', height: '15px', color: '#94A3B8', position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Filter crops by species or variety name..."
+            style={{ width: '100%', padding: '9px 12px 9px 34px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13px', outline: 'none', background: '#ffffff' }}
+          />
+        </div>
 
-      {/* Filter tabs */}
-      <div className="flex gap-2 flex-wrap">
-        {FILTER_TABS.map(tab => (
-          <button
-            key={tab.key}
-            type="button"
-            onClick={() => setFilter(tab.key)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all border ${
-              filter === tab.key
-                ? 'bg-[#159A70] text-white border-[#159A70] shadow-sm'
-                : 'bg-white text-[#66736C] border-[#E0EBE4] hover:border-[#BDD8C7] hover:text-[#17211D]'
-            }`}
-            id={`my-plants-filter-${tab.key}`}
-          >
-            {tab.label}
-            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-md ${filter === tab.key ? 'bg-white/25 text-white' : 'bg-[#F0FAF4] text-[#66736C]'}`}>
-              {counts[tab.key]}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {/* Plants grid */}
-      {filtered.length === 0 ? (
-        <EmptyState
-          icon={<Leaf className="w-10 h-10" />}
-          title={query ? 'No plants found' : 'No plants yet'}
-          description={query ? 'Try a different search term.' : 'Add your first plant by scanning a leaf.'}
-          action={!query ? (
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+          {FILTER_TABS.map((tab) => (
             <button
+              key={tab.key}
               type="button"
-              onClick={() => navigate('/scan')}
-              className="btn btn-primary btn-lg gap-2"
-              id="my-plants-empty-add-btn"
+              onClick={() => setFilter(tab.key)}
+              style={{
+                padding: '7px 12px',
+                borderRadius: '8px',
+                fontSize: '12px',
+                fontWeight: 600,
+                background: filter === tab.key ? '#159A70' : '#ffffff',
+                color: filter === tab.key ? '#ffffff' : '#475569',
+                border: '1px solid',
+                borderColor: filter === tab.key ? '#159A70' : '#CBD5E1',
+                cursor: 'pointer',
+              }}
             >
-              <Plus className="w-5 h-5" />
-              Scan Your First Plant
+              {tab.label} ({counts[tab.key]})
             </button>
-          ) : undefined}
-        />
+          ))}
+        </div>
+      </div>
+
+      {/* ── Grid ── */}
+      {filtered.length === 0 ? (
+        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '48px', textAlign: 'center', color: '#64748B' }}>
+          <p style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>No monitored plants found matching the query.</p>
+        </div>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((plant, i) => (
-            <div
-              key={plant.id}
-              className="animate-fade-in-up"
-              style={{ animationDelay: `${i * 60}ms` }}
-            >
-              <PlantCard
-                plant={plant}
-                onClick={() => navigate(`/plants/${plant.id}`)}
-              />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+          {filtered.map((plant) => (
+            <div key={plant.id} onClick={() => navigate(`/plants/${plant.id}`)} style={{ cursor: 'pointer' }}>
+              <PlantCard plant={plant} />
             </div>
           ))}
         </div>
       )}
+
     </div>
   )
 }
