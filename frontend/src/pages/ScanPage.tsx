@@ -9,9 +9,29 @@ import { HealthScore } from '../components/HealthScore'
 import { HeatmapViewer } from '../components/HeatmapViewer'
 import { TreatmentCard } from '../components/TreatmentCard'
 import { MOCK_CROPS } from '../data/mockData'
-import type { Crop, PredictionResponse, LocationContextData } from '../types'
+import type { Crop, PredictionResponse } from '../types'
 
 export type { Crop, PredictionResponse }
+
+interface ScanPageProps {
+  crops?: Crop[]
+  selectedCrop: string
+  setSelectedCrop: (crop: string) => void
+  selectedFile: File | null
+  previewUrl: string | null
+  onFileChange: (file: File) => void
+  onSelectSamplePreset: (crop: string, key: string) => void
+  onAnalyzePlant: () => void
+  isPredicting: boolean
+  prediction: PredictionResponse | null
+  locationData: unknown
+  onFetchLocation: () => void
+  isLocating: boolean
+  error: string | null
+  onReset: () => void
+}
+
+type Tab = 'overview' | 'causes' | 'treatment' | 'prevention'
 
 export function ScanPage({
   crops = MOCK_CROPS,
@@ -20,13 +40,9 @@ export function ScanPage({
   selectedFile,
   previewUrl,
   onFileChange,
-  onSelectSamplePreset,
   onAnalyzePlant,
   isPredicting,
   prediction,
-  locationData,
-  onFetchLocation,
-  isLocating,
   error,
   onReset,
 }: ScanPageProps) {

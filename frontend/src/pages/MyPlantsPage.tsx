@@ -1,9 +1,8 @@
 // MyPlantsPage.tsx — Monitored Specimens Dashboard
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Plus, Search, Layers } from 'lucide-react'
+import { Plus, Search } from 'lucide-react'
 import { PlantCard } from '../components/PlantCard'
-import { EmptyState } from '../components/ui/EmptyState'
 import { MOCK_PLANTS } from '../data/mockData'
 import type { Plant } from '../types'
 

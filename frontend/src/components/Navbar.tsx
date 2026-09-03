@@ -19,7 +19,7 @@ interface NavbarProps {
   backendHealthy: boolean
 }
 
-export function Navbar({ locationData, isLocating, onFetchLocation, backendHealthy }: NavbarProps) {
+export function Navbar({ backendHealthy }: NavbarProps) {
   const location = useLocation()
   const [profileOpen, setProfileOpen] = useState(false)
   const { t } = useLang()
@@ -31,17 +31,6 @@ export function Navbar({ locationData, isLocating, onFetchLocation, backendHealt
     { path: '/plants',    label: t('nav.plants'),       icon: Leaf },
     { path: '/library',   label: t('nav.encyclopedia'), icon: BookOpen },
   ]
-
-  const riskBg: Record<string, string> = {
-    High:   'rgba(255,69,96,0.12)',
-    Medium: 'rgba(255,184,0,0.12)',
-    Low:    'rgba(0,255,136,0.12)',
-  }
-  const riskColor: Record<string, string> = {
-    High:   'var(--neon-red)',
-    Medium: 'var(--neon-amber)',
-    Low:    'var(--neon-green)',
-  }
 
   return (
     <header className="hidden lg:block" style={{
