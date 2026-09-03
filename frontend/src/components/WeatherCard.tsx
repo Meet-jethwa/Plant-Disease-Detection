@@ -1,4 +1,4 @@
-// WeatherCard.tsx — Location & weather display component
+// WeatherCard.tsx — BioScan Lab dark weather & risk widget
 import { MapPin, Thermometer, Droplets, Wind, RefreshCw } from 'lucide-react'
 import type { LocationContextData } from '../types'
 
@@ -9,76 +9,86 @@ interface WeatherCardProps {
   compact?: boolean
 }
 
-const riskConfig: Record<string, { label: string; cls: string; dot: string }> = {
-  Low:    { label: 'Low Risk',    cls: 'bg-emerald-50 text-emerald-800 border-emerald-200',  dot: 'bg-emerald-500'  },
-  Medium: { label: 'Medium Risk', cls: 'bg-amber-50 text-amber-800 border-amber-200',        dot: 'bg-amber-500'    },
-  High:   { label: 'High Risk',   cls: 'bg-red-50 text-red-800 border-red-200',              dot: 'bg-red-500'      },
+const riskConfig: Record<string, { label: string; color: string; bg: string; border: string }> = {
+  Low:    { label: 'LOW RISK',    color: 'var(--neon-green)', bg: 'rgba(0,255,136,0.08)', border: 'rgba(0,255,136,0.25)' },
+  Medium: { label: 'MEDIUM RISK', color: 'var(--neon-amber)', bg: 'rgba(255,184,0,0.08)', border: 'rgba(255,184,0,0.25)' },
+  High:   { label: 'HIGH RISK',   color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' },
 }
 
 export function WeatherCard({ data, isLoading, onRefresh, compact = false }: WeatherCardProps) {
   const risk = riskConfig[data?.risk_level ?? ''] ?? riskConfig['Medium']
 
   return (
-    <div className="card p-4 space-y-3">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5">
-          <MapPin className="w-4 h-4 text-[#0B8F68]" />
-          <span className="text-xs font-bold text-[#10231D]">Local Weather Context</span>
+    <div className="bio-card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <MapPin style={{ width: 13, height: 13, color: 'var(--neon-cyan)' }} />
+          <span className="eyebrow">WEATHER CONTEXT</span>
         </div>
-        <button
-          type="button"
-          onClick={onRefresh}
-          disabled={isLoading}
-          aria-label="Refresh weather data"
-          className="flex items-center gap-1 text-[10px] text-[#0B8F68] font-bold hover:underline disabled:opacity-50"
-        >
-          <RefreshCw className={`w-3 h-3 ${isLoading ? 'animate-spin' : ''}`} />
-          <span>Update</span>
+        <button type="button" onClick={onRefresh} disabled={isLoading} aria-label="Refresh weather data"
+          style={{
+            display: 'flex', alignItems: 'center', gap: 4, background: 'none', border: 'none',
+            cursor: 'pointer', color: 'var(--neon-green)', fontSize: '0.65rem',
+            fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', opacity: isLoading ? 0.5 : 1,
+          }}>
+          <RefreshCw style={{ width: 11, height: 11, animation: isLoading ? 'bio-spin 1s linear infinite' : 'none' }} />
+          <span>UPDATE</span>
         </button>
       </div>
 
       {isLoading ? (
-        <div className="text-xs text-[#64736C] animate-pulse">Detecting location...</div>
+        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+          <span className="animate-pulse-dot" style={{ display: 'inline-block', marginRight: 6 }}>●</span>
+          LOCATING...
+        </div>
       ) : data ? (
         <>
           <div>
-            <div className="text-sm font-bold text-[#10231D]">
+            <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 2 }}>
               {data.location.city}, {data.location.state}
             </div>
             {!compact && (
-              <div className="text-xs text-[#64736C] mt-0.5">{data.location.country}</div>
+              <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{data.location.country}</div>
             )}
           </div>
 
-          <div className="grid grid-cols-3 gap-2 text-xs">
-            <div className="flex items-center gap-1 text-[#64736C]">
-              <Thermometer className="w-3 h-3 text-orange-500" />
-              <span className="font-semibold">{data.weather.temperature_c}°C</span>
-            </div>
-            <div className="flex items-center gap-1 text-[#64736C]">
-              <Droplets className="w-3 h-3 text-blue-500" />
-              <span className="font-semibold">{data.weather.humidity_percent}%</span>
-            </div>
-            <div className="flex items-center gap-1 text-[#64736C]">
-              <Wind className="w-3 h-3 text-slate-400" />
-              <span className="font-semibold">{data.weather.wind_kmh} km/h</span>
-            </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+            {[
+              { icon: Thermometer, value: `${data.weather.temperature_c}°C`, color: '#FF8C4A' },
+              { icon: Droplets,    value: `${data.weather.humidity_percent}%`, color: 'var(--neon-cyan)' },
+              { icon: Wind,        value: `${data.weather.wind_kmh}km/h`, color: 'var(--text-secondary)' },
+            ].map(({ icon: Icon, value, color }) => (
+              <div key={value} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '8px 4px', borderRadius: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-subtle)' }}>
+                <Icon style={{ width: 13, height: 13, color }} />
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{value}</span>
+              </div>
+            ))}
           </div>
 
-          <div className="text-[10px] text-[#64736C]">{data.weather.condition}</div>
+          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+            {data.weather.condition.toUpperCase()}
+          </div>
 
           {/* Risk indicator */}
-          <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-semibold ${risk.cls}`}>
-            <span className={`w-2 h-2 rounded-full ${risk.dot} shrink-0`} aria-hidden="true" />
-            <span>{risk.label}</span>
-            {!compact && data.risk_reason && (
-              <span className="font-normal text-[10px] ml-1">— {data.risk_reason}</span>
-            )}
+          <div style={{
+            display: 'flex', alignItems: 'flex-start', gap: 8,
+            padding: '10px 12px', borderRadius: 8,
+            background: risk.bg, border: `1px solid ${risk.border}`,
+          }}>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: risk.color, boxShadow: `0 0 6px ${risk.color}`, flexShrink: 0, marginTop: 3 }} />
+            <div>
+              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: risk.color, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
+                {risk.label}
+              </span>
+              {!compact && data.risk_reason && (
+                <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.5 }}>{data.risk_reason}</p>
+              )}
+            </div>
           </div>
         </>
       ) : (
-        <div className="text-xs text-[#64736C]">
-          Click Update to load local weather and disease risk data.
+        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+          Click UPDATE to load local weather and disease risk data.
         </div>
       )}
     </div>

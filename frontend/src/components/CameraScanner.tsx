@@ -77,7 +77,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
       <div className="flex-1 relative overflow-hidden">
         {/* Permission Denied */}
         {(camera.state === 'denied' || camera.state === 'unavailable') && (
-          <div className="absolute inset-0 bg-[#06251C] flex flex-col items-center justify-center gap-6 p-6 z-20">
+          <div className="absolute inset-0 bg-[#0F291E] flex flex-col items-center justify-center gap-6 p-6 z-20">
             <div className="w-20 h-20 rounded-3xl bg-red-900/40 flex items-center justify-center">
               {camera.state === 'denied' ? (
                 <CameraOff className="w-10 h-10 text-red-400" />

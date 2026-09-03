@@ -1,14 +1,15 @@
 // HeatmapViewer.tsx — Interactive Grad-CAM visual analysis viewer
 import { useState } from 'react'
-import { Eye, Maximize2, X, Info, Layers, SlidersHorizontal, ZoomIn } from 'lucide-react'
+import { Eye, Maximize2, X, Info, Layers, ZoomIn, Flame } from 'lucide-react'
 
 interface HeatmapViewerProps {
   originalImage: string
   highlightedImage: string
+  gradcamHeatmap?: string          // pure JET colormap (no blend)
   affectedAreaPercent?: number
 }
 
-type ViewMode = 'original' | 'gradcam' | 'blend'
+type ViewMode = 'gradcam' | 'heatmap' | 'original'
 
 const COLOR_SCALE = [
   { label: 'Critical',  color: '#DC2626', desc: 'Heavily affected' },
@@ -21,35 +22,87 @@ const COLOR_SCALE = [
 export function HeatmapViewer({
   originalImage,
   highlightedImage,
+  gradcamHeatmap,
   affectedAreaPercent = 18,
 }: HeatmapViewerProps) {
   const [mode, setMode] = useState<ViewMode>('gradcam')
-  const [opacity, setOpacity] = useState(0.75)
   const [fullscreen, setFullscreen] = useState(false)
   const [showLegend, setShowLegend] = useState(true)
-
-  const modeConfig: Record<ViewMode, { label: string; icon: React.ReactNode; desc: string }> = {
-    original: {
-      label: 'Original',
-      icon: <Eye className="w-3.5 h-3.5" />,
-      desc: 'Original uploaded image',
-    },
-    gradcam: {
-      label: 'Grad-CAM',
-      icon: <Layers className="w-3.5 h-3.5" />,
-      desc: 'AI attention heatmap overlay',
-    },
-    blend: {
-      label: 'Blend',
-      icon: <SlidersHorizontal className="w-3.5 h-3.5" />,
-      desc: 'Adjustable overlay blend',
-    },
-  }
 
   const severityColor =
     affectedAreaPercent >= 60 ? '#DC2626'
     : affectedAreaPercent >= 35 ? '#D97706'
     : '#16A34A'
+
+  const hasRawHeatmap = Boolean(gradcamHeatmap)
+
+  function ImageView({ maxH }: { maxH: string }) {
+    if (mode === 'original') {
+      return (
+        <img
+          src={originalImage}
+          alt="Original plant leaf"
+          className={`w-full object-contain block ${maxH}`}
+        />
+      )
+    }
+
+    if (mode === 'heatmap' && hasRawHeatmap && gradcamHeatmap) {
+      return (
+        <img
+          src={gradcamHeatmap}
+          alt="Pure Grad-CAM heatmap activation map"
+          className={`w-full object-contain block ${maxH}`}
+        />
+      )
+    }
+
+    // Default Grad-CAM mode: render composite highlightedImage
+    // Fall back to original with screen-blended heatmap if highlightedImage is empty
+    if (highlightedImage) {
+      return (
+        <img
+          src={highlightedImage}
+          alt="Grad-CAM visual attention overlay"
+          className={`w-full object-contain block ${maxH}`}
+        />
+      )
+    }
+
+    if (hasRawHeatmap && gradcamHeatmap) {
+      return (
+        <div className="relative">
+          <img
+            src={originalImage}
+            alt="Original plant leaf"
+            className={`w-full object-contain block ${maxH}`}
+          />
+          <img
+            src={gradcamHeatmap}
+            alt="Grad-CAM heatmap"
+            className="absolute inset-0 w-full h-full object-contain"
+            style={{ mixBlendMode: 'screen', opacity: 0.88 }}
+          />
+        </div>
+      )
+    }
+
+    return (
+      <img
+        src={originalImage}
+        alt="Original plant leaf"
+        className={`w-full object-contain block ${maxH}`}
+      />
+    )
+  }
+
+  const tabs: Array<{ key: ViewMode; label: string; icon: React.ReactNode }> = [
+    { key: 'gradcam', label: 'Grad-CAM Overlay', icon: <Layers className="w-3.5 h-3.5" /> },
+    ...(hasRawHeatmap
+      ? [{ key: 'heatmap' as ViewMode, label: 'Pure Heatmap', icon: <Flame className="w-3.5 h-3.5" /> }]
+      : []),
+    { key: 'original', label: 'Original', icon: <Eye className="w-3.5 h-3.5" /> },
+  ]
 
   return (
     <>
@@ -89,7 +142,7 @@ export function HeatmapViewer({
 
         {/* Mode selector tabs */}
         <div className="flex gap-1 p-3 bg-[#F5FBF7] border-b border-[#D4E8DC]">
-          {(Object.entries(modeConfig) as [ViewMode, typeof modeConfig[ViewMode]][]).map(([key, cfg]) => (
+          {tabs.map(({ key, label, icon }) => (
             <button
               key={key}
               type="button"
@@ -100,35 +153,19 @@ export function HeatmapViewer({
                   : 'bg-white text-[#64736C] border border-[#D4E8DC] hover:border-[#0B8F68]/40 hover:text-[#0B8F68]'
               }`}
             >
-              {cfg.icon}
-              {cfg.label}
+              {icon}
+              {label}
             </button>
           ))}
         </div>
 
         {/* Image display area */}
-        <div className="relative bg-[#06251C] select-none" style={{ minHeight: 300 }}>
-          {/* Base: original image */}
-          <img
-            src={originalImage}
-            alt="Original plant leaf"
-            className="w-full object-contain max-h-[420px]"
-            style={{ display: 'block' }}
-          />
+        <div className="relative bg-[#0e0e0e] select-none border-b border-[#D4E8DC]" style={{ minHeight: 300 }}>
+          <ImageView maxH="max-h-[420px]" />
 
-          {/* Grad-CAM overlay */}
-          {mode !== 'original' && (
-            <img
-              src={highlightedImage}
-              alt="Grad-CAM heatmap"
-              className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300"
-              style={{ opacity: mode === 'gradcam' ? 1 : opacity }}
-            />
-          )}
-
-          {/* Color legend (top-right) */}
+          {/* Color legend (top-right) — only in Grad-CAM / heatmap mode */}
           {showLegend && mode !== 'original' && (
-            <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm rounded-xl p-2.5 space-y-1.5">
+            <div className="absolute top-3 right-3 bg-black/65 backdrop-blur-sm rounded-xl p-2.5 space-y-1.5 z-10">
               <p className="text-[9px] font-700 text-white/70 uppercase tracking-wider mb-1">Intensity</p>
               {COLOR_SCALE.map(({ label, color }) => (
                 <div key={label} className="flex items-center gap-1.5">
@@ -147,50 +184,15 @@ export function HeatmapViewer({
           )}
 
           {/* Mode label pill (bottom-left) */}
-          <div className="absolute bottom-3 left-3">
+          <div className="absolute bottom-3 left-3 z-10">
             <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm">
-              <span className="text-[10px] font-600 text-white">{modeConfig[mode].desc}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Blend opacity slider (only in blend mode) */}
-        {mode === 'blend' && (
-          <div className="px-4 py-3 bg-[#F5FBF7] border-t border-[#D4E8DC]">
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-[#64736C] shrink-0">Original</span>
-              <input
-                type="range"
-                min={0}
-                max={1}
-                step={0.01}
-                value={opacity}
-                onChange={e => setOpacity(Number(e.target.value))}
-                className="flex-1 h-1.5 rounded-full accent-[#0B8F68] cursor-pointer"
-                aria-label="Grad-CAM overlay opacity"
-              />
-              <span className="text-xs text-[#0B8F68] font-600 shrink-0">Grad-CAM</span>
-            </div>
-            <p className="text-[10px] text-[#64736C] text-center mt-1">
-              Drag slider to blend between original and heatmap
-            </p>
-          </div>
-        )}
-
-        {/* Side-by-side thumbnail strip */}
-        <div className="grid grid-cols-2 gap-px bg-[#D4E8DC] border-t border-[#D4E8DC]">
-          <div className="bg-white p-2">
-            <p className="text-[10px] font-600 text-[#64736C] mb-1.5">Original</p>
-            <div className="rounded-lg overflow-hidden aspect-square bg-[#F5F8F5]">
-              <img src={originalImage} alt="Original thumbnail" className="w-full h-full object-cover" />
-            </div>
-          </div>
-          <div className="bg-white p-2">
-            <p className="text-[10px] font-600 text-[#0B8F68] mb-1.5 flex items-center gap-1">
-              <Layers className="w-3 h-3" /> Grad-CAM
-            </p>
-            <div className="rounded-lg overflow-hidden aspect-square bg-[#06251C] border border-[#0B8F68]/30">
-              <img src={highlightedImage} alt="Grad-CAM thumbnail" className="w-full h-full object-cover" />
+              <span className="text-[10px] font-600 text-white">
+                {mode === 'original'
+                  ? 'Original uploaded image'
+                  : mode === 'heatmap'
+                  ? 'Pure JET colormap activation map'
+                  : 'AI attention heatmap overlay'}
+              </span>
             </div>
           </div>
         </div>
@@ -220,7 +222,7 @@ export function HeatmapViewer({
         <div className="flex items-start gap-2 px-4 py-3 bg-amber-50 border-t border-amber-100">
           <Info className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
           <p className="text-[10px] text-amber-700 leading-relaxed">
-            <strong>Grad-CAM</strong> highlights regions the AI focused on when making its prediction. Red/orange areas indicate where the model detected disease markers. Always verify with a qualified agronomist before treatment.
+            <strong>Grad-CAM</strong> highlights regions the AI focused on. <span className="font-semibold text-red-600">Red/orange</span> = disease hotspots, <span className="font-semibold text-yellow-600">yellow</span> = moderate concern, <span className="font-semibold text-green-700">green/blue</span> = healthy regions. Always verify with a qualified agronomist before treatment.
           </p>
         </div>
       </div>
@@ -228,7 +230,7 @@ export function HeatmapViewer({
       {/* ── Fullscreen Modal ───────────────────────────── */}
       {fullscreen && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setFullscreen(false)}
           role="dialog"
           aria-modal
@@ -239,19 +241,19 @@ export function HeatmapViewer({
             onClick={e => e.stopPropagation()}
           >
             {/* Fullscreen header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-[#06251C]">
+            <div className="flex items-center justify-between px-4 py-3 bg-[#0B8F68]">
               <p className="text-sm font-700 text-white">Grad-CAM — Full View</p>
               <div className="flex gap-2">
-                {(Object.keys(modeConfig) as ViewMode[]).map(key => (
+                {tabs.map(({ key, label }) => (
                   <button
                     key={key}
                     type="button"
                     onClick={() => setMode(key)}
                     className={`px-3 py-1 rounded-lg text-xs font-600 transition-colors ${
-                      mode === key ? 'bg-[#0B8F68] text-white' : 'bg-white/10 text-white/70 hover:bg-white/20'
+                      mode === key ? 'bg-white text-[#0B8F68]' : 'bg-white/10 text-white/70 hover:bg-white/20'
                     }`}
                   >
-                    {modeConfig[key].label}
+                    {label}
                   </button>
                 ))}
                 <button
@@ -266,23 +268,11 @@ export function HeatmapViewer({
             </div>
 
             {/* Fullscreen image */}
-            <div className="relative bg-[#040F0A]">
-              <img
-                src={originalImage}
-                alt="Original plant leaf"
-                className="w-full object-contain max-h-[70vh]"
-              />
-              {mode !== 'original' && (
-                <img
-                  src={highlightedImage}
-                  alt="Grad-CAM overlay"
-                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300"
-                  style={{ opacity: mode === 'gradcam' ? 1 : opacity }}
-                />
-              )}
+            <div className="relative bg-[#0e0e0e]">
+              <ImageView maxH="max-h-[70vh]" />
 
               {/* Fullscreen legend */}
-              <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm rounded-xl p-3 space-y-2">
+              <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm rounded-xl p-3 space-y-2 z-10">
                 <p className="text-[9px] font-700 text-white/60 uppercase tracking-wider">Intensity Scale</p>
                 {COLOR_SCALE.map(({ label, color, desc }) => (
                   <div key={label} className="flex items-center gap-2">
@@ -296,27 +286,9 @@ export function HeatmapViewer({
               </div>
             </div>
 
-            {/* Fullscreen blend slider */}
-            {mode === 'blend' && (
-              <div className="px-4 py-3 bg-[#06251C] border-t border-white/10">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs text-white/50 shrink-0">Original</span>
-                  <input
-                    type="range"
-                    min={0}
-                    max={1}
-                    step={0.01}
-                    value={opacity}
-                    onChange={e => setOpacity(Number(e.target.value))}
-                    className="flex-1 accent-[#0B8F68] cursor-pointer"
-                  />
-                  <span className="text-xs text-[#0B8F68] font-600 shrink-0">Grad-CAM</span>
-                </div>
-              </div>
-            )}
-
-            <div className="px-4 py-2 bg-[#06251C] text-[10px] text-white/40 text-center border-t border-white/10">
-              Click outside to close · {modeConfig[mode].desc}
+            <div className="px-4 py-2 bg-[#086E50] text-[10px] text-white/70 text-center border-t border-white/10">
+              Click outside to close ·{' '}
+              {mode === 'original' ? 'Original uploaded image' : 'AI attention heatmap — red = disease hotspot'}
             </div>
           </div>
         </div>

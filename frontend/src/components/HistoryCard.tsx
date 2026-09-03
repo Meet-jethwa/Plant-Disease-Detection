@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import { Calendar, ChevronRight, TrendingUp } from 'lucide-react'
 import type { HistoryItem } from '../types'
+import { PlantHealthGlyph } from './PlantHealthGlyph'
 
 interface HistoryCardProps {
   item: HistoryItem
@@ -53,8 +54,9 @@ export function HistoryCard({ item }: HistoryCardProps) {
         </div>
       </div>
 
-      {/* Score + Arrow */}
+      {/* Health signal + precise score */}
       <div className="flex items-center gap-3 shrink-0">
+        <PlantHealthGlyph score={item.health_score} size="sm" />
         <div className="text-right">
           <div className="text-base font-extrabold text-[#0B8F68]">{item.health_score}</div>
           <div className="text-[9px] text-[#94A09B] font-medium">/100</div>

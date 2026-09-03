@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import { Clock, ChevronRight, Leaf, AlertTriangle } from 'lucide-react'
 import type { Plant } from '../types'
+import { PlantHealthGlyph } from './PlantHealthGlyph'
 
 interface PlantCardProps {
   plant: Plant
@@ -60,9 +61,12 @@ export function PlantCard({ plant, onClick }: PlantCardProps) {
         </div>
 
         {/* Species tag — bottom left */}
-        <div className="absolute bottom-4 left-4">
-          <span className="badge bg-white/85 backdrop-blur-sm text-[#64736C] border-white/50 text-xs font-semibold px-3 py-1.5">
+        <div className="absolute bottom-4 left-4 flex items-center gap-2">
+          <span className="badge bg-white/90 backdrop-blur-md text-[#0B8F68] font-bold text-xs px-3 py-1 shadow-sm border border-emerald-100">
             {plant.species}
+          </span>
+          <span className="badge bg-[#0B8F68] text-white text-[11px] font-bold px-2.5 py-1 shadow-sm">
+            {plant.species === 'Rice' ? '🍃 Leaf & 🌾 Neck Node' : plant.species === 'Wheat' ? '🍃 Flag Leaf & 🌾 Ears' : plant.species === 'Sugarcane' ? '🎋 Stalk Pith' : '🍃 Leaf Veins'}
           </span>
         </div>
       </div>
@@ -71,14 +75,16 @@ export function PlantCard({ plant, onClick }: PlantCardProps) {
       <div className="p-6 space-y-5">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-xl font-bold text-[#06251C] leading-tight">{plant.name}</h3>
+            <h3 className="text-xl font-bold text-[#0F291E] leading-tight">{plant.name}</h3>
             <p className="text-sm italic text-[#64736C] mt-1">{plant.scientificName}</p>
           </div>
           <ChevronRight className="w-5 h-5 text-[#94A09B] group-hover:text-[#0B8F68] transition-colors shrink-0 mt-1" />
         </div>
 
-        {/* Health Score Bar */}
-        <div className="space-y-2">
+        {/* Health signal and precise score */}
+        <div className="flex items-center gap-3">
+          <PlantHealthGlyph score={plant.healthScore} size="sm" />
+          <div className="flex-1 space-y-2">
           <div className="flex justify-between items-center">
             <span className="text-sm text-[#64736C] font-semibold">Health Score</span>
             <span className={`text-xl font-extrabold ${config.scoreColor}`}>{plant.healthScore}<span className="text-sm font-normal text-[#94A09B]">/100</span></span>
@@ -88,6 +94,7 @@ export function PlantCard({ plant, onClick }: PlantCardProps) {
               className="h-full rounded-full transition-all duration-700"
               style={{ width: `${plant.healthScore}%`, background: config.barColor }}
             />
+          </div>
           </div>
         </div>
 

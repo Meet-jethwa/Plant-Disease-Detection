@@ -1,4 +1,4 @@
-// TreatmentCard.tsx — Tabbed treatment options: Organic, Conventional, Preventive
+// TreatmentCard.tsx — BioScan Lab dark treatment protocol card
 import { useState } from 'react'
 import { Leaf, FlaskConical, ShieldCheck, AlertTriangle } from 'lucide-react'
 
@@ -12,7 +12,6 @@ export function TreatmentCard({ treatment, prevention, severity }: TreatmentCard
   const [tab, setTab] = useState<'immediate' | 'organic' | 'preventive'>('immediate')
   const isSevere = ['severe', 'high', 'critical'].includes(severity?.toLowerCase())
 
-  // Parse numbered steps from treatment string
   const steps = treatment.split('\n').filter(s => s.trim()).map(s => s.replace(/^\d+\.\s*/, '').trim())
   const organicSteps = [
     'Apply neem oil solution (2%) as a foliar spray every 5–7 days.',
@@ -23,79 +22,97 @@ export function TreatmentCard({ treatment, prevention, severity }: TreatmentCard
   ]
 
   const tabs = [
-    { id: 'immediate' as const, label: 'Immediate',  icon: AlertTriangle },
-    { id: 'organic'   as const, label: 'Organic',    icon: Leaf },
-    { id: 'preventive'as const, label: 'Preventive', icon: ShieldCheck },
+    { id: 'immediate' as const, label: 'Immediate',  icon: AlertTriangle, color: 'var(--neon-red)' },
+    { id: 'organic'   as const, label: 'Organic',    icon: Leaf,          color: 'var(--neon-green)' },
+    { id: 'preventive'as const, label: 'Preventive', icon: ShieldCheck,   color: 'var(--neon-cyan)' },
   ]
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <FlaskConical className="w-4 h-4 text-[#0B8F68]" />
-        <h3 className="text-sm font-bold text-[#10231D]">Recommended Actions</h3>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <FlaskConical style={{ width: 15, height: 15, color: 'var(--neon-green)' }} />
+        <h3 className="eyebrow">TREATMENT PROTOCOLS</h3>
       </div>
 
       {/* Tab switcher */}
       <div className="tab-group">
         {tabs.map(t => (
           <button
-            key={t.id}
-            type="button"
+            key={t.id} type="button"
             onClick={() => setTab(t.id)}
-            className={`tab-item flex items-center gap-1 ${tab === t.id ? 'active' : ''}`}
+            className={`tab-item ${tab === t.id ? 'active' : ''}`}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.75rem',
+              color: tab === t.id ? t.color : undefined,
+            }}
           >
-            <t.icon className="w-3 h-3" />
+            <t.icon style={{ width: 12, height: 12 }} />
             {t.label}
           </button>
         ))}
       </div>
 
       {/* Tab content */}
-      <div className="space-y-2 min-h-[120px]">
+      <div className="animate-fade-in" style={{ minHeight: 120 }}>
         {tab === 'immediate' && (
-          <ol className="space-y-2">
+          <ol style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {steps.map((step, i) => (
-              <li key={i} className="flex gap-3 text-xs text-[#10231D]">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-[#DDF7EA] border border-[#B9E8D1] text-[#065E44] font-bold text-[10px] flex items-center justify-center">
-                  {i + 1}
+              <li key={i} style={{ display: 'flex', gap: 12 }}>
+                <span style={{
+                  flexShrink: 0, width: 22, height: 22, borderRadius: 6,
+                  background: 'rgba(255,69,96,0.1)', border: '1px solid rgba(255,69,96,0.25)',
+                  color: 'var(--neon-red)', fontWeight: 700, fontSize: '0.65rem',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontFamily: 'var(--font-mono)',
+                }}>
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="leading-relaxed pt-0.5">{step}</span>
+                <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.65, paddingTop: 2 }}>{step}</span>
               </li>
             ))}
           </ol>
         )}
 
         {tab === 'organic' && (
-          <ol className="space-y-2">
+          <ol style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {organicSteps.map((step, i) => (
-              <li key={i} className="flex gap-3 text-xs text-[#10231D]">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-700 font-bold text-[10px] flex items-center justify-center">
-                  <Leaf className="w-2.5 h-2.5" />
+              <li key={i} style={{ display: 'flex', gap: 12 }}>
+                <span style={{
+                  flexShrink: 0, width: 22, height: 22, borderRadius: 6,
+                  background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.25)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <Leaf style={{ width: 11, height: 11, color: 'var(--neon-green)' }} />
                 </span>
-                <span className="leading-relaxed pt-0.5">{step}</span>
+                <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.65, paddingTop: 2 }}>{step}</span>
               </li>
             ))}
           </ol>
         )}
 
         {tab === 'preventive' && (
-          <div className="space-y-2 text-xs text-[#10231D]">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {prevention.split('.').filter(s => s.trim()).map((s, i) => (
-              <div key={i} className="flex gap-2.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#0B8F68] shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{s.trim()}.</span>
+              <div key={i} style={{ display: 'flex', gap: 10 }}>
+                <ShieldCheck style={{ width: 14, height: 14, color: 'var(--neon-cyan)', flexShrink: 0, marginTop: 3 }} />
+                <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>{s.trim()}.</span>
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {/* Expert consultation note for severe cases */}
+      {/* Severe alert */}
       {isSevere && (
-        <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-200">
-          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-          <p className="text-xs text-amber-800 leading-relaxed">
-            <strong>Severe case detected.</strong> We strongly recommend consulting a local agricultural extension officer or certified agronomist before applying treatments. These recommendations are for guidance only.
+        <div style={{
+          display: 'flex', alignItems: 'flex-start', gap: 10,
+          padding: '12px 14px', borderRadius: 10,
+          background: 'rgba(255,184,0,0.08)', border: '1px solid rgba(255,184,0,0.25)',
+        }}>
+          <AlertTriangle style={{ width: 15, height: 15, color: 'var(--neon-amber)', flexShrink: 0, marginTop: 1 }} />
+          <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+            <strong style={{ color: 'var(--neon-amber)' }}>SEVERE CASE DETECTED.</strong>{' '}
+            Consult a local agricultural extension officer or certified agronomist before applying treatments.
           </p>
         </div>
       )}

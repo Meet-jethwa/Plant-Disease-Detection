@@ -1,5 +1,6 @@
-// HealthScore.tsx — Large visual health score with breakdown bars
+// HealthScore.tsx — BioScan Lab neon circular health gauge
 import { useEffect, useState } from 'react'
+import { PlantHealthGlyph } from './PlantHealthGlyph'
 
 interface HealthScoreProps {
   score: number
@@ -8,27 +9,26 @@ interface HealthScoreProps {
   breakdown?: { label: string; value: number }[]
 }
 
-function getStatusFromScore(score: number, isHealthy?: boolean): { label: string; color: string; bg: string } {
-  // If disease detected, never show 'Healthy' regardless of score value
-  if (!isHealthy && score >= 85) return { label: 'Disease Detected', color: 'text-orange-700', bg: 'bg-orange-50 border-orange-200' }
-  if (score >= 85) return { label: 'Healthy',         color: 'text-emerald-700',  bg: 'bg-emerald-50 border-emerald-200' }
-  if (score >= 65) return { label: 'Needs Attention', color: 'text-amber-700',    bg: 'bg-amber-50 border-amber-200' }
-  if (score >= 45) return { label: 'At Risk',          color: 'text-orange-700',   bg: 'bg-orange-50 border-orange-200' }
-  return                  { label: 'Critical',         color: 'text-red-700',      bg: 'bg-red-50 border-red-200' }
+function getStatusFromScore(score: number, isHealthy?: boolean) {
+  if (!isHealthy && score >= 85) return { label: 'DISEASE DETECTED', color: '#FF8C00', bg: 'rgba(255,140,0,0.08)', border: 'rgba(255,140,0,0.25)' }
+  if (score >= 85) return { label: 'HEALTHY',          color: 'var(--neon-green)', bg: 'rgba(0,255,136,0.08)', border: 'rgba(0,255,136,0.25)' }
+  if (score >= 65) return { label: 'NEEDS ATTENTION',  color: 'var(--neon-amber)', bg: 'rgba(255,184,0,0.08)', border: 'rgba(255,184,0,0.25)' }
+  if (score >= 45) return { label: 'AT RISK',          color: '#FF8C00',           bg: 'rgba(255,140,0,0.08)', border: 'rgba(255,140,0,0.25)' }
+  return               { label: 'CRITICAL',            color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' }
 }
 
-function getScoreColor(score: number): string {
-  if (score >= 85) return '#0B8F68'
-  if (score >= 65) return '#D97706'
-  if (score >= 45) return '#EA580C'
-  return '#DC2626'
+function getScoreColor(score: number) {
+  if (score >= 85) return 'var(--neon-green)'
+  if (score >= 65) return 'var(--neon-amber)'
+  if (score >= 45) return '#FF8C00'
+  return 'var(--neon-red)'
 }
 
 const DEFAULT_BREAKDOWN = [
-  { label: 'Leaf Health',     value: 58 },
-  { label: 'Color Health',    value: 72 },
-  { label: 'Visible Damage',  value: 61 },
-  { label: 'Disease Risk',    value: 69 },
+  { label: 'Leaf Health',    value: 58 },
+  { label: 'Color Health',   value: 72 },
+  { label: 'Visible Damage', value: 61 },
+  { label: 'Disease Risk',   value: 69 },
 ]
 
 export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown = DEFAULT_BREAKDOWN }: HealthScoreProps) {
@@ -37,7 +37,6 @@ export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown 
   const status = getStatusFromScore(score, isHealthy)
   const color = getScoreColor(score)
 
-  // SVG circle progress
   const radius = 52
   const circumference = 2 * Math.PI * radius
   const dashOffset = circumference - (animScore / 100) * circumference
@@ -60,64 +59,87 @@ export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown 
   }, [score])
 
   return (
-    <div className="space-y-5">
-      {/* Circular Score */}
-      <div className="flex items-center gap-6">
-        <div className="relative w-32 h-32 shrink-0">
-          <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {/* Circular Score + Status */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        <PlantHealthGlyph score={score} size="lg" />
+
+        {/* Neon arc gauge */}
+        <div style={{ position: 'relative', width: 120, height: 120, flexShrink: 0 }}>
+          <svg viewBox="0 0 120 120" style={{ width: '100%', height: '100%', transform: 'rotate(-90deg)' }}>
             {/* Track */}
-            <circle cx="60" cy="60" r={radius} fill="none" stroke="#EDF7F2" strokeWidth="10" />
-            {/* Progress */}
+            <circle cx="60" cy="60" r={radius} fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="8" />
+            {/* Subtle glow ring */}
+            <circle cx="60" cy="60" r={radius} fill="none" stroke={color} strokeWidth="8" opacity="0.08" />
+            {/* Progress arc */}
             <circle
               cx="60" cy="60" r={radius}
               fill="none"
               stroke={color}
-              strokeWidth="10"
+              strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={dashOffset}
-              style={{ transition: 'stroke-dashoffset 0.05s linear' }}
+              style={{
+                transition: 'stroke-dashoffset 0.05s linear',
+                filter: `drop-shadow(0 0 6px ${color})`,
+              }}
             />
           </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-2xl font-extrabold" style={{ color }}>{animScore}</span>
-            <span className="text-[10px] font-bold text-[#64736C]">/ 100</span>
+          <div style={{
+            position: 'absolute', inset: 0,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.6rem', fontWeight: 700, color, lineHeight: 1 }}>
+              {animScore}
+            </span>
+            <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>/ 100</span>
           </div>
         </div>
 
-        <div className="flex-1">
-          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-sm font-bold ${status.bg} ${status.color} mb-2`}>
-            <span className="w-2 h-2 rounded-full" style={{ background: color }} aria-hidden="true" />
-            {status.label}
+        <div style={{ flex: 1 }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            padding: '6px 12px', borderRadius: 8, marginBottom: 10,
+            background: status.bg, border: `1px solid ${status.border}`,
+          }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: color, boxShadow: `0 0 6px ${color}`, flexShrink: 0 }} />
+            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: status.color, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
+              {status.label}
+            </span>
           </div>
-          <p className="text-xs text-[#64736C] leading-relaxed">
-            AI health index based on visible leaf condition, color, and disease indicators.
+          <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+            AI health index based on visible leaf condition, color, and disease pattern analysis.
           </p>
         </div>
       </div>
 
       {/* Breakdown Bars */}
       {showBreakdown && (
-        <div className="space-y-3">
-          <p className="section-label">Health Breakdown</p>
-          {breakdown.map(item => (
-            <div key={item.label} className="space-y-1">
-              <div className="flex justify-between text-xs font-medium">
-                <span className="text-[#64736C]">{item.label}</span>
-                <span className="text-[#10231D] font-bold">{item.value}%</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <p className="eyebrow">HEALTH BREAKDOWN</p>
+          {breakdown.map(item => {
+            const barColor = getScoreColor(item.value)
+            return (
+              <div key={item.label}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{item.label}</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: barColor, fontFamily: 'var(--font-mono)' }}>{item.value}%</span>
+                </div>
+                <div className="progress-track">
+                  <div
+                    className="progress-fill"
+                    style={{
+                      width: animBars ? `${item.value}%` : '0%',
+                      background: `linear-gradient(90deg, ${barColor}60, ${barColor})`,
+                      boxShadow: `0 0 8px ${barColor}60`,
+                      transition: 'width 0.9s cubic-bezier(0.4, 0, 0.2, 1)',
+                    }}
+                  />
+                </div>
               </div>
-              <div className="progress-track">
-                <div
-                  className="progress-fill"
-                  style={{
-                    width: animBars ? `${item.value}%` : '0%',
-                    background: getScoreColor(item.value),
-                    transition: 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                  }}
-                />
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
     </div>

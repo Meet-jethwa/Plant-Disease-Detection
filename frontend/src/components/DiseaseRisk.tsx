@@ -53,6 +53,7 @@ function getRiskConfig(level: string) {
 export function DiseaseRisk({ riskLevel, riskReason, compact = false }: DiseaseRiskProps) {
   const config = getRiskConfig(riskLevel)
   const Icon = config.icon
+  const normalizedRiskReason = riskReason?.replace(/\s+/g, ' ').trim()
 
   if (compact) {
     return (
@@ -72,8 +73,8 @@ export function DiseaseRisk({ riskLevel, riskReason, compact = false }: DiseaseR
       </div>
       <div className="flex-1 min-w-0">
         <p className={`text-sm font-700 ${config.textColor}`}>{config.label}</p>
-        {riskReason && (
-          <p className="text-xs text-[#64736C] mt-0.5 leading-relaxed">{riskReason}</p>
+        {normalizedRiskReason && (
+          <p className="text-xs text-[#64736C] mt-0.5 leading-relaxed whitespace-normal">{normalizedRiskReason}</p>
         )}
       </div>
     </div>

@@ -84,18 +84,19 @@ export async function getDiagnosis(id: string): Promise<PredictionResponse> {
 
 // ── AI Assistant ───────────────────────────────────────
 export async function askAssistant(
-  context: import('../types').DiagnosisContext
-): Promise<import('../types').GeminiResponse | string> {
+  context: import('../types').AskPayload
+): Promise<string> {
   try {
     const data = await fetchAPI<{
-      gemini_response?: import('../types').GeminiResponse
+      chat_answer?: string
       follow_up_questions?: string[]
+      intent?: string
     }>('/api/assistant/ask', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(context),
     })
-    return data.gemini_response ?? context.question
+    return data.chat_answer ?? context.message
   } catch {
     return (
       `I understand you're asking about your plant. Based on the diagnosis context, I recommend ` +
@@ -114,10 +115,10 @@ export async function fetchLocationWeather(
     return await fetchAPI<LocationContextData>(`/api/location/fetch${query}`)
   } catch {
     return {
-      location: { city: 'Ahmedabad', state: 'Gujarat', country: 'India', latitude: 23.03, longitude: 72.58 },
-      weather: { temperature_c: 32.4, humidity_percent: 74, rainfall_mm: 8.5, wind_kmh: 14.2, condition: 'Partly Humid' },
-      risk_level: 'Medium',
-      risk_reason: 'Moderate humidity levels support steady spore survival.',
+      location: { city: 'Mumbai', state: 'Maharashtra', country: 'India', latitude: 19.08, longitude: 72.88 },
+      weather: { temperature_c: 31.2, humidity_percent: 88, rainfall_mm: 18.6, wind_kmh: 22.5, condition: 'Overcast with Rain' },
+      risk_level: 'High',
+      risk_reason: 'High humidity and rainfall support elevated disease progression risk.',
     }
   }
 }

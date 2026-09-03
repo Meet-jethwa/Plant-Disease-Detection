@@ -67,6 +67,7 @@ export type PredictionResponse = {
   analysis_summary: string
   original_image: string
   highlighted_image: string
+  gradcam_heatmap?: string        // pure JET colormap (no blend) for screen overlay
   // Extended fields (may be absent — handle gracefully)
   symptoms?: Symptom[]
   possible_causes?: Cause[]
@@ -109,7 +110,7 @@ export type HistoryItem = {
   status?: HealthStatus
 }
 
-// ── Gemini Structured Response ──────────────────────────────────────────────
+// ── Gemini Structured Response (Mode A — initial diagnosis) ──────────────────
 
 export type GeminiEnvFactor = {
   factor: string
@@ -117,36 +118,78 @@ export type GeminiEnvFactor = {
   explanation: string
 }
 
+export type GeminiVisualExplanation = {
+  original_image_explanation: string
+  gradcam_explanation: string
+}
+
 export type GeminiResponse = {
   diagnosis_summary: string
   why_detected: string[]
+  visual_explanation?: GeminiVisualExplanation
+  /** Combined SHAP + environmental factors — rendered once, not twice */
   environmental_factors: GeminiEnvFactor[]
   recommended_actions: string[]
   prevention: string[]
+  follow_up_questions?: string[]
   disclaimer: string
+}
+
+// ── Chat answer (Mode B — follow-up) ─────────────────────────────────────────
+
+export type ChatAnswerResponse = {
+  chat_answer: string
+  follow_up_questions: string[]
+  intent: string
 }
 
 // ── Chat ────────────────────────────────────────────────────────────────────
 
+/**
+ * A single message in the chat history.
+ * - `structured` is set on the initial AI message (Mode A full diagnosis)
+ * - `chat_answer` is set on follow-up AI messages (Mode B focused answer)
+ * - User messages only have `role` and `text`
+ */
 export type ChatMessage = {
   role: 'user' | 'assistant'
-  text: string                    // plain-text fallback / user messages
-  structured?: GeminiResponse     // present on AI messages when Gemini returns structured data
+  text: string                       // plain-text fallback / user messages
+  structured?: GeminiResponse        // Mode A: initial diagnosis explanation
+  chat_answer?: string               // Mode B: focused follow-up answer
+  intent?: string                    // detected intent for Mode B messages
+  follow_up_questions?: string[]     // dynamic chips for Mode B messages
   timestamp?: string
 }
 
-// ── Diagnosis Context (sent to /api/assistant/ask) ──────────────────────────
+// ── Diagnosis session ─────────────────────────────────────────────────────────
 
-export type DiagnosisContext = {
-  question: string
-  crop?: string
-  predicted_class?: string
-  confidence?: number             // 0.0–1.0
+/**
+ * Sent to POST /api/assistant/start to initialise a diagnosis session.
+ */
+export type StartSessionPayload = {
+  diagnosis_id: string
+  crop: string
+  predicted_class: string
+  confidence: number
+  top3?: Array<{ class: string; confidence: number }>
   weather?: WeatherData
   feature_importance?: Record<string, number>
-  gradcam_image_b64?: string      // base64 data URL of the Grad-CAM overlay
+  gradcam_image_b64?: string
   disease_info?: Partial<DiseaseInfo>
+  language?: string
 }
+
+/**
+ * Sent to POST /api/assistant/ask for follow-up chat.
+ * Only the diagnosis_id and user message — no images.
+ */
+export type AskPayload = {
+  diagnosis_id: string
+  message: string
+  language?: string
+}
+
+// ── Location ──────────────────────────────────────────────────────────────────
 
 export type LocationContextData = {
   location: LocationData
@@ -154,6 +197,8 @@ export type LocationContextData = {
   risk_level: string
   risk_reason: string
 }
+
+// ── UI utilities ─────────────────────────────────────────────────────────────
 
 export type NotificationType = 'success' | 'error' | 'warning' | 'info'
 

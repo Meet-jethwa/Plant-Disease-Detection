@@ -1,4 +1,4 @@
-// BottomNav.tsx — FloraAI fixed bottom navigation for mobile/tablet
+// BottomNav.tsx — BioScan Lab fixed bottom navigation for mobile/tablet
 import { Link, useLocation } from 'react-router-dom'
 import { Home, Scan, Leaf, MessageSquare, User } from 'lucide-react'
 
@@ -6,11 +6,11 @@ export function BottomNav() {
   const location = useLocation()
 
   const tabs = [
-    { path: '/',         label: 'Home',    icon: Home         },
-    { path: '/plants',   label: 'Plants',  icon: Leaf         },
-    { path: '/scan',     label: 'Scan',    icon: Scan         }, // Center — emphasized
+    { path: '/',          label: 'Home',    icon: Home },
+    { path: '/plants',    label: 'Plants',  icon: Leaf },
+    { path: '/scan',      label: 'Scan',    icon: Scan },
     { path: '/assistant', label: 'AI Chat', icon: MessageSquare },
-    { path: '/profile',  label: 'Profile', icon: User         },
+    { path: '/profile',   label: 'Profile', icon: User },
   ]
 
   return (
@@ -18,7 +18,7 @@ export function BottomNav() {
       aria-label="Main navigation"
       className="mobile-bottom-nav lg:hidden"
     >
-      <div className="flex items-center justify-around px-2 pt-1.5 pb-1">
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', padding: '6px 4px', paddingBottom: 'env(safe-area-inset-bottom, 6px)' }}>
         {tabs.map(tab => {
           const isActive = location.pathname === tab.path || (tab.path !== '/' && location.pathname.startsWith(tab.path))
           const isScan = tab.path === '/scan'
@@ -30,17 +30,39 @@ export function BottomNav() {
                 key={tab.path}
                 to={tab.path}
                 aria-label="Open Plant Scanner"
-                className="flex flex-col items-center gap-0.5 -mt-4"
+                style={{
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
+                  marginTop: -20, textDecoration: 'none',
+                }}
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md transition-all ${
-                  isActive
-                    ? 'bg-[#12372A] shadow-[#12372A]/30'
-                    : 'bg-[#159A70] shadow-[#159A70]/25 hover:bg-[#128A63]'
-                }`}>
-                  <Scan className="w-5 h-5 text-white" />
+                <div style={{
+                  width: 52, height: 52, borderRadius: 14,
+                  background: isActive
+                    ? 'linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,212,255,0.15))'
+                    : 'var(--neon-green)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  boxShadow: isActive
+                    ? '0 0 20px rgba(0,255,136,0.4), 0 0 40px rgba(0,255,136,0.15)'
+                    : '0 0 20px rgba(0,255,136,0.4), 0 4px 12px rgba(0,0,0,0.4)',
+                  border: isActive ? '1px solid rgba(0,255,136,0.5)' : 'none',
+                  transition: 'all 0.2s ease',
+                  position: 'relative',
+                }}>
+                  {isActive && (
+                    <div style={{
+                      position: 'absolute', inset: -4, borderRadius: 18,
+                      border: '1px solid rgba(0,255,136,0.3)',
+                      animation: 'ripple 2s ease-out infinite',
+                    }} />
+                  )}
+                  <Scan style={{ width: 22, height: 22, color: isActive ? 'var(--neon-green)' : '#FFFFFF' }} />
                 </div>
-                <span className={`text-[10px] font-semibold mt-0.5 ${isActive ? 'text-[#159A70]' : 'text-[#66736C]'}`}>
-                  {tab.label}
+                <span style={{
+                  fontSize: '9px', fontWeight: 700, marginTop: 2,
+                  fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
+                  color: isActive ? 'var(--neon-green)' : 'var(--text-muted)',
+                }}>
+                  {tab.label.toUpperCase()}
                 </span>
               </Link>
             )
@@ -51,15 +73,34 @@ export function BottomNav() {
               key={tab.path}
               to={tab.path}
               aria-label={tab.label}
-              className="flex flex-col items-center gap-1 py-1 px-3 min-w-[44px] min-h-[48px] justify-center relative"
+              style={{
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
+                padding: '6px 12px', minWidth: 44, minHeight: 48, justifyContent: 'center',
+                textDecoration: 'none', position: 'relative',
+              }}
             >
-              <Icon className={`w-5 h-5 transition-all ${isActive ? 'text-[#159A70]' : 'text-[#96A39D]'}`} />
-              <span className={`text-[10px] font-medium transition-colors ${isActive ? 'text-[#159A70]' : 'text-[#96A39D]'}`}>
-                {tab.label}
-              </span>
               {isActive && (
-                <span className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-[#159A70]" />
+                <span style={{
+                  position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
+                  width: 20, height: 2, borderRadius: 999,
+                  background: 'var(--neon-green)',
+                  boxShadow: '0 0 8px rgba(0,255,136,0.6)',
+                }} />
               )}
+              <Icon style={{
+                width: 20, height: 20,
+                color: isActive ? 'var(--neon-green)' : 'var(--text-muted)',
+                filter: isActive ? 'drop-shadow(0 0 4px rgba(0,255,136,0.5))' : 'none',
+                transition: 'all 0.15s ease',
+              }} />
+              <span style={{
+                fontSize: '9px', fontWeight: 600,
+                fontFamily: 'var(--font-mono)', letterSpacing: '0.05em',
+                color: isActive ? 'var(--neon-green)' : 'var(--text-muted)',
+                transition: 'color 0.15s ease',
+              }}>
+                {tab.label.toUpperCase()}
+              </span>
             </Link>
           )
         })}

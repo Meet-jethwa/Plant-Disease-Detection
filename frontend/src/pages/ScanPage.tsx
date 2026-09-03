@@ -1,51 +1,17 @@
-// ScanPage.tsx — Diagnostic Workbench
+// ScanPage.tsx — Main plant scanner with stages: crop → upload → preview → analyze → result
 import { useState } from 'react'
-import {
-  AlertTriangle,
-  CheckCircle2,
-  ImagePlus,
-  RotateCcw,
-  Scan,
-  Microscope,
-} from 'lucide-react'
+import { AlertTriangle, CheckCircle2, RotateCcw, Scan, Sparkles, X } from 'lucide-react'
 import { CropSelector } from '../components/CropSelector'
 import { ImageUploader } from '../components/ImageUploader'
 import { CameraScanner } from '../components/CameraScanner'
 import { AnalysisLoader } from '../components/AnalysisLoader'
+import { HealthScore } from '../components/HealthScore'
 import { HeatmapViewer } from '../components/HeatmapViewer'
 import { TreatmentCard } from '../components/TreatmentCard'
-import { WeatherCard } from '../components/WeatherCard'
 import { MOCK_CROPS } from '../data/mockData'
 import type { Crop, PredictionResponse, LocationContextData } from '../types'
 
 export type { Crop, PredictionResponse }
-
-interface ScanPageProps {
-  crops?: Crop[]
-  selectedCrop: string
-  setSelectedCrop: (c: string) => void
-  selectedFile: File | null
-  previewUrl: string | null
-  onFileChange: (file: File) => void
-  onSelectSamplePreset: (crop: string, key: string) => void
-  onAnalyzePlant: () => void
-  isPredicting: boolean
-  prediction: PredictionResponse | null
-  locationData: LocationContextData | null
-  onFetchLocation: () => void
-  isLocating: boolean
-  error: string | null
-  onReset: () => void
-}
-
-type Tab = 'overview' | 'causes' | 'treatment' | 'prevention'
-
-const SAMPLES = [
-  { crop: 'rice', label: 'Rice Blast', key: 'rice_blast' },
-  { crop: 'wheat', label: 'Yellow Rust', key: 'wheat_yellow_rust' },
-  { crop: 'sugarcane', label: 'Red Rot', key: 'sugarcane_red_rot' },
-  { crop: 'cotton', label: 'Bacterial Blight', key: 'cotton_bacterial_blight' },
-]
 
 export function ScanPage({
   crops = MOCK_CROPS,
@@ -67,7 +33,7 @@ export function ScanPage({
   const [showCamera, setShowCamera] = useState(false)
   const [tab, setTab] = useState<Tab>('overview')
 
-  const cropLabel = crops.find((c) => c.name === selectedCrop)?.label ?? selectedCrop
+  const cropLabel = crops.find(c => c.name === selectedCrop)?.label ?? selectedCrop
 
   function handleCameraCapture(file: File) {
     setShowCamera(false)
@@ -75,19 +41,22 @@ export function ScanPage({
   }
 
   function handleValidatedAnalyze() {
-    if (!selectedFile && !previewUrl) return
+    if (!selectedFile && !previewUrl) {
+      return
+    }
     onAnalyzePlant()
   }
 
   const tabs: { id: Tab; label: string }[] = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'causes', label: 'Causes' },
-    { id: 'treatment', label: 'Treatment' },
-    { id: 'prevention', label: 'Prevention' },
+    { id: 'overview',   label: 'Overview'     },
+    { id: 'causes',     label: 'Causes'       },
+    { id: 'treatment',  label: 'Treatment'    },
+    { id: 'prevention', label: 'Prevention'   },
   ]
 
   return (
     <>
+      {/* Camera Modal (fullscreen) */}
       {showCamera && (
         <CameraScanner
           onCapture={handleCameraCapture}
@@ -96,77 +65,44 @@ export function ScanPage({
         />
       )}
 
-      <div style={{ maxWidth: '1240px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px', paddingBottom: '40px' }}>
-        
-        {/* ── Top Header ── */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            background: '#ffffff',
-            padding: '20px 24px',
-            borderRadius: '14px',
-            border: '1px solid #E2E8F0',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-            flexWrap: 'wrap',
-            gap: '16px',
-          }}
-        >
+      <div className="space-y-6 pb-4">
+        {/* Page Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#D4E8DC]">
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#159A70' }} />
-              <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#159A70', letterSpacing: '0.05em' }}>
-                Pathology Diagnostic Terminal
-              </span>
-            </div>
-            <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0F172A', margin: 0 }}>
-              Specimen Input & Inference Module
-            </h1>
+            <p className="eyebrow mb-1">Diagnosis Workspace</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#17211D]">Plant Scanner</h1>
+            <p className="text-sm text-[#66736C] mt-1">
+              Upload or capture a leaf photo to analyze infection areas and get care recommendations.
+            </p>
           </div>
-
           <button
             type="button"
             onClick={onReset}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 14px',
-              background: '#F8FAFC',
-              border: '1px solid #CBD5E1',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: 600,
-              color: '#334155',
-              cursor: 'pointer',
-            }}
+            className="btn btn-secondary btn-sm self-start sm:self-auto shrink-0"
+            aria-label="Reset scanner"
           >
-            <RotateCcw style={{ width: '14px', height: '14px' }} />
-            Reset Workspace
+            <RotateCcw className="w-3.5 h-3.5" />
+            Reset
           </button>
         </div>
 
-        {/* ── Main Two-Column Layout ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px', alignItems: 'start' }}>
-          
-          {/* ── Left Column: Controls & Input ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            
-            {/* Step 1: Crop Select */}
-            <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '20px', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-              <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', display: 'block', marginBottom: '12px' }}>
-                1. Select Target Crop
-              </span>
-              <CropSelector crops={crops} selectedCrop={selectedCrop} onSelect={setSelectedCrop} />
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+
+          {/* Left column — controls */}
+          <div className="lg:col-span-5 space-y-5">
+
+            {/* Crop Selector */}
+            <div className="card p-4 sm:p-5">
+              <CropSelector
+                crops={crops}
+                selectedCrop={selectedCrop}
+                onSelect={setSelectedCrop}
+              />
             </div>
 
-            {/* Step 2: Upload Area */}
-            <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '20px', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748B' }}>
-                2. Leaf Specimen Capture
-              </span>
-
+            {/* Image Uploader */}
+            <div className="card p-4 sm:p-5 space-y-4">
               <ImageUploader
                 onFile={onFileChange}
                 onCameraOpen={() => setShowCamera(true)}
@@ -175,132 +111,93 @@ export function ScanPage({
                 onClear={onReset}
               />
 
-              {/* Benchmark Presets */}
-              <div style={{ paddingTop: '8px', borderTop: '1px solid #F1F5F9' }}>
-                <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', display: 'block', marginBottom: '8px' }}>
-                  Or Load Calibrated Test Specimen:
-                </span>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                  {SAMPLES.map((s) => (
-                    <button
-                      key={s.key}
-                      type="button"
-                      onClick={() => onSelectSamplePreset(s.crop, s.key)}
-                      style={{
-                        padding: '8px 10px',
-                        background: '#F8FAFC',
-                        border: '1px solid #E2E8F0',
-                        borderRadius: '8px',
-                        fontSize: '12px',
-                        fontWeight: 600,
-                        color: '#334155',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        cursor: 'pointer',
-                        textAlign: 'left',
-                      }}
-                    >
-                      <ImagePlus style={{ width: '13px', height: '13px', color: '#159A70', flexShrink: 0 }} />
-                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{s.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Environmental Context */}
-              <div style={{ paddingTop: '8px', borderTop: '1px solid #F1F5F9' }}>
-                <WeatherCard data={locationData} isLoading={isLocating} onRefresh={onFetchLocation} compact />
-              </div>
-
-              {/* Error box */}
+              {/* Error */}
               {error && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px', background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '8px', color: '#991B1B', fontSize: '12px' }}>
-                  <AlertTriangle style={{ width: '16px', height: '16px', flexShrink: 0 }} />
-                  <span style={{ flex: 1 }}>{error}</span>
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 border border-red-200">
+                  <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
+                  <p className="text-xs text-red-800 font-medium">{error}</p>
+                  <button type="button" onClick={() => {}} className="ml-auto">
+                    <X className="w-3.5 h-3.5 text-red-400" />
+                  </button>
                 </div>
               )}
 
-              {/* Run Inference Button */}
-              <button
-                type="button"
-                onClick={handleValidatedAnalyze}
-                disabled={isPredicting || (!selectedFile && !previewUrl)}
-                style={{
-                  width: '100%',
-                  padding: '14px',
-                  background: isPredicting || (!selectedFile && !previewUrl) ? '#94A3B8' : '#159A70',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  fontSize: '14px',
-                  borderRadius: '10px',
-                  border: 'none',
-                  cursor: isPredicting || (!selectedFile && !previewUrl) ? 'not-allowed' : 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  boxShadow: '0 2px 6px rgba(21,154,112,0.25)',
-                }}
-              >
-                {isPredicting ? (
-                  <>
-                    <Scan style={{ width: '18px', height: '18px' }} />
-                    Running Neural Inference...
-                  </>
-                ) : (
-                  <>
-                    <Scan style={{ width: '18px', height: '18px' }} />
-                    Run Diagnostic Analysis
-                  </>
-                )}
-              </button>
+              {/* Analyze CTA — Shown ONLY when a photo is uploaded */}
+              {(selectedFile || previewUrl) && (
+                <button
+                  type="button"
+                  onClick={handleValidatedAnalyze}
+                  disabled={isPredicting}
+                  className="btn btn-primary btn-lg w-full"
+                  aria-label="Analyze plant health"
+                >
+                  {isPredicting ? (
+                    <>
+                      <Scan className="w-5 h-5 animate-pulse" />
+                      Diagnosing Plant Health...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5" />
+                      Diagnose Plant Health
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
 
-          {/* ── Right Column: Output / Heatmap / Diagnostics ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Right column — result / loader / placeholder */}
+          <div className="lg:col-span-7">
             {isPredicting ? (
-              <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '32px' }}>
-                <AnalysisLoader imageUrl={previewUrl} cropName={cropLabel} />
-              </div>
+              <AnalysisLoader imageUrl={previewUrl} cropName={cropLabel} />
             ) : prediction ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                
-                {/* Result Top Card */}
-                <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <CheckCircle2 style={{ width: '16px', height: '16px', color: '#159A70' }} />
-                      <span style={{ fontSize: '12px', fontWeight: 700, color: '#159A70', textTransform: 'uppercase' }}>Classification Complete</span>
+              <div className="space-y-5">
+
+                {/* Result header */}
+                <div className="card p-5 space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="badge badge-green">
+                        <CheckCircle2 className="w-3 h-3" />
+                        Diagnosis Complete
+                      </span>
+                      <span className="text-xs text-[#66736C] font-medium uppercase tracking-wider">{prediction.crop}</span>
                     </div>
-                    <span style={{ fontSize: '11px', fontWeight: 700, background: '#FEF3C7', color: '#92400E', padding: '3px 8px', borderRadius: '6px' }}>
+                    <span className={`badge ${
+                      prediction.disease_info.severity?.toLowerCase() === 'severe' ? 'badge-red' :
+                      prediction.disease_info.severity?.toLowerCase() === 'moderate' ? 'badge-amber' :
+                      prediction.disease_info.severity?.toLowerCase() === 'low' ? 'badge-green' : 'badge-slate'
+                    }`}>
                       {prediction.disease_info.severity} Severity
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
-                    <div>
-                      <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#0F172A', margin: 0 }}>
+                  <div className="flex items-start justify-between gap-4 flex-wrap">
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-xl sm:text-2xl font-bold text-[#17211D] leading-tight">
                         {prediction.predicted_class}
                       </h2>
-                      <p style={{ fontSize: '13px', color: '#64748B', margin: '4px 0 0 0', lineHeight: 1.5 }}>
+                      <p className="text-xs text-[#66736C] mt-1.5 leading-relaxed max-w-lg">
                         {prediction.analysis_summary}
                       </p>
                     </div>
-
-                    <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: '10px', padding: '10px 16px', textAlign: 'center' }}>
-                      <div style={{ fontSize: '22px', fontWeight: 800, color: '#159A70' }}>{prediction.health_score}</div>
-                      <div style={{ fontSize: '10px', fontWeight: 600, color: '#159A70' }}>Health Index</div>
+                    {/* Health score */}
+                    <div className="shrink-0 text-center p-3 rounded-xl bg-[#F0FAF4] border border-[#B0D8C4]">
+                      <div className="text-2xl font-bold text-[#159A70]">{prediction.health_score}</div>
+                      <div className="text-[10px] text-[#159A70] font-semibold">/ 100</div>
+                      <div className="text-[9px] text-[#66736C] mt-0.5">Health Index</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Grad-CAM Viewer */}
-                <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '20px', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-                  <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', display: 'block', marginBottom: '12px' }}>
-                    Grad-CAM Class Activation Map
-                  </span>
+                {/* Health Score Breakdown */}
+                <div className="card p-5">
+                  <HealthScore score={prediction.health_score} />
+                </div>
+
+                {/* Heatmap */}
+                <div className="card p-5">
                   <HeatmapViewer
                     originalImage={prediction.original_image}
                     highlightedImage={prediction.highlighted_image}
@@ -308,33 +205,34 @@ export function ScanPage({
                   />
                 </div>
 
-                {/* Pathology Details Tabs */}
-                <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '20px', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-                  <div style={{ display: 'flex', gap: '6px', borderBottom: '1px solid #E2E8F0', paddingBottom: '10px', marginBottom: '14px' }}>
-                    {tabs.map((t) => (
+                {/* Diagnosis Tabs */}
+                <div className="card p-5 space-y-4">
+                  <div className="tab-group overflow-x-auto">
+                    {tabs.map(t => (
                       <button
                         key={t.id}
                         type="button"
                         onClick={() => setTab(t.id)}
-                        style={{
-                          padding: '6px 12px',
-                          borderRadius: '6px',
-                          fontSize: '12px',
-                          fontWeight: tab === t.id ? 700 : 500,
-                          background: tab === t.id ? '#159A70' : 'transparent',
-                          color: tab === t.id ? '#ffffff' : '#64748B',
-                          border: 'none',
-                          cursor: 'pointer',
-                        }}
+                        className={`tab-item whitespace-nowrap ${tab === t.id ? 'active' : ''}`}
                       >
                         {t.label}
                       </button>
                     ))}
                   </div>
 
-                  <div style={{ fontSize: '13px', color: '#334155', lineHeight: 1.6 }}>
-                    {tab === 'overview' && <p style={{ margin: 0 }}>{prediction.disease_info.description}</p>}
-                    {tab === 'causes' && <p style={{ margin: 0 }}>{prediction.disease_info.causes}</p>}
+                  <div className="min-h-[100px] text-sm text-[#10231D] leading-relaxed">
+                    {tab === 'overview' && (
+                      <div className="space-y-2">
+                        <h4 className="font-bold text-[#10231D]">Symptoms & Pathology</h4>
+                        <p className="text-[#64736C] text-xs">{prediction.disease_info.description}</p>
+                      </div>
+                    )}
+                    {tab === 'causes' && (
+                      <div className="space-y-2">
+                        <h4 className="font-bold text-[#10231D]">Environmental & Moisture Factors</h4>
+                        <p className="text-[#64736C] text-xs">{prediction.disease_info.causes}</p>
+                      </div>
+                    )}
                     {tab === 'treatment' && (
                       <TreatmentCard
                         treatment={prediction.disease_info.treatment}
@@ -342,43 +240,70 @@ export function ScanPage({
                         severity={prediction.disease_info.severity}
                       />
                     )}
-                    {tab === 'prevention' && <p style={{ margin: 0 }}>{prediction.disease_info.prevention}</p>}
+                    {tab === 'prevention' && (
+                      <div className="space-y-2">
+                        <h4 className="font-bold text-[#10231D]">Long-Term Prevention</h4>
+                        <p className="text-[#64736C] text-xs">{prediction.disease_info.prevention}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Top 3 probabilities */}
+                  <div className="pt-4 border-t border-[#EDF7F2] space-y-2">
+                    <p className="section-label">Disease Probabilities</p>
+                    {prediction.top3.map((item, i) => (
+                      <div key={item.class} className="space-y-1">
+                        <div className="flex justify-between text-xs">
+                          <span className="text-[#64736C] font-medium truncate pr-2">{item.class}</span>
+                          <span className="text-[#0B8F68] font-bold shrink-0">{(item.confidence * 100).toFixed(1)}%</span>
+                        </div>
+                        <div className="progress-track">
+                          <div
+                            className="progress-fill"
+                            style={{
+                              width: `${item.confidence * 100}%`,
+                              background: i === 0 ? '#0B8F68' : '#94A09B',
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
+                {/* Action buttons */}
+                <div className="flex flex-wrap gap-3">
+                  <button type="button" className="btn btn-primary flex-1 min-w-0">
+                    <CheckCircle2 className="w-4 h-4" />
+                    Save to My Plants
+                  </button>
+                  <button type="button" onClick={onReset} className="btn btn-secondary">
+                    <Scan className="w-4 h-4" />
+                    Scan Another
+                  </button>
+                </div>
               </div>
             ) : (
-              /* Empty Standby State */
-              <div
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '14px',
-                  padding: '48px 32px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  minHeight: '360px',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
-                }}
-              >
-                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#F1F5F9', border: '1px solid #CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <Microscope style={{ width: '24px', height: '24px', color: '#64748B' }} />
+              /* Empty placeholder */
+              <div className="card-lg p-12 flex flex-col items-center justify-center text-center min-h-[400px] space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-[#DDF7EA] border border-[#B9E8D1] flex items-center justify-center">
+                  <Scan className="w-8 h-8 text-[#0B8F68]" />
                 </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#0F172A', margin: '0 0 6px 0' }}>
-                  Inference Output Standby
-                </h3>
-                <p style={{ fontSize: '13px', color: '#64748B', maxWidth: '340px', margin: 0, lineHeight: 1.5 }}>
-                  Select a crop, upload a leaf specimen or pick a benchmark preset from the left panel, and initiate diagnostic analysis.
-                </p>
+                <div className="space-y-1 max-w-sm">
+                  <h3 className="text-xl font-bold text-[#10231D]">Ready to Diagnose</h3>
+                  <p className="text-sm text-[#64736C] leading-relaxed">
+                    Select a crop type, upload your leaf photo (or pick a sample from the left), then click <strong>Diagnose Plant Health</strong>.
+                  </p>
+                </div>
+                <div className="flex flex-wrap justify-center gap-2 text-xs text-[#64736C]">
+                  <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#0B8F68]" /> AI disease detection</span>
+                  <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#0B8F68]" /> Visual heatmap</span>
+                  <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#0B8F68]" /> Treatment guide</span>
+                </div>
               </div>
             )}
           </div>
-
         </div>
-
       </div>
     </>
   )

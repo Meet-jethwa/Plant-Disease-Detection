@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════
 
 import type { Plant, HistoryItem, Crop, TimelineEntry } from '../types'
+import { PLANT_IMAGES } from './plantImages'
 
 export const MOCK_CROPS: Crop[] = [
   { name: 'rice',     label: 'Rice',     emoji: '🌾', sciName: 'Oryza sativa' },
@@ -12,8 +13,14 @@ export const MOCK_CROPS: Crop[] = [
   { name: 'cotton',   label: 'Cotton',   emoji: '🌿', sciName: 'Gossypium hirsutum' },
 ]
 
-// Placeholder leaf image (base64 small green leaf)
-const LEAF_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNEREY3RUEiLz48ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTAwIiByeD0iNjAiIHJ5PSI4MCIgZmlsbD0iIzBCOEY2OCIgb3BhY2l0eT0iMC42IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTUgMTAwIDEwMCkiLz48L3N2Zz4='
+export const CROP_IMAGES = {
+  rice: PLANT_IMAGES.rice,
+  wheat: PLANT_IMAGES.wheat,
+  sugarcane: PLANT_IMAGES.sugarcane,
+  cotton: PLANT_IMAGES.cotton,
+  rice2: PLANT_IMAGES.riceBlast,
+  wheat2: PLANT_IMAGES.wheatRust,
+}
 
 export const MOCK_PLANTS: Plant[] = [
   {
@@ -21,7 +28,7 @@ export const MOCK_PLANTS: Plant[] = [
     name: 'Rice Paddy A',
     species: 'Rice',
     scientificName: 'Oryza sativa',
-    image: LEAF_PLACEHOLDER,
+    image: CROP_IMAGES.rice,
     healthScore: 64,
     status: 'Needs Attention',
     lastScanned: 'Today, 2:30 PM',
@@ -36,7 +43,7 @@ export const MOCK_PLANTS: Plant[] = [
     name: 'Wheat Field A',
     species: 'Wheat',
     scientificName: 'Triticum aestivum',
-    image: LEAF_PLACEHOLDER,
+    image: CROP_IMAGES.wheat,
     healthScore: 71,
     status: 'Needs Attention',
     lastScanned: 'Yesterday',
@@ -51,8 +58,8 @@ export const MOCK_PLANTS: Plant[] = [
     name: 'Sugarcane Plot B',
     species: 'Sugarcane',
     scientificName: 'Saccharum officinarum',
-    image: LEAF_PLACEHOLDER,
-    healthScore: 84,
+    image: CROP_IMAGES.sugarcane,
+    healthScore: 88,
     status: 'Healthy',
     lastScanned: '3 days ago',
     latestDisease: 'None detected',
@@ -66,7 +73,7 @@ export const MOCK_PLANTS: Plant[] = [
     name: 'Cotton Block C',
     species: 'Cotton',
     scientificName: 'Gossypium hirsutum',
-    image: LEAF_PLACEHOLDER,
+    image: CROP_IMAGES.cotton,
     healthScore: 45,
     status: 'At Risk',
     lastScanned: 'Aug 15',
@@ -75,6 +82,36 @@ export const MOCK_PLANTS: Plant[] = [
     sunlight: 'Full sun',
     humidity: '50–60%',
     soil: 'Black cotton soil',
+  },
+  {
+    id: 'plant-5',
+    name: 'Rice Paddy B',
+    species: 'Rice',
+    scientificName: 'Oryza sativa',
+    image: CROP_IMAGES.rice2,
+    healthScore: 92,
+    status: 'Healthy',
+    lastScanned: 'Aug 18',
+    latestDisease: 'None detected',
+    waterFrequency: 'Flooded paddy',
+    sunlight: 'Full sun',
+    humidity: '75–85%',
+    soil: 'Alluvial soil',
+  },
+  {
+    id: 'plant-6',
+    name: 'Wheat Field B',
+    species: 'Wheat',
+    scientificName: 'Triticum aestivum',
+    image: CROP_IMAGES.wheat2,
+    healthScore: 95,
+    status: 'Healthy',
+    lastScanned: 'Aug 19',
+    latestDisease: 'None detected',
+    waterFrequency: 'Weekly irrigation',
+    sunlight: 'Full sun',
+    humidity: '45–55%',
+    soil: 'Loam soil',
   },
 ]
 
@@ -94,7 +131,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
     confidence_percent: 92.8,
     health_score: 64,
     timestamp: 'Aug 17, 2:30 PM',
-    image_url: LEAF_PLACEHOLDER,
+    image_url: CROP_IMAGES.rice,
     severity: 'Moderate',
     status: 'Needs Attention',
   },
@@ -105,7 +142,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
     confidence_percent: 88.4,
     health_score: 71,
     timestamp: 'Aug 16, 11:00 AM',
-    image_url: LEAF_PLACEHOLDER,
+    image_url: CROP_IMAGES.wheat,
     severity: 'High',
     status: 'Needs Attention',
   },
@@ -116,7 +153,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
     confidence_percent: 96.1,
     health_score: 91,
     timestamp: 'Aug 14, 9:15 AM',
-    image_url: LEAF_PLACEHOLDER,
+    image_url: CROP_IMAGES.sugarcane,
     severity: 'None',
     status: 'Healthy',
   },
@@ -127,7 +164,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
     confidence_percent: 85.2,
     health_score: 45,
     timestamp: 'Aug 13, 4:00 PM',
-    image_url: LEAF_PLACEHOLDER,
+    image_url: CROP_IMAGES.cotton,
     severity: 'Severe',
     status: 'At Risk',
   },
@@ -166,8 +203,8 @@ export const MOCK_DIAGNOSIS_RESULT = {
     { name: 'Nitrogen excess', description: 'High nitrogen levels can increase susceptibility to blast disease.' },
   ],
   analysis_summary: 'Rice Blast detected in rice with moderate severity. Approximately 18% of leaf area shows characteristic blast symptoms. Immediate treatment recommended to prevent spread.',
-  original_image: LEAF_PLACEHOLDER,
-  highlighted_image: LEAF_PLACEHOLDER,
+  original_image: CROP_IMAGES.rice,
+  highlighted_image: CROP_IMAGES.rice,
   weather_context: {
     location: { city: 'Ahmedabad', state: 'Gujarat', country: 'India', latitude: 23.03, longitude: 72.58 },
     weather: { temperature_c: 32.4, humidity_percent: 74, rainfall_mm: 8.5, wind_kmh: 14.2, condition: 'Partly Humid' },

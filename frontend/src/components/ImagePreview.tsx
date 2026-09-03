@@ -29,7 +29,7 @@ export function ImagePreview({
   return (
     <div className="card p-5 animate-fade-in-up">
       {/* Image */}
-      <div className="relative rounded-xl overflow-hidden bg-[#06251C] mb-4">
+      <div className="relative rounded-xl overflow-hidden bg-[#F0FAF4] border border-[#B9E8D1] mb-4">
         <img
           src={previewUrl}
           alt="Plant leaf preview for analysis"
