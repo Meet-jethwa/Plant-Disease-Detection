@@ -43,7 +43,13 @@ function AppContent() {
   const [prediction, setPrediction] = useState<PredictionResponse | null>(null)
   const [chat, setChat] = useState<ChatMessage[]>([{ role: 'assistant', text: defaultAssistantMsg }])
   const [history, setHistory] = useState<HistoryItem[]>([])
-  const [plants] = useState<Plant[]>(MOCK_PLANTS)
+  const [plants, setPlants] = useState<Plant[]>(() => {
+    try {
+      const saved = localStorage.getItem('flora_scanned_plants')
+      if (saved) return JSON.parse(saved)
+    } catch (_) {}
+    return []
+  })
 
   // ── Session management ───────────────────────────────────────────────────────
   // diagnosis_id is generated client-side and sent to /api/assistant/start.
@@ -61,7 +67,32 @@ function AppContent() {
   useEffect(() => {
     void checkBackendHealth()
     void loadCrops()
-    void fetchLocation()
+
+    // Check if manual weather override is saved
+    const savedManual = localStorage.getItem('flora_ai_manual_weather')
+    if (savedManual) {
+      try {
+        setLocationData(JSON.parse(savedManual) as LocationContextData)
+      } catch {
+        void fetchLocation()
+      }
+    } else {
+      void fetchLocation()
+    }
+
+    // Listen for manual weather changes from Preferences
+    const handleWeatherEvent = () => {
+      const updated = localStorage.getItem('flora_ai_manual_weather')
+      if (updated) {
+        try {
+          setLocationData(JSON.parse(updated))
+        } catch (_) {}
+      } else {
+        void fetchLocation()
+      }
+    }
+    window.addEventListener('flora_weather_updated', handleWeatherEvent)
+    return () => window.removeEventListener('flora_weather_updated', handleWeatherEvent)
   }, [])
 
   async function checkBackendHealth() {
@@ -157,6 +188,16 @@ function AppContent() {
   async function fetchLocation() {
     setIsLocating(true)
     setError(null)
+
+    // Respect saved manual weather unless explicitly resetting
+    const savedManual = localStorage.getItem('flora_ai_manual_weather')
+    if (savedManual) {
+      try {
+        setLocationData(JSON.parse(savedManual) as LocationContextData)
+        setIsLocating(false)
+        return
+      } catch (_) {}
+    }
     const fallback = async () => {
       try {
         const response = await fetch(`${API_BASE}/api/location/fetch`)
@@ -317,6 +358,38 @@ function AppContent() {
       }
       setHistory((prev) => [newHistoryItem, ...prev])
 
+      const plantStatus: 'Healthy' | 'Needs Attention' | 'At Risk' | 'Critical' =
+        predData.health_score >= 80 ? 'Healthy' :
+        predData.health_score >= 60 ? 'Needs Attention' :
+        predData.health_score >= 40 ? 'At Risk' : 'Critical'
+
+      const cropCap = predData.crop.charAt(0).toUpperCase() + predData.crop.slice(1)
+      const sciName = predData.scientific_name ||
+        (predData.crop.toLowerCase().includes('rice') ? 'Oryza sativa' :
+         predData.crop.toLowerCase().includes('wheat') ? 'Triticum aestivum' :
+         predData.crop.toLowerCase().includes('sugar') ? 'Saccharum officinarum' : 'Gossypium hirsutum')
+
+      const newScannedPlant: Plant = {
+        id: `plant_${Date.now()}`,
+        name: `${cropCap} Specimen`,
+        species: cropCap,
+        scientificName: sciName,
+        image: predData.original_image || previewUrl || '',
+        healthScore: predData.health_score,
+        status: plantStatus,
+        lastScanned: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        latestDisease: predData.predicted_class,
+        waterFrequency: predData.crop.toLowerCase().includes('rice') ? 'Daily standing water (2-5cm)' : '2-3 times/week',
+        sunlight: 'Full direct sunlight',
+        humidity: predData.weather_context?.weather ? `${predData.weather_context.weather.humidity_percent}% ambient` : '60–75%',
+        soil: 'Loamy, well-draining',
+      }
+      setPlants((prev) => {
+        const next = [newScannedPlant, ...prev]
+        try { localStorage.setItem('flora_scanned_plants', JSON.stringify(next)) } catch (_) {}
+        return next
+      })
+
       addToast('success', 'Analysis Complete', `${predData.crop} — ${predData.predicted_class}`)
       navigate('/diagnosis')
     } catch (err) {
@@ -460,6 +533,18 @@ function AppContent() {
     navigate('/scan')
   }
 
+  function handleUpdateManualWeather(data: LocationContextData | null) {
+    if (data) {
+      localStorage.setItem('flora_ai_manual_weather', JSON.stringify(data))
+      setLocationData(data)
+      addToast('success', 'Weather Data Updated', `${data.location.city} • ${data.weather.temperature_c}°C`)
+    } else {
+      localStorage.removeItem('flora_ai_manual_weather')
+      void fetchLocation()
+      addToast('info', 'Weather Reset', 'Restored live GPS sensor data.')
+    }
+  }
+
   return (
     <>
       <Routes>
@@ -546,9 +631,11 @@ function AppContent() {
                   element={<HistoryPage history={history} onClearHistory={() => setHistory([])} />}
                 />
                 <Route path="/library" element={<LibraryPage />} />
+                <Route path="/library/:diseaseId" element={<LibraryPage />} />
                 <Route path="/plants" element={<MyPlantsPage plants={plants} />} />
                 <Route path="/plants/:id" element={<PlantDetailPage plants={plants} />} />
-                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profile" element={<ProfilePage locationData={locationData} onUpdateLocationData={handleUpdateManualWeather} />} />
+                <Route path="/tools" element={<ProfilePage locationData={locationData} onUpdateLocationData={handleUpdateManualWeather} />} />
               </Routes>
             </AppLayout>
           }

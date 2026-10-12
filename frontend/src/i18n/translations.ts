@@ -26,6 +26,7 @@ export type TranslationKey =
   | 'btn.analyze' | 'btn.analyzing' | 'btn.locate' | 'btn.refresh'
   // Scan page
   | 'scan.title' | 'scan.subtitle' | 'scan.selectCrop' | 'scan.uploadHint' | 'scan.diagnosing'
+  | 'scan.tipLight' | 'scan.tipOneLeaf' | 'scan.tipHold' | 'scan.trySample'
   // Assistant page
   | 'assistant.title' | 'assistant.subtitle' | 'assistant.placeholder' | 'assistant.analyzing'
   | 'assistant.contextActive' | 'assistant.suggested' | 'assistant.followUp' | 'assistant.emptyTitle'
@@ -34,6 +35,7 @@ export type TranslationKey =
   | 'diagnosis.title' | 'diagnosis.gradcam' | 'diagnosis.symptoms' | 'diagnosis.treatment'
   | 'diagnosis.healthScore' | 'diagnosis.details' | 'diagnosis.modelPredictions' | 'diagnosis.aiSummary'
   | 'diagnosis.conditions' | 'diagnosis.risk' | 'diagnosis.expertAlert' | 'diagnosis.consultExpert'
+  | 'diagnosis.whatToDoNow' | 'diagnosis.heatmapToggle' | 'diagnosis.listen' | 'diagnosis.stopListening'
   // Cards
   | 'card.diagnosisSummary' | 'card.whyDetected' | 'card.visualEvidence' | 'card.shap'
   | 'card.environmental' | 'card.actions' | 'card.prevention' | 'card.disclaimer'
@@ -41,6 +43,14 @@ export type TranslationKey =
   // Common
   | 'common.loading' | 'common.error' | 'common.crop' | 'common.confidence' | 'common.health'
   | 'common.severity' | 'common.poweredBy' | 'common.context' | 'common.askFollowUp'
+  // Home
+  | 'home.greeting' | 'home.scanCta' | 'home.diseaseRiskToday' | 'home.recentScans'
+  // Loader
+  | 'loader.step1' | 'loader.step2' | 'loader.step3' | 'loader.slowBackend'
+  // Language switcher
+  | 'nav.language' | 'lang.chooseLanguage'
+  // Status labels
+  | 'status.healthy' | 'status.warning' | 'status.danger'
 
 type Translations = Record<TranslationKey, string>
 
@@ -113,6 +123,28 @@ const en: Translations = {
   'common.poweredBy':      'Powered by Gemini AI',
   'common.context':        'Active Diagnosis Context',
   'common.askFollowUp':    'Ask a follow-up',
+  // New keys — redesign UI
+  'scan.tipLight':         'Good light',
+  'scan.tipOneLeaf':       'One leaf',
+  'scan.tipHold':          'Hold steady',
+  'scan.trySample':        'Try a sample',
+  'diagnosis.whatToDoNow': 'What to do now',
+  'diagnosis.heatmapToggle': 'See where the problem is',
+  'diagnosis.listen':      'Listen',
+  'diagnosis.stopListening': 'Stop listening',
+  'home.greeting':         'Good morning, Farmer',
+  'home.scanCta':          'Scan a leaf',
+  'home.diseaseRiskToday': 'Disease risk today',
+  'home.recentScans':      'Recent scans',
+  'loader.step1':          'Looking at the leaf…',
+  'loader.step2':          'Checking for disease…',
+  'loader.step3':          'Preparing advice…',
+  'loader.slowBackend':    'This is taking longer than expected. Please wait…',
+  'nav.language':          'Choose language',
+  'lang.chooseLanguage':   'Choose language',
+  'status.healthy':        'Healthy',
+  'status.warning':        'Warning',
+  'status.danger':         'Danger',
 }
 
 const hi: Translations = {
@@ -184,6 +216,28 @@ const hi: Translations = {
   'common.poweredBy':      'Gemini AI द्वारा संचालित',
   'common.context':        'सक्रिय निदान संदर्भ',
   'common.askFollowUp':    'अगला प्रश्न',
+  // New keys — [REVIEW NEEDED: native speaker]
+  'scan.tipLight':         'अच्छी रोशनी',
+  'scan.tipOneLeaf':       'एक पत्ती',
+  'scan.tipHold':          'स्थिर रखें',
+  'scan.trySample':        'नमूना आज़माएं',
+  'diagnosis.whatToDoNow': 'अभी क्या करें',
+  'diagnosis.heatmapToggle': 'समस्या कहाँ है देखें',
+  'diagnosis.listen':      'सुनें',
+  'diagnosis.stopListening': 'रोकें',
+  'home.greeting':         'नमस्ते, किसान',
+  'home.scanCta':          'पत्ती स्कैन करें',
+  'home.diseaseRiskToday': 'आज रोग जोखिम',
+  'home.recentScans':      'हाल के स्कैन',
+  'loader.step1':          'पत्ती देख रहे हैं…',
+  'loader.step2':          'बीमारी जाँच रहे हैं…',
+  'loader.step3':          'सलाह तैयार कर रहे हैं…',
+  'loader.slowBackend':    'इसमें अपेक्षा से अधिक समय लग रहा है। कृपया प्रतीक्षा करें…',
+  'nav.language':          'भाषा चुनें',
+  'lang.chooseLanguage':   'भाषा चुनें',
+  'status.healthy':        'स्वस्थ',
+  'status.warning':        'चेतावनी',
+  'status.danger':         'खतरा',
 }
 
 const gu: Translations = {
@@ -255,6 +309,28 @@ const gu: Translations = {
   'common.poweredBy':      'Gemini AI દ્વારા સંચાલિત',
   'common.context':        'સક્રિય નિદાન સંદર્ભ',
   'common.askFollowUp':    'આગળ પૂછો',
+  // New keys — redesign UI
+  'scan.tipLight':         'સારો પ્રકાશ',
+  'scan.tipOneLeaf':       'એક પાંદડું',
+  'scan.tipHold':          'સ્થિર રાખો',
+  'scan.trySample':        'નમૂનો અજમાવો',
+  'diagnosis.whatToDoNow': 'હવે શું કરવું',
+  'diagnosis.heatmapToggle': 'સમસ્યા ક્યાં છે તે જુઓ',
+  'diagnosis.listen':      'સાંભળો',
+  'diagnosis.stopListening': 'બંધ કરો',
+  'home.greeting':         'નમસ્તે, ખેડૂત મિત્ર',
+  'home.scanCta':          'પાંદડું સ્કેન કરો',
+  'home.diseaseRiskToday': 'આજનો રોગ જોખમ',
+  'home.recentScans':      'તાજેતરના સ્કેન',
+  'loader.step1':          'પાંદડું જોઈ રહ્યા છીએ…',
+  'loader.step2':          'રોગ તપાસી રહ્યા છીએ…',
+  'loader.step3':          'સલાહ તૈયાર કરી રહ્યા છીએ…',
+  'loader.slowBackend':    'અપેક્ષા કરતાં વધુ સમય લાગી રહ્યો છે. કૃપા કરીને રાહ જુઓ…',
+  'nav.language':          'ભાષા પસંદ કરો',
+  'lang.chooseLanguage':   'ભાષા પસંદ કરો',
+  'status.healthy':        'તંદુરસ્ત',
+  'status.warning':        'ચેતવણી',
+  'status.danger':         'જોખમ',
 }
 
 const mr: Translations = {
@@ -326,6 +402,28 @@ const mr: Translations = {
   'common.poweredBy':      'Gemini AI द्वारे चालवलेले',
   'common.context':        'सक्रिय निदान संदर्भ',
   'common.askFollowUp':    'पुढे विचारा',
+  // New keys — redesign UI
+  'scan.tipLight':         'चांगला प्रकाश',
+  'scan.tipOneLeaf':       'एक पान',
+  'scan.tipHold':          'स्थिर धरा',
+  'scan.trySample':        'नमुना तपासा',
+  'diagnosis.whatToDoNow': 'आता काय करावे',
+  'diagnosis.heatmapToggle': 'समस्या कुठे आहे ते पहा',
+  'diagnosis.listen':      'ऐका',
+  'diagnosis.stopListening': 'थांबवा',
+  'home.greeting':         'नमस्कार, शेतकरी मित्र',
+  'home.scanCta':          'पान स्कॅन करा',
+  'home.diseaseRiskToday': 'आजचा रोग धोका',
+  'home.recentScans':      'अलीकडील स्कॅन',
+  'loader.step1':          'पान पाहत आहोत…',
+  'loader.step2':          'रोग तपासत आहोत…',
+  'loader.step3':          'सल्ला तयार करत आहोत…',
+  'loader.slowBackend':    'अपेक्षेपेक्षा जास्त वेळ लागत आहे. कृपया प्रतीक्षा करा…',
+  'nav.language':          'भाषा निवडा',
+  'lang.chooseLanguage':   'भाषा निवडा',
+  'status.healthy':        'निरोगी',
+  'status.warning':        'चेतावणी',
+  'status.danger':         'धोका',
 }
 
 const ta: Translations = {
@@ -397,6 +495,28 @@ const ta: Translations = {
   'common.poweredBy':      'Gemini AI மூலம்',
   'common.context':        'செயலில் உள்ள சூழல்',
   'common.askFollowUp':    'தொடர்ந்து கேள்',
+  // New keys — redesign UI
+  'scan.tipLight':         'நல்ல வெளிச்சம்',
+  'scan.tipOneLeaf':       'ஒரு இலை',
+  'scan.tipHold':          'அசையாமல் பிடிக்கவும்',
+  'scan.trySample':        'மாதிரியை முயற்சிக்கவும்',
+  'diagnosis.whatToDoNow': 'இப்போது என்ன செய்ய வேண்டும்',
+  'diagnosis.heatmapToggle': 'பிரச்சனை எங்கே உள்ளது என்று பார்க்கவும்',
+  'diagnosis.listen':      'கேளுங்கள்',
+  'diagnosis.stopListening': 'நிறுத்து',
+  'home.greeting':         'வணக்கம், விவசாயி',
+  'home.scanCta':          'இலையை ஸ்கேன் செய்யவும்',
+  'home.diseaseRiskToday': 'இன்றைய நோய் ஆபத்து',
+  'home.recentScans':      'சமீபத்திய ஸ்கேன்கள்',
+  'loader.step1':          'இலையைப் பார்க்கிறது…',
+  'loader.step2':          'நோயை சரிபார்க்கிறது…',
+  'loader.step3':          'ஆலோசனையை தயார் செய்கிறது…',
+  'loader.slowBackend':    'எதிர்பார்த்ததை விட அதிக நேரம் ஆகிறது. காத்திருக்கவும்…',
+  'nav.language':          'மொழியைத் தேர்வுசெய்',
+  'lang.chooseLanguage':   'மொழியைத் தேர்வுசெய்',
+  'status.healthy':        'ஆரோக்கியமானது',
+  'status.warning':        'எச்சரிக்கை',
+  'status.danger':         'ஆபத்து',
 }
 
 const te: Translations = {
@@ -468,6 +588,28 @@ const te: Translations = {
   'common.poweredBy':      'Gemini AI ద్వారా',
   'common.context':        'సక్రియ సందర్భం',
   'common.askFollowUp':    'తర్వాత అడగండి',
+  // New keys — redesign UI
+  'scan.tipLight':         'మంచి వెలుతురు',
+  'scan.tipOneLeaf':       'ఒక ఆకు',
+  'scan.tipHold':          'కదలకుండా పట్టుకోండి',
+  'scan.trySample':        'నమూనాను ప్రయత్నించండి',
+  'diagnosis.whatToDoNow': 'ఇప్పుడు ఏమి చేయాలి',
+  'diagnosis.heatmapToggle': 'సమస్య ఎక్కడ ఉందో చూడండి',
+  'diagnosis.listen':      'వినండి',
+  'diagnosis.stopListening': 'ఆపండి',
+  'home.greeting':         'నమస్కారం, రైతు మిత్రమా',
+  'home.scanCta':          'ఆకును స్కాన్ చేయండి',
+  'home.diseaseRiskToday': 'నేటి వ్యాధి ప్రమాదం',
+  'home.recentScans':      'ఇటీవలి స్కాన్లు',
+  'loader.step1':          'ఆకును పరిశీలిస్తోంది…',
+  'loader.step2':          'వ్యాధిని నిర్ధారిస్తోంది…',
+  'loader.step3':          'సలహాలను సిద్ధం చేస్తోంది…',
+  'loader.slowBackend':    'అనుకున్న దానికంటే ఎక్కువ సమయం పడుతోంది. దయచేసి వేచి ఉండండి…',
+  'nav.language':          'భాషను ఎంచుకోండి',
+  'lang.chooseLanguage':   'భాషను ఎంచుకోండి',
+  'status.healthy':        'ఆరోగ్యకరమైనది',
+  'status.warning':        'హెచ్చరిక',
+  'status.danger':         'ప్రమాదం',
 }
 
 const bn: Translations = {
@@ -539,6 +681,28 @@ const bn: Translations = {
   'common.poweredBy':      'Gemini AI দ্বারা চালিত',
   'common.context':        'সক্রিয় রোগ নির্ণয়',
   'common.askFollowUp':    'পরবর্তী প্রশ্ন',
+  // New keys — redesign UI
+  'scan.tipLight':         'ভালো আলো',
+  'scan.tipOneLeaf':       'একটি পাতা',
+  'scan.tipHold':          'স্থির রাখুন',
+  'scan.trySample':        'নমুনা চেষ্টা করুন',
+  'diagnosis.whatToDoNow': 'এখন কী করতে হবে',
+  'diagnosis.heatmapToggle': 'সমস্যাটি কোথায় দেখুন',
+  'diagnosis.listen':      'শুনুন',
+  'diagnosis.stopListening': 'বন্ধ করুন',
+  'home.greeting':         'নমস্কার, কৃষক ভাই',
+  'home.scanCta':          'পাতা স্ক্যান করুন',
+  'home.diseaseRiskToday': 'আজ রোগের ঝুঁকি',
+  'home.recentScans':      'সাম্প্রতিক স্ক্যান',
+  'loader.step1':          'পাতা বিশ্লেষণ করা হচ্ছে…',
+  'loader.step2':          'রোগ পরীক্ষা করা হচ্ছে…',
+  'loader.step3':          'পরামর্শ প্রস্তুত করা হচ্ছে…',
+  'loader.slowBackend':    'প্রত্যাশিত চেয়ে বেশি সময় লাগছে। অনুগ্রহ করে অপেক্ষা করুন…',
+  'nav.language':          'ভাষা নির্বাচন করুন',
+  'lang.chooseLanguage':   'ভাষা নির্বাচন করুন',
+  'status.healthy':        'সুস্থ',
+  'status.warning':        'সতর্কতা',
+  'status.danger':         'বিপদ',
 }
 
 const pa: Translations = {
@@ -610,6 +774,28 @@ const pa: Translations = {
   'common.poweredBy':      'Gemini AI ਦੁਆਰਾ',
   'common.context':        'ਸਕਿਰਿਆ ਸੰਦਰਭ',
   'common.askFollowUp':    'ਅੱਗੇ ਪੁੱਛੋ',
+  // New keys — redesign UI
+  'scan.tipLight':         'ਚੰਗੀ ਰੌਸ਼ਨੀ',
+  'scan.tipOneLeaf':       'ਇੱਕ ਪੱਤਾ',
+  'scan.tipHold':          'ਸਥਿਰ ਰੱਖੋ',
+  'scan.trySample':        'ਨਮੂਨਾ ਅਜ਼ਮਾਓ',
+  'diagnosis.whatToDoNow': 'ਹੁਣ ਕੀ ਕਰਨਾ ਹੈ',
+  'diagnosis.heatmapToggle': 'ਦੇਖੋ ਸਮੱਸਿਆ ਕਿੱਥੇ ਹੈ',
+  'diagnosis.listen':      'ਸੁਣੋ',
+  'diagnosis.stopListening': 'ਬੰਦ ਕਰੋ',
+  'home.greeting':         'ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ, ਕਿਸਾਨ ਵੀਰ',
+  'home.scanCta':          'ਪੱਤਾ ਸਕੈਨ ਕਰੋ',
+  'home.diseaseRiskToday': 'ਅੱਜ ਬਿਮਾਰੀ ਦਾ ਖ਼ਤਰਾ',
+  'home.recentScans':      'ਤਾਜ਼ਾ ਸਕੈਨ',
+  'loader.step1':          'ਪੱਤਾ ਦੇਖ ਰਹੇ ਹਾਂ…',
+  'loader.step2':          'ਬਿਮਾਰੀ ਦੀ ਜਾਂਚ ਕਰ ਰਹੇ ਹਾਂ…',
+  'loader.step3':          'ਸਲਾਹ ਤਿਆਰ ਕਰ ਰਹੇ ਹਾਂ…',
+  'loader.slowBackend':    'ਉਮੀਦ ਨਾਲੋਂ ਜ਼ਿਆਦਾ ਸਮਾਂ ਲੱਗ ਰਿਹਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ…',
+  'nav.language':          'ਭਾਸ਼ਾ ਚੁਣੋ',
+  'lang.chooseLanguage':   'ਭਾਸ਼ਾ ਚੁਣੋ',
+  'status.healthy':        'ਤੰਦਰੁਸਤ',
+  'status.warning':        'ਚੇਤਾਵਨੀ',
+  'status.danger':         'ਖ਼ਤਰਾ',
 }
 
 export const TRANSLATIONS: Record<LangCode, Translations> = { en, hi, gu, mr, ta, te, bn, pa }

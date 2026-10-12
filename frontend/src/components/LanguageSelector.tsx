@@ -27,16 +27,16 @@ export function LanguageSelector({ compact = false, variant = 'dark' }: { compac
         onClick={() => setOpen(!open)}
         className={`flex items-center gap-1.5 rounded-lg border transition-all cursor-pointer ${
           compact
-            ? 'px-2 py-1 text-xs bg-white/10 border-white/20 text-white hover:bg-white/20'
+            ? 'px-2.5 py-1.5 text-xs bg-[var(--color-green-50)] border-[var(--color-green-200)] text-[var(--color-green-700)] hover:bg-[var(--color-green-100)] font-medium'
             : variant === 'light'
             ? 'px-2.5 py-1.5 text-xs bg-[#F0FAF4] border-[#0B8F68]/20 text-[#0B8F68] hover:bg-[#DDF3E8] shadow-sm font-medium'
             : 'px-2.5 py-1.5 text-xs bg-white/15 border-white/25 text-white hover:bg-white/25 shadow-sm'
         }`}
         aria-label="Select Language"
       >
-        <Globe className={`w-3.5 h-3.5 ${variant === 'light' ? 'text-[#0B8F68]' : 'text-[#3DFF8F]'}`} />
+        <Globe className={`w-3.5 h-3.5 ${compact || variant === 'light' ? 'text-[var(--color-green-700)]' : 'text-[#3DFF8F]'}`} />
         <span className="font-semibold">{currentMeta.flag} {currentMeta.nativeName}</span>
-        <ChevronDown className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''} ${variant === 'light' ? 'text-[#0B8F68]/70' : 'text-white/70'}`} />
+        <ChevronDown className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''} ${compact || variant === 'light' ? 'text-[var(--color-green-700)]/70' : 'text-white/70'}`} />
       </button>
 
       {open && (

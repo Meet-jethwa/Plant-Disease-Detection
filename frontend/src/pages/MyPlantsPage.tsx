@@ -1,9 +1,8 @@
 // MyPlantsPage.tsx — Monitored Specimens Dashboard
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Plus, Search } from 'lucide-react'
+import { Plus, Search, Sprout } from 'lucide-react'
 import { PlantCard } from '../components/PlantCard'
-import { MOCK_PLANTS } from '../data/mockData'
 import type { Plant } from '../types'
 
 type Filter = 'all' | 'healthy' | 'attention' | 'risk'
@@ -36,7 +35,7 @@ function filterPlants(plants: Plant[], filter: Filter, query: string): Plant[] {
   return result
 }
 
-export function MyPlantsPage({ plants = MOCK_PLANTS }: MyPlantsPageProps) {
+export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
   const navigate = useNavigate()
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
@@ -131,7 +130,27 @@ export function MyPlantsPage({ plants = MOCK_PLANTS }: MyPlantsPageProps) {
       </div>
 
       {/* ── Grid ── */}
-      {filtered.length === 0 ? (
+      {plants.length === 0 ? (
+        <div style={{ background: '#ffffff', border: '1px solid #D4E8DC', borderRadius: '16px', padding: '56px 24px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#F0FBF5', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0B8F68', marginBottom: '16px' }}>
+            <Sprout style={{ width: '28px', height: '28px' }} />
+          </div>
+          <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#10231D', margin: '0 0 8px 0' }}>
+            No Monitored Plants Yet
+          </h2>
+          <p style={{ fontSize: '14px', color: '#64736C', maxWidth: '440px', margin: '0 0 24px 0', lineHeight: 1.5 }}>
+            Whenever you scan a crop leaf with the FloraAI scanner, your diagnosed specimens and health scores will automatically appear in this registry.
+          </p>
+          <button
+            type="button"
+            onClick={() => navigate('/scan')}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: '#0B8F68', color: '#ffffff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}
+          >
+            <Plus style={{ width: '16px', height: '16px' }} />
+            Scan Your First Crop
+          </button>
+        </div>
+      ) : filtered.length === 0 ? (
         <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '48px', textAlign: 'center', color: '#64748B' }}>
           <p style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>No monitored plants found matching the query.</p>
         </div>

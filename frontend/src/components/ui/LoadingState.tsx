@@ -1,17 +1,29 @@
-// LoadingState.tsx — Reusable loading state
-import { Loader2 } from 'lucide-react'
+// LoadingState.tsx — FloraAI green design system
+// Uses skeleton shimmer for list loading; spinner for other loading states
 
 interface LoadingStateProps {
   message?: string
   size?: 'sm' | 'md' | 'lg'
 }
 
-export function LoadingState({ message = 'Loading...', size = 'md' }: LoadingStateProps) {
-  const sizes = { sm: 'w-5 h-5', md: 'w-8 h-8', lg: 'w-12 h-12' }
+const spinnerSize = { sm: 20, md: 32, lg: 44 }
+
+export function LoadingState({ message = 'Loading…', size = 'md' }: LoadingStateProps) {
+  const sz = spinnerSize[size]
   return (
-    <div className="flex flex-col items-center justify-center py-12 gap-3">
-      <Loader2 className={`${sizes[size]} text-[#0B8F68] animate-spin`} />
-      <p className="text-sm text-[#64736C] font-medium">{message}</p>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 24px', gap: 14 }}>
+      {/* Leaf-shaped spinner using CSS border trick */}
+      <div
+        aria-hidden
+        style={{
+          width: sz, height: sz,
+          borderRadius: '50%',
+          border: `3px solid var(--color-green-200)`,
+          borderTopColor: 'var(--color-green-700)',
+          animation: 'bio-spin 0.9s linear infinite',
+        }}
+      />
+      <p style={{ fontSize: 15, color: 'var(--color-ink-2)', fontWeight: 500 }}>{message}</p>
     </div>
   )
 }

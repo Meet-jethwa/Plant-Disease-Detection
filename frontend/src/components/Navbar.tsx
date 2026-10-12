@@ -7,6 +7,7 @@ import {
   Settings, User, Activity,
 } from 'lucide-react'
 import { useLang } from '../contexts/LanguageContext'
+import profileImage from '../../IMAGES/images.jpg'
 
 interface NavbarProps {
   locationData: {
@@ -104,17 +105,6 @@ export function Navbar({ backendHealthy }: NavbarProps) {
           {/* Right Side */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
 
-            {/* Activity */}
-            <Link to="/history" aria-label="Scan history" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: 36, height: 36, borderRadius: 8,
-              background: 'rgba(0,255,136,0.06)', border: '1px solid var(--border-base)',
-              color: 'var(--text-secondary)', textDecoration: 'none',
-              transition: 'all 0.15s ease',
-            }}>
-              <Activity style={{ width: 16, height: 16 }} />
-            </Link>
-
             {/* Profile */}
             <div style={{ position: 'relative' }}>
               <button
@@ -124,27 +114,30 @@ export function Navbar({ backendHealthy }: NavbarProps) {
                 aria-label="User profile menu"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 6,
-                  padding: '4px 6px 4px 4px', borderRadius: 10,
-                  border: '1px solid var(--border-base)',
+                  padding: '4px 6px 4px 4px', borderRadius: 999,
+                  border: '1.5px solid var(--border-base)',
                   background: 'var(--bg-surface)',
                   cursor: 'pointer', transition: 'all 0.15s ease',
                 }}
               >
                 <div style={{
-                  position: 'relative', width: 32, height: 32, borderRadius: 8,
-                  background: 'linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,212,255,0.15))',
-                  border: '1px solid rgba(0,255,136,0.3)',
+                  position: 'relative', width: 34, height: 34, borderRadius: '50%',
+                  overflow: 'visible',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'var(--neon-green)', fontWeight: 700, fontSize: '0.7rem',
-                  fontFamily: 'var(--font-display)',
-                  boxShadow: '0 0 10px rgba(0,255,136,0.15)',
                 }}>
-                  MJ
+                  <img
+                    src={profileImage}
+                    alt="User profile"
+                    style={{
+                      width: 34, height: 34, borderRadius: '50%', objectFit: 'cover',
+                      border: '1.5px solid #0B8F68',
+                    }}
+                  />
                   <span style={{
-                    position: 'absolute', bottom: -2, right: -2,
+                    position: 'absolute', bottom: -1, right: -1,
                     width: 10, height: 10, borderRadius: '50%',
                     background: backendHealthy ? 'var(--neon-green)' : 'var(--neon-amber)',
-                    border: '2px solid var(--bg-void)',
+                    border: '2px solid #FFFFFF',
                     boxShadow: `0 0 6px ${backendHealthy ? 'var(--neon-green)' : 'var(--neon-amber)'}`,
                   }} />
                 </div>
@@ -164,14 +157,14 @@ export function Navbar({ backendHealthy }: NavbarProps) {
                   }}>
                     <div style={{ padding: '14px 16px', borderBottom: '1px solid var(--border-subtle)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <div style={{
-                          width: 36, height: 36, borderRadius: 8,
-                          background: 'linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,212,255,0.15))',
-                          border: '1px solid rgba(0,255,136,0.3)',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          color: 'var(--neon-green)', fontWeight: 700, fontSize: '0.75rem',
-                          fontFamily: 'var(--font-display)',
-                        }}>MJ</div>
+                        <img
+                          src={profileImage}
+                          alt="User profile"
+                          style={{
+                            width: 38, height: 38, borderRadius: '50%', objectFit: 'cover',
+                            border: '1.5px solid #0B8F68', flexShrink: 0,
+                          }}
+                        />
                         <div>
                           <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>Meet Jethwa</div>
                           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>meetjethwa@example.com</div>

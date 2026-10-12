@@ -1,4 +1,5 @@
-// ImageUploader.tsx — BioScan Lab dark drag-and-drop uploader
+// ImageUploader.tsx — FloraAI clean white dropzone
+// Design inspired by app/static/styles.css: white bg, green border, clean shadow
 import { useRef, useState } from 'react'
 import { Camera, ImagePlus, Upload, X } from 'lucide-react'
 
@@ -39,7 +40,9 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-      <p className="eyebrow" style={{ marginBottom: 2 }}>LEAF IMAGE</p>
+      <p style={{ fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-ink-2)', marginBottom: 2, textAlign: 'center' }}>
+        Leaf Image
+      </p>
 
       <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp"
         style={{ display: 'none' }} onChange={handleChange}
@@ -50,37 +53,35 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
       {previewUrl ? (
         <div style={{
           position: 'relative', borderRadius: 12, overflow: 'hidden',
-          border: '1px solid rgba(0,255,136,0.25)',
-          aspectRatio: '16/9', background: '#020906',
+          /* Clean white card — matches app's .video-wrap */
+          border: '1px solid var(--color-green-200)',
+          background: 'var(--color-green-50)',
+          aspectRatio: '16/9',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 0 20px rgba(0,255,136,0.08)',
+          boxShadow: 'var(--shadow-card)',
         }}>
           <img src={previewUrl} alt="Selected leaf" style={{ width: '100%', height: '100%', objectFit: 'contain', maxHeight: 260 }} />
-          {/* Scan line overlay */}
-          <div className="scan-overlay" />
-          {/* Scanner frame corners */}
-          <div className="scanner-frame scanner-frame-br" />
           {/* File info overlay */}
           <div style={{
             position: 'absolute', bottom: 0, left: 0, right: 0,
-            background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+            background: 'linear-gradient(transparent, rgba(11, 46, 28, 0.7))',
             padding: '20px 12px 10px',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span className="status-dot status-dot-green" style={{ width: 6, height: 6 }} />
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.8)', fontFamily: 'var(--font-mono)', maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.9)', maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {selectedFile?.name ?? 'leaf.jpg'} · {fileSizeKb}KB
               </span>
             </div>
             <button type="button" onClick={onClear} aria-label="Remove selected image"
               style={{
-                width: 24, height: 24, borderRadius: '50%', flexShrink: 0,
-                background: 'rgba(255,255,255,0.15)', border: 'none', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
+                background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.3)',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'white',
               }}>
-              <X style={{ width: 13, height: 13 }} />
+              <X style={{ width: 14, height: 14 }} />
             </button>
           </div>
         </div>
@@ -93,33 +94,32 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
           style={{
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
             gap: 14, minHeight: 200, borderRadius: 12,
-            border: `2px dashed ${dragging ? 'var(--neon-green)' : 'rgba(0,255,136,0.2)'}`,
-            background: dragging ? 'rgba(0,255,136,0.06)' : 'rgba(0,255,136,0.02)',
-            cursor: 'pointer', transition: 'all 0.2s ease',
-            boxShadow: dragging ? '0 0 20px rgba(0,255,136,0.1) inset' : 'none',
-            position: 'relative', overflow: 'hidden',
+            /* App-inspired: white bg with green dashed border */
+            border: `2px dashed ${dragging ? 'var(--color-green-600)' : 'var(--color-green-200)'}`,
+            background: dragging ? 'var(--color-green-50)' : 'var(--color-white)',
+            cursor: 'pointer', transition: 'all 0.18s ease',
+            boxShadow: dragging ? '0 0 0 4px rgba(21, 128, 61, 0.08) inset' : 'var(--shadow-card)',
           }}
         >
-          {/* Subtle grid */}
-          <div className="bio-grid-bg-sm" style={{ position: 'absolute', inset: 0, opacity: 0.5 }} />
-
+          {/* Upload icon badge — matches app's clean icon pattern */}
           <div style={{
-            width: 56, height: 56, borderRadius: 14, position: 'relative',
-            background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.3)',
+            width: 56, height: 56, borderRadius: 14,
+            background: dragging ? 'var(--color-green-100)' : 'var(--color-green-50)',
+            border: '1px solid var(--color-green-200)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: dragging ? '0 0 20px rgba(0,255,136,0.25)' : 'none',
+            transition: 'background 0.18s ease',
           }}>
-            <Upload style={{ width: 24, height: 24, color: 'var(--neon-green)' }} />
+            <Upload style={{ width: 24, height: 24, color: 'var(--color-green-600)' }} />
           </div>
-          <div style={{ textAlign: 'center', padding: '0 16px', position: 'relative' }}>
-            <p style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>
-              {dragging ? 'DROP IMAGE TO SCAN' : 'UPLOAD LEAF PHOTO'}
+          <div style={{ textAlign: 'center', padding: '0 16px' }}>
+            <p style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-ink)', marginBottom: 4 }}>
+              {dragging ? 'Drop image to scan' : 'Upload leaf photo'}
             </p>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-ink-2)' }}>
               JPG · PNG · WEBP · Max 10MB
             </p>
           </div>
-          <p style={{ fontSize: '0.7rem', color: 'var(--neon-green)', opacity: 0.7, fontFamily: 'var(--font-mono)', position: 'relative' }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--color-green-700)' }}>
             Best results: clear, well-lit close-up
           </p>
         </label>
@@ -129,8 +129,8 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
       {sizeError && (
         <div style={{
           padding: '8px 12px', borderRadius: 8,
-          background: 'rgba(255,69,96,0.1)', border: '1px solid rgba(255,69,96,0.25)',
-          fontSize: '0.75rem', color: 'var(--neon-red)', fontFamily: 'var(--font-mono)',
+          background: 'var(--color-danger-bg)', border: '1px solid var(--color-danger-border)',
+          fontSize: '0.8rem', color: 'var(--color-danger)',
         }}>
           ⚠ {sizeError}
         </div>

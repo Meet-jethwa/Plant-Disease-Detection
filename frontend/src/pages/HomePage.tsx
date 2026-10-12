@@ -2,17 +2,17 @@
 import { Link } from 'react-router-dom'
 import {
   ArrowRight, Camera, CheckCircle2, ChevronDown,
-  Eye, Scan, ShieldCheck, Upload,
+  Eye, Scan, ShieldCheck,
   HeartPulse, Activity, BookOpen, MessageSquare,
   Leaf, Microscope, TrendingUp, Zap, Globe, FlaskConical,
 } from 'lucide-react'
 import { useState } from 'react'
 
 interface HomePageProps {
-  onSelectSamplePreset: (crop: string, sampleKey: string) => void
+  onSelectSamplePreset?: (crop: string, sampleKey: string) => void
 }
 
-export function HomePage({ onSelectSamplePreset }: HomePageProps) {
+export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePageProps = {}) {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   const quickStats = [
@@ -20,13 +20,6 @@ export function HomePage({ onSelectSamplePreset }: HomePageProps) {
     { label: 'Scans Analyzed',    value: '2.4M+', color: '#0EA5E9', accent: '#F0F9FF', border: 'rgba(14,165,233,0.2)', icon: Scan },
     { label: 'Crops Supported',   value: '18+',   color: '#D97706', accent: '#FFFBEB', border: 'rgba(217,119,6,0.2)', icon: Leaf },
     { label: 'AI Accuracy',       value: '97.3%', color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: TrendingUp },
-  ]
-
-  const samples = [
-    { crop: 'rice',      label: 'Rice Blast',          severity: 'MODERATE', key: 'rice_blast',             sev: 'amber' },
-    { crop: 'wheat',     label: 'Yellow Rust',          severity: 'HIGH',     key: 'wheat_yellow_rust',       sev: 'red' },
-    { crop: 'sugarcane', label: 'Red Rot',              severity: 'SEVERE',   key: 'sugarcane_red_rot',       sev: 'red' },
-    { crop: 'cotton',    label: 'Bacterial Blight',     severity: 'MEDIUM',   key: 'cotton_bacterial_blight', sev: 'amber' },
   ]
 
   const steps = [
@@ -87,15 +80,6 @@ export function HomePage({ onSelectSamplePreset }: HomePageProps) {
     { q: 'Can I use BioScan offline?', a: 'Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline model for field use.' },
     { q: 'What image format and size works best?', a: 'JPG, PNG, or WebP images up to 10MB. For best results, capture the leaf against a plain background in natural light at 2-4 megapixel resolution.' },
   ]
-
-  const sevColor: Record<string, string> = {
-    amber: 'var(--neon-amber)',
-    red: 'var(--neon-red)',
-  }
-  const sevBg: Record<string, string> = {
-    amber: 'rgba(255,184,0,0.08)',
-    red: 'rgba(255,69,96,0.08)',
-  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 80 }}>
@@ -372,62 +356,6 @@ export function HomePage({ onSelectSamplePreset }: HomePageProps) {
               </div>
             )
           })}
-        </div>
-      </section>
-
-      {/* ── Quick Test Samples ───────────────────────── */}
-      <section>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 }}>
-          <div>
-            <p className="eyebrow" style={{ marginBottom: 6 }}>DEMO SAMPLES</p>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)', fontWeight: 800, color: 'var(--text-primary)' }}>
-              TEST WITH PRESETS
-            </h2>
-          </div>
-          <Link to="/scan" className="btn btn-outline btn-sm">
-            <Upload style={{ width: 14, height: 14 }} />
-            Upload Your Own
-          </Link>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14 }}>
-          {samples.map(s => (
-            <button
-              key={s.key}
-              type="button"
-              onClick={() => onSelectSamplePreset(s.crop, s.key)}
-              className="bio-card"
-              style={{
-                padding: '20px', textAlign: 'left', cursor: 'pointer',
-                border: 'none', width: '100%', transition: 'all 0.2s ease',
-              }}
-            >
-              {/* Crop icon */}
-              <div style={{
-                width: 48, height: 48, borderRadius: 12, marginBottom: 14,
-                background: sevBg[s.sev],
-                border: `1px solid ${sevColor[s.sev]}30`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700,
-                color: sevColor[s.sev],
-              }}>
-                {s.crop[0].toUpperCase()}
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>{s.label}</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'capitalize' }}>{s.crop}</span>
-                <span className={`badge badge-${s.sev === 'amber' ? 'amber' : 'red'}`}>{s.severity}</span>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 14, color: 'var(--neon-green)', fontSize: '0.78rem', fontWeight: 600 }}>
-                <Scan style={{ width: 12, height: 12 }} />
-                <span>Run Diagnosis →</span>
-              </div>
-            </button>
-          ))}
         </div>
       </section>
 

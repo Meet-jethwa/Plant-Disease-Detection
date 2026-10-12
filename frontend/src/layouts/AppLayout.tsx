@@ -1,5 +1,6 @@
-// AppLayout.tsx — BioScan Lab dark wrapper
+// AppLayout.tsx — FloraAI clean layout inspired by app/static/styles.css
 import type { ReactNode } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import { MobileHeader } from '../components/MobileHeader'
 import { BottomNav } from '../components/BottomNav'
@@ -18,22 +19,11 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children, locationData, isLocating, onFetchLocation, backendHealthy }: AppLayoutProps) {
+  const location = useLocation()
+  const isAssistantPage = location.pathname === '/assistant'
+
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-void)', position: 'relative' }}>
-      {/* Ambient background blobs */}
-      <div style={{
-        position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0,
-        background: `
-          radial-gradient(ellipse 70% 50% at 15% 15%, rgba(0,255,136,0.04) 0%, transparent 55%),
-          radial-gradient(ellipse 50% 40% at 85% 80%, rgba(0,212,255,0.03) 0%, transparent 50%)
-        `,
-      }} />
-
-      {/* Bio grid overlay */}
-      <div className="bio-grid-bg" style={{
-        position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, opacity: 0.7,
-      }} />
-
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--color-page-bg)', position: 'relative' }}>
       {/* Desktop nav (lg+) */}
       <Navbar
         locationData={locationData}
@@ -42,29 +32,29 @@ export function AppLayout({ children, locationData, isLocating, onFetchLocation,
         backendHealthy={backendHealthy}
       />
 
-      {/* Mobile/tablet header (<lg) */}
+      {/* Mobile/tablet frosted-glass header (<lg) */}
       <MobileHeader />
 
-      {/* Main content — overflow-x hidden to contain hero negative margins */}
+      {/* Main content */}
       <main style={{
         flex: 1,
         width: '100%',
         maxWidth: '1440px',
         margin: '0 auto',
         padding: '0 16px',
-        paddingTop: '24px',
-        paddingBottom: '88px',
+        paddingTop: isAssistantPage ? '16px' : '24px',
+        paddingBottom: isAssistantPage ? '16px' : '88px',
         position: 'relative',
-        zIndex: 1,
-        overflowX: 'hidden',
-      }} className="sm:px-6 lg:px-8 xl:px-10 lg:pb-16">
+      }} className={`sm:px-6 lg:px-8 xl:px-10 ${isAssistantPage ? 'lg:pb-4' : 'lg:pb-16'}`}>
         {children}
       </main>
 
-      {/* Desktop footer */}
-      <div className="hidden lg:block" style={{ position: 'relative', zIndex: 1 }}>
-        <Footer />
-      </div>
+      {/* Desktop footer (hidden on /assistant page) */}
+      {!isAssistantPage && (
+        <div className="hidden lg:block">
+          <Footer />
+        </div>
+      )}
 
       {/* Mobile bottom navigation */}
       <BottomNav />

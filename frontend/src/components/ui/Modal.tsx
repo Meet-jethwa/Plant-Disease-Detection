@@ -1,4 +1,4 @@
-// Modal.tsx — Reusable accessible modal dialog
+// Modal.tsx — FloraAI accessible modal dialog (no backdrop-filter blur)
 import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { X } from 'lucide-react'
@@ -11,12 +11,7 @@ interface ModalProps {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
-const widthMap = {
-  sm: 'max-w-sm',
-  md: 'max-w-md',
-  lg: 'max-w-lg',
-  xl: 'max-w-2xl',
-}
+const maxWidthPx: Record<string, number> = { sm: 380, md: 480, lg: 560, xl: 680 }
 
 export function Modal({ open, onClose, title, children, maxWidth = 'md' }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -29,13 +24,10 @@ export function Modal({ open, onClose, title, children, maxWidth = 'md' }: Modal
     return () => window.removeEventListener('keydown', handler)
   }, [open, onClose])
 
-  // Lock body scroll while open
+  // Lock body scroll
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    if (open) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = ''
     return () => { document.body.style.overflow = '' }
   }, [open])
 
@@ -43,34 +35,45 @@ export function Modal({ open, onClose, title, children, maxWidth = 'md' }: Modal
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4"
+      style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: '0' }}
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
     >
-      {/* Backdrop */}
+      {/* Backdrop — no blur (expensive on low-end Android) */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in"
+        style={{ position: 'absolute', inset: 0, background: 'rgba(11, 46, 28, 0.5)' }}
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Panel */}
+      {/* Panel — full-width bottom sheet on mobile, centered card on desktop */}
       <div
         ref={dialogRef}
-        className={`relative w-full ${widthMap[maxWidth]} bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl animate-fade-in-up max-h-[90dvh] overflow-y-auto`}
+        className="animate-fade-in-up"
+        style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: maxWidthPx[maxWidth],
+          background: 'var(--color-white)',
+          borderRadius: '20px 20px 0 0',
+          boxShadow: '0 -8px 40px rgba(21, 128, 61, 0.12)',
+          maxHeight: '90dvh',
+          overflowY: 'auto',
+          paddingBottom: 'env(safe-area-inset-bottom, 16px)',
+        }}
       >
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-[#D4E8DC]">
-            <h2 id="modal-title" className="text-base font-700 text-[#10231D]">{title}</h2>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px 16px', borderBottom: '1px solid var(--color-green-100)' }}>
+            <h2 id="modal-title" style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-ink)' }}>{title}</h2>
             <button
               type="button"
               onClick={onClose}
-              className="btn btn-icon btn-ghost"
-              aria-label="Close modal"
+              style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', border: 'none', cursor: 'pointer', borderRadius: 12, color: 'var(--color-ink-2)' }}
+              aria-label="Close"
             >
-              <X className="w-4 h-4" />
+              <X style={{ width: 20, height: 20 }} />
             </button>
           </div>
         )}
@@ -78,14 +81,14 @@ export function Modal({ open, onClose, title, children, maxWidth = 'md' }: Modal
           <button
             type="button"
             onClick={onClose}
-            className="btn btn-icon btn-ghost absolute top-3 right-3 z-10"
-            aria-label="Close modal"
+            style={{ position: 'absolute', top: 10, right: 12, width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-green-50)', border: 'none', cursor: 'pointer', borderRadius: 12, zIndex: 10, color: 'var(--color-ink-2)' }}
+            aria-label="Close"
           >
-            <X className="w-4 h-4" />
+            <X style={{ width: 20, height: 20 }} />
           </button>
         )}
 
-        <div className="px-6 py-5">{children}</div>
+        <div style={{ padding: '20px' }}>{children}</div>
       </div>
     </div>
   )

@@ -18,11 +18,11 @@ const CARE_ICONS: Record<string, React.ElementType> = {
   Soil: Mountain,
 }
 
-export function PlantDetailPage({ plants = MOCK_PLANTS }: PlantDetailPageProps) {
+export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
 
-  const plant = plants.find(p => p.id === id) ?? plants[0]
+  const plant = plants.find(p => p.id === id)
 
   if (!plant) {
     return (

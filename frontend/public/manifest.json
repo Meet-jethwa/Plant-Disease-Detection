@@ -1,38 +1,43 @@
 {
-  "name": "PlantEase",
-  "short_name": "PlantEase",
-  "description": "Smart Plant Diagnostics & Disease Prevention",
+  "name": "FloraAI",
+  "short_name": "FloraAI",
+  "description": "AI plant disease detection for Indian farmers — scan a leaf, get diagnosis in your language.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F5F8F5",
-  "theme_color": "#0B8F68",
+  "background_color": "#F0FDF4",
+  "theme_color": "#15803D",
   "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "categories": ["agriculture", "health", "productivity"],
   "lang": "en",
-  "screenshots": [],
   "shortcuts": [
     {
-      "name": "Scan Leaf",
+      "name": "Scan a leaf",
       "short_name": "Scan",
       "description": "Quickly scan a plant leaf for disease",
       "url": "/scan"
     },
     {
-      "name": "My Plants",
+      "name": "My plants",
       "short_name": "Plants",
       "description": "View your monitored plants",
       "url": "/plants"

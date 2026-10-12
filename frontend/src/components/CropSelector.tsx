@@ -11,7 +11,7 @@ interface CropSelectorProps {
 export function CropSelector({ crops = MOCK_CROPS, selectedCrop, onSelect }: CropSelectorProps) {
   return (
     <div>
-      <p className="section-label mb-3">1. Select Crop Type</p>
+      <p className="section-label mb-3 text-center">1. Select Crop Type</p>
       <div className="grid grid-cols-5 sm:grid-cols-5 gap-2">
         {crops.map(crop => {
           const isSelected = selectedCrop === crop.name
