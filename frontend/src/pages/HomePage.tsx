@@ -16,10 +16,10 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   const quickStats = [
-    { label: 'Diseases Detected', value: '127+', color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: Microscope },
-    { label: 'Scans Analyzed',    value: '2.4M+', color: '#0EA5E9', accent: '#F0F9FF', border: 'rgba(14,165,233,0.2)', icon: Scan },
-    { label: 'Crops Supported',   value: '18+',   color: '#D97706', accent: '#FFFBEB', border: 'rgba(217,119,6,0.2)', icon: Leaf },
-    { label: 'AI Accuracy',       value: '97.3%', color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: TrendingUp },
+    { label: 'Disease Classes',   value: '33',    color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: Microscope },
+    { label: 'Crops Supported',   value: '4',     color: '#0EA5E9', accent: '#F0F9FF', border: 'rgba(14,165,233,0.2)', icon: Leaf },
+    { label: 'AI Models',         value: '2',     color: '#D97706', accent: '#FFFBEB', border: 'rgba(217,119,6,0.2)', icon: TrendingUp },
+    { label: 'Weather Features',  value: '11',    color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: Scan },
   ]
 
   const steps = [
@@ -60,7 +60,7 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
     {
       icon: FlaskConical, color: '#8B5CF6',
       accent: '#F5F3FF', border: 'rgba(139,92,246,0.2)',
-      title: 'Disease Encyclopedia', badge: '127 DISEASES',
+      title: 'Disease Encyclopedia', badge: '33 CLASSES',
       desc: 'Comprehensive reference library of plant diseases with symptoms, lifecycle, and treatment databases.',
       link: '/library', linkLabel: 'Explore',
     },
@@ -74,8 +74,8 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
   ]
 
   const faqs = [
-    { q: 'Which crops are currently supported?', a: 'BioScan currently supports Rice, Wheat, Sugarcane, and Cotton, with more crops being added regularly. Our AI model is trained on 127+ disease classes across these crops.' },
-    { q: 'How accurate is the disease detection?', a: 'Our AI model achieves 97.3% accuracy on our validation dataset. Accuracy can vary based on image quality, lighting, and disease stage. We recommend capturing clear, well-lit photos of the affected area.' },
+    { q: 'Which crops are currently supported?', a: 'FloraAI currently supports Rice, Wheat, Sugarcane, and Cotton, with 33 disease and healthy conditions classified across these essential agricultural crops.' },
+    { q: 'How accurate is the disease detection?', a: 'Our AI models achieve state-of-the-art accuracy on validation datasets. Results vary based on image quality, lighting conditions, and disease stage. We recommend capturing clear, well-lit photos of the affected leaf area for best results.' },
     { q: 'Is my data private?', a: 'Yes. Your uploaded images are processed locally on our secure servers and are never shared with third parties. Scan data is stored only in your local browser session.' },
     { q: 'Can I use BioScan offline?', a: 'Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline model for field use.' },
     { q: 'What image format and size works best?', a: 'JPG, PNG, or WebP images up to 10MB. For best results, capture the leaf against a plain background in natural light at 2-4 megapixel resolution.' },

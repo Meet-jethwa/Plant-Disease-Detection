@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Send, Mic, MicOff, Loader2, Info, ChevronDown,
-  Sparkles, Check
+  Check
 } from 'lucide-react'
 import { pressTap } from '../../lib/motion'
 import { LANGUAGE_META } from '../../i18n/translations'
@@ -65,7 +65,7 @@ export function ChatComposer({
       const recognition = new SpeechRecognition()
       recognition.continuous = false
       recognition.interimResults = true
-      recognition.lang = LANGUAGE_META[lang]?.bcp47 || 'en-IN'
+      recognition.lang = LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.bcp47 || 'en-IN'
 
       recognition.onstart = () => setIsListening(true)
       recognition.onend = () => setIsListening(false)
@@ -100,7 +100,7 @@ export function ChatComposer({
       setIsListening(false)
     } else {
       try {
-        recognitionRef.current.lang = LANGUAGE_META[lang]?.bcp47 || 'en-IN'
+        recognitionRef.current.lang = LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.bcp47 || 'en-IN'
         recognitionRef.current.start()
       } catch {
         setIsListening(false)
@@ -198,7 +198,7 @@ export function ChatComposer({
           >
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping" />
-              <span>Listening to voice in {LANGUAGE_META[lang]?.label || 'English'}…</span>
+              <span>Listening to voice in {LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.label || 'English'}…</span>
             </div>
             {/* Waveform bars */}
             <div className="flex items-center gap-0.5 h-3">

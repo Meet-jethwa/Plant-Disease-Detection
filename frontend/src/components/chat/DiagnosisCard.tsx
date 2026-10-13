@@ -3,19 +3,18 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  ShieldAlert, CheckCircle2, ChevronDown, Eye,
+  CheckCircle2, ChevronDown, Eye,
   Info, AlertTriangle, AlertCircle, CloudRain,
-  Microscope, Sparkles, ExternalLink
 } from 'lucide-react'
 import type { GeminiResponse, PredictionResponse } from '../../types'
 
 interface DiagnosisCardProps {
   data?: GeminiResponse
   prediction: PredictionResponse | null
-  onAsk: (question: string) => void
+  onAsk?: (question: string) => void
 }
 
-export function DiagnosisCard({ data, prediction, onAsk }: DiagnosisCardProps) {
+export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCardProps) {
   const [openWhatItIs, setOpenWhatItIs] = useState(true)
   const [openWhatToDo, setOpenWhatToDo] = useState(true)
   const [openWhyThinks, setOpenWhyThinks] = useState(false)
@@ -38,7 +37,7 @@ export function DiagnosisCard({ data, prediction, onAsk }: DiagnosisCardProps) {
     { factor: 'Rainfall & Dew Wetness', importance_pct: 55, explanation: 'Persistent water droplets allow spore penetration into leaf stomata.' },
   ]
 
-  const actions = data?.actionable_steps || [
+  const actions: string[] = data?.recommended_actions || [
     prediction.disease_info?.treatment || 'Apply recommended cultural practices and maintain field sanitation.',
     'Isolate severely infected plant tissue and avoid excessive overhead sprinkler irrigation.',
     'Inspect adjacent crop rows within 48 hours to prevent cluster spread.',
@@ -80,37 +79,12 @@ export function DiagnosisCard({ data, prediction, onAsk }: DiagnosisCardProps) {
           </p>
         </div>
 
-        {/* Confidence Ring (Sweeps 0 to value) */}
-        <div className="flex items-center gap-2.5 bg-white px-3 py-2 rounded-xl border border-emerald-200 shadow-xs">
-          <div className="relative w-11 h-11 flex items-center justify-center">
-            <svg className="w-11 h-11 -rotate-90" viewBox="0 0 36 36">
-              <path
-                className="text-emerald-100"
-                strokeWidth="3.5"
-                stroke="currentColor"
-                fill="none"
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-              />
-              <motion.path
-                className="text-emerald-700"
-                strokeWidth="3.5"
-                strokeDasharray={`${confidence}, 100`}
-                strokeLinecap="round"
-                stroke="currentColor"
-                fill="none"
-                initial={{ strokeDasharray: '0, 100' }}
-                animate={{ strokeDasharray: `${confidence}, 100` }}
-                transition={{ duration: 0.7, ease: 'easeOut' }}
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-              />
-            </svg>
-            <span className="absolute text-xs font-bold text-emerald-950">
-              {confidence}%
-            </span>
-          </div>
+        {/* Diagnosis Status Badge */}
+        <div className="flex items-center gap-2 bg-emerald-50 px-3.5 py-2.5 rounded-xl border border-emerald-200">
+          <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
           <div className="text-left">
-            <span className="block text-[11px] font-bold text-emerald-900 uppercase tracking-wider">Confidence</span>
-            <span className="block text-xs text-stone-500">AI Diagnostic</span>
+            <span className="block text-[11px] font-bold text-emerald-900 uppercase tracking-wider">Status</span>
+            <span className="block text-xs font-semibold text-emerald-700">Diagnosis Verified</span>
           </div>
         </div>
       </div>
@@ -177,7 +151,7 @@ export function DiagnosisCard({ data, prediction, onAsk }: DiagnosisCardProps) {
               className="overflow-hidden"
             >
               <div className="px-5 pb-4 space-y-2.5">
-                {actions.map((act, idx) => (
+                {actions.map((act: string, idx: number) => (
                   <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-emerald-50/50 border border-emerald-200/70">
                     <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {idx + 1}
@@ -295,7 +269,7 @@ export function DiagnosisCard({ data, prediction, onAsk }: DiagnosisCardProps) {
                       <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
                         <span>{env.factor}</span>
                         <span className={isHighRisk ? 'text-red-700' : isModerate ? 'text-amber-800' : 'text-emerald-700'}>
-                          {pct}% · {statusLabel}
+                          {statusLabel}
                         </span>
                       </div>
                       

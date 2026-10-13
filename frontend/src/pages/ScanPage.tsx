@@ -1,6 +1,7 @@
 // ScanPage.tsx — Main plant scanner with stages: crop → upload → preview → analyze → result
 import { useState } from 'react'
-import { AlertTriangle, CheckCircle2, RotateCcw, Scan, Sparkles, X } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { AlertTriangle, CheckCircle2, RotateCcw, Scan, Sparkles, X, Thermometer, Droplets, Wind, MapPin, RefreshCw, Settings2 } from 'lucide-react'
 import { CropSelector } from '../components/CropSelector'
 import { ImageUploader } from '../components/ImageUploader'
 import { CameraScanner } from '../components/CameraScanner'
@@ -8,8 +9,9 @@ import { AnalysisLoader } from '../components/AnalysisLoader'
 import { HealthScore } from '../components/HealthScore'
 import { HeatmapViewer } from '../components/HeatmapViewer'
 import { TreatmentCard } from '../components/TreatmentCard'
+import { ManualWeatherModal } from '../components/ManualWeatherModal'
 import { MOCK_CROPS } from '../data/mockData'
-import type { Crop, PredictionResponse } from '../types'
+import type { Crop, PredictionResponse, LocationContextData } from '../types'
 
 export type { Crop, PredictionResponse }
 
@@ -24,7 +26,7 @@ interface ScanPageProps {
   onAnalyzePlant: () => void
   isPredicting: boolean
   prediction: PredictionResponse | null
-  locationData: unknown
+  locationData: LocationContextData | null
   onFetchLocation: () => void
   isLocating: boolean
   error: string | null
@@ -43,10 +45,15 @@ export function ScanPage({
   onAnalyzePlant,
   isPredicting,
   prediction,
+  locationData,
+  onFetchLocation,
+  isLocating,
   error,
   onReset,
 }: ScanPageProps) {
+  const navigate = useNavigate()
   const [showCamera, setShowCamera] = useState(false)
+  const [showWeatherModal, setShowWeatherModal] = useState(false)
   const [tab, setTab] = useState<Tab>('overview')
 
   const cropLabel = crops.find(c => c.name === selectedCrop)?.label ?? selectedCrop
@@ -161,6 +168,75 @@ export function ScanPage({
                 </button>
               )}
             </div>
+
+            {/* Weather Context Panel */}
+            <div className="card p-4 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#0B8F68]" />
+                  <p className="section-label">Weather Context</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={onFetchLocation}
+                    disabled={isLocating}
+                    className="btn btn-secondary btn-sm gap-1"
+                    title="Refresh weather from GPS"
+                  >
+                    <RefreshCw className={`w-3 h-3 ${isLocating ? 'animate-spin' : ''}`} />
+                    {isLocating ? 'Locating...' : 'Refresh'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowWeatherModal(true)}
+                    className="btn btn-secondary btn-sm gap-1"
+                    title="Set manual weather data"
+                  >
+                    <Settings2 className="w-3 h-3" />
+                    Manual
+                  </button>
+                </div>
+              </div>
+
+              {locationData ? (
+                <>
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="w-3 h-3 text-[#64736C] shrink-0" />
+                    <span className="text-xs font-semibold text-[#10231D]">
+                      {locationData.location.city}, {locationData.location.state}
+                    </span>
+                    {(() => {
+                      const saved = typeof window !== 'undefined' && localStorage.getItem('flora_ai_manual_weather')
+                      return saved ? (
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700">MANUAL</span>
+                      ) : (
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700">LIVE GPS</span>
+                      )
+                    })()}
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-[#F9FDF9] border border-[#E0EBE4]">
+                      <Thermometer className="w-3.5 h-3.5 text-orange-500" />
+                      <span className="text-xs font-bold text-[#10231D]">{locationData.weather.temperature_c}°C</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-[#F9FDF9] border border-[#E0EBE4]">
+                      <Droplets className="w-3.5 h-3.5 text-blue-500" />
+                      <span className="text-xs font-bold text-[#10231D]">{locationData.weather.humidity_percent}%</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-[#F9FDF9] border border-[#E0EBE4]">
+                      <Wind className="w-3.5 h-3.5 text-emerald-500" />
+                      <span className="text-xs font-bold text-[#10231D]">{locationData.weather.wind_kmh}km/h</span>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-[#64736C]">{locationData.weather.condition}</p>
+                </>
+              ) : (
+                <div className="text-xs text-[#64736C] py-1">
+                  {isLocating ? 'Fetching location from GPS...' : 'Weather context not available. Click Refresh or set Manual data.'}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Right column — result / loader / placeholder */}
@@ -264,24 +340,18 @@ export function ScanPage({
                     )}
                   </div>
 
-                  {/* Top 3 probabilities */}
+                  {/* Top 3 - names only, no percentages */}
                   <div className="pt-4 border-t border-[#EDF7F2] space-y-2">
-                    <p className="section-label">Disease Probabilities</p>
+                    <p className="section-label">Possible Conditions</p>
                     {prediction.top3.map((item, i) => (
-                      <div key={item.class} className="space-y-1">
-                        <div className="flex justify-between text-xs">
-                          <span className="text-[#64736C] font-medium truncate pr-2">{item.class}</span>
-                          <span className="text-[#0B8F68] font-bold shrink-0">{(item.confidence * 100).toFixed(1)}%</span>
-                        </div>
-                        <div className="progress-track">
-                          <div
-                            className="progress-fill"
-                            style={{
-                              width: `${item.confidence * 100}%`,
-                              background: i === 0 ? '#0B8F68' : '#94A09B',
-                            }}
-                          />
-                        </div>
+                      <div key={item.class} className="flex items-center gap-2 py-1">
+                        <span className="w-5 h-5 rounded-full bg-[#F5FBF7] border border-[#D4E8DC] flex items-center justify-center text-[9px] font-700 text-[#0B8F68] shrink-0">
+                          {i + 1}
+                        </span>
+                        <span className="text-xs text-[#10231D] font-medium flex-1 truncate">{item.class}</span>
+                        {i === 0 && (
+                          <span className="badge badge-green text-[9px]">Top Match</span>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -289,9 +359,9 @@ export function ScanPage({
 
                 {/* Action buttons */}
                 <div className="flex flex-wrap gap-3">
-                  <button type="button" className="btn btn-primary flex-1 min-w-0">
+                  <button type="button" onClick={() => navigate('/result')} className="btn btn-primary flex-1 min-w-0">
                     <CheckCircle2 className="w-4 h-4" />
-                    Save to My Plants
+                    View Detailed Report
                   </button>
                   <button type="button" onClick={onReset} className="btn btn-secondary">
                     <Scan className="w-4 h-4" />
@@ -321,6 +391,13 @@ export function ScanPage({
           </div>
         </div>
       </div>
+      <ManualWeatherModal
+        isOpen={showWeatherModal}
+        onClose={() => setShowWeatherModal(false)}
+        currentLocationData={locationData}
+        onSave={() => {}}
+        onResetToLive={onFetchLocation}
+      />
     </>
   )
 }

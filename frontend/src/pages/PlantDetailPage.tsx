@@ -4,7 +4,7 @@ import { ArrowLeft, Droplets, Sun, Wind, Mountain, Scan, MessageSquare, Clock, L
 import { PlantTimeline } from '../components/PlantTimeline'
 import { DiseaseCard } from '../components/DiseaseCard'
 import { EmptyState } from '../components/ui/EmptyState'
-import { MOCK_PLANTS, MOCK_TIMELINE } from '../data/mockData'
+import { MOCK_TIMELINE } from '../data/mockData'
 import type { Plant } from '../types'
 
 interface PlantDetailPageProps {

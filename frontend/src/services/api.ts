@@ -22,15 +22,19 @@ async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T> {
 export async function analyzePlant(
   file: File,
   crop: string,
-  location?: { latitude: number; longitude: number }
+  location?: { latitude?: number; longitude?: number; city?: string },
+  weather?: { temperature_c?: number; humidity_percent?: number; rainfall_mm?: number; wind_kmh?: number }
 ): Promise<PredictionResponse> {
   const formData = new FormData()
   formData.append('file', file)
   formData.append('crop', crop)
-  if (location) {
-    formData.append('latitude', String(location.latitude))
-    formData.append('longitude', String(location.longitude))
-  }
+  if (location?.latitude) formData.append('latitude', String(location.latitude))
+  if (location?.longitude) formData.append('longitude', String(location.longitude))
+  if (location?.city) formData.append('city', location.city)
+  if (weather?.temperature_c !== undefined) formData.append('temperature', String(weather.temperature_c))
+  if (weather?.humidity_percent !== undefined) formData.append('humidity', String(weather.humidity_percent))
+  if (weather?.rainfall_mm !== undefined) formData.append('rainfall', String(weather.rainfall_mm))
+  if (weather?.wind_kmh !== undefined) formData.append('wind_speed', String(weather.wind_kmh))
   return fetchAPI<PredictionResponse>('/api/predict', { method: 'POST', body: formData })
 }
 

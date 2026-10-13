@@ -104,9 +104,9 @@ export function HistoryPage({ history, onClearHistory }: HistoryPageProps) {
                   </h3>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <div>
-                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', marginBottom: 2 }}>CONFIDENCE</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, color: 'var(--neon-cyan)' }}>
-                        {item.confidence_percent.toFixed(1)}%
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', marginBottom: 2 }}>CROP SPECIMEN</div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, color: 'var(--neon-green)', textTransform: 'capitalize' }}>
+                        {item.crop}
                       </div>
                     </div>
                     <div style={{ textAlign: 'right' }}>

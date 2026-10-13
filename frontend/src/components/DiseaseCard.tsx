@@ -24,7 +24,7 @@ function getSeverityConfig(severity: string) {
   return { label: severity.toUpperCase(), color: 'var(--text-secondary)', bg: 'rgba(255,255,255,0.04)', border: 'var(--border-subtle)', barColor: 'var(--text-secondary)', icon: Bug }
 }
 
-export function DiseaseCard({ diseaseName, severity, confidence, description, compact = false }: DiseaseCardProps) {
+export function DiseaseCard({ diseaseName, severity, confidence: _confidence, description, compact = false }: DiseaseCardProps) {
   const config = getSeverityConfig(severity)
   const Icon = config.icon
 
@@ -45,9 +45,6 @@ export function DiseaseCard({ diseaseName, severity, confidence, description, co
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
             <span className="badge" style={{ background: config.bg, color: config.color, border: `1px solid ${config.border}`, fontSize: '0.6rem' }}>
               {config.label}
-            </span>
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-              {confidence.toFixed(1)}% CONF
             </span>
           </div>
         </div>
@@ -78,20 +75,10 @@ export function DiseaseCard({ diseaseName, severity, confidence, description, co
         </div>
       </div>
 
-      {/* Confidence bar */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-          <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em' }}>AI CONFIDENCE</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', fontWeight: 700, color: config.color }}>
-            {confidence.toFixed(1)}%
-          </span>
-        </div>
-        <div className="progress-track">
-          <div className="progress-fill" role="progressbar"
-            aria-valuenow={confidence} aria-valuemin={0} aria-valuemax={100}
-            style={{ width: `${Math.min(100, Math.max(0, confidence))}%`, background: `linear-gradient(90deg, ${config.color}80, ${config.color})` }}
-          />
-        </div>
+      {/* Diagnosis Status */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-subtle)' }}>
+        <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>DIAGNOSIS</span>
+        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: config.color }}>Identified in Field</span>
       </div>
 
       {/* Description */}

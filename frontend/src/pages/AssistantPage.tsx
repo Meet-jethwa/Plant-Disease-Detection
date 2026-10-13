@@ -4,8 +4,7 @@ import { useState, useRef, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Leaf, Clock, ArrowDown, WifiOff,
-  AlertTriangle, RotateCcw, CloudSun,
-  ShieldCheck, ArrowLeft, RefreshCw
+  AlertTriangle, RotateCcw, CloudSun
 } from 'lucide-react'
 import type { ChatMessage, PredictionResponse, LocationContextData } from '../types'
 import { useLang } from '../contexts/LanguageContext'
@@ -154,7 +153,7 @@ export function AssistantPage({
 
   // 15-second loading watchdog for 3G / slow network
   useEffect(() => {
-    let timer: NodeJS.Timeout
+    let timer: ReturnType<typeof setTimeout>
     if (isAsking) {
       setTakingLonger(false)
       timer = setTimeout(() => {
@@ -206,7 +205,7 @@ export function AssistantPage({
     if (!cleanText) return
 
     const utterance = new SpeechSynthesisUtterance(cleanText)
-    utterance.lang = LANGUAGE_META[lang]?.bcp47 || 'en-IN'
+    utterance.lang = LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.bcp47 || 'en-IN'
     utterance.rate = 0.95
     utterance.onend = () => setSpeakingIndex(null)
     utterance.onerror = () => setSpeakingIndex(null)

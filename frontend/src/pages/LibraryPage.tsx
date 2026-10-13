@@ -9,7 +9,7 @@ import {
   Thermometer, Wind, ShieldCheck, ShieldAlert,
   Sprout, FlaskConical, Eye, ChevronRight
 } from 'lucide-react'
-import { DISEASES_DATA, type DiseaseItem } from '../data/diseases'
+import { DISEASES_DATA } from '../data/diseases'
 import { LIBRARY_IMAGE_PATHS } from '../data/plantImages'
 import { cardContainerVariants, cardVariantForIndex, pressTap } from '../lib/motion'
 

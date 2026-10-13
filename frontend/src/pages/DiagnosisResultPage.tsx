@@ -74,7 +74,6 @@ export function DiagnosisResultPage({
       '=========================',
       `Crop:         ${prediction.crop}`,
       `Disease:      ${prediction.predicted_class}`,
-      `Confidence:   ${prediction.confidence_percent.toFixed(1)}%`,
       `Health Score: ${prediction.health_score}/100`,
       `Severity:     ${disease.severity}`,
       '---',
@@ -99,7 +98,7 @@ export function DiagnosisResultPage({
     if (navigator.share) {
       void navigator.share({
         title: `FloraAI: ${prediction.predicted_class}`,
-        text: `${prediction.crop} diagnosed with ${prediction.predicted_class} (${prediction.confidence_percent.toFixed(1)}% confidence). Health score: ${prediction.health_score}/100`,
+        text: `${prediction.crop} diagnosed with ${prediction.predicted_class}. Health score: ${prediction.health_score}/100`,
         url: window.location.href,
       })
     }
@@ -135,12 +134,6 @@ export function DiagnosisResultPage({
           <SeverityIcon className="w-4 h-4 shrink-0" style={{ color: severityMeta.color }} />
           <span className="text-sm font-700" style={{ color: severityMeta.color }}>
             {severityMeta.label}
-          </span>
-          <span
-            className="ml-auto text-xs font-600 px-2.5 py-0.5 rounded-full"
-            style={{ background: severityMeta.color + '18', color: severityMeta.color }}
-          >
-            {prediction.confidence_percent.toFixed(1)}% confidence
           </span>
         </div>
 
@@ -183,10 +176,10 @@ export function DiagnosisResultPage({
               {disease.description}
             </p>
 
-            {/* Top-3 predictions */}
+            {/* Top-3 predictions (names only, no percentages) */}
             {prediction.top3 && prediction.top3.length > 0 && (
               <div>
-                <p className="text-[11px] font-700 text-[#64736C] uppercase tracking-wider mb-2">Model Predictions</p>
+                <p className="text-[11px] font-700 text-[#64736C] uppercase tracking-wider mb-2">Possible Conditions</p>
                 <div className="space-y-2">
                   {prediction.top3.map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
@@ -195,9 +188,6 @@ export function DiagnosisResultPage({
                       </span>
                       <span className="text-xs text-[#10231D] font-500 flex-1 truncate">
                         {item.class.replace(/_/g, ' ')}
-                      </span>
-                      <span className="text-xs font-700 text-[#64736C] shrink-0">
-                        {(item.confidence * 100).toFixed(1)}%
                       </span>
                     </div>
                   ))}
@@ -255,18 +245,7 @@ export function DiagnosisResultPage({
             </p>
           </div>
 
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-600 text-[#64736C]">AI Confidence</span>
-              <span className="text-sm font-700 text-[#10231D]">{prediction.confidence_percent.toFixed(1)}%</span>
-            </div>
-            <div className="h-2 rounded-full bg-[#EDF7F2] overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-700"
-                style={{ width: `${prediction.confidence_percent}%`, background: severityMeta.color }}
-              />
-            </div>
-          </div>
+
 
           <div>
             <p className="text-xs font-600 text-[#64736C] mb-2">Root Causes</p>
@@ -304,25 +283,14 @@ export function DiagnosisResultPage({
           <p className="text-[11px] font-700 text-[#64736C] uppercase tracking-wider mb-3">Symptoms Detected</p>
           <div className="grid sm:grid-cols-3 gap-3">
             {symptoms.map((s, i) => (
-              <div key={i} className="card p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-xs font-600 text-[#10231D]">{s.name}</p>
-                  <span
-                    className="text-xs font-700"
-                    style={{ color: s.confidence >= 70 ? '#DC2626' : s.confidence >= 45 ? '#D97706' : '#0B8F68' }}
-                  >
-                    {s.confidence.toFixed(0)}%
-                  </span>
+              <div key={i} className="card p-3.5 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                  <p className="text-xs font-semibold text-[#10231D]">{s.name}</p>
                 </div>
-                <div className="h-1.5 rounded-full bg-[#EDF7F2] overflow-hidden">
-                  <div
-                    className="h-full rounded-full"
-                    style={{
-                      width: `${s.confidence}%`,
-                      background: s.confidence >= 70 ? '#e00909a4' : s.confidence >= 35 ? '#D97706' : '#0B8F68',
-                    }}
-                  />
-                </div>
+                <span className="badge badge-amber text-[10px]">
+                  Observed
+                </span>
               </div>
             ))}
           </div>

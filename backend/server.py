@@ -19,10 +19,15 @@ from tensorflow.keras.models import load_model
 from backend.disease_info import compute_weather_feature_importance, get_disease_info
 from backend.gradcam import generate_gradcam_overlay
 from backend.gemini_chat import ask_gemini_initial, ask_gemini_chat, detect_intent
+from backend.multimodal_loader import predict_multimodal_disease, get_multimodal_model
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODELS_DIR = BASE_DIR / "models"
 
+# Crops supported by the multimodal model (all 4 crops — 33 classes)
+SUPPORTED_CROPS = ["rice", "wheat", "sugarcane", "cotton"]
+
+# Keras fallback models (only available for rice & wheat)
 MODEL_FILES = {
     "rice": {
         "model_file": "rice_disease_disease_model.keras",
@@ -31,14 +36,6 @@ MODEL_FILES = {
     "wheat": {
         "model_file": "wheat_best_model.keras",
         "labels_file": "wheat_class_labels.json",
-    },
-    "sugarcane": {
-        "model_file": "sugarcane_disease_model.keras",
-        "labels_file": "sugarcane_class_labels.json",
-    },
-    "cotton": {
-        "model_file": "cotton_disease_model.keras",
-        "labels_file": "cotton_class_labels.json",
     },
 }
 
@@ -221,7 +218,7 @@ def fetch_real_location_info(latitude: float, longitude: float) -> tuple[str, st
     try:
         url = f"https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={latitude}&longitude={longitude}&localityLanguage=en"
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=2.5) as resp:
+        with urllib.request.urlopen(req, timeout=4.0) as resp:
             if resp.status == 200:
                 data = json.loads(resp.read().decode("utf-8"))
                 city = data.get("city") or data.get("locality") or "Detected Location"
@@ -234,8 +231,63 @@ def fetch_real_location_info(latitude: float, longitude: float) -> tuple[str, st
     return "Detected Location", "User Area", "India"
 
 
-def weather_from_coordinates(latitude: float, longitude: float) -> dict:
-    city, state, country = fetch_real_location_info(latitude, longitude)
+def geocode_city_name(city_name: str) -> tuple[float, float, str, str, str] | None:
+    """Geocode any city name using free Open-Meteo geocoding API."""
+    try:
+        import urllib.parse
+        encoded = urllib.parse.quote(city_name.strip())
+        url = f"https://geocoding-api.open-meteo.com/v1/search?name={encoded}&count=1&language=en&format=json"
+        req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+        with urllib.request.urlopen(req, timeout=4.0) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                results = data.get("results")
+                if results and len(results) > 0:
+                    r = results[0]
+                    lat = float(r.get("latitude"))
+                    lon = float(r.get("longitude"))
+                    resolved_city = r.get("name") or city_name.strip()
+                    resolved_state = r.get("admin1") or ""
+                    resolved_country = r.get("country") or "India"
+                    return lat, lon, resolved_city, resolved_state, resolved_country
+    except Exception as exc:
+        print(f"[Geocode] Failed to geocode '{city_name}': {exc}")
+    return None
+
+
+def fetch_ip_location() -> tuple[float, float, str, str, str] | None:
+    """Fallback IP-based location if browser GPS is blocked/unavailable."""
+    try:
+        url = "http://ip-api.com/json"
+        req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+        with urllib.request.urlopen(req, timeout=3.5) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                if data.get("status") == "success":
+                    lat = float(data.get("lat"))
+                    lon = float(data.get("lon"))
+                    city = data.get("city", "Detected Region")
+                    state = data.get("regionName", "")
+                    country = data.get("country", "India")
+                    return lat, lon, city, state, country
+    except Exception as exc:
+        print(f"[IP-Locate] IP fallback failed: {exc}")
+    return None
+
+
+def weather_from_coordinates(
+    latitude: float,
+    longitude: float,
+    city_override: str | None = None,
+    state_override: str | None = None,
+    country_override: str | None = None,
+) -> dict:
+    if city_override:
+        city = city_override
+        state = state_override or ""
+        country = country_override or "India"
+    else:
+        city, state, country = fetch_real_location_info(latitude, longitude)
 
     # Defaults
     temp_c = 28.0
@@ -244,12 +296,21 @@ def weather_from_coordinates(latitude: float, longitude: float) -> dict:
     wind_kmh = 10.0
     condition = "Partly Cloudy"
 
+    daily_data = {}
     try:
-        url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,relative_humidity_2m,rain,wind_speed_10m,weather_code"
+        url = (
+            f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}"
+            f"&current=temperature_2m,relative_humidity_2m,rain,wind_speed_10m,weather_code"
+            f"&past_days=7&forecast_days=1"
+            f"&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,relative_humidity_2m_max,relative_humidity_2m_mean,precipitation_sum,dew_point_2m_mean,wind_speed_10m_max"
+            f"&timezone=Asia%2FKolkata"
+        )
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=2.5) as resp:
+        with urllib.request.urlopen(req, timeout=4.5) as resp:
             if resp.status == 200:
-                wdata = json.loads(resp.read().decode("utf-8")).get("current", {})
+                res_json = json.loads(resp.read().decode("utf-8"))
+                wdata = res_json.get("current", {})
+                daily_data = res_json.get("daily", {})
                 temp_c = float(wdata.get("temperature_2m", temp_c))
                 humidity = int(wdata.get("relative_humidity_2m", humidity))
                 rainfall = float(wdata.get("rain", rainfall))
@@ -297,6 +358,7 @@ def weather_from_coordinates(latitude: float, longitude: float) -> dict:
             "rainfall_mm": round(rainfall, 1),
             "wind_kmh": round(wind_kmh, 1),
             "condition": condition,
+            "daily": daily_data,
         },
     }
 
@@ -312,22 +374,59 @@ def health_check():
 def get_crops():
     return {
         "crops": [
-            {"name": crop, "label": crop.capitalize()} for crop in MODEL_FILES.keys()
+            {"name": crop, "label": crop.capitalize()} for crop in SUPPORTED_CROPS
         ]
     }
 
 
 @app.get("/api/location/fetch")
-def fetch_location(latitude: float | None = None, longitude: float | None = None):
+def fetch_location(
+    latitude: float | None = None,
+    longitude: float | None = None,
+    city: str | None = None,
+):
     global _location_cursor
 
+    # 1. City search
+    if city and city.strip():
+        geocoded = geocode_city_name(city.strip())
+        if geocoded:
+            g_lat, g_lon, g_city, g_state, g_country = geocoded
+            data = weather_from_coordinates(
+                g_lat, g_lon,
+                city_override=g_city,
+                state_override=g_state,
+                country_override=g_country,
+            )
+            risk_level, risk_reason = get_weather_risk(data["weather"])
+            return {
+                "source": "city_search",
+                **data,
+                "risk_level": risk_level,
+                "risk_reason": risk_reason,
+            }
+
+    # 2. GPS coordinates
     if latitude is not None and longitude is not None:
         data = weather_from_coordinates(latitude, longitude)
         source = "coordinates"
+
+    # 3. IP Geolocation fallback
     else:
-        data = DEFAULT_LOCATION_PROFILES[_location_cursor % len(DEFAULT_LOCATION_PROFILES)]
-        _location_cursor += 1
-        source = "demo_profile"
+        ip_loc = fetch_ip_location()
+        if ip_loc:
+            ip_lat, ip_lon, ip_city, ip_state, ip_country = ip_loc
+            data = weather_from_coordinates(
+                ip_lat, ip_lon,
+                city_override=ip_city,
+                state_override=ip_state,
+                country_override=ip_country,
+            )
+            source = "ip_geolocation"
+        else:
+            data = DEFAULT_LOCATION_PROFILES[_location_cursor % len(DEFAULT_LOCATION_PROFILES)]
+            _location_cursor += 1
+            source = "demo_profile"
 
     risk_level, risk_reason = get_weather_risk(data["weather"])
     return {
@@ -344,15 +443,15 @@ async def predict_disease(
     crop: str = Form("rice"),
     latitude: float | None = Form(None),
     longitude: float | None = Form(None),
+    temperature: float | None = Form(None),
+    humidity: float | None = Form(None),
+    rainfall: float | None = Form(None),
+    wind_speed: float | None = Form(None),
+    city: str | None = Form(None),
 ):
-    try:
-        model, label_map = load_crop_model(crop)
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except FileNotFoundError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
-    except Exception as exc:  # pragma: no cover
-        raise HTTPException(status_code=500, detail=f"Model load failed: {exc}") from exc
+    crop_key = crop.lower()
+    if crop_key not in SUPPORTED_CROPS:
+        raise HTTPException(status_code=400, detail=f"Unsupported crop: {crop_key}")
 
     if not file.filename:
         raise HTTPException(status_code=400, detail="Please select an image file.")
@@ -361,26 +460,101 @@ async def predict_disease(
     if not file_bytes:
         raise HTTPException(status_code=400, detail="The uploaded file is empty.")
 
+    # ── Fetch or build weather data (fed directly to multimodal model) ────
+    if latitude is not None and longitude is not None:
+        weather_payload = weather_from_coordinates(latitude, longitude)
+    else:
+        weather_payload = dict(DEFAULT_LOCATION_PROFILES[0])
+
+    weather_dict = dict(weather_payload["weather"])
+    loc_dict = dict(weather_payload["location"])
+
+    # Apply manual farmer overrides if provided
+    if temperature is not None:
+        weather_dict["temperature_c"] = float(temperature)
+    if humidity is not None:
+        weather_dict["humidity_percent"] = int(round(humidity))
+    if rainfall is not None:
+        weather_dict["rainfall_mm"] = float(rainfall)
+    if wind_speed is not None:
+        weather_dict["wind_kmh"] = float(wind_speed)
+    if city and city.strip():
+        loc_dict["city"] = city.strip()
+
+    weather_payload = {
+        **weather_payload,
+        "location": loc_dict,
+        "weather": weather_dict,
+    }
+
+    # ── Multimodal PyTorch Model (covers all 4 crops: rice, wheat, sugarcane, cotton) ──
+    multimodal_result = None
     try:
-        image_array, original_rgb = preprocess_image(file_bytes)
-        predictions = model.predict(image_array, verbose=0)[0]
-    except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Prediction failed: {exc}") from exc
+        multimodal_result = predict_multimodal_disease(file_bytes, weather_dict, crop_hint=crop_key)
+        print(f"[Predict] Multimodal model OK -> {multimodal_result['predicted_label']} ({multimodal_result['confidence']:.3f})")
+    except Exception as mm_exc:
+        print(f"[Predict] Multimodal model failed: {mm_exc}. Trying keras fallback.")
 
-    top_indexes = np.argsort(predictions)[::-1][:3]
-    top3 = [
-        {
-            "class": normalize_class_name(label_map.get(str(int(index)), f"Class_{int(index)}")),
-            "confidence": round(float(predictions[int(index)]), 4),
-        }
-        for index in top_indexes
-    ]
+    if multimodal_result is not None:
+        # ── Use multimodal result ─────────────────────────────────────────
+        predicted_label = multimodal_result["predicted_label"]
+        confidence = multimodal_result["confidence"]
+        top3_raw = multimodal_result["top3"]
+        top3 = [
+            {"class": normalize_class_name(item["class"]), "confidence": item["confidence"]}
+            for item in top3_raw
+        ]
+        normalized_label = normalize_class_name(predicted_label)
 
-    top_index = int(top_indexes[0])
-    predicted_label = label_map.get(str(top_index), f"Class_{top_index}")
-    confidence = float(predictions[top_index])
-    normalized_label = normalize_class_name(predicted_label)
+        # Grad-CAM via keras fallback if available, else skip
+        original_rgb = None
+        overlay_original = overlay_highlight = raw_heatmap = None
+        affected_area_percent = 0.0
+        try:
+            from PIL import Image as _PIL
+            import io as _io
+            img = _PIL.open(_io.BytesIO(file_bytes)).convert("RGB")
+            original_rgb = np.asarray(img, dtype=np.uint8)
+            if crop_key in MODEL_FILES:
+                keras_model, _ = load_crop_model(crop_key)
+                overlay_original, overlay_highlight, raw_heatmap, affected_area_percent = generate_gradcam_overlay(
+                    original_rgb, keras_model, alpha=0.55
+                )
+        except Exception:
+            pass
 
+    else:
+        # ── Keras fallback (rice/wheat only) ──────────────────────────────
+        if crop_key not in MODEL_FILES:
+            raise HTTPException(status_code=503, detail=f"Multimodal model unavailable and no keras fallback for '{crop_key}'.")
+        try:
+            keras_model, label_map = load_crop_model(crop_key)
+        except FileNotFoundError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except Exception as exc:
+            raise HTTPException(status_code=500, detail=f"Model load failed: {exc}") from exc
+
+        try:
+            image_array, original_rgb = preprocess_image(file_bytes)
+            predictions = keras_model.predict(image_array, verbose=0)[0]
+        except Exception as exc:
+            raise HTTPException(status_code=500, detail=f"Prediction failed: {exc}") from exc
+
+        top_indexes = np.argsort(predictions)[::-1][:3]
+        top3 = [
+            {"class": normalize_class_name(label_map.get(str(int(i)), f"Class_{int(i)}")), "confidence": round(float(predictions[int(i)]), 4)}
+            for i in top_indexes
+        ]
+        top_index = int(top_indexes[0])
+        predicted_label = label_map.get(str(top_index), f"Class_{top_index}")
+        confidence = float(predictions[top_index])
+        normalized_label = normalize_class_name(predicted_label)
+
+        overlay_original, overlay_highlight, raw_heatmap, affected_area_percent = generate_gradcam_overlay(
+            original_rgb, keras_model, alpha=0.55
+        )
+
+    # ── Shared post-processing ────────────────────────────────────────────
     is_healthy_prediction = "healthy" in normalized_label.lower()
     if is_healthy_prediction:
         health_score = max(10, min(100, int(round(confidence * 100))))
@@ -388,11 +562,16 @@ async def predict_disease(
         health_score = max(5, min(90, int(round((1.0 - confidence) * 100))))
 
     disease_info = get_disease_info(normalized_label)
-    overlay_original, overlay_highlight, raw_heatmap, affected_area_percent = generate_gradcam_overlay(original_rgb, model, alpha=0.55)
 
-    if overlay_original is None or overlay_highlight is None:
-        print(f"[GradCAM] Failed for crop={crop}. Returning original image only.")
-        original_image = image_to_data_url(original_rgb)
+    if overlay_original is None:
+        from PIL import Image as _PIL
+        import io as _io
+        try:
+            img = _PIL.open(_io.BytesIO(file_bytes)).convert("RGB")
+            original_rgb_fallback = np.asarray(img, dtype=np.uint8)
+            original_image = image_to_data_url(original_rgb_fallback)
+        except Exception:
+            original_image = ""
         highlighted_image = None
         gradcam_heatmap = None
         affected_area_percent = 0.0
@@ -401,22 +580,16 @@ async def predict_disease(
         highlighted_image = image_to_data_url(overlay_highlight)
         gradcam_heatmap = image_to_data_url(raw_heatmap) if raw_heatmap is not None else None
 
-    weather_payload = None
-    if latitude is not None and longitude is not None:
-        weather_payload = weather_from_coordinates(latitude, longitude)
-    else:
-        weather_payload = DEFAULT_LOCATION_PROFILES[0]
-
-    risk_level, risk_reason = get_weather_risk(weather_payload["weather"])
-    weather_importance = compute_weather_feature_importance(disease_info, weather_payload["weather"])
+    risk_level, risk_reason = get_weather_risk(weather_dict)
+    weather_importance = compute_weather_feature_importance(disease_info, weather_dict)
 
     summary = (
-        f"Detected {normalized_label} in {crop.lower()} with {round(confidence * 100, 2)}% confidence. "
+        f"Detected {normalized_label} in {crop_key} using multimodal AI analysis. "
         f"Likely cause: {disease_info.get('causes', 'Condition-specific causes unavailable.')}"
     )
 
     return {
-        "crop": crop.lower(),
+        "crop": crop_key,
         "predicted_class": normalized_label,
         "confidence": round(confidence, 4),
         "confidence_percent": round(confidence * 100, 2),
@@ -437,6 +610,7 @@ async def predict_disease(
             "risk_level": risk_level,
             "risk_reason": risk_reason,
             "feature_importance": weather_importance,
+            "weather_importance_days": multimodal_result.get("weather_importance_days") if multimodal_result else None,
         },
         "analysis_summary": summary,
         "original_image": original_image,

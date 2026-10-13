@@ -16,14 +16,13 @@ import { PlantDetailPage } from './pages/PlantDetailPage'
 import { DiagnosisResultPage } from './pages/DiagnosisResultPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { LoginPage } from './pages/LoginPage'
-import { MOCK_PLANTS } from './data/mockData'
 import { useLang } from './contexts/LanguageContext'
 import type { Plant, LocationContextData, StartSessionPayload, AskPayload } from './types'
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
 
 const defaultAssistantMsg =
-  'Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.'
+  'Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — disease identification, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.'
 
 function AppContent() {
   const navigate = useNavigate()
@@ -185,19 +184,23 @@ function AppContent() {
     navigate('/scan')
   }
 
-  async function fetchLocation() {
+  async function fetchLocation(forceGps: boolean = false) {
     setIsLocating(true)
     setError(null)
 
-    // Respect saved manual weather unless explicitly resetting
-    const savedManual = localStorage.getItem('flora_ai_manual_weather')
-    if (savedManual) {
-      try {
-        setLocationData(JSON.parse(savedManual) as LocationContextData)
-        setIsLocating(false)
-        return
-      } catch (_) {}
+    if (forceGps) {
+      localStorage.removeItem('flora_ai_manual_weather')
+    } else {
+      const savedManual = localStorage.getItem('flora_ai_manual_weather')
+      if (savedManual) {
+        try {
+          setLocationData(JSON.parse(savedManual) as LocationContextData)
+          setIsLocating(false)
+          return
+        } catch (_) {}
+      }
     }
+
     const fallback = async () => {
       try {
         const response = await fetch(`${API_BASE}/api/location/fetch`)
@@ -216,9 +219,16 @@ function AppContent() {
     }
 
     try {
-      if (!navigator.geolocation) { await fallback(); return }
+      if (!navigator.geolocation) {
+        await fallback()
+        return
+      }
       const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 8000 })
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          timeout: 6000,
+          maximumAge: 60000,
+          enableHighAccuracy: false,
+        })
       })
       const { latitude, longitude } = position.coords
       const res = await fetch(`${API_BASE}/api/location/fetch?latitude=${latitude}&longitude=${longitude}`)
@@ -289,7 +299,7 @@ function AppContent() {
         { name: 'Fungal / Bacterial Pathogen Infection', description: 'Primary biotic agent responsible for foliar symptoms.' },
         { name: 'Extended Leaf Wetness & Humidity', description: 'Environmental conditions favoring spore germination.' },
       ],
-      analysis_summary: `${diseaseName} detected in ${cropName} with 94.2% confidence. Affected organ: ${affectedPart}. Recommended immediate fungicide treatment protocol.`,
+      analysis_summary: `${diseaseName} detected in ${cropName}. Affected organ: ${affectedPart}. Recommended immediate fungicide treatment protocol.`,
       original_image: imageToUse,
       highlighted_image: imageToUse,
       weather_context: {
@@ -324,6 +334,21 @@ function AppContent() {
         if (locationData?.location?.latitude && locationData?.location?.longitude) {
           formData.append('latitude', String(locationData.location.latitude))
           formData.append('longitude', String(locationData.location.longitude))
+        }
+        if (locationData?.location?.city) {
+          formData.append('city', locationData.location.city)
+        }
+        if (locationData?.weather?.temperature_c !== undefined) {
+          formData.append('temperature', String(locationData.weather.temperature_c))
+        }
+        if (locationData?.weather?.humidity_percent !== undefined) {
+          formData.append('humidity', String(locationData.weather.humidity_percent))
+        }
+        if (locationData?.weather?.rainfall_mm !== undefined) {
+          formData.append('rainfall', String(locationData.weather.rainfall_mm))
+        }
+        if (locationData?.weather?.wind_kmh !== undefined) {
+          formData.append('wind_speed', String(locationData.weather.wind_kmh))
         }
 
         const response = await fetch(`${API_BASE}/api/predict`, {

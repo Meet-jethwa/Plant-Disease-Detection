@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import {
   Leaf, Volume2, Square, Copy, Check, ThumbsUp, ThumbsDown
 } from 'lucide-react'
-import type { ChatMessage, GeminiResponse, PredictionResponse } from '../../types'
+import type { ChatMessage, PredictionResponse } from '../../types'
 import { DiagnosisCard } from './DiagnosisCard'
 
 interface MessageBubbleProps {
@@ -114,9 +114,9 @@ export function MessageBubble({
           {renderFormattedText(message.text)}
 
           {/* Embedded Diagnosis card if present in message payload */}
-          {message.geminiData && (
+          {message.structured && (
             <DiagnosisCard
-              data={message.geminiData}
+              data={message.structured}
               prediction={latestPrediction ?? null}
               onAsk={onAsk}
             />

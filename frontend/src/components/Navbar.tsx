@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import {
   BookOpen, ChevronDown, MessageSquare, History,
   Home, Leaf, LogOut, Scan,
-  Settings, User, Activity,
+  Settings, User,
 } from 'lucide-react'
 import { useLang } from '../contexts/LanguageContext'
 import profileImage from '../../IMAGES/images.jpg'

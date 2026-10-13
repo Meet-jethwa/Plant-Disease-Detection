@@ -1,6 +1,6 @@
 // HistoryCard.tsx — Diagnosis history list item
 import { Link } from 'react-router-dom'
-import { Calendar, ChevronRight, TrendingUp } from 'lucide-react'
+import { Calendar, ChevronRight } from 'lucide-react'
 import type { HistoryItem } from '../types'
 import { PlantHealthGlyph } from './PlantHealthGlyph'
 
@@ -43,10 +43,6 @@ export function HistoryCard({ item }: HistoryCardProps) {
         </div>
         <p className="text-xs text-[#64736C] font-medium truncate">{item.predicted_class}</p>
         <div className="flex items-center gap-3 text-[10px] text-[#94A09B]">
-          <span className="flex items-center gap-1">
-            <TrendingUp className="w-3 h-3" />
-            {item.confidence_percent.toFixed(1)}% confidence
-          </span>
           <span className="flex items-center gap-1">
             <Calendar className="w-3 h-3" />
             {item.timestamp}
