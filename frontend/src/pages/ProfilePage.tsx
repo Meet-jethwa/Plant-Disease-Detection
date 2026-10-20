@@ -24,18 +24,22 @@ interface SettingRowProps {
 
 function SettingRow({ icon: Icon, label, description, value, toggle, defaultOn = false, onClick, id }: SettingRowProps) {
   const [on, setOn] = useState(defaultOn)
+  const isClickable = Boolean(toggle || onClick)
+  const Component = isClickable ? 'button' : 'div'
+
   return (
-    <button
-      type="button" id={id}
+    <Component
+      {...(isClickable ? { type: 'button' as const } : {})}
+      id={id}
       onClick={toggle ? () => setOn(v => !v) : onClick}
       style={{
         width: '100%', display: 'flex', alignItems: 'center', gap: 12,
         padding: '12px 16px', borderRadius: 8, transition: 'all 0.15s ease',
-        background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
+        background: 'transparent', border: 'none', cursor: isClickable ? 'pointer' : 'default', textAlign: 'left',
         fontFamily: 'var(--font-body)',
       }}
-      onMouseEnter={e => (e.currentTarget.style.background = '#F0FAF4')}
-      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+      onMouseEnter={e => { if (isClickable) e.currentTarget.style.background = '#F0FAF4' }}
+      onMouseLeave={e => { if (isClickable) e.currentTarget.style.background = 'transparent' }}
     >
       <div style={{
         width: 36, height: 36, borderRadius: 9, flexShrink: 0,
@@ -56,6 +60,7 @@ function SettingRow({ icon: Icon, label, description, value, toggle, defaultOn =
             border: `1px solid ${on ? 'rgba(11,143,104,0.4)' : '#CBD5E1'}`,
             boxShadow: on ? '0 0 8px rgba(11,143,104,0.15)' : 'none',
             transition: 'all 0.2s ease',
+            cursor: 'pointer',
           }}
           role="switch" aria-checked={on} aria-label={label}
         >
@@ -75,7 +80,7 @@ function SettingRow({ icon: Icon, label, description, value, toggle, defaultOn =
       ) : (
         <ChevronRight style={{ width: 15, height: 15, color: 'var(--text-muted)', flexShrink: 0 }} />
       )}
-    </button>
+    </Component>
   )
 }
 
