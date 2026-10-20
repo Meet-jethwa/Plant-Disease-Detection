@@ -36,16 +36,28 @@ export function AppLayout({ children, locationData, isLocating, onFetchLocation,
       <MobileHeader />
 
       {/* Main content */}
-      <main style={{
-        flex: 1,
-        width: '100%',
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: '0 16px',
-        paddingTop: isAssistantPage ? '16px' : '24px',
-        paddingBottom: isAssistantPage ? '16px' : '88px',
-        position: 'relative',
-      }} className={`sm:px-6 lg:px-8 xl:px-10 ${isAssistantPage ? 'lg:pb-4' : 'lg:pb-16'}`}>
+      <main
+        style={{
+          flex: 1,
+          width: '100%',
+          maxWidth: isAssistantPage ? '100%' : '1440px',
+          margin: '0 auto',
+          padding: isAssistantPage ? '0' : '0 16px',
+          paddingTop: isAssistantPage ? '0' : '24px',
+          paddingBottom: isAssistantPage ? '0' : '88px',
+          position: 'relative',
+          display: isAssistantPage ? 'flex' : undefined,
+          flexDirection: isAssistantPage ? 'column' : undefined,
+          minHeight: 0,
+          overflow: isAssistantPage ? 'hidden' : undefined,
+          height: isAssistantPage ? 'calc(100dvh - 56px)' : undefined,
+        }}
+        className={
+          isAssistantPage
+            ? 'lg:h-[calc(100dvh-70px)]'
+            : 'sm:px-6 lg:px-8 xl:px-10 lg:pb-16'
+        }
+      >
         {children}
       </main>
 
@@ -56,8 +68,8 @@ export function AppLayout({ children, locationData, isLocating, onFetchLocation,
         </div>
       )}
 
-      {/* Mobile bottom navigation */}
-      <BottomNav />
+      {/* Mobile bottom navigation (hidden on /assistant page to give full viewport to composer) */}
+      {!isAssistantPage && <BottomNav />}
     </div>
   )
 }

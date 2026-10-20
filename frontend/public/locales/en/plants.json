@@ -1,0 +1,19 @@
+{
+  "crop.rice": "Rice",
+  "crop.wheat": "Wheat",
+  "crop.sugarcane": "Sugarcane",
+  "crop.cotton": "Cotton",
+  "plants.title": "Active Crop Health Registry",
+  "plants.badge": "Crop Monitoring",
+  "plants.registerNew": "Register New Specimen",
+  "plants.healthySpecimens": "Healthy Specimens",
+  "plants.attentionRequired": "Attention Required",
+  "plants.highRisk": "High Pathogen Risk",
+  "plants.allCrops": "All Crops",
+  "plants.healthy": "Healthy",
+  "plants.needsAttention": "Needs Attention",
+  "plants.searchPlaceholder": "Search plants by name or species…",
+  "plants.empty": "No monitored plants found",
+  "plants.emptyDesc": "Start by scanning a leaf in the scanner to monitor recovery.",
+  "plants.scanFirst": "Scan Plant Now"
+}

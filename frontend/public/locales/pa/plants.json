@@ -1,0 +1,19 @@
+{
+  "crop.rice": "ਝੋਨਾ",
+  "crop.wheat": "ਕਣਕ",
+  "crop.sugarcane": "ਗੰਨਾ",
+  "crop.cotton": "ਨਰਮਾ",
+  "plants.title": "ਫ਼ਸਲ ਦੀ ਸਿਹਤ ਦਾ ਰਿਕਾਰਡ",
+  "plants.badge": "ਫ਼ਸਲ ਦੀ ਦੇਖਭਾਲ",
+  "plants.registerNew": "ਨਵਾਂ ਨਮੂਨਾ ਦਰਜ ਕਰੋ",
+  "plants.healthySpecimens": "ਤੰਦਰੁਸਤ ਪੌਦੇ",
+  "plants.attentionRequired": "ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ ਹੈ",
+  "plants.highRisk": "ਬਿਮਾਰੀ ਦਾ ਵੱਡਾ ਖ਼ਤਰਾ",
+  "plants.allCrops": "ਸਾਰੀਆਂ ਫ਼ਸਲਾਂ",
+  "plants.healthy": "ਤੰਦਰੁਸਤ",
+  "plants.needsAttention": "ਧਿਆਨ ਚਾਹੀਦਾ ਹੈ",
+  "plants.searchPlaceholder": "ਨਾਮ ਜਾਂ ਕਿਸਮ ਨਾਲ ਪੌਦੇ ਲੱਭੋ…",
+  "plants.empty": "ਕੋਈ ਵੀ ਨਿਗਰਾਨੀ ਹੇਠ ਪੌਦਾ ਨਹੀਂ ਮਿਲਿਆ",
+  "plants.emptyDesc": "ਠੀਕ ਹੋਣ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਪੱਤੇ ਨੂੰ ਸਕੈਨ ਕਰੋ।",
+  "plants.scanFirst": "ਹੁਣੇ ਪੌਦਾ ਸਕੈਨ ਕਰੋ"
+}

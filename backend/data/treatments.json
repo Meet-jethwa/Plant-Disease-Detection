@@ -1,0 +1,308 @@
+{
+  "treat_copper_bactericide": {
+    "id": "treat_copper_bactericide",
+    "chemical": "Copper Oxychloride 50% WP",
+    "dose": 2.5,
+    "unit": "g/L",
+    "interval_days": 10,
+    "application_method": "foliar spray",
+    "safety": "Wear protective gloves and mask. Avoid spraying during bloom or direct midday sun."
+  },
+  "treat_mancozeb": {
+    "id": "treat_mancozeb",
+    "chemical": "Mancozeb 75% WP",
+    "dose": 2.0,
+    "unit": "g/L",
+    "interval_days": 12,
+    "application_method": "foliar spray",
+    "safety": "Do not harvest within 14 days of last application."
+  },
+  "treat_iprodione": {
+    "id": "treat_iprodione",
+    "chemical": "Iprodione 50% WP",
+    "dose": 2.0,
+    "unit": "g/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Store in a cool dry place out of reach of children."
+  },
+  "treat_tricyclazole": {
+    "id": "treat_tricyclazole",
+    "chemical": "Tricyclazole 75% WP",
+    "dose": 0.6,
+    "unit": "g/L",
+    "interval_days": 12,
+    "application_method": "foliar spray",
+    "safety": "Apply at boot leaf emergence or initial symptom notice."
+  },
+  "treat_isoprothiolane": {
+    "id": "treat_isoprothiolane",
+    "chemical": "Isoprothiolane 40% EC",
+    "dose": 1.5,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Do not mix with alkaline substances."
+  },
+  "treat_azoxystrobin": {
+    "id": "treat_azoxystrobin",
+    "chemical": "Azoxystrobin 23% SC",
+    "dose": 1.0,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Rotate with different chemical classes to prevent resistance."
+  },
+  "treat_propiconazole": {
+    "id": "treat_propiconazole",
+    "chemical": "Propiconazole 25% EC",
+    "dose": 1.0,
+    "unit": "ml/L",
+    "interval_days": 15,
+    "application_method": "foliar spray",
+    "safety": "Use calibrated sprayer. Max 2 applications per season."
+  },
+  "treat_carbendazim": {
+    "id": "treat_carbendazim",
+    "chemical": "Carbendazim 50% WP",
+    "dose": 1.0,
+    "unit": "g/L",
+    "interval_days": 12,
+    "application_method": "foliar spray",
+    "safety": "Harmful to aquatic organisms; prevent water runoff."
+  },
+  "treat_validamycin": {
+    "id": "treat_validamycin",
+    "chemical": "Validamycin 3% L",
+    "dose": 2.0,
+    "unit": "ml/L",
+    "interval_days": 10,
+    "application_method": "foliar spray directed at base/sheath",
+    "safety": "Direct spray towards lower sheath areas."
+  },
+  "treat_hexaconazole": {
+    "id": "treat_hexaconazole",
+    "chemical": "Hexaconazole 5% SC",
+    "dose": 2.0,
+    "unit": "ml/L",
+    "interval_days": 12,
+    "application_method": "foliar spray",
+    "safety": "Observe standard personal protective equipment (PPE)."
+  },
+  "treat_imidacloprid": {
+    "id": "treat_imidacloprid",
+    "chemical": "Imidacloprid 17.8% SL",
+    "dose": 0.5,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Avoid spraying when pollinators/bees are active."
+  },
+  "treat_lambda_cyhalothrin": {
+    "id": "treat_lambda_cyhalothrin",
+    "chemical": "Lambda-cyhalothrin 5% EC",
+    "dose": 1.0,
+    "unit": "ml/L",
+    "interval_days": 10,
+    "application_method": "foliar spray",
+    "safety": "Toxic to fish; keep away from water bodies."
+  },
+  "treat_tebuconazole": {
+    "id": "treat_tebuconazole",
+    "chemical": "Tebuconazole 25.9% EC",
+    "dose": 1.0,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Apply upon first appearance of rust pustules."
+  },
+  "treat_trifloxystrobin_tebuconazole": {
+    "id": "treat_trifloxystrobin_tebuconazole",
+    "chemical": "Trifloxystrobin 25% + Tebuconazole 50% WG",
+    "dose": 0.5,
+    "unit": "g/L",
+    "interval_days": 15,
+    "application_method": "foliar spray",
+    "safety": "Ensure thorough coverage of upper and lower leaf surfaces."
+  },
+  "treat_thiophanate_methyl": {
+    "id": "treat_thiophanate_methyl",
+    "chemical": "Thiophanate-methyl 70% WP",
+    "dose": 1.0,
+    "unit": "g/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Apply during early flowering / heading stage."
+  },
+  "treat_metconazole": {
+    "id": "treat_metconazole",
+    "chemical": "Metconazole 8.5% SL",
+    "dose": 1.0,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Follow pre-harvest intervals strictly."
+  },
+  "treat_triadimefon": {
+    "id": "treat_triadimefon",
+    "chemical": "Triadimefon 25% WP",
+    "dose": 1.0,
+    "unit": "g/L",
+    "interval_days": 15,
+    "application_method": "foliar spray",
+    "safety": "Do not inhale spray mist."
+  },
+  "treat_sulfur": {
+    "id": "treat_sulfur",
+    "chemical": "Wettable Sulfur 80% WDG",
+    "dose": 2.5,
+    "unit": "g/L",
+    "interval_days": 10,
+    "application_method": "foliar spray",
+    "safety": "Do not apply if ambient temperature exceeds 32°C."
+  },
+  "treat_abamectin": {
+    "id": "treat_abamectin",
+    "chemical": "Abamectin 1.9% EC",
+    "dose": 0.5,
+    "unit": "ml/L",
+    "interval_days": 10,
+    "application_method": "foliar spray",
+    "safety": "Highly toxic to bees; apply in late evening."
+  },
+  "treat_dicofol": {
+    "id": "treat_dicofol",
+    "chemical": "Dicofol 18.5% EC",
+    "dose": 2.5,
+    "unit": "ml/L",
+    "interval_days": 12,
+    "application_method": "foliar spray",
+    "safety": "Target undersides of leaves where mites congregate."
+  },
+  "treat_epoxiconazole": {
+    "id": "treat_epoxiconazole",
+    "chemical": "Epoxiconazole 12.5% SC",
+    "dose": 1.0,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Ensure adequate water volume for uniform coverage."
+  },
+  "treat_carboxin_thiram": {
+    "id": "treat_carboxin_thiram",
+    "chemical": "Carboxin 37.5% + Thiram 37.5% WS",
+    "dose": 2.5,
+    "unit": "g/kg seed",
+    "interval_days": 0,
+    "application_method": "seed treatment prior to sowing",
+    "safety": "Treated seed must not be used for food, feed, or oil purposes."
+  },
+  "treat_chlorpyrifos": {
+    "id": "treat_chlorpyrifos",
+    "chemical": "Chlorpyrifos 20% EC",
+    "dose": 2.0,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray / seedling drench",
+    "safety": "Wear respirator during mixing and spraying."
+  },
+  "treat_streptomycin_copper": {
+    "id": "treat_streptomycin_copper",
+    "chemical": "Streptocycline 90:10 + Copper Oxychloride",
+    "dose": 2.5,
+    "unit": "g/L",
+    "interval_days": 12,
+    "application_method": "foliar spray",
+    "safety": "Antibiotic formulation for agricultural bacterial suppression."
+  },
+  "treat_chlorothalonil": {
+    "id": "treat_chlorothalonil",
+    "chemical": "Chlorothalonil 75% WP",
+    "dose": 2.0,
+    "unit": "g/L",
+    "interval_days": 10,
+    "application_method": "foliar spray",
+    "safety": "Broad-spectrum protectant fungicide."
+  },
+  "treat_malathion": {
+    "id": "treat_malathion",
+    "chemical": "Malathion 50% EC",
+    "dose": 2.0,
+    "unit": "ml/L",
+    "interval_days": 10,
+    "application_method": "foliar spray",
+    "safety": "Do not enter treated field within 24 hours without protection."
+  },
+  "treat_monocrotophos": {
+    "id": "treat_monocrotophos",
+    "chemical": "Monocrotophos 36% SL",
+    "dose": 1.5,
+    "unit": "ml/L",
+    "interval_days": 15,
+    "application_method": "foliar spray",
+    "safety": "Strict safety observance; restricted pesticide."
+  },
+  "treat_buprofezin": {
+    "id": "treat_buprofezin",
+    "chemical": "Buprofezin 25% SC",
+    "dose": 1.5,
+    "unit": "ml/L",
+    "interval_days": 14,
+    "application_method": "foliar spray",
+    "safety": "Insect growth regulator specifically targeting nymphal stages."
+  },
+  "treat_cartap": {
+    "id": "treat_cartap",
+    "chemical": "Cartap Hydrochloride 4% G",
+    "dose": 18.0,
+    "unit": "kg/ha",
+    "interval_days": 21,
+    "application_method": "soil granule broadcast in standing water",
+    "safety": "Maintain 2-3 cm standing water in paddy fields during application."
+  },
+  "treat_flubendiamide": {
+    "id": "treat_flubendiamide",
+    "chemical": "Flubendiamide 39.35% SC",
+    "dose": 0.3,
+    "unit": "ml/L",
+    "interval_days": 15,
+    "application_method": "foliar spray",
+    "safety": "Rinsate must not contaminate irrigation canals."
+  },
+  "treat_metalaxyl": {
+    "id": "treat_metalaxyl",
+    "chemical": "Metalaxyl 35% WS / Ridomil MZ",
+    "dose": 2.0,
+    "unit": "g/L",
+    "interval_days": 12,
+    "application_method": "seed treatment or foliar spray",
+    "safety": "Systemic oomycete control."
+  },
+  "treat_fosetyl_al": {
+    "id": "treat_fosetyl_al",
+    "chemical": "Fosetyl-Aluminium 80% WP",
+    "dose": 2.0,
+    "unit": "g/L",
+    "interval_days": 12,
+    "application_method": "foliar spray",
+    "safety": "Upward and downward systemic action."
+  },
+  "treat_oxolinic_acid": {
+    "id": "treat_oxolinic_acid",
+    "chemical": "Oxolinic Acid 20% WP",
+    "dose": 1.0,
+    "unit": "g/L",
+    "interval_days": 10,
+    "application_method": "foliar spray at panicle emergence",
+    "safety": "Specific bactericide against panicle blight."
+  },
+  "treat_routine_monitoring": {
+    "id": "treat_routine_monitoring",
+    "chemical": "Preventive Cultural Practices",
+    "dose": 0,
+    "unit": "N/A",
+    "interval_days": 7,
+    "application_method": "visual scouting and field hygiene",
+    "safety": "Ensure proper irrigation, balanced NPK, and removal of weed hosts."
+  }
+}

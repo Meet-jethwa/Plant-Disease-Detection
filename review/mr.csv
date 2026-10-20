@@ -1,0 +1,738 @@
+key,english,translation,status
+fe:diagnosis:diagnosis.treatment,Treatment Plan,उपचार योजना,reviewed
+fe:diagnosis:diagnosis.showTreatmentsAnyway,Show possible treatments anyway,तरीही औषधोपचार दाखवा,machine
+fe:library:library.treatment,Recommended Treatment Plan,शिफारस केलेले उपचार,machine
+fe:scan:scan.treatmentGuide,Treatment Guide,उपचार मार्गदर्शन,machine
+be:disease:bacterial_leaf_blight:treatment_summary,Apply copper-based bactericides. Remove infected plant debris. Use resistant varieties. Avoid excessive nitrogen fertilization.,तांबेयुक्त जिवाणूनाशक वापरा. रोगाची लागण झालेले पिकाचे अवशेष काढून टाका. रोगप्रतिकारक वाण वापरा. नत्राचा अतिवापर टाळा.,machine
+be:disease:brown_spot:treatment_summary,"Apply mancozeb or iprodione fungicide. Correct soil nutrient deficiencies (potassium, silicon). Reduce dense planting.","मँकोझेब किंवा इप्रोडिओन बुरशीनाशक फवारा. जमिनीतील अन्नद्रव्यांची कमतरता (पालाश, सिलिकॉन) दूर करा. लागवड दाट करू नका.",machine
+be:disease:healthy:treatment_summary,Continue regular monitoring and preventive care.,शेतावर सतत लक्ष ठेवा आणि काळजी घेत राहा.,machine
+be:disease:leaf_blast:treatment_summary,"Apply fungicides: tricyclazole, isoprothiolane, or azoxystrobin. Reduce nitrogen fertilizer. Drain fields to reduce humidity.","बुरशीनाशके फवारा: ट्रायसायक्लाझोल, आयसोप्रोटिओलेन किंवा ॲझोक्सिस्ट्रोबिन. नत्राची खते कमी करा. आर्द्रता कमी करण्यासाठी शेतातील पाणी उपसून काढा.",machine
+be:disease:leaf_scald:treatment_summary,Apply propiconazole or carbendazim fungicide. Improve field drainage and plant spacing.,प्रोपिकोनाजोल किंवा कार्बेन्डाझिम बुरशीनाशक फवारा. शेतातून पाण्याचा निचरा सुधार ⁠आणि रोपांमधील अंतर ठेवा.,machine
+be:disease:sheath_blight:treatment_summary,"Apply validamycin, hexaconazole, or propiconazole fungicides. Reduce plant density. Minimize canopy humidity.","व्हॅलिडामायसिन, हेक्साकोनाझोल किंवा प्रोपिकोनाझोल बुरशीनाशक फवारा. झाडांची लागवड विरळ करा. पानांमधला दमटपणा कमी ठेवा.",machine
+be:disease:aphid:treatment_summary,Apply imidacloprid or lambda-cyhalothrin insecticide. Encourage natural predators (ladybugs).,इमिडाक्लोप्रिड किंवा लॅम्ब्डा-सायहॅलोथ्रीन कीटकनाशक फवारा. नैसर्गिक शत्रूंना (लेडीबग) वाढू द्या.,machine
+be:disease:black_rust:treatment_summary,"Apply propiconazole, tebuconazole, or trifloxystrobin fungicides at early stages.","सुरुवातीच्या टप्प्यात प्रोपिकोनाझोल, टेबिकोनाझोल किंवा ट्रायफ्लोक्झोस्ट्रोबिन बुरशीनाशक फवारा.",machine
+be:disease:blast:treatment_summary,"Tricyclazole, isoprothiolane, azoxystrobin fungicides.","ट्रायकॉझोल (Tricyclazole), आयसोप्रोत्थिओलेन (isoprothiolane), ॲझोक्सिस्ट्रोबिन (azoxystrobin) ही बुरशीनाशके वापरा.",machine
+be:disease:brown_rust:treatment_summary,"Fungicides: propiconazole, mancozeb. Apply at early infection stage.","बुरशीनाशके: प्रोपिकोनाझोल, मँकोझेब. रोगाची लक्षणे दिसू लागताच फवारणी करा.",machine
+be:disease:common_root_rot:treatment_summary,Seed treatment with trifloxystrobin + tebuconazole. Crop rotation with non-cereal crops.,ट्रायफ्लोक्झोस्ट्रोबिन + टेब्युकोनाझोलची बीजप्रक्रिया करा. तृणधान्य नसलेल्या पिकांसोबत फेरपालट करा.,machine
+be:disease:fusarium_head_blight:treatment_summary,Apply thiophanate-methyl or metconazole at early flowering. Remove infected debris.,फुलोरा सुरुवातीच्या काळात थायोफॅनेट-मिथाइल किंवा मेटकोनाझोल फवारा. बाधित अवशेष काढून टाका.,machine
+be:disease:leaf_blight:treatment_summary,Mancozeb or propiconazole fungicide application.,मँकोझेब किंवा प्रोपिकोनाझोल बुरशीनाशक फवारा.,machine
+be:disease:mildew:treatment_summary,"Apply triadimefon, propiconazole, or sulfur-based fungicides.","ट्रायडिमफॉन, प्रोपिकोनाझोल किंवा गंधक (सल्फर) युक्त बुरशीनाशके फवारा.",machine
+be:disease:mite:treatment_summary,Apply abamectin or dicofol miticide. Increase irrigation.,अबामामेक्टिन (abamectin) किंवा डायकोफॉल (dicofol) हे कोळीनाशक वापरा. पाणी देण्याचे प्रमाण वाढवा.,machine
+be:disease:septoria:treatment_summary,"Triazole or SDHI fungicides (epoxiconazole, fluxapyroxad). Early application is key.","ट्रायझोल (Triazole) किंवा एसडीएचआय (SDHI) बुरशीनाशके (इपोक्सिकोनाजोल, फ्लक्सॅप्रॉक्साड). लवकरात लवकर औषध मारणे फायद्याचे ठरते.",machine
+be:disease:smut:treatment_summary,"Seed treatment with carboxin, thiram, or tebuconazole is highly effective.","कार्बोक्सिन (carboxin), थिराम (thiram) किंवा टेबुकोनाजोल (tebuconazole) ने बियाण्याला प्रक्रिया करणे खूप प्रभावी ठरते.",machine
+be:disease:stem_fly:treatment_summary,Apply chlorpyrifos or imidacloprid at seedling stage.,रोपांच्या वाढीच्या काळात क्लोरपायरीफोस किंवा इमिडाक्लोप्रिड फवारा.,machine
+be:disease:tan_spot:treatment_summary,Apply propiconazole or mancozeb. Tillage to bury residues.,प्रोपिकोनाजोल किंवा मँकोझेब फवारा. अवशेष जमिनीखाली गाडण्यासाठी नांगरणी करा.,machine
+be:disease:yellow_rust:treatment_summary,"Apply propiconazole, tebuconazole, or other triazole fungicides early.","सुरुवातीलाच प्रोपिकोनाजोल, टेबुकोनाजोल किंवा इतर ट्रायझोल बुरशीनाशक फवारा.",machine
+be:disease:mosaic_disease:treatment_summary,No chemical cure. Remove and destroy infected stools. Control aphid vectors.,यावर कोणतेही रासायनिक औषध नाही. रोगाने ग्रासलेली झाडे उपटून नष्ट करा. मावा किडीचे नियंत्रण करा.,machine
+be:disease:rust:treatment_summary,Apply triadimefon or propiconazole fungicide. Remove severely infected leaves.,ट्रायडिमफॉन किंवा प्रोपिकोनाजोल बुरशीनाशक फवारा. जास्त प्रादुर्भाव झालेली पाने काढून टाका.,machine
+be:disease:bacterial_blight:treatment_summary,Apply copper oxychloride or streptomycin spray. Remove infected debris.,कॉपर ऑक्सिक्लोराईड किंवा स्ट्रेप्टोमायसीनची फवारणी करा. रोगाने खराब झालेले अवशेष काढून टाका.,machine
+be:disease:alternaria_leaf_spot:treatment_summary,"Apply mancozeb, chlorothalonil, or iprodione fungicide.","मँकोझेब, क्लोरोथॅलोनील किंवा इप्रोडिओन बुरशीनाशक फवारा.",machine
+be:disease:hispa:treatment_summary,Apply malathion or monocrotophos. Clip and destroy affected leaves.,मॅलॅथियान किंवा मोनोक्रोटोफोस वापरा. प्रादुर्भाव झालेली पाने कापून नष्ट करा.,machine
+be:disease:tungro:treatment_summary,No direct cure. Control leafhopper vectors with buprofezin or imidacloprid.,यावर थेट कोणताही उपाय नाही. तुडतुड्यांचा बिमोड करण्यासाठी बुप्रोफेझिन किंवा इमिडाक्लोप्रिड वापरा.,machine
+be:disease:dead_heart:treatment_summary,"Apply cartap hydrochloride, chlorpyrifos, or flubendiamide granules.","कार्टॅप हायड्रोक्लोराइड, क्लोरपायरीफोस किंवा फ्लुबेन्डामाइड दाणेदार औषध वापरा.",machine
+be:disease:downy_mildew:treatment_summary,Apply metalaxyl or fosetyl-aluminium fungicide. Improve drainage.,मेटलॅक्सिल किंवा फोसेटील-ॲल्युमिनियम बुरशीनाशक फवारा. पाण्याचा निचरा सुधार 1.,machine
+be:disease:bacterial_leaf_streak:treatment_summary,Apply copper-based bactericides. Remove infected leaves.,तांबेयुक्त जिवाणूनाशक वापरा. रोगट पाने काढून टाका.,machine
+be:disease:bacterial_panicle_blight:treatment_summary,Apply oxolinic acid or copper-based bactericide at panicle initiation.,कणीस बाहेर पडण्याच्या सुरुवातीला ऑक्झोलिनिक ॲसिड किंवा तांबेयुक्त जिवाणूनाशक वापरा.,machine
+be:disease:normal:treatment_summary,Continue routine monitoring and preventive agronomic practices.,शेताची नियमित पाहणी करत राहा आणि पिकाची काळजी घेत राहा.,machine
+fe:diagnosis:diagnosis.symptoms,Detected Symptoms,ओळखलेली लक्षणे,reviewed
+fe:diagnosis:diagnosis.symptomsFound,Symptoms found,ही लक्षणे आढळली,machine
+fe:library:library.symptoms,Key Visual Symptoms,मुख्य ओळखण्याची लक्षणे,machine
+fe:scan:scan.symptomsPathology,Symptoms & Pathology,लक्षणे आणि रोगशास्त्र,machine
+be:disease:bacterial_leaf_blight:causes,"Warm temperatures (25–30°C), high humidity, and typhoon/rain-splash that spreads the bacteria through leaf wounds.","उबदार तापमान (२५–३०°C), जास्त आर्द्रता आणि वादळ/पावसाचे तुषार ज्यामुळे पानांच्या जखमांमधून जिवाणू पसरतात.",machine
+be:disease:brown_spot:causes,Associated with nutrient-deficient soils (especially potassium and silicon). Favoured by warm humid conditions and poor soil health.,जमिनीत अन्नद्रव्यांची कमतरता (विशेषतः पालाश आणि सिलिकॉन) असणे. उबदार दमट हवामान आणि खराब जमीन आरोग्यामुळे वाढतो.,machine
+be:disease:healthy:causes,N/A,लागू नाही,machine
+be:disease:leaf_blast:causes,"Cool nights, warm days, high humidity (>90%), heavy dew, excessive nitrogen application, and susceptible varieties.","थंड रात्री, उष्ण दिवस, जास्त आर्द्रता (>90%), जास्त दव, नत्राचा (नायट्रोजन) अतिवापर आणि रोगाला बळी पडणाऱ्या जाती.",machine
+be:disease:leaf_scald:causes,"High humidity, warm temperatures, and dense planting that reduces airflow.","जास्त आर्द्रता, उष्ण तापमान आणि दाट लागवड ज्यामुळे हवा खेळती राहत नाही.",machine
+be:disease:sheath_blight:causes,"High humidity (>90%), temperatures of 28–32°C, dense planting, high nitrogen levels, and flooded conditions that allow mycelium spread.","जास्त दमटपणा (>90%), २८–३२°C तापमान, दाट लागवड, नत्राचे जास्त प्रमाण आणि शेतात साचलेले पाणी ज्यामुळे मायसिलीयम पसरतो.",machine
+be:disease:aphid:causes,"Warm dry conditions, absence of natural predators, and dense planting.","कोमट कोरडे हवामान, नैसर्गिक शत्रू नसणे आणि दाट लागवड.",machine
+be:disease:black_rust:causes,"Warm temperatures (15–30°C), dew, and wind-blown spores from nearby infected fields.","कोमट तापमान (१५–३०°C), दव आणि जवळच्या संक्रमित शेतातून वाऱ्याद्वारे उडून येणारे बिजाणू.",machine
+be:disease:blast:causes,"Cool nights, morning dew, excess nitrogen, susceptible varieties.","थंड रात्री, सकाळचे दव, नत्राचा अतिवापर, आणि रोगप्रतिकारशक्ती नसलेल्या जाती.",machine
+be:disease:brown_rust:causes,"Moderate temperatures (15–22°C), dew, and humid conditions.","मध्यम तापमान (15–22°C), दव, आणि दमट हवामान.",machine
+be:disease:common_root_rot:causes,"Dry soil conditions, warm temperatures during seeding, and soil-borne inoculum.","कोडी माती, पेरणीच्या वेळी जास्त तापमान, आणि मातीतील जिवाणू.",machine
+be:disease:fusarium_head_blight:causes,"Wet conditions during flowering (anthesis), temperatures of 25–30°C, and crop residues.","फुलोरा येताना दमट हवामान, २५–३०°C तापमान आणि पिकाचे अवशेष.",machine
+be:disease:leaf_blight:causes,Warm humid conditions and susceptible varieties.,उष्ण दमट हवामान आणि रोगाला बळी पडणारे वाण.,machine
+be:disease:mildew:causes,"Cool temperatures (15–22°C), moderate humidity, and dense canopy.","थंड तापमान (१५–२२°C), मध्यम आर्द्रता आणि दाट पीक.",machine
+be:disease:mite:causes,"Hot, dry conditions. Chemical treatments that kill natural predators.",उष्ण आणि कोरडे हवामान. उपद्रवी कीटकांना खाणारे मित्र कीटक मारणारी रासायनिक औषधे.,machine
+be:disease:septoria:causes,"Cool, wet weather (10–20°C), leaf wetness periods >20 hours.","थंड, दमट हवामान (10–20°C), पाने 20 तासांपेक्षा जास्त वेळ ओली राहणे.",machine
+be:disease:smut:causes,Moderate temperatures during flowering with humid conditions. Seed-borne pathogen.,फुलोऱ्याच्या वेळी मध्यम तापमान आणि दमट हवामान. हा बियाण्यामार्फत पसरणारा रोग आहे.,machine
+be:disease:stem_fly:causes,Peak activity during cool temperatures (15–20°C) at early crop stages.,पिकाच्या सुरुवातीच्या वाढीच्या काळात थंड हवामानात (15–20°C) प्रादुर्भाव वाढतो.,machine
+be:disease:tan_spot:causes,"Warm temperatures (20–28°C), leaf wetness, and crop residue from previous season.","उबदार तापमान (20–28°C), पानांवर ओलावा आणि गेल्या हंगामातील पिकाचे अवशेष.",machine
+be:disease:yellow_rust:causes,"Cool temperatures (10–15°C), dew and mist, and susceptible varieties.","थंड तापमान (10–15°C), दव आणि धुके, आणि रोगाला बळी पडणाऱ्या जाती.",machine
+be:disease:mosaic_disease:causes,"Transmitted by aphids (Rhopalosiphum maidis), infected planting material.",मावा किडीद्वारे (Rhopalosiphum maidis) आणि रोगाचा प्रादुर्भाव झालेल्या बेण्यामुळे पसरतो.,machine
+be:disease:rust:causes,"Warm temperatures (24–28°C), high humidity, and susceptible cultivars.","उबदार तापमान (24–28°C), जास्त आद्रता आणि रोगट जाती.",machine
+be:disease:bacterial_blight:causes,"Warm, humid weather, rain-splash, mechanical damage, and infected seeds.","उबदार, दमट हवामान, पावसाचे तुषार, यांत्रिक इजा आणि संक्रमित बियाणे.",machine
+be:disease:alternaria_leaf_spot:causes,High humidity and temperatures of 25–30°C. Most severe on stressed or weakened plants.,जास्त दमट हवामान आणि २५–३०°C तापमान. कमकुवत किंवा ताण आलेल्या पिकांवर याचा जास्त प्रादुर्भाव होतो.,machine
+be:disease:hispa:causes,"Lush, dense crops with high nitrogen. Wet season conditions.",नत्रयुक्त खतांचा जादा वापर असलेली दाट पिके. पावसाळ्यातील दमट हवामान.,machine
+be:disease:tungro:causes,Green leafhopper (Nephotettix spp.) populations carrying both viruses.,दोन्ही विषाणूंचे वहन करणारे हिरवे तुडतुडे (निफोटीटिक्स प्रजाती) यांची संख्या वाढल्यामुळे.,machine
+be:disease:dead_heart:causes,Stem borer moth populations during vegetative stage.,वाढीच्या काळात खोडकिडीच्या पतंगांची संख्या वाढणे.,machine
+be:disease:downy_mildew:causes,"Waterlogged soils, cool temperatures, and high humidity.","पाण्यात तुंबलेली शेती, थंड तापमान आणि जास्त आर्द्रता.",machine
+be:disease:bacterial_leaf_streak:causes,"Warm, humid weather. Spread by rain splash and irrigation water.","उबदार, दमट हवामान. पावसाचे तुषार आणि सिंचनाच्या पाण्यामुळे पसरतो.",machine
+be:disease:bacterial_panicle_blight:causes,High temperatures (>30°C) during flowering combined with high humidity.,फुलोरा येण्याच्या काळात जास्त तापमान (>30°C) आणि हवेतील जास्त दमटपणा.,machine
+be:disease:normal:causes,N/A,लागू नाही,machine
+fe:common:card.prevention,Prevention Plan,प्रतिबंध,reviewed
+fe:library:library.prevention,Long-term Prevention,पुढील संरक्षणासाठी उपाय,machine
+fe:scan:scan.longTermPrevention,Long-Term Prevention,दीर्घकालीन प्रतिबंध,machine
+be:disease:bacterial_leaf_blight:prevention,Use certified disease-free seeds. Maintain field drainage. Apply balanced fertilization.,प्रमाणित रोगमुक्त बियाणे वापरा. शेतात पाण्याचा निचरा व्यवस्थित ठेवा. संतुलित खत व्यवस्थापन करा.,machine
+be:disease:brown_spot:prevention,"Balanced fertilization, well-drained soils, disease-resistant varieties.","संतुलित खत व्यवस्थापन, पाण्याचा चांगला निचरा होणाऱ्या जमिनी, रोगप्रतिकारक वाण.",machine
+be:disease:healthy:prevention,"Maintain good agronomic practices, balanced fertilization, and proper irrigation.","शेतीची योग्य कामे करा, खतांचा समतोल वापर करा आणि योग्य प्रमाणात पाणी द्या.",machine
+be:disease:leaf_blast:prevention,Use blast-resistant varieties. Avoid excess nitrogen. Ensure good airflow between plants.,करपा रोधक जातींची निवड करा. नत्राचा अतिवापर टाळा. झाडांमध्ये पुरेशी मोकळी हवा खेळती राहील याची काळजी घ्या.,machine
+be:disease:leaf_scald:prevention,"Wider row spacing, balanced nutrients, resistant varieties.","ओळींमध्ये जास्त अंतर ठेवा, समतोल खते द्या आणि रोग प्रतिकारक जाती वापरा.",machine
+be:disease:sheath_blight:prevention,"Lower seeding rates, balanced fertilization, water management.","बियाणे कमी प्रमाणात पेरणी, योग्य खत व्यवस्थापन, पाणी व्यवस्थापन.",machine
+be:disease:aphid:prevention,"Early planting, crop rotation, avoid excessive nitrogen.","लवकर पेरणी, पीक फेरपालट, नत्राचा अतिवापर टाळा.",machine
+be:disease:black_rust:prevention,Plant resistant varieties. Early sowing. Remove volunteer wheat plants.,रोगास प्रतिकार करणाऱ्या जातींची लागवड करा. लवकर पेरणी करा. उगवून आलेली गव्हाची अतिरिक्त रोपे काढून टाका.,machine
+be:disease:blast:prevention,"Resistant varieties, balanced nitrogen, regulated irrigation.","रोगप्रतिकारक जातींची निवड, नत्राचा संतुलित वापर, आणि पाण्याचे नियंत्रण.",machine
+be:disease:brown_rust:prevention,"Resistant varieties, timely sowing, crop rotation.","रोगप्रतिकारक जाती, वेळेवर पेरणी, आणि फेरपालट.",machine
+be:disease:common_root_rot:prevention,"Balanced soil fertility, avoid continuous wheat, proper seeding depth.","मातीची सुपीकता राखा, सलग गहू पिकवणे टाळा, आणि योग्य खोलीवर पेरणी करा.",machine
+be:disease:fusarium_head_blight:prevention,"Resistant varieties, tillage to bury residues, good drainage.","रोगप्रतिकारक वाण वापरा, अवशेष जमिनीत गाडण्यासाठी नांगरणी करा, पाण्याचा चांगला निचरा ठेवा.",machine
+be:disease:leaf_blight:prevention,Crop rotation and use of resistant varieties.,पीक फेरपालट करा आणि रोगप्रतिकारक वाण वापर.,machine
+be:disease:mildew:prevention,"Wider row spacing, resistant varieties, early sowing.","ओळींमध्ये जास्त अंतर ठेवा, रोगप्रतिकारक वाण वापरा, लवकर पेरणी करा.",machine
+be:disease:mite:prevention,Avoid overly dry conditions. Conserve beneficial insects.,शेतात खूप कोरडेपणा येऊ देऊ नका. मित्र कीटकांचे रक्षण करा.,machine
+be:disease:septoria:prevention,"Resistant varieties, crop rotation, delayed sowing.","रोगप्रतिकारक वाण वापरा, पिकांची फेरपालट करा, पेरणी उशिरा करा.",machine
+be:disease:smut:prevention,Use certified smut-free seed. Hot-water seed treatment.,रोगमुक्त प्रमाणित बियाणे वापर. बियाण्याला गरम पाण्याच्या प्रक्रियेचा उपचार द्या.,machine
+be:disease:stem_fly:prevention,"Early sowing, treat seeds with systemic insecticide, monitor basal nodes.","लवकर पेरणी करा, बियाण्यांना सिस्टिमॅटिक कीटकनाशकाची प्रक्रिया करा, जमिनीलगतच्या गाठींची पाहणी करा.",machine
+be:disease:tan_spot:prevention,"Crop rotation, residue management, resistant varieties.","पीक फेरपालट, अवशेषांचे व्यवस्थापन, रोगटपणा सहन करणाऱ्या जाती.",machine
+be:disease:yellow_rust:prevention,Resistant varieties are most effective. Early sowing. Monitor forecasts.,रोगप्रतिकारक जाती सर्वात प्रभावी आहेत. लवकर पेरणी करा. हवामान अंदाजावर लक्ष ठेवा.,machine
+be:disease:mosaic_disease:prevention,"Use virus-free seed cane, resistant varieties, control aphid populations.","विषाणूमुक्त बेणे वापरा, रोगप्रतिकारक जाती लावा, मावा किडीची संख्या नियंत्रणात ठेवा.",machine
+be:disease:rust:prevention,Plant resistant varieties. Balanced fertilization.,रोगप्रतिकारक जाती लावा. संतुलित खते द्या.,machine
+be:disease:bacterial_blight:prevention,"Disease-free certified seed, seed treatment, crop rotation.","रोगमुक्त प्रमाणित बियाणे वापरा, बियाण्याला प्रक्रिया करा, पिकांची फेरपालट करा.",machine
+be:disease:alternaria_leaf_spot:prevention,"Good drainage, balanced nutrition, remove infected debris.","पाण्याचा चांगला निचरा ठेवा, पिकाला योग्य खते द्या, रोगट पालापाचोळा काढून नष्ट करा.",machine
+be:disease:hispa:prevention,"Avoid over-fertilization, resistant varieties, reduce dense planting.","खतांचा अतिवापर टाळा, प्रतिकारक्षम जाती वापरा, लागवड फार दाट करू नका.",machine
+be:disease:tungro:prevention,"Resistant varieties (Utri Merah), synchronized planting, leafhopper management.","प्रतिकारक्षम जाती (उत्त्री मेराह) वापरा, एकाच वेळी लागवड करा, तुडतुड्यांचे नियंत्रण करा.",machine
+be:disease:dead_heart:prevention,Avoid early planting when moths are active. Use light traps. Remove egg masses.,पतंग सक्रिय असताना लवकर लागवड करणे टाळा. प्रकाश सापळे वापरा. अंड्यांचे पुंजके गोळा करून नष्ट करा.,machine
+be:disease:downy_mildew:prevention,"Avoid water stagnation, improve field drainage, resistant varieties.","पाणी साचू देऊ नका, शेतातून पाण्याचा निचरा चांगला करा, रोगप्रतिकारक जाती वापरा.",machine
+be:disease:bacterial_leaf_streak:prevention,Use resistant varieties. Avoid excessive nitrogen.,रोगप्रतिकारक जाती वापरा. नत्राचा अतिवापर टाळा.,machine
+be:disease:bacterial_panicle_blight:prevention,"Resistant varieties, avoid water stress at heading.","रोगप्रतिकारक वाण वापरा, कणीस बाहेर पडताना पाण्याचा ताण पडू देऊ नका.",machine
+be:disease:normal:prevention,"Maintain balanced fertilization, proper irrigation, and crop rotation.","खतांचे योग्य प्रमाण ठेवा, योग्य वेळी पाणी द्या आणि पिकांची फेरपालट करा.",machine
+fe:assistant:assistant.noDiagnosis,Scan a leaf first to enable context-aware diagnosis.,आधी झाडाचे पान स्कॅन करा.,reviewed
+fe:common:card.diagnosisSummary,Diagnosis Summary,निदान सारांश,reviewed
+fe:diagnosis:diagnosis.title,Plant Health Report,वनस्पती आरोग्य अहवाल,reviewed
+fe:diagnosis:diagnosis.gradcam,Grad-CAM Attention Map,AI दृश्य विश्लेषण (Grad-CAM),reviewed
+fe:diagnosis:diagnosis.healthScore,Health Score,आरोग्य स्कोर,reviewed
+fe:diagnosis:diagnosis.details,Diagnosis Details,निदान तपशील,reviewed
+fe:diagnosis:diagnosis.modelPredictions,Model Predictions,मॉडेल अंदाज,reviewed
+fe:diagnosis:diagnosis.aiSummary,Why FloraAI Thinks This,FloraAI असे का वाटते,reviewed
+fe:diagnosis:diagnosis.conditions,Current Weather,सध्याचे हवामान,reviewed
+fe:diagnosis:diagnosis.risk,Disease Risk,रोग धोका,reviewed
+fe:diagnosis:diagnosis.expertAlert,Consult an Expert,तज्ञाचा सल्ला घ्या,reviewed
+fe:diagnosis:diagnosis.consultExpert,This diagnosis indicates a high-severity condition. Consult a local agronomist before applying chemical treatment.,हे निदान गंभीर स्थिती दर्शवते. उपचारापूर्वी स्थानिक कृषी तज्ञाशी सल्लामसलत करा.,reviewed
+fe:diagnosis:diagnosis.whatToDoNow,What to do now,आता काय करावे,reviewed
+fe:diagnosis:diagnosis.heatmapToggle,See where the problem is,समस्या कुठे आहे ते पहा,reviewed
+fe:diagnosis:diagnosis.listen,Listen,ऐका,reviewed
+fe:diagnosis:diagnosis.stopListening,Stop listening,थांबवा,reviewed
+fe:diagnosis:diagnosis.leafVision,Leaf Vision,पान व्हिजन,machine
+fe:diagnosis:diagnosis.originalPhoto,Original leaf photo,पानाचा मूळ फोटो,machine
+fe:diagnosis:diagnosis.photo,Photo,फोटो,machine
+fe:diagnosis:diagnosis.aiView,AI view,AI चा फोटो,machine
+fe:diagnosis:diagnosis.compare,Compare,तुलना करा,machine
+fe:diagnosis:diagnosis.compareHandle,Compare AI view with original,AI च्या फोटोची मूळ फोटोशी तुलना करा,machine
+fe:diagnosis:diagnosis.hotspot,Attention point,लक्ष देण्यासारखी जागा,machine
+fe:diagnosis:diagnosis.attentionHere,The AI paid most attention here,AI ने इथे सगळ्यात जास्त लक्ष दिलंय,machine
+fe:diagnosis:diagnosis.whereAiLooked,Where the AI looked,AI ने कुठं पाहिलं,machine
+fe:diagnosis:diagnosis.attentionLegend,Green to amber to red focus scale,हिरव्यापासून पिवळ्या आणि लाल रंगापर्यंतची लक्ष देण्याची खूण,machine
+fe:diagnosis:diagnosis.attentionInfo,"This shows model attention, not a guaranteed diagnosis.","हे AI चं लक्ष दाखवतंय, नक्की रोग कोणता हे खात्रीशीर नाही.",machine
+fe:diagnosis:diagnosis.lowConfidenceNote,"The AI is not sure, so highlights may be approximate","AI ला नक्की माहीत नाही, त्यामुळे खून अंदाजे असू शकतात",machine
+fe:diagnosis:diagnosis.notSureYet,Not sure yet,नक्की सांगता येत नाहीये,machine
+fe:diagnosis:diagnosis.unrecognizedLeaf,We could not recognize this leaf,आम्हाला हे पान ओळखता आले नाही,machine
+fe:diagnosis:diagnosis.unrecognizedHint,"Please retake the photo clearly, or check that the selected crop matches your plant.","कृपया फोटो पुन्हा नीट काढा, किंवा तुम्ही निवडलेलं पीक बरोबर आहे का ते तपासा.",machine
+fe:diagnosis:diagnosis.retakePhoto,Retake photo,फोटो पुन्हा काढा,machine
+fe:diagnosis:diagnosis.lowConfidenceWarning,"Warning: Because the AI is not confident, consult an agronomist before applying chemicals.","इशारा: AI ला खात्री नसल्यामुळे, औषध मारण्यापूर्वी तज्ज्ञांचा सल्ला घ्या.",machine
+fe:diagnosis:diagnosis.affectedArea,Affected Area,प्रभावित भाग,machine
+fe:diagnosis:diagnosis.weatherRisk,Weather Risk,हमानाचा धोका,machine
+fe:diagnosis:diagnosis.weatherDetails,Weather details,हवामानाची माहिती,machine
+fe:diagnosis:diagnosis.technicalDetails,Technical details,तांत्रिक माहिती,machine
+fe:diagnosis:diagnosis.tabImmediate,Immediate,तातडीचे,machine
+fe:diagnosis:diagnosis.tabOrganic,Organic,सेंद्रिय,machine
+fe:diagnosis:diagnosis.tabPreventive,Preventive,प्रतिबंधक,machine
+fe:diagnosis:diagnosis.askAiAboutThis,Ask AI about this,याबद्दल AI ला विचार,machine
+fe:diagnosis:diagnosis.diseaseDetected,Disease Detected,रोग आढळला,machine
+fe:diagnosis:diagnosis.healthyPlant,Healthy Plant,निरोगी झाड,machine
+fe:diagnosis:diagnosis.photoTips,Tips for a better photo,चांगला फोटो काढण्यासाठी टिप्स,machine
+fe:diagnosis:diagnosis.possibleDiseases,Possible Diseases,संभाव्य रोग,machine
+fe:diagnosis:diagnosis.confidenceIs,Confidence is,खात्री आहे,machine
+fe:diagnosis:diagnosis.multipleMatch,Multiple conditions may match these leaf patterns.,पानावरील या खुणांवरून एकापेक्षा जास्त रोग असू शकतात.,machine
+fe:diagnosis:diagnosis.disclaimer,FloraAI diagnostic assistance is advisory only. Verify with agricultural officers before crop intervention.,FloraAI चा रोग तपासणी सल्ला हा फक्त माहितीसाठी आहे. पिकावर कोणतीही फवारणी किंवा उपचार करण्याआधी कृषी अधिकाऱ्यांचा सल्ला घ्या.,machine
+fe:diagnosis:weather.context,WEATHER CONTEXT,हवामानाची माहिती,machine
+fe:diagnosis:weather.update,UPDATE,अपडेट करा,machine
+fe:diagnosis:weather.locating,LOCATING...,लोकेशन शोधत आहे...,machine
+fe:diagnosis:weather.lowRisk,LOW RISK,कमी धोका,machine
+fe:diagnosis:weather.mediumRisk,MEDIUM RISK,मध्यम धोका,machine
+fe:diagnosis:weather.highRisk,HIGH RISK,जास्त धोका,machine
+fe:diagnosis:weather.severeRisk,SEVERE RISK,अतिधोकादायक,machine
+fe:diagnosis:weather.prompt,Click UPDATE to load local weather and disease risk data.,स्थानिक हवामान आणि रोगाच्या धोक्याची माहिती पाहण्यासाठी अपडेटवर क्लिक करा.,machine
+fe:diagnosis:diagnosis.preliminaryMeasures,Preliminary Measures:,प्राथमिक उपाय:,machine
+fe:diagnosis:diagnosis.factorInfluence,Environmental Factor Influence,वातावरणाचा प्रभाव,machine
+fe:diagnosis:diagnosis.sympLesions,Discolored foliar lesions,पानांवर पडलेले डाग व रंग बदलणे,machine
+fe:diagnosis:diagnosis.sympNecrosis,Necrotic margin formation,कडा सुकणे किंवा सडणे,machine
+fe:diagnosis:diagnosis.sympVascular,Vascular tissue stress,अन्नवाहिन्यांवर ताण पडणे,machine
+fe:assistant:assistant.title,AI Agronomist Chat,AI कृषी सहाय्यक,reviewed
+fe:assistant:assistant.subtitle,Multi-crop expert diagnostics and care protocols powered by Gemini AI.,"भात, गहू, ऊस आणि कापसासाठी AI आधारित रोग विश्लेषण.",reviewed
+fe:assistant:assistant.placeholder,"Ask about this diagnosis, treatments, or preventive care…",या निदानाबद्दल विचारा…,reviewed
+fe:assistant:assistant.analyzing,Thinking…,विश्लेषण होत आहे…,reviewed
+fe:assistant:assistant.contextActive,Diagnosis Context Active,संदर्भ सक्रिय,reviewed
+fe:assistant:assistant.suggested,Suggested questions:,सुचविलेले प्रश्न:,reviewed
+fe:assistant:assistant.followUp,Ask a follow-up question:,पुढील प्रश्न विचारा:,reviewed
+fe:assistant:assistant.emptyTitle,Ask the AI Crop Specialist,AI कृषी तज्ञाला विचारा,reviewed
+fe:assistant:assistant.emptyHint,"Ask questions regarding your scanned plant diagnosis, organic remedies, or seasonal prevention.",स्कॅन केलेल्या पानाच्या निदानाबद्दल प्रश्न विचारा.,reviewed
+fe:assistant:assistant.weatherAdvice,Today's Weather Advice,आजचा हवामान सल्ला,machine
+fe:assistant:assistant.jumpToLatest,Jump to latest,शेवटच्या संदेशावर जा,machine
+fe:assistant:assistant.welcomeMsg,"Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.","नमस्कार! मी तुमचा एआय (AI) वनस्पती आरोग्य सहाय्यक आहे. वनस्पती रोगाचे संपूर्ण निदान मिळवण्यासाठी पानाचा फोटो अपलोड करा - यात अचूकता, ग्रॅड-कॅम (Grad-CAM ध्यान नकाशा) दृश्य पुरावा, वातावरणातील धोक्यांचे विश्लेषण आणि सोपे उपाय मिळतील.",machine
+fe:common:nav.home,Home,मुखपृष्ठ,reviewed
+fe:common:nav.scan,Scanner,स्कॅन,reviewed
+fe:common:nav.chat,AI Chat,AI चॅट,reviewed
+fe:common:nav.plants,My Plants,माझी झाडे,reviewed
+fe:common:nav.encyclopedia,Encyclopedia,विश्वकोश,reviewed
+fe:common:nav.history,History,इतिहास,reviewed
+fe:common:nav.language,Choose language,भाषा निवडा,reviewed
+fe:common:lang.chooseLanguage,Choose language,भाषा निवडा,reviewed
+fe:common:btn.scanPlant,Scan Plant,झाड स्कॅन करा,reviewed
+fe:common:btn.save,Save Plant,झाड जतन करा,reviewed
+fe:common:btn.saved,Saved,जतन झाले,reviewed
+fe:common:btn.download,Download Report,अहवाल डाउनलोड करा,reviewed
+fe:common:btn.share,Share,शेअर करा,reviewed
+fe:common:btn.back,Back,मागे,reviewed
+fe:common:btn.send,Send,पाठवा,reviewed
+fe:common:btn.speak,Listen,ऐका,reviewed
+fe:common:btn.stopSpeaking,Stop listening,थांबा,reviewed
+fe:common:btn.scanAnother,Scan Another,दुसरे झाड स्कॅन करा,reviewed
+fe:common:btn.askChat,Ask AI Chat,AI चॅटला विचारा,reviewed
+fe:common:btn.analyze,Analyze,विश्लेषण करा,reviewed
+fe:common:btn.analyzing,Analyzing…,विश्लेषण होत आहे…,reviewed
+fe:common:btn.locate,Locate,स्थान शोधा,reviewed
+fe:common:btn.refresh,Refresh,रिफ्रेश,reviewed
+fe:common:btn.cancel,Cancel,रद्द करा,machine
+fe:common:btn.more,More,आणखी,machine
+fe:common:footer.platform,Platform,प्लॅटफॉर्म,machine
+fe:common:footer.data,Data,डेटा,machine
+fe:common:footer.info,Info,माहिती,machine
+fe:common:footer.scanner,Plant Scanner,प्लँट स्कॅनर,machine
+fe:common:footer.chat,AI Chat,एआय (AI) गप्पा,machine
+fe:common:footer.plants,My Plants,माझ्या वनस्पती,machine
+fe:common:footer.encyclopedia,Encyclopedia,वनस्पती विश्वकोश,machine
+fe:common:footer.library,Disease Library,रोग माहितीकोश,machine
+fe:common:footer.history,Scan History,स्कॅन इतिहास,machine
+fe:common:footer.tools,Analysis Tools,विश्लेषण साधने,machine
+fe:common:footer.about,About BioScan,बायोस्कॅनबद्दल,machine
+fe:common:footer.contact,Contact,संपर्क,machine
+fe:common:footer.privacy,Privacy,गोपनीयता,machine
+fe:common:footer.terms,Terms,अटी व शर्ती,machine
+fe:common:footer.tagline,"AI-powered plant disease intelligence for farms, labs, and greenhouses worldwide.","जगभरातील शेतात, प्रयोगशाळा आणि हरितगृहांसाठी एआय (AI) आधारित वनस्पती रोग माहिती.",machine
+fe:common:footer.operational,ALL SYSTEMS OPERATIONAL,सर्व यंत्रणा सुरळीਤ सुरू आहेत,machine
+fe:common:footer.rights,All rights reserved.,सर्व हक्क सुरक्षित.,machine
+fe:common:footer.disclaimer,Flora AI provides diagnostic guidance for informational purposes only. Results should be verified by a qualified agricultural expert.,फ्लोरा एआय (Flora AI) फक्त माहितीसाठी निदानाचे मार्गदर्शन करते. निकालांची खात्री कृषी तज्ज्ञांकडून करून घ्यावी.,machine
+fe:common:history.title,Scan History & Timeline,स्कॅन इतिहास आणि कालक्रम,machine
+fe:common:history.empty,No scan records found. Scan a leaf to start tracking health.,कोणताही स्कॅन रेकॉर्ड सापडला नाही. आरोग्याची नोंद ठेवण्यासाठी पानाचा स्कॅन करा.,machine
+fe:common:history.clear,Clear History,इतिहास पुसा,machine
+fe:common:history.diagnosesRecorded,diagnoses recorded,निदान नोंदवले,machine
+fe:common:card.whyDetected,Why Detected (XAI),का ओळखले (XAI),reviewed
+fe:common:card.visualEvidence,Visual Evidence,दृश्य पुरावा,reviewed
+fe:common:card.shap,SHAP Feature Evidence,SHAP वैशिष्ट्य पुरावा,reviewed
+fe:common:card.environmental,Environmental Factors,पर्यावरणीय घटक,reviewed
+fe:common:card.actions,Recommended Actions,शिफारस केलेल्या क्रिया,reviewed
+fe:common:card.disclaimer,FloraAI guidance is advisory only.,FloraAI चे मार्गदर्शन केवळ सल्ल्यासाठी आहे.,reviewed
+fe:common:card.original,Original Image,मूळ प्रतिमा,reviewed
+fe:common:card.gradcam,Grad-CAM Heatmap,Grad-CAM हीटमॅप,reviewed
+fe:common:card.shapNote,SHAP values are pre-computed by the backend from environmental sensor data.,SHAP मूल्ये बॅकएंडद्वारे पूर्व-गणित आहेत. Gemini केवळ स्पष्टीकरण देते.,reviewed
+fe:common:common.loading,Loading…,लोड होत आहे…,reviewed
+fe:common:common.error,Error,त्रुटी,reviewed
+fe:common:common.crop,Crop,पीक,reviewed
+fe:common:common.confidence,AI Confidence,AI विश्वास,reviewed
+fe:common:common.health,Health,आरोग्य,reviewed
+fe:common:common.severity,Severity,तीव्रता,reviewed
+fe:common:common.poweredBy,Powered by Gemini AI,Gemini AI द्वारे चालवलेले,reviewed
+fe:common:common.context,Active Diagnosis Context,सक्रिय निदान संदर्भ,reviewed
+fe:common:common.askFollowUp,Ask a follow-up,पुढे विचारा,reviewed
+fe:common:status.healthy,Healthy,निरोगी,reviewed
+fe:common:status.warning,Warning,चेतावणी,reviewed
+fe:common:status.danger,Danger,धोका,reviewed
+fe:common:risk.low,Low Risk,कमी धोका,machine
+fe:common:risk.medium,Medium Risk,मध्यम धोका,machine
+fe:common:risk.high,High Risk,जास्त धोका,machine
+fe:common:risk.severe,Severe Risk,मोता धोका,machine
+fe:common:loader.step1,Looking at the leaf…,पान पाहत आहोत…,reviewed
+fe:common:loader.step2,Checking for disease…,रोग तपासत आहोत…,reviewed
+fe:common:loader.step3,Preparing advice…,सल्ला तयार करत आहोत…,reviewed
+fe:common:loader.slowBackend,This is taking longer than expected. Please wait…,अपेक्षेपेक्षा जास्त वेळ लागत आहे. कृपया प्रतीक्षा करा…,reviewed
+fe:common:loader.checking,Checking your plant…,तुमच्या झाडाची तपासणी करत आहे...,machine
+fe:common:loader.takingLonger,Taking longer than usual… please keep this page open,नेहमीपेक्षा जास्त वेळ लागत आहे... कृपया हे पेज उघडे ठेवा,machine
+fe:common:loader.timeoutError,Diagnosis took too long. Please check your connection and try again.,तपासणीसाठी खूप वेळ लागला. कृपया तुमचे इंटरनेट तपासून पुन्हा प्रयत्न करा.,machine
+fe:common:loader.tryAgain,Try again,पुन्हा प्रयत्न करा,machine
+fe:common:nav.myProfile,My Profile,माझे प्रोफाइल,machine
+fe:common:nav.scanHistory,Scan History,स्कॅनचा इतिहास,machine
+fe:common:nav.preferences,Preferences,पसंती,machine
+fe:common:nav.signOut,Sign Out,बाहेर पडा,machine
+fe:common:nav.proSpecialist,PRO SPECIALIST,प्रो स्पेशालिस्ट,machine
+fe:common:uploader.leafImage,Leaf Image,पानाचा फोटो,machine
+fe:common:uploader.uploadHint,Upload leaf photo,पानाचा फोटो अपलोड करा,machine
+fe:common:uploader.dropHint,Drop image to scan,स्कॅन करण्यासाठी फोटो इथे टाка,machine
+fe:common:uploader.fileLimits,JPG · PNG · WEBP · Max 10MB,JPG · PNG · WEBP · जास्तीत जास्त 10MB,machine
+fe:common:uploader.tip,"Best results: clear, well-lit close-up",उत्कृष्ट निकालासाठी: स्पष्ट आणि चांगल्या प्रकाशातील जवळचा फोटो,machine
+fe:common:uploader.takePhoto,Take Photo,फोटो काढ,machine
+fe:common:uploader.chooseFile,Choose File,फाइल निवडा,machine
+fe:common:uploader.invalidType,"Please upload a valid image file (JPG, PNG, or WEBP).","कृपया योग्य फोटो फाइल अपलोड करा (JPG, PNG, किंवा WEBP).",machine
+fe:common:uploader.tooLarge,Image is too large. Please use an image under 10 MB.,फोटो खूप मोठा आहे. कृपया 10 MB पेक्षा लहान फोटो वापर.,machine
+fe:common:uploader.remove,Remove selected image,निवडलेला फोटो काढा,machine
+fe:common:camera.scannerTitle,FloraAI Scanner,FloraAI स्कॅनर,machine
+fe:common:camera.positionLeaf,Position leaf in frame,पान चौकटीत ठेवा,machine
+fe:common:camera.alignLeaf,Align the affected leaf within the frame,रोगट पान चौकटीच्या बरोबर मध्ये आणा,machine
+fe:common:camera.retake,Retake,पुन्हा फोटो काढा,machine
+fe:common:camera.gallery,Gallery,गॅलरी,machine
+fe:common:camera.flip,Flip Camera,कॅमेरा बदला,machine
+fe:common:camera.accessDenied,Camera Access Denied,कॅमेरा वापरण्याची परवानगी नाही,machine
+fe:common:camera.unavailable,Camera Unavailable,कॅमेरा उपलब्ध नाही,machine
+fe:common:camera.uploadInstead,Upload Image Instead,त्याऐवजी फोटो अपलोड करा,machine
+fe:common:camera.tryAgain,Try Again,पुन्हा प्रयत्न करा,machine
+fe:common:camera.usePhoto,Use this photo,हा फोटो वापरा,machine
+fe:common:camera.capture,Capture photo,फोटो काढा,machine
+fe:common:camera.close,Close camera,कॅमेरा बंद करा,machine
+fe:common:severity.low,Low,कमी,machine
+fe:common:severity.medium,Moderate,मध्यम,machine
+fe:common:severity.moderate,Moderate,मध्यम,machine
+fe:common:severity.high,High,जास्त,machine
+fe:common:severity.severe,Severe,गंभीर,machine
+fe:common:severity.critical,Critical,अतिगंभीर,machine
+fe:common:severity.none,None,काही नाही,machine
+fe:common:status.needsAttention,Needs Attention,लक्ष देणे गरजेचे आहे,machine
+fe:common:status.atRisk,At Risk,धोक्यात,machine
+fe:common:status.critical,Critical,अतिगंभीर,machine
+fe:common:status.diseaseDetected,DISEASE DETECTED,रोग आढळला आहे,machine
+fe:common:health.breakdown,HEALTH BREAKDOWN,आरोग्याची स्थिती,machine
+fe:common:health.indexDesc,"AI health index based on visible leaf condition, color, and disease pattern analysis.","पानांची दिसणारी स्थिती, रंग आणि रोगाच्या लक्षणांवर आधारित एआय (AI) आरोग्याचा निर्देशांक.",machine
+fe:common:health.leafHealth,Leaf Health,पानांचे आरोग्य,machine
+fe:common:health.colorHealth,Color Health,रंगाचे आरोग्य,machine
+fe:common:health.visibleDamage,Visible Damage,दिसणारे नुकसान,machine
+fe:common:health.diseaseRisk,Disease Risk,रोगाचा धोका,machine
+fe:common:chat.treatTitle,Treat Disease,रोगावर उपचार,machine
+fe:common:chat.treatQuestion,What is the immediate recommended organic or chemical treatment for this disease?,या रोगावर ताबडतोब कोणते सेंद्रिय किंवा रासायनिक उपचार करावेत?,machine
+fe:common:chat.irrigationRainTitle,Irrigation after rainfall,पावसानंतर पाणी देणे,machine
+fe:common:chat.irrigationRainQuestion,When should I irrigate after heavy rainfall and high soil moisture?,जास्त पाऊस पडल्यानंतर आणि जमिनीत ओलावा असताना पिकाला कधी पाणी द्यावे?,machine
+fe:common:chat.irrigationTitle,Irrigation timing,पाणी देण्याची वेळ,machine
+fe:common:chat.irrigationQuestion,When should I irrigate my crop after rainfall?,पावसानंतर पिकाला कधी पाणी द्यावे?,machine
+fe:common:chat.fertilizerTitle,Fertilizer & nutrition,खते आणि पोषण,machine
+fe:common:chat.fertilizerQuestion,How much urea should I apply during the tillering stage?,फुटी फुटण्याच्या काळात (टिलरिंग स्टेज) किती युरिया टाकावा?,machine
+fe:common:chat.yellowingTitle,Yellowing leaf diagnosis,पाने पिवळी पडण्याचे कारण,machine
+fe:common:chat.yellowingQuestion,Why are the lower crop leaves turning yellow?,पिकाची खालची पाने का पिवळी पडत आहेत?,machine
+fe:common:chat.dripTitle,Drip vs Flood methods,ठिबक विरुद्ध पाटपाani पद्धत,machine
+fe:common:chat.dripQuestion,What is the water savings and yield difference between drip and flood irrigation?,ठिबक आणि पाटपाण्याच्या पद्धतीत पाणी कसं वाचतं आणि उत्पादनात काय फरक पडतो?,machine
+fe:common:chat.simpler,Explain simpler,अजून सोप्या भाषेत सांगा,machine
+fe:common:chat.simplerQ,Can you explain this in simpler farmer terms with less technical jargon?,"हे शेतकऱ्यांच्या साध्या भाषेत, कठीण शब्द न वापरता सांगू शकाल का?",machine
+fe:common:chat.steps,Show steps,पायऱ्या दाखवा,machine
+fe:common:chat.stepsQ,What are the numbered practical action steps I should follow in order?,मी एकानंतर एक कोणत्या व्यवहारी गोष्टी करायला पाहिजेत?,machine
+fe:common:chat.organic,Organic option,सेंद्रिय पर्याय,machine
+fe:common:chat.organicQ,What organic and non-chemical remedies can I prepare at home?,मी घरीच कोणते सेंद्रिय आणि विना-रासायनिक उपाय करू शकतो?,machine
+fe:common:tag.leafNeck,🍃 Leaf & 🌾 Neck Node,🍃 पान आणि 🌾 कणीस/गाठ,machine
+fe:common:tag.flagEars,🍃 Flag Leaf & 🌾 Ears,🍃 शेंड्याचे पान आणि 🌾 कणसे,machine
+fe:common:tag.stalkPith,🎋 Stalk Pith,🎋 खोडाचा आतील भाग,machine
+fe:common:tag.leafVeins,🍃 Leaf Veins,🍃 पानांच्या शिरा,machine
+fe:common:care.water,Water,पाणी,machine
+fe:common:care.sunlight,Sunlight,सूर्यप्रकाश,machine
+fe:common:care.humidity,Humidity, हवेतील ओलावा,machine
+fe:common:care.soil,Soil,माती,machine
+fe:common:care.asNeeded,As needed, गरजेनुसार,machine
+fe:common:care.fullSun,Full sun,संपूर्ण सूर्यप्रकाश,machine
+fe:common:care.wellDraining,Well-draining, पाण्याचा योग्य निचरा होणारी,machine
+fe:common:common.copied,Copied,कॉपी केले,machine
+fe:common:common.copy,Copy,कॉपी करा,machine
+fe:common:common.helpful,Helpful,उपयुक्त,machine
+fe:common:chat.newChat,New Chat,नवीन चॅट,machine
+fe:common:common.advice,Advice,सल्ला,machine
+fe:common:common.healthScore,Health Score,आरोग्य स्कोअर,machine
+fe:common:common.view,View,पहा,machine
+fe:common:common.close,Close,बंद करा,machine
+fe:home:home.heroPill,FLORA AI — PLANT DISEASE INTELLIGENCE,फ्लोरा एआय — वनस्पती रोग माहिती,machine
+fe:home:home.heroTitle1,DIAGNOSE,तपासा,machine
+fe:home:home.heroTitle2,PLANT DISEASE,झाडांचे रोग,machine
+fe:home:home.heroTitle3,IN SECONDS,काही सेकंदांत,machine
+fe:home:home.heroSubtitle,"Instant AI crop disease detection, Grad-CAM visual evidence, and agricultural advice in your language.","झटपट एआय पीक रोग ओळख, ग्रॅड-CAM (Grad-CAM ध्यान नकाशा) पुरावा आणि तुमच्या भाषेत शेतीचा सल्ला मिळवा.",machine
+fe:home:home.scanNowFree,SCAN NOW — FREE,आता स्कॅन करा — मोफत,machine
+fe:home:home.badgeNoSignup,No signup required,साइन अप करण्याची गरज नाही,machine
+fe:home:home.badgeAnyDevice,Works on any device,कोणत्याही मोबाईलवर चालते,machine
+fe:home:home.badgeSpeed,Results in < 3 seconds,< ३ सेकंदांत निकाल,machine
+fe:home:home.statsDiseases,Diseases Detected,ओळखलेले रोग,machine
+fe:home:home.statsScans,Scans Analyzed,तपासलेले स्कॅन,machine
+fe:home:home.statsCrops,Supported Crops,समाविष्ट पिके,machine
+fe:home:home.statsAccuracy,AI Accuracy Rate,एआय अचूकता प्रमाण,machine
+fe:home:home.howItWorks,HOW IT WORKS,हे कसे काम करते,machine
+fe:home:home.threeSteps,THREE STEPS TO DIAGNOSIS,रोग तपासणीच्या तीन सोप्या पायऱ्या,machine
+fe:home:home.step1Title,Capture,फोटो काढा,machine
+fe:home:home.step1Desc,Upload or capture a clear photo of the infected leaf.,रोगट पानाचा साफ फोटो अपलोड करा किंवा काढा.,machine
+fe:home:home.step2Title,Analyze,तपासणी,machine
+fe:home:home.step2Desc,AI runs multi-class disease detection and generates heatmaps.,AI विविध रोगांची ओळख पटवून हीटमॅप तयार करतो.,machine
+fe:home:home.step3Title,Respond,उपाय,machine
+fe:home:home.step3Desc,"Receive diagnosis, risk score, treatment protocols and prevention tips.","निदान, धोक्याची पातळी, उपचारांची माहिती आणि बचावाचे सल्ले मिळवा.",machine
+fe:home:home.capabilities,CAPABILITIES,क्षमता,machine
+fe:home:home.labTools,LAB-GRADE TOOLS,लॅब लेव्हलची टूल्स,machine
+fe:home:home.featHeatmapTitle,Visual AI Heatmaps,व्हिज्युअल AI हीटमॅप्स,machine
+fe:home:home.featHeatmapDesc,Proprietary Grad-CAM visualization shows precisely where infection is located on the leaf.,Grad-CAM द्वारे पानावर रोग नेमका कुठे लागला आहे ते अचूक दिसते.,machine
+fe:home:home.featHeatmapAction,Run Scanner,स्कॅनर चालू करा,machine
+fe:home:home.featChatTitle,AI Expert Chat,AI तज्ज्ञांशी गप्पा,machine
+fe:home:home.featChatDesc,"Powered by Gemini AI, get instant expert-level answers on disease management and fertilizers.",जेमिनी AI च्या मदतीने रोग नियंत्रण आणि खतांबद्दल तज्ज्ञांसारखे अचूक उत्तर तात्काळ मिळवा.,machine
+fe:home:home.featChatAction,Open Chat,चॅट उघडा,machine
+fe:home:home.featTrackingTitle,Health Tracking,आरोग्य ट्रॅकिंग,machine
+fe:home:home.featTrackingDesc,Monitor recovery curves and plant health scores over time with progress analytics.,प्रगती विश्लेषणाच्या मदतीने पिकाची तब्येत सुधारत असल्याचे वेळोवेळी तपासा.,machine
+fe:home:home.featTrackingAction,My Plants,माझी झाडे,machine
+fe:home:home.featWeatherTitle,Weather Risk Intel,हवामान धोक्याची माहिती,machine
+fe:home:home.featWeatherDesc,Correlates local weather conditions with disease spread probability in real time.,थेट हवामानाची स्थिती आणि रोग पसरण्याची शक्यता यांची सांगड घालते.,machine
+fe:home:home.featWeatherAction,Check Risk,धोका तपासा,machine
+fe:home:home.featLibraryTitle,Disease Encyclopedia,रोग विश्वकोश,machine
+fe:home:home.featLibraryDesc,Comprehensive reference library of plant diseases with symptoms and treatment databases.,वनस्पतींच्या रोगांची लक्षणे आणि उपचारांची माहिती देणारी सर्वसमावेशक मार्गदर्शिका.,machine
+fe:home:home.featLibraryAction,Explore,तपासा,machine
+fe:home:home.featInstantTitle,Instant Diagnosis,झटपट निदान,machine
+fe:home:home.featInstantDesc,Diagnosis results in under 3 seconds. Upload from any device in the field.,३ सेकंदांपेक्षा कमी वेळेत रोगाचे निदान. शेतातून कोणत्याही डिव्हाइसवरून फोटो अपलोड करा.,machine
+fe:home:home.featInstantAction,Try Now,आता वापरून पहा,machine
+fe:home:home.edgePill,BIOSCAN EDGE,बायोस्कॅन एज,machine
+fe:home:home.edgeTitle,"BUILT FOR FARMS, LABS AND FIELDS",शेतात आणि लॅबमध्ये वापरण्यासाठी तयार,machine
+fe:home:home.edgeDesc,"BioScan works on any device — whether you are in a greenhouse, in a lab, or in the middle of a field with just your phone.","बायोस्कॅन कोणत्याही डिव्हाइसवर चालते — तुम्ही शेतात असाल, लॅबमध्ये असाल किंवा फोन घेऊन उभ्या पिकामध्ये असाल.",machine
+fe:home:home.deviceMobile,📱 Mobile,📱 मोबाईल,machine
+fe:home:home.deviceDesktop,💻 Desktop,💻 कॉम्प्युटर,machine
+fe:home:home.deviceLab,🔬 Lab Screen,🔬 लॅब स्क्रीन,machine
+fe:home:home.deviceField,🌾 Field Tablet,🌾 शेत टॅबलेट,machine
+fe:home:home.deviceDashboard,🖥 Dashboard,🖥 डॅशबोर्ड,machine
+fe:home:home.startScanning,Start Scanning,स्कॅन करायला सुरुवात करा,machine
+fe:home:home.askChat,Ask AI Chat,AI चॅटला विचारा,machine
+fe:home:home.faqPill,FAQ,नेहमी विचारले जाणारे प्रश्न (FAQ),machine
+fe:home:home.faqTitle,COMMON QUESTIONS,नेहमीचे प्रश्न,machine
+fe:home:home.faq1Q,Which crops are currently supported?,सध्या कोणकोणती पिके चालतात?,machine
+fe:home:home.faq1A,"BioScan currently supports Rice, Wheat, Sugarcane, and Cotton, with more crops being added regularly. Our AI model is trained on 127+ disease classes.","बायोस्कॅनमध्ये सध्या तांदूळ (भात), गहू, ऊस आणि कापूस चालतात, आणि लवकरच आणखी पिके जोडली जात आहेत. आमचा AI मॉडेल १२७+ पेक्षा जास्त रोगांवर तयार केला गेला आहे.",machine
+fe:home:home.faq2Q,How accurate is the disease detection?,रोगाची ओळख किती अचूक होते?,machine
+fe:home:home.faq2A,"Our AI model achieves 97.3% accuracy on our validation dataset. For best results, capture clear, well-lit photos.","आमचा AI मॉडेल ९७.३% अचूक निकाल देतो. चांगल्या परिणामांसाठी, स्पष्ट आणि उजेडात काढलेले फोटो घ्या.",machine
+fe:home:home.faq3Q,Is my data private?,माझा डेटा सुरक्षित आहे का?,machine
+fe:home:home.faq3A,Yes. Your uploaded images are processed securely and never shared with third parties.,हो. तुम्ही अपलोड केलेले फोटो सुरक्षितपणे तपासले जातात आणि कोणा इतर व्यक्तीला दिले जात नाहीत.,machine
+fe:home:home.faq4Q,Can I use BioScan offline?,मी बायोस्कॅन इंटरनेटशिवाय (ऑफलाइन) वापरू शकतो का?,machine
+fe:home:home.faq4A,Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline mode.,सध्या AI तपासासाठी बायोस्कॅनला इंटरनेट लागते. आम्ही विना-इंटरनेट चालणाऱ्या छोट्या मोडवर काम करत आहोत.,machine
+fe:home:home.faq5Q,What image format and size works best?,फोटोचे कोणते फॉरमॅट आणि साईज चांगले चालते?,machine
+fe:home:home.faq5A,"JPG, PNG, or WebP images up to 10MB. Capture the leaf against natural light at 2-4 megapixel resolution.","१०MB पर्यंतचे JPG, PNG, किंवा WebP फोटो चालतात. पानाचा फोटो नैसर्गिक उजेडात २-४ मेगापिक्सेलमध्ये काढा.",machine
+fe:home:home.ctaReady,READY TO SCAN YOUR PLANTS?,तुमच्या पिकांचे स्कॅन करायला तयार आहात?,machine
+fe:home:home.ctaDesc,Upload a photo right now — no signup needed. Get AI diagnosis in seconds.,आताच फोटो अपलोड करा — नाव नोंदवायची गरज नाही. काही सेकंदात AI द्वारे निदान मिळवा.,machine
+fe:home:home.ctaLaunch,Launch BioScanner,बायोस्कॅनर सुरू करा,machine
+fe:home:home.greeting,"Good morning, Farmer","नमस्कार, शेतकरी मित्र",reviewed
+fe:home:home.scanCta,Scan a leaf,पान स्कॅन करा,reviewed
+fe:home:home.diseaseRiskToday,Disease risk today,आजचा रोग धोका,reviewed
+fe:home:home.recentScans,Recent scans,अलीकडील स्कॅन,reviewed
+fe:library:library.title,Plant Disease Encyclopedia,पीक रोग माहितीकोश,machine
+fe:library:library.subtitle,Complete pathology reference for farmers with field symptoms and scientific treatment protocols.,शेतकऱ्यांसाठी शेतातील लक्षणे आणि वैज्ञानिक उपचारांसह संपूर्ण माहिती.,machine
+fe:library:library.searchPlaceholder,"Search by disease name, symptom, or pathogen…","रोगाचे नाव, लक्षण किंवा जंतू शोध रा...",machine
+fe:library:library.allCrops,All Crops,सर्व पिके,machine
+fe:library:library.affectedOrgans,Affected Organs:,बाधित भाग:,machine
+fe:library:library.noMatches,No matching diseases found,कोणताही जुळणारा रोग सापडला नाही,machine
+fe:library:library.viewProtocol,View Treatment Protocol,उपचाराची माहिती पहा,machine
+fe:library:library.back,Back to Encyclopedia,माहितीकोशाकडे परत जा,machine
+fe:library:library.scanForThis,Scan leaf for this disease,या रोगासाठी पान स्कॅन करा,machine
+fe:library:library.overview,Disease Overview,रोगाची थोडक्यात माहिती,machine
+fe:library:library.whereToLook,Where to look on plant,झाडावर कुठे बघायचे,machine
+fe:library:library.favors,Conditions that favor infection,रोग वाढण्यासाठी अनुकूल वातावरण,machine
+fe:library:library.spreads,How it spreads,रोग कसा पसरतो,machine
+fe:library:library.organic,Organic / Biocontrol,सेंद्रिय / जैविक उपाय,machine
+fe:library:library.chemical,Chemical / Fungicide Protocol,रासायनिक / बुरशीनाशक उपचार,machine
+fe:library:library.profilesCount,Disease Profiles · 4 Crops,रोगांची माहिती · 4 पिके,machine
+fe:library:library.diseasesCount,Diseases,रोग,machine
+fe:library:library.noMatchesTitle,No Disease Matches Found,कोणताही रोग सापडला नाही,machine
+fe:library:library.noMatchesDesc,No diseases matched your search for the selected filter. Try adjusting your query or resetting filters.,तुम्ही शोधलेल्या किंवा निवडलेल्या फिल्टरनुसार कोणताही रोग जुळला नाही. कृपया दुसरा शब्द टाका किंवा फिल्टर बदला.,machine
+fe:library:library.clearFilters,Clear Filters,फिल्टर काढा,machine
+fe:library:library.impactSeverity,Impact Severity,रोगाची तीव्रता,machine
+fe:library:library.anatomyFocus,Anatomy focus:,झाडाचा भाग:,machine
+fe:library:library.riceDesc,"Staple cereal vulnerable to blast fungi, brown spots, and leaf miner beetles.","करपा / ब्लास्ट रोग, तपकिरी ठिपके आणि पाने खाणाऱ्या भुंगेऱ्यांमुळे धोक्यात येणारे मुख्य अन्नधान्य पीक.",machine
+fe:library:library.riceParts,"Leaf Blade, Sheath, Neck Node & Grain","पानाची पाती, शिफ, कणीस आणि खोडाची गाठ",machine
+fe:library:library.wheatDesc,Cereal crop prone to stripe/brown rust fungi and septoria leaf blotch.,"तांबेरा, तपकिरी तांबेरा आणि सेप्टोरिया पानांच्या रोगास बळी पडणारे पीक.",machine
+fe:library:library.wheatParts,"Flag Leaf, Upper Canopy & Spike Ears","झेंडा पान, वरची पाने आणि कणसे",machine
+fe:library:library.sugarcaneDesc,Perennial cash crop susceptible to red rot stalk decay and mosaic virus.,तांबडे कूज आणि मोझॅक विषाणूचा धोका असणारे नगदी पीक.,machine
+fe:library:library.sugarcaneParts,"Internal Stalk, Stem Internodes & Whorl Leaves","खोडाचा आतील भाग, कांड्या आणि शेंड्याची पाने",machine
+fe:library:library.cottonDesc,Fiber crop challenged by bacterial blight lesions and whitefly curl virus.,जिवाणूजन्य करपा आणि पांढरी माशी यांच्या प्रादुर्भावाचा धोका असलेले कापूस पीक.,machine
+fe:library:library.cottonParts,"Angular Leaf Veins, Main Stem & Bolls","पानांच्या शिरा, मुख्य खोड आणि बोंडे",machine
+fe:plants:crop.rice,Rice,भात,machine
+fe:plants:crop.wheat,Wheat,गहू,machine
+fe:plants:crop.sugarcane,Sugarcane,ऊस,machine
+fe:plants:crop.cotton,Cotton,कापूस,machine
+fe:plants:plants.title,Active Crop Health Registry,पीक आरोग्य नोंदणी,machine
+fe:plants:plants.badge,Crop Monitoring,पीक पाहणी,machine
+fe:plants:plants.registerNew,Register New Specimen,नवीन पीक नोंदवा,machine
+fe:plants:plants.healthySpecimens,Healthy Specimens,निरोगी झाडे,machine
+fe:plants:plants.attentionRequired,Attention Required,लक्ष देणे गरजेचे,machine
+fe:plants:plants.highRisk,High Pathogen Risk,रोगाचा मोठा धोका,machine
+fe:plants:plants.allCrops,All Crops,सर्व पिके,machine
+fe:plants:plants.healthy,Healthy,निरोगी,machine
+fe:plants:plants.needsAttention,Needs Attention,लक्ष देणे गरजेचे,machine
+fe:plants:plants.searchPlaceholder,Search plants by name or species…,झाडाचे नाव किंवा जात शोध े...,machine
+fe:plants:plants.empty,No monitored plants found,कोणतीही निरीक्षण केलेली झाडे आढळली नाहीत,machine
+fe:plants:plants.emptyDesc,Start by scanning a leaf in the scanner to monitor recovery.,झाड बरे होत आहे का हे पाहण्यासाठी स्कॅनरमध्ये पानाचा फोटो स्कॅन करा.,machine
+fe:plants:plants.scanFirst,Scan Plant Now,आत्ताच झाड स्कॅन करा,machine
+fe:profile:profile.title,Settings & Farm Profile,सेटिंग्ज आणि शेती प्रोफाईल,machine
+fe:profile:profile.verified,VERIFIED,व्हेरिफाय केलेले,machine
+fe:profile:profile.pro,PRO SPECIALIST,प्रो तज्ज्ञ,machine
+fe:profile:profile.notifications,NOTIFICATIONS,सूचना (नोटिफिकेशन्स),machine
+fe:profile:profile.diseaseAlerts,Disease Alerts,रोगाचे इशारे,machine
+fe:profile:profile.diseaseAlertsDesc,Get notified when crop infection risk is high,पिकावर रोगाचा धोका जास्त असताना सूचना मिळवा,machine
+fe:profile:profile.weeklyReports,Weekly Reports,आवडवडीचे अहवाल,machine
+fe:profile:profile.weeklyReportsDesc,Summary of your plant health and treatments,तुमच्या पिकाचे आरोग्य आणि उपचारांचा गोषवारा,machine
+fe:profile:profile.preferences,PREFERENCES,पसंतीचे पर्याय,machine
+fe:profile:profile.language,Language,भाषा,machine
+fe:profile:profile.units,Units,मापे,machine
+fe:profile:profile.unitsVal,"Metric (°C, mm, km/h)","मेट्रिक मापे (°C, mm, km/h)",machine
+fe:profile:profile.weatherOverride,Manual Weather Data,स्वतः हवामानाची माहिती टाका,machine
+fe:profile:profile.manualActive,MANUAL ACTIVE,स्वतः टाकलेली माहिती चालू आहे,machine
+fe:profile:profile.autoGps,AUTO GPS,ऑटो जीपीएस,machine
+fe:profile:profile.weatherTitle,Agro-Climatic Weather Override,हवामानाची माहिती स्वतः बदला,machine
+fe:profile:profile.city,City / Village,शहर / गाव,machine
+fe:profile:profile.state,State / Region,राज्य / परिसर,machine
+fe:profile:profile.temp,Temperature (°C),तापमान (°C),machine
+fe:profile:profile.humidity,Relative Humidity (%),आर्द्रता (%),machine
+fe:profile:profile.rainfall,Rainfall (24h mm),पाऊस (२४ तास मिमी),machine
+fe:profile:profile.wind,Wind Speed (km/h),वाऱ्याचा वेग (किमी/तास),machine
+fe:profile:profile.condition,Weather Condition,हवामानाची स्थिती,machine
+fe:profile:profile.riskLevel,Environmental Risk Level,पर्यावरणाचा धोक्याचा स्तर,machine
+fe:profile:profile.riskReason,Risk Assessment Explanation,धोका मूल्यांकनाचे स्पष्टीकरण,machine
+fe:profile:profile.applyWeather,Apply Weather Data,हवामानाचा डेटा लागू करा,machine
+fe:profile:profile.resetGps,Reset to Live GPS,लाईव्ह GPS वर रीसेट करा,machine
+fe:profile:profile.savedSuccess,Manual weather data saved and applied across the entire app!,हवामानाचा मॅन्युअल डेटा सेव्ह केला आणि संपूर्ण अ‍ॅपमध्ये लागू केला!,machine
+fe:profile:profile.resetSuccess,Reset to live GPS sensors and Open-Meteo weather data!,लाईव्ह GPS सेन्सर्स आणि ओपन-मेटिओ हवामान डेटामध्ये रीसेट केले!,machine
+fe:profile:profile.privacy,PRIVACY & DATA,गोपनीयता आणि डेटा,machine
+fe:profile:profile.dataSharing,Data Sharing,डेटा शेअरिंग,machine
+fe:profile:profile.dataSharingDesc,Help improve agronomic AI models,शेतीविषयक AI मॉडेल सुधारण्यास मदत करा,machine
+fe:profile:profile.privacyPolicy,Privacy Policy,गोपनीयता धोरण,machine
+fe:profile:profile.deleteData,Delete My Data,माझा डेटा डिलीट करा,machine
+fe:profile:profile.support,SUPPORT,सपोर्ट,machine
+fe:profile:profile.helpFaq,Help & FAQ,मदत आणि वारंवार विचारले जाणारे प्रश्न,machine
+fe:profile:profile.contactSupport,Contact Agronomist Support,तज्ज्ञ कृषी अधिकाऱ्यांच्या सपोर्टशी संपर्क साधा,machine
+fe:profile:profile.signOut,SIGN OUT,बाहेर पडा,machine
+fe:profile:profile.footerText,FLORA AI • PLANT DISEASE INTELLIGENCE PLATFORM,फ्लोरा AI • वनस्पती रोग बुद्धिमत्ता प्लॅटफॉर्म,machine
+fe:scan:scan.workspace,DIAGNOSTIC WORKSPACE,निदान कार्यक्षेत्र,machine
+fe:scan:scan.title,Plant Disease Scanner,वनस्पती रोग स्कॅनर,reviewed
+fe:scan:scan.subtitle,Upload a leaf photo to get instant AI-powered pathology and Grad-CAM diagnosis.,पानाचा फोटो अपलोड करा आणि त्वरित AI निदान मिळवा.,reviewed
+fe:scan:scan.reset,Reset,रीसेट करा,machine
+fe:scan:scan.selectCrop,Select Crop,पीक निवडा,reviewed
+fe:scan:scan.uploadHint,Upload leaf image,पानाची प्रतिमा अपलोड करा,reviewed
+fe:scan:scan.diagnosing,Diagnosing your plant…,तुमच्या झाडाचे निदान होत आहे…,reviewed
+fe:scan:scan.diagnoseCta,Diagnose Plant Health,झाडाच्या आरोग्याचे निदान करा,machine
+fe:scan:scan.ready,Ready for Diagnostics,निदानासाठी तयार,machine
+fe:scan:scan.aiDetection,AI Disease Detection,AI रोग ओळख,machine
+fe:scan:scan.visualHeatmap,Visual Heatmap,व्हिज्युअल हीटमॅप,machine
+fe:scan:scan.complete,Diagnosis Complete,निदान पूर्ण झाले,machine
+fe:scan:scan.severity,Severity,तीव्रता,machine
+fe:scan:scan.retake,Retake,परत फोटो काढा,machine
+fe:scan:scan.flip,Flip Camera,कॅमेरा फिरवा,machine
+fe:scan:scan.gallery,Gallery,गॅलरी,machine
+fe:scan:scan.tipLight,Good light,चांगला प्रकाश,reviewed
+fe:scan:scan.tipOneLeaf,One leaf,एक पान,reviewed
+fe:scan:scan.tipHold,Hold steady,स्थिर धरा,reviewed
+fe:scan:scan.trySample,Try a sample,नमुना तपासा,reviewed
+fe:scan:scan.healthIndex,Health Index,आरोग्य निर्देशांक,machine
+fe:scan:scan.diseaseProbabilities,Disease Probabilities,रोगाची शक्यता,machine
+fe:scan:scan.saveToPlants,Save to My Plants,माझ्या झाडांमध्ये जतन करा,machine
+fe:scan:scan.scanAnother,Scan Another,दुसरे स्कॅन करा,machine
+fe:scan:scan.environmentalFactors,Environmental & Moisture Factors,पर्यावरण आणि ओलावा घटक,machine
+be:disease:bacterial_leaf_blight:display,Bacterial Leaf Blight,जिवाणूजन्य पानांचा करपा,machine
+be:disease:bacterial_leaf_blight:crop,Rice,भात,machine
+be:disease:bacterial_leaf_blight:severity,High,जास्त,machine
+be:disease:bacterial_leaf_blight:description,A serious bacterial disease caused by Xanthomonas oryzae pv. oryzae. Leaves show water-soaked margins that turn yellow and eventually white.,"झॅंथोमोनस ओरिजाए पीव्ही. ओरिजाए मुळे होणारा एक गंभीर जिवाणूजन्य रोग. पानांच्या कडांवर पाणी साचल्यासारखे दिसते, जे पिवळे आणि शेवटी पांढरे होतात.",machine
+be:disease:bacterial_leaf_blight:fav:temperature,25–35°C,२५–३५°C,machine
+be:disease:bacterial_leaf_blight:fav:humidity,>80%,>८०%,machine
+be:disease:bacterial_leaf_blight:fav:rainfall,Heavy (storm/flooding),जास्त (वादळ/पाणथळ जमीन),machine
+be:disease:brown_spot:display,Brown Spot,तपकिरी ठिपका,machine
+be:disease:brown_spot:crop,Rice,भात,machine
+be:disease:brown_spot:severity,Medium,मध्यम,machine
+be:disease:brown_spot:description,Fungal disease caused by Cochliobolus miyabeanus. Oval to circular brown lesions with yellow halos appear on leaves.,कोक्लिओबोलस मियाबियानस मुळे होणारा बुरशीजन्य रोग. पानांवर पिवळ्या वर्तुळासह लंबगोलाकार ते गोलाकार तपकिरी डाग पडतात.,machine
+be:disease:brown_spot:fav:temperature,22–32°C,२२–३२°C,machine
+be:disease:brown_spot:fav:humidity,75–90%,७५–९०%,machine
+be:disease:brown_spot:fav:rainfall,Moderate,मध्यम,machine
+be:disease:healthy:display,Healthy,निरोगी,machine
+be:disease:healthy:crop,All,सर्व,machine
+be:disease:healthy:severity,None,काहीही नाही,machine
+be:disease:healthy:description,The leaf appears healthy with no visible disease symptoms.,पान निरोगी दिसते आहे आणि त्यावर रोगाची कोणतीही लक्षणे दिसत नाहीत.,machine
+be:disease:healthy:fav:temperature,Any,कोणतेही,machine
+be:disease:healthy:fav:humidity,Any,कोणतीही,machine
+be:disease:healthy:fav:rainfall,Regular,नियमित,machine
+be:disease:leaf_blast:display,Leaf Blast,पानांचा करपा / ब्लास्ट रोग,machine
+be:disease:leaf_blast:crop,Rice,भात,machine
+be:disease:leaf_blast:severity,Very High,खूप जास्त,machine
+be:disease:leaf_blast:description,"One of the most destructive rice diseases, caused by Magnaporthe oryzae. Diamond-shaped lesions with grey centres and brown borders appear on leaves.","मॅग्नापोर्टे ओरिझाई (Magnaporthe oryzae) मुळे होणारा हा धान्याचा एक अत्यंत भयानक रोग आहे. पानांवर γ-आकाराचे किंवा हिऱ्याच्या आकाराचे डाग पडतात, ज्यांचे मधले भाग राखाडी आणि कडा तपकिरी असतात.",machine
+be:disease:leaf_blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:leaf_blast:fav:humidity,>90%,>90%,machine
+be:disease:leaf_blast:fav:rainfall,Frequent light rain/dew,सतत हलका पाऊस/दव,machine
+be:disease:leaf_scald:display,Leaf Scald,पानांची स्कॅल्ड (करपा),machine
+be:disease:leaf_scald:crop,Rice,भात,machine
+be:disease:leaf_scald:severity,Medium,मध्यम,machine
+be:disease:leaf_scald:description,Caused by Microdochium oryzae. Alternating light and dark brown bands appear along leaf margins creating a 'zonate' pattern.,मायक्रोडोचियम ओरिझाई (Microdochium oryzae) मुळे हा रोग होतो. पानांच्या कडांवर आलटून-पालटून फिकट आणि गडद तपकिरी पट्टे तयार होतात.,machine
+be:disease:leaf_scald:fav:temperature,25–30°C,25–30°C,machine
+be:disease:leaf_scald:fav:humidity,>80%,>80%,machine
+be:disease:leaf_scald:fav:rainfall,Moderate to heavy,मध्यम ते मुसळधार,machine
+be:disease:sheath_blight:display,Sheath Blight,खोडाचा करपा (शीथ ब्लाइट),machine
+be:disease:sheath_blight:crop,Rice,भात,machine
+be:disease:sheath_blight:severity,High,जास्त,machine
+be:disease:sheath_blight:description,"Caused by Rhizoctonia solani. Oval greenish-grey lesions with dark brown borders appear on leaf sheaths, spreading to leaves.","ऱ्हिजोक्टोनिया सोलानीमुळे होतो. पानांच्या शीतावर गडद तपकिरी कडा असलेले अंडाकृती हिरवे-पांढरट डाग पडतात, जे पानांवर पसरतात.",machine
+be:disease:sheath_blight:fav:temperature,28–32°C,२८–३२°C,machine
+be:disease:sheath_blight:fav:humidity,>90%,>९०%,machine
+be:disease:sheath_blight:fav:rainfall,Heavy flooding,भरपूर पाणी साचणे,machine
+be:disease:aphid:display,Aphid Infestation,मावा प्रादुर्भाव,machine
+be:disease:aphid:crop,Wheat,गहू,machine
+be:disease:aphid:severity,Medium,मध्यम,machine
+be:disease:aphid:description,"Small soft-bodied insects that cluster on leaves and stems, sucking plant sap and potentially transmitting viruses.","लहान मऊ शरीराचे कीटक जे पाने आणि खोडावर गोळा होतात, झाडाचा रस शोषून घेतात आणि विषाणू पसरवू शकतात.",machine
+be:disease:aphid:fav:temperature,15–25°C,१५–२५°C,machine
+be:disease:aphid:fav:humidity,<60%,<६०%,machine
+be:disease:aphid:fav:rainfall,Low,कमी,machine
+be:disease:black_rust:display,Black Rust (Stem Rust),काळा तांबेरा (खोड तांबेरा),machine
+be:disease:black_rust:crop,Wheat,गहू,machine
+be:disease:black_rust:severity,Very High,खूप जास्त,machine
+be:disease:black_rust:description,Caused by Puccinia graminis. Produces brick-red to black pustules on stems and leaves. Can devastate entire crops.,पुक्सिनिया ग्रॅमिनिसमुळे होतो. खोडावर आणि पानांवर विटांसारख्या लाल ते काळ्या रंगाच्या फोड्या येतात. संपूर्ण पीक उद्ध्वस्त करू शकते.,machine
+be:disease:black_rust:fav:temperature,15–30°C,१५–३०°C,machine
+be:disease:black_rust:fav:humidity,>80%,>८०%,machine
+be:disease:black_rust:fav:rainfall,Moderate with dew,दिव्यासह मध्यम पाऊस,machine
+be:disease:blast:display,Blast (Rice Paddy),करपा / ब्लास्ट रोग (तांदूळ शेती),machine
+be:disease:blast:crop,Rice,तांदूळ,machine
+be:disease:blast:severity,Very High,खूप जास्त,machine
+be:disease:blast:description,Magnaporthe oryzae. Diamond-shaped lesions on leaves. Can also affect panicles (panicle blast).,मॅग्नापोर्टे ओरिझाई (Magnaporthe oryzae). पानांवर हिऱ्याच्या आकाराचे डाग पडतात. पिकाच्या कणसांवरही प्रादुर्भाव होऊ शकतो (कणसाचा करपा / ब्लास्ट रोग).,machine
+be:disease:blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:blast:fav:humidity,>90%,>90%,machine
+be:disease:blast:fav:rainfall,Frequent dew/light rain,सतत दव / हलका पाऊस,machine
+be:disease:brown_rust:display,Brown Rust (Leaf Rust),तपकिरी तांबेरा (पानाचा तांबेरा),machine
+be:disease:brown_rust:crop,Wheat,गहू,machine
+be:disease:brown_rust:severity,High,जास्त,machine
+be:disease:brown_rust:description,Caused by Puccinia triticina. Orange-brown pustules on upper leaf surface. Very common and widespread.,पुक्सिनिया टिटिसिना (Puccinia triticina) मुळे होतो. पानांच्या वरच्या बाजूला केशरी-तपकिरी रंगाचे फोड येतात. हा रोग खूप सामान्य आणि पसरणारा आहे.,machine
+be:disease:brown_rust:fav:temperature,15–22°C,15–22°C,machine
+be:disease:brown_rust:fav:humidity,>70%,>70%,machine
+be:disease:brown_rust:fav:rainfall,Light rain/dew,हलका पाऊस / दव,machine
+be:disease:common_root_rot:display,Common Root Rot,साधारण मूळकुज (रूट रॉट),machine
+be:disease:common_root_rot:crop,Wheat,गहू,machine
+be:disease:common_root_rot:severity,Medium,मध्यम,machine
+be:disease:common_root_rot:description,Caused by Bipolaris sorokiniana. Brown to black discolouration of crown and root tissues.,बायपोलारिस सोरोकिनियाना (Bipolaris sorokiniana) मुळे होतो. मुळांचा आणि खोडाचा भाग तपकिरी ते काळा पडतो.,machine
+be:disease:common_root_rot:fav:temperature,18–28°C,18–28°C,machine
+be:disease:common_root_rot:fav:humidity,Low soil moisture,मातीतील कमी ओलावा,machine
+be:disease:common_root_rot:fav:rainfall,Insufficient,अपुरा पाऊस,machine
+be:disease:fusarium_head_blight:display,Fusarium Head Blight (Scab),फ्युझॅरियम हेडब्लाइट (स्कॅब),machine
+be:disease:fusarium_head_blight:crop,Wheat,गहू,machine
+be:disease:fusarium_head_blight:severity,Very High,खूप जास्त,machine
+be:disease:fusarium_head_blight:description,Caused by Fusarium graminearum. Bleached spikelets with pink mold. Produces mycotoxins (DON) that contaminate grain.,फ्युसेरियम ग्रॅमिनियममुळे होतो. पांढरे पडलेले कणीस ज्यावर गुलाबी बुरशी असते. विषारी घटक (DON) तयार होतात ज्यामुळे दाणे खराब होतात.,machine
+be:disease:fusarium_head_blight:fav:temperature,25–30°C,२५–३०°C,machine
+be:disease:fusarium_head_blight:fav:humidity,>90%,>९०%,machine
+be:disease:fusarium_head_blight:fav:rainfall,Rain during flowering,फुलोऱ्याच्या काळात पाऊस,machine
+be:disease:leaf_blight:display,Leaf Blight,पानांचा करपा,machine
+be:disease:leaf_blight:crop,Wheat,गहू,machine
+be:disease:leaf_blight:severity,Medium,मध्यम,machine
+be:disease:leaf_blight:description,Tan-brown lesions with yellow borders on older leaves.,जुन्या पानांवर पिवळ्या कडा असलेले तांबूस-तपकिरी डाग.,machine
+be:disease:leaf_blight:fav:temperature,20–30°C,२०–३०°C,machine
+be:disease:leaf_blight:fav:humidity,>70%,>७०%,machine
+be:disease:leaf_blight:fav:rainfall,Moderate,मध्यम,machine
+be:disease:mildew:display,Powdery Mildew,भुरी रोग,machine
+be:disease:mildew:crop,Wheat,गहू,machine
+be:disease:mildew:severity,Medium,मध्यम,machine
+be:disease:mildew:description,"White powdery coating on leaves, caused by Blumeria graminis. Reduces photosynthesis.","पानांवर पांढरा पावडरसारखा थर, जो ब्लुमेरिया ग्रॅमिनिसमुळे होतो. प्रकाशसंश्लेषण कमी होते.",machine
+be:disease:mildew:fav:temperature,15–22°C,१५–२२°C,machine
+be:disease:mildew:fav:humidity,60–80%,६०–८०%,machine
+be:disease:mildew:fav:rainfall,Low to moderate,कमी ते मध्यम,machine
+be:disease:mite:display,Mite Infestation,कोळी प्रादुर्भाव,machine
+be:disease:mite:crop,Wheat,गहू,machine
+be:disease:mite:severity,Low,कमी,machine
+be:disease:mite:description,Tiny arachnids causing silvery stippling and bronzing of leaves.,"लहान कोळी कीटक, ज्यामुळं पानांवर पांढुरके ठिपके पडतात आणि पाने कांस्य रंगाची होतात.",machine
+be:disease:mite:fav:temperature,>30°C,>30°C,machine
+be:disease:mite:fav:humidity,<50%,<50%,machine
+be:disease:mite:fav:rainfall,Very low,खूप कमी,machine
+be:disease:septoria:display,Septoria Leaf Blotch,सेप्टोरिया पानांचे ठिपके (लीफ ब्लॉच),machine
+be:disease:septoria:crop,Wheat,गहू,machine
+be:disease:septoria:severity,High,जास्त,machine
+be:disease:septoria:description,Caused by Zymoseptoria tritici. Pale green-yellow blotches with brown necrosis and pycnidia on leaves.,झायमोसेप्टोरिया ट्रीटीसी (Zymoseptoria tritici) मुळे होते. पानांवर फिकट हिरवे-पिवळे डाग पडून नंतर पाने सुकतात आणि त्यावर काळे टिपुस दिसतात.,machine
+be:disease:septoria:fav:temperature,10–20°C,10–20°C,machine
+be:disease:septoria:fav:humidity,>80%,>80%,machine
+be:disease:septoria:fav:rainfall,Frequent rain,सतत पाऊस,machine
+be:disease:smut:display,Loose Smut,कण्या (लुज स्मट),machine
+be:disease:smut:crop,Wheat,गहू,machine
+be:disease:smut:severity,Medium,मध्यम,machine
+be:disease:smut:description,Caused by Ustilago tritici. Spikes replaced by black powdery masses of teliospores.,उस्टिलागो ट्रीटीसी (Ustilago tritici) मुळे होते. पिकाच्या कणसांचे काळ्या पावडरसारख्या बुरशीमध्ये रूपांतर होते.,machine
+be:disease:smut:fav:temperature,16–22°C,16–22°C,machine
+be:disease:smut:fav:humidity,>60%,>60%,machine
+be:disease:smut:fav:rainfall,Moderate during anthesis,फुलोऱ्याच्या काळात मध्यम पाऊस,machine
+be:disease:stem_fly:display,Stem Fly,खोड माशी,machine
+be:disease:stem_fly:crop,Wheat,गहू,machine
+be:disease:stem_fly:severity,Medium,मध्यम,machine
+be:disease:stem_fly:description,Larval mining inside wheat stems causing 'dead heart' symptoms in young plants.,"गव्हाच्या खोडात अळ्या भुसभुशीत करून खातात, ज्यामुळे लहान रोपांमध्ये 'डेड हार्ट' (कोरडे शेंडे) लक्षणे दिसतात.",machine
+be:disease:stem_fly:fav:temperature,15–20°C,15–20°C,machine
+be:disease:stem_fly:fav:humidity,Any,कोणतीही,machine
+be:disease:stem_fly:fav:rainfall,Low to moderate,कमी ते मध्यम,machine
+be:disease:tan_spot:display,Tan Spot,टॅन स्पॉट,machine
+be:disease:tan_spot:crop,Wheat,गहू,machine
+be:disease:tan_spot:severity,Medium,मध्यम,machine
+be:disease:tan_spot:description,Caused by Pyrenophora tritici-repentis. Tan-colored oval lesions with yellow borders.,पायरिनोफोरा ट्रीटीसी-रिपेन्टीसमुळे होतो. पिवळ्या कडा असलेले तांबूस-तपकिरी अंडाकृती डाग पडतात.,machine
+be:disease:tan_spot:fav:temperature,20–28°C,20–28°C,machine
+be:disease:tan_spot:fav:humidity,>70%,>70%,machine
+be:disease:tan_spot:fav:rainfall,Moderate,मध्यम,machine
+be:disease:yellow_rust:display,Yellow Rust (Stripe Rust),पिवळा तांबेरा (स्ट्राइप रस्ट),machine
+be:disease:yellow_rust:crop,Wheat,गहू,machine
+be:disease:yellow_rust:severity,Very High,खूप जास्त,machine
+be:disease:yellow_rust:description,Caused by Puccinia striiformis. Bright yellow pustules in stripes along leaf veins. Very destructive in cool climates.,प्युक्सिनिया स्ट्रायफॉर्मिसमुळे होतो. पानांच्या नसांच्या रेषेत चमकदार पिवळे पुटकुळ्यासारखे डाग पडतात. थंड हवामानात खूप नुकसान होते.,machine
+be:disease:yellow_rust:fav:temperature,10–15°C,10–15°C,machine
+be:disease:yellow_rust:fav:humidity,>80%,>80%,machine
+be:disease:yellow_rust:fav:rainfall,Dew / light rain,दव / हलका पाऊस,machine
+be:disease:mosaic_disease:display,Mosaic Disease,मोझॅक रोग,machine
+be:disease:mosaic_disease:crop,Sugarcane,ऊस,machine
+be:disease:mosaic_disease:severity,High,जास्त,machine
+be:disease:mosaic_disease:description,Caused by Sugarcane Mosaic Virus (SCMV). Mosaic or mottled discolouration of leaves — alternating light and dark green patches.,सुगारकेन मोझॅक व्हायरस (SCMV) मुळे होतो. पानांवर मोझॅक किंवा पट्टेदार रंग उडणे - फिकट आणि गडद हिरवे डाग आलटून-पालटून दिसतात.,machine
+be:disease:mosaic_disease:fav:temperature,25–30°C,25–30°C,machine
+be:disease:mosaic_disease:fav:humidity,Moderate,मध्यम,machine
+be:disease:mosaic_disease:fav:rainfall,Any,कोणतीही,machine
+be:disease:rust:display,Sugarcane Rust,उसाचा तांबेरा,machine
+be:disease:rust:crop,Sugarcane,ऊस,machine
+be:disease:rust:severity,Medium,मध्यम,machine
+be:disease:rust:description,Caused by Puccinia melanocephala. Orange-brown pustules on leaf undersides causing premature leaf death.,"प्युक्सिनिया मेलॅनोसेफला (Puccinia melanocephala) मुळे होतो. पानाच्या खालच्या बाजूला नारिंगी-तपकिरी फोड येतात, ज्यामुळे पाने वेळेआधीच सुकतात.",machine
+be:disease:rust:fav:temperature,24–28°C,24–28°C,machine
+be:disease:rust:fav:humidity,>75%,>75%,machine
+be:disease:rust:fav:rainfall,Moderate,मध्यम,machine
+be:disease:bacterial_blight:display,Bacterial Blight,जिवाणूजन्य करपा,machine
+be:disease:bacterial_blight:crop,Cotton,कापूस,machine
+be:disease:bacterial_blight:severity,High,जास्त,machine
+be:disease:bacterial_blight:description,"Caused by Xanthomonas axonopodis pv. malvacearum. Angular water-soaked lesions on leaves, black cankers on stems.","झॅंथोमोनस ॲक्सोनोपोडिस पीव्ही. म्हाल्व्हासेरम (Xanthomonas axonopodis pv. malvacearum) मुळे होतो. पानांवर कोनीय पाणी साचल्यासारखे डाग, खोडावर काळे फोड.",machine
+be:disease:bacterial_blight:fav:temperature,28–35°C,28–35°C,machine
+be:disease:bacterial_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_blight:fav:rainfall,Heavy,जास्त,machine
+be:disease:alternaria_leaf_spot:display,Alternaria Leaf Spot,अल्टरनेरिया पानावर डाग,machine
+be:disease:alternaria_leaf_spot:crop,Cotton,कापूस,machine
+be:disease:alternaria_leaf_spot:severity,Medium,मध्यम,machine
+be:disease:alternaria_leaf_spot:description,Caused by Alternaria macrospora. Dark brown to black circular spots with concentric rings on leaves.,"अल्टरनेरिया मॅक्रोस्पोरामुळे होते. पानांवर गोल, गडद तपकिरी ते काळे डाग पडतात ज्यांच्यावर वर्तुळाकार रेषा असतात.",machine
+be:disease:alternaria_leaf_spot:fav:temperature,25–30°C,25–30°C,machine
+be:disease:alternaria_leaf_spot:fav:humidity,>75%,>75%,machine
+be:disease:alternaria_leaf_spot:fav:rainfall,Moderate to heavy,मध्यम ते जास्त,machine
+be:disease:hispa:display,Rice Hispa,धान्याची हिस्पा कीड,machine
+be:disease:hispa:crop,Rice,भात,machine
+be:disease:hispa:severity,Medium,मध्यम,machine
+be:disease:hispa:description,Caused by Dicladispa armigera (leaf beetle). Adults scrape leaf surfaces; larvae mine inside leaves creating white tunnels.,डिक्लॅडिस्पा आर्मिगेरा (पान खाणारा भुंगा) मुळे होते. प्रौढ कीटक पानांचा वरचा भाग खातात; अळ्या पानांच्या आत खाऊन पांढरे बोगदे तयार करतात.,machine
+be:disease:hispa:fav:temperature,25–35°C,25–35°C,machine
+be:disease:hispa:fav:humidity,>75%,>75%,machine
+be:disease:hispa:fav:rainfall,Moderate,मध्यम,machine
+be:disease:tungro:display,Tungro Virus Disease,तुंग्रो विषाणू रोग,machine
+be:disease:tungro:crop,Rice,भात,machine
+be:disease:tungro:severity,Very High,खूप जास्त,machine
+be:disease:tungro:description,Caused by two viruses (RTBV + RTSV) transmitted by green leafhoppers. Leaves turn yellow-orange. Stunted plants with reduced tillering.,हिरव्या तुडतुड्यांद्वारे पसरवल्या जाणाऱ्या दोन विषाणूंमुळे (RTBV + RTSV) होतो. पाने पिवळी-केशरी होतात. झाडे बुटकी होतात आणि फुटवे कमी येतात.,machine
+be:disease:tungro:fav:temperature,25–30°C,25–30°C,machine
+be:disease:tungro:fav:humidity,>80%,>80%,machine
+be:disease:tungro:fav:rainfall,Moderate,मध्यम,machine
+be:disease:dead_heart:display,Dead Heart (Stem Borer),डेड हार्ट (खोडकिडा),machine
+be:disease:dead_heart:crop,Rice,भात,machine
+be:disease:dead_heart:severity,High,जास्त,machine
+be:disease:dead_heart:description,Caused by stem borer larvae (Scirpophaga incertulas). The central leaf whorl turns yellow and dies — pulled out easily.,खोडकिडीच्या अळ्यांमुळे (स्सिर्पोफॅगा इन्सेर्टुलास) होतो. पानांचा मधला भाग पिवळा पडतो आणि मरतो - सहज बाहेर निघतो.,machine
+be:disease:dead_heart:fav:temperature,25–35°C,25–35°C,machine
+be:disease:dead_heart:fav:humidity,High,जास्त,machine
+be:disease:dead_heart:fav:rainfall,Moderate,मध्यम,machine
+be:disease:downy_mildew:display,Downy Mildew,केवडा रोग,machine
+be:disease:downy_mildew:crop,Rice,भात,machine
+be:disease:downy_mildew:severity,Medium,मध्यम,machine
+be:disease:downy_mildew:description,Caused by Sclerophthora macrospora. Pale yellow lesions with downy growth on underside of leaves.,स्क्लेरोफ्थोरा मॅक्रोस्पोरामुळे होतो. पानांच्या खालील बाजूला फिकट पिवळे डाग आणि बुरशीची वाढ दिसते.,machine
+be:disease:downy_mildew:fav:temperature,18–25°C,18–25°C,machine
+be:disease:downy_mildew:fav:humidity,>90%,>90%,machine
+be:disease:downy_mildew:fav:rainfall,Heavy flooding,भरपूर पाऊस,machine
+be:disease:bacterial_leaf_streak:display,Bacterial Leaf Streak,जिवाणूजन्य पानावरील रेषा रोग,machine
+be:disease:bacterial_leaf_streak:crop,Rice,भात,machine
+be:disease:bacterial_leaf_streak:severity,Medium,मध्यम,machine
+be:disease:bacterial_leaf_streak:description,"Caused by Xanthomonas oryzae pv. oryzicola. Narrow, translucent water-soaked stripes between veins.","झँथomonas ओरिजाए पीव्ही. ओरिझिकोलामुळे होतो. शिरांच्यामध्ये संडासच्या पाण्यासारख्या अरुंद, पारदर्शक रेषा दिसतात.",machine
+be:disease:bacterial_leaf_streak:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_streak:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_streak:fav:rainfall,Heavy,जास्त,machine
+be:disease:bacterial_panicle_blight:display,Bacterial Panicle Blight,जिवाणूजन्य कणीस करपा,machine
+be:disease:bacterial_panicle_blight:crop,Rice,भात,machine
+be:disease:bacterial_panicle_blight:severity,High,जास्त,machine
+be:disease:bacterial_panicle_blight:description,"Caused by Burkholderia glumae. Sterile spikelets, grayish-brown discolouration. Significant yield loss.","बर् Burkholderia glumae मुळे होते. दाणे पोकळ राहतात, करड्या-तपकिरी रंगाचे होतात. उत्पादनात खूप मोठे नुकसान होते.",machine
+be:disease:bacterial_panicle_blight:fav:temperature,>30°C,>30°C,machine
+be:disease:bacterial_panicle_blight:fav:humidity,>85%,>85%,machine
+be:disease:bacterial_panicle_blight:fav:rainfall,Moderate,मध्यम,machine
+be:disease:normal:display,Healthy (Normal),निरोगी (सामान्य),machine
+be:disease:normal:crop,Rice,भात,machine
+be:disease:normal:severity,None,काही नाही,machine
+be:disease:normal:description,No disease detected. Crop appears healthy.,कोणताही रोग आढळला नाही. पीक निरोगी दिसत आहे.,machine
+be:disease:normal:fav:temperature,Any,कोणतेही,machine
+be:disease:normal:fav:humidity,Any,कोणतेही,machine
+be:disease:normal:fav:rainfall,Regular,नियमित,machine

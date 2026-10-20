@@ -7,78 +7,80 @@ import {
   Leaf, Microscope, TrendingUp, Zap, Globe, FlaskConical,
 } from 'lucide-react'
 import { useState } from 'react'
+import { useLang } from '../contexts/LanguageContext'
 
 interface HomePageProps {
   onSelectSamplePreset?: (crop: string, sampleKey: string) => void
 }
 
 export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePageProps = {}) {
+  const { t } = useLang()
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   const quickStats = [
-    { label: 'Disease Classes',   value: '33',    color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: Microscope },
-    { label: 'Crops Supported',   value: '4',     color: '#0EA5E9', accent: '#F0F9FF', border: 'rgba(14,165,233,0.2)', icon: Leaf },
-    { label: 'AI Models',         value: '2',     color: '#D97706', accent: '#FFFBEB', border: 'rgba(217,119,6,0.2)', icon: TrendingUp },
-    { label: 'Weather Features',  value: '11',    color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: Scan },
+    { label: t('home.statsDiseases'), value: '127+', color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: Microscope },
+    { label: t('home.statsScans'),    value: '2.4M+', color: '#0EA5E9', accent: '#F0F9FF', border: 'rgba(14,165,233,0.2)', icon: Scan },
+    { label: t('home.statsCrops'),   value: '18+',   color: '#D97706', accent: '#FFFBEB', border: 'rgba(217,119,6,0.2)', icon: Leaf },
+    { label: t('home.statsAccuracy'),       value: '97.3%', color: '#0B8F68', accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)', icon: TrendingUp },
   ]
 
   const steps = [
-    { n: '01', icon: Camera,     title: 'Capture', desc: 'Upload or capture a clear photo of the affected leaf or plant tissue.', color: 'var(--neon-green)' },
-    { n: '02', icon: Activity,   title: 'Analyze',  desc: 'AI model runs multi-class detection and Grad-CAM heatmap generation.', color: 'var(--neon-cyan)' },
-    { n: '03', icon: ShieldCheck, title: 'Respond', desc: 'Receive diagnosis, risk score, treatment protocols and prevention tips.', color: 'var(--neon-amber)' },
+    { n: '01', icon: Camera,     title: t('home.step1Title'), desc: t('home.step1Desc'), color: 'var(--neon-green)' },
+    { n: '02', icon: Activity,   title: t('home.step2Title'),  desc: t('home.step2Desc'), color: 'var(--neon-cyan)' },
+    { n: '03', icon: ShieldCheck, title: t('home.step3Title'), desc: t('home.step3Desc'), color: 'var(--neon-amber)' },
   ]
 
   const features = [
     {
       icon: Eye, color: '#D97706',
       accent: '#FFFBEB', border: 'rgba(217,119,6,0.2)',
-      title: 'Visual AI Heatmaps', badge: 'GRAD-CAM',
-      desc: 'Proprietary Grad-CAM visualization shows precisely where infection is located on the leaf — down to the cellular level.',
-      link: '/scan', linkLabel: 'Run Scanner',
+      title: t('home.featHeatmapTitle'), badge: 'GRAD-CAM',
+      desc: t('home.featHeatmapDesc'),
+      link: '/scan', linkLabel: t('home.featHeatmapAction'),
     },
     {
       icon: MessageSquare, color: '#0B8F68',
       accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)',
-      title: 'AI Expert Chat', badge: 'GEMINI',
-      desc: 'Powered by Gemini AI, get instant expert-level answers on disease management, fertilizers, and crop care protocols.',
-      link: '/assistant', linkLabel: 'Open Chat',
+      title: t('home.featChatTitle'), badge: 'GEMINI',
+      desc: t('home.featChatDesc'),
+      link: '/assistant', linkLabel: t('home.featChatAction'),
     },
     {
       icon: TrendingUp, color: '#0EA5E9',
       accent: '#F0F9FF', border: 'rgba(14,165,233,0.2)',
-      title: 'Health Tracking', badge: 'LIVE',
-      desc: 'Monitor recovery curves and plant health scores over time with auto-generated progress analytics.',
-      link: '/plants', linkLabel: 'My Plants',
+      title: t('home.featTrackingTitle'), badge: 'LIVE',
+      desc: t('home.featTrackingDesc'),
+      link: '/plants', linkLabel: t('home.featTrackingAction'),
     },
     {
       icon: Globe, color: '#0B8F68',
       accent: '#F0FAF4', border: 'rgba(11,143,104,0.2)',
-      title: 'Weather Risk Intel', badge: 'LIVE',
-      desc: 'Correlates local weather conditions with disease spread probability, giving you a real-time infection risk score.',
-      link: '/scan', linkLabel: 'Check Risk',
+      title: t('home.featWeatherTitle'), badge: 'LIVE',
+      desc: t('home.featWeatherDesc'),
+      link: '/scan', linkLabel: t('home.featWeatherAction'),
     },
     {
       icon: FlaskConical, color: '#8B5CF6',
       accent: '#F5F3FF', border: 'rgba(139,92,246,0.2)',
-      title: 'Disease Encyclopedia', badge: '33 CLASSES',
-      desc: 'Comprehensive reference library of plant diseases with symptoms, lifecycle, and treatment databases.',
-      link: '/library', linkLabel: 'Explore',
+      title: t('home.featLibraryTitle'), badge: '127 DISEASES',
+      desc: t('home.featLibraryDesc'),
+      link: '/library', linkLabel: t('home.featLibraryAction'),
     },
     {
       icon: Zap, color: '#D97706',
       accent: '#FFFBEB', border: 'rgba(217,119,6,0.2)',
-      title: 'Instant Diagnosis', badge: '<3 SEC',
-      desc: 'Diagnosis results in under 3 seconds. Upload from any device — optimized for field use on mobile and tablet.',
-      link: '/scan', linkLabel: 'Try Now',
+      title: t('home.featInstantTitle'), badge: '<3 SEC',
+      desc: t('home.featInstantDesc'),
+      link: '/scan', linkLabel: t('home.featInstantAction'),
     },
   ]
 
   const faqs = [
-    { q: 'Which crops are currently supported?', a: 'FloraAI currently supports Rice, Wheat, Sugarcane, and Cotton, with 33 disease and healthy conditions classified across these essential agricultural crops.' },
-    { q: 'How accurate is the disease detection?', a: 'Our AI models achieve state-of-the-art accuracy on validation datasets. Results vary based on image quality, lighting conditions, and disease stage. We recommend capturing clear, well-lit photos of the affected leaf area for best results.' },
-    { q: 'Is my data private?', a: 'Yes. Your uploaded images are processed locally on our secure servers and are never shared with third parties. Scan data is stored only in your local browser session.' },
-    { q: 'Can I use BioScan offline?', a: 'Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline model for field use.' },
-    { q: 'What image format and size works best?', a: 'JPG, PNG, or WebP images up to 10MB. For best results, capture the leaf against a plain background in natural light at 2-4 megapixel resolution.' },
+    { q: t('home.faq1Q'), a: t('home.faq1A') },
+    { q: t('home.faq2Q'), a: t('home.faq2A') },
+    { q: t('home.faq3Q'), a: t('home.faq3A') },
+    { q: t('home.faq4Q'), a: t('home.faq4A') },
+    { q: t('home.faq5Q'), a: t('home.faq5A') },
   ]
 
   return (
@@ -143,7 +145,7 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
                 textTransform: 'uppercase', color: '#3DFF8F',
                 fontFamily: 'var(--font-mono)',
               }}>
-                FLORA AI — PLANT DISEASE INTELLIGENCE
+                {t('home.heroPill')}
               </span>
             </div>
 
@@ -158,10 +160,10 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
                 textShadow: '0 4px 20px rgba(0,0,0,0.6)',
               }}>
                 <span style={{ display: 'block' }}>
-                  DIAGNOSE
+                  {t('home.heroTitle1')}
                 </span>
                 <span style={{ display: 'block', color: '#3DFF8F', textShadow: '0 0 24px rgba(61,255,143,0.5)' }}>
-                  PLANT DISEASE
+                  {t('home.heroTitle2')}
                 </span>
               </h1>
               <h2 style={{
@@ -172,7 +174,7 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
                 color: '#FFFFFF',
                 textShadow: '0 4px 20px rgba(0,0,0,0.6)',
               }}>
-                IN SECONDS
+                {t('home.heroTitle3')}
               </h2>
             </div>
 
@@ -182,8 +184,7 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
               color: '#FFFFFF', fontWeight: 600,
               textShadow: '0 2px 10px rgba(0,0,0,0.8)',
             }}>
-              Upload a leaf photo and get an instant AI-powered diagnosis with Grad-CAM heatmaps,
-              disease risk scores, and step-by-step treatment protocols.
+              {t('home.heroSubtitle')}
             </p>
 
             {/* CTA Buttons */}
@@ -194,7 +195,7 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
                 style={{ paddingLeft: 32, paddingRight: 32, fontSize: '0.95rem' }}
               >
                 <Scan style={{ width: 18, height: 18 }} />
-                <span>SCAN NOW — FREE</span>
+                <span>{t('home.scanNowFree')}</span>
                 <ArrowRight style={{ width: 16, height: 16 }} />
               </Link>
               <Link
@@ -210,16 +211,16 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
                 }}
               >
                 <BookOpen style={{ width: 16, height: 16 }} />
-                Browse Library
+                <span>{t('nav.encyclopedia')}</span>
               </Link>
             </div>
 
             {/* Trust badges */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 22, flexWrap: 'wrap', justifyContent: 'center', marginTop: 4 }}>
               {[
-                { icon: CheckCircle2, text: 'No signup required' },
-                { icon: CheckCircle2, text: 'Works on any device' },
-                { icon: CheckCircle2, text: 'Results in < 3 seconds' },
+                { icon: CheckCircle2, text: t('home.badgeNoSignup') },
+                { icon: CheckCircle2, text: t('home.badgeAnyDevice') },
+                { icon: CheckCircle2, text: t('home.badgeSpeed') },
               ].map(item => (
                 <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <item.icon style={{ width: 14, height: 14, color: '#0B8F68' }} />
@@ -271,9 +272,9 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
       {/* ── How It Works ─────────────────────────────── */}
       <section>
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <p className="eyebrow" style={{ marginBottom: 8 }}>HOW IT WORKS</p>
+          <p className="eyebrow" style={{ marginBottom: 8 }}>{t('home.howItWorks')}</p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 800, color: 'var(--text-primary)' }}>
-            THREE STEPS TO DIAGNOSIS
+            {t('home.threeSteps')}
           </h2>
         </div>
 
@@ -315,9 +316,9 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
       {/* ── Features Grid ────────────────────────────── */}
       <section>
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <p className="eyebrow" style={{ marginBottom: 8 }}>CAPABILITIES</p>
+          <p className="eyebrow" style={{ marginBottom: 8 }}>{t('home.capabilities')}</p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 800, color: 'var(--text-primary)' }}>
-            LAB-GRADE TOOLS
+            {t('home.labTools')}
           </h2>
         </div>
 
@@ -375,18 +376,22 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
         </div>
 
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 640 }}>
-          <p className="eyebrow">BIOSCAN EDGE</p>
+          <p className="eyebrow">{t('home.edgePill')}</p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.4rem, 3vw, 2.2rem)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2 }}>
-            BUILT FOR FARMS,<br />
-            <span style={{ color: 'var(--neon-green)', textShadow: '0 0 20px rgba(0,255,136,0.3)' }}>LABS AND FIELDS</span>
+            {t('home.edgeTitle')}
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.75, maxWidth: 520 }}>
-            BioScan works on any device — whether you're in a greenhouse, in a lab, or in the middle of a field with just your phone.
-            Designed to be fast, accurate, and accessible to both expert agronomists and everyday growers.
+            {t('home.edgeDesc')}
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {['📱 Mobile', '💻 Desktop', '🔬 Lab Screen', '🌾 Field Tablet', '🖥 Dashboard'].map(d => (
+            {[
+              t('home.deviceMobile'),
+              t('home.deviceDesktop'),
+              t('home.deviceLab'),
+              t('home.deviceField'),
+              t('home.deviceDashboard')
+            ].map(d => (
               <span key={d} className="chip" style={{ fontSize: '0.8rem' }}>{d}</span>
             ))}
           </div>
@@ -394,11 +399,11 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link to="/scan" className="btn btn-primary">
               <Scan style={{ width: 16, height: 16 }} />
-              Start Scanning
+              {t('home.startScanning')}
             </Link>
             <Link to="/assistant" className="btn btn-outline">
               <MessageSquare style={{ width: 16, height: 16 }} />
-              Ask AI Chat
+              {t('home.askChat')}
             </Link>
           </div>
         </div>
@@ -407,9 +412,9 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
       {/* ── FAQ ─────────────────────────────────────── */}
       <section>
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <p className="eyebrow" style={{ marginBottom: 8 }}>FAQ</p>
+          <p className="eyebrow" style={{ marginBottom: 8 }}>{t('home.faqPill')}</p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.3rem, 2.5vw, 1.9rem)', fontWeight: 800, color: 'var(--text-primary)' }}>
-            COMMON QUESTIONS
+            {t('home.faqTitle')}
           </h2>
         </div>
 
@@ -457,14 +462,14 @@ export function HomePage({ onSelectSamplePreset: _onSelectSamplePreset }: HomePa
             <HeartPulse style={{ width: 28, height: 28, color: 'var(--neon-green)' }} />
           </div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 800, color: 'var(--text-primary)' }}>
-            READY TO SCAN YOUR PLANTS?
+            {t('home.ctaReady')}
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: 420 }}>
-            Upload a photo right now — no signup needed. Get AI diagnosis in seconds.
+            {t('home.ctaDesc')}
           </p>
           <Link to="/scan" className="btn btn-primary btn-lg" style={{ paddingLeft: 36, paddingRight: 36 }}>
             <Scan style={{ width: 18, height: 18 }} />
-            Launch BioScanner
+            {t('home.ctaLaunch')}
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
         </div>

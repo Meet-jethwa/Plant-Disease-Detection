@@ -1,0 +1,19 @@
+{
+  "crop.rice": "వరి",
+  "crop.wheat": "గోధుమ",
+  "crop.sugarcane": "చెరకు",
+  "crop.cotton": "పత్తి",
+  "plants.title": "పంటల ఆరోగ్య నమోదు పట్టిక",
+  "plants.badge": "పంటల పర్యవేక్షణ",
+  "plants.registerNew": "కొత్త పంటను నమోదు చేయండి",
+  "plants.healthySpecimens": "ఆరోగ్యంగా ఉన్న మొక్కలు",
+  "plants.attentionRequired": "శ్రద్ధ పెట్టాలి",
+  "plants.highRisk": "తెగుళ్ల ముప్పు ఎక్కువగా ఉంది",
+  "plants.allCrops": "అన్ని పంటలు",
+  "plants.healthy": "ఆరోగ్యంగా ఉన్నాయి",
+  "plants.needsAttention": "జాగ్రత్త తీసుకోవాలి",
+  "plants.searchPlaceholder": "పేరు లేదా జాతి ద్వారా మొక్కల కోసం వెతకండి…",
+  "plants.empty": "గమనికలో ఉన్న మొక్కలు ఏవీ కనుగొనబడలేదు",
+  "plants.emptyDesc": "కోలుకునే తీరును పరిశీలించడానికి ముందుగా స్కానర్‌లో ఆకును స్కాన్ చేయండి.",
+  "plants.scanFirst": "ఇప్పుడే మొక్కను స్కాన్ చేయండి"
+}

@@ -1,0 +1,15 @@
+{
+  "assistant.title": "AI কৃষি সহকারী",
+  "assistant.subtitle": "ধান, গম, আখ এবং তুলার জন্য AI-ভিত্তিক রোগ বিশ্লেষণ।",
+  "assistant.placeholder": "এই রোগ নির্ণয় সম্পর্কে জিজ্ঞেস করুন…",
+  "assistant.analyzing": "বিশ্লেষণ চলছে…",
+  "assistant.contextActive": "প্রসঙ্গ সক্রিয়",
+  "assistant.suggested": "পরামর্শকৃত প্রশ্ন:",
+  "assistant.followUp": "পরবর্তী প্রশ্ন করুন:",
+  "assistant.emptyTitle": "AI বিশেষজ্ঞকে জিজ্ঞেস করুন",
+  "assistant.emptyHint": "স্ক্যান করা পাতা, চিকিৎসা বা প্রতিরোধ সম্পর্কে জিজ্ঞেস করুন।",
+  "assistant.noDiagnosis": "প্রথমে গাছের পাতা স্ক্যান করুন।",
+  "assistant.weatherAdvice": "আজকের আবহাওয়ার পরামর্শ",
+  "assistant.jumpToLatest": "সর্বশেষটিতে যান",
+  "assistant.welcomeMsg": "নমস্কার! আমি আপনার এআই (AI) গাছের স্বাস্থ্য সহায়ক। গাছের পাতার ছবি আপলোড করে সম্পূর্ণ রোগ নির্ণয় করুন — সঠিকতার মাত্রা, গ্র্যাড-ক্যাম (Grad-CAM দৃষ্টি মানচিত্র) প্রমাণ, আবহাওয়া ঝুকির বিশ্লেষণ এবং কাজের পরামর্শ।"
+}

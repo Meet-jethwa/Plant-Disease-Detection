@@ -1,0 +1,15 @@
+{
+  "assistant.title": "AI कृषि सहायक",
+  "assistant.subtitle": "धान, गेहूं, गन्ना और कपास के लिए AI आधारित रोग विश्लेषण।",
+  "assistant.placeholder": "इस निदान के बारे में पूछें…",
+  "assistant.analyzing": "विश्लेषण हो रहा है…",
+  "assistant.contextActive": "संदर्भ सक्रिय",
+  "assistant.suggested": "सुझाए गए प्रश्न:",
+  "assistant.followUp": "अगला प्रश्न पूछें:",
+  "assistant.emptyTitle": "AI कृषि विशेषज्ञ से पूछें",
+  "assistant.emptyHint": "स्कैन की गई पत्ती के निदान, उपचार या रोकथाम के बारे में प्रश्न पूछें।",
+  "assistant.noDiagnosis": "पहले पौधे की पत्ती स्कैन करें।",
+  "assistant.weatherAdvice": "आज की मौसम सलाह",
+  "assistant.jumpToLatest": "सबसे नए पर जाएं",
+  "assistant.welcomeMsg": "नमस्ते! मैं आपका एआई प्लांट हेल्थ असिस्टेंट हूँ। पौधे की पत्ती की फोटो अपलोड करें और पूरी जानकारी पाएं — कितना सही है (कॉन्फिडेंस स्कोर), ग्रैड-कैम (Grad-CAM एआई ध्यान नक्शा) विजुअल सबूत, मौसम से जुड़ा खतरा, और करने लायक आसान उपाय।"
+}

@@ -1,140 +1,232 @@
-// AnalysisLoader.tsx — BioScan Lab AI scanning animation
-import { CheckCircle2, Loader2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
-
-const STAGES = [
-  { label: 'IMAGE QUALITY VERIFIED',    code: 'IMG_QC_OK' },
-  { label: 'PLANT STRUCTURE DETECTED',  code: 'STRUCT_OK' },
-  { label: 'SYMPTOM PATTERN ANALYSIS',  code: 'SYMP_SCAN' },
-  { label: 'DISEASE CLASS MATCHING',    code: 'CLASSFY'   },
-  { label: 'SEVERITY INDEX COMPUTING',  code: 'SEV_CALC'  },
-  { label: 'TREATMENT PROTOCOL GEN',    code: 'TRMT_GEN'  },
-]
+// AnalysisLoader.tsx — Farmer-friendly plant scanning progress loader
+import { useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { Leaf, RefreshCw } from 'lucide-react'
+import { useLang } from '../contexts/LanguageContext'
 
 interface AnalysisLoaderProps {
-  imageUrl: string | null
-  cropName: string
+  imageUrl?: string | null
+  cropName?: string
+  isPredicting?: boolean
+  onCancel?: () => void
+  onRetry?: () => void
+  onComplete?: () => void
 }
 
-export function AnalysisLoader({ imageUrl, cropName }: AnalysisLoaderProps) {
-  const [currentStage, setCurrentStage] = useState(0)
+export function AnalysisLoader({
+  imageUrl,
+  cropName: _cropName,
+  isPredicting = true,
+  onCancel,
+  onRetry,
+  onComplete,
+}: AnalysisLoaderProps) {
+  const { t } = useLang()
+  const reducedMotion = useReducedMotion()
 
+  const [progress, setProgress] = useState(0)
+  const [elapsed, setElapsed] = useState(0)
+  const [isFinishing, setIsFinishing] = useState(false)
+  const [isCompleted, setIsCompleted] = useState(false)
+
+  const startTimeRef = useRef(Date.now())
+  const hasTriggeredCompleteRef = useRef(false)
+  const isPredictingRef = useRef(isPredicting)
+
+  isPredictingRef.current = isPredicting
+
+  // Main timer loop: decelerate from 0% to ~90% over 8s, then hold at 90%
   useEffect(() => {
-    if (currentStage >= STAGES.length - 1) return
-    const t = setTimeout(() => setCurrentStage(s => s + 1), 850)
-    return () => clearTimeout(t)
-  }, [currentStage])
+    startTimeRef.current = Date.now()
+    hasTriggeredCompleteRef.current = false
+    setIsFinishing(false)
+    setIsCompleted(false)
 
-  const progress = Math.round(((currentStage + 1) / STAGES.length) * 100)
+    const interval = setInterval(() => {
+      const now = Date.now()
+      const totalElapsed = (now - startTimeRef.current) / 1000
+      setElapsed(totalElapsed)
+
+      // If already animating to 100%, let that effect take over
+      if (hasTriggeredCompleteRef.current) return
+
+      // Decelerating curve over ~8 seconds: Ease-out quadratic towards 90%
+      if (totalElapsed < 8) {
+        const tNorm = totalElapsed / 8
+        const easeOutQuad = 1 - (1 - tNorm) * (1 - tNorm)
+        const currentSimulated = Math.min(90, Math.round(easeOutQuad * 90))
+        setProgress(currentSimulated)
+      } else {
+        // Hold firmly at 90% until backend response arrives
+        setProgress(90)
+      }
+    }, 50)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  // When backend finishes (isPredicting transitions to false)
+  useEffect(() => {
+    if (isPredicting || hasTriggeredCompleteRef.current) return
+
+    const now = Date.now()
+    const elapsedMs = now - startTimeRef.current
+    const minWaitMs = Math.max(0, 1200 - elapsedMs) // Guarantee at least 1.2s total visible time
+
+    const timer = setTimeout(() => {
+      hasTriggeredCompleteRef.current = true
+      setIsFinishing(true)
+
+      // Quickly animate to 100% over ~250ms
+      setProgress(100)
+
+      // 300ms pause after reaching 100% before handing over
+      const finishTimer = setTimeout(() => {
+        setIsCompleted(true)
+        onComplete?.()
+      }, 300)
+
+      return () => clearTimeout(finishTimer)
+    }, minWaitMs)
+
+    return () => clearTimeout(timer)
+  }, [isPredicting, onComplete])
+
+  // Determine stage & messaging
+  const isTimeoutError = elapsed >= 45 && !hasTriggeredCompleteRef.current && isPredicting
+  const isTakingLonger = elapsed >= 15 && !isTimeoutError && !hasTriggeredCompleteRef.current
+  const isIndeterminate = isTakingLonger
+
+  const displaySentence = isTimeoutError
+    ? t('loader.timeoutError')
+    : isTakingLonger
+    ? t('loader.takingLonger')
+    : t('loader.checking')
+
+  const roundedPercentage = Math.min(100, Math.max(0, Math.round(progress)))
+
+  if (isCompleted) {
+    return null
+  }
 
   return (
-    <div className="bio-card" style={{ padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 24 }}>
-      {/* Header */}
-      <div style={{ textAlign: 'center' }}>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          padding: '6px 14px', borderRadius: 999,
-          background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.25)',
-          marginBottom: 12,
-        }}>
-          <Loader2 style={{ width: 13, height: 13, color: 'var(--neon-green)', animation: 'bio-spin 1s linear infinite' }} />
-          <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--neon-green)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em' }}>
-            AI ANALYSIS RUNNING
-          </span>
-        </div>
-        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.02em', marginBottom: 4 }}>
-          SCANNING PLANT
-        </h2>
-        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-          TARGET: {cropName.toUpperCase()} — RUNNING BIOSCAN PROTOCOL
-        </p>
-      </div>
+    <div className="w-full flex items-center justify-center p-4">
+      <div className="w-full max-w-sm rounded-2xl border border-[#D4E8DC] bg-white p-6 shadow-sm flex flex-col items-center text-center">
+        
+        {/* Leaf photo thumbnail (96px, rounded) */}
+        <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-[#B0D8C4] bg-[#F0FAF4] shadow-xs flex items-center justify-center shrink-0">
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt="Leaf photo"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Leaf className="h-10 w-10 text-[#15803D]" />
+          )}
 
-      {/* Image with scanning effect */}
-      {imageUrl && (
-        <div style={{
-          position: 'relative', borderRadius: 10, overflow: 'hidden',
-          border: '1px solid rgba(0,255,136,0.3)',
-          aspectRatio: '16/9', background: '#020906',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          maxHeight: 220, margin: '0 auto', width: '100%', maxWidth: 360,
-          boxShadow: '0 0 24px rgba(0,255,136,0.12)',
-        }}>
-          <img src={imageUrl} alt="Analyzing" style={{ width: '100%', height: '100%', objectFit: 'contain', opacity: 0.75 }} />
-          {/* Scanning overlay pulse */}
-          <div className="animate-scan-pulse" style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(180deg, rgba(0,255,136,0.08) 0%, transparent 50%, rgba(0,255,136,0.04) 100%)',
-          }} />
-          {/* Moving scan line */}
-          <div className="animate-scan-line" />
-          {/* Grid lines */}
-          <div className="scan-overlay" />
-          {/* Scanner corners */}
-          <div className="scanner-frame scanner-frame-br" />
-          {/* Progress overlay bottom */}
-          <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0,
-            background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
-            padding: '12px 10px 8px',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontSize: '0.6rem', fontFamily: 'var(--font-mono)', color: 'var(--neon-green)', letterSpacing: '0.06em' }}>
-                {STAGES[currentStage]?.code}
-              </span>
-              <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginLeft: 'auto' }}>
-                {progress}%
-              </span>
-            </div>
-          </div>
+          {/* Soft green scan line sweeping across thumbnail (transform & opacity only) */}
+          {!reducedMotion && !isTimeoutError && (
+            <motion.div
+              initial={{ y: -96, opacity: 0 }}
+              animate={{ y: 96, opacity: [0, 0.85, 0.85, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              className="pointer-events-none absolute left-0 right-0 h-1 bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]"
+              style={{ willChange: 'transform, opacity' }}
+            />
+          )}
         </div>
-      )}
 
-      {/* Progress stages */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 340, margin: '0 auto', width: '100%' }}>
-        {STAGES.map((stage, i) => {
-          const isDone = i < currentStage
-          const isActive = i === currentStage
-          const isPending = i > currentStage
-          return (
-            <div key={stage.label} style={{
-              display: 'flex', alignItems: 'center', gap: 10,
-              opacity: isPending ? 0.3 : 1,
-              transition: 'opacity 0.4s ease',
-            }}>
-              <div style={{ flexShrink: 0, width: 16, height: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {isDone ? (
-                  <CheckCircle2 style={{ width: 14, height: 14, color: 'var(--neon-green)' }} />
-                ) : isActive ? (
-                  <Loader2 style={{ width: 14, height: 14, color: 'var(--neon-cyan)', animation: 'bio-spin 0.9s linear infinite' }} />
-                ) : (
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--border-base)', margin: '0 4px' }} />
-                )}
-              </div>
-              <span style={{
-                fontSize: '0.7rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
-                color: isDone ? 'var(--neon-green)' : isActive ? 'var(--text-primary)' : 'var(--text-dim)',
-                fontWeight: isActive ? 600 : 400,
-              }}>
-                {stage.label}
-              </span>
-              {isDone && (
-                <span style={{ marginLeft: 'auto', fontSize: '0.55rem', fontFamily: 'var(--font-mono)', color: 'var(--neon-green)', opacity: 0.6 }}>OK</span>
+        {/* Short sentence in 20px text */}
+        <div className="mt-5 min-h-[3rem] flex items-center justify-center px-1">
+          <p
+            aria-live="polite"
+            className={`text-[20px] font-semibold leading-snug ${
+              isTimeoutError ? 'text-red-700' : 'text-[#17211D]'
+            }`}
+          >
+            {displaySentence}
+          </p>
+        </div>
+
+        {/* Progress bar container (12px high, 999px radius, green-100 track, green-700 fill) */}
+        {!isTimeoutError && (
+          <div className="mt-5 w-full flex items-center gap-3">
+            <div
+              role="progressbar"
+              aria-label={t('loader.checking')}
+              aria-valuenow={roundedPercentage}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              className="relative h-3 flex-1 overflow-hidden rounded-full bg-green-100"
+            >
+              {/* Fill */}
+              <div
+                className={`h-full rounded-full bg-green-700 ${
+                  isFinishing ? 'transition-all duration-300 ease-out' : 'transition-all duration-150 ease-out'
+                }`}
+                style={{ width: `${roundedPercentage}%` }}
+              />
+
+              {/* Moving shine / indeterminate shimmer */}
+              {!reducedMotion && !isFinishing && (
+                <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+                  <motion.div
+                    initial={{ x: '-100%' }}
+                    animate={{ x: '200%' }}
+                    transition={{
+                      duration: isIndeterminate ? 1.2 : 2.2,
+                      repeat: Infinity,
+                      ease: isIndeterminate ? 'easeInOut' : 'linear',
+                    }}
+                    className={`h-full ${
+                      isIndeterminate ? 'w-1/2 bg-white/40' : 'w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent'
+                    }`}
+                    style={{ willChange: 'transform' }}
+                  />
+                </div>
               )}
             </div>
-          )
-        })}
-      </div>
 
-      {/* Overall progress bar */}
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-          <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>ANALYSIS PROGRESS</span>
-          <span style={{ fontSize: '0.65rem', color: 'var(--neon-green)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{progress}%</span>
+            {/* Percentage in 16px bold text on the right */}
+            <span className="w-12 text-right text-base font-bold text-[#17211D] tabular-nums shrink-0">
+              {roundedPercentage}%
+            </span>
+          </div>
+        )}
+
+        {/* Controls / Actions */}
+        <div className="mt-6 w-full flex flex-col items-center gap-2">
+          {isTimeoutError ? (
+            <div className="w-full flex flex-col gap-2.5">
+              <button
+                type="button"
+                onClick={onRetry}
+                className="btn btn-primary min-h-[48px] w-full flex items-center justify-center gap-2 text-sm font-semibold cursor-pointer"
+              >
+                <RefreshCw className="h-4 w-4" />
+                {t('loader.tryAgain')}
+              </button>
+              <button
+                type="button"
+                onClick={onCancel}
+                className="btn btn-secondary min-h-[48px] w-full flex items-center justify-center text-sm font-semibold cursor-pointer"
+              >
+                {t('btn.cancel')}
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={onCancel}
+              className="min-h-[48px] px-4 py-3 text-sm font-medium text-[#66736C] hover:text-[#17211D] transition-colors cursor-pointer flex items-center justify-center"
+              aria-label={t('btn.cancel')}
+            >
+              {t('btn.cancel')}
+            </button>
+          )}
         </div>
-        <div className="progress-track">
-          <div className="progress-fill" style={{ width: `${progress}%` }} />
-        </div>
+
       </div>
     </div>
   )

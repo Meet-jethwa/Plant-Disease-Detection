@@ -122,7 +122,7 @@ export function AssistantPage({
   latestPrediction,
   locationData,
 }: AssistantPageProps) {
-  const { lang } = useLang()
+  const { lang, t } = useLang()
   const copy = LOCAL_COPY[lang] || LOCAL_COPY.en
 
   const [input, setInput] = useState('')
@@ -204,9 +204,17 @@ export function AssistantPage({
     const cleanText = text.replace(/[*#_`•]/g, '').trim()
     if (!cleanText) return
 
+    const bcp47 = LANGUAGE_META[lang]?.bcp47 || 'en-IN'
     const utterance = new SpeechSynthesisUtterance(cleanText)
-    utterance.lang = LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.bcp47 || 'en-IN'
+    utterance.lang = bcp47
     utterance.rate = 0.95
+
+    // Pick exact voice or best prefix match; fall back to browser default
+    const voices = window.speechSynthesis.getVoices()
+    const voice = voices.find((v) => v.lang === bcp47)
+      ?? voices.find((v) => v.lang.startsWith(bcp47.split('-')[0]))
+    if (voice) utterance.voice = voice
+
     utterance.onend = () => setSpeakingIndex(null)
     utterance.onerror = () => setSpeakingIndex(null)
 
@@ -238,24 +246,31 @@ export function AssistantPage({
   const quickChips = useMemo(() => {
     if (chat.length <= 1) return []
     return [
-      { label: 'Explain simpler', question: 'Can you explain this in simpler farmer terms with less technical jargon?' },
-      { label: 'Show steps', question: 'What are the numbered practical action steps I should follow in order?' },
-      { label: 'Organic option', question: 'What organic and non-chemical remedies can I prepare at home?' },
+      { label: t('chat.simpler'), question: t('chat.simplerQ') },
+      { label: t('chat.steps'), question: t('chat.stepsQ') },
+      { label: t('chat.organic'), question: t('chat.organicQ') },
     ]
-  }, [chat])
+  }, [chat, t])
 
   // Weather chip string (temp + one-word condition, dropping unexplained soil %)
   const tempVal = locationData?.weather?.temperature_c ? `${locationData.weather.temperature_c.toFixed(0)}°C` : '31°C'
   const conditionVal = locationData?.weather?.condition || 'Overcast'
+  // Weather question generated from current weather context
+  const weatherQuestion = useMemo(() => {
+    if (lang === 'hi') {
+      return `आज के मौसम (${conditionVal}, ${tempVal}) के बाद फसल की सिंचाई और देखभाल के लिए मुझे क्या करना चाहिए?`
+    }
+    return `What should I do about crop irrigation and protection after today's weather (${conditionVal}, ${tempVal})?`
+  }, [conditionVal, tempVal, lang])
 
   // Is chat currently in empty state (only initial welcome message, 0 user messages)
   const isOnlyWelcome = sessionQueries.length === 0
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-4rem)] max-h-[100dvh] bg-[#F7FAF8] overflow-hidden select-text relative">
+    <div className="flex flex-col h-full max-h-full min-h-0 bg-[#F7FAF8] overflow-hidden select-text relative w-full">
       
-      {/* ── Slim Header (Pinned) ── */}
-      <header className="h-14 sm:h-16 bg-white border-b border-emerald-100 px-4 sm:px-6 flex items-center justify-between shrink-0 z-20 shadow-xs">
+      {/* ── Slim Header (Pinned, 24px horizontal padding so chips never touch edges) ── */}
+      <header className="h-14 sm:h-16 bg-white border-b border-emerald-100 px-6 flex items-center justify-between shrink-0 z-20 shadow-xs">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 shrink-0">
             <Leaf className="w-5 h-5" />
@@ -270,20 +285,29 @@ export function AssistantPage({
           </div>
         </div>
 
-        {/* Right side: Compact weather chip + History toggle button */}
+        {/* Right side: Tappable Weather Advice chip + History button */}
         <div className="flex items-center gap-2 shrink-0">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-semibold">
-            <CloudSun className="w-3.5 h-3.5 text-emerald-700" />
-            <span>{tempVal} · {conditionVal}</span>
-          </div>
+          <button
+            type="button"
+            onClick={() => handleSend(weatherQuestion)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-semibold hover:bg-emerald-100 focus-visible:ring-2 focus-visible:ring-emerald-700 transition-colors cursor-pointer shadow-2xs"
+            aria-label={`Ask weather advice: ${weatherQuestion}`}
+            title="Tap for irrigation & disease advice based on today's weather"
+          >
+            <CloudSun className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+            <span className="font-bold">{tempVal} · {conditionVal}</span>
+            <span className="hidden sm:inline text-[10px] text-emerald-800 font-bold bg-emerald-200/70 px-1.5 py-0.5 rounded ml-0.5">
+              Advice
+            </span>
+          </button>
 
           <button
             type="button"
             onClick={() => setIsHistoryOpen(true)}
-            className="h-9 px-3 rounded-xl border border-emerald-200 hover:border-emerald-400 bg-white hover:bg-emerald-50 text-emerald-900 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="h-9 px-3 rounded-xl border border-emerald-200 hover:border-emerald-400 bg-white hover:bg-emerald-50 text-emerald-900 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-700"
             aria-label="Open conversation history panel"
           >
-            <Clock className="w-3.5 h-3.5 text-emerald-700" />
+            <Clock className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
             <span className="hidden sm:inline">History</span>
             {sessionQueries.length > 0 && (
               <span className="w-4 h-4 rounded-full bg-emerald-700 text-white text-[10px] flex items-center justify-center">
@@ -309,15 +333,15 @@ export function AssistantPage({
         )}
       </AnimatePresence>
 
-      {/* ── Message Area (Only This Container Scrolls, Hero Centered max-w-760px) ── */}
+      {/* ── Message Area (Only This Container Scrolls, Centered max-w-[720px]) ── */}
       <main
         ref={messagesContainerRef}
         onScroll={handleScroll}
         role="log"
         aria-live="polite"
-        className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 flex flex-col items-center"
+        className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 flex flex-col items-center min-h-0"
       >
-        <div className="w-full max-w-[760px] flex-1 flex flex-col justify-start">
+        <div className="w-full max-w-[720px] flex-1 flex min-h-0 flex-col justify-center">
           
           {/* Empty state when no queries have been asked yet */}
           {isOnlyWelcome ? (
@@ -416,17 +440,17 @@ export function AssistantPage({
             exit={{ opacity: 0, y: 10 }}
             type="button"
             onClick={scrollToBottom}
-            className="fixed bottom-28 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-emerald-800 text-white shadow-lg text-xs font-bold flex items-center gap-1.5 hover:bg-emerald-900 transition-colors cursor-pointer"
+            className="fixed bottom-36 sm:bottom-32 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full bg-emerald-800 text-white shadow-xl text-xs font-bold flex items-center gap-1.5 hover:bg-emerald-900 focus-visible:ring-2 focus-visible:ring-emerald-600 transition-all cursor-pointer"
           >
             <ArrowDown className="w-3.5 h-3.5" />
-            <span>Jump to latest</span>
+            <span>{t('assistant.jumpToLatest')}</span>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* ── Composer Container (Pinned at Bottom, max-w-[760px] Centered) ── */}
-      <footer className="w-full bg-white/95 backdrop-blur-md border-t border-emerald-100 p-3 sm:p-4 shrink-0 z-20 flex justify-center">
-        <div className="w-full max-w-[760px]">
+      {/* ── Composer Container (Pinned at Bottom, max-w-[720px] Centered) ── */}
+      <footer className="w-full bg-white/95 backdrop-blur-md border-t border-emerald-100 px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 sm:p-4 shrink-0 z-20 flex justify-center">
+        <div className="w-full max-w-[720px]">
           <ChatComposer
             input={input}
             setInput={setInput}

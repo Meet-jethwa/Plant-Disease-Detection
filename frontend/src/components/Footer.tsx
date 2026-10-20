@@ -1,35 +1,37 @@
 // Footer.tsx — BioScan Lab dark minimal footer
 import { Link } from 'react-router-dom'
 import { Sprout } from 'lucide-react'
+import { useLang } from '../contexts/LanguageContext'
 
 export function Footer() {
+  const { t } = useLang()
   const year = new Date().getFullYear()
 
   const columns = [
     {
-      heading: 'Platform',
+      heading: t('footer.platform'),
       links: [
-        { label: 'Plant Scanner', to: '/scan' },
-        { label: 'AI Chat', to: '/assistant' },
-        { label: 'My Plants', to: '/plants' },
-        { label: 'Encyclopedia', to: '/library' },
+        { label: t('footer.scanner'), to: '/scan' },
+        { label: t('footer.chat'), to: '/assistant' },
+        { label: t('footer.plants'), to: '/plants' },
+        { label: t('footer.encyclopedia'), to: '/library' },
       ],
     },
     {
-      heading: 'Data',
+      heading: t('footer.data'),
       links: [
-        { label: 'Disease Library', to: '/library' },
-        { label: 'Scan History', to: '/history' },
-        { label: 'Analysis Tools', to: '/tools' },
+        { label: t('footer.library'), to: '/library' },
+        { label: t('footer.history'), to: '/history' },
+        { label: t('footer.tools'), to: '/scan' },
       ],
     },
     {
-      heading: 'Info',
+      heading: t('footer.info'),
       links: [
-        { label: 'About BioScan', to: '/' },
-        { label: 'Contact', to: '/' },
-        { label: 'Privacy', to: '/' },
-        { label: 'Terms', to: '/' },
+        { label: t('footer.about'), to: '/' },
+        { label: t('footer.contact'), to: '/' },
+        { label: t('footer.privacy'), to: '/' },
+        { label: t('footer.terms'), to: '/' },
       ],
     },
   ]
@@ -69,12 +71,12 @@ export function Footer() {
               </div>
             </div>
             <p style={{ fontSize: '0.8rem', color: '#D1FAE5', lineHeight: 1.7, maxWidth: 220 }}>
-              AI-powered plant disease intelligence for farms, labs, and greenhouses worldwide.
+              {t('footer.tagline')}
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 16 }}>
               <span className="status-dot status-dot-green" style={{ width: 6, height: 6 }} />
               <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: '#3DFF8F', fontWeight: 600, letterSpacing: '0.08em' }}>
-                ALL SYSTEMS OPERATIONAL
+                {t('footer.operational')}
               </span>
             </div>
           </div>
@@ -116,10 +118,10 @@ export function Footer() {
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
         }} className="md:flex-row md:justify-between">
           <p style={{ fontSize: '0.75rem', color: '#A7F3D0', fontFamily: 'var(--font-mono)' }}>
-            © {year} Flora AI. All rights reserved.
+            © {year} Flora AI. {t('footer.rights')}
           </p>
           <p style={{ fontSize: '0.7rem', color: '#A7F3D0', opacity: 0.8, textAlign: 'center', maxWidth: 500, lineHeight: 1.6 }}>
-            Flora AI provides diagnostic guidance for informational purposes only. Results should be verified by a qualified agricultural expert.
+            {t('footer.disclaimer')}
           </p>
         </div>
       </div>

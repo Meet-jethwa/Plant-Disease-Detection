@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import type { ChatMessage, PredictionResponse } from '../../types'
 import { DiagnosisCard } from './DiagnosisCard'
+import { useLang } from '../../contexts/LanguageContext'
 
 interface MessageBubbleProps {
   message: ChatMessage
@@ -28,6 +29,7 @@ export function MessageBubble({
   onAsk,
   latestPrediction,
 }: MessageBubbleProps) {
+  const { t } = useLang()
   const isUser = message.role === 'user'
   const [feedback, setFeedback] = useState<'up' | 'down' | null>(null)
 
@@ -114,9 +116,9 @@ export function MessageBubble({
           {renderFormattedText(message.text)}
 
           {/* Embedded Diagnosis card if present in message payload */}
-          {message.structured && (
+          {(message.geminiData || message.structured) && (
             <DiagnosisCard
-              data={message.structured}
+              data={message.geminiData || message.structured}
               prediction={latestPrediction ?? null}
               onAsk={onAsk}
             />
@@ -134,10 +136,10 @@ export function MessageBubble({
                 ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                 : 'text-stone-600 hover:text-emerald-950 hover:bg-emerald-50'
             }`}
-            aria-label={isSpeaking ? 'Stop listening to advice' : 'Listen to advice spoken aloud'}
+            aria-label={isSpeaking ? t('diagnosis.stopListening') : t('diagnosis.listen')}
           >
             {isSpeaking ? <Square className="w-4 h-4 text-emerald-700 fill-emerald-700" /> : <Volume2 className="w-4 h-4 text-emerald-700" />}
-            <span className="hidden sm:inline">{isSpeaking ? 'Stop' : 'Listen'}</span>
+            <span className="hidden sm:inline">{isSpeaking ? t('diagnosis.stopListening') : t('diagnosis.listen')}</span>
           </button>
 
           {/* Copy Button */}
@@ -145,10 +147,10 @@ export function MessageBubble({
             type="button"
             onClick={() => onCopy(message.text, index)}
             className="min-h-[40px] h-10 px-3 rounded-xl flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-emerald-950 hover:bg-emerald-50 transition-colors cursor-pointer"
-            aria-label="Copy message text to clipboard"
+            aria-label={isCopied ? t('common.copied') : t('common.copy')}
           >
             {isCopied ? <Check className="w-4 h-4 text-emerald-700" /> : <Copy className="w-4 h-4 text-emerald-700" />}
-            <span className="hidden sm:inline">{isCopied ? 'Copied' : 'Copy'}</span>
+            <span className="hidden sm:inline">{isCopied ? t('common.copied') : t('common.copy')}</span>
           </button>
 
           {/* Helpful Button */}
@@ -160,10 +162,10 @@ export function MessageBubble({
                 ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                 : 'text-stone-600 hover:text-emerald-950 hover:bg-emerald-50'
             }`}
-            aria-label="Mark response as helpful"
+            aria-label={t('common.helpful')}
           >
             <ThumbsUp className="w-4 h-4 text-emerald-700" />
-            <span className="hidden sm:inline">Helpful</span>
+            <span className="hidden sm:inline">{t('common.helpful')}</span>
           </button>
 
           {/* Not Helpful */}

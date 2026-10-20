@@ -2,6 +2,7 @@
 // Design inspired by app/static/styles.css: white bg, green border, clean shadow
 import { useRef, useState } from 'react'
 import { Camera, ImagePlus, Upload, X } from 'lucide-react'
+import { useLang } from '../contexts/LanguageContext'
 
 interface ImageUploaderProps {
   onFile: (file: File) => void
@@ -13,14 +14,15 @@ interface ImageUploaderProps {
 }
 
 export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, onClear }: ImageUploaderProps) {
+  const { t } = useLang()
   const fileRef = useRef<HTMLInputElement>(null)
   const [dragging, setDragging] = useState(false)
   const [sizeError, setSizeError] = useState<string | null>(null)
 
   function handleFile(file: File) {
     setSizeError(null)
-    if (!file.type.startsWith('image/')) { setSizeError('Please upload a valid image file (JPG, PNG, or WEBP).'); return }
-    if (file.size > 10 * 1024 * 1024) { setSizeError('Image is too large. Please use an image under 10 MB.'); return }
+    if (!file.type.startsWith('image/')) { setSizeError(t('uploader.invalidType')); return }
+    if (file.size > 10 * 1024 * 1024) { setSizeError(t('uploader.tooLarge')); return }
     onFile(file)
   }
 
@@ -41,12 +43,12 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
       <p style={{ fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-ink-2)', marginBottom: 2, textAlign: 'center' }}>
-        Leaf Image
+        {t('uploader.leafImage')}
       </p>
 
       <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp"
         style={{ display: 'none' }} onChange={handleChange}
-        id="leaf-file-input" aria-label="Upload plant leaf photo"
+        id="leaf-file-input" aria-label={t('uploader.uploadHint')}
       />
 
       {/* Preview or Dropzone */}
@@ -74,7 +76,7 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
                 {selectedFile?.name ?? 'leaf.jpg'} · {fileSizeKb}KB
               </span>
             </div>
-            <button type="button" onClick={onClear} aria-label="Remove selected image"
+            <button type="button" onClick={onClear} aria-label={t('uploader.remove')}
               style={{
                 width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
                 background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.3)',
@@ -113,14 +115,14 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
           </div>
           <div style={{ textAlign: 'center', padding: '0 16px' }}>
             <p style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-ink)', marginBottom: 4 }}>
-              {dragging ? 'Drop image to scan' : 'Upload leaf photo'}
+              {dragging ? t('uploader.dropHint') : t('uploader.uploadHint')}
             </p>
             <p style={{ fontSize: '0.75rem', color: 'var(--color-ink-2)' }}>
-              JPG · PNG · WEBP · Max 10MB
+              {t('uploader.fileLimits')}
             </p>
           </div>
           <p style={{ fontSize: '0.75rem', color: 'var(--color-green-700)' }}>
-            Best results: clear, well-lit close-up
+            {t('uploader.tip')}
           </p>
         </label>
       )}
@@ -139,13 +141,13 @@ export function ImageUploader({ onFile, onCameraOpen, previewUrl, selectedFile, 
       {/* Action Buttons */}
       {!previewUrl && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          <button type="button" onClick={onCameraOpen} className="btn btn-primary btn-sm" aria-label="Open camera to take photo">
+          <button type="button" onClick={onCameraOpen} className="btn btn-primary btn-sm" aria-label={t('uploader.takePhoto')}>
             <Camera style={{ width: 14, height: 14 }} />
-            <span>Take Photo</span>
+            <span>{t('uploader.takePhoto')}</span>
           </button>
-          <button type="button" onClick={() => fileRef.current?.click()} className="btn btn-secondary btn-sm" aria-label="Choose image from device">
+          <button type="button" onClick={() => fileRef.current?.click()} className="btn btn-secondary btn-sm" aria-label={t('uploader.chooseFile')}>
             <ImagePlus style={{ width: 14, height: 14 }} />
-            <span>Choose File</span>
+            <span>{t('uploader.chooseFile')}</span>
           </button>
         </div>
       )}

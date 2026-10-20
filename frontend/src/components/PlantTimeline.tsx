@@ -1,6 +1,8 @@
 // PlantTimeline.tsx — Health history timeline
 import { CheckCircle2, AlertTriangle, XCircle } from 'lucide-react'
 import type { TimelineEntry } from '../types'
+import { useLang } from '../contexts/LanguageContext'
+import { localizeDiseaseName } from '../i18n/translations'
 
 interface PlantTimelineProps {
   entries: TimelineEntry[]
@@ -19,9 +21,11 @@ function getScoreColor(score: number): string {
 }
 
 export function PlantTimeline({ entries }: PlantTimelineProps) {
+  const { t, lang } = useLang()
+
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold text-[#10231D]">Health Timeline</h3>
+      <h3 className="text-sm font-bold text-[#10231D]">{t('history.title')}</h3>
       <div className="relative">
         {/* Vertical line */}
         <div className="absolute left-4 top-0 bottom-0 w-px bg-[#D4E8DC]" />
@@ -29,6 +33,9 @@ export function PlantTimeline({ entries }: PlantTimelineProps) {
         <div className="space-y-4">
           {entries.map((entry, i) => {
             const { Icon, color, bg } = getEntryIcon(entry.status)
+            const statusKey = entry.status === 'Needs Attention' ? 'needsAttention' : entry.status === 'At Risk' ? 'atRisk' : entry.status.toLowerCase()
+            const translatedStatus = t(('status.' + statusKey) as any) || entry.status
+
             return (
               <div key={i} className="flex gap-4 items-start relative">
                 {/* Icon node */}
@@ -44,8 +51,8 @@ export function PlantTimeline({ entries }: PlantTimelineProps) {
                       {entry.healthScore}/100
                     </span>
                   </div>
-                  <p className="text-xs text-[#64736C]">{entry.diagnosis}</p>
-                  <span className={`text-[10px] font-semibold ${color}`}>{entry.status}</span>
+                  <p className="text-xs text-[#64736C]">{localizeDiseaseName(entry.diagnosis, lang)}</p>
+                  <span className={`text-[10px] font-semibold ${color}`}>{translatedStatus}</span>
                 </div>
               </div>
             )

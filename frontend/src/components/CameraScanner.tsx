@@ -1,7 +1,7 @@
-// CameraScanner.tsx — Real browser camera interface
 import { useEffect, useRef } from 'react'
 import { Camera, CameraOff, FlipHorizontal, Image, RotateCcw, X, ZapOff } from 'lucide-react'
 import { useCamera } from '../hooks/useCamera'
+import { useLang } from '../contexts/LanguageContext'
 
 interface CameraScannerProps {
   onCapture: (file: File) => void
@@ -10,6 +10,7 @@ interface CameraScannerProps {
 }
 
 export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraScannerProps) {
+  const { t } = useLang()
   const camera = useCamera()
   const galleryRef = useRef<HTMLInputElement>(null)
 
@@ -54,19 +55,19 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
         <button
           type="button"
           onClick={() => { camera.stopCamera(); onClose() }}
-          aria-label="Close camera"
+          aria-label={t('camera.close')}
           className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
         <div className="text-center">
-          <div className="text-white font-bold text-sm">FloraAI Scanner</div>
-          <div className="text-white/60 text-xs">Position leaf in frame</div>
+          <div className="text-white font-bold text-sm">{t('camera.scannerTitle')}</div>
+          <div className="text-white/60 text-xs">{t('camera.positionLeaf')}</div>
         </div>
         <button
           type="button"
           onClick={camera.toggleFacing}
-          aria-label="Switch camera"
+          aria-label={t('camera.flip')}
           className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
         >
           <FlipHorizontal className="w-5 h-5" />
@@ -87,10 +88,10 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
             </div>
             <div className="text-center">
               <h3 className="text-white font-bold text-lg mb-2">
-                {camera.state === 'denied' ? 'Camera Access Denied' : 'Camera Unavailable'}
+                {camera.state === 'denied' ? t('camera.accessDenied') : t('camera.unavailable')}
               </h3>
               <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-                {camera.error ?? 'Unable to access camera.'}
+                {camera.error ?? t('camera.unavailable')}
               </p>
             </div>
             <div className="flex flex-col gap-3 w-full max-w-xs">
@@ -100,14 +101,14 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
                 className="w-full py-3 rounded-xl bg-[#0B8F68] text-white font-bold text-sm flex items-center justify-center gap-2"
               >
                 <Image className="w-5 h-5" />
-                Upload Image Instead
+                {t('camera.uploadInstead')}
               </button>
               <button
                 type="button"
                 onClick={() => camera.startCamera()}
                 className="w-full py-3 rounded-xl bg-white/10 text-white font-semibold text-sm"
               >
-                Try Again
+                {t('camera.tryAgain')}
               </button>
             </div>
           </div>
@@ -152,7 +153,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
             </div>
             <div className="absolute bottom-8 left-0 right-0 text-center">
               <span className="text-white/80 text-xs bg-black/40 px-3 py-1 rounded-full">
-                Align the affected leaf within the frame
+                {t('camera.alignLeaf')}
               </span>
             </div>
           </div>
@@ -172,7 +173,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <RotateCcw className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">Retake</span>
+              <span className="text-white/70 text-xs">{t('camera.retake')}</span>
             </button>
 
             {/* Use Photo */}
@@ -180,7 +181,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               type="button"
               onClick={() => { if (camera.capturedFile) onCapture(camera.capturedFile) }}
               className="w-20 h-20 rounded-full bg-[#0B8F68] flex items-center justify-center shadow-lg shadow-[#0B8F68]/50 hover:bg-[#087A59] transition-colors"
-              aria-label="Use this photo"
+              aria-label={t('camera.usePhoto')}
             >
               <Camera className="w-8 h-8 text-white" />
             </button>
@@ -194,7 +195,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <Image className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">Gallery</span>
+              <span className="text-white/70 text-xs">{t('camera.gallery')}</span>
             </button>
           </>
         ) : (
@@ -208,7 +209,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <Image className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">Gallery</span>
+              <span className="text-white/70 text-xs">{t('camera.gallery')}</span>
             </button>
 
             {/* Capture */}
@@ -217,7 +218,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               onClick={handleCapture}
               disabled={camera.state !== 'active'}
               className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center disabled:opacity-40 active:scale-95 transition-transform"
-              aria-label="Capture photo"
+              aria-label={t('camera.capture')}
             >
               <div className="w-14 h-14 rounded-full bg-white" />
             </button>
@@ -231,7 +232,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <FlipHorizontal className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">Flip</span>
+              <span className="text-white/70 text-xs">{t('camera.flip')}</span>
             </button>
           </>
         )}

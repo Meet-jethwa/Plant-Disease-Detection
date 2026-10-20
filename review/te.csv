@@ -1,0 +1,738 @@
+key,english,translation,status
+fe:diagnosis:diagnosis.treatment,Treatment Plan,చికిత్స ప్రణాళిక,reviewed
+fe:diagnosis:diagnosis.showTreatmentsAnyway,Show possible treatments anyway,ఏమైనప్పటికీ మందుల వివరాలు చూపించు,machine
+fe:library:library.treatment,Recommended Treatment Plan,సూచించిన నయం చేసే పద్ధతులు,machine
+fe:scan:scan.treatmentGuide,Treatment Guide,చికిత్స మార్గదర్శి,machine
+be:disease:bacterial_leaf_blight:treatment_summary,Apply copper-based bactericides. Remove infected plant debris. Use resistant varieties. Avoid excessive nitrogen fertilization.,రాగి ఆధారిత బ్యాక్టీరియా నాశినిలను వాడండి. తెగులు సోకిన మొక్కల అవశేషాలను తొలగించండి. తెగులును తట్టుకునే రకాలను సాగు చేయండి. నత్రజని ఎరువులను ఎక్కువగా వేయకండి.,machine
+be:disease:brown_spot:treatment_summary,"Apply mancozeb or iprodione fungicide. Correct soil nutrient deficiencies (potassium, silicon). Reduce dense planting.","మాంకోజెబ్ లేదా ఇప్రోడయాన్ శిలీంద్ర సంహారిణిని పిచికారీ చేయండి. నేలలో పోషకాల లోపాలను (పొటాషియం, సిలికాన్) సరిచేయండి. మొక్కలను దగ్గరగా నాటడాన్ని తగ్గించండి.",machine
+be:disease:healthy:treatment_summary,Continue regular monitoring and preventive care.,క్రమం తప్పకుండా గమనించడం మరియు నివారణ చర్యలు కొనసాగించండి.,machine
+be:disease:leaf_blast:treatment_summary,"Apply fungicides: tricyclazole, isoprothiolane, or azoxystrobin. Reduce nitrogen fertilizer. Drain fields to reduce humidity.","శిలీంద్ర సంహారిణిలను వాడండి: ట్రిైసైక్లోజోల్, ఐసోప్రొథియోలేన్ లేదా అజోక్సిస్ట్రోబిన్. నత్రజని ఎరువుల వాడకం తగ్గించండి. తేమను తగ్గించడానికి పొలంలో నీరు తీసివేయండి.",machine
+be:disease:leaf_scald:treatment_summary,Apply propiconazole or carbendazim fungicide. Improve field drainage and plant spacing.,ప్రొపికొనాజోల్ లేదా కార్బెండాజిమ్ శిలీంద్ర సంహారిణిని పిచికారీ చేయండి. పొలంలో నీరు నిలవకుండా చూడండి మరియు మొక్కల మధ్య దూరం పాటించండి.,machine
+be:disease:sheath_blight:treatment_summary,"Apply validamycin, hexaconazole, or propiconazole fungicides. Reduce plant density. Minimize canopy humidity.","వాలిడమైసిన్, హెక్సకొనజోల్ లేదా ప్రొపికొనజోల్ శిలీంద్ర సంహారిణి వాడండి. మొక్కల మధ్య దూరం ఉండేలా చూడండి. గాలి ఆడేలా చూసి తేమ తగ్గించండి.",machine
+be:disease:aphid:treatment_summary,Apply imidacloprid or lambda-cyhalothrin insecticide. Encourage natural predators (ladybugs).,ఇమిడాక్లోప్రిడ్ లేదా లామ్డా-సైహలోత్రిన్ పురుగుమందు వాడండి. సహజ శత్రువులైన లేడీ బర్డ్ పురుగులను ప్రోత్సహించండి.,machine
+be:disease:black_rust:treatment_summary,"Apply propiconazole, tebuconazole, or trifloxystrobin fungicides at early stages.","తెగులు ప్రారంభ దశలోనే ప్రొపికొనజోల్, టెబుకొనజోల్ లేదా ట్రిఫ్లాక్స్ట్రోబిన్ శిలీంద్ర సంహారిణి పిచికారీ చేయండి.",machine
+be:disease:blast:treatment_summary,"Tricyclazole, isoprothiolane, azoxystrobin fungicides.","ట్రైసైక్లాజోల్, ఐసోప్రొథియోలేన్, అజోక్సిస్ట్రోబిన్ శిలీంద్ర సంహారిణులు.",machine
+be:disease:brown_rust:treatment_summary,"Fungicides: propiconazole, mancozeb. Apply at early infection stage.","శిలీంద్ర సంహారిణులు: ప్రొపికోనజోల్, మాంకోజెబ్. తెగులు ఆశించిన మొదట్లో పిచికారీ చేయాలి.",machine
+be:disease:common_root_rot:treatment_summary,Seed treatment with trifloxystrobin + tebuconazole. Crop rotation with non-cereal crops.,ట్రైఫ్లాక్సీస్ట్రోబిన్ + టెబుకొనజోల్ తో విత్తన శుద్ధి చేయాలి. ధాన్యేతర పంటలతో పంట మార్పిడి చేయాలి.,machine
+be:disease:fusarium_head_blight:treatment_summary,Apply thiophanate-methyl or metconazole at early flowering. Remove infected debris.,పూత ప్రారంభంలో థియోఫానేట్-మిథైల్ లేదా మెట్కొనజోల్ పిచికారీ చేయాలి. తెగులు సోకిన చెత్తను తొలగించాలి.,machine
+be:disease:leaf_blight:treatment_summary,Mancozeb or propiconazole fungicide application.,మాంకోజెబ్ లేదా ప్రొపికొనజోల్ శిలీంద్ర సంహారిణి పిచికారీ చేయాలి.,machine
+be:disease:mildew:treatment_summary,"Apply triadimefon, propiconazole, or sulfur-based fungicides.","ట్రయాడిఫాన్, ప్రొపికొనజోల్ లేదా గంధకం (సల్ఫర్) ఆధారిత శిలీంద్ర సంహారిణిలను పిచికారీ చేయాలి.",machine
+be:disease:mite:treatment_summary,Apply abamectin or dicofol miticide. Increase irrigation.,అబమెక్టిన్ (abamectin) లేదా డైకోఫాల్ (dicofol) పురుగుమందును వాడండి. నీటి తడులు పెంచండి.,machine
+be:disease:septoria:treatment_summary,"Triazole or SDHI fungicides (epoxiconazole, fluxapyroxad). Early application is key.","ట్రైజోల్ లేదా SDHI శిలీంద్ర సంహారిణిలు (ఎపోక్సికొనజోల్, ఫ్లక్సాపైరోక్సాడ్) వాడాలి. తెగులు ఆశించిన మొదట్లోనే మందు కొట్టడం చాలా ముఖ్యం.",machine
+be:disease:smut:treatment_summary,"Seed treatment with carboxin, thiram, or tebuconazole is highly effective.","కార్బాక్సిన్, థిరామ్ లేదా టెబుకొనజోల్ తో విత్తన శుద్ధి చేయడం చాలా ప్రభావవంతంగా పనిచేస్తుంది.",machine
+be:disease:stem_fly:treatment_summary,Apply chlorpyrifos or imidacloprid at seedling stage.,మొక్కల దశలో క్లోర్‌పైరిఫాస్ లేదా ఇమిడాక్లోప్రిడ్ మందును పిచికారీ చేయాలి.,machine
+be:disease:tan_spot:treatment_summary,Apply propiconazole or mancozeb. Tillage to bury residues.,ప్రొపికొనజోల్ లేదా మాంకోజెబ్ పిచికారీ చేయాలి. వ్యర్థాలు మట్టిలో కలిసేలా దున్నాలి.,machine
+be:disease:yellow_rust:treatment_summary,"Apply propiconazole, tebuconazole, or other triazole fungicides early.","ప్రొపికొనజోల్, టెబుకొనజోల్ లేదా ఇతర ట్రైజోల్ శిలీంద్ర సంహారిణిలను ముందుగానే పిచికారీ చేయాలి.",machine
+be:disease:mosaic_disease:treatment_summary,No chemical cure. Remove and destroy infected stools. Control aphid vectors.,దీనికి మందులతో నయం చేయడం కుదరదు. తెగులు సోకిన మొక్కలను పీకి కాల్చివేయాలి. పేనుబంక పురుగులను అణచివేయాలి.,machine
+be:disease:rust:treatment_summary,Apply triadimefon or propiconazole fungicide. Remove severely infected leaves.,ట్రైడిమిఫాన్ లేదా ప్రొపికొజోల్ శిలీంద్ర సంహారిణి పిచికారీ చేయాలి. తెగులు బాగా సోకిన ఆకులను తీసివేయాలి.,machine
+be:disease:bacterial_blight:treatment_summary,Apply copper oxychloride or streptomycin spray. Remove infected debris.,కాపర్ ఆక్సిక్ಲೋರైಡ್ లేదా స్ట్రెప్టోమైసిన్ పిచికారీ చేయాలి. తెగులు సోకిన చెత్తను తొలగించాలి.,machine
+be:disease:alternaria_leaf_spot:treatment_summary,"Apply mancozeb, chlorothalonil, or iprodione fungicide.","మ్యాంకోజెబ్, క్లోరోథాలేనిల్ లేదా ఐప్రೋడియోన్ శిలీంద్ర సంహారిణి పిచికారీ చేయాలి.",machine
+be:disease:hispa:treatment_summary,Apply malathion or monocrotophos. Clip and destroy affected leaves.,మాలాథియాన్ లేదా మోనోక్రోటోఫాస్ పిచికారీ చేయాలి. రోగం సోకిన ఆకులను కత్తిరించి నాశనం చేయాలి.,machine
+be:disease:tungro:treatment_summary,No direct cure. Control leafhopper vectors with buprofezin or imidacloprid.,దీనికి నేరుగా నయం చేసే మందు లేదు. దోమలను అణచివేయడానికి బుప్రొఫెజిన్ లేదా ఇమిడాక్లోప్రిడ్ వాడాలి.,machine
+be:disease:dead_heart:treatment_summary,"Apply cartap hydrochloride, chlorpyrifos, or flubendiamide granules.","కార్టాప్ హైడ్రోక్లోరైడ్, క్లోర్‌పైరిఫాస్ లేదా ఫ్లుబెండిమైడ్ గుళికలను వాడండి.",machine
+be:disease:downy_mildew:treatment_summary,Apply metalaxyl or fosetyl-aluminium fungicide. Improve drainage.,మెటాలాక్సిల్ లేదా ఫోసెటైల్-అల్యూమినియం శిలీంద్ర సంహారిణిని వాడండి. నీరు పారేలా చూడండి.,machine
+be:disease:bacterial_leaf_streak:treatment_summary,Apply copper-based bactericides. Remove infected leaves.,రాగి ఆధారిత బ్యాక్టీరియా నాశినిని వాడండి. తెగులు సోకిన ఆకులను తొలగించండి.,machine
+be:disease:bacterial_panicle_blight:treatment_summary,Apply oxolinic acid or copper-based bactericide at panicle initiation.,క్యాన్ కంకు వచ్చే సమయంలో ఆక్సోలినిక్ యాసిడ్ లేదా రాగి ఆధారిత బ్యాక్టీరియా నాశిని పిచికారీ చేయాలి.,machine
+be:disease:normal:treatment_summary,Continue routine monitoring and preventive agronomic practices.,పంటను క్రమం తప్పకుండా పరిశీలిస్తూ ఉండండి మరియు సాధారణ సేద్యపు పద్ధతులు పాటించండి.,machine
+fe:diagnosis:diagnosis.symptoms,Detected Symptoms,గుర్తించిన లక్షణాలు,reviewed
+fe:diagnosis:diagnosis.symptomsFound,Symptoms found,గుర్తించిన లక్షణాలు,machine
+fe:library:library.symptoms,Key Visual Symptoms,ముఖ్యమైన లక్షణాలు,machine
+fe:scan:scan.symptomsPathology,Symptoms & Pathology,లక్షణాలు & తెగులు తీరు,machine
+be:disease:bacterial_leaf_blight:causes,"Warm temperatures (25–30°C), high humidity, and typhoon/rain-splash that spreads the bacteria through leaf wounds.","వెచ్చని ఉష్ణోగ్రతలు (25–30°C), ఎక్కువ తేమ, మరియు ఈదురుగాలులు/వర్షపు తుంపరల ద్వారా ఆకుల గాయాల ద్వారా బాక్టీరియా వ్యాపిస్తుంది.",machine
+be:disease:brown_spot:causes,Associated with nutrient-deficient soils (especially potassium and silicon). Favoured by warm humid conditions and poor soil health.,పోషకాలు లేని నేలల్లో (ముఖ్యంగా పొటాషియం మరియు సిలికాన్ లోపం ఉన్నప్పుడు) ఇది వస్తుంది. వెచ్చని తేమతో కూడిన వాతావరణం మరియు చెడు నేల ఆరోగ్యం దీనికి అనుకూలం.,machine
+be:disease:healthy:causes,N/A,వర్తించదు,machine
+be:disease:leaf_blast:causes,"Cool nights, warm days, high humidity (>90%), heavy dew, excessive nitrogen application, and susceptible varieties.","చల్లని రాత్రులు, వెచ్చని పగటిపూట, అధిక తేమ (>90%), విపరీతమైన మంచు, మోతాదుకు మించి నత్రజని ఎరువులు వేయడం మరియు తెగుლను తట్టుకోలేని రకాలను సాగు చేయడం.",machine
+be:disease:leaf_scald:causes,"High humidity, warm temperatures, and dense planting that reduces airflow.","అధిక తేమ, వెచ్చని ఉష్ణోగ్రతలు, మరియు దగ్గరగా నాటడం వల్ల గాలి సరిగ్గా ఆడకపోవడం.",machine
+be:disease:sheath_blight:causes,"High humidity (>90%), temperatures of 28–32°C, dense planting, high nitrogen levels, and flooded conditions that allow mycelium spread.","ఎక్కువ తేమ (>90%), 28–32°C ఉష్ణోగ్రతలు, ముద్దగా నాటడం, నత్రజని మోతాదు ఎక్కువ కావడం, మరియు నీరు నిలకడగా ఉండటం వల్ల సిలీంద్రం పెరుగుతుంది.",machine
+be:disease:aphid:causes,"Warm dry conditions, absence of natural predators, and dense planting.","వెచ్చని పొడి వాతావరణం, సహజ శత్రువులు లేకపోవడం, మరియు దగ్గరగా నాటడం.",machine
+be:disease:black_rust:causes,"Warm temperatures (15–30°C), dew, and wind-blown spores from nearby infected fields.","వెచ్చని ఉష్ణోగ్రతలు (15–30°C), మంచు కురవడం, మరియు పక్క పొలాల నుండి గాలి ద్వారా బీజాలు రాలడం.",machine
+be:disease:blast:causes,"Cool nights, morning dew, excess nitrogen, susceptible varieties.","చల్లని రాత్రులు, ఉదయం పూట మంచు, నత్రజని మోతాదు ఎక్కువ కావడం, తెగులు సోకే రకాలు.",machine
+be:disease:brown_rust:causes,"Moderate temperatures (15–22°C), dew, and humid conditions.","మధ్యస్థ ఉష్ణోగ్రతలు (15–22°C), మంచు మరియు తేమతో కూడిన వాతావరణం.",machine
+be:disease:common_root_rot:causes,"Dry soil conditions, warm temperatures during seeding, and soil-borne inoculum.","నేలలో తేమ తక్కువగా ఉండటం, విత్తే సమయంలో ఎక్కువ ఉష్ణోగ్రతలు, నేల ద్వారా సోకే క్రిములు.",machine
+be:disease:fusarium_head_blight:causes,"Wet conditions during flowering (anthesis), temperatures of 25–30°C, and crop residues.","పూత సమయంలో వర్షం కురియడం, 25–30°C ఉష్ణోగ్రత మరియు పొలంలో మిగిలిన పంట వ్యర్థాలు.",machine
+be:disease:leaf_blight:causes,Warm humid conditions and susceptible varieties.,వెచ్చని తేమతో కూడిన వాతావరణం మరియు తెగులు ఆశించే రకాలు.,machine
+be:disease:mildew:causes,"Cool temperatures (15–22°C), moderate humidity, and dense canopy.","చల్లని ఉష్ణోగ్రతలు (15–22°C), మోస్తరు తేమ మరియు దట్టమైన పంట.",machine
+be:disease:mite:causes,"Hot, dry conditions. Chemical treatments that kill natural predators.",ఎండ ఎక్కువగా ఉండి పొడిగా ఉండే వాతావరణం. మేలు చేసే జీవులను చంపేసే రసాయన మందులు వాడడం.,machine
+be:disease:septoria:causes,"Cool, wet weather (10–20°C), leaf wetness periods >20 hours.","చల్లని, తడి వాతావరణం (10–20°C), ఆకులు 20 గంటల కంటే ఎక్కువ సమయం తడిగా ఉండడం.",machine
+be:disease:smut:causes,Moderate temperatures during flowering with humid conditions. Seed-borne pathogen.,పూత సమయంలో తేమతో కూడిన మధ్యస్థ ఉష్ణోగ్రతలు. విత్తనాల ద్వారా సోకే తెగులు.,machine
+be:disease:stem_fly:causes,Peak activity during cool temperatures (15–20°C) at early crop stages.,పంట ప్రారంభ దశలో చల్లని వాతావరణం (15–20°C) ఉన్నప్పుడు ఇవి ఎక్కువగా వస్తాయి.,machine
+be:disease:tan_spot:causes,"Warm temperatures (20–28°C), leaf wetness, and crop residue from previous season.","వెచ్చని ఉష్ణోగ్రతలు (20–28°C), ఆకులపై తేమ మరియు గత సీజన్ పంట వ్యర్థాలు ఉండటం.",machine
+be:disease:yellow_rust:causes,"Cool temperatures (10–15°C), dew and mist, and susceptible varieties.","చల్లని ఉష్ణోగ్రతలు (10–15°C), మంచు కురవడం, మరియు తెగులు సోకే రకాలు.",machine
+be:disease:mosaic_disease:causes,"Transmitted by aphids (Rhopalosiphum maidis), infected planting material.",ఇది పేనుబంక (Rhopalosiphum maidis) పురుగుల ద్వారా మరియు సోకిన విత్తన కట్టెల ద్వారా వ్యాపిస్తుంది.,machine
+be:disease:rust:causes,"Warm temperatures (24–28°C), high humidity, and susceptible cultivars.","ఎక్కువ ఉష్ణోగ్రత (24–28°C), ఎక్కువ తేమ మరియు తెగులు సోకే రకాలు.",machine
+be:disease:bacterial_blight:causes,"Warm, humid weather, rain-splash, mechanical damage, and infected seeds.","వెచ్చని, తేమతో కూడిన వాతావరణం, వర్షపు నీటి తుంపరలు, గాయాలు మరియు సోకిన విత్తనాలు.",machine
+be:disease:alternaria_leaf_spot:causes,High humidity and temperatures of 25–30°C. Most severe on stressed or weakened plants.,ఎక్కువ తేమ మరియు 25–30°C ఉష్ణోగ్రత ఉన్నప్పుడు వస్తుంది. నీటి ఎత్తిడి లేదా బలహీనంగా ఉన్న మొక్కలకు ఇది ఎక్కువగా సోకుతుంది.,machine
+be:disease:hispa:causes,"Lush, dense crops with high nitrogen. Wet season conditions.","నత్రజని ఎరువులు ఎక్కువగా వేసి, గుబురుగా పెరిగిన పంట. వర్షాకాల వాతావరణం దీనికి అనుకూలం.",machine
+be:disease:tungro:causes,Green leafhopper (Nephotettix spp.) populations carrying both viruses.,రెండు వైరస్‌లను మోసుకెళ్లే ఆకుపచ్చ దోమలు (నెఫోటెటిక్స్ రకాలు) ఎక్కువైతే ఈ తెగులు వస్తుంది.,machine
+be:disease:dead_heart:causes,Stem borer moth populations during vegetative stage.,మొక్కల పెరుగుదల దశలో కాండం తొలుచు పురుగు రెక్కల పురుగుల ఉధృతి.,machine
+be:disease:downy_mildew:causes,"Waterlogged soils, cool temperatures, and high humidity.","నీరు నిల్వ ఉండే నేలలు, చల్లని ఉష్ణోగ్రతలు మరియు ఎక్కువ తేమ.",machine
+be:disease:bacterial_leaf_streak:causes,"Warm, humid weather. Spread by rain splash and irrigation water.","వెచ్చని, తేమతో కూడిన వాతావరణం. వర్షపు తుంపర్లు మరియు నీటి ద్వారా వ్యాపిస్తుంది.",machine
+be:disease:bacterial_panicle_blight:causes,High temperatures (>30°C) during flowering combined with high humidity.,పూత సమయంలో ఉష్ణోగ్రత ఎక్కువగా (>30°C) ఉండటం మరియు గాలిలో తేమ ఎక్కువగా ఉండటం.,machine
+be:disease:normal:causes,N/A,వర్తించదు,machine
+fe:common:card.prevention,Prevention Plan,నివారణ,reviewed
+fe:library:library.prevention,Long-term Prevention,దీర్ఘకాలిక నివారణ చర్యలు,machine
+fe:scan:scan.longTermPrevention,Long-Term Prevention,దీర్ఘకాలిక నివారణ,machine
+be:disease:bacterial_leaf_blight:prevention,Use certified disease-free seeds. Maintain field drainage. Apply balanced fertilization.,తెగులు లేని ధృవీకరించిన విత్తనాలను వాడండి. పొలంలో నీరు నిలవకుండా చూసుకోండి. సమతుల్యంగా ఎరువులు వేయండి.,machine
+be:disease:brown_spot:prevention,"Balanced fertilization, well-drained soils, disease-resistant varieties.","సమతుల్య ఎరువుల వాడకం, నీరు బాగా ఇంకిపోయే నేలలు, తెగుళ్లను తట్టుకునే రకాలు.",machine
+be:disease:healthy:prevention,"Maintain good agronomic practices, balanced fertilization, and proper irrigation.","మంచి సేద్యపు పద్ధతులు పాటించండి, సమతుల్యంగా ఎరువులు వేయండి మరియు సరైన నీటి తడులు ఇవ్వండి.",machine
+be:disease:leaf_blast:prevention,Use blast-resistant varieties. Avoid excess nitrogen. Ensure good airflow between plants.,తెగులును తట్టుకునే రకాలను ఎంచుకోండి. ఎక్కువ నత్రజని ఎరువులు వేయకండి. మొక్కల మధ్య గాలి బాగా ఆడేలా చూసుకోండి.,machine
+be:disease:leaf_scald:prevention,"Wider row spacing, balanced nutrients, resistant varieties.","వరుసల మధ్య ఎక్కువ దూరం ఉంచడం, సమతుల్య పోషకాలు, తెగులును తట్టుకునే రకాలు.",machine
+be:disease:sheath_blight:prevention,"Lower seeding rates, balanced fertilization, water management.","విత్తన మోతాదు తగ్గించండి, సమతుల్యంగా ఎరువులు వేయండి, నీటి యాజమాన్యం పాటించండి.",machine
+be:disease:aphid:prevention,"Early planting, crop rotation, avoid excessive nitrogen.","ముందస్తుగా విత్తడం, పంట మార్పిడి చేయడం, నత్రజని ఎరువులు ఎక్కువగా వేయకపోవడం.",machine
+be:disease:black_rust:prevention,Plant resistant varieties. Early sowing. Remove volunteer wheat plants.,తెగులును తట్టుకునే రకాలను వేయండి. ముందుగానే విత్తండి. వాటంతట అవే మొలిచే గోధుమ మొక్కలను తొలగించండి.,machine
+be:disease:blast:prevention,"Resistant varieties, balanced nitrogen, regulated irrigation.","తెగులును తట్టుకునే రకాలు, సమపాళ్లలో నత్రజని, సరిపడా నీటి పారుదల.",machine
+be:disease:brown_rust:prevention,"Resistant varieties, timely sowing, crop rotation.","తెగులు తట్టుకునే రకాలు, సరైన సమయానికి విత్తనం వేయడం, పంట మార్పిడి.",machine
+be:disease:common_root_rot:prevention,"Balanced soil fertility, avoid continuous wheat, proper seeding depth.","నేలలో పోషకాలు సరిపడా ఉండేలా చూసుకోవడం, గోధుమ పంటనే మళ్లీ మళ్లీ వేయకపోవడం, సరైన లోతులో విత్తనాలు విత్తడం.",machine
+be:disease:fusarium_head_blight:prevention,"Resistant varieties, tillage to bury residues, good drainage.","తెగులును తట్టుకునే రకాలను సాగు చేయడం, వ్యర్థాలు మట్టిలో కలిసేలా దున్నుకోవడం, మంచి నీటి పారుదల కల్పించడం.",machine
+be:disease:leaf_blight:prevention,Crop rotation and use of resistant varieties.,పంట మార్పిడి చేయడం మరియు తెగులును తట్టుకునే రకాలను వాడటం.,machine
+be:disease:mildew:prevention,"Wider row spacing, resistant varieties, early sowing.","వరుసల మధ్య ఎక్కువ దూరం ఉండేలా చూడటం, తెగులును తట్టుకునే రకాలను సాగు చేయడం, ముందుగా విత్తడం.",machine
+be:disease:mite:prevention,Avoid overly dry conditions. Conserve beneficial insects.,నేల లేదా వాతావరణం మరీ పొడిగా ఉండకుండా చూసుకోండి. పంటకు మేలు చేసే కీటకాలను కాపాడుకోండి.,machine
+be:disease:septoria:prevention,"Resistant varieties, crop rotation, delayed sowing.","తెగులును తట్టుకునే రకాలను సాగు చేయడం, పంట మార్పిడి చేయడం, విత్తడం ఆలస్యం చేయడం.",machine
+be:disease:smut:prevention,Use certified smut-free seed. Hot-water seed treatment.,తెగులు ఆశించని ధృవీకరించిన విత్తనాలను వాడండి. వేడి నీటితో విత్తన శుద్ధి చేయండి.,machine
+be:disease:stem_fly:prevention,"Early sowing, treat seeds with systemic insecticide, monitor basal nodes.","ముందస్తుగా విత్తనాలు వేయాలి, విత్తనాలకు సిస్టమిక్ పురుగుమందుతో శుద్ధి చేయాలి, మొక్కల మొదళ్లను గమనిస్తూ ఉండాలి.",machine
+be:disease:tan_spot:prevention,"Crop rotation, residue management, resistant varieties.","పంట మార్పిడి చేయడం, వ్యర్థాలను సరిగ్గా నిర్వహించడం, తెగులును తట్టుకునే రకాలను సాగు చేయడం.",machine
+be:disease:yellow_rust:prevention,Resistant varieties are most effective. Early sowing. Monitor forecasts.,తెగులును తట్టుకునే రకాలను వేయడం చాలా ముఖ్యం. ముందస్తుగా విత్తనాలు వేయాలి. వాతావరణ సూచనలను గమనించాలి.,machine
+be:disease:mosaic_disease:prevention,"Use virus-free seed cane, resistant varieties, control aphid populations.","వైరస్ లేని మంచి విత్తನ కట్టెలను వాడాలి, తెగులును తట్టుకునే రకాలను ఎంచుకోవాలి, పేనుబంక పురుగులను నివారించాలి.",machine
+be:disease:rust:prevention,Plant resistant varieties. Balanced fertilization.,తెగులును తట్టుకునే రకాలను నాటాలి. సక్రమంగా ఎరువులు వేయాలి.,machine
+be:disease:bacterial_blight:prevention,"Disease-free certified seed, seed treatment, crop rotation.","తెగులు లేని ధృవీకరించిన విత్తనాలు వాడాలి, విత్తన శుద్ధి చేయాలి, పంట మార్పిడి చేయాలి.",machine
+be:disease:alternaria_leaf_spot:prevention,"Good drainage, balanced nutrition, remove infected debris.","నీరు నిల్వకుండా చూడాలి, సరైన పోషకాలు అందించాలి, రోగం సోకిన చెత్తాచెదారాన్ని తొలగించాలి.",machine
+be:disease:hispa:prevention,"Avoid over-fertilization, resistant varieties, reduce dense planting.","ఎక్కువ ఎరువులు వాడటం తగ్గించాలి, తట్టుకునే రకాలను సాగు చేయాలి, మొక్కలు దగ్గరదగ్గరగా నాటడం తగ్గించాలి.",machine
+be:disease:tungro:prevention,"Resistant varieties (Utri Merah), synchronized planting, leafhopper management.","తెగులును తట్టుకునే రకాలు (ఉట్రి మెరాహ్) సాగు చేయడం, అందరూ ఒకే సమయంలో నార్లు నాటడం, దోమలను అణచివేయడం.",machine
+be:disease:dead_heart:prevention,Avoid early planting when moths are active. Use light traps. Remove egg masses.,పురుగులు ఎక్కువగా ఉన్నప్పుడు ముందుగానే నాటడం మానుకోండి. కాంతి ఉచ్చులు (లైట్ ట్రాప్స్) వాడండి. గుడ్ల సమూహాలను ఏరివేయండి.,machine
+be:disease:downy_mildew:prevention,"Avoid water stagnation, improve field drainage, resistant varieties.","నీరు నిలవకుండా చూసుకోండి, పొలంలో నీటి పారుదల సౌకర్యం మెరుగుపరచండి, తెగులును తట్టుకునే రకాలను సాగు చేయండి.",machine
+be:disease:bacterial_leaf_streak:prevention,Use resistant varieties. Avoid excessive nitrogen.,తెగులును తట్టుకునే రకాలను వాడండి. నత్రజని ఎరువులు ఎక్కువగా వేయకండి.,machine
+be:disease:bacterial_panicle_blight:prevention,"Resistant varieties, avoid water stress at heading.","తెగులును తట్టుకునే రకాలను సాగు చేయాలి, కంకు వచ్చే సమయంలో నీటి ఎత్తి రాకుండా చూసుకోవాలి.",machine
+be:disease:normal:prevention,"Maintain balanced fertilization, proper irrigation, and crop rotation.","సమతుల్యంగా ఎరువులు వేయడం, సరైన నీటి పారుదల మరియు పంట మార్పిడి పద్ధతులు పాటించడం.",machine
+fe:assistant:assistant.noDiagnosis,Scan a leaf first to enable context-aware diagnosis.,ముందు మొక్క ఆకును స్కాన్ చేయండి.,reviewed
+fe:common:card.diagnosisSummary,Diagnosis Summary,నిర్ధారణ సారాంశం,reviewed
+fe:diagnosis:diagnosis.title,Plant Health Report,మొక్క ఆరోగ్య నివేదిక,reviewed
+fe:diagnosis:diagnosis.gradcam,Grad-CAM Attention Map,AI దృశ్య విశ్లేషణ (Grad-CAM),reviewed
+fe:diagnosis:diagnosis.healthScore,Health Score,ఆరోగ్య స్కోర్,reviewed
+fe:diagnosis:diagnosis.details,Diagnosis Details,నిర్ధారణ వివరాలు,reviewed
+fe:diagnosis:diagnosis.modelPredictions,Model Predictions,మోడల్ అంచనాలు,reviewed
+fe:diagnosis:diagnosis.aiSummary,Why FloraAI Thinks This,FloraAI ఇలా ఎందుకు భావిస్తుంది,reviewed
+fe:diagnosis:diagnosis.conditions,Current Weather,ప్రస్తుత వాతావరణం,reviewed
+fe:diagnosis:diagnosis.risk,Disease Risk,వ్యాధి ప్రమాదం,reviewed
+fe:diagnosis:diagnosis.expertAlert,Consult an Expert,నిపుణుడిని సంప్రదించండి,reviewed
+fe:diagnosis:diagnosis.consultExpert,This diagnosis indicates a high-severity condition. Consult a local agronomist before applying chemical treatment.,ఈ నిర్ధారణ తీవ్రమైన స్థితిని సూచిస్తుంది. చికిత్సకు ముందు నిపుణుడిని సంప్రదించండి.,reviewed
+fe:diagnosis:diagnosis.whatToDoNow,What to do now,ఇప్పుడు ఏమి చేయాలి,reviewed
+fe:diagnosis:diagnosis.heatmapToggle,See where the problem is,సమస్య ఎక్కడ ఉందో చూడండి,reviewed
+fe:diagnosis:diagnosis.listen,Listen,వినండి,reviewed
+fe:diagnosis:diagnosis.stopListening,Stop listening,ఆపండి,reviewed
+fe:diagnosis:diagnosis.leafVision,Leaf Vision,లీఫ్ విజన్,machine
+fe:diagnosis:diagnosis.originalPhoto,Original leaf photo,అసలు ఆకు ఫోటో,machine
+fe:diagnosis:diagnosis.photo,Photo,ఫోటో,machine
+fe:diagnosis:diagnosis.aiView,AI view,AI వ్యూ,machine
+fe:diagnosis:diagnosis.compare,Compare,పోల్చండి,machine
+fe:diagnosis:diagnosis.compareHandle,Compare AI view with original,AI వ్యూని అసలు ఫోటోతో పోల్చండి,machine
+fe:diagnosis:diagnosis.hotspot,Attention point,గమనించాల్సిన చోటు,machine
+fe:diagnosis:diagnosis.attentionHere,The AI paid most attention here,AI ఇక్కడ ఎక్కువగా చూసింది,machine
+fe:diagnosis:diagnosis.whereAiLooked,Where the AI looked,AI ఎక్కడ చూసింది,machine
+fe:diagnosis:diagnosis.attentionLegend,Green to amber to red focus scale,"ఆకుపచ్చ నుండి పసుపు, ఎరుపు రంగుల ఫోకస్ స్కేల్",machine
+fe:diagnosis:diagnosis.attentionInfo,"This shows model attention, not a guaranteed diagnosis.","ఇది AI ఎక్కడ చూసిందో చూపుతుంది అంతే, ఖచ్చితమైన రోగ నిర్ధారణ కాదు.",machine
+fe:diagnosis:diagnosis.lowConfidenceNote,"The AI is not sure, so highlights may be approximate","AI కి సరిగ్గా అర్థం కాలేదు, అందుకే గుర్తులు అటుఇటుగా ఉండవచ్చు",machine
+fe:diagnosis:diagnosis.notSureYet,Not sure yet,ఇంకా ఖచ్చితంగా చెప్పలేం,machine
+fe:diagnosis:diagnosis.unrecognizedLeaf,We could not recognize this leaf,ఈ ఆకు ఏమిటో మాకు గుర్తించలేకపోయింది,machine
+fe:diagnosis:diagnosis.unrecognizedHint,"Please retake the photo clearly, or check that the selected crop matches your plant.",దయచేసి ఫోటో స్పష్టంగా మళ్లీ తీయండి లేదా మీరు ఎంచుకున్న పంట సరిగ్గా ఉందో లేదో చూసుకోండి.,machine
+fe:diagnosis:diagnosis.retakePhoto,Retake photo,ఫోటో మళ్లీ తీయండి,machine
+fe:diagnosis:diagnosis.lowConfidenceWarning,"Warning: Because the AI is not confident, consult an agronomist before applying chemicals.","హెచ్చరిక: AI కి నమ్మకం కుదరలేదు, కాబట్టి మందులు వాడే ముందు వ్యవసాయ నిపుణులను సంప్రదించండి.",machine
+fe:diagnosis:diagnosis.affectedArea,Affected Area,తెగులు సోకిన భాగం,machine
+fe:diagnosis:diagnosis.weatherRisk,Weather Risk,వాతావరణ ముప్పు,machine
+fe:diagnosis:diagnosis.weatherDetails,Weather details,వాతావరణ వివరాలు,machine
+fe:diagnosis:diagnosis.technicalDetails,Technical details,సాంకేతిక వివరాలు,machine
+fe:diagnosis:diagnosis.tabImmediate,Immediate,వెంటనే చేయాల్సింది,machine
+fe:diagnosis:diagnosis.tabOrganic,Organic,సేంద్రీయ పద్ధతి,machine
+fe:diagnosis:diagnosis.tabPreventive,Preventive,ముందస్తు జాగ్రత్తలు,machine
+fe:diagnosis:diagnosis.askAiAboutThis,Ask AI about this,దీని గురించి AI ని అడగండి,machine
+fe:diagnosis:diagnosis.diseaseDetected,Disease Detected,తెగులు గుర్తింపు,machine
+fe:diagnosis:diagnosis.healthyPlant,Healthy Plant,ఆరోగ్యకరమైన మొక్క,machine
+fe:diagnosis:diagnosis.photoTips,Tips for a better photo,మంచి ఫోటో తీయడానికి సూచనలు,machine
+fe:diagnosis:diagnosis.possibleDiseases,Possible Diseases,రావడానికి అవకాశం ఉన్న తెగుళ్లు,machine
+fe:diagnosis:diagnosis.confidenceIs,Confidence is,ఖచ్చితత్వ శాతం,machine
+fe:diagnosis:diagnosis.multipleMatch,Multiple conditions may match these leaf patterns.,ఈ ఆకు లక్షణాలను బట్టి ఒకటి కంటే ఎక్కువ తెగుళ్లు ఉండవచ్చు.,machine
+fe:diagnosis:diagnosis.disclaimer,FloraAI diagnostic assistance is advisory only. Verify with agricultural officers before crop intervention.,ఫ్లోరా AI (FloraAI) చెప్పేది కేవలం సలహా మాత్రమే. పంటలో ఏవైనా మందులు కొట్టే ముందు వ్యవసాయ అధికారులను సంప్రదించండి.,machine
+fe:diagnosis:weather.context,WEATHER CONTEXT,వాతావరణ పరిస్థితి,machine
+fe:diagnosis:weather.update,UPDATE,అప్‌డేట్ చేయి,machine
+fe:diagnosis:weather.locating,LOCATING...,స్థానాన్ని గుర్తిస్తోంది...,machine
+fe:diagnosis:weather.lowRisk,LOW RISK,తక్కువ ప్రమాదం,machine
+fe:diagnosis:weather.mediumRisk,MEDIUM RISK,మధ్యస్త ప్రమాదం,machine
+fe:diagnosis:weather.highRisk,HIGH RISK,ఎక్కువ ప్రమాదం,machine
+fe:diagnosis:weather.severeRisk,SEVERE RISK,అత్యంత తీవ్ర ప్రమాదం,machine
+fe:diagnosis:weather.prompt,Click UPDATE to load local weather and disease risk data.,స్థానిక వాతావరణం మరియు తెగుళ్ల సమాచారం కోసం అప్‌డేట్ నొక్కండి.,machine
+fe:diagnosis:diagnosis.preliminaryMeasures,Preliminary Measures:,మొదటి దశలో తీసుకోవాల్సిన చర్యలు:,machine
+fe:diagnosis:diagnosis.factorInfluence,Environmental Factor Influence,వాతావరణ ప్రభావం,machine
+fe:diagnosis:diagnosis.sympLesions,Discolored foliar lesions,ఆకులపై రంగు మారిన మచ్చలు,machine
+fe:diagnosis:diagnosis.sympNecrosis,Necrotic margin formation,మచ్చల అంచులు ఎండిపోవడం,machine
+fe:diagnosis:diagnosis.sympVascular,Vascular tissue stress,నాళాల వ్యవస్థపై ఒత్తిడి,machine
+fe:assistant:assistant.title,AI Agronomist Chat,AI వ్యవసాయ సహాయకుడు,reviewed
+fe:assistant:assistant.subtitle,Multi-crop expert diagnostics and care protocols powered by Gemini AI.,"వరి, గోధుమ, చెరకు మరియు పత్తి వ్యాధి విశ్లేషణ.",reviewed
+fe:assistant:assistant.placeholder,"Ask about this diagnosis, treatments, or preventive care…",ఈ నిర్ధారణ గురించి అడగండి…,reviewed
+fe:assistant:assistant.analyzing,Thinking…,విశ్లేషిస్తోంది…,reviewed
+fe:assistant:assistant.contextActive,Diagnosis Context Active,సందర్భం సక్రియం,reviewed
+fe:assistant:assistant.suggested,Suggested questions:,సూచించిన ప్రశ్నలు:,reviewed
+fe:assistant:assistant.followUp,Ask a follow-up question:,తర్వాత అడగండి:,reviewed
+fe:assistant:assistant.emptyTitle,Ask the AI Crop Specialist,AI నిపుణుడిని అడగండి,reviewed
+fe:assistant:assistant.emptyHint,"Ask questions regarding your scanned plant diagnosis, organic remedies, or seasonal prevention.","స్కాన్ చేసిన ఆకు, చికిత్స లేదా నివారణ గురించి అడగండి.",reviewed
+fe:assistant:assistant.weatherAdvice,Today's Weather Advice,ఈరోజు వాతావరణ సలహా,machine
+fe:assistant:assistant.jumpToLatest,Jump to latest,చివరికి వెళ్ళు,machine
+fe:assistant:assistant.welcomeMsg,"Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.","నమస్కారం! నేను మీ మొక్కల ఆరోగ్య సహాయకుడిని. పూర్తి రోగ నిర్ధారణ కోసం మొక్క ఆకు ఫోటోను అప్‌లోడ్ చేయండి — నమ్మకం స్కోర్, గ్రాడ్-క్యామ్ (Grad-CAM దృష్టి పటం) సాక్ష్యం, వాతావరణ ముప్పు విశ్లేషణ మరియు ఆచరణాత్మక సలహాలు పొందండి.",machine
+fe:common:nav.home,Home,హోమ్,reviewed
+fe:common:nav.scan,Scanner,స్కాన్,reviewed
+fe:common:nav.chat,AI Chat,AI చాట్,reviewed
+fe:common:nav.plants,My Plants,నా మొక్కలు,reviewed
+fe:common:nav.encyclopedia,Encyclopedia,విజ్ఞానకోశం,reviewed
+fe:common:nav.history,History,చరిత్ర,reviewed
+fe:common:nav.language,Choose language,భాషను ఎంచుకోండి,reviewed
+fe:common:lang.chooseLanguage,Choose language,భాషను ఎంచుకోండి,reviewed
+fe:common:btn.scanPlant,Scan Plant,మొక్క స్కాన్,reviewed
+fe:common:btn.save,Save Plant,సేవ్ చేయి,reviewed
+fe:common:btn.saved,Saved,సేవ్ అయింది,reviewed
+fe:common:btn.download,Download Report,నివేదిక డౌన్‌లోడ్,reviewed
+fe:common:btn.share,Share,షేర్ చేయి,reviewed
+fe:common:btn.back,Back,వెనుకకు,reviewed
+fe:common:btn.send,Send,పంపు,reviewed
+fe:common:btn.speak,Listen,వినండి,reviewed
+fe:common:btn.stopSpeaking,Stop listening,ఆపు,reviewed
+fe:common:btn.scanAnother,Scan Another,మరొక మొక్క స్కాన్,reviewed
+fe:common:btn.askChat,Ask AI Chat,AI చాట్ అడగండి,reviewed
+fe:common:btn.analyze,Analyze,విశ్లేషించు,reviewed
+fe:common:btn.analyzing,Analyzing…,విశ్లేషిస్తోంది…,reviewed
+fe:common:btn.locate,Locate,స్థానం కనుగొను,reviewed
+fe:common:btn.refresh,Refresh,రిఫ్రెష్,reviewed
+fe:common:btn.cancel,Cancel,రద్దు చేయి,machine
+fe:common:btn.more,More,మరిన్ని,machine
+fe:common:footer.platform,Platform,ప్లాట్‌ఫారమ్,machine
+fe:common:footer.data,Data,డేటా,machine
+fe:common:footer.info,Info,సమాచారం,machine
+fe:common:footer.scanner,Plant Scanner,ప్లాంట్ స్కేనర్,machine
+fe:common:footer.chat,AI Chat,AI చాట్,machine
+fe:common:footer.plants,My Plants,నా మొక్కలు,machine
+fe:common:footer.encyclopedia,Encyclopedia,విజ్ఞాన సర్వస్వం,machine
+fe:common:footer.library,Disease Library,తెగుళ్ల పుస్తకం,machine
+fe:common:footer.history,Scan History,స్కాన్ చరిత్ర,machine
+fe:common:footer.tools,Analysis Tools,విశ్లేషణ పరికరాలు,machine
+fe:common:footer.about,About BioScan,బయోస్కాన్ గురించి,machine
+fe:common:footer.contact,Contact,సంప్రదించండి,machine
+fe:common:footer.privacy,Privacy,గోప్యత,machine
+fe:common:footer.terms,Terms,నిబంధనలు,machine
+fe:common:footer.tagline,"AI-powered plant disease intelligence for farms, labs, and greenhouses worldwide.","ప్రపంచవ్యాప్తంగా ఉన్న పొలాలు, ప్రయోగశాలలు మరియు గ్రీన్‌హౌస్‌ల కోసం AI ఆధారిత మొక్కల తెగుళ్ల సమాచారం.",machine
+fe:common:footer.operational,ALL SYSTEMS OPERATIONAL,సిస్టమ్స్ అన్నీ పనిచేస్తున్నాయి,machine
+fe:common:footer.rights,All rights reserved.,అన్ని హక్కులూ రిజర్వ్ చేయబడ్డాయి.,machine
+fe:common:footer.disclaimer,Flora AI provides diagnostic guidance for informational purposes only. Results should be verified by a qualified agricultural expert.,ఫ్లోరా AI సమాచార ప్రయోజనాల కోసం మాత్రమే రోగ నిర్ధారణ మార్గదర్శకాలను అందిస్తుంది. ఫలితాలను అర్హత కలిగిన వ్యవసాయ నిపుణుడు ధృవీకరించాలి.,machine
+fe:common:history.title,Scan History & Timeline,స్కాన్ చరిత్ర & కాలక్రమం,machine
+fe:common:history.empty,No scan records found. Scan a leaf to start tracking health.,స్కాన్ రికార్డ్స్ ఏవీ కనుగొనబడలేదు. ఆరోగ్యాన్ని ట్రాక్ చేయడం ప్రారంభించడానికి ఆకును స్కాన్ చేయండి.,machine
+fe:common:history.clear,Clear History,చరిత్రను తొలగించు,machine
+fe:common:history.diagnosesRecorded,diagnoses recorded,రోగ నిర్ధారణలు నమోదయ్యాయి,machine
+fe:common:card.whyDetected,Why Detected (XAI),ఎందుకు గుర్తించబడింది (XAI),reviewed
+fe:common:card.visualEvidence,Visual Evidence,దృశ్య సాక్ష్యం,reviewed
+fe:common:card.shap,SHAP Feature Evidence,SHAP సాక్ష్యం,reviewed
+fe:common:card.environmental,Environmental Factors,పర్యావరణ కారకాలు,reviewed
+fe:common:card.actions,Recommended Actions,సిఫారసు చేసిన చర్యలు,reviewed
+fe:common:card.disclaimer,FloraAI guidance is advisory only.,FloraAI మార్గదర్శకత్వం కేవలం సలహా కొరకు మాత్రమే.,reviewed
+fe:common:card.original,Original Image,అసలు చిత్రం,reviewed
+fe:common:card.gradcam,Grad-CAM Heatmap,Grad-CAM వేడి మ్యాప్,reviewed
+fe:common:card.shapNote,SHAP values are pre-computed by the backend from environmental sensor data.,SHAP విలువలు ముందే లెక్కించబడ్డాయి. Gemini వాటిని వివరిస్తుంది.,reviewed
+fe:common:common.loading,Loading…,లోడవుతోంది…,reviewed
+fe:common:common.error,Error,లోపం,reviewed
+fe:common:common.crop,Crop,పంట,reviewed
+fe:common:common.confidence,AI Confidence,AI విశ్వాసం,reviewed
+fe:common:common.health,Health,ఆరోగ్యం,reviewed
+fe:common:common.severity,Severity,తీవ్రత,reviewed
+fe:common:common.poweredBy,Powered by Gemini AI,Gemini AI ద్వారా,reviewed
+fe:common:common.context,Active Diagnosis Context,సక్రియ సందర్భం,reviewed
+fe:common:common.askFollowUp,Ask a follow-up,తర్వాత అడగండి,reviewed
+fe:common:status.healthy,Healthy,ఆరోగ్యకరమైనది,reviewed
+fe:common:status.warning,Warning,హెచ్చరిక,reviewed
+fe:common:status.danger,Danger,ప్రమాదం,reviewed
+fe:common:risk.low,Low Risk,తక్కువ ప్రమాదం,machine
+fe:common:risk.medium,Medium Risk,మధ్యస్థ ప్రమాదం,machine
+fe:common:risk.high,High Risk,ఎక్కువ ప్రమాదం,machine
+fe:common:risk.severe,Severe Risk,తీవ్రమైన ముప్పు,machine
+fe:common:loader.step1,Looking at the leaf…,ఆకును పరిశీలిస్తోంది…,reviewed
+fe:common:loader.step2,Checking for disease…,వ్యాధిని నిర్ధారిస్తోంది…,reviewed
+fe:common:loader.step3,Preparing advice…,సలహాలను సిద్ధం చేస్తోంది…,reviewed
+fe:common:loader.slowBackend,This is taking longer than expected. Please wait…,అనుకున్న దానికంటే ఎక్కువ సమయం పడుతోంది. దయచేసి వేచి ఉండండి…,reviewed
+fe:common:loader.checking,Checking your plant…,మీ మొక్కను పరిశీలిస్తున్నాము…,machine
+fe:common:loader.takingLonger,Taking longer than usual… please keep this page open,సాధారణం కంటే ఎక్కువ సమయం పడుతోంది… దయచేసి ఈ పేజీని తెరిచి ఉంచండి,machine
+fe:common:loader.timeoutError,Diagnosis took too long. Please check your connection and try again.,నిర్ధారణకు చాలా సమయం పట్టింది. దయచేసి మీ నెట్‌వర్క్ చూసుకుని మళ్లీ ప్రయత్నించండి.,machine
+fe:common:loader.tryAgain,Try again,మళ్లీ ప్రయత్నించండి,machine
+fe:common:nav.myProfile,My Profile,నా ప్రొఫైల్,machine
+fe:common:nav.scanHistory,Scan History,స్కాన్ చరిత్ర,machine
+fe:common:nav.preferences,Preferences,సెట్టింగ్‌లు,machine
+fe:common:nav.signOut,Sign Out,బయటకు వెళ్లండి (లాగ్ అవుట్),machine
+fe:common:nav.proSpecialist,PRO SPECIALIST,ప్రో నిపుణుడు,machine
+fe:common:uploader.leafImage,Leaf Image,ఆకు ఫోటో,machine
+fe:common:uploader.uploadHint,Upload leaf photo,ఆకు ఫోటోను అప్‌లోడ్ చేయండి,machine
+fe:common:uploader.dropHint,Drop image to scan,స్కాన్ చేయడానికి ఫోటోను ఇక్కడ ఉంచండి,machine
+fe:common:uploader.fileLimits,JPG · PNG · WEBP · Max 10MB,JPG · PNG · WEBP · గరిష్టంగా 10MB,machine
+fe:common:uploader.tip,"Best results: clear, well-lit close-up","మంచి ఫలితాల కోసం: స్పష్టంగా, మంచి వెలుతురులో తీసిన దగ్గరి ఫోటో",machine
+fe:common:uploader.takePhoto,Take Photo,ఫోటో తీయండి,machine
+fe:common:uploader.chooseFile,Choose File,ఫైల్‌ను ఎంచుకోండి,machine
+fe:common:uploader.invalidType,"Please upload a valid image file (JPG, PNG, or WEBP).","దయచేసి సరైన ఇమేజ్ ఫైల్‌ను అప్‌లోడ్ చేయండి (JPG, PNG, లేదా WEBP).",machine
+fe:common:uploader.tooLarge,Image is too large. Please use an image under 10 MB.,ఫోటో చాలా పెద్దదిగా ఉంది. దయచేసి 10 MB కంటే తక్కువ ఉన్న ఫోటోను వాడండి.,machine
+fe:common:uploader.remove,Remove selected image,ఎంచుకున్న ఫోటోను తీసివేయండి,machine
+fe:common:camera.scannerTitle,FloraAI Scanner,ఫ్లోరా AI స్కానర్,machine
+fe:common:camera.positionLeaf,Position leaf in frame,ఫ్రేమ్‌లో ఆకును ఉంచండి,machine
+fe:common:camera.alignLeaf,Align the affected leaf within the frame,తెగులు సోకిన ఆకును ఫ్రేమ్‌లో సరిగ్గా అమర్చండి,machine
+fe:common:camera.retake,Retake,మళ్లీ తీయండి,machine
+fe:common:camera.gallery,Gallery,గ్యాలరీ,machine
+fe:common:camera.flip,Flip Camera,కెమెరా మార్చండి,machine
+fe:common:camera.accessDenied,Camera Access Denied,కెమెరా అనుమతి నిరాకరించబడింది,machine
+fe:common:camera.unavailable,Camera Unavailable,కెమెరా అందుబాటులో లేదు,machine
+fe:common:camera.uploadInstead,Upload Image Instead,దానికి బదులుగా ఫోటోను అప్‌లోడ్ చేయండి,machine
+fe:common:camera.tryAgain,Try Again,మళ్లీ ప్రయత్నించండి,machine
+fe:common:camera.usePhoto,Use this photo,ఈ ఫోటోను వాడండి,machine
+fe:common:camera.capture,Capture photo,ఫోటో తీయండి,machine
+fe:common:camera.close,Close camera,కెమెరా మూసివేయండి,machine
+fe:common:severity.low,Low,తక్కువ,machine
+fe:common:severity.medium,Moderate,మోస్తరు,machine
+fe:common:severity.moderate,Moderate,మోస్తరు,machine
+fe:common:severity.high,High,ఎక్కువ,machine
+fe:common:severity.severe,Severe,తీవ్రమైనది,machine
+fe:common:severity.critical,Critical,చాలా తీవ్రమైనది,machine
+fe:common:severity.none,None,ఏమీ లేదు,machine
+fe:common:status.needsAttention,Needs Attention,శ్రద్ధ పెట్టాలి,machine
+fe:common:status.atRisk,At Risk,ప్రమాదంలో ఉంది,machine
+fe:common:status.critical,Critical,చాలా ప్రమాదకరం,machine
+fe:common:status.diseaseDetected,DISEASE DETECTED,తెగులు సోకింది,machine
+fe:common:health.breakdown,HEALTH BREAKDOWN,ఆరోగ్య వివరాలు,machine
+fe:common:health.indexDesc,"AI health index based on visible leaf condition, color, and disease pattern analysis.","ఆకుల పరిస్థితి, రంగు మరియు తెగుళ్ల లక్షణాలను బట్టి AI ఆరోగ్య సూచిక ఇవ్వబడింది.",machine
+fe:common:health.leafHealth,Leaf Health,ఆకుల ఆరోగ్యం,machine
+fe:common:health.colorHealth,Color Health,రంగు ఆరోగ్యం,machine
+fe:common:health.visibleDamage,Visible Damage,కనిపించే నష్టం,machine
+fe:common:health.diseaseRisk,Disease Risk,తెగులు వచ్చే ప్రమాదం,machine
+fe:common:chat.treatTitle,Treat Disease,తెగులుకు మందు,machine
+fe:common:chat.treatQuestion,What is the immediate recommended organic or chemical treatment for this disease?,ఈ తెగులు పోవడానికి వెంటనే ఏ మందు (సేంద్రీయ లేదా రసాయన) కొట్టాలి?,machine
+fe:common:chat.irrigationRainTitle,Irrigation after rainfall,వర్షం తర్వాత నీరు పెట్టడం,machine
+fe:common:chat.irrigationRainQuestion,When should I irrigate after heavy rainfall and high soil moisture?,"భారీ వర్షం పడి నేల తడిగా ఉన్నప్పుడు, మళ్లీ ఎప్పుడు నీరు పెట్టాలి?",machine
+fe:common:chat.irrigationTitle,Irrigation timing,నీరు పెట్టే సమయం,machine
+fe:common:chat.irrigationQuestion,When should I irrigate my crop after rainfall?,వర్షం కురిసిన తర్వాత పంటకు ఎప్పుడు నీరు పెట్టాలి?,machine
+fe:common:chat.fertilizerTitle,Fertilizer & nutrition,ఎరువులు మరియు పోషకాలు,machine
+fe:common:chat.fertilizerQuestion,How much urea should I apply during the tillering stage?,పిల్లకలు వచ్చే దశలో ఎంత యూరియా వేయాలి?,machine
+fe:common:chat.yellowingTitle,Yellowing leaf diagnosis,ఆకులు పసుపు రంగులోకి మారడం,machine
+fe:common:chat.yellowingQuestion,Why are the lower crop leaves turning yellow?,కింది ఆకులు ఎందుకు పసుపు రంగులోకి మారుతున్నాయి?,machine
+fe:common:chat.dripTitle,Drip vs Flood methods,డ్రిప్ వర్సెస్ ముంపు పద్ధతులు,machine
+fe:common:chat.dripQuestion,What is the water savings and yield difference between drip and flood irrigation?,డ్రిప్ మరియు ముంపు నీటి పారుదల మధ్య నీటి ఆదా మరియు దిగుబడి తేడా ఎంత?,machine
+fe:common:chat.simpler,Explain simpler,ఇంకా సులభంగా చెప్పండి,machine
+fe:common:chat.simplerQ,Can you explain this in simpler farmer terms with less technical jargon?,"దీన్ని రైతన్నలకు అర్థమయ్యేలా సులభమైన మాటల్లో, ఎక్కువ కఠినమైన పదాలు లేకుండా చెప్పగలరా?",machine
+fe:common:chat.steps,Show steps,పద్ధతులు చూపించు,machine
+fe:common:chat.stepsQ,What are the numbered practical action steps I should follow in order?,నేను వరుసగా పాటించాల్సిన ఆచరణాత్మక పనులు ఏమిటి?,machine
+fe:common:chat.organic,Organic option,సేంద్రియ పద్ధతి,machine
+fe:common:chat.organicQ,What organic and non-chemical remedies can I prepare at home?,నేను ఇంట్లోనే ఏవైనా సేంద్రియ మరియు రసాయనేతర మందులు తయారు చేసుకోవచ్చా?,machine
+fe:common:tag.leafNeck,🍃 Leaf & 🌾 Neck Node,🍃 ఆకు & 🌾 మెడ భాగం,machine
+fe:common:tag.flagEars,🍃 Flag Leaf & 🌾 Ears,🍃 జెండా ఆకు & 🌾 కంకులు,machine
+fe:common:tag.stalkPith,🎋 Stalk Pith,🎋 కాండం లోపలి భాగం,machine
+fe:common:tag.leafVeins,🍃 Leaf Veins,🍃 ఆకు నరాలు,machine
+fe:common:care.water,Water,నీరు,machine
+fe:common:care.sunlight,Sunlight,ఎండ,machine
+fe:common:care.humidity,Humidity,తేమ,machine
+fe:common:care.soil,Soil,నేల,machine
+fe:common:care.asNeeded,As needed,అవసరాన్ని బట్టి,machine
+fe:common:care.fullSun,Full sun,నిండు ఎండ,machine
+fe:common:care.wellDraining,Well-draining,నీరు నిలవని నేల,machine
+fe:common:common.copied,Copied,కాపీ అయింది,machine
+fe:common:common.copy,Copy,కాపీ చేయి,machine
+fe:common:common.helpful,Helpful,ఉపయోగకరంగా ఉంది,machine
+fe:common:chat.newChat,New Chat,కొత్త చాట్,machine
+fe:common:common.advice,Advice,సలహా,machine
+fe:common:common.healthScore,Health Score,ఆరోగ్య స్కోర్,machine
+fe:common:common.view,View,చూడు,machine
+fe:common:common.close,Close,మూసివేయి,machine
+fe:home:home.heroPill,FLORA AI — PLANT DISEASE INTELLIGENCE,ఫ్లోరా AI (FLORA AI) — మొక్కల తెగుళ్ల సమాచారం,machine
+fe:home:home.heroTitle1,DIAGNOSE,గుర్తించండి,machine
+fe:home:home.heroTitle2,PLANT DISEASE,మొక్కల తెగుళ్లను,machine
+fe:home:home.heroTitle3,IN SECONDS,సెకన్లలో,machine
+fe:home:home.heroSubtitle,"Instant AI crop disease detection, Grad-CAM visual evidence, and agricultural advice in your language.","AI ద్వారా వెంటనే పంట తెగుళ్లను గుర్తించండి, గ్రాడ్-క్యామ్ (Grad-CAM దృష్టి పటం) ద్వారా సాక్ష్యాలను చూడండి, మీ సొంత భాషలో వ్యవసాయ సలహాలు పొందండి.",machine
+fe:home:home.scanNowFree,SCAN NOW — FREE,ఇప్పుడే స్కాన్ చేయండి — ఉచితం,machine
+fe:home:home.badgeNoSignup,No signup required,రిజిస్ట్రేషన్ అవసరం లేదు,machine
+fe:home:home.badgeAnyDevice,Works on any device,ఏ ఫోన్ లోనైనా పనిచేస్తుంది,machine
+fe:home:home.badgeSpeed,Results in < 3 seconds,3 సెకన్లలో ఫలితం,machine
+fe:home:home.statsDiseases,Diseases Detected,గుర్తించిన తెగుళ్లు,machine
+fe:home:home.statsScans,Scans Analyzed,విశ్లేషించిన స్కాన్‌లు,machine
+fe:home:home.statsCrops,Supported Crops,గుర్తించగల పంటలు,machine
+fe:home:home.statsAccuracy,AI Accuracy Rate,AI కచ్చితత్వ రేటు,machine
+fe:home:home.howItWorks,HOW IT WORKS,ఇది ఎలా పనిచేస్తుంది,machine
+fe:home:home.threeSteps,THREE STEPS TO DIAGNOSIS,తెగులును గుర్తಿಸಲು మూడు అడుగులు,machine
+fe:home:home.step1Title,Capture,ఫోటో తీయండి,machine
+fe:home:home.step1Desc,Upload or capture a clear photo of the infected leaf.,తెగులు సోకిన ఆకు యొక్క స్పష్టమైన ఫోటోను అప్‌లోడ్ చేయండి లేదా తీయండి.,machine
+fe:home:home.step2Title,Analyze,విశ్లేషించు,machine
+fe:home:home.step2Desc,AI runs multi-class disease detection and generates heatmaps.,ఏఐ (AI) రకరకాల తెగుళ్లను గుర్తించి హీట్‌మ్యాప్‌లను తయారు చేస్తుంది.,machine
+fe:home:home.step3Title,Respond,సమాధానం,machine
+fe:home:home.step3Desc,"Receive diagnosis, risk score, treatment protocols and prevention tips.","తెగులు ఏంటో, రిస్క్ ఎంత ఉందో తెలుసుకోండి, అలాగే మందులు మరియు నివారణ చిట్కాలు పొందండి.",machine
+fe:home:home.capabilities,CAPABILITIES,చేయగల పనులు,machine
+fe:home:home.labTools,LAB-GRADE TOOLS,ప్రయోగశాల స్థాయి పరికరాలు,machine
+fe:home:home.featHeatmapTitle,Visual AI Heatmaps,చూడదగిన ఏఐ హీట్‌మ్యాప్‌లు,machine
+fe:home:home.featHeatmapDesc,Proprietary Grad-CAM visualization shows precisely where infection is located on the leaf.,ప్రత్యేకమైన గ్రాడ్-క్యామ్ (Grad-CAM దృష్టి పటం) ద్వారా ఆకుపై తెగులు ఎక్కడ ఉందో ఖచ్చితంగా చూపిస్తుంది.,machine
+fe:home:home.featHeatmapAction,Run Scanner,స్కానర్ నడుపు,machine
+fe:home:home.featChatTitle,AI Expert Chat,ఏఐ నిపుణుడితో చాట్,machine
+fe:home:home.featChatDesc,"Powered by Gemini AI, get instant expert-level answers on disease management and fertilizers.","జెమినీ ఏఐ (Gemini AI) సహాయంతో, తెగుళ్ల నిర్వహణ మరియు ఎరువుల గురించి నిపుణుల సలహాలు వెంటనే పొందండి.",machine
+fe:home:home.featChatAction,Open Chat,చాట్ తెరువు,machine
+fe:home:home.featTrackingTitle,Health Tracking,ఆరోగ్య పర్యవేక్షణ,machine
+fe:home:home.featTrackingDesc,Monitor recovery curves and plant health scores over time with progress analytics.,మొక్క కోలుకుంటున్న తీరును మరియు దాని ఆరోగ్యాన్ని ఎప్పటికప్పుడు గమనించండి.,machine
+fe:home:home.featTrackingAction,My Plants,నా మొక్కలు,machine
+fe:home:home.featWeatherTitle,Weather Risk Intel,వాతావరణ రిస్క్ సమాచారం,machine
+fe:home:home.featWeatherDesc,Correlates local weather conditions with disease spread probability in real time.,స్థానిక వాతావరణ పరిస్థితులను బట్టి తెగులు ఎంత వేగంగా వ్యాపిస్తుందో అప్పటికప్పుడు తెలియజేస్తుంది.,machine
+fe:home:home.featWeatherAction,Check Risk,రిస్క్ చూడండి,machine
+fe:home:home.featLibraryTitle,Disease Encyclopedia,తెగుళ్ల పుస్తకం,machine
+fe:home:home.featLibraryDesc,Comprehensive reference library of plant diseases with symptoms and treatment databases.,"మొక్కల తెగుళ్లు, వాటి లక్షణాలు మరియు మందుల గురించి పూర్తి వివరాలు ఉండే లైబ్రరీ.",machine
+fe:home:home.featLibraryAction,Explore,చూడండి,machine
+fe:home:home.featInstantTitle,Instant Diagnosis,వెంటనే నిర్ధారణ,machine
+fe:home:home.featInstantDesc,Diagnosis results in under 3 seconds. Upload from any device in the field.,3 సెకన్లలోపు తెగులు ఏంటో తెలుస్తుంది. పొలంలో ఉండి ఏ ఫోన్ నుండైనా ఫోటో అప్‌లోడ్ చేయవచ్చు.,machine
+fe:home:home.featInstantAction,Try Now,ఇప్పుడే ప్రయత్నించండి,machine
+fe:home:home.edgePill,BIOSCAN EDGE,బయోస్కാൻ ఎడ్జ్,machine
+fe:home:home.edgeTitle,"BUILT FOR FARMS, LABS AND FIELDS","పొలాలు, లాబ్‌లు మరియు క్షేత్రాల కోసం తయారు చేయబడింది",machine
+fe:home:home.edgeDesc,"BioScan works on any device — whether you are in a greenhouse, in a lab, or in the middle of a field with just your phone.","బయోస్కాన్ ఏ ఫోన్లోనైనా పనిచేస్తుంది — మీరు గ్రీన్‌హౌస్‌లో ఉన్నా, లాబ్‌లో ఉన్నా, లేదా మీ ఫోన్‌తో పొలం మధ్యలో ఉన్నా సరే.",machine
+fe:home:home.deviceMobile,📱 Mobile,📱 మొబైల్,machine
+fe:home:home.deviceDesktop,💻 Desktop,💻 డెస్క్‌టాప్,machine
+fe:home:home.deviceLab,🔬 Lab Screen,🔬 ల్యాబ్ స్క్రీన్,machine
+fe:home:home.deviceField,🌾 Field Tablet,🌾 పొలం టాబ్లెట్,machine
+fe:home:home.deviceDashboard,🖥 Dashboard,🖥 డాష్‌బోర్డ్,machine
+fe:home:home.startScanning,Start Scanning,స్కాన్ చేయడం మొదలుపెట్టండి,machine
+fe:home:home.askChat,Ask AI Chat,AI చాట్‌ను అడగండి,machine
+fe:home:home.faqPill,FAQ,తరచుగా అడిగే ప్రశ్నలు,machine
+fe:home:home.faqTitle,COMMON QUESTIONS,ಸಾಮಾನ್ಯ ప్రశ్నలు,machine
+fe:home:home.faq1Q,Which crops are currently supported?,ప్రస్తుతం ఏ పంటలకు మద్దతు ఉంది?,machine
+fe:home:home.faq1A,"BioScan currently supports Rice, Wheat, Sugarcane, and Cotton, with more crops being added regularly. Our AI model is trained on 127+ disease classes.","బయోస్కాన్ ప్రస్తుతం వరి, గోధుమ, చెరుకు మరియు పత్తి పంటలకు మద్దతు ఇస్తుంది, ఇంకా అనేక పంటలను క్రమం తప్పకుండా జోడిస్తున్నాము. మా AI మోడల్ 127+ తెగుళ్ల రకాలపై శిక్షణ పొందింది.",machine
+fe:home:home.faq2Q,How accurate is the disease detection?,తెగులు గుర్తింపు ఎంత ఖచ్చితంగా ఉంటుంది?,machine
+fe:home:home.faq2A,"Our AI model achieves 97.3% accuracy on our validation dataset. For best results, capture clear, well-lit photos.","మా AI మోడల్ మా వాలిడేషన్ డేటాసెట్‌పై 97.3% ఖచ్చితత్త్వాన్ని సాధిస్తుంది. ఉత్తమ ఫలితాల కోసం, స్పష్టమైన మరియు మంచి వెలుతురు ఉన్న ఫోటోలను తీయండి.",machine
+fe:home:home.faq3Q,Is my data private?,నా డేటా గోప్యంగా ఉంటుందా?,machine
+fe:home:home.faq3A,Yes. Your uploaded images are processed securely and never shared with third parties.,అవును. మీరు అప్‌లోడ్ చేసిన ఫోటోలు సురక్షితంగా ప్రాసెస్ చేయబడతాయి మరియు ఎట్టి పరిస్థితుల్లోనూ మూడవ పక్షాలతో పంచుకోబడవు.,machine
+fe:home:home.faq4Q,Can I use BioScan offline?,నేను బయోస్కాన్‌ను ఇంటర్నెట్ లేకుండా (ఆఫ్‌లైన్) వాడవచ్చా?,machine
+fe:home:home.faq4A,Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline mode.,ప్రస్తుతం AI విశ్లేషణ కోసం బయోస్కాన్‌కు ఇంటర్నెట్ కనెక్షన్ అవసరం. మేము త్వరలో ఆఫ్‌లైన్ మోడ్‌ను కూడా తీసుకురావడానికి పని చేస్తున్నాము.,machine
+fe:home:home.faq5Q,What image format and size works best?,ఏ రకమైన ఇమేజ్ ఫార్మాట్ మరియు సైజ్ ఉత్తమంగా పనిచేస్తుంది?,machine
+fe:home:home.faq5A,"JPG, PNG, or WebP images up to 10MB. Capture the leaf against natural light at 2-4 megapixel resolution.","JPG, PNG, లేదా WebP ఇమేజ్‌లు 10MB వరకు పర్వాలేదు. సహజమైన వెలుతురులో 2-4 మెగాపిక్సల్ రిజల్యూషన్‌తో ఆకు ఫోటో తీయండి.",machine
+fe:home:home.ctaReady,READY TO SCAN YOUR PLANTS?,మీ మొక్కలను స్కాన్ చేయడానికి సిద్ధంగా ఉన్నారా?,machine
+fe:home:home.ctaDesc,Upload a photo right now — no signup needed. Get AI diagnosis in seconds.,ఇప్పుడే ఫోటోను అప్‌లోడ్ చేయండి — రిజిస్ట్రేషన్ అవసరం లేదు. సెకన్లలో AI ద్వారా తెగులు ఏమిటో తెలుసుకోండి.,machine
+fe:home:home.ctaLaunch,Launch BioScanner,బయోస్కానర్‌ను ప్రారంభించండి,machine
+fe:home:home.greeting,"Good morning, Farmer","నమస్కారం, రైతు మిత్రమా",reviewed
+fe:home:home.scanCta,Scan a leaf,ఆకును స్కాన్ చేయండి,reviewed
+fe:home:home.diseaseRiskToday,Disease risk today,నేటి వ్యాధి ప్రమాదం,reviewed
+fe:home:home.recentScans,Recent scans,ఇటీవలి స్కాన్లు,reviewed
+fe:library:library.title,Plant Disease Encyclopedia,మొక్కల తెగుళ్ల నిధి (ఎన్సైక్లోపీడియా),machine
+fe:library:library.subtitle,Complete pathology reference for farmers with field symptoms and scientific treatment protocols.,రైతుల కోసం పొలంలో కనిపించే లక్షణాలు మరియు శాస్త్రీయ చికిత్సా విధానాలతో కూడిన పూర్తి తెగుళ్ల సమాచార పుస్తకం.,machine
+fe:library:library.searchPlaceholder,"Search by disease name, symptom, or pathogen…","తెగులు పేరు, లక్షణం లేదా క్రిమి పేరుతో వెతకండి...",machine
+fe:library:library.allCrops,All Crops,అన్ని పంటలు,machine
+fe:library:library.affectedOrgans,Affected Organs:,సోకిన భాగాలు:,machine
+fe:library:library.noMatches,No matching diseases found,సరిపోలే తెగుళ్లు ఏవీ కనుగొనబడలేదు,machine
+fe:library:library.viewProtocol,View Treatment Protocol,చికిత్సా విధానాన్ని చూడండి,machine
+fe:library:library.back,Back to Encyclopedia,ఎన్సైక్లోపీడియాకు వెనక్కి వెళ్ళండి,machine
+fe:library:library.scanForThis,Scan leaf for this disease,ఈ తెగులు కోసం ఆకును స్కాన్ చేయండి,machine
+fe:library:library.overview,Disease Overview,తెగులు వివరాలు,machine
+fe:library:library.whereToLook,Where to look on plant,చెట్టుపై ఎక్కడ చూడాలి,machine
+fe:library:library.favors,Conditions that favor infection,తెగులు త్వరగా వ్యాపించడానికి అనుకూలమైన వాతావరణం,machine
+fe:library:library.spreads,How it spreads,ఇది ఎలా వ్యాపిస్తుంది,machine
+fe:library:library.organic,Organic / Biocontrol,సేంద్రీయ / జీవ నియంత్రణ,machine
+fe:library:library.chemical,Chemical / Fungicide Protocol,రసాయన / శిలీంద్ర సంహారిణి పద్ధతి,machine
+fe:library:library.profilesCount,Disease Profiles · 4 Crops,తెగుళ్ల వివరాలు · 4 పంటలు,machine
+fe:library:library.diseasesCount,Diseases,తెగుళ్లు,machine
+fe:library:library.noMatchesTitle,No Disease Matches Found,ఎలాంటి తెగుళ్లు కనుగొనబడలేదు,machine
+fe:library:library.noMatchesDesc,No diseases matched your search for the selected filter. Try adjusting your query or resetting filters.,మీరు వెతికిన పదానికి లేదా పెట్టిన ఫిల్టర్‌కు ఎలాంటి తెగుళ్లు సరిపోలలేదు. దయచేసి వెతికే పదాన్ని మార్చండి లేదా ఫిల్టర్‌లను తీసేయండి.,machine
+fe:library:library.clearFilters,Clear Filters,ఫిల్టర్‌లను తొలగించు,machine
+fe:library:library.impactSeverity,Impact Severity,తెగులు తీవ్రత,machine
+fe:library:library.anatomyFocus,Anatomy focus:,ఎక్కువగా దెబ్బతినే భాగం:,machine
+fe:library:library.riceDesc,"Staple cereal vulnerable to blast fungi, brown spots, and leaf miner beetles.","అగ్గి తెగులు (బ్లాస్ట్), గోధుమ మచ్చలు మరియు ఆకు తొలుచు పురుగుల బారినపడే ముఖ్యమైన ధాన్యపు పంట.",machine
+fe:library:library.riceParts,"Leaf Blade, Sheath, Neck Node & Grain","ఆకు బ్లేడ్, తొడుగు, కంకి కింద భాగం & గింజ",machine
+fe:library:library.wheatDesc,Cereal crop prone to stripe/brown rust fungi and septoria leaf blotch.,గీత / గోధుమ రంగు తుప్పు తెగులు మరియు సెప్టోరియా ఆకు మచ్చల బారినపడే గోధుమ పంట.,machine
+fe:library:library.wheatParts,"Flag Leaf, Upper Canopy & Spike Ears","జెండా ఆకు, పై భాగం & కంకులు",machine
+fe:library:library.sugarcaneDesc,Perennial cash crop susceptible to red rot stalk decay and mosaic virus.,ఎర్ర కుళ్లు తెగులు మరియు మొזాయిక్ వైరస్ సోకే చెరకు పంట.,machine
+fe:library:library.sugarcaneParts,"Internal Stalk, Stem Internodes & Whorl Leaves","కాండం లోపలి భాగం, కణుపులు & సుడులు",machine
+fe:library:library.cottonDesc,Fiber crop challenged by bacterial blight lesions and whitefly curl virus.,బ్యాక్టీరియా ఆకు మచ్చలు మరియు తెల్లదోమ వైరస్ సమస్యలను ఎదుర్కొనే పత్తి పంట.,machine
+fe:library:library.cottonParts,"Angular Leaf Veins, Main Stem & Bolls","ఆకు ఈనెలు, ప్రధాన కాండం & కాయలు",machine
+fe:plants:crop.rice,Rice,వరి,machine
+fe:plants:crop.wheat,Wheat,గోధుమ,machine
+fe:plants:crop.sugarcane,Sugarcane,చెరకు,machine
+fe:plants:crop.cotton,Cotton,పత్తి,machine
+fe:plants:plants.title,Active Crop Health Registry,పంటల ఆరోగ్య నమోదు పట్టిక,machine
+fe:plants:plants.badge,Crop Monitoring,పంటల పర్యవేక్షణ,machine
+fe:plants:plants.registerNew,Register New Specimen,కొత్త పంటను నమోదు చేయండి,machine
+fe:plants:plants.healthySpecimens,Healthy Specimens,ఆరోగ్యంగా ఉన్న మొక్కలు,machine
+fe:plants:plants.attentionRequired,Attention Required,శ్రద్ధ పెట్టాలి,machine
+fe:plants:plants.highRisk,High Pathogen Risk,తెగుళ్ల ముప్పు ఎక్కువగా ఉంది,machine
+fe:plants:plants.allCrops,All Crops,అన్ని పంటలు,machine
+fe:plants:plants.healthy,Healthy,ఆరోగ్యంగా ఉన్నాయి,machine
+fe:plants:plants.needsAttention,Needs Attention,జాగ్రత్త తీసుకోవాలి,machine
+fe:plants:plants.searchPlaceholder,Search plants by name or species…,పేరు లేదా జాతి ద్వారా మొక్కల కోసం వెతకండి…,machine
+fe:plants:plants.empty,No monitored plants found,గమనికలో ఉన్న మొక్కలు ఏవీ కనుగొనబడలేదు,machine
+fe:plants:plants.emptyDesc,Start by scanning a leaf in the scanner to monitor recovery.,కోలుకునే తీరును పరిశీలించడానికి ముందుగా స్కానర్‌లో ఆకును స్కాన్ చేయండి.,machine
+fe:plants:plants.scanFirst,Scan Plant Now,ఇప్పుడే మొక్కను స్కాన్ చేయండి,machine
+fe:profile:profile.title,Settings & Farm Profile,సెట్టింగ్‌లు & పొలం ప్రొఫైల్,machine
+fe:profile:profile.verified,VERIFIED,ధృవీకరించబడింది,machine
+fe:profile:profile.pro,PRO SPECIALIST,ప్రో నిపుణుడు,machine
+fe:profile:profile.notifications,NOTIFICATIONS,సమాచారాలు (నోటిఫికేషన్‌లు),machine
+fe:profile:profile.diseaseAlerts,Disease Alerts,తెగుళ్ల హెచ్చరికలు,machine
+fe:profile:profile.diseaseAlertsDesc,Get notified when crop infection risk is high,పంటకు తెగులు సోకే ప్రమాదం ఎక్కువగా ఉన్నప్పుడు సమాచారం పొందండి,machine
+fe:profile:profile.weeklyReports,Weekly Reports,వారపు నివేదికలు,machine
+fe:profile:profile.weeklyReportsDesc,Summary of your plant health and treatments,మీ మొక్కల ఆరోగ్యం మరియు మందుల పిచికారీ వివరాల సారాంశం,machine
+fe:profile:profile.preferences,PREFERENCES,ప్రాధాన్యతలు,machine
+fe:profile:profile.language,Language,భాష,machine
+fe:profile:profile.units,Units,కొలతలు,machine
+fe:profile:profile.unitsVal,"Metric (°C, mm, km/h)","మెట్రిక్ (°C, mm, km/h)",machine
+fe:profile:profile.weatherOverride,Manual Weather Data,చేతితో నమోదు చేసే వాతావరణ సమాచారం,machine
+fe:profile:profile.manualActive,MANUAL ACTIVE,మ్యాన్యువల్ యాక్టివ్‌లో ఉంది,machine
+fe:profile:profile.autoGps,AUTO GPS,ఆటో జిపిఎస్,machine
+fe:profile:profile.weatherTitle,Agro-Climatic Weather Override,వాతావరణ సమాచారాన్ని మార్చుకోండి,machine
+fe:profile:profile.city,City / Village,నగరం / గ్రామం,machine
+fe:profile:profile.state,State / Region,రాష్ట్రం / ప్రాంతం,machine
+fe:profile:profile.temp,Temperature (°C),ఉష్ణోగ్రత (°C),machine
+fe:profile:profile.humidity,Relative Humidity (%),గాలిలో తేమ శాతం (%),machine
+fe:profile:profile.rainfall,Rainfall (24h mm),వర్షపాతం (24h మి.మీ),machine
+fe:profile:profile.wind,Wind Speed (km/h),గాలి వేగం (కి.మీ/గంట),machine
+fe:profile:profile.condition,Weather Condition,వాతావరణ పరిస్థితి,machine
+fe:profile:profile.riskLevel,Environmental Risk Level,పర్యావరణ ముప్పు స్థాయి,machine
+fe:profile:profile.riskReason,Risk Assessment Explanation,ముప్పు అంచనా వివరణ,machine
+fe:profile:profile.applyWeather,Apply Weather Data,వాతావరణ డేటాను వర్తింపజేయి,machine
+fe:profile:profile.resetGps,Reset to Live GPS,లైవ్ GPSకి రీసెట్ చేయి,machine
+fe:profile:profile.savedSuccess,Manual weather data saved and applied across the entire app!,మాన్యువల్ వాతావరణ డేటా సేవ్ చేయబడింది మరియు యాప్ అంతటా వర్తింపజేయబడింది!,machine
+fe:profile:profile.resetSuccess,Reset to live GPS sensors and Open-Meteo weather data!,లైవ్ GPS సెన్సార్లు మరియు ఓపెన్-మెటియో వాతావరణ డేటాకు రీసెట్ చేయబడింది!,machine
+fe:profile:profile.privacy,PRIVACY & DATA,గోప్యత & డేటా,machine
+fe:profile:profile.dataSharing,Data Sharing,డేటా షేరింగ్,machine
+fe:profile:profile.dataSharingDesc,Help improve agronomic AI models,వ్యవసాయ AI మోడళ్లను మెరుగుపరచడంలో సహాయపడండి,machine
+fe:profile:profile.privacyPolicy,Privacy Policy,గోప్యతా విధానం,machine
+fe:profile:profile.deleteData,Delete My Data,నా డేటాను తొలగించు,machine
+fe:profile:profile.support,SUPPORT,మద్దతు,machine
+fe:profile:profile.helpFaq,Help & FAQ,సహాయం & తరచుగా అడిగే ప్రశ్నలు,machine
+fe:profile:profile.contactSupport,Contact Agronomist Support,వ్యవసాయ నిపుణుల మద్దతును సంప్రదించండి,machine
+fe:profile:profile.signOut,SIGN OUT,సైన్ అవుట్,machine
+fe:profile:profile.footerText,FLORA AI • PLANT DISEASE INTELLIGENCE PLATFORM,ఫ్లోరా AI • మొక్కల వ్యాధి మేధస్సు వేదిక,machine
+fe:scan:scan.workspace,DIAGNOSTIC WORKSPACE,డయాగ్నస్టిక్ వర్క్‌స్పేస్,machine
+fe:scan:scan.title,Plant Disease Scanner,మొక్క వ్యాధి స్కానర్,reviewed
+fe:scan:scan.subtitle,Upload a leaf photo to get instant AI-powered pathology and Grad-CAM diagnosis.,ఆకు ఫోటో అప్‌లోడ్ చేసి తక్షణ AI నిర్ధారణ పొందండి.,reviewed
+fe:scan:scan.reset,Reset,రీసెట్ చేయి,machine
+fe:scan:scan.selectCrop,Select Crop,పంట ఎంచుకోండి,reviewed
+fe:scan:scan.uploadHint,Upload leaf image,ఆకు చిత్రాన్ని అప్‌లోడ్ చేయండి,reviewed
+fe:scan:scan.diagnosing,Diagnosing your plant…,మీ మొక్కను పరీక్షిస్తోంది…,reviewed
+fe:scan:scan.diagnoseCta,Diagnose Plant Health,మొక్కల ఆరోగ్యాన్ని నిర్ధారించండి,machine
+fe:scan:scan.ready,Ready for Diagnostics,నిర్ధారణకు సిద్ధంగా ఉంది,machine
+fe:scan:scan.aiDetection,AI Disease Detection,AI వ్యాధి గుర్తింపు,machine
+fe:scan:scan.visualHeatmap,Visual Heatmap,విజువల్ హీట్‌మ్యాప్,machine
+fe:scan:scan.complete,Diagnosis Complete,నిర్ధారణ పూర్తయింది,machine
+fe:scan:scan.severity,Severity,తీవ్రత,machine
+fe:scan:scan.retake,Retake,మళ్లీ తీయండి,machine
+fe:scan:scan.flip,Flip Camera,కెమెరా తిప్పు,machine
+fe:scan:scan.gallery,Gallery,గ్యాలరీ,machine
+fe:scan:scan.tipLight,Good light,మంచి వెలుతురు,reviewed
+fe:scan:scan.tipOneLeaf,One leaf,ఒక ఆకు,reviewed
+fe:scan:scan.tipHold,Hold steady,కదలకుండా పట్టుకోండి,reviewed
+fe:scan:scan.trySample,Try a sample,నమూనాను ప్రయత్నించండి,reviewed
+fe:scan:scan.healthIndex,Health Index,మొక్క ఆరోగ్యం,machine
+fe:scan:scan.diseaseProbabilities,Disease Probabilities,తెగులు వచ్చే అవకాశం,machine
+fe:scan:scan.saveToPlants,Save to My Plants,నా మొక్కలలో భద్రపరచు,machine
+fe:scan:scan.scanAnother,Scan Another,మరొకటి స్కాన్ చేయి,machine
+fe:scan:scan.environmentalFactors,Environmental & Moisture Factors,వాతావరణ & తేమ పరిస్థితులు,machine
+be:disease:bacterial_leaf_blight:display,Bacterial Leaf Blight,బాక్టీరియా ఆకు ఎండు తెగులు,machine
+be:disease:bacterial_leaf_blight:crop,Rice,వరి,machine
+be:disease:bacterial_leaf_blight:severity,High,ఎక్కువ,machine
+be:disease:bacterial_leaf_blight:description,A serious bacterial disease caused by Xanthomonas oryzae pv. oryzae. Leaves show water-soaked margins that turn yellow and eventually white.,"జాంతోమోనాస్ ఒరైజే పీవీ ఒరైజే వల్ల వచ్చే తీవ్రమైన బాక్టీరియా తెగులు. ఆకుల అంచులు నీటితో తడిసినట్లుగా మారి, పసుపు రంగులోకి వచ్చి చివరకు తెల్లగా మారుతాయి.",machine
+be:disease:bacterial_leaf_blight:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_blight:fav:rainfall,Heavy (storm/flooding),భారీ వర్షం (తుఫాను/వరదలు),machine
+be:disease:brown_spot:display,Brown Spot,బ్రౌన్ స్పాట్ (గోధుమ రంగు మచ్చల తెగులు),machine
+be:disease:brown_spot:crop,Rice,వరి,machine
+be:disease:brown_spot:severity,Medium,మోస్తరు,machine
+be:disease:brown_spot:description,Fungal disease caused by Cochliobolus miyabeanus. Oval to circular brown lesions with yellow halos appear on leaves.,కోక్లియోబోలస్ మియాబియానస్ అనే శిలీంద్రం వల్ల వచ్చే తెగులు. ఆకులపై పసుపు రంగు వలయాలతో కూడిన గుండ్రని లేదా అండాకారపు గోధుమ రంగు మచ్చలు ఏర్పడతాయి.,machine
+be:disease:brown_spot:fav:temperature,22–32°C,22–32°C,machine
+be:disease:brown_spot:fav:humidity,75–90%,75–90%,machine
+be:disease:brown_spot:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:healthy:display,Healthy,ఆరోగ్యంగా ఉంది,machine
+be:disease:healthy:crop,All,అన్నీ,machine
+be:disease:healthy:severity,None,ఏమీ లేదు,machine
+be:disease:healthy:description,The leaf appears healthy with no visible disease symptoms.,"ఆకు ఆరోగ్యంగా ఉంది, ఎలాంటి తెగులు లక్షణాలు కనిపించడం లేదు.",machine
+be:disease:healthy:fav:temperature,Any,ఏదైనా,machine
+be:disease:healthy:fav:humidity,Any,ఏదైనా,machine
+be:disease:healthy:fav:rainfall,Regular,క్రమం తప్పకుండా,machine
+be:disease:leaf_blast:display,Leaf Blast,అగ్గి తెగులు (బ్లాస్ట్),machine
+be:disease:leaf_blast:crop,Rice,వరి,machine
+be:disease:leaf_blast:severity,Very High,చాలా ఎక్కువ,machine
+be:disease:leaf_blast:description,"One of the most destructive rice diseases, caused by Magnaporthe oryzae. Diamond-shaped lesions with grey centres and brown borders appear on leaves.",మాగ్నాపోర్టే ఒరైజే అనే శిలీంద్రం వల్ల వచ్చే అత్యంత ప్రమాదకరమైన తెగుళ్లలో ఇది ఒకటి. ఆకులపై బూడిద రంగు మధ్య భాగం మరియు గోధుమ రంగు అంచులు కలిగిన వజ్రాకారపు మచ్చలు ఏర్పడతాయి.,machine
+be:disease:leaf_blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:leaf_blast:fav:humidity,>90%,>90%,machine
+be:disease:leaf_blast:fav:rainfall,Frequent light rain/dew,తరచుగా తేలికపాటి వర్షం/మంచు,machine
+be:disease:leaf_scald:display,Leaf Scald,ఆకు మంట తెగులు,machine
+be:disease:leaf_scald:crop,Rice,వరి,machine
+be:disease:leaf_scald:severity,Medium,పర్వాలేదు / మోస్తరు,machine
+be:disease:leaf_scald:description,Caused by Microdochium oryzae. Alternating light and dark brown bands appear along leaf margins creating a 'zonate' pattern.,మైక్రোডೋಚியம் ఒరైజే వల్ల వస్తుంది. ఆకు అంచుల వెంబడి తేలికపాటి మరియు ముదురు గోధుమ రంగు పట్టీలు ఏర్పడి వలయాల లాంటి ఆకారాన్ని ఏర్పరుస్తాయి.,machine
+be:disease:leaf_scald:fav:temperature,25–30°C,25–30°C,machine
+be:disease:leaf_scald:fav:humidity,>80%,>80%,machine
+be:disease:leaf_scald:fav:rainfall,Moderate to heavy,మోస్తరు నుండి ఎక్కువ,machine
+be:disease:sheath_blight:display,Sheath Blight,పొట్ట కుళ్లు తెగులు (షీత్ బ్లైట్),machine
+be:disease:sheath_blight:crop,Rice,వరి,machine
+be:disease:sheath_blight:severity,High,ఎక్కువ,machine
+be:disease:sheath_blight:description,"Caused by Rhizoctonia solani. Oval greenish-grey lesions with dark brown borders appear on leaf sheaths, spreading to leaves.","ఇది రైజోక్టోనియా సొలాని వల్ల వస్తుంది. ఆకుల తొడుగులపై ముదురు గోధుమ రంగు అంచులతో కూడిన ఆకుపచ్చ-బూడిద రంగు మచ్చలు ఏర్పడి, ఆకులకు పాకుతాయి.",machine
+be:disease:sheath_blight:fav:temperature,28–32°C,28–32°C,machine
+be:disease:sheath_blight:fav:humidity,>90%,>90%,machine
+be:disease:sheath_blight:fav:rainfall,Heavy flooding,భారీ వర్షం / నీరు నిలవడం,machine
+be:disease:aphid:display,Aphid Infestation,అపిడ్ (పేనుబంక) ఆశించడం,machine
+be:disease:aphid:crop,Wheat,గోధుమ,machine
+be:disease:aphid:severity,Medium,పర్వాలేదు / మోస్తరు,machine
+be:disease:aphid:description,"Small soft-bodied insects that cluster on leaves and stems, sucking plant sap and potentially transmitting viruses.","ఇవి చిన్నగా మెత్తటి శరీరం ఉండే పురుగులు. ఆకులు మరియు కాండాలపై గుంపులుగా చేరి రసం పీలుస్తాయి, వైరస్ వ్యాప్తి చెందేలా చేస్తాయి.",machine
+be:disease:aphid:fav:temperature,15–25°C,15–25°C,machine
+be:disease:aphid:fav:humidity,<60%,<60%,machine
+be:disease:aphid:fav:rainfall,Low,తక్కువ,machine
+be:disease:black_rust:display,Black Rust (Stem Rust),నల్ల తుప్పు తెగులు (కాండం తుప్పు తెగులు),machine
+be:disease:black_rust:crop,Wheat,గోధుమ,machine
+be:disease:black_rust:severity,Very High,చాలా ఎక్కువ,machine
+be:disease:black_rust:description,Caused by Puccinia graminis. Produces brick-red to black pustules on stems and leaves. Can devastate entire crops.,ఇది పியుక్సీనియా గ్రామినిస్ వల్ల వస్తుంది. కాండాలు మరియు ఆకులపై ఇటుక-ఎరుపు నుండి నలుపు రంగు పొక్కులు ఏర్పడతాయి. పంట మొత్తాన్ని నాశనం చేయగలదు.,machine
+be:disease:black_rust:fav:temperature,15–30°C,15–30°C,machine
+be:disease:black_rust:fav:humidity,>80%,>80%,machine
+be:disease:black_rust:fav:rainfall,Moderate with dew,మంచుతో కూడిన మోస్తరు వర్షం,machine
+be:disease:blast:display,Blast (Rice Paddy),అగ్గి తెగులు (బ్లాస్ట్) (వరి),machine
+be:disease:blast:crop,Rice,వరి,machine
+be:disease:blast:severity,Very High,చాలా ఎక్కువ,machine
+be:disease:blast:description,Magnaporthe oryzae. Diamond-shaped lesions on leaves. Can also affect panicles (panicle blast).,మాగ్నాపోర్ట్ ఒరైజే. ఆకుల మీద వజ్రాకారపు మచ్చలు. కంకులను కూడా ఆశిస్తుంది (కంకి అగ్గి తెగులు).,machine
+be:disease:blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:blast:fav:humidity,>90%,>90%,machine
+be:disease:blast:fav:rainfall,Frequent dew/light rain,తరచూ మంచు/తేలికపాటి వర్షం,machine
+be:disease:brown_rust:display,Brown Rust (Leaf Rust),గోధుమ రంగు తుప్పు తెగులు (ఆకు తుప్పు తెగులు),machine
+be:disease:brown_rust:crop,Wheat,గోధుమ,machine
+be:disease:brown_rust:severity,High,ఎక్కువ,machine
+be:disease:brown_rust:description,Caused by Puccinia triticina. Orange-brown pustules on upper leaf surface. Very common and widespread.,ప్యూక్సీనియా ట్రిటిసినా వల్ల వస్తుంది. ఆకుల పైభాగంలో నారింజ-గోధుమ రంగు పొక్కులు ఏర్పడతాయి. ఇది చాలా సాధారణం మరియు విస్తృతంగా వస్తుంది.,machine
+be:disease:brown_rust:fav:temperature,15–22°C,15–22°C,machine
+be:disease:brown_rust:fav:humidity,>70%,>70%,machine
+be:disease:brown_rust:fav:rainfall,Light rain/dew,తేలికపాటి వర్షం/మంచు,machine
+be:disease:common_root_rot:display,Common Root Rot,సాధారణ వేరు కుళ్ళు తెగులు,machine
+be:disease:common_root_rot:crop,Wheat,గోధుమ,machine
+be:disease:common_root_rot:severity,Medium,పర్వాలేదు (మధ్యస్థం),machine
+be:disease:common_root_rot:description,Caused by Bipolaris sorokiniana. Brown to black discolouration of crown and root tissues.,బైపోలారిస్ సోరోకినియానా వల్ల వస్తుంది. మొక్క కింద భాగం మరియు వేర్లు గోధుమ నుండి నలుపు రంగులోకి మారుతాయి.,machine
+be:disease:common_root_rot:fav:temperature,18–28°C,18–28°C,machine
+be:disease:common_root_rot:fav:humidity,Low soil moisture,నేలలో తక్కువ తేమ,machine
+be:disease:common_root_rot:fav:rainfall,Insufficient,సరిపోనన్ని వర్షాలు,machine
+be:disease:fusarium_head_blight:display,Fusarium Head Blight (Scab),ఫ్యూసేరియం హెడ్ బ్లైట్ (స్కాబ్),machine
+be:disease:fusarium_head_blight:crop,Wheat,గోధుమ,machine
+be:disease:fusarium_head_blight:severity,Very High,చాలా ఎక్కువ,machine
+be:disease:fusarium_head_blight:description,Caused by Fusarium graminearum. Bleached spikelets with pink mold. Produces mycotoxins (DON) that contaminate grain.,ఫ్యూసేరియం గ్రామినియరం వల్ల వస్తుంది. వెన్నులు తెల్లగా మారి గులాబీ రంగు బూజు పడుతుంది. గింజలను పాడుచేసే విషపదార్థాలను (DON) ఉత్పత్తి చేస్తుంది.,machine
+be:disease:fusarium_head_blight:fav:temperature,25–30°C,25–30°C,machine
+be:disease:fusarium_head_blight:fav:humidity,>90%,>90%,machine
+be:disease:fusarium_head_blight:fav:rainfall,Rain during flowering,పూత సమయంలో వర్షం,machine
+be:disease:leaf_blight:display,Leaf Blight,ఆకు ఎండు తెగులు,machine
+be:disease:leaf_blight:crop,Wheat,గోధుమ,machine
+be:disease:leaf_blight:severity,Medium,పర్వాలేదు (మధ్యస్థం),machine
+be:disease:leaf_blight:description,Tan-brown lesions with yellow borders on older leaves.,పాత ఆకులపై పసుపు రంగు అంచులతో గోధుమ రంగు మచ్చలు ఏర్పడతాయి.,machine
+be:disease:leaf_blight:fav:temperature,20–30°C,20–30°C,machine
+be:disease:leaf_blight:fav:humidity,>70%,>70%,machine
+be:disease:leaf_blight:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:mildew:display,Powdery Mildew,బూడిద తెగులు,machine
+be:disease:mildew:crop,Wheat,గోధుమ,machine
+be:disease:mildew:severity,Medium,పర్వాలేదు (మధ్యస్థం),machine
+be:disease:mildew:description,"White powdery coating on leaves, caused by Blumeria graminis. Reduces photosynthesis.",బ్లూమేరియా గ్రామినిస్ వల్ల ఆకులపై తెల్లటి బూడిద పొర ఏర్పడుతుంది. ఇది కిరణజన్య సంయోగక్రియను తగ్గిస్తుంది.,machine
+be:disease:mildew:fav:temperature,15–22°C,15–22°C,machine
+be:disease:mildew:fav:humidity,60–80%,60–80%,machine
+be:disease:mildew:fav:rainfall,Low to moderate,తక్కువ నుండి మోస్తరు,machine
+be:disease:mite:display,Mite Infestation,నల్లి ఆక్రమణ,machine
+be:disease:mite:crop,Wheat,గోధుమ,machine
+be:disease:mite:severity,Low,తక్కువ,machine
+be:disease:mite:description,Tiny arachnids causing silvery stippling and bronzing of leaves.,"ఆకుల మీద వెండి రంగు మచ్చలు, రాగి రంగులోకి మారడానికి కారణమయ్యే చిన్న సాలెపురుగు లాంటి పురుగులు.",machine
+be:disease:mite:fav:temperature,>30°C,>30°C,machine
+be:disease:mite:fav:humidity,<50%,<50%,machine
+be:disease:mite:fav:rainfall,Very low,చాలా తక్కువ,machine
+be:disease:septoria:display,Septoria Leaf Blotch,సెప్టోరియా ఆకు మచ్చ తెగులు,machine
+be:disease:septoria:crop,Wheat,గోధుమ,machine
+be:disease:septoria:severity,High,ఎక్కువ,machine
+be:disease:septoria:description,Caused by Zymoseptoria tritici. Pale green-yellow blotches with brown necrosis and pycnidia on leaves.,"జిమోసెప్టోరియా ట్రిటిసి (Zymoseptoria tritici) వల్ల వస్తుంది. ఆకుల మీద లేత ఆకుపచ్చ-పసుపు రంగు మచ్చలు, బ్రౌన్ రంగులో కుళ్ళిన భాగాలు మరియు నల్లటి చిన్న బిందువులు ఏర్పడతాయి.",machine
+be:disease:septoria:fav:temperature,10–20°C,10–20°C,machine
+be:disease:septoria:fav:humidity,>80%,>80%,machine
+be:disease:septoria:fav:rainfall,Frequent rain,తరచూ వర్షాలు కురవడం,machine
+be:disease:smut:display,Loose Smut,బొగ్గు తెగులు (లూజ్ స్మట్),machine
+be:disease:smut:crop,Wheat,గోధుమ,machine
+be:disease:smut:severity,Medium,పర్వాలేదు (మధ్యస్థం),machine
+be:disease:smut:description,Caused by Ustilago tritici. Spikes replaced by black powdery masses of teliospores.,ఉస్టిలాగో ట్రిటిసి (Ustilago tritici) వల్ల వస్తుంది. కంకులు నల్లటి పొడి లాంటి బీజాంశాలుగా మారిపోతాయి.,machine
+be:disease:smut:fav:temperature,16–22°C,16–22°C,machine
+be:disease:smut:fav:humidity,>60%,>60%,machine
+be:disease:smut:fav:rainfall,Moderate during anthesis,పూత సమయంలో మోస్తరు వర్షం,machine
+be:disease:stem_fly:display,Stem Fly,కాండం ఈగ,machine
+be:disease:stem_fly:crop,Wheat,గోధుమ,machine
+be:disease:stem_fly:severity,Medium,పర్వాలేదు (మధ్యమం),machine
+be:disease:stem_fly:description,Larval mining inside wheat stems causing 'dead heart' symptoms in young plants.,గోధుమ మొక్కల కాండం లోపల పురుగులు తిరగడం వల్ల చిన్న మొక్కల్లో 'డెడ్ హార్ట్' (చనిపోయిన ఈకలు) లక్షణాలు కనిపిస్తాయి.,machine
+be:disease:stem_fly:fav:temperature,15–20°C,15–20°C,machine
+be:disease:stem_fly:fav:humidity,Any,ఏదైనా,machine
+be:disease:stem_fly:fav:rainfall,Low to moderate,తక్కువ నుండి మోస్తరు,machine
+be:disease:tan_spot:display,Tan Spot,టాన్ స్పాట్ (గోధుమ రంగు మచ్చల తెగులు),machine
+be:disease:tan_spot:crop,Wheat,గోధుమ,machine
+be:disease:tan_spot:severity,Medium,పర్వాలేదు (మధ్యమం),machine
+be:disease:tan_spot:description,Caused by Pyrenophora tritici-repentis. Tan-colored oval lesions with yellow borders.,ఇది పైరెనోఫోరా ట్రిటిసి-రెపెన్టిస్ వల్ల వస్తుంది. పసుపు అంచులతో గోధుమ రంగు గుండ్రని మచ్చలు ఏర్పడతాయి.,machine
+be:disease:tan_spot:fav:temperature,20–28°C,20–28°C,machine
+be:disease:tan_spot:fav:humidity,>70%,>70%,machine
+be:disease:tan_spot:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:yellow_rust:display,Yellow Rust (Stripe Rust),పసుపు తుప్పు తెగులు (స్రైప్ తుప్పు తెగులు),machine
+be:disease:yellow_rust:crop,Wheat,గోధుమ,machine
+be:disease:yellow_rust:severity,Very High,చాలా ఎక్కువ,machine
+be:disease:yellow_rust:description,Caused by Puccinia striiformis. Bright yellow pustules in stripes along leaf veins. Very destructive in cool climates.,ఇది పుక్సినియా స్ట్రిఫార్మిస్ వల్ల వస్తుంది. ఆకుల నరాల వెంట పసుపు రంగు చారలు వస్తాయి. చల్లని వాతావరణంలో ఇది పంటను తీవ్రంగా పాడు చేస్తుంది.,machine
+be:disease:yellow_rust:fav:temperature,10–15°C,10–15°C,machine
+be:disease:yellow_rust:fav:humidity,>80%,>80%,machine
+be:disease:yellow_rust:fav:rainfall,Dew / light rain,మంచు / తేలికపాటి వర్షం,machine
+be:disease:mosaic_disease:display,Mosaic Disease,మొజాయిక్ తెగులు,machine
+be:disease:mosaic_disease:crop,Sugarcane,చెరకు,machine
+be:disease:mosaic_disease:severity,High,ఎక్కువ,machine
+be:disease:mosaic_disease:description,Caused by Sugarcane Mosaic Virus (SCMV). Mosaic or mottled discolouration of leaves — alternating light and dark green patches.,ఇది సుగర్ కేన్ మోజాయిక్ వైరస్ (SCMV) వల్ల వస్తుంది. ఆకుల మీద ఈకల లాగా లేదా మచ్చల లాగా లేత ఆకుపచ్చ మరియు ముదురు ఆకుపచ్చ రంగు మచ్చలు ఏర్పడతాయి.,machine
+be:disease:mosaic_disease:fav:temperature,25–30°C,25–30°C,machine
+be:disease:mosaic_disease:fav:humidity,Moderate,మోస్తరుగా,machine
+be:disease:mosaic_disease:fav:rainfall,Any,ఏదైనా,machine
+be:disease:rust:display,Sugarcane Rust,చెరుకు తుప్పు తెగులు,machine
+be:disease:rust:crop,Sugarcane,చెరుకు,machine
+be:disease:rust:severity,Medium,పర్వాలేదు / మోస్తరు,machine
+be:disease:rust:description,Caused by Puccinia melanocephala. Orange-brown pustules on leaf undersides causing premature leaf death.,"ఇది ప్యుక్సినియా మెలానోసెఫాలా (Puccinia melanocephala) వల్ల వస్తుంది. ఆకుల కింద నారింజ-గోధుమ రంగు పొక్కులు ఏర్పడి, ఆకులు త్వరగా ఎండిపోతాయి.",machine
+be:disease:rust:fav:temperature,24–28°C,24–28°C,machine
+be:disease:rust:fav:humidity,>75%,>75%,machine
+be:disease:rust:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:bacterial_blight:display,Bacterial Blight,బ్యాక్టీరియా ఆకు మచ్చ తెగులు,machine
+be:disease:bacterial_blight:crop,Cotton,పత్తి,machine
+be:disease:bacterial_blight:severity,High,ఎక్కువ,machine
+be:disease:bacterial_blight:description,"Caused by Xanthomonas axonopodis pv. malvacearum. Angular water-soaked lesions on leaves, black cankers on stems.","ఇది జాంతోమోనాస్ ఆక్సోనోపోడిస్ పివి. మాల్వేసియారమ్ (Xanthomonas axonopodis pv. malvacearum) వల్ల వస్తుంది. ఆకుల మీద నీటితో తడిసినట్లుండే మూలల మచ్చలు, కాండం మీద నల్లటి పుండ్లు ఏర్పడతాయి.",machine
+be:disease:bacterial_blight:fav:temperature,28–35°C,28–35°C,machine
+be:disease:bacterial_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_blight:fav:rainfall,Heavy,భారీ వర్షం,machine
+be:disease:alternaria_leaf_spot:display,Alternaria Leaf Spot,అల్టర్నేరియా ఆకు మచ్చ తెగులు,machine
+be:disease:alternaria_leaf_spot:crop,Cotton,పత్తి,machine
+be:disease:alternaria_leaf_spot:severity,Medium,పర్వాలేదు (మధ్యస్థం),machine
+be:disease:alternaria_leaf_spot:description,Caused by Alternaria macrospora. Dark brown to black circular spots with concentric rings on leaves.,ఇది ఆల్టర్నేరియా మాక్రోస్పోరా అనే శిలీంద్రం వల్ల వస్తుంది. ఆకుల మీద గుండ్రని ముదురు గోధుమ లేదా నలుపు రంగు మచ్చలు గుండ్రటి వలయాల లాగా ఏర్పడతాయి.,machine
+be:disease:alternaria_leaf_spot:fav:temperature,25–30°C,25–30°C,machine
+be:disease:alternaria_leaf_spot:fav:humidity,>75%,>75%,machine
+be:disease:alternaria_leaf_spot:fav:rainfall,Moderate to heavy,మోస్తరు నుండి ఎక్కువ వర్షం,machine
+be:disease:hispa:display,Rice Hispa,వరి ఆకు తెల్లమచ్చ పురుగు (హిస్పా),machine
+be:disease:hispa:crop,Rice,వరి,machine
+be:disease:hispa:severity,Medium,పర్వాలేదు (మధ్యస్థం),machine
+be:disease:hispa:description,Caused by Dicladispa armigera (leaf beetle). Adults scrape leaf surfaces; larvae mine inside leaves creating white tunnels.,ఇది డిక్లాడిస్పా ఆర్మిగెరా (ఆకు పురుగు) వల్ల వస్తుంది. పెద్ద పురుగులు ఆకుల పైభాగం గీరుతాయి; పిల్ల పురుగులు ఆకుల లోపల తింటూ తెల్లటి సొరంగాల లాగా చేస్తాయి.,machine
+be:disease:hispa:fav:temperature,25–35°C,25–35°C,machine
+be:disease:hispa:fav:humidity,>75%,>75%,machine
+be:disease:hispa:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:tungro:display,Tungro Virus Disease,టుంగ్రో వైరస్ తెగులు,machine
+be:disease:tungro:crop,Rice,వరి,machine
+be:disease:tungro:severity,Very High,చాలా ఎక్కువ,machine
+be:disease:tungro:description,Caused by two viruses (RTBV + RTSV) transmitted by green leafhoppers. Leaves turn yellow-orange. Stunted plants with reduced tillering.,ఇది ఆకుపచ్చ దోమల ద్వారా సోకే రెండు వైరస్‌ల (RTBV + RTSV) వల్ల వస్తుంది. ఆకులు పసుపు-నారింజ రంగులోకి మారుతాయి. మొక్కలు గిడసబారి పిలకలు తక్కువగా వస్తాయి.,machine
+be:disease:tungro:fav:temperature,25–30°C,25–30°C,machine
+be:disease:tungro:fav:humidity,>80%,>80%,machine
+be:disease:tungro:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:dead_heart:display,Dead Heart (Stem Borer),డెడ్ హార్ట్ (కాండం తొలుచు పురుగు),machine
+be:disease:dead_heart:crop,Rice,వరి,machine
+be:disease:dead_heart:severity,High,ఎక్కువ,machine
+be:disease:dead_heart:description,Caused by stem borer larvae (Scirpophaga incertulas). The central leaf whorl turns yellow and dies — pulled out easily.,కాండం తొలుచు పురుగు (స్కిర్పోఫాగా ఇన్సర్టులాస్) లార్వాల వల్ల వస్తుంది. మధ్యలో ఉండే ఆకు సుడులు పసుపు రంగులోకి మారి ఎండిపోతాయి - లాగితే సులభంగా ఊడివస్తుంది.,machine
+be:disease:dead_heart:fav:temperature,25–35°C,25–35°C,machine
+be:disease:dead_heart:fav:humidity,High,ఎక్కువ,machine
+be:disease:dead_heart:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:downy_mildew:display,Downy Mildew,డౌనీ మిల్డో తెగులు,machine
+be:disease:downy_mildew:crop,Rice,వరి,machine
+be:disease:downy_mildew:severity,Medium,పర్వాలేదు / మధ్యస్థం,machine
+be:disease:downy_mildew:description,Caused by Sclerophthora macrospora. Pale yellow lesions with downy growth on underside of leaves.,స్క్లెరోఫ్తోరా మాక్రోస్పోరా వల్ల వస్తుంది. ఆకుల కింద తెల్లటి బూజు లాంటి పెరుగుదలతో లేత పసుపు రంగు మచ్చలు ఏర్పడతాయి.,machine
+be:disease:downy_mildew:fav:temperature,18–25°C,18–25°C,machine
+be:disease:downy_mildew:fav:humidity,>90%,>90%,machine
+be:disease:downy_mildew:fav:rainfall,Heavy flooding,భారీ వర్షాలు,machine
+be:disease:bacterial_leaf_streak:display,Bacterial Leaf Streak,బ్యాక్టీరియా ఆకు గీతల తెగులు,machine
+be:disease:bacterial_leaf_streak:crop,Rice,వరి,machine
+be:disease:bacterial_leaf_streak:severity,Medium,పర్వాలేదు / మధ్యస్థం,machine
+be:disease:bacterial_leaf_streak:description,"Caused by Xanthomonas oryzae pv. oryzicola. Narrow, translucent water-soaked stripes between veins.","జాంతోమోనాస్ ఒరైజే పివి. ఒరైజికోలా వల్ల వస్తుంది. ఈనెల మధ్యలో సన్నని, నీటితో తడిసినట్లు ఉండే పారదర్శక గీతలు ఏర్పడతాయి.",machine
+be:disease:bacterial_leaf_streak:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_streak:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_streak:fav:rainfall,Heavy,భారీ వర్షం,machine
+be:disease:bacterial_panicle_blight:display,Bacterial Panicle Blight,బ్యాక్టీరియా కంకి తెగులు,machine
+be:disease:bacterial_panicle_blight:crop,Rice,వరి,machine
+be:disease:bacterial_panicle_blight:severity,High,ఎక్కువ,machine
+be:disease:bacterial_panicle_blight:description,"Caused by Burkholderia glumae. Sterile spikelets, grayish-brown discolouration. Significant yield loss.","ఇది బర్కోడెరియా గ్లుమే అనే బ్యాక్టీరియా వల్ల వస్తుంది. గింజలు పాలు పోసుకోకుండా తెల్లగా ఉండిపోతాయి, బూడిద-గోధుమ రంగులోకి మారుతాయి. దీనివల్ల దిగుబడి బాగా తగ్గిపోతుంది.",machine
+be:disease:bacterial_panicle_blight:fav:temperature,>30°C,>30°C,machine
+be:disease:bacterial_panicle_blight:fav:humidity,>85%,>85%,machine
+be:disease:bacterial_panicle_blight:fav:rainfall,Moderate,మోస్తరు,machine
+be:disease:normal:display,Healthy (Normal),ఆరోగ్యంగా ఉంది (సాధారణం),machine
+be:disease:normal:crop,Rice,వరి,machine
+be:disease:normal:severity,None,ఏమీ లేదు,machine
+be:disease:normal:description,No disease detected. Crop appears healthy.,తెగులు ఏదీ లేవు. పంట ఆరోగ్యంగా కనిపిస్తోంది.,machine
+be:disease:normal:fav:temperature,Any,ఏదైనా,machine
+be:disease:normal:fav:humidity,Any,ఏదైనా,machine
+be:disease:normal:fav:rainfall,Regular,క్రమం తప్పకుండా,machine

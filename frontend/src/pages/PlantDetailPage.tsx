@@ -1,25 +1,21 @@
 // PlantDetailPage.tsx — Full plant details: care info, latest diagnosis, health timeline
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Droplets, Sun, Wind, Mountain, Scan, MessageSquare, Clock, Leaf } from 'lucide-react'
+import { ArrowLeft, Scan, MessageSquare, Clock, Leaf } from 'lucide-react'
 import { PlantTimeline } from '../components/PlantTimeline'
 import { DiseaseCard } from '../components/DiseaseCard'
 import { EmptyState } from '../components/ui/EmptyState'
 import { MOCK_TIMELINE } from '../data/mockData'
+import { useLang } from '../contexts/LanguageContext'
+import { localizeDiseaseName } from '../i18n/translations'
 import type { Plant } from '../types'
 
 interface PlantDetailPageProps {
   plants?: Plant[]
 }
 
-const CARE_ICONS: Record<string, React.ElementType> = {
-  Water: Droplets,
-  Sunlight: Sun,
-  Humidity: Wind,
-  Soil: Mountain,
-}
-
 export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
   const navigate = useNavigate()
+  const { t, lang } = useLang()
   const { id } = useParams<{ id: string }>()
 
   const plant = plants.find(p => p.id === id)
@@ -29,24 +25,17 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
       <div className="max-w-2xl mx-auto py-12">
         <EmptyState
           icon={<Leaf className="w-8 h-8" />}
-          title="Plant not found"
-          description="This plant doesn't exist or was removed."
+          title={t('plants.empty')}
+          description={t('plants.emptyDesc')}
           action={
             <button type="button" onClick={() => navigate('/plants')} className="btn btn-primary">
-              Back to My Plants
+              {t('btn.back')}
             </button>
           }
         />
       </div>
     )
   }
-
-  const careItems = [
-    { label: 'Water', value: plant.waterFrequency ?? 'As needed', icon: 'Water' },
-    { label: 'Sunlight', value: plant.sunlight ?? 'Full sun', icon: 'Sunlight' },
-    { label: 'Humidity', value: plant.humidity ?? '50–70%', icon: 'Humidity' },
-    { label: 'Soil', value: plant.soil ?? 'Well-draining', icon: 'Soil' },
-  ]
 
   const statusBadgeClass =
     plant.status === 'Healthy' ? 'badge-green' :
@@ -66,7 +55,7 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
           type="button"
           onClick={() => navigate('/plants')}
           className="btn btn-secondary btn-icon"
-          aria-label="Back to My Plants"
+          aria-label={t('btn.back')}
           id="plant-detail-back-btn"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -92,8 +81,12 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
           {/* Info */}
           <div className="p-5">
             <div className="flex items-center gap-2 mb-3">
-              <span className={`badge ${statusBadgeClass}`}>{plant.status}</span>
-              <span className="badge badge-slate capitalize">{plant.species}</span>
+              <span className={`badge ${statusBadgeClass}`}>
+                {t(('status.' + (plant.status === 'Needs Attention' ? 'needsAttention' : plant.status === 'At Risk' ? 'atRisk' : plant.status.toLowerCase())) as any) || plant.status}
+              </span>
+              <span className="badge badge-slate capitalize">
+                {t(('crop.' + plant.species.toLowerCase()) as any) || plant.species}
+              </span>
             </div>
 
             {/* Health Score ring */}
@@ -117,18 +110,18 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
               </div>
               <div>
                 <p className="text-2xl font-800 text-[#10231D]">{plant.healthScore}<span className="text-sm font-400 text-[#64736C]">/100</span></p>
-                <p className="text-xs text-[#64736C]">Health Score</p>
+                <p className="text-xs text-[#64736C]">{t('diagnosis.healthScore')}</p>
               </div>
             </div>
 
             <div className="flex items-center gap-1.5 text-xs text-[#94A09B] mb-4">
               <Clock className="w-3.5 h-3.5" />
-              Last scanned: {plant.lastScanned}
+              {plant.lastScanned}
             </div>
 
             {plant.latestDisease && plant.latestDisease !== 'None detected' && (
               <div className="text-xs bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 text-amber-800 font-500 mb-4">
-                ⚠ Latest: {plant.latestDisease}
+                ⚠ {localizeDiseaseName(plant.latestDisease, lang)}
               </div>
             )}
 
@@ -140,7 +133,7 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
                 id="plant-detail-scan-btn"
               >
                 <Scan className="w-3.5 h-3.5" />
-                Scan Again
+                {t('btn.scanAnother')}
               </button>
               <button
                 type="button"
@@ -149,36 +142,17 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
                 id="plant-detail-ask-btn"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                Ask Doctor
+                {t('btn.askChat')}
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Care Information */}
-      <div className="mb-5">
-        <h2 className="text-base font-700 text-[#10231D] mb-3">Care Information</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {careItems.map(item => {
-            const Icon = CARE_ICONS[item.icon]
-            return (
-              <div key={item.label} className="card p-4 text-center">
-                <div className="w-9 h-9 rounded-xl bg-[#DDF7EA] flex items-center justify-center mx-auto mb-2">
-                  <Icon className="w-4.5 h-4.5 text-[#0B8F68]" />
-                </div>
-                <p className="text-[10px] font-700 text-[#64736C] uppercase tracking-wide mb-1">{item.label}</p>
-                <p className="text-xs font-600 text-[#10231D] leading-tight">{item.value}</p>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-
       {/* Latest Diagnosis */}
       {plant.latestDisease && plant.latestDisease !== 'None detected' && (
         <div className="mb-5">
-          <h2 className="text-base font-700 text-[#10231D] mb-3">Latest Diagnosis</h2>
+          <h2 className="text-base font-700 text-[#10231D] mb-3">{t('diagnosis.title')}</h2>
           <DiseaseCard
             diseaseName={plant.latestDisease}
             severity={plant.status === 'At Risk' ? 'High' : plant.status === 'Needs Attention' ? 'Moderate' : 'Low'}
@@ -189,7 +163,7 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
 
       {/* Health Timeline */}
       <div className="mb-6">
-        <h2 className="text-base font-700 text-[#10231D] mb-3">Health History</h2>
+        <h2 className="text-base font-700 text-[#10231D] mb-3">{t('history.title')}</h2>
         <PlantTimeline entries={MOCK_TIMELINE} />
       </div>
     </div>

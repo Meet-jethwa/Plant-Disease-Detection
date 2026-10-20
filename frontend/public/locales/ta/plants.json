@@ -1,0 +1,19 @@
+{
+  "crop.rice": "நெல்லு",
+  "crop.wheat": "கோதுமை",
+  "crop.sugarcane": "கரும்பு",
+  "crop.cotton": "பருத்தி",
+  "plants.title": "செயலில் உள்ள பயிர் ஆரோக்கிய பதிவு",
+  "plants.badge": "பயிர் கண்காணிப்பு",
+  "plants.registerNew": "புதிய பயிரைப் பதிவு செய்",
+  "plants.healthySpecimens": "ஆரோக்கியமான பயிர்கள்",
+  "plants.attentionRequired": "கவனம் தேவை",
+  "plants.highRisk": "நோய் தாக்கும் அதிக ஆபத்து",
+  "plants.allCrops": "அனைத்து பயிர்களும்",
+  "plants.healthy": "ஆரோக்கியமாக உள்ளது",
+  "plants.needsAttention": "கவனம் தேவைப்படுகிறது",
+  "plants.searchPlaceholder": "பெயர் அல்லது இனம் வைத்து பயிரைத் தேடுங்கள்...",
+  "plants.empty": "கண்காணிக்கப்படும் பயிர்கள் எதுவும் இல்லை",
+  "plants.emptyDesc": "பயிர் வளர்ச்சியைக் கண்காணிக்க, ஸ்கேனரில் இலையை ஸ்கேன் செய்யத் தொடங்குங்கள்.",
+  "plants.scanFirst": "இப்போதே பயிரை ஸ்கேன் செய்யவும்"
+}

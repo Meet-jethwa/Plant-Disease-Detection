@@ -1,0 +1,716 @@
+{
+  "bacterial_leaf_blight": {
+    "display": "ব্যাকটেরিয়া পাতা ঝলসানো রোগ",
+    "crop": "ধান",
+    "severity": "বেশি",
+    "description": "জ্যান্থোমোনাস ওরাইজি পিভি ওরাইজি (Xanthomonas oryzae pv. oryzae) নামক ব্যাকটেরিয়ার কারণে এই গুরুতর রোগটি হয়। পাতার কিনারা জলজেত্র মনে হয়, পরে হলুদ এবং শেষে সাদা হয়ে যায়।",
+    "causes": "উষ্ণ তাপমাত্রা (২৫–৩০°C), বেশি আর্দ্রতা এবং ঝড়-বৃষ্টির জল পাতার ক্ষতের মাধ্যমে ব্যাকটেরিয়া ছড়িয়ে দেয়।",
+    "treatment_summary": "তামা (copper) ভিত্তিক ব্যাকটেরিয়া নাশক প্রয়োগ করুন। আক্রান্ত গাছের অবশিষ্টাংশ পরিষ্কার করুন। রোগ প্রতিরোধ ক্ষমতা সম্পন্ন বীজ ব্যবহার করুন। অতিরিক্ত নাইট্রোজেন সার দেওয়া থেকে বিরত থাকুন।",
+    "prevention": "প্রত্যয়িত রোগমুক্ত বীজ ব্যবহার করুন। জমিতে জল জমতে দেবেন না, নিকাশি ব্যবস্থা ভালো রাখুন। সুষম সার প্রয়োগ করুন।",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "২৫–৩৫°C",
+      "humidity": ">৮০%",
+      "rainfall": "প্রচুর (ঝড়/জলমগ্নতা)"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.5,
+      "rainfall": 0.2
+    }
+  },
+  "brown_spot": {
+    "display": "বাদামী দাগ রোগ",
+    "crop": "ধান",
+    "severity": "মাঝারি",
+    "description": "কোক্লিওবোলাস মিয়াবিয়ানাস (Cochliobolus miyabeanus) নামক ছত্রাকের কারণে এই রোগ হয়। পাতায় ডিম্বাকৃতি থেকে গোল বাদামী রঙের দাগ দেখা দেয় এবং চারপাশে হলুদ রঙের বলয় থাকে।",
+    "causes": "মাটিতে পুষ্টির অভাব থাকলে (বিশেষ করে পটাশিয়াম ও সিলিকন) এই রোগ হয়। উষ্ণ ও আর্দ্র আবহাওয়া এবং খারাপ মাটির স্বাস্থ্যের কারণে এটি বাড়ে।",
+    "treatment_summary": "ম্যাঙ্কোজেব বা ইপ্রোডিয়ন ছত্রাকনাশক প্রয়োগ করুন। মাটির পুষ্টির ঘাটতি পূরণ করুন (পটাশিয়াম, সিলিকন)। ঘন করে চারা রোপণ কমান।",
+    "prevention": "সুষম সার প্রয়োগ, ভালো জল নিকাশি ব্যবস্থাযুক্ত মাটি এবং রোগ প্রতিরোধক জাত ব্যবহার করুন।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "২২–৩২°C",
+      "humidity": "৭৫–৯০%",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "healthy": {
+    "display": "সুস্থ",
+    "crop": "সব",
+    "severity": "নেই",
+    "description": "পাতাটি সুস্থ দেখাচ্ছে এবং এতে রোগের কোনো লক্ষণ নেই।",
+    "causes": "প্রযোজ্য নয়",
+    "treatment_summary": "নিয়মিত খেয়াল রাখুন এবং সতর্কতামূলক ব্যবস্থা চালিয়ে যান।",
+    "prevention": "ভালো চাষাবাদ পদ্ধতি মেনে চলুন, সুষম সার ব্যবহার করুন এবং ঠিকমতো জল দিন।",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "যেকোনো",
+      "humidity": "যেকোনো",
+      "rainfall": "নিয়মিত"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  },
+  "leaf_blast": {
+    "display": "পাতার ব্লাস্ট রোগ",
+    "crop": "ধান",
+    "severity": "খub বেশি",
+    "description": "ধানের সবচেয়ে ক্ষতি করা রোগগুলির মধ্যে একটি, যা Magnaporthe oryzae ছত্রাকের কারণে হয়। পাতায় ছাইরঙা কেন্দ্র এবং বাদামী ধারযুক্ত হিরের আকৃতির দাগ দেখা যায়।",
+    "causes": "ঠান্ডা রাত, গরম দিন, বাতাসে বেশি আর্দ্রতা (>90%), বেশি শিশির, বেশি নাইট্রোজেন সার ব্যবহার এবং রোগাক্রান্ত হওয়ার প্রবণতা আছে এমন জাত।",
+    "treatment_summary": "ছত্রাকনাশক ব্যবহার করুন: tricyclazole, isoprothiolane, বা azoxystrobin। নাইট্রোজেন সার কমান। আর্দ্রতা কমাতে জমি থেকে জল বের করে দিন।",
+    "prevention": "ব্লাস্ট রোগ প্রতিরোধী জাত ব্যবহার করুন। বেশি নাইট্রোজেন দেবেন না। গাছগুলোর মধ্যে যেন হাওয়া চলাচল করতে পারে তা নিশ্চিত করুন।",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "ঘন ঘন হালকা বৃষ্টি/শিশির"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "leaf_scald": {
+    "display": "পাতার স্কেল্ড রোগ",
+    "crop": "ধান",
+    "severity": "মাঝারি",
+    "description": "Microdochium oryzae-এর কারণে হয়। পাতার কিনারায় হালকা এবং গাঢ় বাদামী রঙের ডোরাকাটা দাগ দেখা যায়।",
+    "causes": "বেশি আর্দ্রতা, উষ্ণ তাপমাত্রা এবং ঘন করে চারা লাগানো যার ফলে হাওয়া চলাচল কমে যায়।",
+    "treatment_summary": "propiconazole বা carbendazim ছত্রাকনাশক ব্যবহার করুন। জমির জল নিষ্কাশন ব্যবস্থা ভালো করুন এবং গাছের দূরত্ব বজায় রাখুন।",
+    "prevention": "সারিবদ্ধভাবে লাগানোর সময় দূরত্ব বেশি রাখুন, সুষম সার দিন এবং রোগ প্রতিরোধী জাত ব্যবহার করুন।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_carbendazim"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "মাঝারি থেকে বেশি"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "sheath_blight": {
+    "display": "খাপ পোড়া রোগ (শীথ ব্লাইট)",
+    "crop": "ধান",
+    "severity": "বেশি",
+    "description": "রাইজোকটোনিয়া সোলানি (Rhizoctonia solani) নামক ছত্রাকের কারণে এটি হয়। পাতার খোলে গাঢ় বাদামী সীমানা সহ ডিম্বাকার সবুজ-ধূসর দাগ দেখা দেয়, যা পাতায় ছড়িয়ে পড়ে।",
+    "causes": "অতিরিক্ত আর্দ্রতা (>90%), ২৮–৩২°C তাপমাত্রা, ঘন করে গাছ লাগানো, বেশি নাইট্রোজেন সার দেওয়া এবং জলমগ্ন অবস্থা যা মাইসেলিয়াম ছড়াতে সাহায্য করে।",
+    "treatment_summary": "ভ্যালিডামাইসিন, হেক্সাকোনাজল বা প্রোপিকোনাজল ছত্রাকনাশক ব্যবহার করুন। গাছের ঘনত্ব কমান। জমির আর্দ্রতা কমানোর ব্যবস্থা করুন।",
+    "prevention": "কম বীজ বপন করা, সুষম সার ব্যবহার এবং জল ব্যবস্থাপনা ঠিক রাখা।",
+    "treatment_ids": [
+      "treat_validamycin",
+      "treat_hexaconazole",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "২৮–৩২°C",
+      "humidity": ">90%",
+      "rainfall": "প্রচুর জল জমা"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "aphid": {
+    "display": "জাব পোকার আক্রমণ",
+    "crop": "গম",
+    "severity": "মাঝারি",
+    "description": "ছোট নরম শরীরের পোকা যা পাতা ও ডালে জটলা পাকিয়ে থাকে, গাছের রস চুষে খায় এবং ভাইরাস ছড়াতে পারে।",
+    "causes": "উষ্ণ শুষ্ক আবহাওয়া, উপকারী পোকার অভাব এবং ঘন করে গাছ লাগানো।",
+    "treatment_summary": "ইমিডাক্লোপ্রিড বা ল্যাম্বডা-সাইহালোথ্রিন কীটনাশক প্রয়োগ করুন। উপকারী পোকাদের (যেমন লেডিবাগ) আসতে সাহায্য করুন।",
+    "prevention": "তাড়াতাড়ি চারা লাগানো, ফসল পর্যায়ক্রম (শস্য আবর্তন) করা এবং অতিরিক্ত নাইট্রোজেন সার এড়ানো।",
+    "treatment_ids": [
+      "treat_imidacloprid",
+      "treat_lambda_cyhalothrin"
+    ],
+    "favorable_conditions": {
+      "temperature": "১৫–২৫°C",
+      "humidity": "<60%",
+      "rainfall": "কম"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "black_rust": {
+    "display": "কালো মরিচা রোগ (স্টেম রাস্ট)",
+    "crop": "গম",
+    "severity": "খুব বেশি",
+    "description": "পুকিনিয়া গ্রামিনিস (Puccinia graminis) দ্বারা ঘটে। কান্ড ও পাতায় ইট-লাল থেকে কালো রঙের ফোসকা তৈরি করে। পুরো ফসল নষ্ট করে দিতে পারে।",
+    "causes": "উষ্ণ তাপমাত্রা (১৫–৩০°C), শিশির এবং আশেপাশের আক্রান্ত ক্ষেত থেকে বাতাসে ভেসে আসা রেনু।",
+    "treatment_summary": "রোগের শুরুতে প্রোপিকোনাজল, টেবুকোনাজল বা ট্রাইফ্লক্সিস্ট্রবিন ছত্রাকনাশক প্রয়োগ করুন।",
+    "prevention": "রোগ প্রতিরোধ ক্ষমতা সম্পন্ন জাতের বীজ লাগান। তাড়াতাড়ি বীজ বুনুন। ক্ষেতের আগাছা এবং আগের মরশুমের অবশিষ্ট গমের গাছ পরিষ্কার করুন।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole",
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "১৫–৩০°C",
+      "humidity": ">80%",
+      "rainfall": "শিশির সহ মাঝারি বৃষ্টিপাত"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "blast": {
+    "display": "ব্লাস্ট রোগ (ধান)",
+    "crop": "ধান",
+    "severity": "খুব বেশি",
+    "description": "ম্যাগ্নাপোর্টরি ওরাইজি (Magnaporthe oryzae)। পাতায় হীরকাকৃতির দাগ দেখা যায়। ধানের শীষও আক্রান্ত হতে পারে (গলা ব্লাস্ট রোগ)।",
+    "causes": "ঠান্ডা রাত, সকালের শিশির, অতিরিক্ত নাইট্রোজেন সার, এবং রোগাক্রান্ত হওয়ার প্রবণতা আছে এমন জাত।",
+    "treatment_summary": "ট্রাইসাইক্লাজল, আইসোপ্রোথিওলেন, অ্যাজোক্সিস্ট্রোবিন ছত্রাকনাশক ব্যবহার করুন।",
+    "prevention": "রোগ প্রতিরোধী জাত নির্বাচন করুন, পরিমিত নাইট্রোজেন সার দিন, এবং নিয়মিত সেচ দিন।",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "ঘন ঘন শিশির / হালকা বৃষ্টি"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "brown_rust": {
+    "display": "বাদামী মরিচা রোগ (পাতার মরিচা রোগ)",
+    "crop": "গম",
+    "severity": "বেশি",
+    "description": "পাকসিনিয়া টিটিসিনিয়া (Puccinia triticina) দ্বারা হয়। পাতার ওপরের পিঠে কমলা-বাদামী রঙের ফোস্কা পড়ে। এটি খুব সাধারণ এবং সর্বত্র দেখা যায়।",
+    "causes": "মাঝারি তাপমাত্রা (15–22°C), শিশির এবং আর্দ্র আবহাওয়া।",
+    "treatment_summary": "ছত্রাকনাশক: প্রোপিকোনাজল, ম্যানকোজেব। রোগ দেখা দেওয়ার সাথে সাথেই প্রয়োগ করুন।",
+    "prevention": "রোগ প্রতিরোধী জাত, সময়মতো বীজ বপন এবং শস্য পর্যায় অবলম্বন করুন।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": ">70%",
+      "rainfall": "হালকা বৃষ্টি / শিশির"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "common_root_rot": {
+    "display": "সাধারণ শেকড় পচা রোগ",
+    "crop": "গম",
+    "severity": "মাঝারি",
+    "description": "বাইপোলারিস সরোকিনিয়ানা (Bipolaris sorokiniana) দ্বারা হয়। গাছ ও শেকড়ের টিস্যু বাদামী থেকে কালো রঙের হয়ে যায়।",
+    "causes": "মাটিতে রস কম থাকা, বীজ বপনের সময় বেশি তাপমাত্রা এবং মাটিতে রোগের জীবাণু থাকা।",
+    "treatment_summary": "ট্রাইফ্লক্সিস্ট্রোবিন + টেবুকেোনাজল দিয়ে বীজ শোধন করুন। ধান বা গম জাতীয় ফসল ছাড়া অন্য ফসল দিয়ে শস্য পর্যায় করুন।",
+    "prevention": "মাটির উর্বরতা ঠিক রাখুন, পরপর একই জমিতে গম চাষ এড়িয়ে চলুন, এবং সঠিক গভীরে বীজ বপন করুন।",
+    "treatment_ids": [
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–28°C",
+      "humidity": "মাটিতে কম আর্দ্রতা",
+      "rainfall": "অপর্যাপ্ত"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.3,
+      "rainfall": 0.3
+    }
+  },
+  "fusarium_head_blight": {
+    "display": "ফিউজারিয়াম শীষ পচা রোগ (স্ক্যাব)",
+    "crop": "গম",
+    "severity": "খুব বেশি",
+    "description": "ফিউসারিউম গ্রামিনিয়ারাম (Fusarium graminearum) এর কারণে হয়। শীষে হালকা রঙের ছোপ এবং গোলাপি রঙের ছত্রাক দেখা যায়। এটি বিষাক্ত উপাদান (DON) তৈরি করে যা দানা নষ্ট করে।",
+    "causes": "ফুল ফোটার সময় ভেজা আবহাওয়া, ২৫–৩০°C তাপমাত্রা এবং আগের ফসলের অবশিষ্টাংশ।",
+    "treatment_summary": "ফুল আসার শুরুতে থিওফানেট-মিথাইল বা মেটাকোনাজল স্প্রে করুন। আক্রান্ত অংশ পরিষ্কার করুন।",
+    "prevention": "রোগ প্রতিরোধী বীজ ব্যবহার, চাষ করে জমির আবশিষ্টাংশ মাটিতে মিশিয়ে দেওয়া এবং ভালো জল নিকাশের ব্যবস্থা করা।",
+    "treatment_ids": [
+      "treat_thiophanate_methyl",
+      "treat_metconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "২৫–৩০°C",
+      "humidity": ">৯০%",
+      "rainfall": "ফুল ফোটার সময়ে বৃষ্টি"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "leaf_blight": {
+    "display": "পাতা ঝলসানো রোগ",
+    "crop": "গম",
+    "severity": "মাঝারি",
+    "description": "পুরনো পাতায় হলুদ কিনারাযুক্ত হালকা বাদামী দাগ দেখা যায়।",
+    "causes": "উষ্ণ ও স্যাঁতসেঁতে আবহাওয়া এবং রোগাক্রান্ত হওয়ার প্রবণতা আছে এমন জাত।",
+    "treatment_summary": "ম্যানকোজেব বা প্রোপিকোনাজল ছত্রাকনাশক স্প্রে করুন।",
+    "prevention": "ফসল পরিবর্তন করে চাষ করা এবং রোগ প্রতিরোধী বীজ ব্যবহার করা।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "২০–৩০°C",
+      "humidity": ">৭০%",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "mildew": {
+    "display": "পাউডারি মিলডিউ রোগ",
+    "crop": "গম",
+    "severity": "মাঝারি",
+    "description": "ব্লুমেরিয়া গ্রামিনিস (Blumeria graminis) এর কারণে পাতায় সাদা পাউডারের মতো আস্তরণ পড়ে। এটি সালোকসংশ্লেষণ কমিয়ে দেয়।",
+    "causes": "ঠান্ডা আবহাওয়া (১৫–২২°C), মাঝারি আর্দ্রতা এবং ঘন গাছপালা।",
+    "treatment_summary": "ট্রায়াডিমেফন, প্রোপিকোনাজল বা সালফারযুক্ত ছত্রাকনাশক স্প্রে করুন।",
+    "prevention": "সারির মধ্যে বেশি ফাঁক রাখা, রোগ প্রতিরোধী বীজ ব্যবহার এবং তাড়াতাড়ি বীজ বপন করা।",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole",
+      "treat_sulfur"
+    ],
+    "favorable_conditions": {
+      "temperature": "১৫–২২°C",
+      "humidity": "৬০–৮০%",
+      "rainfall": "কম থেকে মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "mite": {
+    "display": "মাকড় বা মাইট আক্রমণ",
+    "crop": "গম",
+    "severity": "কম",
+    "description": "ছোট মাকড়, যা পাতার রঙ রূপালী করে দেয় এবং পাতা তামাটে হয়ে যায়।",
+    "causes": "গরম ও শুষ্ক আবহাওয়া। যেসব রাসায়নিক ওষুধ পোকার শত্রু পোকাদের মেরে ফেলে।",
+    "treatment_summary": "অ্যাবামেকটিন বা ডিকোফল মাকড়নাশক দিন। জলসেচ বাড়িয়ে দিন।",
+    "prevention": "খুব বেশি শুষ্ক আবহাওয়া এড়িয়ে চলুন। উপকারী পোকাদের বাঁচিয়ে রাখুন।",
+    "treatment_ids": [
+      "treat_abamectin",
+      "treat_dicofol"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": "<50%",
+      "rainfall": "খুব কম"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.3,
+      "rainfall": 0.2
+    }
+  },
+  "septoria": {
+    "display": "সেপ্টোরিয়া পাতা ছোপ রোগ",
+    "crop": "গম",
+    "severity": "বেশি",
+    "description": "জাইমোসেপ্টোরিয়া ট্রাইটিকি (Zymoseptoria tritici) এর কারণে হয়। পাতায় ফ্যাকাশে সবুজ-হলুদ ছোপ এবং বাদামী পচা দাগ ও ছোট কালো বিন্দু দেখা যায়।",
+    "causes": "ঠান্ডা ও ভেজা আবহাওয়া (10–20°C), পাতা টানা >২০ ঘণ্টা ভেজা থাকা।",
+    "treatment_summary": "ট্রায়াজল বা এসডিএইচআই (SDHI) ছত্রাকনাশক (ইপোক্সিকোনাজল, ফ্লুক্সাপাইরোক্স্যাড)। সময়মতো ওষুধ দেওয়া খুব জরুরি।",
+    "prevention": "রোগ প্রতিরোধ ক্ষমতা সম্পন্ন বীজ, শস্য পরিবর্তন, দেরিতে বীজ বপন।",
+    "treatment_ids": [
+      "treat_epoxiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–20°C",
+      "humidity": ">80%",
+      "rainfall": "মাঝেমধ্যে বৃষ্টি"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "smut": {
+    "display": "উগ্র কান্সার বা ঢিল রোগ",
+    "crop": "গম",
+    "severity": "মাঝারি",
+    "description": "উস্টিলাগো ট্রাইটিকি (Ustilago tritici) এর কারণে হয়। শীষগুলো কালো গুঁড়ো পাউডারে পরিণত হয়।",
+    "causes": "ফুল আসার সময় মাঝারি তাপমাত্রা ও স্যাঁতসেঁতে আবহাওয়া। বীজবাহিত রোগজীবাণু।",
+    "treatment_summary": "কার্বোক্সিন, থিরাম বা টেবুকোনাজল দিয়ে বীজ শোধন করা খুব কার্যকরী।",
+    "prevention": "রোগমুক্ত ও প্রত্যয়িত বীজ ব্যবহার করুন। গরম জলে বীজ শোধন করুন।",
+    "treatment_ids": [
+      "treat_carboxin_thiram"
+    ],
+    "favorable_conditions": {
+      "temperature": "16–22°C",
+      "humidity": ">60%",
+      "rainfall": "ফুল আসার সময় মাঝারি বৃষ্টি"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "stem_fly": {
+    "display": "ডাঁটা মাছি",
+    "crop": "গম",
+    "severity": "মাঝারি",
+    "description": "গম গাছের কাণ্ডের ভেতরে পোকার লার্ভা কেটে খায়, যার ফলে ছোট গাছের পাতা শুকিয়ে মরে যায় (যাকে ডেড হার্ট বলে)।",
+    "causes": "ফসলের প্রাথমিক অবস্থায় ঠান্ডা আবহাওয়ায় (১৫–২০°C) এটার আক্রমণ বেশি হয়।",
+    "treatment_summary": "চারা অবস্থায় ক্লোরপাইরিফস বা ইমিডাক্লোপ্রিড স্প্রে করুন।",
+    "prevention": "তাড়াতাড়ি বীজ বুনুন, দানাদার কীটনাশক দিয়ে বীজ শোধন করুন এবং গাছের গোড়ার দিকটা খেয়াল রাখুন।",
+    "treatment_ids": [
+      "treat_chlorpyrifos",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "১৫–২০°C",
+      "humidity": "যেকোনো",
+      "rainfall": "কম থেকে মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.25,
+      "rainfall": 0.25
+    }
+  },
+  "tan_spot": {
+    "display": "ট্যান স্পট রোগ",
+    "crop": "গম",
+    "severity": "মাঝারি",
+    "description": "পাইরেনোফোরা ট্রিটিসি-রিপেন্টিস (Pyrenophora tritici-repentis) নামক ছত্রাকের কারণে হয়। পাতায় হলুদ কিনারাযুক্ত বাদামী রঙের ডিম্বাকৃতি দাগ দেখা দেয়।",
+    "causes": "উষ্ণ তাপমাত্রা (২০–২৮°C), ভেজা পাতা এবং আগের মৌসুমের ফসলের অবশিষ্টাংশ।",
+    "treatment_summary": "প্রপিকোনাজল বা ম্যানকোজেব স্প্রে করুন। জমি চাষ করে আগের ফসলের অবশিষ্টাংশ মাটিতে ঢেকে দিন।",
+    "prevention": "ফসল বদল করে চাষ করুন, ফসলের আবর্জনা পরিষ্কার রাখুন, এবং রোগ প্রতিরোধী জাত ব্যবহার করুন।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "২০–২৮°C",
+      "humidity": ">৭০%",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "yellow_rust": {
+    "display": "হলুদ মরিচা রোগ (স্ট্রাইপ রাস্ট)",
+    "crop": "গম",
+    "severity": "খুব বেশি",
+    "description": "পাক্সিনিয়া স্ট্রাইফর্মিস (Puccinia striiformis) নামক ছত্রাকের কারণে হয়। পাতার শিরার বরাবর উজ্জ্বল হলুদ রঙের ফোসকা বা দাগ পড়ে। ঠান্ডা আবহাওয়ায় এটি ফসলের খুব ক্ষতি করে।",
+    "causes": "ঠান্ডা আবহাওয়া (১০–১৫°C), শিশির ও কুয়াশা, এবং রোগাক্রান্ত হওয়ার ঝুঁকিতে থাকা জাত।",
+    "treatment_summary": "শুরুতেই প্রপিকোনাজল, টেবুকোনাজল বা অন্য কোনো ট্রায়াজল ছত্রাকনাশক স্প্রে করুন।",
+    "prevention": "রোগ প্রতিরোধী জাত ব্যবহার করা সবচেয়ে বেশি কার্যকর। তাড়াতাড়ি বীজ বুনুন। আবহাওয়ার পূর্বাভাস খেয়াল রাখুন।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "১০–১৫°C",
+      "humidity": ">৮০%",
+      "rainfall": "শিশির / হালকা বৃষ্টি"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "mosaic_disease": {
+    "display": "মোজাইক রোগ",
+    "crop": "আখ",
+    "severity": "বেশি",
+    "description": "সুগারকেন মোজাইক ভাইরাস (SCMV) এর কারণে হয়। পাতায় মোজাইক বা ছোপ ছোপ দাগ—হালকা এবং গাঢ় সবুজ রঙের ছোপ দেখা যায়।",
+    "causes": "জাব পোকা (Rhopalosiphum maidis) এবং রোগাক্রান্ত বীজ বা গাছ লাগানোর মাধ্যমে ছড়ায়।",
+    "treatment_summary": "কোনো রাসায়নিক ওষুধ নেই। রোগাক্রান্ত গাছ তুলে পুড়িয়ে ফেলুন। জাব পোকা দমন করুন।",
+    "prevention": "রোগমুক্ত বীজ বা চারা ব্যবহার করুন, রোগ প্রতিরোধী জাত লাগান, জাব পোকা দমন করুন।",
+    "treatment_ids": [
+      "treat_routine_monitoring",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": "মাঝারি",
+      "rainfall": "যেকোনো"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.35,
+      "rainfall": 0.35
+    }
+  },
+  "rust": {
+    "display": "আখের মরিচা রোগ",
+    "crop": "আখ",
+    "severity": "মাঝারি",
+    "description": "পুকিনিয়া মেলানোসেফালা (Puccinia melanocephala) ছত্রাকের কারণে হয়। পাতার নিচে কমলা-বাদামী রঙের ফোস্কা পড়ে, যার ফলে পাতা আগেই শুকিয়ে মরে যায়।",
+    "causes": "উষ্ণ তাপমাত্রা (24–28°C), বেশি আর্দ্রতা এবং যে জাতগুলোতে রোগ সহজে ধরে।",
+    "treatment_summary": "ট্রায়াডিমেফন বা প্রপিকোনাজোল ছত্রাকনাশক স্প্রে করুন। বেশি রোগাক্রান্ত পাতাগুলো ছাঁটাই করুন।",
+    "prevention": "রোগ প্রতিরোধী জাতের চারা লাগান। সুষম সার ব্যবহার করুন।",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "24–28°C",
+      "humidity": ">75%",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "bacterial_blight": {
+    "display": "ব্যাকটেরিয়াল ব্লাইট",
+    "crop": "তুলা",
+    "severity": "বেশি",
+    "description": "জ্যান্থোমোনাস এক্সোনোপোডিস পিভি. ম্যালভেসিয়রাম (Xanthomonas axonopodis pv. malvacearum) ব্যাকটেরিয়ার কারণে হয়। পাতায় কোণাকৃতি ভেজা দাগ এবং ডালে কালো ঘা দেখা দেয়।",
+    "causes": "গরম ও স্যাঁতসেঁতে আবহাওয়া, বৃষ্টির ছাঁট, গাছে আঘাত লাগা এবং রোগাক্রান্ত বীজ।",
+    "treatment_summary": "কপার অক্সিক্লোরাইড বা স্ট্রেপ্টোমাইসিন স্প্রে করুন। রোগাক্রান্ত অবশিষ্টাংশ পরিষ্কার করুন।",
+    "prevention": "রোগমুক্ত প্রত্যয়িত বীজ ব্যবহার করুন, বীজ শোধন করুন, শস্য পর্যায় অবলম্বন করুন।",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–35°C",
+      "humidity": ">80%",
+      "rainfall": "প্রচুর"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "alternaria_leaf_spot": {
+    "display": "অল্টারনারিয়া পাতার দাগ রোগ",
+    "crop": "তুলা",
+    "severity": "মাঝারি",
+    "description": "অল্টারনারিয়া ম্যাক্রোস্পোরা (Alternaria macrospora) এর কারণে হয়। পাতায় গোল গোল গাঢ় বাদামী থেকে কালো রঙের দাগ পড়ে, যার মধ্যে গোল রিং থাকে।",
+    "causes": "বেশি আর্দ্রতা এবং ২৫–৩০°C তাপমাত্রা। দুর্বল বা রোগগ্রস্ত গাছে এই রোগ বেশি হয়।",
+    "treatment_summary": "ম্যানকোজেব, ক্লোরথ্যালোনিল বা ইপ্রোডিয়ন ছত্রাকনাশক দিন।",
+    "prevention": "জল নিষ্কাশনের ভালো ব্যবস্থা রাখুন, সুষম সার দিন এবং রোগাক্রান্ত পাতা বা আবর্জনা পরিষ্কার করে ফেলুন।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_chlorothalonil",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "২৫–৩০°C",
+      "humidity": ">৭৫%",
+      "rainfall": "মাঝারি থেকে বেশি"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "hispa": {
+    "display": "ধানের গান্ধী পোকা বা হিস্পা",
+    "crop": "ধান",
+    "severity": "মাঝারি",
+    "description": "ডিক্লাডিস্পা আর্মিগেরা (leaf beetle) এর কারণে হয়। পোকাগুলো পাতার ওপরের অংশ কুড়ে কুড়ে খায়; আর শুঁয়োপোকাগুলো পাতার ভেতরে ঢুকে সাদা সুড়ঙ্গের মতো তৈরি করে।",
+    "causes": "অতিরিক্ত নাইট্রোজেন সার দেওয়া ঘন এবং সতেজ ফসল। বর্ষাকালের আবহাওয়া।",
+    "treatment_summary": "ম্যালাথিয়ন বা মনোট্রোভফস দিন। আক্রান্ত পাতাগুলো কেটে নষ্ট করে দিন।",
+    "prevention": "অতিরিক্ত সার দেওয়া থেকে বিরত থাকুন, রোগ প্রতিরোধক বীজ ব্যবহার করুন এবং খুব ঘন করে চারা রোপণ করবেন না।",
+    "treatment_ids": [
+      "treat_malathion",
+      "treat_monocrotophos"
+    ],
+    "favorable_conditions": {
+      "temperature": "২৫–৩৫°C",
+      "humidity": ">৭৫%",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "tungro": {
+    "display": "টুংরো ভাইরাস রোগ",
+    "crop": "ধান",
+    "severity": "খুব বেশি",
+    "description": "সবুজ শোষক পোকার মাধ্যমে ছড়ানো দুটি ভাইরাসের (RTBV + RTSV) কারণে এটি হয়। পাতা হলুদ-কমলা রঙের হয়ে যায়। গাছ খর্বাকৃতি হয় এবং কম কুশি বের হয়।",
+    "causes": "যে সবুজ শোষক পোকাগুলোতে (Nephotettix spp.) এই দুটি ভাইরাস থাকে, তাদের আক্রমণ।",
+    "treatment_summary": "এর সরাসরি কোনো চিকিৎসা নেই। বুপ্রোফেজিন বা ইমিডাক্লোপ্রিড দিয়ে পোকা দমন করুন।",
+    "prevention": "রোগ প্রতিরোধক জাত ব্যবহার করুন (যেমন- উট্রি মেরাহ), একসাথে সব জমিতে ধান লাগান এবং পোকা দমন করুন।",
+    "treatment_ids": [
+      "treat_buprofezin",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "২৫–৩০°C",
+      "humidity": ">৮০%",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.35,
+      "rainfall": 0.3
+    }
+  },
+  "dead_heart": {
+    "display": "ডেড হার্ট বা মরা মোচা (মাজরা পোকা)",
+    "crop": "ধান",
+    "severity": "বেশি",
+    "description": "মাজরা পোকার লার্ভার (Scirpophaga incertulas) কারণে হয়। মাঝের পাতার খোসা হলুদ হয়ে মারা যায় এবং সহজেই টেনে তোলা যায়।",
+    "causes": "গাছ বৃদ্ধির সময়ে মাজরা পোকার মথের উপদ্রব।",
+    "treatment_summary": "কার্টাপ হাইড্রোক্লোরাইড, ক্লোরপাইরিফস বা ফ্লুবেনডায়ামাইড দানাদার কীটনাশক ব্যবহার করুন।",
+    "prevention": "মথের উপদ্রব বেশি থাকলে চারা একটু দেরিতে লাগান। আলোর ফাঁদ ব্যবহার করুন। ডিমের থোকাগুলো নষ্ট করে দিন।",
+    "treatment_ids": [
+      "treat_cartap",
+      "treat_flubendiamide",
+      "treat_chlorpyrifos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": "বেশি",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "downy_mildew": {
+    "display": "ডাউনি মিলডিউ রোগ",
+    "crop": "ধান",
+    "severity": "মাঝারি",
+    "description": "Sclerophthora macrospora-র কারণে হয়। পাতার নিচের দিকে তুলার মতো আস্তরণ সহ হালকা হলুদ দাগ দেখা যায়।",
+    "causes": "জমিতে জল জমে থাকা, ঠাণ্ডা আবহাওয়া এবং বেশি আর্দ্রতা।",
+    "treatment_summary": "মেটাক্সিল বা ফসেটিল-অ্যালুমিনিয়াম ছত্রাকনাশক প্রয়োগ করুন। জল নিকাশের ব্যবস্থা ভালো করুন।",
+    "prevention": "জল জমতে দেবেন না, জমির জল নিকাশের ব্যবস্থা উন্নত করুন, রোগ প্রতিরোধী জাত ব্যবহার করুন।",
+    "treatment_ids": [
+      "treat_metalaxyl",
+      "treat_fosetyl_al"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–25°C",
+      "humidity": ">90%",
+      "rainfall": "প্রবল বৃষ্টিপাত"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_leaf_streak": {
+    "display": "ব্যাকটেরিয়াল লিফ স্ট্রিক",
+    "crop": "ধান",
+    "severity": "মাঝারি",
+    "description": "Xanthomonas oryzae pv. oryzicola-র কারণে হয়। পাতার শিরাগুলোর মাঝখানে লম্বা, স্বচ্ছ জলের মতো ভেজা দাগ দেখা যায়।",
+    "causes": "গরম ও আর্দ্র আবহাওয়া। বৃষ্টির ছাঁট এবং সেচের জলের মাধ্যমে ছড়ায়।",
+    "treatment_summary": "তামা (কপার) ভিত্তিক ব্যাকটেরিয়া নাশক প্রয়োগ করুন। আক্রান্ত পাতাগুলো তুলে ফেলুন।",
+    "prevention": "রোগ প্রতিরোধী জাত ব্যবহার করুন। বেশি ইউরিয়া সার দেবেন না।",
+    "treatment_ids": [
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "বেশি"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_panicle_blight": {
+    "display": "ব্যাকটেরিয়াল প্যানিকল ব্লাইট",
+    "crop": "ধান",
+    "severity": "বেশি",
+    "description": "বার্কহোলডেরিয়া গ্লুমা (Burkholderia glumae) নামক ব্যাকটেরিয়ার কারণে হয়। ধানের দানা চিটা হয়ে যায়, ধূসর-বাদামী রঙ ধারণ করে। ফলন অনেক কমে যায়।",
+    "causes": "ফুল আসার সময় বেশি তাপমাত্রা (>30°C) এবং সাথে বেশি আর্দ্রতা থাকলে।",
+    "treatment_summary": "থোড় আসার সময় অক্সোলিনিক অ্যাসিড বা তামা (copper) ভিত্তিক ব্যাকটেরিয়া নাশক ব্যবহার করুন।",
+    "prevention": "রোগ প্রতিরোধ ক্ষমতা সম্পন্ন বীজ ব্যবহার করুন, ধান বের হওয়ার সময় জলের অভাব হতে দেবেন না।",
+    "treatment_ids": [
+      "treat_oxolinic_acid",
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": ">85%",
+      "rainfall": "মাঝারি"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "normal": {
+    "display": "সুস্থ (স্বাভাবিক)",
+    "crop": "ধান",
+    "severity": "কিছুই না",
+    "description": "কোনো রোগ দেখা যায়নি। ফসল সুস্থ দেখাচ্ছে।",
+    "causes": "প্রযোজ্য নয়",
+    "treatment_summary": "নিয়মিত নজরদারি এবং প্রতিরোধমূলক চাষের কাজ চালিয়ে যান।",
+    "prevention": "মিতভাবে সার দিন, ঠিকমতো জল দিন এবং শস্য পর্যায় (crop rotation) মেনে চলুন।",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "যেকোনো",
+      "humidity": "যেকোনো",
+      "rainfall": "নিয়মিত"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  }
+}

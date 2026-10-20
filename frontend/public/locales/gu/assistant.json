@@ -1,0 +1,15 @@
+{
+  "assistant.title": "AI કૃષિ સહાયક",
+  "assistant.subtitle": "ડાંગર, ઘઉં, શેરડી અને કપાસ માટે AI આધારિત રોગ વિશ્લેષણ।",
+  "assistant.placeholder": "આ નિદાન વિષે પૂછો…",
+  "assistant.analyzing": "વિશ્લેષણ થઈ રહ્યું છે…",
+  "assistant.contextActive": "સંદર્ભ સક્રિય",
+  "assistant.suggested": "સૂચિત પ્રશ્નો:",
+  "assistant.followUp": "આગળ પૂછો:",
+  "assistant.emptyTitle": "AI નિષ્ણાતને પૂછો",
+  "assistant.emptyHint": "સ્કેન કરેલ પાંદડા, સારવાર અથવા રોકથામ વિષે પ્રશ્ન પૂછો।",
+  "assistant.noDiagnosis": "પ્રથમ છોડનું પાંદડું સ્કેન કરો।",
+  "assistant.weatherAdvice": "આજની હવામાન સલાહ",
+  "assistant.jumpToLatest": "છેલ્લા સંદેશ પર જાઓ",
+  "assistant.welcomeMsg": "નમસ્તે! હું તમારો AI પ્લાન્ટ હેલ્થ આસિસ્ટન્ટ છું. છોડના પાનનો ફોટો અપલોડ કરો અને પૂરી માહિતી મેળવો — ચોકસાઈનો સ્કોર, ગ્રેડ-કેમ (Grad-CAM ધ્યાન નકશો), વાતાવરણનું જોખમ અને ખેતી માટેની સરળ સલાહ."
+}

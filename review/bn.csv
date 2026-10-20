@@ -1,0 +1,738 @@
+key,english,translation,status
+fe:diagnosis:diagnosis.treatment,Treatment Plan,চিকিৎসা পরিকল্পনা,reviewed
+fe:diagnosis:diagnosis.showTreatmentsAnyway,Show possible treatments anyway,তাও সম্ভাব্য চিকিৎসার উপায়গুলো দেখান,machine
+fe:library:library.treatment,Recommended Treatment Plan,পরামর্শ দেওয়া চিকিৎসার নিয়ম,machine
+fe:scan:scan.treatmentGuide,Treatment Guide,চিকিৎসার নির্দেশিকা,machine
+be:disease:bacterial_leaf_blight:treatment_summary,Apply copper-based bactericides. Remove infected plant debris. Use resistant varieties. Avoid excessive nitrogen fertilization.,তামা (copper) ভিত্তিক ব্যাকটেরিয়া নাশক প্রয়োগ করুন। আক্রান্ত গাছের অবশিষ্টাংশ পরিষ্কার করুন। রোগ প্রতিরোধ ক্ষমতা সম্পন্ন বীজ ব্যবহার করুন। অতিরিক্ত নাইট্রোজেন সার দেওয়া থেকে বিরত থাকুন।,machine
+be:disease:brown_spot:treatment_summary,"Apply mancozeb or iprodione fungicide. Correct soil nutrient deficiencies (potassium, silicon). Reduce dense planting.","ম্যাঙ্কোজেব বা ইপ্রোডিয়ন ছত্রাকনাশক প্রয়োগ করুন। মাটির পুষ্টির ঘাটতি পূরণ করুন (পটাশিয়াম, সিলিকন)। ঘন করে চারা রোপণ কমান।",machine
+be:disease:healthy:treatment_summary,Continue regular monitoring and preventive care.,নিয়মিত খেয়াল রাখুন এবং সতর্কতামূলক ব্যবস্থা চালিয়ে যান।,machine
+be:disease:leaf_blast:treatment_summary,"Apply fungicides: tricyclazole, isoprothiolane, or azoxystrobin. Reduce nitrogen fertilizer. Drain fields to reduce humidity.","ছত্রাকনাশক ব্যবহার করুন: tricyclazole, isoprothiolane, বা azoxystrobin। নাইট্রোজেন সার কমান। আর্দ্রতা কমাতে জমি থেকে জল বের করে দিন।",machine
+be:disease:leaf_scald:treatment_summary,Apply propiconazole or carbendazim fungicide. Improve field drainage and plant spacing.,propiconazole বা carbendazim ছত্রাকনাশক ব্যবহার করুন। জমির জল নিষ্কাশন ব্যবস্থা ভালো করুন এবং গাছের দূরত্ব বজায় রাখুন।,machine
+be:disease:sheath_blight:treatment_summary,"Apply validamycin, hexaconazole, or propiconazole fungicides. Reduce plant density. Minimize canopy humidity.","ভ্যালিডামাইসিন, হেক্সাকোনাজল বা প্রোপিকোনাজল ছত্রাকনাশক ব্যবহার করুন। গাছের ঘনত্ব কমান। জমির আর্দ্রতা কমানোর ব্যবস্থা করুন।",machine
+be:disease:aphid:treatment_summary,Apply imidacloprid or lambda-cyhalothrin insecticide. Encourage natural predators (ladybugs).,ইমিডাক্লোপ্রিড বা ল্যাম্বডা-সাইহালোথ্রিন কীটনাশক প্রয়োগ করুন। উপকারী পোকাদের (যেমন লেডিবাগ) আসতে সাহায্য করুন।,machine
+be:disease:black_rust:treatment_summary,"Apply propiconazole, tebuconazole, or trifloxystrobin fungicides at early stages.","রোগের শুরুতে প্রোপিকোনাজল, টেবুকোনাজল বা ট্রাইফ্লক্সিস্ট্রবিন ছত্রাকনাশক প্রয়োগ করুন।",machine
+be:disease:blast:treatment_summary,"Tricyclazole, isoprothiolane, azoxystrobin fungicides.","ট্রাইসাইক্লাজল, আইসোপ্রোথিওলেন, অ্যাজোক্সিস্ট্রোবিন ছত্রাকনাশক ব্যবহার করুন।",machine
+be:disease:brown_rust:treatment_summary,"Fungicides: propiconazole, mancozeb. Apply at early infection stage.","ছত্রাকনাশক: প্রোপিকোনাজল, ম্যানকোজেব। রোগ দেখা দেওয়ার সাথে সাথেই প্রয়োগ করুন।",machine
+be:disease:common_root_rot:treatment_summary,Seed treatment with trifloxystrobin + tebuconazole. Crop rotation with non-cereal crops.,ট্রাইফ্লক্সিস্ট্রোবিন + টেবুকেোনাজল দিয়ে বীজ শোধন করুন। ধান বা গম জাতীয় ফসল ছাড়া অন্য ফসল দিয়ে শস্য পর্যায় করুন।,machine
+be:disease:fusarium_head_blight:treatment_summary,Apply thiophanate-methyl or metconazole at early flowering. Remove infected debris.,ফুল আসার শুরুতে থিওফানেট-মিথাইল বা মেটাকোনাজল স্প্রে করুন। আক্রান্ত অংশ পরিষ্কার করুন।,machine
+be:disease:leaf_blight:treatment_summary,Mancozeb or propiconazole fungicide application.,ম্যানকোজেব বা প্রোপিকোনাজল ছত্রাকনাশক স্প্রে করুন।,machine
+be:disease:mildew:treatment_summary,"Apply triadimefon, propiconazole, or sulfur-based fungicides.","ট্রায়াডিমেফন, প্রোপিকোনাজল বা সালফারযুক্ত ছত্রাকনাশক স্প্রে করুন।",machine
+be:disease:mite:treatment_summary,Apply abamectin or dicofol miticide. Increase irrigation.,অ্যাবামেকটিন বা ডিকোফল মাকড়নাশক দিন। জলসেচ বাড়িয়ে দিন।,machine
+be:disease:septoria:treatment_summary,"Triazole or SDHI fungicides (epoxiconazole, fluxapyroxad). Early application is key.","ট্রায়াজল বা এসডিএইচআই (SDHI) ছত্রাকনাশক (ইপোক্সিকোনাজল, ফ্লুক্সাপাইরোক্স্যাড)। সময়মতো ওষুধ দেওয়া খুব জরুরি।",machine
+be:disease:smut:treatment_summary,"Seed treatment with carboxin, thiram, or tebuconazole is highly effective.","কার্বোক্সিন, থিরাম বা টেবুকোনাজল দিয়ে বীজ শোধন করা খুব কার্যকরী।",machine
+be:disease:stem_fly:treatment_summary,Apply chlorpyrifos or imidacloprid at seedling stage.,চারা অবস্থায় ক্লোরপাইরিফস বা ইমিডাক্লোপ্রিড স্প্রে করুন।,machine
+be:disease:tan_spot:treatment_summary,Apply propiconazole or mancozeb. Tillage to bury residues.,প্রপিকোনাজল বা ম্যানকোজেব স্প্রে করুন। জমি চাষ করে আগের ফসলের অবশিষ্টাংশ মাটিতে ঢেকে দিন।,machine
+be:disease:yellow_rust:treatment_summary,"Apply propiconazole, tebuconazole, or other triazole fungicides early.","শুরুতেই প্রপিকোনাজল, টেবুকোনাজল বা অন্য কোনো ট্রায়াজল ছত্রাকনাশক স্প্রে করুন।",machine
+be:disease:mosaic_disease:treatment_summary,No chemical cure. Remove and destroy infected stools. Control aphid vectors.,কোনো রাসায়নিক ওষুধ নেই। রোগাক্রান্ত গাছ তুলে পুড়িয়ে ফেলুন। জাব পোকা দমন করুন।,machine
+be:disease:rust:treatment_summary,Apply triadimefon or propiconazole fungicide. Remove severely infected leaves.,ট্রায়াডিমেফন বা প্রপিকোনাজোল ছত্রাকনাশক স্প্রে করুন। বেশি রোগাক্রান্ত পাতাগুলো ছাঁটাই করুন।,machine
+be:disease:bacterial_blight:treatment_summary,Apply copper oxychloride or streptomycin spray. Remove infected debris.,কপার অক্সিক্লোরাইড বা স্ট্রেপ্টোমাইসিন স্প্রে করুন। রোগাক্রান্ত অবশিষ্টাংশ পরিষ্কার করুন।,machine
+be:disease:alternaria_leaf_spot:treatment_summary,"Apply mancozeb, chlorothalonil, or iprodione fungicide.","ম্যানকোজেব, ক্লোরথ্যালোনিল বা ইপ্রোডিয়ন ছত্রাকনাশক দিন।",machine
+be:disease:hispa:treatment_summary,Apply malathion or monocrotophos. Clip and destroy affected leaves.,ম্যালাথিয়ন বা মনোট্রোভফস দিন। আক্রান্ত পাতাগুলো কেটে নষ্ট করে দিন।,machine
+be:disease:tungro:treatment_summary,No direct cure. Control leafhopper vectors with buprofezin or imidacloprid.,এর সরাসরি কোনো চিকিৎসা নেই। বুপ্রোফেজিন বা ইমিডাক্লোপ্রিড দিয়ে পোকা দমন করুন।,machine
+be:disease:dead_heart:treatment_summary,"Apply cartap hydrochloride, chlorpyrifos, or flubendiamide granules.","কার্টাপ হাইড্রোক্লোরাইড, ক্লোরপাইরিফস বা ফ্লুবেনডায়ামাইড দানাদার কীটনাশক ব্যবহার করুন।",machine
+be:disease:downy_mildew:treatment_summary,Apply metalaxyl or fosetyl-aluminium fungicide. Improve drainage.,মেটাক্সিল বা ফসেটিল-অ্যালুমিনিয়াম ছত্রাকনাশক প্রয়োগ করুন। জল নিকাশের ব্যবস্থা ভালো করুন।,machine
+be:disease:bacterial_leaf_streak:treatment_summary,Apply copper-based bactericides. Remove infected leaves.,তামা (কপার) ভিত্তিক ব্যাকটেরিয়া নাশক প্রয়োগ করুন। আক্রান্ত পাতাগুলো তুলে ফেলুন।,machine
+be:disease:bacterial_panicle_blight:treatment_summary,Apply oxolinic acid or copper-based bactericide at panicle initiation.,থোড় আসার সময় অক্সোলিনিক অ্যাসিড বা তামা (copper) ভিত্তিক ব্যাকটেরিয়া নাশক ব্যবহার করুন।,machine
+be:disease:normal:treatment_summary,Continue routine monitoring and preventive agronomic practices.,নিয়মিত নজরদারি এবং প্রতিরোধমূলক চাষের কাজ চালিয়ে যান।,machine
+fe:diagnosis:diagnosis.symptoms,Detected Symptoms,সনাক্ত করা লক্ষণ,reviewed
+fe:diagnosis:diagnosis.symptomsFound,Symptoms found,যে লক্ষণগুলো পাওয়া গেছে,machine
+fe:library:library.symptoms,Key Visual Symptoms,প্রধান লক্ষণগুলি,machine
+fe:scan:scan.symptomsPathology,Symptoms & Pathology,লক্ষণ ও রোগতত্ত্ব,machine
+be:disease:bacterial_leaf_blight:causes,"Warm temperatures (25–30°C), high humidity, and typhoon/rain-splash that spreads the bacteria through leaf wounds.","উষ্ণ তাপমাত্রা (২৫–৩০°C), বেশি আর্দ্রতা এবং ঝড়-বৃষ্টির জল পাতার ক্ষতের মাধ্যমে ব্যাকটেরিয়া ছড়িয়ে দেয়।",machine
+be:disease:brown_spot:causes,Associated with nutrient-deficient soils (especially potassium and silicon). Favoured by warm humid conditions and poor soil health.,মাটিতে পুষ্টির অভাব থাকলে (বিশেষ করে পটাশিয়াম ও সিলিকন) এই রোগ হয়। উষ্ণ ও আর্দ্র আবহাওয়া এবং খারাপ মাটির স্বাস্থ্যের কারণে এটি বাড়ে।,machine
+be:disease:healthy:causes,N/A,প্রযোজ্য নয়,machine
+be:disease:leaf_blast:causes,"Cool nights, warm days, high humidity (>90%), heavy dew, excessive nitrogen application, and susceptible varieties.","ঠান্ডা রাত, গরম দিন, বাতাসে বেশি আর্দ্রতা (>90%), বেশি শিশির, বেশি নাইট্রোজেন সার ব্যবহার এবং রোগাক্রান্ত হওয়ার প্রবণতা আছে এমন জাত।",machine
+be:disease:leaf_scald:causes,"High humidity, warm temperatures, and dense planting that reduces airflow.","বেশি আর্দ্রতা, উষ্ণ তাপমাত্রা এবং ঘন করে চারা লাগানো যার ফলে হাওয়া চলাচল কমে যায়।",machine
+be:disease:sheath_blight:causes,"High humidity (>90%), temperatures of 28–32°C, dense planting, high nitrogen levels, and flooded conditions that allow mycelium spread.","অতিরিক্ত আর্দ্রতা (>90%), ২৮–৩২°C তাপমাত্রা, ঘন করে গাছ লাগানো, বেশি নাইট্রোজেন সার দেওয়া এবং জলমগ্ন অবস্থা যা মাইসেলিয়াম ছড়াতে সাহায্য করে।",machine
+be:disease:aphid:causes,"Warm dry conditions, absence of natural predators, and dense planting.","উষ্ণ শুষ্ক আবহাওয়া, উপকারী পোকার অভাব এবং ঘন করে গাছ লাগানো।",machine
+be:disease:black_rust:causes,"Warm temperatures (15–30°C), dew, and wind-blown spores from nearby infected fields.","উষ্ণ তাপমাত্রা (১৫–৩০°C), শিশির এবং আশেপাশের আক্রান্ত ক্ষেত থেকে বাতাসে ভেসে আসা রেনু।",machine
+be:disease:blast:causes,"Cool nights, morning dew, excess nitrogen, susceptible varieties.","ঠান্ডা রাত, সকালের শিশির, অতিরিক্ত নাইট্রোজেন সার, এবং রোগাক্রান্ত হওয়ার প্রবণতা আছে এমন জাত।",machine
+be:disease:brown_rust:causes,"Moderate temperatures (15–22°C), dew, and humid conditions.","মাঝারি তাপমাত্রা (15–22°C), শিশির এবং আর্দ্র আবহাওয়া।",machine
+be:disease:common_root_rot:causes,"Dry soil conditions, warm temperatures during seeding, and soil-borne inoculum.","মাটিতে রস কম থাকা, বীজ বপনের সময় বেশি তাপমাত্রা এবং মাটিতে রোগের জীবাণু থাকা।",machine
+be:disease:fusarium_head_blight:causes,"Wet conditions during flowering (anthesis), temperatures of 25–30°C, and crop residues.","ফুল ফোটার সময় ভেজা আবহাওয়া, ২৫–৩০°C তাপমাত্রা এবং আগের ফসলের অবশিষ্টাংশ।",machine
+be:disease:leaf_blight:causes,Warm humid conditions and susceptible varieties.,উষ্ণ ও স্যাঁতসেঁতে আবহাওয়া এবং রোগাক্রান্ত হওয়ার প্রবণতা আছে এমন জাত।,machine
+be:disease:mildew:causes,"Cool temperatures (15–22°C), moderate humidity, and dense canopy.","ঠান্ডা আবহাওয়া (১৫–২২°C), মাঝারি আর্দ্রতা এবং ঘন গাছপালা।",machine
+be:disease:mite:causes,"Hot, dry conditions. Chemical treatments that kill natural predators.",গরম ও শুষ্ক আবহাওয়া। যেসব রাসায়নিক ওষুধ পোকার শত্রু পোকাদের মেরে ফেলে।,machine
+be:disease:septoria:causes,"Cool, wet weather (10–20°C), leaf wetness periods >20 hours.","ঠান্ডা ও ভেজা আবহাওয়া (10–20°C), পাতা টানা >২০ ঘণ্টা ভেজা থাকা।",machine
+be:disease:smut:causes,Moderate temperatures during flowering with humid conditions. Seed-borne pathogen.,ফুল আসার সময় মাঝারি তাপমাত্রা ও স্যাঁতসেঁতে আবহাওয়া। বীজবাহিত রোগজীবাণু।,machine
+be:disease:stem_fly:causes,Peak activity during cool temperatures (15–20°C) at early crop stages.,ফসলের প্রাথমিক অবস্থায় ঠান্ডা আবহাওয়ায় (১৫–২০°C) এটার আক্রমণ বেশি হয়।,machine
+be:disease:tan_spot:causes,"Warm temperatures (20–28°C), leaf wetness, and crop residue from previous season.","উষ্ণ তাপমাত্রা (২০–২৮°C), ভেজা পাতা এবং আগের মৌসুমের ফসলের অবশিষ্টাংশ।",machine
+be:disease:yellow_rust:causes,"Cool temperatures (10–15°C), dew and mist, and susceptible varieties.","ঠান্ডা আবহাওয়া (১০–১৫°C), শিশির ও কুয়াশা, এবং রোগাক্রান্ত হওয়ার ঝুঁকিতে থাকা জাত।",machine
+be:disease:mosaic_disease:causes,"Transmitted by aphids (Rhopalosiphum maidis), infected planting material.",জাব পোকা (Rhopalosiphum maidis) এবং রোগাক্রান্ত বীজ বা গাছ লাগানোর মাধ্যমে ছড়ায়।,machine
+be:disease:rust:causes,"Warm temperatures (24–28°C), high humidity, and susceptible cultivars.","উষ্ণ তাপমাত্রা (24–28°C), বেশি আর্দ্রতা এবং যে জাতগুলোতে রোগ সহজে ধরে।",machine
+be:disease:bacterial_blight:causes,"Warm, humid weather, rain-splash, mechanical damage, and infected seeds.","গরম ও স্যাঁতসেঁতে আবহাওয়া, বৃষ্টির ছাঁট, গাছে আঘাত লাগা এবং রোগাক্রান্ত বীজ।",machine
+be:disease:alternaria_leaf_spot:causes,High humidity and temperatures of 25–30°C. Most severe on stressed or weakened plants.,বেশি আর্দ্রতা এবং ২৫–৩০°C তাপমাত্রা। দুর্বল বা রোগগ্রস্ত গাছে এই রোগ বেশি হয়।,machine
+be:disease:hispa:causes,"Lush, dense crops with high nitrogen. Wet season conditions.",অতিরিক্ত নাইট্রোজেন সার দেওয়া ঘন এবং সতেজ ফসল। বর্ষাকালের আবহাওয়া।,machine
+be:disease:tungro:causes,Green leafhopper (Nephotettix spp.) populations carrying both viruses.,"যে সবুজ শোষক পোকাগুলোতে (Nephotettix spp.) এই দুটি ভাইরাস থাকে, তাদের আক্রমণ।",machine
+be:disease:dead_heart:causes,Stem borer moth populations during vegetative stage.,গাছ বৃদ্ধির সময়ে মাজরা পোকার মথের উপদ্রব।,machine
+be:disease:downy_mildew:causes,"Waterlogged soils, cool temperatures, and high humidity.","জমিতে জল জমে থাকা, ঠাণ্ডা আবহাওয়া এবং বেশি আর্দ্রতা।",machine
+be:disease:bacterial_leaf_streak:causes,"Warm, humid weather. Spread by rain splash and irrigation water.",গরম ও আর্দ্র আবহাওয়া। বৃষ্টির ছাঁট এবং সেচের জলের মাধ্যমে ছড়ায়।,machine
+be:disease:bacterial_panicle_blight:causes,High temperatures (>30°C) during flowering combined with high humidity.,ফুল আসার সময় বেশি তাপমাত্রা (>30°C) এবং সাথে বেশি আর্দ্রতা থাকলে।,machine
+be:disease:normal:causes,N/A,প্রযোজ্য নয়,machine
+fe:common:card.prevention,Prevention Plan,প্রতিরোধ,reviewed
+fe:library:library.prevention,Long-term Prevention,দীর্ঘমেয়াদী প্রতিরোধ,machine
+fe:scan:scan.longTermPrevention,Long-Term Prevention,দীর্ঘমেয়াদী প্রতিকার,machine
+be:disease:bacterial_leaf_blight:prevention,Use certified disease-free seeds. Maintain field drainage. Apply balanced fertilization.,"প্রত্যয়িত রোগমুক্ত বীজ ব্যবহার করুন। জমিতে জল জমতে দেবেন না, নিকাশি ব্যবস্থা ভালো রাখুন। সুষম সার প্রয়োগ করুন।",machine
+be:disease:brown_spot:prevention,"Balanced fertilization, well-drained soils, disease-resistant varieties.","সুষম সার প্রয়োগ, ভালো জল নিকাশি ব্যবস্থাযুক্ত মাটি এবং রোগ প্রতিরোধক জাত ব্যবহার করুন।",machine
+be:disease:healthy:prevention,"Maintain good agronomic practices, balanced fertilization, and proper irrigation.","ভালো চাষাবাদ পদ্ধতি মেনে চলুন, সুষম সার ব্যবহার করুন এবং ঠিকমতো জল দিন।",machine
+be:disease:leaf_blast:prevention,Use blast-resistant varieties. Avoid excess nitrogen. Ensure good airflow between plants.,ব্লাস্ট রোগ প্রতিরোধী জাত ব্যবহার করুন। বেশি নাইট্রোজেন দেবেন না। গাছগুলোর মধ্যে যেন হাওয়া চলাচল করতে পারে তা নিশ্চিত করুন।,machine
+be:disease:leaf_scald:prevention,"Wider row spacing, balanced nutrients, resistant varieties.","সারিবদ্ধভাবে লাগানোর সময় দূরত্ব বেশি রাখুন, সুষম সার দিন এবং রোগ প্রতিরোধী জাত ব্যবহার করুন।",machine
+be:disease:sheath_blight:prevention,"Lower seeding rates, balanced fertilization, water management.","কম বীজ বপন করা, সুষম সার ব্যবহার এবং জল ব্যবস্থাপনা ঠিক রাখা।",machine
+be:disease:aphid:prevention,"Early planting, crop rotation, avoid excessive nitrogen.","তাড়াতাড়ি চারা লাগানো, ফসল পর্যায়ক্রম (শস্য আবর্তন) করা এবং অতিরিক্ত নাইট্রোজেন সার এড়ানো।",machine
+be:disease:black_rust:prevention,Plant resistant varieties. Early sowing. Remove volunteer wheat plants.,রোগ প্রতিরোধ ক্ষমতা সম্পন্ন জাতের বীজ লাগান। তাড়াতাড়ি বীজ বুনুন। ক্ষেতের আগাছা এবং আগের মরশুমের অবশিষ্ট গমের গাছ পরিষ্কার করুন।,machine
+be:disease:blast:prevention,"Resistant varieties, balanced nitrogen, regulated irrigation.","রোগ প্রতিরোধী জাত নির্বাচন করুন, পরিমিত নাইট্রোজেন সার দিন, এবং নিয়মিত সেচ দিন।",machine
+be:disease:brown_rust:prevention,"Resistant varieties, timely sowing, crop rotation.","রোগ প্রতিরোধী জাত, সময়মতো বীজ বপন এবং শস্য পর্যায় অবলম্বন করুন।",machine
+be:disease:common_root_rot:prevention,"Balanced soil fertility, avoid continuous wheat, proper seeding depth.","মাটির উর্বরতা ঠিক রাখুন, পরপর একই জমিতে গম চাষ এড়িয়ে চলুন, এবং সঠিক গভীরে বীজ বপন করুন।",machine
+be:disease:fusarium_head_blight:prevention,"Resistant varieties, tillage to bury residues, good drainage.","রোগ প্রতিরোধী বীজ ব্যবহার, চাষ করে জমির আবশিষ্টাংশ মাটিতে মিশিয়ে দেওয়া এবং ভালো জল নিকাশের ব্যবস্থা করা।",machine
+be:disease:leaf_blight:prevention,Crop rotation and use of resistant varieties.,ফসল পরিবর্তন করে চাষ করা এবং রোগ প্রতিরোধী বীজ ব্যবহার করা।,machine
+be:disease:mildew:prevention,"Wider row spacing, resistant varieties, early sowing.","সারির মধ্যে বেশি ফাঁক রাখা, রোগ প্রতিরোধী বীজ ব্যবহার এবং তাড়াতাড়ি বীজ বপন করা।",machine
+be:disease:mite:prevention,Avoid overly dry conditions. Conserve beneficial insects.,খুব বেশি শুষ্ক আবহাওয়া এড়িয়ে চলুন। উপকারী পোকাদের বাঁচিয়ে রাখুন।,machine
+be:disease:septoria:prevention,"Resistant varieties, crop rotation, delayed sowing.","রোগ প্রতিরোধ ক্ষমতা সম্পন্ন বীজ, শস্য পরিবর্তন, দেরিতে বীজ বপন।",machine
+be:disease:smut:prevention,Use certified smut-free seed. Hot-water seed treatment.,রোগমুক্ত ও প্রত্যয়িত বীজ ব্যবহার করুন। গরম জলে বীজ শোধন করুন।,machine
+be:disease:stem_fly:prevention,"Early sowing, treat seeds with systemic insecticide, monitor basal nodes.","তাড়াতাড়ি বীজ বুনুন, দানাদার কীটনাশক দিয়ে বীজ শোধন করুন এবং গাছের গোড়ার দিকটা খেয়াল রাখুন।",machine
+be:disease:tan_spot:prevention,"Crop rotation, residue management, resistant varieties.","ফসল বদল করে চাষ করুন, ফসলের আবর্জনা পরিষ্কার রাখুন, এবং রোগ প্রতিরোধী জাত ব্যবহার করুন।",machine
+be:disease:yellow_rust:prevention,Resistant varieties are most effective. Early sowing. Monitor forecasts.,রোগ প্রতিরোধী জাত ব্যবহার করা সবচেয়ে বেশি কার্যকর। তাড়াতাড়ি বীজ বুনুন। আবহাওয়ার পূর্বাভাস খেয়াল রাখুন।,machine
+be:disease:mosaic_disease:prevention,"Use virus-free seed cane, resistant varieties, control aphid populations.","রোগমুক্ত বীজ বা চারা ব্যবহার করুন, রোগ প্রতিরোধী জাত লাগান, জাব পোকা দমন করুন।",machine
+be:disease:rust:prevention,Plant resistant varieties. Balanced fertilization.,রোগ প্রতিরোধী জাতের চারা লাগান। সুষম সার ব্যবহার করুন।,machine
+be:disease:bacterial_blight:prevention,"Disease-free certified seed, seed treatment, crop rotation.","রোগমুক্ত প্রত্যয়িত বীজ ব্যবহার করুন, বীজ শোধন করুন, শস্য পর্যায় অবলম্বন করুন।",machine
+be:disease:alternaria_leaf_spot:prevention,"Good drainage, balanced nutrition, remove infected debris.","জল নিষ্কাশনের ভালো ব্যবস্থা রাখুন, সুষম সার দিন এবং রোগাক্রান্ত পাতা বা আবর্জনা পরিষ্কার করে ফেলুন।",machine
+be:disease:hispa:prevention,"Avoid over-fertilization, resistant varieties, reduce dense planting.","অতিরিক্ত সার দেওয়া থেকে বিরত থাকুন, রোগ প্রতিরোধক বীজ ব্যবহার করুন এবং খুব ঘন করে চারা রোপণ করবেন না।",machine
+be:disease:tungro:prevention,"Resistant varieties (Utri Merah), synchronized planting, leafhopper management.","রোগ প্রতিরোধক জাত ব্যবহার করুন (যেমন- উট্রি মেরাহ), একসাথে সব জমিতে ধান লাগান এবং পোকা দমন করুন।",machine
+be:disease:dead_heart:prevention,Avoid early planting when moths are active. Use light traps. Remove egg masses.,মথের উপদ্রব বেশি থাকলে চারা একটু দেরিতে লাগান। আলোর ফাঁদ ব্যবহার করুন। ডিমের থোকাগুলো নষ্ট করে দিন।,machine
+be:disease:downy_mildew:prevention,"Avoid water stagnation, improve field drainage, resistant varieties.","জল জমতে দেবেন না, জমির জল নিকাশের ব্যবস্থা উন্নত করুন, রোগ প্রতিরোধী জাত ব্যবহার করুন।",machine
+be:disease:bacterial_leaf_streak:prevention,Use resistant varieties. Avoid excessive nitrogen.,রোগ প্রতিরোধী জাত ব্যবহার করুন। বেশি ইউরিয়া সার দেবেন না।,machine
+be:disease:bacterial_panicle_blight:prevention,"Resistant varieties, avoid water stress at heading.","রোগ প্রতিরোধ ক্ষমতা সম্পন্ন বীজ ব্যবহার করুন, ধান বের হওয়ার সময় জলের অভাব হতে দেবেন না।",machine
+be:disease:normal:prevention,"Maintain balanced fertilization, proper irrigation, and crop rotation.","মিতভাবে সার দিন, ঠিকমতো জল দিন এবং শস্য পর্যায় (crop rotation) মেনে চলুন।",machine
+fe:assistant:assistant.noDiagnosis,Scan a leaf first to enable context-aware diagnosis.,প্রথমে গাছের পাতা স্ক্যান করুন।,reviewed
+fe:common:card.diagnosisSummary,Diagnosis Summary,রোগ নির্ণয় সারসংক্ষেপ,reviewed
+fe:diagnosis:diagnosis.title,Plant Health Report,গাছের স্বাস্থ্য রিপোর্ট,reviewed
+fe:diagnosis:diagnosis.gradcam,Grad-CAM Attention Map,AI দৃশ্য বিশ্লেষণ (Grad-CAM),reviewed
+fe:diagnosis:diagnosis.healthScore,Health Score,স্বাস্থ্য স্কোর,reviewed
+fe:diagnosis:diagnosis.details,Diagnosis Details,রোগ নির্ণয়ের বিবরণ,reviewed
+fe:diagnosis:diagnosis.modelPredictions,Model Predictions,মডেল পূর্বাভাস,reviewed
+fe:diagnosis:diagnosis.aiSummary,Why FloraAI Thinks This,FloraAI কেন এটি মনে করে,reviewed
+fe:diagnosis:diagnosis.conditions,Current Weather,বর্তমান অবস্থা,reviewed
+fe:diagnosis:diagnosis.risk,Disease Risk,রোগের ঝুঁকি,reviewed
+fe:diagnosis:diagnosis.expertAlert,Consult an Expert,বিশেষজ্ঞের সাথে পরামর্শ করুন,reviewed
+fe:diagnosis:diagnosis.consultExpert,This diagnosis indicates a high-severity condition. Consult a local agronomist before applying chemical treatment.,এই রোগ নির্ণয় গুরুতর অবস্থা নির্দেশ করে। চিকিৎসার আগে বিশেষজ্ঞের পরামর্শ নিন।,reviewed
+fe:diagnosis:diagnosis.whatToDoNow,What to do now,এখন কী করতে হবে,reviewed
+fe:diagnosis:diagnosis.heatmapToggle,See where the problem is,সমস্যাটি কোথায় দেখুন,reviewed
+fe:diagnosis:diagnosis.listen,Listen,শুনুন,reviewed
+fe:diagnosis:diagnosis.stopListening,Stop listening,বন্ধ করুন,reviewed
+fe:diagnosis:diagnosis.leafVision,Leaf Vision,পাতার ভিশন,machine
+fe:diagnosis:diagnosis.originalPhoto,Original leaf photo,পাতার আসল ছবি,machine
+fe:diagnosis:diagnosis.photo,Photo,ছবি,machine
+fe:diagnosis:diagnosis.aiView,AI view,AI এর দেখা,machine
+fe:diagnosis:diagnosis.compare,Compare,তুলনা করুন,machine
+fe:diagnosis:diagnosis.compareHandle,Compare AI view with original,আসলের সাথে AI এর দেখা তুলনা করুন,machine
+fe:diagnosis:diagnosis.hotspot,Attention point,নজর দেওয়ার জায়গা,machine
+fe:diagnosis:diagnosis.attentionHere,The AI paid most attention here,AI এখানে সবচেয়ে বেশি নজর দিয়েছে,machine
+fe:diagnosis:diagnosis.whereAiLooked,Where the AI looked,AI যেখানে দেখেছে,machine
+fe:diagnosis:diagnosis.attentionLegend,Green to amber to red focus scale,সবুজ থেকে হলুদ হয়ে লাল ফোকাস স্কেল,machine
+fe:diagnosis:diagnosis.attentionInfo,"This shows model attention, not a guaranteed diagnosis.","এটি মডেলের নজর দেওয়া দেখায়, নিশ্চিত রোগ নয়।",machine
+fe:diagnosis:diagnosis.lowConfidenceNote,"The AI is not sure, so highlights may be approximate","AI নিশ্চিত নয়, তাই দাগগুলো আন্দাজমতো হতে পারে",machine
+fe:diagnosis:diagnosis.notSureYet,Not sure yet,এখনো নিশ্চিত নয়,machine
+fe:diagnosis:diagnosis.unrecognizedLeaf,We could not recognize this leaf,আমরা এই পাতাটি চিনতে পারিনি,machine
+fe:diagnosis:diagnosis.unrecognizedHint,"Please retake the photo clearly, or check that the selected crop matches your plant.","দয়া করে পরিষ্কার করে আবার ছবি তুলুন, অথবা বেছে নেওয়া ফসলটি আপনার গাছের সাথে মিলছে কি না দেখে নিন।",machine
+fe:diagnosis:diagnosis.retakePhoto,Retake photo,আবার ছবি তুলুন,machine
+fe:diagnosis:diagnosis.lowConfidenceWarning,"Warning: Because the AI is not confident, consult an agronomist before applying chemicals.","সতর্কতা: AI যেহেতু নিশ্চিত নয়, তাই ওষুধ দেওয়ার আগে কৃষি বিশেষজ্ঞের পরামর্শ নিন।",machine
+fe:diagnosis:diagnosis.affectedArea,Affected Area,আক্রান্ত জায়গা,machine
+fe:diagnosis:diagnosis.weatherRisk,Weather Risk,আবহাওয়া ঝুঁকি,machine
+fe:diagnosis:diagnosis.weatherDetails,Weather details,আবহাওয়ার বিবরণ,machine
+fe:diagnosis:diagnosis.technicalDetails,Technical details,কারিগরি বিবরণ,machine
+fe:diagnosis:diagnosis.tabImmediate,Immediate,তাৎক্ষণিক,machine
+fe:diagnosis:diagnosis.tabOrganic,Organic,জৈবিক,machine
+fe:diagnosis:diagnosis.tabPreventive,Preventive,প্রতিরোধমূলক,machine
+fe:diagnosis:diagnosis.askAiAboutThis,Ask AI about this,এটি নিয়ে AI কে জিজ্ঞেস করুন,machine
+fe:diagnosis:diagnosis.diseaseDetected,Disease Detected,রোগ ধরা পড়েছে,machine
+fe:diagnosis:diagnosis.healthyPlant,Healthy Plant,সুস্থ গাছ,machine
+fe:diagnosis:diagnosis.photoTips,Tips for a better photo,ভালো ছবি তোলার টিপস,machine
+fe:diagnosis:diagnosis.possibleDiseases,Possible Diseases,সম্ভাব্য রোগ,machine
+fe:diagnosis:diagnosis.confidenceIs,Confidence is,নিশ্চিত হওয়ার মাত্রা,machine
+fe:diagnosis:diagnosis.multipleMatch,Multiple conditions may match these leaf patterns.,এই পাতার দাগের সাথে একাধিক রোগ মিলতে পারে।,machine
+fe:diagnosis:diagnosis.disclaimer,FloraAI diagnostic assistance is advisory only. Verify with agricultural officers before crop intervention.,ফ্লোরাএআই (FloraAI) রোগ নির্ণয়ের সাহায্য কেবল পরামর্শমূলক। ফসলে কিছু করার আগে কৃষি কর্মকর্তাদের সাথে যাচাই করে নিন।,machine
+fe:diagnosis:weather.context,WEATHER CONTEXT,আবহাওয়া পরিস্থিতি,machine
+fe:diagnosis:weather.update,UPDATE,আপডেট করুন,machine
+fe:diagnosis:weather.locating,LOCATING...,অবস্থান খোঁজা হচ্ছে...,machine
+fe:diagnosis:weather.lowRisk,LOW RISK,কম ঝুঁকি,machine
+fe:diagnosis:weather.mediumRisk,MEDIUM RISK,মাঝারি ঝুঁকি,machine
+fe:diagnosis:weather.highRisk,HIGH RISK,বেশি ঝুঁকি,machine
+fe:diagnosis:weather.severeRisk,SEVERE RISK,খুব বেশি ঝুঁকি,machine
+fe:diagnosis:weather.prompt,Click UPDATE to load local weather and disease risk data.,স্থানীয় আবহাওয়া এবং রোগের ঝুঁকির তথ্য দেখতে আপডেট-এ ক্লিক করুন।,machine
+fe:diagnosis:diagnosis.preliminaryMeasures,Preliminary Measures:,প্রাথমিক ব্যবস্থা:,machine
+fe:diagnosis:diagnosis.factorInfluence,Environmental Factor Influence,পরিবেশগত বিষয়ের প্রভাব,machine
+fe:diagnosis:diagnosis.sympLesions,Discolored foliar lesions,পাতার রং বদলে যাওয়া দাগ,machine
+fe:diagnosis:diagnosis.sympNecrosis,Necrotic margin formation,পচে যাওয়া বা মরা কিনার তৈরি হওয়া,machine
+fe:diagnosis:diagnosis.sympVascular,Vascular tissue stress,পরিবাহী নালীতে চাপ,machine
+fe:assistant:assistant.title,AI Agronomist Chat,AI কৃষি সহকারী,reviewed
+fe:assistant:assistant.subtitle,Multi-crop expert diagnostics and care protocols powered by Gemini AI.,"ধান, গম, আখ এবং তুলার জন্য AI-ভিত্তিক রোগ বিশ্লেষণ।",reviewed
+fe:assistant:assistant.placeholder,"Ask about this diagnosis, treatments, or preventive care…",এই রোগ নির্ণয় সম্পর্কে জিজ্ঞেস করুন…,reviewed
+fe:assistant:assistant.analyzing,Thinking…,বিশ্লেষণ চলছে…,reviewed
+fe:assistant:assistant.contextActive,Diagnosis Context Active,প্রসঙ্গ সক্রিয়,reviewed
+fe:assistant:assistant.suggested,Suggested questions:,পরামর্শকৃত প্রশ্ন:,reviewed
+fe:assistant:assistant.followUp,Ask a follow-up question:,পরবর্তী প্রশ্ন করুন:,reviewed
+fe:assistant:assistant.emptyTitle,Ask the AI Crop Specialist,AI বিশেষজ্ঞকে জিজ্ঞেস করুন,reviewed
+fe:assistant:assistant.emptyHint,"Ask questions regarding your scanned plant diagnosis, organic remedies, or seasonal prevention.","স্ক্যান করা পাতা, চিকিৎসা বা প্রতিরোধ সম্পর্কে জিজ্ঞেস করুন।",reviewed
+fe:assistant:assistant.weatherAdvice,Today's Weather Advice,আজকের আবহাওয়ার পরামর্শ,machine
+fe:assistant:assistant.jumpToLatest,Jump to latest,সর্বশেষটিতে যান,machine
+fe:assistant:assistant.welcomeMsg,"Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.","নমস্কার! আমি আপনার এআই (AI) গাছের স্বাস্থ্য সহায়ক। গাছের পাতার ছবি আপলোড করে সম্পূর্ণ রোগ নির্ণয় করুন — সঠিকতার মাত্রা, গ্র্যাড-ক্যাম (Grad-CAM দৃষ্টি মানচিত্র) প্রমাণ, আবহাওয়া ঝুকির বিশ্লেষণ এবং কাজের পরামর্শ।",machine
+fe:common:nav.home,Home,হোম,reviewed
+fe:common:nav.scan,Scanner,স্ক্যান,reviewed
+fe:common:nav.chat,AI Chat,AI চ্যাট,reviewed
+fe:common:nav.plants,My Plants,আমার গাছ,reviewed
+fe:common:nav.encyclopedia,Encyclopedia,বিশ্বকোষ,reviewed
+fe:common:nav.history,History,ইতিহাস,reviewed
+fe:common:nav.language,Choose language,ভাষা নির্বাচন করুন,reviewed
+fe:common:lang.chooseLanguage,Choose language,ভাষা নির্বাচন করুন,reviewed
+fe:common:btn.scanPlant,Scan Plant,গাছ স্ক্যান করুন,reviewed
+fe:common:btn.save,Save Plant,সংরক্ষণ করুন,reviewed
+fe:common:btn.saved,Saved,সংরক্ষিত,reviewed
+fe:common:btn.download,Download Report,রিপোর্ট ডাউনলোড,reviewed
+fe:common:btn.share,Share,শেয়ার করুন,reviewed
+fe:common:btn.back,Back,পিছনে,reviewed
+fe:common:btn.send,Send,পাঠান,reviewed
+fe:common:btn.speak,Listen,শুনুন,reviewed
+fe:common:btn.stopSpeaking,Stop listening,থামুন,reviewed
+fe:common:btn.scanAnother,Scan Another,আরেকটি গাছ স্ক্যান করুন,reviewed
+fe:common:btn.askChat,Ask AI Chat,AI চ্যাটকে জিজ্ঞেস করুন,reviewed
+fe:common:btn.analyze,Analyze,বিশ্লেষণ করুন,reviewed
+fe:common:btn.analyzing,Analyzing…,বিশ্লেষণ চলছে…,reviewed
+fe:common:btn.locate,Locate,অবস্থান খুঁজুন,reviewed
+fe:common:btn.refresh,Refresh,রিফ্রেশ,reviewed
+fe:common:btn.cancel,Cancel,বাতিল,machine
+fe:common:btn.more,More,আরও,machine
+fe:common:footer.platform,Platform,প্ল্যাটফর্ম,machine
+fe:common:footer.data,Data,ডেটা,machine
+fe:common:footer.info,Info,তথ্য,machine
+fe:common:footer.scanner,Plant Scanner,প্ল্যান্ট স্ক্যানার,machine
+fe:common:footer.chat,AI Chat,এআই চ্যাট,machine
+fe:common:footer.plants,My Plants,আমার গাছপালা,machine
+fe:common:footer.encyclopedia,Encyclopedia,বিশ্বকোষ,machine
+fe:common:footer.library,Disease Library,রোগের লাইব্রেরি,machine
+fe:common:footer.history,Scan History,স্ক্যানের ইতিহাস,machine
+fe:common:footer.tools,Analysis Tools,বিশ্লেষণের টুলস,machine
+fe:common:footer.about,About BioScan,বায়োস্ক্যান সম্পর্কে,machine
+fe:common:footer.contact,Contact,যোগাযোগ,machine
+fe:common:footer.privacy,Privacy,গোপনীয়তা,machine
+fe:common:footer.terms,Terms,শর্তাবলী,machine
+fe:common:footer.tagline,"AI-powered plant disease intelligence for farms, labs, and greenhouses worldwide.","সারা বিশ্বের খেত, ল্যাব এবং গ্রিনহাউসের জন্য এআই-চালিত গাছের রোগ সনাক্তকরণ ব্যবস্থা।",machine
+fe:common:footer.operational,ALL SYSTEMS OPERATIONAL,সমস্ত সিস্টেম সচল আছে,machine
+fe:common:footer.rights,All rights reserved.,সর্বস্বত্ব সংরক্ষিত।,machine
+fe:common:footer.disclaimer,Flora AI provides diagnostic guidance for informational purposes only. Results should be verified by a qualified agricultural expert.,ফ্লোরা এআই শুধুমাত্র তথ্যগত উদ্দেশ্যে রোগ নির্ণয়ের পরামর্শ দেয়। ফলাফল একজন অভিজ্ঞ কৃষি বিশেষজ্ঞ দ্বারা যাচাই করা উচিত।,machine
+fe:common:history.title,Scan History & Timeline,স্ক্যানের ইতিহাস এবং সময়সূচী,machine
+fe:common:history.empty,No scan records found. Scan a leaf to start tracking health.,কোনো স্ক্যান রেকর্ড পাওয়া যায়নি। গাছের স্বাস্থ্য ট্র্যাক করা শুরু করতে একটি পাতা স্ক্যান করুন।,machine
+fe:common:history.clear,Clear History,ইতিহাস মুছুন,machine
+fe:common:history.diagnosesRecorded,diagnoses recorded,টি রোগ নির্ণয় রেকর্ড করা হয়েছে,machine
+fe:common:card.whyDetected,Why Detected (XAI),কেন সনাক্ত করা হয়েছে (XAI),reviewed
+fe:common:card.visualEvidence,Visual Evidence,দৃশ্য প্রমাণ,reviewed
+fe:common:card.shap,SHAP Feature Evidence,SHAP বৈশিষ্ট্য প্রমাণ,reviewed
+fe:common:card.environmental,Environmental Factors,পরিবেশগত কারণ,reviewed
+fe:common:card.actions,Recommended Actions,প্রস্তাবিত পদক্ষেপ,reviewed
+fe:common:card.disclaimer,FloraAI guidance is advisory only.,FloraAI নির্দেশিকা শুধুমাত্র পরামর্শের জন্য।,reviewed
+fe:common:card.original,Original Image,মূল ছবি,reviewed
+fe:common:card.gradcam,Grad-CAM Heatmap,Grad-CAM হিটম্যাপ,reviewed
+fe:common:card.shapNote,SHAP values are pre-computed by the backend from environmental sensor data.,SHAP মান আগে থেকে গণনা করা। Gemini শুধু ব্যাখ্যা করে।,reviewed
+fe:common:common.loading,Loading…,লোড হচ্ছে…,reviewed
+fe:common:common.error,Error,ত্রুটি,reviewed
+fe:common:common.crop,Crop,ফসল,reviewed
+fe:common:common.confidence,AI Confidence,AI আস্থা,reviewed
+fe:common:common.health,Health,স্বাস্থ্য,reviewed
+fe:common:common.severity,Severity,তীব্রতা,reviewed
+fe:common:common.poweredBy,Powered by Gemini AI,Gemini AI দ্বারা চালিত,reviewed
+fe:common:common.context,Active Diagnosis Context,সক্রিয় রোগ নির্ণয়,reviewed
+fe:common:common.askFollowUp,Ask a follow-up,পরবর্তী প্রশ্ন,reviewed
+fe:common:status.healthy,Healthy,সুস্থ,reviewed
+fe:common:status.warning,Warning,সতর্কতা,reviewed
+fe:common:status.danger,Danger,বিপদ,reviewed
+fe:common:risk.low,Low Risk,কম ঝুঁকি,machine
+fe:common:risk.medium,Medium Risk,মাঝারি ঝুঁকি,machine
+fe:common:risk.high,High Risk,বেশি ঝুঁকি,machine
+fe:common:risk.severe,Severe Risk,খুব বেশি ঝুঁকি,machine
+fe:common:loader.step1,Looking at the leaf…,পাতা বিশ্লেষণ করা হচ্ছে…,reviewed
+fe:common:loader.step2,Checking for disease…,রোগ পরীক্ষা করা হচ্ছে…,reviewed
+fe:common:loader.step3,Preparing advice…,পরামর্শ প্রস্তুত করা হচ্ছে…,reviewed
+fe:common:loader.slowBackend,This is taking longer than expected. Please wait…,প্রত্যাশিত চেয়ে বেশি সময় লাগছে। অনুগ্রহ করে অপেক্ষা করুন…,reviewed
+fe:common:loader.checking,Checking your plant…,আপনার গাছ চেক করা হচ্ছে…,machine
+fe:common:loader.takingLonger,Taking longer than usual… please keep this page open,"সাধারণত যত সময় লাগে, তার চেয়ে বেশি সময় লাগছে… দয়া করে এই পেজটি খোলা রাখুন",machine
+fe:common:loader.timeoutError,Diagnosis took too long. Please check your connection and try again.,রোগ নির্ণয় করতে অনেক বেশি সময় লেগেছে। দয়া করে আপনার নেটওয়ার্ক চেক করে আবার চেষ্টা করুন।,machine
+fe:common:loader.tryAgain,Try again,আবার চেষ্টা করুন,machine
+fe:common:nav.myProfile,My Profile,আমার প্রোফাইল,machine
+fe:common:nav.scanHistory,Scan History,আগের স্ক্যানগুলি,machine
+fe:common:nav.preferences,Preferences,পছন্দসই সেটিংস,machine
+fe:common:nav.signOut,Sign Out,লগআউট করুন,machine
+fe:common:nav.proSpecialist,PRO SPECIALIST,প্রো স্পেশালিস্ট,machine
+fe:common:uploader.leafImage,Leaf Image,পাতার ছবি,machine
+fe:common:uploader.uploadHint,Upload leaf photo,পাতার ছবি আপলোড করুন,machine
+fe:common:uploader.dropHint,Drop image to scan,স্ক্যান করতে ছবি এখানে ছাড়ুন,machine
+fe:common:uploader.fileLimits,JPG · PNG · WEBP · Max 10MB,JPG · PNG · WEBP · সর্বোচ্চ 10MB,machine
+fe:common:uploader.tip,"Best results: clear, well-lit close-up",ভালো ফলাফলের জন্য: পরিষ্কার ও আলোয় ভালো করে তোলা কাছের ছবি দিন,machine
+fe:common:uploader.takePhoto,Take Photo,ছবি তুলুন,machine
+fe:common:uploader.chooseFile,Choose File,ফাইল বেছে নিন,machine
+fe:common:uploader.invalidType,"Please upload a valid image file (JPG, PNG, or WEBP).","দয়া করে সঠিক ফরম্যাটের ছবির ফাইল আপলোড করুন (JPG, PNG, বা WEBP)।",machine
+fe:common:uploader.tooLarge,Image is too large. Please use an image under 10 MB.,ছবিটি খুব বড়। দয়া করে 10 MB এর কম সাইজের ছবি দিন।,machine
+fe:common:uploader.remove,Remove selected image,বাছাই করা ছবি বাদ দিন,machine
+fe:common:camera.scannerTitle,FloraAI Scanner,FloraAI স্ক্যানার,machine
+fe:common:camera.positionLeaf,Position leaf in frame,ফ্রেমের মধ্যে পাতা রাখুন,machine
+fe:common:camera.alignLeaf,Align the affected leaf within the frame,রোগাক্রান্ত পাতাটি ফ্রেমের মধ্যে ঠিকঠাক রাখুন,machine
+fe:common:camera.retake,Retake,আবার ছবি তুলুন,machine
+fe:common:camera.gallery,Gallery,গ্যালারি,machine
+fe:common:camera.flip,Flip Camera,ক্যামেরা ঘোরান,machine
+fe:common:camera.accessDenied,Camera Access Denied,ক্যামেরা ব্যবহারের অনুমতি দেওয়া হয়নি,machine
+fe:common:camera.unavailable,Camera Unavailable,ক্যামেরা কাজ করছে না,machine
+fe:common:camera.uploadInstead,Upload Image Instead,পরিবর্তে ছবি আপলোড করুন,machine
+fe:common:camera.tryAgain,Try Again,আবার চেষ্টা করুন,machine
+fe:common:camera.usePhoto,Use this photo,এই ছবিটা ব্যবহার করুন,machine
+fe:common:camera.capture,Capture photo,ছবি তুলুন,machine
+fe:common:camera.close,Close camera,ক্যামেরা বন্ধ করুন,machine
+fe:common:severity.low,Low,কম,machine
+fe:common:severity.medium,Moderate,মাঝারি,machine
+fe:common:severity.moderate,Moderate,মাঝারি,machine
+fe:common:severity.high,High,বেশি,machine
+fe:common:severity.severe,Severe,খুব বেশি,machine
+fe:common:severity.critical,Critical,খুব বিপজ্জনক,machine
+fe:common:severity.none,None,কিছুই না,machine
+fe:common:status.needsAttention,Needs Attention,জরুরি নজর দিতে হবে,machine
+fe:common:status.atRisk,At Risk,ঝুঁকিতে আছে,machine
+fe:common:status.critical,Critical,খুব বিপজ্জনক,machine
+fe:common:status.diseaseDetected,DISEASE DETECTED,রোগ ধরা পড়েছে,machine
+fe:common:health.breakdown,HEALTH BREAKDOWN,গাছের স্বাস্থ্যের বিবরণ,machine
+fe:common:health.indexDesc,"AI health index based on visible leaf condition, color, and disease pattern analysis.","পাতার অবস্থা, রঙ এবং রোগ দেখে এআই (AI) গাছের স্বাস্থ্যের হিসাব করে।",machine
+fe:common:health.leafHealth,Leaf Health,পাতার স্বাস্থ্য,machine
+fe:common:health.colorHealth,Color Health,রঙের স্বাস্থ্য,machine
+fe:common:health.visibleDamage,Visible Damage,চোখে পড়া ক্ষতি,machine
+fe:common:health.diseaseRisk,Disease Risk,রোগের ঝুঁকি,machine
+fe:common:chat.treatTitle,Treat Disease,রোগের চিকিৎসা,machine
+fe:common:chat.treatQuestion,What is the immediate recommended organic or chemical treatment for this disease?,এই রোগের জন্য এখন কী জৈব বা রাসায়নিক ওষুধ ব্যবহার করা দরকার?,machine
+fe:common:chat.irrigationRainTitle,Irrigation after rainfall,বৃষ্টির পরে জলসেচ,machine
+fe:common:chat.irrigationRainQuestion,When should I irrigate after heavy rainfall and high soil moisture?,ভারী বৃষ্টি ও মাটিতে বেশি জল জমার পরে কবে জলসেচ দেওয়া উচিত?,machine
+fe:common:chat.irrigationTitle,Irrigation timing,জলসেচের সময়,machine
+fe:common:chat.irrigationQuestion,When should I irrigate my crop after rainfall?,বৃষ্টির পর কখন ফসলে জলসেচ দিতে হবে?,machine
+fe:common:chat.fertilizerTitle,Fertilizer & nutrition,সার ও পুষ্টি,machine
+fe:common:chat.fertilizerQuestion,How much urea should I apply during the tillering stage?,কুশি ছাড়ার সময়ে কতটা ইউরিয়া সার দেওয়া দরকার?,machine
+fe:common:chat.yellowingTitle,Yellowing leaf diagnosis,পাতা হলুদ হওয়ার কারণ,machine
+fe:common:chat.yellowingQuestion,Why are the lower crop leaves turning yellow?,গাছের নিচের পাতাগুলো কেন হলুদ হয়ে যাচ্ছে?,machine
+fe:common:chat.dripTitle,Drip vs Flood methods,ড্রিপ বনাম প্লাবন পদ্ধতি,machine
+fe:common:chat.dripQuestion,What is the water savings and yield difference between drip and flood irrigation?,ড্রিপ এবং প্লাবন সেচের মধ্যে জল সাশ্রয় ও ফলন কতটা আলাদা?,machine
+fe:common:chat.simpler,Explain simpler,সহজ করে বলুন,machine
+fe:common:chat.simplerQ,Can you explain this in simpler farmer terms with less technical jargon?,কম কঠিন কথা ব্যবহার করে এটা কি কৃষকদের ভাষায় সহজ করে বোঝাতে পারবেন?,machine
+fe:common:chat.steps,Show steps,ধাপগুলো দেখান,machine
+fe:common:chat.stepsQ,What are the numbered practical action steps I should follow in order?,কোন কোন কাজের ধাপগুলো আমার পরপর করা উচিত?,machine
+fe:common:chat.organic,Organic option,জৈব উপায়,machine
+fe:common:chat.organicQ,What organic and non-chemical remedies can I prepare at home?,কী কী জৈব এবং রাসায়নিক ছাড়া ঘরোয়া ওষুধ আমি বানাতে পারি?,machine
+fe:common:tag.leafNeck,🍃 Leaf & 🌾 Neck Node,🍃 পাতা এবং 🌾 কলার গোড়া,machine
+fe:common:tag.flagEars,🍃 Flag Leaf & 🌾 Ears,🍃 পতাকাপাতা এবং 🌾 শিষ,machine
+fe:common:tag.stalkPith,🎋 Stalk Pith,🎋 ডাঁটার মজ্জা,machine
+fe:common:tag.leafVeins,🍃 Leaf Veins,🍃 পাতার শিরা,machine
+fe:common:care.water,Water,জল,machine
+fe:common:care.sunlight,Sunlight,রোদের আলো,machine
+fe:common:care.humidity,Humidity,আর্দ্রতা,machine
+fe:common:care.soil,Soil,মাটি,machine
+fe:common:care.asNeeded,As needed,দরকার মতো,machine
+fe:common:care.fullSun,Full sun,ভর রোদ্দুর,machine
+fe:common:care.wellDraining,Well-draining,জল জমে থাকে না এমন,machine
+fe:common:common.copied,Copied,কপি করা হয়েছে,machine
+fe:common:common.copy,Copy,কপি করুন,machine
+fe:common:common.helpful,Helpful,উপকারী,machine
+fe:common:chat.newChat,New Chat,নতুন চ্যাট,machine
+fe:common:common.advice,Advice,পরামর্শ,machine
+fe:common:common.healthScore,Health Score,স্বাস্থ্যের স্কোর,machine
+fe:common:common.view,View,দেখুন,machine
+fe:common:common.close,Close,বন্ধ করুন,machine
+fe:home:home.heroPill,FLORA AI — PLANT DISEASE INTELLIGENCE,ফ্লোরা এআই — গাছের রোগ চেনার উপায়,machine
+fe:home:home.heroTitle1,DIAGNOSE,রোগ নির্ণয় করুন,machine
+fe:home:home.heroTitle2,PLANT DISEASE,গাছের রোগ,machine
+fe:home:home.heroTitle3,IN SECONDS,কয়েক সেকেন্ডের মধ্যে,machine
+fe:home:home.heroSubtitle,"Instant AI crop disease detection, Grad-CAM visual evidence, and agricultural advice in your language.","নিমিষেই এআই দিয়ে ফসলের রোগ শনাক্ত করুন, গ্র্যাড-ক্যাম (Grad-CAM দৃষ্টি মানচিত্র) প্রমাণ দেখুন এবং আপনার নিজের ভাষায় কৃষিপরামর্শ পান।",machine
+fe:home:home.scanNowFree,SCAN NOW — FREE,এখনই স্ক্যান করুন — একদম ফ্রি,machine
+fe:home:home.badgeNoSignup,No signup required,কোনো অ্যাকাউন্ট খোলার দরকার নেই,machine
+fe:home:home.badgeAnyDevice,Works on any device,যেকোনো ডিভাইসে কাজ করে,machine
+fe:home:home.badgeSpeed,Results in < 3 seconds,৩ সেকেন্ডের কম সময়ে ফলাফল,machine
+fe:home:home.statsDiseases,Diseases Detected,শনাক্ত করা রোগ,machine
+fe:home:home.statsScans,Scans Analyzed,যাচাই করা স্ক্যান,machine
+fe:home:home.statsCrops,Supported Crops,যেসব ফসল দেখা যায়,machine
+fe:home:home.statsAccuracy,AI Accuracy Rate,এআই (AI) এর সঠিকতার হার,machine
+fe:home:home.howItWorks,HOW IT WORKS,এটি যেভাবে কাজ করে,machine
+fe:home:home.threeSteps,THREE STEPS TO DIAGNOSIS,রোগ নির্ণয়ের তিনটি ধাপ,machine
+fe:home:home.step1Title,Capture,ছবি তুলুন,machine
+fe:home:home.step1Desc,Upload or capture a clear photo of the infected leaf.,রোগাক্রান্ত পাতার একটি পরিষ্কার ছবি তুলুন বা আপলোড করুন।,machine
+fe:home:home.step2Title,Analyze,পরীক্ষা করুন,machine
+fe:home:home.step2Desc,AI runs multi-class disease detection and generates heatmaps.,এআই (AI) একাধিক রোগের ধরন শনাক্ত করে এবং হিটম্যাপ তৈরি করে।,machine
+fe:home:home.step3Title,Respond,পদক্ষেপ নিন,machine
+fe:home:home.step3Desc,"Receive diagnosis, risk score, treatment protocols and prevention tips.","রোগ নির্ণয়, ঝুঁকির মাত্রা, চিকিৎসার নিয়ম এবং প্রতিরোধের উপায় জেনে নিন।",machine
+fe:home:home.capabilities,CAPABILITIES,ক্ষমতা,machine
+fe:home:home.labTools,LAB-GRADE TOOLS,ল্যাব-মানের টুলস,machine
+fe:home:home.featHeatmapTitle,Visual AI Heatmaps,ভিজ্যুয়াল এআই হিটম্যাপ,machine
+fe:home:home.featHeatmapDesc,Proprietary Grad-CAM visualization shows precisely where infection is located on the leaf.,বিশেষ গ্র্যাড-ক্যাম (Grad-CAM দৃষ্টি মানচিত্র) ঠিক কোথায় পাতায় রোগ ধরেছে তা স্পষ্টভাবে দেখায়।,machine
+fe:home:home.featHeatmapAction,Run Scanner,স্ক্যানার চালু করুন,machine
+fe:home:home.featChatTitle,AI Expert Chat,এআই এক্সপার্ট চ্যাট,machine
+fe:home:home.featChatDesc,"Powered by Gemini AI, get instant expert-level answers on disease management and fertilizers.","জেমিনি এআই (Gemini AI) দ্বারা চালিত, রোগ ব্যবস্থাপনা এবং সার সম্পর্কে অবিলম্বে বিশেষজ্ঞের মতো উত্তর পান।",machine
+fe:home:home.featChatAction,Open Chat,চ্যাট খুলুন,machine
+fe:home:home.featTrackingTitle,Health Tracking,গাছের স্বাস্থ্য নজরদারি,machine
+fe:home:home.featTrackingDesc,Monitor recovery curves and plant health scores over time with progress analytics.,প্রোগ্রেস অ্যানালিটিক্স-এর সাহায্যে সময়ের সাথে গাছের সুস্থ হয়ে ওঠার গতি এবং স্বাস্থ্যের স্কোর নজর রাখুন।,machine
+fe:home:home.featTrackingAction,My Plants,আমার গাছপালা,machine
+fe:home:home.featWeatherTitle,Weather Risk Intel,আবহাওয়ার ঝুঁকি সংক্রান্ত তথ্য,machine
+fe:home:home.featWeatherDesc,Correlates local weather conditions with disease spread probability in real time.,স্থানীয় আবহাওয়ার অবস্থার সাথে রোগ ছড়িয়ে পড়ার সম্ভাবনার আসল সময়ের তুলনা করে।,machine
+fe:home:home.featWeatherAction,Check Risk,ঝুঁকি যাচাই করুন,machine
+fe:home:home.featLibraryTitle,Disease Encyclopedia,রোগের বিশ্বকোষ,machine
+fe:home:home.featLibraryDesc,Comprehensive reference library of plant diseases with symptoms and treatment databases.,লক্ষণ ও চিকিৎসার ডেটাবেস সহ গাছের রোগ সম্পর্কিত একটি সম্পূর্ণ নির্দেশিকা লাইব্রেরি।,machine
+fe:home:home.featLibraryAction,Explore,খুঁজে দেখুন,machine
+fe:home:home.featInstantTitle,Instant Diagnosis,তাৎক্ষণিক রোগ নির্ণয়,machine
+fe:home:home.featInstantDesc,Diagnosis results in under 3 seconds. Upload from any device in the field.,৩ সেকেন্ডের কম সময়ে রোগ নির্ণয়ের ফলাফল। খেত থেকে যেকোনো ডিভাইস দিয়ে আপলোড করুন।,machine
+fe:home:home.featInstantAction,Try Now,এখনই চেষ্টা করুন,machine
+fe:home:home.edgePill,BIOSCAN EDGE,বায়োস্ক্যান এজ,machine
+fe:home:home.edgeTitle,"BUILT FOR FARMS, LABS AND FIELDS","খেত, ল্যাব এবং কৃষিজমির জন্য তৈরি",machine
+fe:home:home.edgeDesc,"BioScan works on any device — whether you are in a greenhouse, in a lab, or in the middle of a field with just your phone.","বায়োস্ক্যান যেকোনো ডিভাইসে কাজ করে — আপনি গ্রিনহাউসে থাকুন, ল্যাবে থাকুন, বা শুধু আপনার ফোন নিয়ে মাঠের মাঝখানে থাকুন না কেন।",machine
+fe:home:home.deviceMobile,📱 Mobile,📱 মোবাইল,machine
+fe:home:home.deviceDesktop,💻 Desktop,💻 ডেস্কটপ,machine
+fe:home:home.deviceLab,🔬 Lab Screen,🔬 ল্যাব স্ক্রিন,machine
+fe:home:home.deviceField,🌾 Field Tablet,🌾 মাঠের ট্যাব,machine
+fe:home:home.deviceDashboard,🖥 Dashboard,🖥 ড্যাশবোর্ড,machine
+fe:home:home.startScanning,Start Scanning,স্ক্যান করা শুরু করুন,machine
+fe:home:home.askChat,Ask AI Chat,এআই চ্যাটে জিজ্ঞাসা করুন,machine
+fe:home:home.faqPill,FAQ,জিজ্ঞাসা,machine
+fe:home:home.faqTitle,COMMON QUESTIONS,সাধারণ প্রশ্নাবলী,machine
+fe:home:home.faq1Q,Which crops are currently supported?,বর্তমানে কোন কোন ফসলের জন্য এটি কাজ করে?,machine
+fe:home:home.faq1A,"BioScan currently supports Rice, Wheat, Sugarcane, and Cotton, with more crops being added regularly. Our AI model is trained on 127+ disease classes.","বায়োস্ক্যান বর্তমানে ধান, গম, আক্ষ বা আখ (Sugarcane), এবং তুলার জন্য কাজ করে, এবং নিয়মিত আরও নতুন ফসল যুক্ত করা হচ্ছে। আমাদের এআই মডেলে ১২৭টির বেশি রোগ নিয়ে ট্রেনিং দেওয়া হয়েছে।",machine
+fe:home:home.faq2Q,How accurate is the disease detection?,রোগ শনাক্ত করার ক্ষমতা কতখানি নির্ভুল?,machine
+fe:home:home.faq2A,"Our AI model achieves 97.3% accuracy on our validation dataset. For best results, capture clear, well-lit photos.",আমাদের এআই মডেল ৯৭.৩% নির্ভুল ফলাফল দেয়। ভালো ফলাফলের জন্য পরিষ্কার ও পর্যাপ্ত আলোর মধ্যে ছবি তুলুন।,machine
+fe:home:home.faq3Q,Is my data private?,আমার তথ্য কি নিরাপদ থাকবে?,machine
+fe:home:home.faq3A,Yes. Your uploaded images are processed securely and never shared with third parties.,হ্যাঁ। আপনার আপলোড করা ছবিগুলো নিরাপদে প্রসেস করা হয় এবং কখনই অন্য কারো সাথে শেয়ার করা হয় না।,machine
+fe:home:home.faq4Q,Can I use BioScan offline?,আমি কি ইন্টারনেট ছাড়া অফলাইনে বায়োস্ক্যান ব্যবহার করতে পারব?,machine
+fe:home:home.faq4A,Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline mode.,বর্তমানে এআই দিয়ে বিশ্লেষণের জন্য বায়োস্ক্যানে ইন্টারনেট সংযোগ প্রয়োজন হয়। আমরা খুব শীঘ্রই অফলাইন মোড আনার জন্য কাজ করছি।,machine
+fe:home:home.faq5Q,What image format and size works best?,কোন ফরম্যাটের এবং কত সাইজের ছবি সবচেয়ে ভালো কাজ করে?,machine
+fe:home:home.faq5A,"JPG, PNG, or WebP images up to 10MB. Capture the leaf against natural light at 2-4 megapixel resolution.","JPG, PNG, বা WebP ফরম্যাটের ছবি যার সাইজ ১০MB পর্যন্ত হতে পারে। পাতার ছবি তোলার সময় প্রাকৃতিক আলো ব্যবহার করুন এবং ২-৪ মেগাপিক্সেল রেজোলিউশনে ছবি তুলুন।",machine
+fe:home:home.ctaReady,READY TO SCAN YOUR PLANTS?,আপনার গাছের ছবি স্ক্যান করতে প্রস্তুত?,machine
+fe:home:home.ctaDesc,Upload a photo right now — no signup needed. Get AI diagnosis in seconds.,এখনই একটি ছবি আপলোড করুন — কোনো সাইন-আপ করার দরকার নেই। সেকেন্ডের মধ্যে এআই থেকে রোগের নাম ও সমাধান জেনে নিন।,machine
+fe:home:home.ctaLaunch,Launch BioScanner,বায়োস্ক্যানার চালু করুন,machine
+fe:home:home.greeting,"Good morning, Farmer","নমস্কার, কৃষক ভাই",reviewed
+fe:home:home.scanCta,Scan a leaf,পাতা স্ক্যান করুন,reviewed
+fe:home:home.diseaseRiskToday,Disease risk today,আজ রোগের ঝুঁকি,reviewed
+fe:home:home.recentScans,Recent scans,সাম্প্রতিক স্ক্যান,reviewed
+fe:library:library.title,Plant Disease Encyclopedia,ফসলের রোগ বিষয়ক বিশ্বকোষ,machine
+fe:library:library.subtitle,Complete pathology reference for farmers with field symptoms and scientific treatment protocols.,কৃষকদের জন্য মাঠের লক্ষণ ও বৈজ্ঞানিক প্রতিকার সহ সম্পূর্ণ রোগের নির্দেশিকা।,machine
+fe:library:library.searchPlaceholder,"Search by disease name, symptom, or pathogen…","রোগের নাম, লক্ষণ বা জীবাণু দিয়ে খুঁজুন…",machine
+fe:library:library.allCrops,All Crops,সব ফসল,machine
+fe:library:library.affectedOrgans,Affected Organs:,আক্রান্ত অংশ:,machine
+fe:library:library.noMatches,No matching diseases found,কোনো মিলে যাওয়া রোগ পাওয়া যায়নি,machine
+fe:library:library.viewProtocol,View Treatment Protocol,চিকিৎসার নিয়মাবলী দেখুন,machine
+fe:library:library.back,Back to Encyclopedia,বিশ্বকোষে ফিরে যান,machine
+fe:library:library.scanForThis,Scan leaf for this disease,এই রোগের জন্য পাতা স্ক্যান করুন,machine
+fe:library:library.overview,Disease Overview,রোগের সংক্ষিপ্ত বিবরণ,machine
+fe:library:library.whereToLook,Where to look on plant,গাছের কোথায় দেখতে হবে,machine
+fe:library:library.favors,Conditions that favor infection,যে আবহাওয়া রোগ ছড়াতে সাহায্য করে,machine
+fe:library:library.spreads,How it spreads,এটি যেভাবে ছড়ায়,machine
+fe:library:library.organic,Organic / Biocontrol,জৈব বা জৈবিক দমন,machine
+fe:library:library.chemical,Chemical / Fungicide Protocol,রাসায়নিক বা ছত্রাকনাশক পদ্ধতি,machine
+fe:library:library.profilesCount,Disease Profiles · 4 Crops,রোগের বিবরণ · ৪টি ফসল,machine
+fe:library:library.diseasesCount,Diseases,রোগগুলি,machine
+fe:library:library.noMatchesTitle,No Disease Matches Found,কোনো রোগের মিল পাওয়া যায়নি,machine
+fe:library:library.noMatchesDesc,No diseases matched your search for the selected filter. Try adjusting your query or resetting filters.,আপনার খোঁজা বা ফিল্টারের সাথে কোনো রোগ মিলছে না। লেখার বানান পাল্টে বা ফিল্টার হাটিয়ে আবার চেষ্টা করুন।,machine
+fe:library:library.clearFilters,Clear Filters,ফিল্টার মুছে ফেলুন,machine
+fe:library:library.impactSeverity,Impact Severity,ক্ষতির মাত্রা,machine
+fe:library:library.anatomyFocus,Anatomy focus:,গাছের যে অংশে বেশি নজর দিতে হবে:,machine
+fe:library:library.riceDesc,"Staple cereal vulnerable to blast fungi, brown spots, and leaf miner beetles.","প্রধান খাদ্যশস্য যা ব্লাস্ট রোগ, বাদামী দাগ এবং মশা পোকার আক্রমণের শিকার হয়।",machine
+fe:library:library.riceParts,"Leaf Blade, Sheath, Neck Node & Grain","পাতার ফলক, খোল, গলার গিট ও দানা",machine
+fe:library:library.wheatDesc,Cereal crop prone to stripe/brown rust fungi and septoria leaf blotch.,শস্য জাতীয় ফসল যা ডোরাকাটা বা বাদামী মরিচা রোগ এবং সেপ্‌টোরিয়া পাতার দাগে আক্রান্ত হতে পারে।,machine
+fe:library:library.wheatParts,"Flag Leaf, Upper Canopy & Spike Ears","পতাকা পাতা, ওপরের পাতার ছাতা ও শীষ",machine
+fe:library:library.sugarcaneDesc,Perennial cash crop susceptible to red rot stalk decay and mosaic virus.,বারোমাসি নগদ ফসলে লাল পচা রোগ এবং মোজাইক ভাইরাস হতে পারে।,machine
+fe:library:library.sugarcaneParts,"Internal Stalk, Stem Internodes & Whorl Leaves","ভেতরের কাণ্ড, কাণ্ডের জোড় ও মাথার পাতা",machine
+fe:library:library.cottonDesc,Fiber crop challenged by bacterial blight lesions and whitefly curl virus.,সুতির ফসল যা ব্যাকটেরিয়াজনিত পাতার দাগ এবং সাদা মাছি ভাইরাসে আক্রান্ত হয়।,machine
+fe:library:library.cottonParts,"Angular Leaf Veins, Main Stem & Bolls","পাতার কৌণিক শিরা, মূল কাণ্ড ও তুলার গুটি",machine
+fe:plants:crop.rice,Rice,ধান,machine
+fe:plants:crop.wheat,Wheat,গম,machine
+fe:plants:crop.sugarcane,Sugarcane,আখ,machine
+fe:plants:crop.cotton,Cotton,তুলা,machine
+fe:plants:plants.title,Active Crop Health Registry,ফসল স্বাস্থ্য রেজিস্ট্রি,machine
+fe:plants:plants.badge,Crop Monitoring,ফসল নজরদারি,machine
+fe:plants:plants.registerNew,Register New Specimen,নতুন গাছ রেজিস্টার করুন,machine
+fe:plants:plants.healthySpecimens,Healthy Specimens,সুস্থ গাছপালা,machine
+fe:plants:plants.attentionRequired,Attention Required,যত্ন নেওয়া দরকার,machine
+fe:plants:plants.highRisk,High Pathogen Risk,রোগের মারাত্মক ঝুঁকি,machine
+fe:plants:plants.allCrops,All Crops,সব ফসল,machine
+fe:plants:plants.healthy,Healthy,সুস্থ,machine
+fe:plants:plants.needsAttention,Needs Attention,যত্ন দরকার,machine
+fe:plants:plants.searchPlaceholder,Search plants by name or species…,নাম বা জাত দিয়ে গাছ খুঁজুন...,machine
+fe:plants:plants.empty,No monitored plants found,কোনো নজরদারি করা গাছ পাওয়া যায়নি,machine
+fe:plants:plants.emptyDesc,Start by scanning a leaf in the scanner to monitor recovery.,গাছ ঠিক হচ্ছে কি না দেখতে স্ক্যানারে পাতা স্ক্যান করা শুরু করুন।,machine
+fe:plants:plants.scanFirst,Scan Plant Now,এখনই গাছ স্ক্যান করুন,machine
+fe:profile:profile.title,Settings & Farm Profile,সেটিংস এবং খামারের প্রোফাইল,machine
+fe:profile:profile.verified,VERIFIED,যাচাই করা হয়েছে,machine
+fe:profile:profile.pro,PRO SPECIALIST,প্রো স্পেশালিস্ট,machine
+fe:profile:profile.notifications,NOTIFICATIONS,বিজ্ঞপ্তি,machine
+fe:profile:profile.diseaseAlerts,Disease Alerts,রোগের সতর্কতা,machine
+fe:profile:profile.diseaseAlertsDesc,Get notified when crop infection risk is high,ফসল সংক্রমণের ঝুঁকি বেশি হলে নোটিফিকেশন পান,machine
+fe:profile:profile.weeklyReports,Weekly Reports,সাপ্তাহিক রিপোর্ট,machine
+fe:profile:profile.weeklyReportsDesc,Summary of your plant health and treatments,আপনার গাছের স্বাস্থ্য এবং চিকিৎসার সারাংশ,machine
+fe:profile:profile.preferences,PREFERENCES,পছন্দসমূহ,machine
+fe:profile:profile.language,Language,ভাষা,machine
+fe:profile:profile.units,Units,একক,machine
+fe:profile:profile.unitsVal,"Metric (°C, mm, km/h)","মেট্রিক (°C, mm, km/h)",machine
+fe:profile:profile.weatherOverride,Manual Weather Data,হাতে করে আবহাওয়ার তথ্য দেওয়া,machine
+fe:profile:profile.manualActive,MANUAL ACTIVE,ম্যানুয়াল চালু আছে,machine
+fe:profile:profile.autoGps,AUTO GPS,অটো জিপিএস,machine
+fe:profile:profile.weatherTitle,Agro-Climatic Weather Override,কৃষি-জলবায়ু আবহাওয়ার তথ্য পরিবর্তন,machine
+fe:profile:profile.city,City / Village,শহর / গ্রাম,machine
+fe:profile:profile.state,State / Region,রাজ্য / অঞ্চল,machine
+fe:profile:profile.temp,Temperature (°C),তাপমাত্রা (°C),machine
+fe:profile:profile.humidity,Relative Humidity (%),আপেক্ষিক আর্দ্রতা (%),machine
+fe:profile:profile.rainfall,Rainfall (24h mm),বৃষ্টিপাত (২৪ ঘণ্টা মিমি),machine
+fe:profile:profile.wind,Wind Speed (km/h),বাতাসের গতি (কিমি/ঘণ্টা),machine
+fe:profile:profile.condition,Weather Condition,আবহাওয়ার অবস্থা,machine
+fe:profile:profile.riskLevel,Environmental Risk Level,পরিবেশগত ঝুঁকির মাত্রা,machine
+fe:profile:profile.riskReason,Risk Assessment Explanation,ঝুঁকি মূল্যায়নের বিবরণ,machine
+fe:profile:profile.applyWeather,Apply Weather Data,আবহাওয়ার তথ্য প্রয়োগ করুন,machine
+fe:profile:profile.resetGps,Reset to Live GPS,লাইভ জিপিএস-এ ফিরিয়ে নিন,machine
+fe:profile:profile.savedSuccess,Manual weather data saved and applied across the entire app!,ম্যানুয়াল আবহাওয়ার তথ্য সেভ করা হয়েছে এবং পুরো অ্যাপে চালু করা হয়েছে!,machine
+fe:profile:profile.resetSuccess,Reset to live GPS sensors and Open-Meteo weather data!,লাইভ জিপিএস সেন্সর এবং ওপেন-মেটিও আবহাওয়ার তথ্যে ফিরিয়ে আনা হয়েছে!,machine
+fe:profile:profile.privacy,PRIVACY & DATA,গোপনীয়তা ও ডেটা,machine
+fe:profile:profile.dataSharing,Data Sharing,ডেটা শেয়ারিং,machine
+fe:profile:profile.dataSharingDesc,Help improve agronomic AI models,কৃষি এআই (AI) মডেল উন্নত করতে সাহায্য করুন,machine
+fe:profile:profile.privacyPolicy,Privacy Policy,গোপনীয়তা নীতি,machine
+fe:profile:profile.deleteData,Delete My Data,আমার ডেটা মুছে ফেলুন,machine
+fe:profile:profile.support,SUPPORT,সহায়তা,machine
+fe:profile:profile.helpFaq,Help & FAQ,সাহায্য ও সাধারণ প্রশ্ন (FAQ),machine
+fe:profile:profile.contactSupport,Contact Agronomist Support,কৃষি বিশেষজ্ঞের সহায়তায় যোগাযোগ করুন,machine
+fe:profile:profile.signOut,SIGN OUT,সাইন আউট,machine
+fe:profile:profile.footerText,FLORA AI • PLANT DISEASE INTELLIGENCE PLATFORM,ফ্লোরা এআই • গাছের রোগ নির্ণয়ের প্ল্যাটফর্ম,machine
+fe:scan:scan.workspace,DIAGNOSTIC WORKSPACE,রোগ নির্ণয়ের জায়গা,machine
+fe:scan:scan.title,Plant Disease Scanner,গাছের রোগ স্ক্যানার,reviewed
+fe:scan:scan.subtitle,Upload a leaf photo to get instant AI-powered pathology and Grad-CAM diagnosis.,পাতার ছবি আপলোড করুন এবং তাৎক্ষণিক AI রোগ নির্ণয় পান।,reviewed
+fe:scan:scan.reset,Reset,রিসেট করুন,machine
+fe:scan:scan.selectCrop,Select Crop,ফসল বেছে নিন,reviewed
+fe:scan:scan.uploadHint,Upload leaf image,পাতার ছবি আপলোড করুন,reviewed
+fe:scan:scan.diagnosing,Diagnosing your plant…,আপনার গাছ পরীক্ষা করা হচ্ছে…,reviewed
+fe:scan:scan.diagnoseCta,Diagnose Plant Health,গাছের স্বাস্থ্য পরীক্ষা করুন,machine
+fe:scan:scan.ready,Ready for Diagnostics,পরীক্ষার জন্য তৈরি,machine
+fe:scan:scan.aiDetection,AI Disease Detection,এআই (AI) দিয়ে রোগ শনাক্তকরণ,machine
+fe:scan:scan.visualHeatmap,Visual Heatmap,ভিজুয়াল হিটম্যাপ,machine
+fe:scan:scan.complete,Diagnosis Complete,রোগ নির্ণয় সম্পন্ন,machine
+fe:scan:scan.severity,Severity,তীব্রতা,machine
+fe:scan:scan.retake,Retake,আবার তুলুন,machine
+fe:scan:scan.flip,Flip Camera,ক্যামেরা ঘোরান,machine
+fe:scan:scan.gallery,Gallery,গ্যালারি,machine
+fe:scan:scan.tipLight,Good light,ভালো আলো,reviewed
+fe:scan:scan.tipOneLeaf,One leaf,একটি পাতা,reviewed
+fe:scan:scan.tipHold,Hold steady,স্থির রাখুন,reviewed
+fe:scan:scan.trySample,Try a sample,নমুনা চেষ্টা করুন,reviewed
+fe:scan:scan.healthIndex,Health Index,গাছের স্বাস্থ্যের সূচক,machine
+fe:scan:scan.diseaseProbabilities,Disease Probabilities,রোগের সম্ভাবনা,machine
+fe:scan:scan.saveToPlants,Save to My Plants,আমার গাছে সেভ করুন,machine
+fe:scan:scan.scanAnother,Scan Another,আরেকটি স্ক্যান করুন,machine
+fe:scan:scan.environmentalFactors,Environmental & Moisture Factors,পরিবেশ ও আর্দ্রতার কারণ,machine
+be:disease:bacterial_leaf_blight:display,Bacterial Leaf Blight,ব্যাকটেরিয়া পাতা ঝলসানো রোগ,machine
+be:disease:bacterial_leaf_blight:crop,Rice,ধান,machine
+be:disease:bacterial_leaf_blight:severity,High,বেশি,machine
+be:disease:bacterial_leaf_blight:description,A serious bacterial disease caused by Xanthomonas oryzae pv. oryzae. Leaves show water-soaked margins that turn yellow and eventually white.,"জ্যান্থোমোনাস ওরাইজি পিভি ওরাইজি (Xanthomonas oryzae pv. oryzae) নামক ব্যাকটেরিয়ার কারণে এই গুরুতর রোগটি হয়। পাতার কিনারা জলজেত্র মনে হয়, পরে হলুদ এবং শেষে সাদা হয়ে যায়।",machine
+be:disease:bacterial_leaf_blight:fav:temperature,25–35°C,২৫–৩৫°C,machine
+be:disease:bacterial_leaf_blight:fav:humidity,>80%,>৮০%,machine
+be:disease:bacterial_leaf_blight:fav:rainfall,Heavy (storm/flooding),প্রচুর (ঝড়/জলমগ্নতা),machine
+be:disease:brown_spot:display,Brown Spot,বাদামী দাগ রোগ,machine
+be:disease:brown_spot:crop,Rice,ধান,machine
+be:disease:brown_spot:severity,Medium,মাঝারি,machine
+be:disease:brown_spot:description,Fungal disease caused by Cochliobolus miyabeanus. Oval to circular brown lesions with yellow halos appear on leaves.,কোক্লিওবোলাস মিয়াবিয়ানাস (Cochliobolus miyabeanus) নামক ছত্রাকের কারণে এই রোগ হয়। পাতায় ডিম্বাকৃতি থেকে গোল বাদামী রঙের দাগ দেখা দেয় এবং চারপাশে হলুদ রঙের বলয় থাকে।,machine
+be:disease:brown_spot:fav:temperature,22–32°C,২২–৩২°C,machine
+be:disease:brown_spot:fav:humidity,75–90%,৭৫–৯০%,machine
+be:disease:brown_spot:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:healthy:display,Healthy,সুস্থ,machine
+be:disease:healthy:crop,All,সব,machine
+be:disease:healthy:severity,None,নেই,machine
+be:disease:healthy:description,The leaf appears healthy with no visible disease symptoms.,পাতাটি সুস্থ দেখাচ্ছে এবং এতে রোগের কোনো লক্ষণ নেই।,machine
+be:disease:healthy:fav:temperature,Any,যেকোনো,machine
+be:disease:healthy:fav:humidity,Any,যেকোনো,machine
+be:disease:healthy:fav:rainfall,Regular,নিয়মিত,machine
+be:disease:leaf_blast:display,Leaf Blast,পাতার ব্লাস্ট রোগ,machine
+be:disease:leaf_blast:crop,Rice,ধান,machine
+be:disease:leaf_blast:severity,Very High,খub বেশি,machine
+be:disease:leaf_blast:description,"One of the most destructive rice diseases, caused by Magnaporthe oryzae. Diamond-shaped lesions with grey centres and brown borders appear on leaves.","ধানের সবচেয়ে ক্ষতি করা রোগগুলির মধ্যে একটি, যা Magnaporthe oryzae ছত্রাকের কারণে হয়। পাতায় ছাইরঙা কেন্দ্র এবং বাদামী ধারযুক্ত হিরের আকৃতির দাগ দেখা যায়।",machine
+be:disease:leaf_blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:leaf_blast:fav:humidity,>90%,>90%,machine
+be:disease:leaf_blast:fav:rainfall,Frequent light rain/dew,ঘন ঘন হালকা বৃষ্টি/শিশির,machine
+be:disease:leaf_scald:display,Leaf Scald,পাতার স্কেল্ড রোগ,machine
+be:disease:leaf_scald:crop,Rice,ধান,machine
+be:disease:leaf_scald:severity,Medium,মাঝারি,machine
+be:disease:leaf_scald:description,Caused by Microdochium oryzae. Alternating light and dark brown bands appear along leaf margins creating a 'zonate' pattern.,Microdochium oryzae-এর কারণে হয়। পাতার কিনারায় হালকা এবং গাঢ় বাদামী রঙের ডোরাকাটা দাগ দেখা যায়।,machine
+be:disease:leaf_scald:fav:temperature,25–30°C,25–30°C,machine
+be:disease:leaf_scald:fav:humidity,>80%,>80%,machine
+be:disease:leaf_scald:fav:rainfall,Moderate to heavy,মাঝারি থেকে বেশি,machine
+be:disease:sheath_blight:display,Sheath Blight,খাপ পোড়া রোগ (শীথ ব্লাইট),machine
+be:disease:sheath_blight:crop,Rice,ধান,machine
+be:disease:sheath_blight:severity,High,বেশি,machine
+be:disease:sheath_blight:description,"Caused by Rhizoctonia solani. Oval greenish-grey lesions with dark brown borders appear on leaf sheaths, spreading to leaves.","রাইজোকটোনিয়া সোলানি (Rhizoctonia solani) নামক ছত্রাকের কারণে এটি হয়। পাতার খোলে গাঢ় বাদামী সীমানা সহ ডিম্বাকার সবুজ-ধূসর দাগ দেখা দেয়, যা পাতায় ছড়িয়ে পড়ে।",machine
+be:disease:sheath_blight:fav:temperature,28–32°C,২৮–৩২°C,machine
+be:disease:sheath_blight:fav:humidity,>90%,>90%,machine
+be:disease:sheath_blight:fav:rainfall,Heavy flooding,প্রচুর জল জমা,machine
+be:disease:aphid:display,Aphid Infestation,জাব পোকার আক্রমণ,machine
+be:disease:aphid:crop,Wheat,গম,machine
+be:disease:aphid:severity,Medium,মাঝারি,machine
+be:disease:aphid:description,"Small soft-bodied insects that cluster on leaves and stems, sucking plant sap and potentially transmitting viruses.","ছোট নরম শরীরের পোকা যা পাতা ও ডালে জটলা পাকিয়ে থাকে, গাছের রস চুষে খায় এবং ভাইরাস ছড়াতে পারে।",machine
+be:disease:aphid:fav:temperature,15–25°C,১৫–২৫°C,machine
+be:disease:aphid:fav:humidity,<60%,<60%,machine
+be:disease:aphid:fav:rainfall,Low,কম,machine
+be:disease:black_rust:display,Black Rust (Stem Rust),কালো মরিচা রোগ (স্টেম রাস্ট),machine
+be:disease:black_rust:crop,Wheat,গম,machine
+be:disease:black_rust:severity,Very High,খুব বেশি,machine
+be:disease:black_rust:description,Caused by Puccinia graminis. Produces brick-red to black pustules on stems and leaves. Can devastate entire crops.,পুকিনিয়া গ্রামিনিস (Puccinia graminis) দ্বারা ঘটে। কান্ড ও পাতায় ইট-লাল থেকে কালো রঙের ফোসকা তৈরি করে। পুরো ফসল নষ্ট করে দিতে পারে।,machine
+be:disease:black_rust:fav:temperature,15–30°C,১৫–৩০°C,machine
+be:disease:black_rust:fav:humidity,>80%,>80%,machine
+be:disease:black_rust:fav:rainfall,Moderate with dew,শিশির সহ মাঝারি বৃষ্টিপাত,machine
+be:disease:blast:display,Blast (Rice Paddy),ব্লাস্ট রোগ (ধান),machine
+be:disease:blast:crop,Rice,ধান,machine
+be:disease:blast:severity,Very High,খুব বেশি,machine
+be:disease:blast:description,Magnaporthe oryzae. Diamond-shaped lesions on leaves. Can also affect panicles (panicle blast).,ম্যাগ্নাপোর্টরি ওরাইজি (Magnaporthe oryzae)। পাতায় হীরকাকৃতির দাগ দেখা যায়। ধানের শীষও আক্রান্ত হতে পারে (গলা ব্লাস্ট রোগ)।,machine
+be:disease:blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:blast:fav:humidity,>90%,>90%,machine
+be:disease:blast:fav:rainfall,Frequent dew/light rain,ঘন ঘন শিশির / হালকা বৃষ্টি,machine
+be:disease:brown_rust:display,Brown Rust (Leaf Rust),বাদামী মরিচা রোগ (পাতার মরিচা রোগ),machine
+be:disease:brown_rust:crop,Wheat,গম,machine
+be:disease:brown_rust:severity,High,বেশি,machine
+be:disease:brown_rust:description,Caused by Puccinia triticina. Orange-brown pustules on upper leaf surface. Very common and widespread.,পাকসিনিয়া টিটিসিনিয়া (Puccinia triticina) দ্বারা হয়। পাতার ওপরের পিঠে কমলা-বাদামী রঙের ফোস্কা পড়ে। এটি খুব সাধারণ এবং সর্বত্র দেখা যায়।,machine
+be:disease:brown_rust:fav:temperature,15–22°C,15–22°C,machine
+be:disease:brown_rust:fav:humidity,>70%,>70%,machine
+be:disease:brown_rust:fav:rainfall,Light rain/dew,হালকা বৃষ্টি / শিশির,machine
+be:disease:common_root_rot:display,Common Root Rot,সাধারণ শেকড় পচা রোগ,machine
+be:disease:common_root_rot:crop,Wheat,গম,machine
+be:disease:common_root_rot:severity,Medium,মাঝারি,machine
+be:disease:common_root_rot:description,Caused by Bipolaris sorokiniana. Brown to black discolouration of crown and root tissues.,বাইপোলারিস সরোকিনিয়ানা (Bipolaris sorokiniana) দ্বারা হয়। গাছ ও শেকড়ের টিস্যু বাদামী থেকে কালো রঙের হয়ে যায়।,machine
+be:disease:common_root_rot:fav:temperature,18–28°C,18–28°C,machine
+be:disease:common_root_rot:fav:humidity,Low soil moisture,মাটিতে কম আর্দ্রতা,machine
+be:disease:common_root_rot:fav:rainfall,Insufficient,অপর্যাপ্ত,machine
+be:disease:fusarium_head_blight:display,Fusarium Head Blight (Scab),ফিউজারিয়াম শীষ পচা রোগ (স্ক্যাব),machine
+be:disease:fusarium_head_blight:crop,Wheat,গম,machine
+be:disease:fusarium_head_blight:severity,Very High,খুব বেশি,machine
+be:disease:fusarium_head_blight:description,Caused by Fusarium graminearum. Bleached spikelets with pink mold. Produces mycotoxins (DON) that contaminate grain.,ফিউসারিউম গ্রামিনিয়ারাম (Fusarium graminearum) এর কারণে হয়। শীষে হালকা রঙের ছোপ এবং গোলাপি রঙের ছত্রাক দেখা যায়। এটি বিষাক্ত উপাদান (DON) তৈরি করে যা দানা নষ্ট করে।,machine
+be:disease:fusarium_head_blight:fav:temperature,25–30°C,২৫–৩০°C,machine
+be:disease:fusarium_head_blight:fav:humidity,>90%,>৯০%,machine
+be:disease:fusarium_head_blight:fav:rainfall,Rain during flowering,ফুল ফোটার সময়ে বৃষ্টি,machine
+be:disease:leaf_blight:display,Leaf Blight,পাতা ঝলসানো রোগ,machine
+be:disease:leaf_blight:crop,Wheat,গম,machine
+be:disease:leaf_blight:severity,Medium,মাঝারি,machine
+be:disease:leaf_blight:description,Tan-brown lesions with yellow borders on older leaves.,পুরনো পাতায় হলুদ কিনারাযুক্ত হালকা বাদামী দাগ দেখা যায়।,machine
+be:disease:leaf_blight:fav:temperature,20–30°C,২০–৩০°C,machine
+be:disease:leaf_blight:fav:humidity,>70%,>৭০%,machine
+be:disease:leaf_blight:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:mildew:display,Powdery Mildew,পাউডারি মিলডিউ রোগ,machine
+be:disease:mildew:crop,Wheat,গম,machine
+be:disease:mildew:severity,Medium,মাঝারি,machine
+be:disease:mildew:description,"White powdery coating on leaves, caused by Blumeria graminis. Reduces photosynthesis.",ব্লুমেরিয়া গ্রামিনিস (Blumeria graminis) এর কারণে পাতায় সাদা পাউডারের মতো আস্তরণ পড়ে। এটি সালোকসংশ্লেষণ কমিয়ে দেয়।,machine
+be:disease:mildew:fav:temperature,15–22°C,১৫–২২°C,machine
+be:disease:mildew:fav:humidity,60–80%,৬০–৮০%,machine
+be:disease:mildew:fav:rainfall,Low to moderate,কম থেকে মাঝারি,machine
+be:disease:mite:display,Mite Infestation,মাকড় বা মাইট আক্রমণ,machine
+be:disease:mite:crop,Wheat,গম,machine
+be:disease:mite:severity,Low,কম,machine
+be:disease:mite:description,Tiny arachnids causing silvery stippling and bronzing of leaves.,"ছোট মাকড়, যা পাতার রঙ রূপালী করে দেয় এবং পাতা তামাটে হয়ে যায়।",machine
+be:disease:mite:fav:temperature,>30°C,>30°C,machine
+be:disease:mite:fav:humidity,<50%,<50%,machine
+be:disease:mite:fav:rainfall,Very low,খুব কম,machine
+be:disease:septoria:display,Septoria Leaf Blotch,সেপ্টোরিয়া পাতা ছোপ রোগ,machine
+be:disease:septoria:crop,Wheat,গম,machine
+be:disease:septoria:severity,High,বেশি,machine
+be:disease:septoria:description,Caused by Zymoseptoria tritici. Pale green-yellow blotches with brown necrosis and pycnidia on leaves.,জাইমোসেপ্টোরিয়া ট্রাইটিকি (Zymoseptoria tritici) এর কারণে হয়। পাতায় ফ্যাকাশে সবুজ-হলুদ ছোপ এবং বাদামী পচা দাগ ও ছোট কালো বিন্দু দেখা যায়।,machine
+be:disease:septoria:fav:temperature,10–20°C,10–20°C,machine
+be:disease:septoria:fav:humidity,>80%,>80%,machine
+be:disease:septoria:fav:rainfall,Frequent rain,মাঝেমধ্যে বৃষ্টি,machine
+be:disease:smut:display,Loose Smut,উগ্র কান্সার বা ঢিল রোগ,machine
+be:disease:smut:crop,Wheat,গম,machine
+be:disease:smut:severity,Medium,মাঝারি,machine
+be:disease:smut:description,Caused by Ustilago tritici. Spikes replaced by black powdery masses of teliospores.,উস্টিলাগো ট্রাইটিকি (Ustilago tritici) এর কারণে হয়। শীষগুলো কালো গুঁড়ো পাউডারে পরিণত হয়।,machine
+be:disease:smut:fav:temperature,16–22°C,16–22°C,machine
+be:disease:smut:fav:humidity,>60%,>60%,machine
+be:disease:smut:fav:rainfall,Moderate during anthesis,ফুল আসার সময় মাঝারি বৃষ্টি,machine
+be:disease:stem_fly:display,Stem Fly,ডাঁটা মাছি,machine
+be:disease:stem_fly:crop,Wheat,গম,machine
+be:disease:stem_fly:severity,Medium,মাঝারি,machine
+be:disease:stem_fly:description,Larval mining inside wheat stems causing 'dead heart' symptoms in young plants.,"গম গাছের কাণ্ডের ভেতরে পোকার লার্ভা কেটে খায়, যার ফলে ছোট গাছের পাতা শুকিয়ে মরে যায় (যাকে ডেড হার্ট বলে)।",machine
+be:disease:stem_fly:fav:temperature,15–20°C,১৫–২০°C,machine
+be:disease:stem_fly:fav:humidity,Any,যেকোনো,machine
+be:disease:stem_fly:fav:rainfall,Low to moderate,কম থেকে মাঝারি,machine
+be:disease:tan_spot:display,Tan Spot,ট্যান স্পট রোগ,machine
+be:disease:tan_spot:crop,Wheat,গম,machine
+be:disease:tan_spot:severity,Medium,মাঝারি,machine
+be:disease:tan_spot:description,Caused by Pyrenophora tritici-repentis. Tan-colored oval lesions with yellow borders.,পাইরেনোফোরা ট্রিটিসি-রিপেন্টিস (Pyrenophora tritici-repentis) নামক ছত্রাকের কারণে হয়। পাতায় হলুদ কিনারাযুক্ত বাদামী রঙের ডিম্বাকৃতি দাগ দেখা দেয়।,machine
+be:disease:tan_spot:fav:temperature,20–28°C,২০–২৮°C,machine
+be:disease:tan_spot:fav:humidity,>70%,>৭০%,machine
+be:disease:tan_spot:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:yellow_rust:display,Yellow Rust (Stripe Rust),হলুদ মরিচা রোগ (স্ট্রাইপ রাস্ট),machine
+be:disease:yellow_rust:crop,Wheat,গম,machine
+be:disease:yellow_rust:severity,Very High,খুব বেশি,machine
+be:disease:yellow_rust:description,Caused by Puccinia striiformis. Bright yellow pustules in stripes along leaf veins. Very destructive in cool climates.,পাক্সিনিয়া স্ট্রাইফর্মিস (Puccinia striiformis) নামক ছত্রাকের কারণে হয়। পাতার শিরার বরাবর উজ্জ্বল হলুদ রঙের ফোসকা বা দাগ পড়ে। ঠান্ডা আবহাওয়ায় এটি ফসলের খুব ক্ষতি করে।,machine
+be:disease:yellow_rust:fav:temperature,10–15°C,১০–১৫°C,machine
+be:disease:yellow_rust:fav:humidity,>80%,>৮০%,machine
+be:disease:yellow_rust:fav:rainfall,Dew / light rain,শিশির / হালকা বৃষ্টি,machine
+be:disease:mosaic_disease:display,Mosaic Disease,মোজাইক রোগ,machine
+be:disease:mosaic_disease:crop,Sugarcane,আখ,machine
+be:disease:mosaic_disease:severity,High,বেশি,machine
+be:disease:mosaic_disease:description,Caused by Sugarcane Mosaic Virus (SCMV). Mosaic or mottled discolouration of leaves — alternating light and dark green patches.,সুগারকেন মোজাইক ভাইরাস (SCMV) এর কারণে হয়। পাতায় মোজাইক বা ছোপ ছোপ দাগ—হালকা এবং গাঢ় সবুজ রঙের ছোপ দেখা যায়।,machine
+be:disease:mosaic_disease:fav:temperature,25–30°C,25–30°C,machine
+be:disease:mosaic_disease:fav:humidity,Moderate,মাঝারি,machine
+be:disease:mosaic_disease:fav:rainfall,Any,যেকোনো,machine
+be:disease:rust:display,Sugarcane Rust,আখের মরিচা রোগ,machine
+be:disease:rust:crop,Sugarcane,আখ,machine
+be:disease:rust:severity,Medium,মাঝারি,machine
+be:disease:rust:description,Caused by Puccinia melanocephala. Orange-brown pustules on leaf undersides causing premature leaf death.,"পুকিনিয়া মেলানোসেফালা (Puccinia melanocephala) ছত্রাকের কারণে হয়। পাতার নিচে কমলা-বাদামী রঙের ফোস্কা পড়ে, যার ফলে পাতা আগেই শুকিয়ে মরে যায়।",machine
+be:disease:rust:fav:temperature,24–28°C,24–28°C,machine
+be:disease:rust:fav:humidity,>75%,>75%,machine
+be:disease:rust:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:bacterial_blight:display,Bacterial Blight,ব্যাকটেরিয়াল ব্লাইট,machine
+be:disease:bacterial_blight:crop,Cotton,তুলা,machine
+be:disease:bacterial_blight:severity,High,বেশি,machine
+be:disease:bacterial_blight:description,"Caused by Xanthomonas axonopodis pv. malvacearum. Angular water-soaked lesions on leaves, black cankers on stems.",জ্যান্থোমোনাস এক্সোনোপোডিস পিভি. ম্যালভেসিয়রাম (Xanthomonas axonopodis pv. malvacearum) ব্যাকটেরিয়ার কারণে হয়। পাতায় কোণাকৃতি ভেজা দাগ এবং ডালে কালো ঘা দেখা দেয়।,machine
+be:disease:bacterial_blight:fav:temperature,28–35°C,28–35°C,machine
+be:disease:bacterial_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_blight:fav:rainfall,Heavy,প্রচুর,machine
+be:disease:alternaria_leaf_spot:display,Alternaria Leaf Spot,অল্টারনারিয়া পাতার দাগ রোগ,machine
+be:disease:alternaria_leaf_spot:crop,Cotton,তুলা,machine
+be:disease:alternaria_leaf_spot:severity,Medium,মাঝারি,machine
+be:disease:alternaria_leaf_spot:description,Caused by Alternaria macrospora. Dark brown to black circular spots with concentric rings on leaves.,"অল্টারনারিয়া ম্যাক্রোস্পোরা (Alternaria macrospora) এর কারণে হয়। পাতায় গোল গোল গাঢ় বাদামী থেকে কালো রঙের দাগ পড়ে, যার মধ্যে গোল রিং থাকে।",machine
+be:disease:alternaria_leaf_spot:fav:temperature,25–30°C,২৫–৩০°C,machine
+be:disease:alternaria_leaf_spot:fav:humidity,>75%,>৭৫%,machine
+be:disease:alternaria_leaf_spot:fav:rainfall,Moderate to heavy,মাঝারি থেকে বেশি,machine
+be:disease:hispa:display,Rice Hispa,ধানের গান্ধী পোকা বা হিস্পা,machine
+be:disease:hispa:crop,Rice,ধান,machine
+be:disease:hispa:severity,Medium,মাঝারি,machine
+be:disease:hispa:description,Caused by Dicladispa armigera (leaf beetle). Adults scrape leaf surfaces; larvae mine inside leaves creating white tunnels.,ডিক্লাডিস্পা আর্মিগেরা (leaf beetle) এর কারণে হয়। পোকাগুলো পাতার ওপরের অংশ কুড়ে কুড়ে খায়; আর শুঁয়োপোকাগুলো পাতার ভেতরে ঢুকে সাদা সুড়ঙ্গের মতো তৈরি করে।,machine
+be:disease:hispa:fav:temperature,25–35°C,২৫–৩৫°C,machine
+be:disease:hispa:fav:humidity,>75%,>৭৫%,machine
+be:disease:hispa:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:tungro:display,Tungro Virus Disease,টুংরো ভাইরাস রোগ,machine
+be:disease:tungro:crop,Rice,ধান,machine
+be:disease:tungro:severity,Very High,খুব বেশি,machine
+be:disease:tungro:description,Caused by two viruses (RTBV + RTSV) transmitted by green leafhoppers. Leaves turn yellow-orange. Stunted plants with reduced tillering.,সবুজ শোষক পোকার মাধ্যমে ছড়ানো দুটি ভাইরাসের (RTBV + RTSV) কারণে এটি হয়। পাতা হলুদ-কমলা রঙের হয়ে যায়। গাছ খর্বাকৃতি হয় এবং কম কুশি বের হয়।,machine
+be:disease:tungro:fav:temperature,25–30°C,২৫–৩০°C,machine
+be:disease:tungro:fav:humidity,>80%,>৮০%,machine
+be:disease:tungro:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:dead_heart:display,Dead Heart (Stem Borer),ডেড হার্ট বা মরা মোচা (মাজরা পোকা),machine
+be:disease:dead_heart:crop,Rice,ধান,machine
+be:disease:dead_heart:severity,High,বেশি,machine
+be:disease:dead_heart:description,Caused by stem borer larvae (Scirpophaga incertulas). The central leaf whorl turns yellow and dies — pulled out easily.,মাজরা পোকার লার্ভার (Scirpophaga incertulas) কারণে হয়। মাঝের পাতার খোসা হলুদ হয়ে মারা যায় এবং সহজেই টেনে তোলা যায়।,machine
+be:disease:dead_heart:fav:temperature,25–35°C,25–35°C,machine
+be:disease:dead_heart:fav:humidity,High,বেশি,machine
+be:disease:dead_heart:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:downy_mildew:display,Downy Mildew,ডাউনি মিলডিউ রোগ,machine
+be:disease:downy_mildew:crop,Rice,ধান,machine
+be:disease:downy_mildew:severity,Medium,মাঝারি,machine
+be:disease:downy_mildew:description,Caused by Sclerophthora macrospora. Pale yellow lesions with downy growth on underside of leaves.,Sclerophthora macrospora-র কারণে হয়। পাতার নিচের দিকে তুলার মতো আস্তরণ সহ হালকা হলুদ দাগ দেখা যায়।,machine
+be:disease:downy_mildew:fav:temperature,18–25°C,18–25°C,machine
+be:disease:downy_mildew:fav:humidity,>90%,>90%,machine
+be:disease:downy_mildew:fav:rainfall,Heavy flooding,প্রবল বৃষ্টিপাত,machine
+be:disease:bacterial_leaf_streak:display,Bacterial Leaf Streak,ব্যাকটেরিয়াল লিফ স্ট্রিক,machine
+be:disease:bacterial_leaf_streak:crop,Rice,ধান,machine
+be:disease:bacterial_leaf_streak:severity,Medium,মাঝারি,machine
+be:disease:bacterial_leaf_streak:description,"Caused by Xanthomonas oryzae pv. oryzicola. Narrow, translucent water-soaked stripes between veins.","Xanthomonas oryzae pv. oryzicola-র কারণে হয়। পাতার শিরাগুলোর মাঝখানে লম্বা, স্বচ্ছ জলের মতো ভেজা দাগ দেখা যায়।",machine
+be:disease:bacterial_leaf_streak:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_streak:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_streak:fav:rainfall,Heavy,বেশি,machine
+be:disease:bacterial_panicle_blight:display,Bacterial Panicle Blight,ব্যাকটেরিয়াল প্যানিকল ব্লাইট,machine
+be:disease:bacterial_panicle_blight:crop,Rice,ধান,machine
+be:disease:bacterial_panicle_blight:severity,High,বেশি,machine
+be:disease:bacterial_panicle_blight:description,"Caused by Burkholderia glumae. Sterile spikelets, grayish-brown discolouration. Significant yield loss.","বার্কহোলডেরিয়া গ্লুমা (Burkholderia glumae) নামক ব্যাকটেরিয়ার কারণে হয়। ধানের দানা চিটা হয়ে যায়, ধূসর-বাদামী রঙ ধারণ করে। ফলন অনেক কমে যায়।",machine
+be:disease:bacterial_panicle_blight:fav:temperature,>30°C,>30°C,machine
+be:disease:bacterial_panicle_blight:fav:humidity,>85%,>85%,machine
+be:disease:bacterial_panicle_blight:fav:rainfall,Moderate,মাঝারি,machine
+be:disease:normal:display,Healthy (Normal),সুস্থ (স্বাভাবিক),machine
+be:disease:normal:crop,Rice,ধান,machine
+be:disease:normal:severity,None,কিছুই না,machine
+be:disease:normal:description,No disease detected. Crop appears healthy.,কোনো রোগ দেখা যায়নি। ফসল সুস্থ দেখাচ্ছে।,machine
+be:disease:normal:fav:temperature,Any,যেকোনো,machine
+be:disease:normal:fav:humidity,Any,যেকোনো,machine
+be:disease:normal:fav:rainfall,Regular,নিয়মিত,machine

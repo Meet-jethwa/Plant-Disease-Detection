@@ -1,0 +1,19 @@
+{
+  "crop.rice": "भात",
+  "crop.wheat": "गहू",
+  "crop.sugarcane": "ऊस",
+  "crop.cotton": "कापूस",
+  "plants.title": "पीक आरोग्य नोंदणी",
+  "plants.badge": "पीक पाहणी",
+  "plants.registerNew": "नवीन पीक नोंदवा",
+  "plants.healthySpecimens": "निरोगी झाडे",
+  "plants.attentionRequired": "लक्ष देणे गरजेचे",
+  "plants.highRisk": "रोगाचा मोठा धोका",
+  "plants.allCrops": "सर्व पिके",
+  "plants.healthy": "निरोगी",
+  "plants.needsAttention": "लक्ष देणे गरजेचे",
+  "plants.searchPlaceholder": "झाडाचे नाव किंवा जात शोध े...",
+  "plants.empty": "कोणतीही निरीक्षण केलेली झाडे आढळली नाहीत",
+  "plants.emptyDesc": "झाड बरे होत आहे का हे पाहण्यासाठी स्कॅनरमध्ये पानाचा फोटो स्कॅन करा.",
+  "plants.scanFirst": "आत्ताच झाड स्कॅन करा"
+}

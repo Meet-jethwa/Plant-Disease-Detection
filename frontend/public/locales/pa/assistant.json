@@ -1,0 +1,15 @@
+{
+  "assistant.title": "AI ਖੇਤੀਬਾੜੀ ਸਹਾਇਕ",
+  "assistant.subtitle": "ਝੋਨੇ, ਕਣਕ, ਗੰਨੇ ਅਤੇ ਕਪਾਹ ਲਈ AI ਆਧਾਰਿਤ ਬਿਮਾਰੀ ਵਿਸ਼ਲੇਸ਼ਣ।",
+  "assistant.placeholder": "ਇਸ ਤਸ਼ਖੀਸ ਬਾਰੇ ਪੁੱਛੋ…",
+  "assistant.analyzing": "ਵਿਸ਼ਲੇਸ਼ਣ ਹੋ ਰਿਹਾ ਹੈ…",
+  "assistant.contextActive": "ਸੰਦਰਭ ਸਕਿਰਿਆ",
+  "assistant.suggested": "ਸੁਝਾਏ ਸਵਾਲ:",
+  "assistant.followUp": "ਅੱਗੇ ਪੁੱਛੋ:",
+  "assistant.emptyTitle": "AI ਮਾਹਰ ਨੂੰ ਪੁੱਛੋ",
+  "assistant.emptyHint": "ਸਕੈਨ ਕੀਤੇ ਪੱਤੇ, ਇਲਾਜ ਜਾਂ ਰੋਕਥਾਮ ਬਾਰੇ ਪੁੱਛੋ।",
+  "assistant.noDiagnosis": "ਪਹਿਲਾਂ ਪੌਦੇ ਦਾ ਪੱਤਾ ਸਕੈਨ ਕਰੋ।",
+  "assistant.weatherAdvice": "ਅੱਜ ਦੀ ਮੌਸਮ ਦੀ ਸਲਾਹ",
+  "assistant.jumpToLatest": "ਸਭ ਤੋਂ ਬਾਅਦ ਵਾਲੇ ਵੱਲ ਜਾਓ",
+  "assistant.welcomeMsg": "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ! ਮੈਂ ਤੁਹਾਡਾ AI ਪਲਾਂਟ ਹੈਲਥ ਅਸਿਸਟੈਂਟ ਹਾਂ। ਪੌਦੇ ਦੀ ਪੱਤੀ ਦੀ ਫੋਟੋ ਅੱਪਲੋਡ ਕਰੋ ਤਾਂ ਜੋ ਪੂਰੀ ਜਾਂਚ ਹੋ ਸਕੇ — ਭਰੋਸੇਯੋਗਤਾ ਸਕੋਰ, ਗ੍ਰੈਡ-ਕੈਮ (Grad-CAM ਨਕਸ਼ਾ), ਮੌਸਮੀ ਖਤਰੇ ਦੀ ਜਾਂਚ, ਅਤੇ ਕੰਮ ਦੀਆਂ ਸਲਾਹਾਂ।"
+}

@@ -1,0 +1,19 @@
+{
+  "crop.rice": "ধান",
+  "crop.wheat": "গম",
+  "crop.sugarcane": "আখ",
+  "crop.cotton": "তুলা",
+  "plants.title": "ফসল স্বাস্থ্য রেজিস্ট্রি",
+  "plants.badge": "ফসল নজরদারি",
+  "plants.registerNew": "নতুন গাছ রেজিস্টার করুন",
+  "plants.healthySpecimens": "সুস্থ গাছপালা",
+  "plants.attentionRequired": "যত্ন নেওয়া দরকার",
+  "plants.highRisk": "রোগের মারাত্মক ঝুঁকি",
+  "plants.allCrops": "সব ফসল",
+  "plants.healthy": "সুস্থ",
+  "plants.needsAttention": "যত্ন দরকার",
+  "plants.searchPlaceholder": "নাম বা জাত দিয়ে গাছ খুঁজুন...",
+  "plants.empty": "কোনো নজরদারি করা গাছ পাওয়া যায়নি",
+  "plants.emptyDesc": "গাছ ঠিক হচ্ছে কি না দেখতে স্ক্যানারে পাতা স্ক্যান করা শুরু করুন।",
+  "plants.scanFirst": "এখনই গাছ স্ক্যান করুন"
+}

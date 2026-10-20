@@ -8,6 +8,7 @@ import {
   Sliders,
 } from 'lucide-react'
 import { LanguageSelector } from '../components/LanguageSelector'
+import { useLang } from '../contexts/LanguageContext'
 import type { LocationContextData } from '../types'
 
 interface SettingRowProps {
@@ -84,6 +85,7 @@ interface ProfilePageProps {
 }
 
 export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageProps) {
+  const { t } = useLang()
   const [isWeatherOpen, setIsWeatherOpen] = useState(false)
   const [isManualActive, setIsManualActive] = useState(false)
   const [savedFeedback, setSavedFeedback] = useState(false)
@@ -183,10 +185,10 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
   }
 
   const stats = [
-    { label: 'Plants',  value: 8,  icon: Leaf,       color: '#0B8F68' },
-    { label: 'Scans',   value: 24, icon: ScanLine,   color: '#0EA5E9' },
-    { label: 'Healthy', value: 19, icon: HeartPulse, color: '#0B8F68' },
-    { label: 'Reports', value: 6,  icon: BookMarked, color: '#D97706' },
+    { label: t('nav.plants'),  value: 8,  icon: Leaf,       color: '#0B8F68' },
+    { label: t('home.statsScans'),   value: 24, icon: ScanLine,   color: '#0EA5E9' },
+    { label: t('plants.healthy'), value: 19, icon: HeartPulse, color: '#0B8F68' },
+    { label: t('history.diagnosesRecorded'), value: 6,  icon: BookMarked, color: '#D97706' },
   ]
 
   return (
@@ -225,11 +227,11 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span className="badge badge-green">
                 <Check style={{ width: 10, height: 10 }} />
-                VERIFIED
+                {t('profile.verified')}
               </span>
               <span className="badge badge-green">
                 <Zap style={{ width: 10, height: 10 }} />
-                PRO SPECIALIST
+                {t('profile.pro')}
               </span>
             </div>
           </div>
@@ -252,20 +254,20 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
 
       {/* ── NOTIFICATIONS SECTION ── */}
       <div className="bio-card" style={{ padding: '6px 8px' }}>
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>NOTIFICATIONS</p>
-        <SettingRow icon={Bell} label="Disease Alerts" description="Get notified when crop infection risk is high" toggle defaultOn id="pref-disease-alerts" />
-        <SettingRow icon={Bell} label="Weekly Reports" description="Summary of your plant health and treatments" toggle defaultOn={false} id="pref-weekly-reports" />
+        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.notifications')}</p>
+        <SettingRow icon={Bell} label={t('profile.diseaseAlerts')} description={t('profile.diseaseAlertsDesc')} toggle defaultOn id="pref-disease-alerts" />
+        <SettingRow icon={Bell} label={t('profile.weeklyReports')} description={t('profile.weeklyReportsDesc')} toggle defaultOn={false} id="pref-weekly-reports" />
       </div>
 
       {/* ── PREFERENCES SECTION (Includes Manual Weather Data) ── */}
       <div className="bio-card" style={{ padding: '6px 8px' }} id="preferences-section">
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>PREFERENCES</p>
+        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.preferences')}</p>
         
         {/* Language */}
-        <SettingRow icon={Globe} label="Language" value={<LanguageSelector variant="light" />} id="pref-language" />
+        <SettingRow icon={Globe} label={t('profile.language')} value={<LanguageSelector variant="light" />} id="pref-language" />
         
         {/* Units */}
-        <SettingRow icon={Shield} label="Units" value="Metric (°C, mm, km/h)" id="pref-units" />
+        <SettingRow icon={Shield} label={t('profile.units')} value={t('profile.unitsVal')} id="pref-units" />
 
         {/* Manual Weather Data Setting Row */}
         <div style={{ borderTop: '1px solid #EDF7F2', marginTop: 4, paddingTop: 4 }}>
@@ -289,12 +291,12 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
             <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                  Manual Weather Data
+                  {t('profile.weatherOverride')}
                 </p>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                   isManualActive ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
                 }`}>
-                  {isManualActive ? 'MANUAL ACTIVE' : 'AUTO GPS'}
+                  {isManualActive ? t('profile.manualActive') : t('profile.autoGps')}
                 </span>
               </div>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 1 }}>
@@ -315,11 +317,11 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                 <div className="flex items-center gap-2">
                   <Sliders className="w-4 h-4 text-[#0B8F68]" />
                   <span className="text-xs font-bold text-[#111827] uppercase tracking-wide">
-                    Agro-Climatic Weather Override
+                    {t('profile.weatherTitle')}
                   </span>
                 </div>
                 <span className="text-[11px] text-[#64736C]">
-                  {isManualActive ? 'Manual Override Enabled' : 'Using Live Open-Meteo GPS'}
+                  {isManualActive ? t('profile.manualActive') : t('profile.autoGps')}
                 </span>
               </div>
 
@@ -329,7 +331,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* City */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      City / Village
+                      {t('profile.city')}
                     </label>
                     <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
                       <MapPin className="w-3.5 h-3.5 text-[#0B8F68] shrink-0" />
@@ -346,7 +348,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* State */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      State / Region
+                      {t('profile.state')}
                     </label>
                     <input
                       type="text"
@@ -360,7 +362,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* Temperature */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      Temperature (°C)
+                      {t('profile.temp')}
                     </label>
                     <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
                       <Thermometer className="w-3.5 h-3.5 text-orange-500 shrink-0" />
@@ -377,7 +379,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* Humidity */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      Relative Humidity (%)
+                      {t('profile.humidity')}
                     </label>
                     <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
                       <Droplets className="w-3.5 h-3.5 text-blue-500 shrink-0" />
@@ -395,7 +397,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* Rainfall */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      Rainfall (24h mm)
+                      {t('profile.rainfall')}
                     </label>
                     <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
                       <CloudRain className="w-3.5 h-3.5 text-blue-600 shrink-0" />
@@ -413,7 +415,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* Wind */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      Wind Speed (km/h)
+                      {t('profile.wind')}
                     </label>
                     <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
                       <Wind className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -431,7 +433,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* Condition */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      Weather Condition
+                      {t('profile.condition')}
                     </label>
                     <select
                       value={condition}
@@ -451,17 +453,17 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                   {/* Risk Level */}
                   <div>
                     <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                      Environmental Risk Level
+                      {t('profile.riskLevel')}
                     </label>
                     <select
                       value={riskLevel}
                       onChange={e => setRiskLevel(e.target.value)}
                       className="w-full px-3 py-2 text-xs text-[#111827] font-medium rounded-lg border border-[#D4E8DC] bg-white outline-none focus:border-[#0B8F68] cursor-pointer"
                     >
-                      <option value="Low">Low Risk</option>
-                      <option value="Moderate">Moderate Risk</option>
-                      <option value="High">High Risk</option>
-                      <option value="Severe">Severe Risk</option>
+                      <option value="Low">{t('risk.low')}</option>
+                      <option value="Moderate">{t('risk.medium')}</option>
+                      <option value="High">{t('risk.high')}</option>
+                      <option value="Severe">{t('risk.severe')}</option>
                     </select>
                   </div>
                 </div>
@@ -469,7 +471,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                 {/* Risk Reason text */}
                 <div>
                   <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
-                    Risk Assessment Explanation
+                    {t('profile.riskReason')}
                   </label>
                   <input
                     type="text"
@@ -495,7 +497,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                       ? 'bg-amber-100 text-amber-800'
                       : 'bg-emerald-100 text-emerald-800'
                   }`}>
-                    {riskLevel} Risk
+                    {riskLevel}
                   </span>
                 </div>
 
@@ -503,13 +505,13 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                 {savedFeedback && (
                   <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 animate-fade-in">
                     <Check className="w-4 h-4 text-emerald-600" />
-                    <span>Manual weather data saved and applied across the entire app!</span>
+                    <span>{t('profile.savedSuccess')}</span>
                   </div>
                 )}
                 {resetFeedback && (
                   <div className="p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold flex items-center gap-2 animate-fade-in">
                     <Check className="w-4 h-4 text-blue-600" />
-                    <span>Reset to live GPS sensors and Open-Meteo weather data!</span>
+                    <span>{t('profile.resetSuccess')}</span>
                   </div>
                 )}
 
@@ -520,7 +522,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                     className="px-4 py-2.5 rounded-xl bg-[#0B8F68] text-white text-xs font-bold hover:bg-[#097354] transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
                   >
                     <Check className="w-3.5 h-3.5" />
-                    <span>Apply Weather Data</span>
+                    <span>{t('profile.applyWeather')}</span>
                   </button>
 
                   <button
@@ -529,7 +531,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                     className="px-4 py-2.5 rounded-xl border border-[#D4E8DC] bg-white text-[#4B5563] text-xs font-semibold hover:bg-slate-50 transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
-                    <span>Reset to Live GPS</span>
+                    <span>{t('profile.resetGps')}</span>
                   </button>
                 </div>
               </form>
@@ -540,27 +542,27 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
 
       {/* ── PRIVACY & DATA SECTION ── */}
       <div className="bio-card" style={{ padding: '6px 8px' }}>
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>PRIVACY & DATA</p>
-        <SettingRow icon={Shield} label="Data Sharing" description="Help improve agronomic AI models" toggle defaultOn id="pref-data-sharing" />
-        <SettingRow icon={Shield} label="Privacy Policy" id="pref-privacy" />
-        <SettingRow icon={Shield} label="Delete My Data" id="pref-delete-data" />
+        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.privacy')}</p>
+        <SettingRow icon={Shield} label={t('profile.dataSharing')} description={t('profile.dataSharingDesc')} toggle defaultOn id="pref-data-sharing" />
+        <SettingRow icon={Shield} label={t('profile.privacyPolicy')} id="pref-privacy" />
+        <SettingRow icon={Shield} label={t('profile.deleteData')} id="pref-delete-data" />
       </div>
 
       {/* ── SUPPORT SECTION ── */}
       <div className="bio-card" style={{ padding: '6px 8px' }}>
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>SUPPORT</p>
-        <SettingRow icon={HelpCircle} label="Help & FAQ" id="pref-help" />
-        <SettingRow icon={HelpCircle} label="Contact Agronomist Support" id="pref-contact" />
+        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.support')}</p>
+        <SettingRow icon={HelpCircle} label={t('profile.helpFaq')} id="pref-help" />
+        <SettingRow icon={HelpCircle} label={t('profile.contactSupport')} id="pref-contact" />
       </div>
 
       {/* Logout */}
       <button type="button" className="btn btn-danger btn-lg" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }} id="profile-logout-btn">
         <LogOut style={{ width: 16, height: 16 }} />
-        SIGN OUT
+        {t('profile.signOut')}
       </button>
 
       <p style={{ textAlign: 'center', fontSize: '0.7rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-        FLORA AI v2.1.0 • PLANT DISEASE INTELLIGENCE PLATFORM
+        {t('profile.footerText')}
       </p>
     </div>
   )

@@ -7,6 +7,7 @@ import {
   Settings, User,
 } from 'lucide-react'
 import { useLang } from '../contexts/LanguageContext'
+import { LanguageSelector } from './LanguageSelector'
 import profileImage from '../../IMAGES/images.jpg'
 
 interface NavbarProps {
@@ -103,7 +104,9 @@ export function Navbar({ backendHealthy }: NavbarProps) {
           </nav>
 
           {/* Right Side */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+            {/* Language Selector */}
+            <LanguageSelector variant="dark" />
 
             {/* Profile */}
             <div style={{ position: 'relative' }}>
@@ -170,14 +173,14 @@ export function Navbar({ backendHealthy }: NavbarProps) {
                           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>meetjethwa@example.com</div>
                         </div>
                       </div>
-                      <span className="badge badge-green" style={{ marginTop: 10, display: 'inline-flex' }}>PRO SPECIALIST</span>
+                      <span className="badge badge-green" style={{ marginTop: 10, display: 'inline-flex' }}>{t('nav.proSpecialist')}</span>
                     </div>
 
                     <div style={{ padding: '6px 8px' }}>
                       {[
-                        { to: '/profile', icon: User,     label: 'My Profile' },
-                        { to: '/history', icon: History,  label: 'Scan History' },
-                        { to: '/tools',   icon: Settings, label: 'Preferences' },
+                        { to: '/profile', icon: User,     label: t('nav.myProfile') },
+                        { to: '/history', icon: History,  label: t('nav.scanHistory') },
+                        { to: '/tools',   icon: Settings, label: t('nav.preferences') },
                       ].map(item => (
                         <Link
                           key={item.to}
@@ -218,7 +221,7 @@ export function Navbar({ backendHealthy }: NavbarProps) {
                         }}
                       >
                         <LogOut style={{ width: 15, height: 15 }} />
-                        <span>Sign Out</span>
+                        <span>{t('nav.signOut')}</span>
                       </button>
                     </div>
                   </div>

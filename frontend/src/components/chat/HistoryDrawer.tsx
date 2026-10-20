@@ -2,6 +2,7 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageSquare, Plus, Trash2, X, Clock, ChevronRight } from 'lucide-react'
+import { useLang } from '../../contexts/LanguageContext'
 
 interface HistoryDrawerProps {
   isOpen: boolean
@@ -20,6 +21,7 @@ export function HistoryDrawer({
   onNewChat,
   onClearSession,
 }: HistoryDrawerProps) {
+  const { t } = useLang()
   
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -50,19 +52,19 @@ export function HistoryDrawer({
             exit={{ x: '-100%' }}
             transition={{ type: 'spring', damping: 26, stiffness: 260 }}
             className="fixed top-0 bottom-0 left-0 z-50 w-[280px] sm:w-[320px] bg-white border-r border-emerald-200 shadow-xl flex flex-col"
-            aria-label="Conversation history"
+            aria-label={t('nav.history')}
           >
             {/* Header */}
             <div className="p-4 border-b border-emerald-100 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-emerald-700" />
-                <h3 className="text-sm font-bold text-emerald-950">Chat Session History</h3>
+                <h3 className="text-sm font-bold text-emerald-950">{t('history.title')}</h3>
               </div>
               <button
                 type="button"
                 onClick={onClose}
                 className="w-8 h-8 rounded-full hover:bg-emerald-50 text-stone-500 hover:text-emerald-900 flex items-center justify-center transition-colors cursor-pointer"
-                aria-label="Close history panel"
+                aria-label={t('common.close')}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -76,14 +78,14 @@ export function HistoryDrawer({
                 className="flex-1 py-2 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs transition-colors cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
-                <span>New Chat</span>
+                <span>{t('chat.newChat')}</span>
               </button>
               {sessionQueries.length > 0 && (
                 <button
                   type="button"
                   onClick={onClearSession}
                   className="py-2 px-3 rounded-xl border border-emerald-200 hover:bg-red-50 text-stone-600 hover:text-red-700 text-xs font-semibold flex items-center justify-center transition-colors cursor-pointer"
-                  title="Clear current queries"
+                  title={t('history.clear')}
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -97,9 +99,9 @@ export function HistoryDrawer({
                   <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center mx-auto mb-2">
                     <MessageSquare className="w-5 h-5" />
                   </div>
-                  <p className="text-xs font-bold text-emerald-950 mb-1">No Past Queries</p>
+                  <p className="text-xs font-bold text-emerald-950 mb-1">{t('history.empty')}</p>
                   <p className="text-[11px] text-stone-500 leading-relaxed">
-                    Questions you ask during this session will appear here for quick reference.
+                    {t('assistant.emptyHint')}
                   </p>
                 </div>
               ) : (

@@ -1,5 +1,6 @@
 // WeatherCard.tsx — BioScan Lab dark weather & risk widget
 import { MapPin, Thermometer, Droplets, Wind, RefreshCw } from 'lucide-react'
+import { useLang } from '../contexts/LanguageContext'
 import type { LocationContextData } from '../types'
 
 interface WeatherCardProps {
@@ -9,13 +10,16 @@ interface WeatherCardProps {
   compact?: boolean
 }
 
-const riskConfig: Record<string, { label: string; color: string; bg: string; border: string }> = {
-  Low:    { label: 'LOW RISK',    color: 'var(--neon-green)', bg: 'rgba(0,255,136,0.08)', border: 'rgba(0,255,136,0.25)' },
-  Medium: { label: 'MEDIUM RISK', color: 'var(--neon-amber)', bg: 'rgba(255,184,0,0.08)', border: 'rgba(255,184,0,0.25)' },
-  High:   { label: 'HIGH RISK',   color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' },
-}
-
 export function WeatherCard({ data, isLoading, onRefresh, compact = false }: WeatherCardProps) {
+  const { t } = useLang()
+
+  const riskConfig: Record<string, { label: string; color: string; bg: string; border: string }> = {
+    Low:    { label: t('risk.low'),    color: 'var(--neon-green)', bg: 'rgba(0,255,136,0.08)', border: 'rgba(0,255,136,0.25)' },
+    Medium: { label: t('risk.medium'), color: 'var(--neon-amber)', bg: 'rgba(255,184,0,0.08)', border: 'rgba(255,184,0,0.25)' },
+    High:   { label: t('risk.high'),   color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' },
+    Severe: { label: t('risk.severe'), color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' },
+  }
+
   const risk = riskConfig[data?.risk_level ?? ''] ?? riskConfig['Medium']
 
   return (
@@ -23,23 +27,23 @@ export function WeatherCard({ data, isLoading, onRefresh, compact = false }: Wea
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <MapPin style={{ width: 13, height: 13, color: 'var(--neon-cyan)' }} />
-          <span className="eyebrow">WEATHER CONTEXT</span>
+          <span className="eyebrow">{t('weather.context')}</span>
         </div>
-        <button type="button" onClick={onRefresh} disabled={isLoading} aria-label="Refresh weather data"
+        <button type="button" onClick={onRefresh} disabled={isLoading} aria-label={t('weather.update')}
           style={{
             display: 'flex', alignItems: 'center', gap: 4, background: 'none', border: 'none',
             cursor: 'pointer', color: 'var(--neon-green)', fontSize: '0.65rem',
             fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', opacity: isLoading ? 0.5 : 1,
           }}>
           <RefreshCw style={{ width: 11, height: 11, animation: isLoading ? 'bio-spin 1s linear infinite' : 'none' }} />
-          <span>UPDATE</span>
+          <span>{t('weather.update')}</span>
         </button>
       </div>
 
       {isLoading ? (
         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
           <span className="animate-pulse-dot" style={{ display: 'inline-block', marginRight: 6 }}>●</span>
-          LOCATING...
+          {t('weather.locating')}
         </div>
       ) : data ? (
         <>
@@ -66,7 +70,7 @@ export function WeatherCard({ data, isLoading, onRefresh, compact = false }: Wea
           </div>
 
           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-            {data.weather.condition.toUpperCase()}
+            {data.weather.condition}
           </div>
 
           {/* Risk indicator */}
@@ -88,7 +92,7 @@ export function WeatherCard({ data, isLoading, onRefresh, compact = false }: Wea
         </>
       ) : (
         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-          Click UPDATE to load local weather and disease risk data.
+          {t('weather.prompt')}
         </div>
       )}
     </div>

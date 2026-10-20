@@ -63,8 +63,8 @@ def _load_env_file():
 _load_env_file()
 
 # ── Gemini model ──────────────────────────────────────────────────────────────
-_GEMINI_MODEL = "gemini-3.6-flash"
-_FALLBACK_MODELS = ["gemini-3.6-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-2.5-flash"]
+_GEMINI_MODEL = "gemini-3.5-flash-lite"
+_FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-3.5-flash"]
 
 # ── Disclaimer ────────────────────────────────────────────────────────────────
 _DISCLAIMER = (
@@ -202,14 +202,15 @@ def _lang_name(code: str) -> str:
     return names.get(code.lower(), "English")
 
 
-def _build_image_part(b64_data_url: str) -> dict | None:
-    """Convert base64 data URL to Gemini inline_data part, or None if invalid."""
+def _build_image_part(b64_data_url: str) -> Any | None:
+    """Convert base64 data URL to google.genai Part, or None if invalid."""
     if not b64_data_url:
         return None
     try:
+        from google.genai import types
         mime, b64_data = _strip_data_url_prefix(b64_data_url)
-        base64.b64decode(b64_data, validate=True)
-        return {"inline_data": {"mime_type": mime, "data": b64_data}}
+        raw_bytes = base64.b64decode(b64_data, validate=True)
+        return types.Part.from_bytes(data=raw_bytes, mime_type=mime)
     except Exception:
         return None
 
@@ -274,12 +275,11 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
         return _fallback_initial(context)
 
     try:
-        import google.generativeai as genai  # type: ignore[import]
-        from google.generativeai.types import HarmCategory, HarmBlockThreshold  # type: ignore[import]
-    except ImportError:
+        from google import genai
+        client = genai.Client(api_key=api_key)
+    except Exception as exc:
+        print(f"[gemini_chat] genai Client initialization failed: {exc}")
         return _fallback_initial(context)
-
-    genai.configure(api_key=api_key)
 
     disease = context.get("predicted_class") or context.get("disease") or "Unknown Condition"
     crop = context.get("crop") or "plant"
@@ -358,22 +358,17 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
     last_error = None
     for model_name in _FALLBACK_MODELS:
         try:
-            model = genai.GenerativeModel(
-                model_name=model_name,
-                system_instruction=system_instruction,
-                generation_config=genai.types.GenerationConfig(
+            from google.genai import types
+            response = client.models.generate_content(
+                model=model_name,
+                contents=parts,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_instruction,
                     response_mime_type="application/json",
                     temperature=0.3,
                     max_output_tokens=1800,
                 ),
-                safety_settings={
-                    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-                },
             )
-            response = model.generate_content(parts)
             result = json.loads(response.text)
 
             # Ensure all required fields exist
@@ -422,12 +417,11 @@ def ask_gemini_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
         return _fallback_chat(context, intent)
 
     try:
-        import google.generativeai as genai  # type: ignore[import]
-        from google.generativeai.types import HarmCategory, HarmBlockThreshold  # type: ignore[import]
-    except ImportError:
+        from google import genai
+        client = genai.Client(api_key=api_key)
+    except Exception as exc:
+        print(f"[gemini_chat] genai Client initialization failed: {exc}")
         return _fallback_chat(context, intent)
-
-    genai.configure(api_key=api_key)
 
     disease = context.get("predicted_class") or context.get("disease") or ""
     crop = context.get("crop") or ""
@@ -562,22 +556,17 @@ def ask_gemini_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
     last_error = None
     for model_name in _FALLBACK_MODELS:
         try:
-            model = genai.GenerativeModel(
-                model_name=model_name,
-                system_instruction=system_instruction,
-                generation_config=genai.types.GenerationConfig(
+            from google.genai import types
+            response = client.models.generate_content(
+                model=model_name,
+                contents=parts,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_instruction,
                     temperature=0.4,
                     max_output_tokens=800,
                 ),
-                safety_settings={
-                    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-                },
             )
-            response = model.generate_content(parts)
-            chat_answer = response.text.strip()
+            chat_answer = (response.text or "").strip()
 
             return {
                 "chat_answer": chat_answer,

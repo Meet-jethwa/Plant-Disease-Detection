@@ -1,0 +1,15 @@
+{
+  "assistant.title": "AI कृषी सहाय्यक",
+  "assistant.subtitle": "भात, गहू, ऊस आणि कापसासाठी AI आधारित रोग विश्लेषण.",
+  "assistant.placeholder": "या निदानाबद्दल विचारा…",
+  "assistant.analyzing": "विश्लेषण होत आहे…",
+  "assistant.contextActive": "संदर्भ सक्रिय",
+  "assistant.suggested": "सुचविलेले प्रश्न:",
+  "assistant.followUp": "पुढील प्रश्न विचारा:",
+  "assistant.emptyTitle": "AI कृषी तज्ञाला विचारा",
+  "assistant.emptyHint": "स्कॅन केलेल्या पानाच्या निदानाबद्दल प्रश्न विचारा.",
+  "assistant.noDiagnosis": "आधी झाडाचे पान स्कॅन करा.",
+  "assistant.weatherAdvice": "आजचा हवामान सल्ला",
+  "assistant.jumpToLatest": "शेवटच्या संदेशावर जा",
+  "assistant.welcomeMsg": "नमस्कार! मी तुमचा एआय (AI) वनस्पती आरोग्य सहाय्यक आहे. वनस्पती रोगाचे संपूर्ण निदान मिळवण्यासाठी पानाचा फोटो अपलोड करा - यात अचूकता, ग्रॅड-कॅम (Grad-CAM ध्यान नकाशा) दृश्य पुरावा, वातावरणातील धोक्यांचे विश्लेषण आणि सोपे उपाय मिळतील."
+}

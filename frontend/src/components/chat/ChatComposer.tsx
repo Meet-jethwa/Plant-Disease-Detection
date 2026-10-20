@@ -6,7 +6,7 @@ import {
   Check
 } from 'lucide-react'
 import { pressTap } from '../../lib/motion'
-import { LANGUAGE_META } from '../../i18n/translations'
+import { LANGUAGE_META, type LangCode } from '../../i18n/translations'
 
 interface ChatComposerProps {
   input: string
@@ -14,7 +14,7 @@ interface ChatComposerProps {
   onSend: (text: string) => void
   isSending: boolean
   isOnline: boolean
-  lang: string
+  lang: LangCode
   placeholder?: string
   disclaimer?: string
   quickChips?: Array<{ label: string; question: string }>
@@ -65,7 +65,7 @@ export function ChatComposer({
       const recognition = new SpeechRecognition()
       recognition.continuous = false
       recognition.interimResults = true
-      recognition.lang = LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.bcp47 || 'en-IN'
+      recognition.lang = LANGUAGE_META[lang]?.bcp47 || 'en-IN'
 
       recognition.onstart = () => setIsListening(true)
       recognition.onend = () => setIsListening(false)
@@ -88,7 +88,7 @@ export function ChatComposer({
 
     return () => {
       if (recognitionRef.current) {
-        try { recognitionRef.current.abort() } catch (_) {}
+        try { recognitionRef.current.abort() } catch {}
       }
     }
   }, [lang, setInput])
@@ -96,11 +96,11 @@ export function ChatComposer({
   function toggleSpeech() {
     if (!recognitionRef.current) return
     if (isListening) {
-      try { recognitionRef.current.stop() } catch (_) {}
+      try { recognitionRef.current.stop() } catch {}
       setIsListening(false)
     } else {
       try {
-        recognitionRef.current.lang = LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.bcp47 || 'en-IN'
+        recognitionRef.current.lang = LANGUAGE_META[lang]?.bcp47 || 'en-IN'
         recognitionRef.current.start()
       } catch {
         setIsListening(false)
@@ -128,26 +128,26 @@ export function ChatComposer({
   const hasText = input.trim().length > 0
 
   return (
-    <div className="w-full space-y-2">
+    <div className="w-full">
       
-      {/* ── Top Bar above composer: Crop selector chip & Quick Chips ── */}
-      <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 scrollbar-none px-1">
+      {/* ── Top Bar above composer: 44px-tall crop chip with 12px spacing ── */}
+      <div className="mb-3 flex items-center justify-between gap-2 overflow-x-auto pb-0.5 scrollbar-none px-0.5">
         
-        {/* Selected Crop chip ("Rice ▾") */}
+        {/* Selected Crop chip ("Rice ▾") — 44px tall (h-11) */}
         <div className="relative">
           <button
             type="button"
             onClick={() => setShowCropMenu(!showCropMenu)}
-            className="h-8 px-3 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-200/90 text-xs font-bold flex items-center gap-1.5 hover:bg-emerald-100 transition-colors cursor-pointer shrink-0"
+            className="h-11 px-3.5 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-bold flex items-center gap-2 hover:bg-emerald-100 transition-colors cursor-pointer shrink-0 focus-visible:ring-2 focus-visible:ring-emerald-600"
             aria-expanded={showCropMenu}
             aria-label="Select active crop context"
           >
             <span>{selectedCrop}</span>
-            <ChevronDown className="w-3 h-3 text-emerald-700" />
+            <ChevronDown className="w-3.5 h-3.5 text-emerald-700" />
           </button>
 
           {showCropMenu && (
-            <div className="absolute bottom-9 left-0 z-30 bg-white border border-emerald-200 rounded-xl shadow-lg p-1.5 w-36 space-y-0.5">
+            <div className="absolute bottom-12 left-0 z-30 bg-white border border-emerald-200 rounded-xl shadow-xl p-1.5 w-36 space-y-0.5">
               {crops.map((c) => (
                 <button
                   key={c}
@@ -156,14 +156,14 @@ export function ChatComposer({
                     onSelectCrop?.(c)
                     setShowCropMenu(false)
                   }}
-                  className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
                     selectedCrop.toLowerCase() === c.toLowerCase()
                       ? 'bg-emerald-100 text-emerald-950 font-bold'
                       : 'hover:bg-emerald-50 text-stone-700'
                   }`}
                 >
                   <span>{c}</span>
-                  {selectedCrop.toLowerCase() === c.toLowerCase() && <Check className="w-3 h-3 text-emerald-700" />}
+                  {selectedCrop.toLowerCase() === c.toLowerCase() && <Check className="w-3.5 h-3.5 text-emerald-700" />}
                 </button>
               ))}
             </div>
@@ -178,7 +178,7 @@ export function ChatComposer({
                 key={idx}
                 type="button"
                 onClick={() => onSend(chip.question)}
-                className="h-8 px-3 rounded-full bg-white text-emerald-900 border border-emerald-200 text-xs font-semibold hover:bg-emerald-50 hover:border-emerald-400 whitespace-nowrap shadow-2xs transition-all cursor-pointer shrink-0"
+                className="h-8 px-3 rounded-full bg-white text-emerald-900 border border-emerald-200 text-xs font-semibold hover:bg-emerald-50 hover:border-emerald-400 whitespace-nowrap shadow-2xs transition-all cursor-pointer shrink-0 focus-visible:ring-2 focus-visible:ring-emerald-600"
               >
                 {chip.label}
               </button>
@@ -194,11 +194,11 @@ export function ChatComposer({
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
-            className="flex items-center justify-between px-4 py-2 bg-emerald-50 border border-emerald-300 rounded-xl text-emerald-900 text-xs font-bold"
+            className="mb-2 flex items-center justify-between px-4 py-2 bg-emerald-50 border border-emerald-300 rounded-xl text-emerald-900 text-xs font-bold"
           >
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping" />
-              <span>Listening to voice in {LANGUAGE_META[lang as keyof typeof LANGUAGE_META]?.label || 'English'}…</span>
+              <span>Listening in {LANGUAGE_META[lang]?.label || 'English'}…</span>
             </div>
             {/* Waveform bars */}
             <div className="flex items-center gap-0.5 h-3">
@@ -210,10 +210,10 @@ export function ChatComposer({
         )}
       </AnimatePresence>
 
-      {/* ── Main Single Rounded Container (Radius 24, White, 1px green-200) ── */}
-      <div className="relative rounded-3xl bg-white border border-emerald-200 shadow-xs focus-within:ring-2 focus-within:ring-emerald-600/30 focus-within:border-emerald-600 transition-all p-2 flex items-end gap-2">
+      {/* ── Main Composer Container: 16px inner padding (p-4), visible focus state ── */}
+      <div className="relative rounded-3xl bg-white border border-emerald-200 shadow-xs focus-within:ring-2 focus-within:ring-emerald-600 focus-within:border-emerald-600 transition-all p-4 flex items-end gap-2">
         
-        {/* Auto-growing Textarea — 16px font to prevent mobile auto-zoom */}
+        {/* Auto-growing Textarea — 16px font to prevent mobile auto-zoom, min 56px height up to 5 lines */}
         <label htmlFor="assistant-textarea" className="sr-only">Ask FloraAI Advisor</label>
         <textarea
           id="assistant-textarea"
@@ -224,7 +224,7 @@ export function ChatComposer({
           placeholder={placeholder}
           disabled={!isOnline}
           rows={1}
-          className="flex-1 bg-transparent border-none outline-none resize-none px-3 py-2.5 text-base text-emerald-950 placeholder-stone-400 min-h-[44px] max-h-[130px] leading-relaxed scrollbar-none"
+          className="flex-1 bg-transparent border-none outline-none resize-none px-0 py-0 text-base text-emerald-950 placeholder-stone-400 min-h-[56px] max-h-[140px] leading-relaxed scrollbar-none"
         />
 
         {/* 48px Mic Button (Left of send) */}
@@ -234,7 +234,7 @@ export function ChatComposer({
             type="button"
             onClick={toggleSpeech}
             disabled={!isOnline}
-            className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer ${
+            className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-600 ${
               isListening
                 ? 'bg-emerald-600 text-white ring-4 ring-emerald-300 shadow-md'
                 : 'text-stone-500 hover:text-emerald-800 hover:bg-emerald-50'
@@ -251,7 +251,7 @@ export function ChatComposer({
           type="button"
           onClick={handleFormSubmit}
           disabled={!hasText || isSending || !isOnline}
-          className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer ${
+          className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-600 ${
             hasText && isOnline && !isSending
               ? 'bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm'
               : 'bg-emerald-100/70 text-stone-400 cursor-not-allowed'
@@ -266,10 +266,10 @@ export function ChatComposer({
         </motion.button>
       </div>
 
-      {/* ── Disclaimer (One 12px line below with "i" icon, >= 4.5:1 contrast) ── */}
-      <div className="flex items-center justify-center gap-1.5 text-xs text-stone-600 px-2 pt-0.5">
+      {/* ── 12px Disclaimer line below that stays inside viewport ── */}
+      <div className="flex items-center justify-center gap-1.5 text-[12px] text-stone-600 px-2 pt-1.5">
         <Info className="w-3.5 h-3.5 text-emerald-800 shrink-0" />
-        <span className="truncate">{disclaimer}</span>
+        <span className="text-center">{disclaimer}</span>
       </div>
 
     </div>

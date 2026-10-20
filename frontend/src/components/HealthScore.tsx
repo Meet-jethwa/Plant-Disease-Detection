@@ -1,20 +1,13 @@
 // HealthScore.tsx — BioScan Lab neon circular health gauge
 import { useEffect, useState } from 'react'
 import { PlantHealthGlyph } from './PlantHealthGlyph'
+import { useLang } from '../contexts/LanguageContext'
 
 interface HealthScoreProps {
   score: number
   isHealthy?: boolean
   showBreakdown?: boolean
   breakdown?: { label: string; value: number }[]
-}
-
-function getStatusFromScore(score: number, isHealthy?: boolean) {
-  if (!isHealthy && score >= 85) return { label: 'DISEASE DETECTED', color: '#FF8C00', bg: 'rgba(255,140,0,0.08)', border: 'rgba(255,140,0,0.25)' }
-  if (score >= 85) return { label: 'HEALTHY',          color: 'var(--neon-green)', bg: 'rgba(0,255,136,0.08)', border: 'rgba(0,255,136,0.25)' }
-  if (score >= 65) return { label: 'NEEDS ATTENTION',  color: 'var(--neon-amber)', bg: 'rgba(255,184,0,0.08)', border: 'rgba(255,184,0,0.25)' }
-  if (score >= 45) return { label: 'AT RISK',          color: '#FF8C00',           bg: 'rgba(255,140,0,0.08)', border: 'rgba(255,140,0,0.25)' }
-  return               { label: 'CRITICAL',            color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' }
 }
 
 function getScoreColor(score: number) {
@@ -24,16 +17,27 @@ function getScoreColor(score: number) {
   return 'var(--neon-red)'
 }
 
-const DEFAULT_BREAKDOWN = [
-  { label: 'Leaf Health',    value: 58 },
-  { label: 'Color Health',   value: 72 },
-  { label: 'Visible Damage', value: 61 },
-  { label: 'Disease Risk',   value: 69 },
-]
-
-export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown = DEFAULT_BREAKDOWN }: HealthScoreProps) {
+export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown }: HealthScoreProps) {
+  const { t } = useLang()
   const [animScore, setAnimScore] = useState(0)
   const [animBars, setAnimBars] = useState(false)
+
+  function getStatusFromScore(s: number, healthy?: boolean) {
+    if (!healthy && s >= 85) return { label: t('status.diseaseDetected'), color: '#FF8C00', bg: 'rgba(255,140,0,0.08)', border: 'rgba(255,140,0,0.25)' }
+    if (s >= 85) return { label: t('status.healthy').toUpperCase(),          color: 'var(--neon-green)', bg: 'rgba(0,255,136,0.08)', border: 'rgba(0,255,136,0.25)' }
+    if (s >= 65) return { label: t('status.needsAttention').toUpperCase(),  color: 'var(--neon-amber)', bg: 'rgba(255,184,0,0.08)', border: 'rgba(255,184,0,0.25)' }
+    if (s >= 45) return { label: t('status.atRisk').toUpperCase(),          color: '#FF8C00',           bg: 'rgba(255,140,0,0.08)', border: 'rgba(255,140,0,0.25)' }
+    return               { label: t('status.critical').toUpperCase(),        color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' }
+  }
+
+  const defaultBreakdown = [
+    { label: t('health.leafHealth'),    value: 58 },
+    { label: t('health.colorHealth'),   value: 72 },
+    { label: t('health.visibleDamage'), value: 61 },
+    { label: t('health.diseaseRisk'),   value: 69 },
+  ]
+
+  const items = breakdown ?? defaultBreakdown
   const status = getStatusFromScore(score, isHealthy)
   const color = getScoreColor(score)
 
@@ -109,7 +113,7 @@ export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown 
             </span>
           </div>
           <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-            AI health index based on visible leaf condition, color, and disease pattern analysis.
+            {t('health.indexDesc')}
           </p>
         </div>
       </div>
@@ -117,8 +121,8 @@ export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown 
       {/* Breakdown Bars */}
       {showBreakdown && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <p className="eyebrow">HEALTH BREAKDOWN</p>
-          {breakdown.map(item => {
+          <p className="eyebrow">{t('health.breakdown')}</p>
+          {items.map(item => {
             const barColor = getScoreColor(item.value)
             return (
               <div key={item.label}>
@@ -145,3 +149,4 @@ export function HealthScore({ score, isHealthy, showBreakdown = true, breakdown 
     </div>
   )
 }
+

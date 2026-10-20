@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus, Search, Sprout } from 'lucide-react'
 import { PlantCard } from '../components/PlantCard'
+import { useLang } from '../contexts/LanguageContext'
 import type { Plant } from '../types'
 
 type Filter = 'all' | 'healthy' | 'attention' | 'risk'
@@ -10,13 +11,6 @@ type Filter = 'all' | 'healthy' | 'attention' | 'risk'
 interface MyPlantsPageProps {
   plants?: Plant[]
 }
-
-const FILTER_TABS: { key: Filter; label: string }[] = [
-  { key: 'all', label: 'All Crops' },
-  { key: 'healthy', label: 'Healthy' },
-  { key: 'attention', label: 'Needs Attention' },
-  { key: 'risk', label: 'High Pathology Risk' },
-]
 
 function filterPlants(plants: Plant[], filter: Filter, query: string): Plant[] {
   let result = plants
@@ -37,8 +31,16 @@ function filterPlants(plants: Plant[], filter: Filter, query: string): Plant[] {
 
 export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
   const navigate = useNavigate()
+  const { t } = useLang()
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
+
+  const FILTER_TABS: { key: Filter; label: string }[] = [
+    { key: 'all', label: t('plants.allCrops') },
+    { key: 'healthy', label: t('plants.healthy') },
+    { key: 'attention', label: t('plants.needsAttention') },
+    { key: 'risk', label: t('plants.highRisk') },
+  ]
 
   const filtered = filterPlants(plants, filter, query)
 
@@ -58,11 +60,11 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
             <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#159A70' }} />
             <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#159A70', letterSpacing: '0.05em' }}>
-              Crop Monitoring
+              {t('plants.badge')}
             </span>
           </div>
           <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0F172A', margin: 0 }}>
-            Active Crop Health Registry
+            {t('plants.title')}
           </h1>
         </div>
 
@@ -72,22 +74,22 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
           style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 16px', background: '#159A70', color: '#ffffff', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}
         >
           <Plus style={{ width: '15px', height: '15px' }} />
-          Register New Specimen
+          {t('plants.registerNew')}
         </button>
       </div>
 
       {/* ── Metric Summary Cards ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
         <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>Healthy Specimens</span>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>{t('plants.healthySpecimens')}</span>
           <div style={{ fontSize: '24px', fontWeight: 800, color: '#159A70', marginTop: '4px' }}>{counts.healthy}</div>
         </div>
         <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>Attention Required</span>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>{t('plants.attentionRequired')}</span>
           <div style={{ fontSize: '24px', fontWeight: 800, color: '#D97706', marginTop: '4px' }}>{counts.attention}</div>
         </div>
         <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>High Pathogen Risk</span>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>{t('plants.highRisk')}</span>
           <div style={{ fontSize: '24px', fontWeight: 800, color: '#DC2626', marginTop: '4px' }}>{counts.risk}</div>
         </div>
       </div>
@@ -100,7 +102,7 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Filter crops by species or variety name..."
+            placeholder={t('plants.searchPlaceholder')}
             style={{ width: '100%', padding: '9px 12px 9px 34px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13px', outline: 'none', background: '#ffffff' }}
           />
         </div>
@@ -136,10 +138,10 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
             <Sprout style={{ width: '28px', height: '28px' }} />
           </div>
           <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#10231D', margin: '0 0 8px 0' }}>
-            No Monitored Plants Yet
+            {t('plants.empty')}
           </h2>
           <p style={{ fontSize: '14px', color: '#64736C', maxWidth: '440px', margin: '0 0 24px 0', lineHeight: 1.5 }}>
-            Whenever you scan a crop leaf with the FloraAI scanner, your diagnosed specimens and health scores will automatically appear in this registry.
+            {t('plants.emptyDesc')}
           </p>
           <button
             type="button"
@@ -147,12 +149,12 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: '#0B8F68', color: '#ffffff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}
           >
             <Plus style={{ width: '16px', height: '16px' }} />
-            Scan Your First Crop
+            {t('plants.scanFirst')}
           </button>
         </div>
       ) : filtered.length === 0 ? (
         <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '48px', textAlign: 'center', color: '#64748B' }}>
-          <p style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>No monitored plants found matching the query.</p>
+          <p style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>{t('plants.empty')}</p>
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>

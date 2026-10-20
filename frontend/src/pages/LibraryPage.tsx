@@ -12,9 +12,12 @@ import {
 import { DISEASES_DATA } from '../data/diseases'
 import { LIBRARY_IMAGE_PATHS } from '../data/plantImages'
 import { cardContainerVariants, cardVariantForIndex, pressTap } from '../lib/motion'
+import { useLang } from '../contexts/LanguageContext'
+import { localizeDiseaseName } from '../i18n/translations'
 
 export function LibraryPage() {
   const navigate = useNavigate()
+  const { t, lang } = useLang()
   const { diseaseId } = useParams<{ diseaseId?: string }>()
   const searchInputId = useId()
 
@@ -39,39 +42,43 @@ export function LibraryPage() {
   const cropCategories = [
     {
       crop: 'Rice',
+      label: t('crop.rice'),
       sciName: 'Oryza sativa',
       icon: '🌾',
       count: 3,
       image: LIBRARY_IMAGE_PATHS.rice,
-      description: 'Staple cereal vulnerable to blast fungi, brown spots, and leaf miner beetles.',
-      primaryParts: 'Leaf Blade, Sheath, Neck Node & Grain',
+      description: t('library.riceDesc'),
+      primaryParts: t('library.riceParts'),
     },
     {
       crop: 'Wheat',
+      label: t('crop.wheat'),
       sciName: 'Triticum aestivum',
       icon: '🌾',
       count: 3,
       image: LIBRARY_IMAGE_PATHS.wheat,
-      description: 'Cereal crop prone to stripe/brown rust fungi and septoria leaf blotch.',
-      primaryParts: 'Flag Leaf, Upper Canopy & Spike Ears',
+      description: t('library.wheatDesc'),
+      primaryParts: t('library.wheatParts'),
     },
     {
       crop: 'Sugarcane',
+      label: t('crop.sugarcane'),
       sciName: 'Saccharum officinarum',
       icon: '🎋',
       count: 2,
       image: LIBRARY_IMAGE_PATHS.sugarcane,
-      description: 'Perennial cash crop susceptible to red rot stalk decay and mosaic virus.',
-      primaryParts: 'Internal Stalk, Stem Internodes & Whorl Leaves',
+      description: t('library.sugarcaneDesc'),
+      primaryParts: t('library.sugarcaneParts'),
     },
     {
       crop: 'Cotton',
+      label: t('crop.cotton'),
       sciName: 'Gossypium hirsutum',
       icon: '🌿',
       count: 2,
       image: LIBRARY_IMAGE_PATHS.cotton,
-      description: 'Fiber crop challenged by bacterial blight lesions and whitefly curl virus.',
-      primaryParts: 'Angular Leaf Veins, Main Stem & Bolls',
+      description: t('library.cottonDesc'),
+      primaryParts: t('library.cottonParts'),
     },
   ]
 
@@ -97,21 +104,21 @@ export function LibraryPage() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold mb-3">
               <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Plant Pathology Encyclopedia</span>
+              <span>{t('library.title')}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-emerald-950 tracking-tight">
-              Crop Disease Field Library
+              {t('library.title')}
             </h1>
             <p className="text-stone-600 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-              Photographic identification, diagnosis markers, and bilingual treatment protocols for Indian agronomy.
+              {t('library.subtitle')}
             </p>
           </div>
 
           <div className="flex items-center gap-3 bg-emerald-50/80 border border-emerald-200 rounded-2xl px-5 py-3 shrink-0 shadow-sm">
             <Leaf className="w-5 h-5 text-emerald-700" />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-emerald-800">Knowledge Base</p>
-              <p className="text-sm font-bold text-emerald-950">{DISEASES_DATA.length} Disease Profiles · 4 Crops</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-emerald-800">{t('nav.encyclopedia')}</p>
+              <p className="text-sm font-bold text-emerald-950">{DISEASES_DATA.length} {t('library.profilesCount')}</p>
             </div>
           </div>
         </div>
@@ -121,7 +128,7 @@ export function LibraryPage() {
       <section aria-labelledby="crops-section-title">
         <div className="flex items-center justify-between mb-4">
           <h2 id="crops-section-title" className="text-xs font-bold text-emerald-900 tracking-wider uppercase">
-            Browse by Primary Crop
+            {t('scan.selectCrop')}
           </h2>
           {selectedCrop !== 'all' && (
             <button
@@ -130,7 +137,7 @@ export function LibraryPage() {
               className="text-xs font-semibold text-emerald-700 hover:text-emerald-900 underline flex items-center gap-1 cursor-pointer"
             >
               <X className="w-3.5 h-3.5" />
-              Clear crop filter
+              {t('library.allCrops')}
             </button>
           )}
         </div>
@@ -169,7 +176,7 @@ export function LibraryPage() {
                   
                   {/* Badge */}
                   <div className="absolute top-3 right-3 bg-white/95 px-2.5 py-1 rounded-full text-xs font-bold text-emerald-800 shadow-sm border border-emerald-100">
-                    {c.count} Diseases
+                    {c.count} {t('library.diseasesCount')}
                   </div>
 
                   {isSelected && (
@@ -180,7 +187,7 @@ export function LibraryPage() {
 
                   <div className="absolute bottom-2.5 left-3 right-3 text-white">
                     <span className="text-lg mr-1.5">{c.icon}</span>
-                    <span className="font-bold text-base drop-shadow-sm">{c.crop}</span>
+                    <span className="font-bold text-base drop-shadow-sm">{c.label}</span>
                     <span className="block text-[11px] text-emerald-200 italic font-mono truncate">{c.sciName}</span>
                   </div>
                 </div>
@@ -190,7 +197,7 @@ export function LibraryPage() {
                     {c.description}
                   </p>
                   <div className="pt-2 border-t border-emerald-100 flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-emerald-800">Affected Organs:</span>
+                    <span className="text-[11px] font-bold text-emerald-800">{t('library.affectedOrgans')}</span>
                     <span className="text-[11px] font-medium text-stone-700 truncate max-w-[140px] text-right">
                       {c.primaryParts}
                     </span>
@@ -208,14 +215,14 @@ export function LibraryPage() {
           
           {/* Search Input — min 16px font to prevent mobile zoom */}
           <div className="relative flex-1">
-            <label htmlFor={searchInputId} className="sr-only">Search plant diseases</label>
+            <label htmlFor={searchInputId} className="sr-only">{t('library.searchPlaceholder')}</label>
             <Search className="w-5 h-5 text-emerald-700/60 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               id={searchInputId}
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search by disease name, pathogen, or symptoms..."
+              placeholder={t('library.searchPlaceholder')}
               className="w-full pl-11 pr-10 py-3 rounded-xl bg-emerald-50/50 border border-emerald-200 text-emerald-950 placeholder-stone-400 text-base focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
             />
             {searchTerm && (
@@ -245,11 +252,11 @@ export function LibraryPage() {
                       : 'bg-emerald-50/70 text-stone-700 border-emerald-200 hover:bg-emerald-100 hover:text-emerald-950'
                   }`}
                 >
-                  {c === 'all' && '🌱 All Crops'}
-                  {c === 'rice' && '🌾 Rice'}
-                  {c === 'wheat' && '🌾 Wheat'}
-                  {c === 'sugarcane' && '🎋 Sugarcane'}
-                  {c === 'cotton' && '🌿 Cotton'}
+                  {c === 'all' && ('🌱 ' + t('library.allCrops'))}
+                  {c === 'rice' && ('🌾 ' + t('crop.rice'))}
+                  {c === 'wheat' && ('🌾 ' + t('crop.wheat'))}
+                  {c === 'sugarcane' && ('🎋 ' + t('crop.sugarcane'))}
+                  {c === 'cotton' && ('☁️ ' + t('crop.cotton'))}
                   {active && <Check className="w-3.5 h-3.5 ml-0.5" />}
                 </button>
               )
@@ -265,16 +272,16 @@ export function LibraryPage() {
           <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
             <Leaf className="w-8 h-8" />
           </div>
-          <h3 className="text-xl font-bold text-emerald-950">No Disease Matches Found</h3>
+          <h3 className="text-xl font-bold text-emerald-950">{t('library.noMatchesTitle')}</h3>
           <p className="text-sm text-stone-600 max-w-md">
-            No diseases matched &ldquo;{searchTerm}&rdquo; for the selected filter. Try adjusting your query or resetting filters.
+            {t('library.noMatchesDesc')}
           </p>
           <button
             type="button"
             onClick={() => { setSearchTerm(''); setSelectedCrop('all') }}
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-700 text-white text-sm font-semibold hover:bg-emerald-800 transition-colors shadow-sm"
           >
-            Clear Filters
+            {t('library.clearFilters')}
           </button>
         </div>
       ) : (
@@ -320,10 +327,10 @@ export function LibraryPage() {
                     {/* Crop pill top-left */}
                     <div className="absolute top-3 left-3">
                       <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-white/95 text-emerald-900 border border-emerald-100 shadow-sm">
-                        {d.crop === 'Rice' && '🌾 Rice'}
-                        {d.crop === 'Wheat' && '🌾 Wheat'}
-                        {d.crop === 'Sugarcane' && '🎋 Sugarcane'}
-                        {d.crop === 'Cotton' && '🌿 Cotton'}
+                        {d.crop === 'Rice' && `🌾 ${t('crop.rice')}`}
+                        {d.crop === 'Wheat' && `🌾 ${t('crop.wheat')}`}
+                        {d.crop === 'Sugarcane' && `🎋 ${t('crop.sugarcane')}`}
+                        {d.crop === 'Cotton' && `🌿 ${t('crop.cotton')}`}
                       </span>
                     </div>
 
@@ -339,7 +346,7 @@ export function LibraryPage() {
                         {isSevere && <AlertTriangle className="w-3.5 h-3.5 text-red-600" />}
                         {isHigh && <AlertCircle className="w-3.5 h-3.5 text-amber-600" />}
                         {!isSevere && !isHigh && <Info className="w-3.5 h-3.5 text-emerald-600" />}
-                        {d.impact} Risk
+                        {t(('severity.' + d.impact.toLowerCase()) as any) || d.impact} {t('diagnosis.risk')}
                       </span>
                     </div>
                   </div>
@@ -348,7 +355,7 @@ export function LibraryPage() {
                   <div className="p-4 sm:p-5 space-y-3">
                     <div>
                       <h3 className="text-lg sm:text-xl font-bold text-emerald-950 leading-tight group-hover:text-emerald-700 transition-colors">
-                        {d.name}
+                        {localizeDiseaseName(d.name, lang)}
                       </h3>
                       <p className="text-xs text-stone-500 font-mono italic mt-0.5 truncate">
                         {d.scientificName}
@@ -376,7 +383,7 @@ export function LibraryPage() {
 
                 {/* Card footer CTA */}
                 <div className="px-4 sm:px-5 py-3 bg-emerald-50/40 border-t border-emerald-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-emerald-950">
-                  <span>View Full Protocol</span>
+                  <span>{t('library.viewProtocol')}</span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
@@ -418,14 +425,14 @@ export function LibraryPage() {
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-emerald-900 p-1.5 rounded-lg hover:bg-emerald-50 transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Library</span>
+                  <span>{t('library.back')}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => navigate('/library')}
                   className="w-8 h-8 rounded-full bg-emerald-50 text-stone-500 hover:text-emerald-900 flex items-center justify-center transition-colors"
-                  aria-label="Close detail panel"
+                  aria-label={t('common.close')}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -448,7 +455,7 @@ export function LibraryPage() {
                   />
                   <div className="absolute bottom-3 left-3">
                     <span className="px-3 py-1 rounded-full text-xs font-bold bg-white text-emerald-900 border border-emerald-100 shadow-sm">
-                      {selectedDisease.crop}
+                      {t(('crop.' + selectedDisease.crop.toLowerCase()) as any) || selectedDisease.crop}
                     </span>
                   </div>
                 </div>
@@ -457,7 +464,7 @@ export function LibraryPage() {
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between gap-3 flex-wrap">
                     <h2 id="disease-detail-title" className="text-2xl sm:text-3xl font-extrabold text-emerald-950">
-                      {selectedDisease.name}
+                      {localizeDiseaseName(selectedDisease.name, lang)}
                     </h2>
                     
                     <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold border ${
@@ -470,7 +477,7 @@ export function LibraryPage() {
                       {selectedDisease.impact === 'Severe' && <AlertTriangle className="w-3.5 h-3.5 text-red-600" />}
                       {selectedDisease.impact === 'High' && <AlertCircle className="w-3.5 h-3.5 text-amber-600" />}
                       {selectedDisease.impact !== 'Severe' && selectedDisease.impact !== 'High' && <Info className="w-3.5 h-3.5 text-emerald-600" />}
-                      {selectedDisease.impact} Impact Severity
+                      {t(('severity.' + selectedDisease.impact.toLowerCase()) as any) || selectedDisease.impact} {t('library.impactSeverity')}
                     </span>
                   </div>
 
@@ -486,14 +493,14 @@ export function LibraryPage() {
                   className="w-full py-3.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-base shadow-md shadow-emerald-700/20 flex items-center justify-center gap-2 cursor-pointer transition-all"
                 >
                   <Scan className="w-5 h-5" />
-                  <span>Scan My Crop for This Disease</span>
+                  <span>{t('library.scanForThis')}</span>
                 </button>
 
                 {/* Section: What it is */}
                 <div className="bg-emerald-50/60 rounded-2xl p-4 sm:p-5 border border-emerald-200/80 space-y-2">
                   <div className="flex items-center gap-2 text-emerald-900 font-bold text-sm">
                     <Info className="w-4 h-4 text-emerald-700" />
-                    <span>Pathology Overview</span>
+                    <span>{t('library.overview')}</span>
                   </div>
                   <p className="text-sm text-stone-700 leading-relaxed">
                     {selectedDisease.technicalDetails.pathology}
@@ -504,7 +511,7 @@ export function LibraryPage() {
                 <div className="space-y-2.5">
                   <div className="flex items-center gap-2 text-emerald-950 font-bold text-base">
                     <Eye className="w-4 h-4 text-emerald-700" />
-                    <span>Where to Look (Affected Parts)</span>
+                    <span>{t('library.whereToLook')}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedDisease.affectedParts.map((part) => (
@@ -514,7 +521,7 @@ export function LibraryPage() {
                     ))}
                   </div>
                   <p className="text-xs text-stone-500 italic mt-1">
-                    Anatomy focus: {selectedDisease.technicalDetails.anatomy}
+                    {t('library.anatomyFocus')} {selectedDisease.technicalDetails.anatomy}
                   </p>
                 </div>
 
@@ -522,7 +529,7 @@ export function LibraryPage() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-emerald-950 font-bold text-base">
                     <AlertCircle className="w-4 h-4 text-emerald-700" />
-                    <span>Key Symptoms to Observe</span>
+                    <span>{t('library.symptoms')}</span>
                   </div>
                   <p className="text-sm text-stone-700 leading-relaxed bg-white border border-emerald-200 p-4 rounded-xl">
                     {selectedDisease.whatToLookFor}
@@ -534,7 +541,7 @@ export function LibraryPage() {
                   <div className="p-4 rounded-xl border border-emerald-200 bg-white space-y-2">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-900 uppercase">
                       <Thermometer className="w-4 h-4 text-emerald-700" />
-                      <span>What Favors It</span>
+                      <span>{t('library.favors')}</span>
                     </div>
                     <p className="text-xs text-stone-600 leading-relaxed">
                       {selectedDisease.whatFavorsIt}
@@ -544,7 +551,7 @@ export function LibraryPage() {
                   <div className="p-4 rounded-xl border border-emerald-200 bg-white space-y-2">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-900 uppercase">
                       <Wind className="w-4 h-4 text-emerald-700" />
-                      <span>How It Spreads</span>
+                      <span>{t('library.spreads')}</span>
                     </div>
                     <p className="text-xs text-stone-600 leading-relaxed">
                       {selectedDisease.howItSpreads}
@@ -556,7 +563,7 @@ export function LibraryPage() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-emerald-950 font-bold text-base">
                     <ShieldAlert className="w-4 h-4 text-emerald-700" />
-                    <span>Recommended Treatment Protocol</span>
+                    <span>{t('library.treatment')}</span>
                   </div>
 
                   {/* Tabs */}
@@ -571,7 +578,7 @@ export function LibraryPage() {
                       }`}
                     >
                       <Sprout className="w-4 h-4" />
-                      <span>Organic / Bio-Control</span>
+                      <span>{t('library.organic')}</span>
                     </button>
 
                     <button
@@ -584,19 +591,19 @@ export function LibraryPage() {
                       }`}
                     >
                       <FlaskConical className="w-4 h-4" />
-                      <span>Chemical / Fungicide</span>
+                      <span>{t('library.chemical')}</span>
                     </button>
                   </div>
 
                   <div className="p-4 rounded-xl bg-white border border-emerald-200 shadow-sm text-sm text-stone-700 leading-relaxed">
                     {treatmentTab === 'organic' ? (
                       <div>
-                        <div className="text-xs font-bold text-emerald-800 uppercase mb-1">Organic Management:</div>
+                        <div className="text-xs font-bold text-emerald-800 uppercase mb-1">{t('library.organic')}:</div>
                         <p>{selectedDisease.organicTreatment}</p>
                       </div>
                     ) : (
                       <div>
-                        <div className="text-xs font-bold text-emerald-800 uppercase mb-1">Chemical Application:</div>
+                        <div className="text-xs font-bold text-emerald-800 uppercase mb-1">{t('library.chemical')}:</div>
                         <p>{selectedDisease.chemicalTreatment}</p>
                       </div>
                     )}
@@ -607,7 +614,7 @@ export function LibraryPage() {
                 <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2">
                   <div className="flex items-center gap-2 text-emerald-950 font-bold text-sm">
                     <ShieldCheck className="w-4 h-4 text-emerald-700" />
-                    <span>Long-Term Prevention</span>
+                    <span>{t('library.prevention')}</span>
                   </div>
                   <p className="text-sm text-stone-700 leading-relaxed">
                     {selectedDisease.prevention}

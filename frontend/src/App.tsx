@@ -22,12 +22,12 @@ import type { Plant, LocationContextData, StartSessionPayload, AskPayload } from
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
 
 const defaultAssistantMsg =
-  'Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — disease identification, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.'
+  'Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.'
 
 function AppContent() {
   const navigate = useNavigate()
   const { toasts, addToast, removeToast } = useToast()
-  const { lang } = useLang()
+  const { lang, t } = useLang()
 
   const [crops, setCrops] = useState<Crop[]>([
     { name: 'rice', label: 'Rice' },
@@ -40,7 +40,17 @@ function AppContent() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [locationData, setLocationData] = useState<LocationContextData | null>(null)
   const [prediction, setPrediction] = useState<PredictionResponse | null>(null)
-  const [chat, setChat] = useState<ChatMessage[]>([{ role: 'assistant', text: defaultAssistantMsg }])
+  const [chat, setChat] = useState<ChatMessage[]>(() => [{ role: 'assistant', text: defaultAssistantMsg }])
+
+  useEffect(() => {
+    // Dynamically localize initial greeting when language changes
+    setChat((prev) => {
+      if (prev.length === 1 && prev[0].role === 'assistant') {
+        return [{ role: 'assistant', text: t('assistant.welcomeMsg') }]
+      }
+      return prev
+    })
+  }, [lang, t])
   const [history, setHistory] = useState<HistoryItem[]>([])
   const [plants, setPlants] = useState<Plant[]>(() => {
     try {
@@ -184,23 +194,19 @@ function AppContent() {
     navigate('/scan')
   }
 
-  async function fetchLocation(forceGps: boolean = false) {
+  async function fetchLocation() {
     setIsLocating(true)
     setError(null)
 
-    if (forceGps) {
-      localStorage.removeItem('flora_ai_manual_weather')
-    } else {
-      const savedManual = localStorage.getItem('flora_ai_manual_weather')
-      if (savedManual) {
-        try {
-          setLocationData(JSON.parse(savedManual) as LocationContextData)
-          setIsLocating(false)
-          return
-        } catch (_) {}
-      }
+    // Respect saved manual weather unless explicitly resetting
+    const savedManual = localStorage.getItem('flora_ai_manual_weather')
+    if (savedManual) {
+      try {
+        setLocationData(JSON.parse(savedManual) as LocationContextData)
+        setIsLocating(false)
+        return
+      } catch (_) {}
     }
-
     const fallback = async () => {
       try {
         const response = await fetch(`${API_BASE}/api/location/fetch`)
@@ -219,16 +225,9 @@ function AppContent() {
     }
 
     try {
-      if (!navigator.geolocation) {
-        await fallback()
-        return
-      }
+      if (!navigator.geolocation) { await fallback(); return }
       const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject, {
-          timeout: 6000,
-          maximumAge: 60000,
-          enableHighAccuracy: false,
-        })
+        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 8000 })
       })
       const { latitude, longitude } = position.coords
       const res = await fetch(`${API_BASE}/api/location/fetch?latitude=${latitude}&longitude=${longitude}`)
@@ -299,7 +298,7 @@ function AppContent() {
         { name: 'Fungal / Bacterial Pathogen Infection', description: 'Primary biotic agent responsible for foliar symptoms.' },
         { name: 'Extended Leaf Wetness & Humidity', description: 'Environmental conditions favoring spore germination.' },
       ],
-      analysis_summary: `${diseaseName} detected in ${cropName}. Affected organ: ${affectedPart}. Recommended immediate fungicide treatment protocol.`,
+      analysis_summary: `${diseaseName} detected in ${cropName} with 94.2% confidence. Affected organ: ${affectedPart}. Recommended immediate fungicide treatment protocol.`,
       original_image: imageToUse,
       highlighted_image: imageToUse,
       weather_context: {
@@ -335,21 +334,6 @@ function AppContent() {
           formData.append('latitude', String(locationData.location.latitude))
           formData.append('longitude', String(locationData.location.longitude))
         }
-        if (locationData?.location?.city) {
-          formData.append('city', locationData.location.city)
-        }
-        if (locationData?.weather?.temperature_c !== undefined) {
-          formData.append('temperature', String(locationData.weather.temperature_c))
-        }
-        if (locationData?.weather?.humidity_percent !== undefined) {
-          formData.append('humidity', String(locationData.weather.humidity_percent))
-        }
-        if (locationData?.weather?.rainfall_mm !== undefined) {
-          formData.append('rainfall', String(locationData.weather.rainfall_mm))
-        }
-        if (locationData?.weather?.wind_kmh !== undefined) {
-          formData.append('wind_speed', String(locationData.weather.wind_kmh))
-        }
 
         const response = await fetch(`${API_BASE}/api/predict`, {
           method: 'POST',
@@ -369,8 +353,10 @@ function AppContent() {
 
       setPrediction(predData)
 
-      // Start a new diagnosis session immediately after prediction
-      await startDiagnosisSession(predData)
+      // Start diagnosis chat session in background so it never blocks viewing results
+      startDiagnosisSession(predData).catch((err) => {
+        console.warn('Background assistant session init:', err)
+      })
 
       const newHistoryItem: HistoryItem = {
         id: String(Date.now()),
@@ -610,32 +596,73 @@ function AppContent() {
                 <Route
                   path="/diagnosis"
                   element={
-                    prediction ? (
-                      <DiagnosisResultPage
-                        prediction={prediction}
-                        locationData={locationData}
-                        onReset={handleResetScanner}
-                        onSaveToPlants={() => addToast('success', 'Plant saved!', 'Added to My Plants.')}
-                      />
-                    ) : (
-                      <ScanPage
-                        crops={crops}
-                        selectedCrop={selectedCrop}
-                        setSelectedCrop={setSelectedCrop}
-                        selectedFile={selectedFile}
-                        previewUrl={previewUrl}
-                        onFileChange={handleFileChange}
-                        onSelectSamplePreset={handleSelectSamplePreset}
-                        onAnalyzePlant={analyzePlant}
-                        isPredicting={isPredicting}
-                        prediction={prediction}
-                        locationData={locationData}
-                        onFetchLocation={fetchLocation}
-                        isLocating={isLocating}
-                        error={error}
-                        onReset={handleResetScanner}
-                      />
-                    )
+                    (() => {
+                      const mockConfidenceParam = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('mockConfidence') : null
+                      const effectivePrediction = prediction || (mockConfidenceParam ? {
+                        crop: 'rice',
+                        predicted_class: 'Rice Blast',
+                        confidence: parseFloat(mockConfidenceParam) / 100,
+                        confidence_percent: parseFloat(mockConfidenceParam),
+                        health_score: 45,
+                        top3: [
+                          { class: 'Rice Blast', confidence: parseFloat(mockConfidenceParam) / 100 },
+                          { class: 'Brown Spot', confidence: 0.32 },
+                          { class: 'Healthy', confidence: 0.08 },
+                        ],
+                        disease_info: {
+                          display: 'Rice Blast',
+                          severity: 'Moderate',
+                          description: 'Rice blast causes diamond-shaped foliar lesions with grayish center and brown margins.',
+                          causes: 'High relative humidity, excessive nitrogen fertilization, and prolonged leaf wetness.',
+                          treatment: 'Apply tricyclazole (0.6 g/L) or isoprothiolane fungicide.\nDrain excess field water and avoid evening spraying.\nPrune and dispose of heavily infested leaves.',
+                          prevention: 'Use blast-tolerant paddy varieties and maintain balanced fertilizer ratios.',
+                        },
+                        symptoms: [
+                          { name: 'Spindle-shaped foliar lesions', confidence: Math.round(parseFloat(mockConfidenceParam)) },
+                          { name: 'Chlorotic lesion halos', confidence: Math.max(10, Math.round(parseFloat(mockConfidenceParam) - 15)) },
+                        ],
+                        possible_causes: [
+                          { name: 'Magnaporthe oryzae Fungal Pathogen', description: 'Primary spore infection favored by wet foliage.' }
+                        ],
+                        analysis_summary: 'Rice Blast detected on leaf blade.',
+                        original_image: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80',
+                        highlighted_image: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80',
+                        affected_area_percent: 18,
+                        weather_context: {
+                          weather: { temperature_c: 31.0, humidity_percent: 86, rainfall_mm: 14.2, wind_kmh: 12.0, condition: 'Humid with Rain' },
+                          risk_level: 'High',
+                          risk_reason: 'Elevated humidity and leaf wetness favor disease progression.',
+                          feature_importance: { 'Humidity (>80%)': 0.45, 'Leaf Wetness': 0.35 }
+                        }
+                      } : null)
+
+                      return effectivePrediction ? (
+                        <DiagnosisResultPage
+                          prediction={effectivePrediction}
+                          locationData={locationData}
+                          onReset={handleResetScanner}
+                          onSaveToPlants={() => addToast('success', 'Plant saved!', 'Added to My Plants.')}
+                        />
+                      ) : (
+                        <ScanPage
+                          crops={crops}
+                          selectedCrop={selectedCrop}
+                          setSelectedCrop={setSelectedCrop}
+                          selectedFile={selectedFile}
+                          previewUrl={previewUrl}
+                          onFileChange={handleFileChange}
+                          onSelectSamplePreset={handleSelectSamplePreset}
+                          onAnalyzePlant={analyzePlant}
+                          isPredicting={isPredicting}
+                          prediction={prediction}
+                          locationData={locationData}
+                          onFetchLocation={fetchLocation}
+                          isLocating={isLocating}
+                          error={error}
+                          onReset={handleResetScanner}
+                        />
+                      )
+                    })()
                   }
                 />
                 <Route

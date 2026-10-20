@@ -1,6 +1,7 @@
 // TreatmentCard.tsx — BioScan Lab dark treatment protocol card
 import { useState } from 'react'
 import { Leaf, FlaskConical, ShieldCheck, AlertTriangle } from 'lucide-react'
+import { useLang } from '../contexts/LanguageContext'
 
 interface TreatmentCardProps {
   treatment: string
@@ -9,6 +10,7 @@ interface TreatmentCardProps {
 }
 
 export function TreatmentCard({ treatment, prevention, severity }: TreatmentCardProps) {
+  const { t } = useLang()
   const [tab, setTab] = useState<'immediate' | 'organic' | 'preventive'>('immediate')
   const isSevere = ['severe', 'high', 'critical'].includes(severity?.toLowerCase())
 
@@ -22,32 +24,32 @@ export function TreatmentCard({ treatment, prevention, severity }: TreatmentCard
   ]
 
   const tabs = [
-    { id: 'immediate' as const, label: 'Immediate',  icon: AlertTriangle, color: 'var(--neon-red)' },
-    { id: 'organic'   as const, label: 'Organic',    icon: Leaf,          color: 'var(--neon-green)' },
-    { id: 'preventive'as const, label: 'Preventive', icon: ShieldCheck,   color: 'var(--neon-cyan)' },
+    { id: 'immediate' as const, label: t('diagnosis.tabImmediate'),  icon: AlertTriangle, color: 'var(--neon-red)' },
+    { id: 'organic'   as const, label: t('diagnosis.tabOrganic'),    icon: Leaf,          color: 'var(--neon-green)' },
+    { id: 'preventive'as const, label: t('diagnosis.tabPreventive'), icon: ShieldCheck,   color: 'var(--neon-cyan)' },
   ]
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <FlaskConical style={{ width: 15, height: 15, color: 'var(--neon-green)' }} />
-        <h3 className="eyebrow">TREATMENT PROTOCOLS</h3>
+        <h3 className="eyebrow">{t('diagnosis.treatment')}</h3>
       </div>
 
       {/* Tab switcher */}
       <div className="tab-group">
-        {tabs.map(t => (
+        {tabs.map(tTab => (
           <button
-            key={t.id} type="button"
-            onClick={() => setTab(t.id)}
-            className={`tab-item ${tab === t.id ? 'active' : ''}`}
+            key={tTab.id} type="button"
+            onClick={() => setTab(tTab.id)}
+            className={`tab-item ${tab === tTab.id ? 'active' : ''}`}
             style={{
               display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.75rem',
-              color: tab === t.id ? t.color : undefined,
+              color: tab === tTab.id ? tTab.color : undefined,
             }}
           >
-            <t.icon style={{ width: 12, height: 12 }} />
-            {t.label}
+            <tTab.icon style={{ width: 12, height: 12 }} />
+            {tTab.label}
           </button>
         ))}
       </div>
@@ -111,8 +113,8 @@ export function TreatmentCard({ treatment, prevention, severity }: TreatmentCard
         }}>
           <AlertTriangle style={{ width: 15, height: 15, color: 'var(--neon-amber)', flexShrink: 0, marginTop: 1 }} />
           <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-            <strong style={{ color: 'var(--neon-amber)' }}>SEVERE CASE DETECTED.</strong>{' '}
-            Consult a local agricultural extension officer or certified agronomist before applying treatments.
+            <strong style={{ color: 'var(--neon-amber)' }}>{t('diagnosis.expertAlert')}:</strong>{' '}
+            {t('diagnosis.consultExpert')}
           </p>
         </div>
       )}

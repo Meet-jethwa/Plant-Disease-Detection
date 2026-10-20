@@ -130,6 +130,7 @@ export type GeminiResponse = {
   /** Combined SHAP + environmental factors — rendered once, not twice */
   environmental_factors: GeminiEnvFactor[]
   recommended_actions: string[]
+  actionable_steps?: string[]
   prevention: string[]
   follow_up_questions?: string[]
   disclaimer: string
@@ -155,6 +156,7 @@ export type ChatMessage = {
   role: 'user' | 'assistant'
   text: string                       // plain-text fallback / user messages
   structured?: GeminiResponse        // Mode A: initial diagnosis explanation
+  geminiData?: GeminiResponse        // alias for structured
   chat_answer?: string               // Mode B: focused follow-up answer
   intent?: string                    // detected intent for Mode B messages
   follow_up_questions?: string[]     // dynamic chips for Mode B messages

@@ -1,0 +1,738 @@
+key,english,translation,status
+fe:diagnosis:diagnosis.treatment,Treatment Plan,સારવાર યોજના,reviewed
+fe:diagnosis:diagnosis.showTreatmentsAnyway,Show possible treatments anyway,તો પણ દવાઓ બતાવો,machine
+fe:library:library.treatment,Recommended Treatment Plan,સારવાર માટેની ભલામણ,machine
+fe:scan:scan.treatmentGuide,Treatment Guide,સારવાર માર્ગદર્શિકા,machine
+be:disease:bacterial_leaf_blight:treatment_summary,Apply copper-based bactericides. Remove infected plant debris. Use resistant varieties. Avoid excessive nitrogen fertilization.,કોપર યુક્ત જીવાણુનાશક છાંટો. રોગવાળા છોડના અવશેષો દૂર કરો. રોગપ્રતિકારક જાતો વાવો. વધુ પડતું નાઇટ્રોજન ખાતર ના નાખો.,machine
+be:disease:brown_spot:treatment_summary,"Apply mancozeb or iprodione fungicide. Correct soil nutrient deficiencies (potassium, silicon). Reduce dense planting.","મેન્કોઝેબ અથવા ઇપ્રોડિઓન ફૂગનાશક છાંટો. જમીનમાં પોષક તત્વોની ઉણપ (પોટેશિયમ, સિલિકોન) દૂર કરો. છોડ બહુ નજીક-નજીક ન વાવો.",machine
+be:disease:healthy:treatment_summary,Continue regular monitoring and preventive care.,નિયમિત દેખરેખ રાખતા રહो અને સાવચેતીના પગલાં ચાલુ રાખો.,machine
+be:disease:leaf_blast:treatment_summary,"Apply fungicides: tricyclazole, isoprothiolane, or azoxystrobin. Reduce nitrogen fertilizer. Drain fields to reduce humidity.","ફૂગનાશક દવાઓ છાંટો: ટ્રાયસાઇક્લાઝોલ, આસોપ્રોથિયોલેન, અથવા એઝોક્સિસ્ટ્રોબિન. નાઇટ્રોજન ખાતર ઓછું કરો. ભેજ ઘટાડવા માટે ખેતરમાંથી પાણી બહાર કાઢી નાખો.",machine
+be:disease:leaf_scald:treatment_summary,Apply propiconazole or carbendazim fungicide. Improve field drainage and plant spacing.,પ્રોપિકોનાઝોલ અથવા કાર્બેન્ડાઝિમ ફૂગનાશક છાંટો. ખેતરનો નિતાર સુધારો અને છોડ વચ્ચે પૂરતું અંતર રાખો.,machine
+be:disease:sheath_blight:treatment_summary,"Apply validamycin, hexaconazole, or propiconazole fungicides. Reduce plant density. Minimize canopy humidity.","વેલિડામાયસીન, હેક્સાકોનાઝોલ અથવા પ્રોપિકોનાઝોલ ફૂગનાશક છાંટો. છોડ વચ્ચે અંતર રાખો. પાકમાં ભેજનું પ્રમાણ ઓછું કરો.",machine
+be:disease:aphid:treatment_summary,Apply imidacloprid or lambda-cyhalothrin insecticide. Encourage natural predators (ladybugs).,ઇમિડાક્લોપ્રિડ અથવા લેમ્ડા-સાયહેલોથ્રિન જંતુનાશક છાંટો. કુદરતી દુશ્મન જીવાતોને (લેડીબગ) પ્રોત્સાહિત કરો.,machine
+be:disease:black_rust:treatment_summary,"Apply propiconazole, tebuconazole, or trifloxystrobin fungicides at early stages.","શરૂઆતની અવસ્થામાં પ્રોપિકોનાઝોલ, ટેબુકોનાઝોલ અથવા ટ્રાઇફ્લોક્સીસ્ટ્રોબિન ફૂગનાશક છાંટો.",machine
+be:disease:blast:treatment_summary,"Tricyclazole, isoprothiolane, azoxystrobin fungicides.","ટ્રાઇસાઇક્લાઝોલ, આઇસોપ્રોથિઓલેન, એઝોક્સિસ્ટ્રોબિન ફૂગનાશક.",machine
+be:disease:brown_rust:treatment_summary,"Fungicides: propiconazole, mancozeb. Apply at early infection stage.","ફૂગનાશક: પ્રોપિકોનાઝોલ, મેન્કોઝેબ. રોગની શરૂઆતમાં જ છંટકાવ કરો.",machine
+be:disease:common_root_rot:treatment_summary,Seed treatment with trifloxystrobin + tebuconazole. Crop rotation with non-cereal crops.,ટ્રાઇફ્લોક્સિસ્ટ્રોબિન + ટેબુકોનાઝોલથી બિયારણની માવજત કરો. અનાજ સિવાયના અન્ય પાકોની ફેરબદલી કરો.,machine
+be:disease:fusarium_head_blight:treatment_summary,Apply thiophanate-methyl or metconazole at early flowering. Remove infected debris.,ફૂલ બેસવાની શરૂઆતમાં થિયોફાનેટ-મિથાઈલ અથવા મેટકોનાઝોલ છાંટો. રોગવાળો કચરો દૂર કરો.,machine
+be:disease:leaf_blight:treatment_summary,Mancozeb or propiconazole fungicide application.,મેન્કોઝેબ અથવા પ્રોપિકોનાઝોલ ફૂગનાશકનો છંટકાવ કરો.,machine
+be:disease:mildew:treatment_summary,"Apply triadimefon, propiconazole, or sulfur-based fungicides.","ટ્રાયડિમેફોન, પ્રોપિકોનાઝોલ, અથવા સલ્ફર આધારિત ફૂગનાશક છાંટો.",machine
+be:disease:mite:treatment_summary,Apply abamectin or dicofol miticide. Increase irrigation.,અબામેક્ટિન અથવા ડાયકોફોલ મિટિસાઇડ (જંતુનાશક) છાંટો. પિયત (પાણી) વધારો.,machine
+be:disease:septoria:treatment_summary,"Triazole or SDHI fungicides (epoxiconazole, fluxapyroxad). Early application is key.","ટ્રાયઝોલ અથવા SDHI ફૂગનાશક (એપોક્સિકોનાઝોલ, ફ્લક્સાસાયરોક્સાડ). સમયસર દવા છાંટવી ખૂબ જરૂરી છે.",machine
+be:disease:smut:treatment_summary,"Seed treatment with carboxin, thiram, or tebuconazole is highly effective.","બિયારણને કાર્બોક્સિન, થિરામ અથવા ટેબુકોનાઝોલની માવજત આપવી ખૂબ જ અસરકારક છે.",machine
+be:disease:stem_fly:treatment_summary,Apply chlorpyrifos or imidacloprid at seedling stage.,છોડની શરૂઆતની અવસ્થામાં ક્લોરપાયરિફોસ અથવા ઇમિડાક્લોપ્રિડ છાટો.,machine
+be:disease:tan_spot:treatment_summary,Apply propiconazole or mancozeb. Tillage to bury residues.,પ્રોપિકોનાઝોલ અથવા મેન્કોઝેબ છાટો. અવશેષોને દાટી દેવા માટે ખેડાણ કરો.,machine
+be:disease:yellow_rust:treatment_summary,"Apply propiconazole, tebuconazole, or other triazole fungicides early.","શરૂઆતમાં જ પ્રોપિકોનાઝોલ, ટેબુકોનાઝોલ, અથવા અન્ય ટ્રાએઝોલ ફૂગનાશક છાટો.",machine
+be:disease:mosaic_disease:treatment_summary,No chemical cure. Remove and destroy infected stools. Control aphid vectors.,આની કોઈ રાસાયણિક દવા નથી. રોગગ્રસ્ત છોડને કાઢીને નાશ કરો. મોલોમશીનું નિયંત્રણ કરો.,machine
+be:disease:rust:treatment_summary,Apply triadimefon or propiconazole fungicide. Remove severely infected leaves.,ટ્રાયડિમેફોન અથવા પ્રોપિકોનાઝોલ ફૂગનાશક છાંટો. ખૂબ વધારે રોગવાળા પાંદડા કાઢી નાખો.,machine
+be:disease:bacterial_blight:treatment_summary,Apply copper oxychloride or streptomycin spray. Remove infected debris.,કોપર ઓક્સીક્લોરાઈડ અથવા સ્ટ્રેપ્ટોમાઈસિનનો છંટકાવ કરો. રોગગ્રસ્ત કચરો દૂર કરો.,machine
+be:disease:alternaria_leaf_spot:treatment_summary,"Apply mancozeb, chlorothalonil, or iprodione fungicide.","મેન્કોઝેબ, ક્લોરોથાલોનિલ અથવા આઇપ્રોડિયોન ફૂગનાશક છાંટો.",machine
+be:disease:hispa:treatment_summary,Apply malathion or monocrotophos. Clip and destroy affected leaves.,મેલાથિયોન અથવા મોનોક્રોટોફોસ છાંટો. રોગવાળા પાંદડા કાપીને નાશ કરો.,machine
+be:disease:tungro:treatment_summary,No direct cure. Control leafhopper vectors with buprofezin or imidacloprid.,આની કોઈ સીધી દવા નથી. બુપ્રોફેઝિન અથવા ઇમિડાક્લોપ્રિડ છાંટીને તડતડિયા (લીફહોપર) કાબૂમાં રાખો.,machine
+be:disease:dead_heart:treatment_summary,"Apply cartap hydrochloride, chlorpyrifos, or flubendiamide granules.","કાર્ટાપ હાઇડ્રોક્લોરાઇડ, ક્લોરપાયરિફોસ અથવા ફ્લુબેન્ડિયામાઇડ દાણાદાર દવા નાખો.",machine
+be:disease:downy_mildew:treatment_summary,Apply metalaxyl or fosetyl-aluminium fungicide. Improve drainage.,મેટાલક્સિલ અથવા ફોસેટિલ-એલ્યુમિનિયમ ફૂગનાશક છાંટો. પાણી નિકાલની વ્યવસ્થા સુધારો.,machine
+be:disease:bacterial_leaf_streak:treatment_summary,Apply copper-based bactericides. Remove infected leaves.,તાંબા (કોપર) આધારિત જીવાણુનાશક છાંટો. રોગગ્રસ્ત પાંદડા કાઢી નાખો.,machine
+be:disease:bacterial_panicle_blight:treatment_summary,Apply oxolinic acid or copper-based bactericide at panicle initiation.,કૂંસ (ડોંક) ફૂટતી વખતે ઓક્સોલિનિક એસિડ અથવા તાંબાવાળું જીવાણુનાશક છાંટો.,machine
+be:disease:normal:treatment_summary,Continue routine monitoring and preventive agronomic practices.,ખેતરની નિયમિત દેખરેખ રાખવી અને ખેતીના જરૂરી નિયમોનું પાલન કરતા રહેવું.,machine
+fe:diagnosis:diagnosis.symptoms,Detected Symptoms,ઓળખાયેલ લક્ષણો,reviewed
+fe:diagnosis:diagnosis.symptomsFound,Symptoms found,રોગના લક્ષણો મળ્યા,machine
+fe:library:library.symptoms,Key Visual Symptoms,મુખ્ય દેખાતા લક્ષણો,machine
+fe:scan:scan.symptomsPathology,Symptoms & Pathology,રોગના લક્ષણો,machine
+be:disease:bacterial_leaf_blight:causes,"Warm temperatures (25–30°C), high humidity, and typhoon/rain-splash that spreads the bacteria through leaf wounds.","વધુ તાપમાન (25–30°C), વધુ ભેજ અને વરસાદના છાંટા કે વાવાઝોડાથી પાનના ઘા દ્વારા બેક્ટેરિયા ફેલાય છે.",machine
+be:disease:brown_spot:causes,Associated with nutrient-deficient soils (especially potassium and silicon). Favoured by warm humid conditions and poor soil health.,"આ જમીનમાં પોષક તત્વોની ઉણપ (ખાસ કરીને પોટેશિયમ અને સિલિકોન) ને કારણે થાય છે. ગરમ, ભેજવાળું વાતાવરણ અને ખરાબ જમીન સ્વાસ્થ્ય આ રોગને વધારે છે.",machine
+be:disease:healthy:causes,N/A,લાગુ પડતું નથી,machine
+be:disease:leaf_blast:causes,"Cool nights, warm days, high humidity (>90%), heavy dew, excessive nitrogen application, and susceptible varieties.","ઠંડી રાતો, ગરમ દિવસો, વધુ ભેજ (>90%), ભારે ઓસ, નાઇટ્રોજન ખાતરનો વધુ પડતો ઉપયોગ અને રોગ સામે સંવેદનશીલ જાતો.",machine
+be:disease:leaf_scald:causes,"High humidity, warm temperatures, and dense planting that reduces airflow.","વધુ ભેજ, ગરમ તાપમાન, અને ઘાટી વાવણી જેનાથી હવા ઉજાસ ઘટે છે.",machine
+be:disease:sheath_blight:causes,"High humidity (>90%), temperatures of 28–32°C, dense planting, high nitrogen levels, and flooded conditions that allow mycelium spread.","વધુ ભેજ (>90%), તાપમાન 28–32°C, નજીક-નજીક છોડ વાવવા, નાઇટ્રોજનનું વધુ પ્રમાણ, અને ખેતરમાં પાણી ભરાઈ રહેવાથી ફૂગ ફેલાય છે.",machine
+be:disease:aphid:causes,"Warm dry conditions, absence of natural predators, and dense planting.","ગરમ અને સૂકું વાતાવરણ, કુદરતી દુશ્મન જીવાતોનો અભાવ, અને ঘন વાવેતર.",machine
+be:disease:black_rust:causes,"Warm temperatures (15–30°C), dew, and wind-blown spores from nearby infected fields.","ગરમ તાપમાન (15–30°C), ઓસ, અને આસપાસના રોગગ્રસ્ત ખેતરોમાંથી હવા દ્વારા ઉડતા બીજાણુઓ.",machine
+be:disease:blast:causes,"Cool nights, morning dew, excess nitrogen, susceptible varieties.","ઠંડી રાતો, સવારનું ઓસ, નાઇટ્રોજનનો વધુ પડતો ઉપયોગ, અને રોગ સામે ઓછી તાકાતવાળી જાતો.",machine
+be:disease:brown_rust:causes,"Moderate temperatures (15–22°C), dew, and humid conditions.","મધ્યમ તાપમાન (15–22°C), ઓસ, અને ભેજવાળું વાતાવરણ.",machine
+be:disease:common_root_rot:causes,"Dry soil conditions, warm temperatures during seeding, and soil-borne inoculum.","સૂકી માટી, વાવણી વખતે ગરમ તાપમાન, અને જમીનમાં રહેલા રોગના જંતુઓ.",machine
+be:disease:fusarium_head_blight:causes,"Wet conditions during flowering (anthesis), temperatures of 25–30°C, and crop residues.","ફૂલ આવતી વખતે ભેજવાળું વાતાવરણ, 25–30°C તાપમાન, અને ખેતરમાં પાકના અવશેષો પડેલા રહેવા.",machine
+be:disease:leaf_blight:causes,Warm humid conditions and susceptible varieties.,ગરમ અને ભેજવાળું વાતાવરણ અને રોગ સામે ન ટકી શકે તેવી જાતો.,machine
+be:disease:mildew:causes,"Cool temperatures (15–22°C), moderate humidity, and dense canopy.","ઠંડુ તાપમાન (15–22°C), મધ્યમ ભેજ, અને છોડ ખૂબ નજીક હોવા.",machine
+be:disease:mite:causes,"Hot, dry conditions. Chemical treatments that kill natural predators.",ગરમ અને સૂકું વાતાવરણ. રાસાયણિક દવાઓ જે કુદરતી શત્રુજીવાતોને મારી નાખે છે.,machine
+be:disease:septoria:causes,"Cool, wet weather (10–20°C), leaf wetness periods >20 hours.","ઠંડું, ભીનું વાતાવરણ (10–20°C), પાન 20 કલાકથી વધુ સમય સુધી ભીનાં રહેવા.",machine
+be:disease:smut:causes,Moderate temperatures during flowering with humid conditions. Seed-borne pathogen.,फूल બેસતી વખતે મધ્યમ તાપમાન અને ભેજવાળું વાતાવરણ. બીજ દ્વારા ફેલાતો રોગ.,machine
+be:disease:stem_fly:causes,Peak activity during cool temperatures (15–20°C) at early crop stages.,પાકની શરૂઆતની અવસ્થામાં ઠંડા તાપમાન (15–20°C) દરમિયાન સૌથી વધુ પ્રવૃત્તિ.,machine
+be:disease:tan_spot:causes,"Warm temperatures (20–28°C), leaf wetness, and crop residue from previous season.","ગરમ તાપમાન (20–28°C), પાંદડા પર ભીનાશ, અને પાછલી સિઝનનો પાક અવશેષ.",machine
+be:disease:yellow_rust:causes,"Cool temperatures (10–15°C), dew and mist, and susceptible varieties.","ઠંડુ તાપમાન (10–15°C), ઓસ અને ઝાકળ, અને રોગ લાગુ પડે તેવી જાતો.",machine
+be:disease:mosaic_disease:causes,"Transmitted by aphids (Rhopalosiphum maidis), infected planting material.",આ મોલોમશી (Rhopalosiphum maidis) દ્વારા અને રોગગ્રસ્ત બિયારણ વાવવાથી ફેલાય છે.,machine
+be:disease:rust:causes,"Warm temperatures (24–28°C), high humidity, and susceptible cultivars.","વધારે તાપમાન (24–28°C), વધુ ભેજ અને રોગ લાગુ પડે તેવી જાતો.",machine
+be:disease:bacterial_blight:causes,"Warm, humid weather, rain-splash, mechanical damage, and infected seeds.","ગરમ અને ભેજવાળું વાતાવરણ, વરસાદના છાંટા, યાંત્રિક ઈજા અને રોગગ્રસ્ત બીજ.",machine
+be:disease:alternaria_leaf_spot:causes,High humidity and temperatures of 25–30°C. Most severe on stressed or weakened plants.,વધુ પડતો ભેજ અને 25–30°C તાપમાન. નબળા કે નબળી સ્થિતિવાળા છોડ પર આ રોગ સૌથી વધુ જોખમી બને છે.,machine
+be:disease:hispa:causes,"Lush, dense crops with high nitrogen. Wet season conditions.",વધુ નાઇટ્રોજનયુક્ત અને ઘાટ્ટા ઊગેલા પાક. ચોમાસાની સ્થિતિ.,machine
+be:disease:tungro:causes,Green leafhopper (Nephotettix spp.) populations carrying both viruses.,બંને વાયરસ વહન કરતા લીલા તડતડિયા (Nephotettix spp.) ની વસ્તી.,machine
+be:disease:dead_heart:causes,Stem borer moth populations during vegetative stage.,છોડની વૃદ્ધિની અવસ્થા દરમિયાન ગાભમારાની ઈયળના પતંગિયાઓનો ઉપદ્રવ.,machine
+be:disease:downy_mildew:causes,"Waterlogged soils, cool temperatures, and high humidity.","ભરાઈ રહેલું પાણી, ઠંડુ તાપમાન અને વધુ ભેજ.",machine
+be:disease:bacterial_leaf_streak:causes,"Warm, humid weather. Spread by rain splash and irrigation water.",ગરમ અને ભેજવાળું વાતાવરણ. વરસાદના છાંટા અને સિંચાઈના પાણીથી ફેલાય છે.,machine
+be:disease:bacterial_panicle_blight:causes,High temperatures (>30°C) during flowering combined with high humidity.,ફૂલ આવતી વખતે વધુ તાપમાન (>30°C) અને સાથે વધુ ભેજ હોવાને કારણે.,machine
+be:disease:normal:causes,N/A,લાગુ નથી,machine
+fe:common:card.prevention,Prevention Plan,નિવારણ,reviewed
+fe:library:library.prevention,Long-term Prevention,લાંબા ગાળા માટે બચાવ,machine
+fe:scan:scan.longTermPrevention,Long-Term Prevention,લાંબા ગાળાની સાવચેતી,machine
+be:disease:bacterial_leaf_blight:prevention,Use certified disease-free seeds. Maintain field drainage. Apply balanced fertilization.,"રોગમુક્ત પ્રમાણિત બિયારણ વાપરો. ખેતરમાં પાણી ભરાવા ન દો, નિકાલ સારો રાખો. સંતુલિત ખાતર આપો.",machine
+be:disease:brown_spot:prevention,"Balanced fertilization, well-drained soils, disease-resistant varieties.","સંતુલિત ખાતર, પાણીના સારા નિકાલવાળી જમીન અને રોગપ્રતિકારક જાતો વાપરો.",machine
+be:disease:healthy:prevention,"Maintain good agronomic practices, balanced fertilization, and proper irrigation.","ખેતીની સારી પદ્ધતિઓ અપનાવો, ખાતરનું સંતુલન રાખો અને યોગ્ય પિયત આપો.",machine
+be:disease:leaf_blast:prevention,Use blast-resistant varieties. Avoid excess nitrogen. Ensure good airflow between plants.,બ્લાસ્ટ રોગ સામે રક્ષણ આપતી જાતો વાવો. વધુ પડતું નાઇટ્રોજન ના નાખો. છોડ વચ્ચે સારો હવા ઉજાસ રહે તેની ખાતરી કરો.,machine
+be:disease:leaf_scald:prevention,"Wider row spacing, balanced nutrients, resistant varieties.","હરોળ વચ્ચે વધુ અંતર રાખો, સંતુલિત ખાતર વાપરો, રોગ પ્રતિકારક જાતો વાવો.",machine
+be:disease:sheath_blight:prevention,"Lower seeding rates, balanced fertilization, water management.","બિયારણ ઓછું વાવો, ખાતરનું પ્રમાણ સંતુલિત રાખો, પાણીનું યોગ્ય સંચાલન કરો.",machine
+be:disease:aphid:prevention,"Early planting, crop rotation, avoid excessive nitrogen.","વહેલી વાવણી કરો, પાકની ફેરબદલી કરો, વધુ પડતા નાઇટ્રોજન ખાતરથી બચો.",machine
+be:disease:black_rust:prevention,Plant resistant varieties. Early sowing. Remove volunteer wheat plants.,રોગ પ્રતિકારક જાતો વાવો. વહેલી વાવણી કરો. ઘઉંના નીંદણવાળા છોડ દૂર કરો.,machine
+be:disease:blast:prevention,"Resistant varieties, balanced nitrogen, regulated irrigation.","રોગ પ્રતિકારક જાતો વાવો, માપસર નાઇટ્રોજન આપો, અને પાણીનું નિયંત્રણ રાખો.",machine
+be:disease:brown_rust:prevention,"Resistant varieties, timely sowing, crop rotation.","રોગ પ્રતિકારક જાતો વાવો, સમયસર વાવણી કરો, અને પાકની ફેરબદલી કરો.",machine
+be:disease:common_root_rot:prevention,"Balanced soil fertility, avoid continuous wheat, proper seeding depth.","જમીનમાં પોષક તત્વોનું સંતુલન રાખો, સતત ઘઉં વાવવાનું ટાળો, અને યોગ્ય ઊંડાઈએ વાવણી કરો.",machine
+be:disease:fusarium_head_blight:prevention,"Resistant varieties, tillage to bury residues, good drainage.","રોગ પ્રતિકારક જાતો વાવો, કચરો ડાટી દેવા ખેડ કરો, પાણીની સારી નિકાલ રાખો.",machine
+be:disease:leaf_blight:prevention,Crop rotation and use of resistant varieties.,પાકની ફેરબદલી કરો અને રોગ પ્રતિકારક જાતો વાવો.,machine
+be:disease:mildew:prevention,"Wider row spacing, resistant varieties, early sowing.","હરોળ વચ્ચે વધુ જગ્યા રાખો, રોગ પ્રતિકારક જાતો વાવો, વહેલી વાવણી કરો.",machine
+be:disease:mite:prevention,Avoid overly dry conditions. Conserve beneficial insects.,વધુ પડતી સૂકી પરિસ્થિતિ ટાળો. ફાયદાકારક જીવાતોનું રક્ષણ કરો.,machine
+be:disease:septoria:prevention,"Resistant varieties, crop rotation, delayed sowing.","રોગ પ્રતિકારક જાતો, પાકની ફેરબદલી, મોડું વાવેતર.",machine
+be:disease:smut:prevention,Use certified smut-free seed. Hot-water seed treatment.,પ્રમાણિત અને રોગમુક્ત બિયારણ વાપરો. બિયારણની ગરમ પાણીથી માવજત કરો.,machine
+be:disease:stem_fly:prevention,"Early sowing, treat seeds with systemic insecticide, monitor basal nodes.","વહેલી વાવણી કરો, બિયારણને પ્રણાલીગત (સિસ્ટેમિક) જંતુનાશકથી માઈક્રો-ટ્રીટમેન્ટ આપો, અને છોડના પાયાના ભાગ પર નજર રાખો.",machine
+be:disease:tan_spot:prevention,"Crop rotation, residue management, resistant varieties.","પાકની ફેરબદલી, અવશેષોનું વ્યવસ્થાપન, અને રોગપ્રતિકારક જાતો.",machine
+be:disease:yellow_rust:prevention,Resistant varieties are most effective. Early sowing. Monitor forecasts.,રોગપ્રતિકારક જાતો સૌથી વધુ અસરકારક છે. વહેલી વાવણી કરો. હવામાનની આગાહી પર નજર રાખો.,machine
+be:disease:mosaic_disease:prevention,"Use virus-free seed cane, resistant varieties, control aphid populations.","વાયરસ મુક્ત બિયારણ વાપરો, રોગ સામે રક્ષણ આપતી જાતો વાવો, મોલોમશીની સંખ્યા નિયંત્રિત કરો.",machine
+be:disease:rust:prevention,Plant resistant varieties. Balanced fertilization.,રોગ પ્રતિકારક જાતો વાવો. ખાતરનું સંતુલન રાખો.,machine
+be:disease:bacterial_blight:prevention,"Disease-free certified seed, seed treatment, crop rotation.","રોગમુક્ત પ્રમાણિત બિયારણ, બીજ માવજત અને પાક ફેરબદલી કરો.",machine
+be:disease:alternaria_leaf_spot:prevention,"Good drainage, balanced nutrition, remove infected debris.","સારું પાણી નિકાલ કરો, પૂરતા પ્રમાણમાં ખાતર નાખો, અને રોગવાળા કચરાને દૂર કરો.",machine
+be:disease:hispa:prevention,"Avoid over-fertilization, resistant varieties, reduce dense planting.","વધુ પડતું ખાતર નાખવાનું ટાળો, રોગપ્રતિકારક જાતો વાવો, અને પાક ખૂબ નજીક-નજીક ન વાવો.",machine
+be:disease:tungro:prevention,"Resistant varieties (Utri Merah), synchronized planting, leafhopper management.","રોગપ્રતિકારક જાતો (ઉટ્રી મેરાહ) વાવો, એક સાથે રોપણી કરો, અને તડતડિયાનું નિયંત્રણ કરો.",machine
+be:disease:dead_heart:prevention,Avoid early planting when moths are active. Use light traps. Remove egg masses.,જ્યારે પતંગિયા સક્રિય હોય ત્યારે વહેલી વાવણી કરવાનું ટાળો. લાઈટ ટ્રેપ (દિવા અસરો) નો ઉપયોગ કરો. ઈંડાના સમૂહને દૂર કરો.,machine
+be:disease:downy_mildew:prevention,"Avoid water stagnation, improve field drainage, resistant varieties.","પાણી ભરાવા ન દો, ખેતરમાં પાણીના નિકાલમાં સુધારો કરો, રોગ પ્રતિકારક જાતો વાપરો.",machine
+be:disease:bacterial_leaf_streak:prevention,Use resistant varieties. Avoid excessive nitrogen.,રોગ પ્રતિકારક જાતો વાપરો. નાઇટ્રોજન ખાતર વધુ પડતું ન નાખો.,machine
+be:disease:bacterial_panicle_blight:prevention,"Resistant varieties, avoid water stress at heading.","રોગ સામે રક્ષણ આપતી જાતો વાવો, ડૂંડા બેસતી વખતે પાણીની તંગી ન પડવા દો.",machine
+be:disease:normal:prevention,"Maintain balanced fertilization, proper irrigation, and crop rotation.","ખાતરનું યોગ્ય પ્રમાણ જાળવો, પિયર સરખી રીતે આપો અને પાકની ફેરબદલી કરો.",machine
+fe:assistant:assistant.noDiagnosis,Scan a leaf first to enable context-aware diagnosis.,પ્રથમ છોડનું પાંદડું સ્કેન કરો।,reviewed
+fe:common:card.diagnosisSummary,Diagnosis Summary,નિદાન સારાંશ,reviewed
+fe:diagnosis:diagnosis.title,Plant Health Report,છોડ સ્વાસ્થ્ય અહેવાલ,reviewed
+fe:diagnosis:diagnosis.gradcam,Grad-CAM Attention Map,AI દ્રશ્ય વિશ્લેષણ (Grad-CAM),reviewed
+fe:diagnosis:diagnosis.healthScore,Health Score,સ્વાસ્થ્ય સ્કોર,reviewed
+fe:diagnosis:diagnosis.details,Diagnosis Details,નિદાન વિગતો,reviewed
+fe:diagnosis:diagnosis.modelPredictions,Model Predictions,મૉડેલ આગાહીઓ,reviewed
+fe:diagnosis:diagnosis.aiSummary,Why FloraAI Thinks This,FloraAI આ શા માટે વિચારે છે,reviewed
+fe:diagnosis:diagnosis.conditions,Current Weather,વર્તમાન હવામાન,reviewed
+fe:diagnosis:diagnosis.risk,Disease Risk,રોગ જોખમ,reviewed
+fe:diagnosis:diagnosis.expertAlert,Consult an Expert,નિષ્ણાતની સલાહ લો,reviewed
+fe:diagnosis:diagnosis.consultExpert,This diagnosis indicates a high-severity condition. Consult a local agronomist before applying chemical treatment.,આ નિદાન ગંભીર સ્થિતિ દર્શાવે છે. સ્થાનિક કૃષિ નિષ્ણાતનો સંપર્ક કરો।,reviewed
+fe:diagnosis:diagnosis.whatToDoNow,What to do now,હવે શું કરવું,reviewed
+fe:diagnosis:diagnosis.heatmapToggle,See where the problem is,સમસ્યા ક્યાં છે તે જુઓ,reviewed
+fe:diagnosis:diagnosis.listen,Listen,સાંભળો,reviewed
+fe:diagnosis:diagnosis.stopListening,Stop listening,બંધ કરો,reviewed
+fe:diagnosis:diagnosis.leafVision,Leaf Vision,પાંદડાની દ્રષ્ટિ,machine
+fe:diagnosis:diagnosis.originalPhoto,Original leaf photo,પાંદડાનો અસલ ફોટો,machine
+fe:diagnosis:diagnosis.photo,Photo,ફોટો,machine
+fe:diagnosis:diagnosis.aiView,AI view,AI વ્યુ,machine
+fe:diagnosis:diagnosis.compare,Compare,સરખામણી કરો,machine
+fe:diagnosis:diagnosis.compareHandle,Compare AI view with original,AI વ્યુની અસલી ફોટો સાથે સરખામણી કરો,machine
+fe:diagnosis:diagnosis.hotspot,Attention point,ધ્યાન આપવાની જગ્યા,machine
+fe:diagnosis:diagnosis.attentionHere,The AI paid most attention here,AI નું સૌથી વધારે ધ્યાન અહીં ગયું છે,machine
+fe:diagnosis:diagnosis.whereAiLooked,Where the AI looked,AI એ ક્યાં જોયું,machine
+fe:diagnosis:diagnosis.attentionLegend,Green to amber to red focus scale,લીલાથી પીળા અને લાલ રંગનું ફોકસ માપ,machine
+fe:diagnosis:diagnosis.attentionInfo,"This shows model attention, not a guaranteed diagnosis.","આ AI નું ધ્યાન બતાવે છે, પાક્કો રોગ નહીં.",machine
+fe:diagnosis:diagnosis.lowConfidenceNote,"The AI is not sure, so highlights may be approximate","AI ને પૂરી ખાતરી નથી, એટલે નિશાન આસપાસના હોઈ શકે છે",machine
+fe:diagnosis:diagnosis.notSureYet,Not sure yet,હજી ખાતરી નથી,machine
+fe:diagnosis:diagnosis.unrecognizedLeaf,We could not recognize this leaf,અમે આ પાંદડું ઓળખી શક્યા નથી,machine
+fe:diagnosis:diagnosis.unrecognizedHint,"Please retake the photo clearly, or check that the selected crop matches your plant.","કૃપા કરીને ફરીથી સ્પષ્ટ ફોટો પાડો, અથવા જોઈ લો કે પસંદ કરેલો પાક તમારા છોડ જેવો જ છે.",machine
+fe:diagnosis:diagnosis.retakePhoto,Retake photo,ફરીથી ફોટો પાડો,machine
+fe:diagnosis:diagnosis.lowConfidenceWarning,"Warning: Because the AI is not confident, consult an agronomist before applying chemicals.","ચેતવણી: AI ને પૂરી ખાતરી ન હોવાથી, દવા છાંટતા પહેલા કોઈ કૃષિ નિષ્ણાતની સલાહ લો.",machine
+fe:diagnosis:diagnosis.affectedArea,Affected Area,રોગવાળો ભાગ,machine
+fe:diagnosis:diagnosis.weatherRisk,Weather Risk,હવામાનનું જોખમ,machine
+fe:diagnosis:diagnosis.weatherDetails,Weather details,હવામાનની માહિતી,machine
+fe:diagnosis:diagnosis.technicalDetails,Technical details,ટેકનિકલ માહિતી,machine
+fe:diagnosis:diagnosis.tabImmediate,Immediate,તરત,machine
+fe:diagnosis:diagnosis.tabOrganic,Organic,ઓર્ગેનિક,machine
+fe:diagnosis:diagnosis.tabPreventive,Preventive,બચાવ માટે,machine
+fe:diagnosis:diagnosis.askAiAboutThis,Ask AI about this,આના વિશે AI ને પૂછો,machine
+fe:diagnosis:diagnosis.diseaseDetected,Disease Detected,રોગ પકડાયો,machine
+fe:diagnosis:diagnosis.healthyPlant,Healthy Plant,તંદુરસ્ત છોડ,machine
+fe:diagnosis:diagnosis.photoTips,Tips for a better photo,સારો ફોટો પાડવાની ટીપ્સ,machine
+fe:diagnosis:diagnosis.possibleDiseases,Possible Diseases,થઈ શકે તેવા રોગો,machine
+fe:diagnosis:diagnosis.confidenceIs,Confidence is,ખાતરી કેટલી છે,machine
+fe:diagnosis:diagnosis.multipleMatch,Multiple conditions may match these leaf patterns.,આ પાંદડાના નિશાન સાથે એક કરતાં વધુ રોગ હોઈ શકે છે.,machine
+fe:diagnosis:diagnosis.disclaimer,FloraAI diagnostic assistance is advisory only. Verify with agricultural officers before crop intervention.,FloraAI નું આ નિદાન માત્ર સલાહ માટે છે. પાકમાં દવા કે ખાતર નાખતા પહેલા કૃષિ અધિકારીની સલાહ લો.,machine
+fe:diagnosis:weather.context,WEATHER CONTEXT,હવામાનની માહિતી,machine
+fe:diagnosis:weather.update,UPDATE,અપડેટ કરો,machine
+fe:diagnosis:weather.locating,LOCATING...,લોકેશન શોધી રહ્યા છીએ...,machine
+fe:diagnosis:weather.lowRisk,LOW RISK,ઓછું જોખમ,machine
+fe:diagnosis:weather.mediumRisk,MEDIUM RISK,મધ્યમ જોખમ,machine
+fe:diagnosis:weather.highRisk,HIGH RISK,વધુ જોખમ,machine
+fe:diagnosis:weather.severeRisk,SEVERE RISK,ખૂબ જ ગંભીર જોખમ,machine
+fe:diagnosis:weather.prompt,Click UPDATE to load local weather and disease risk data.,સ્થાનિક હવામાન અને રોગનું જોખમ જાણવા માટે અપડેટ પર ક્લિક કરો.,machine
+fe:diagnosis:diagnosis.preliminaryMeasures,Preliminary Measures:,પ્રાથમિક ઉપાયો:,machine
+fe:diagnosis:diagnosis.factorInfluence,Environmental Factor Influence,વાતાવરણની અસર,machine
+fe:diagnosis:diagnosis.sympLesions,Discolored foliar lesions,પાંદડા પર રંગ બદલાવ અને ડાઘ,machine
+fe:diagnosis:diagnosis.sympNecrosis,Necrotic margin formation,કિનારીઓ સૂકાઈ જવી,machine
+fe:diagnosis:diagnosis.sympVascular,Vascular tissue stress,અંદરની નસોને નુકસાન,machine
+fe:assistant:assistant.title,AI Agronomist Chat,AI કૃષિ સહાયક,reviewed
+fe:assistant:assistant.subtitle,Multi-crop expert diagnostics and care protocols powered by Gemini AI.,"ડાંગર, ઘઉં, શેરડી અને કપાસ માટે AI આધારિત રોગ વિશ્લેષણ।",reviewed
+fe:assistant:assistant.placeholder,"Ask about this diagnosis, treatments, or preventive care…",આ નિદાન વિષે પૂછો…,reviewed
+fe:assistant:assistant.analyzing,Thinking…,વિશ્લેષણ થઈ રહ્યું છે…,reviewed
+fe:assistant:assistant.contextActive,Diagnosis Context Active,સંદર્ભ સક્રિય,reviewed
+fe:assistant:assistant.suggested,Suggested questions:,સૂચિત પ્રશ્નો:,reviewed
+fe:assistant:assistant.followUp,Ask a follow-up question:,આગળ પૂછો:,reviewed
+fe:assistant:assistant.emptyTitle,Ask the AI Crop Specialist,AI નિષ્ણાતને પૂછો,reviewed
+fe:assistant:assistant.emptyHint,"Ask questions regarding your scanned plant diagnosis, organic remedies, or seasonal prevention.","સ્કેન કરેલ પાંદડા, સારવાર અથવા રોકથામ વિષે પ્રશ્ન પૂછો।",reviewed
+fe:assistant:assistant.weatherAdvice,Today's Weather Advice,આજની હવામાન સલાહ,machine
+fe:assistant:assistant.jumpToLatest,Jump to latest,છેલ્લા સંદેશ પર જાઓ,machine
+fe:assistant:assistant.welcomeMsg,"Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.","નમસ્તે! હું તમારો AI પ્લાન્ટ હેલ્થ આસિસ્ટન્ટ છું. છોડના પાનનો ફોટો અપલોડ કરો અને પૂરી માહિતી મેળવો — ચોકસાઈનો સ્કોર, ગ્રેડ-કેમ (Grad-CAM ધ્યાન નકશો), વાતાવરણનું જોખમ અને ખેતી માટેની સરળ સલાહ.",machine
+fe:common:nav.home,Home,હોમ,reviewed
+fe:common:nav.scan,Scanner,સ્કેન,reviewed
+fe:common:nav.chat,AI Chat,AI ચેટ,reviewed
+fe:common:nav.plants,My Plants,મારા છોડ,reviewed
+fe:common:nav.encyclopedia,Encyclopedia,વિશ્વકોષ,reviewed
+fe:common:nav.history,History,ઇતિહાસ,reviewed
+fe:common:nav.language,Choose language,ભાષા પસંદ કરો,reviewed
+fe:common:lang.chooseLanguage,Choose language,ભાષા પસંદ કરો,reviewed
+fe:common:btn.scanPlant,Scan Plant,છોડ સ્કેન કરો,reviewed
+fe:common:btn.save,Save Plant,છોડ સેવ કરો,reviewed
+fe:common:btn.saved,Saved,સેવ થઈ ગયો,reviewed
+fe:common:btn.download,Download Report,રિપોર્ટ ડાઉનલોડ કરો,reviewed
+fe:common:btn.share,Share,શેર કરો,reviewed
+fe:common:btn.back,Back,પાછળ,reviewed
+fe:common:btn.send,Send,મોકલો,reviewed
+fe:common:btn.speak,Listen,સાંભળો,reviewed
+fe:common:btn.stopSpeaking,Stop listening,અટકો,reviewed
+fe:common:btn.scanAnother,Scan Another,બીજા છોડને સ્કેન કરો,reviewed
+fe:common:btn.askChat,Ask AI Chat,AI ચેટ પૂછો,reviewed
+fe:common:btn.analyze,Analyze,વિશ્લેષણ કરો,reviewed
+fe:common:btn.analyzing,Analyzing…,વિશ્લેષણ થઈ રહ્યું છે…,reviewed
+fe:common:btn.locate,Locate,સ્થળ મેળવો,reviewed
+fe:common:btn.refresh,Refresh,રિફ્રેશ,reviewed
+fe:common:btn.cancel,Cancel,રદ કરો,machine
+fe:common:btn.more,More,વધુ,machine
+fe:common:footer.platform,Platform,પ્લેટફોર્મ,machine
+fe:common:footer.data,Data,ડેટા,machine
+fe:common:footer.info,Info,માહિતી,machine
+fe:common:footer.scanner,Plant Scanner,પ્લાન્ટ સ્કેનર,machine
+fe:common:footer.chat,AI Chat,AI ચેટ,machine
+fe:common:footer.plants,My Plants,મારા છોડ,machine
+fe:common:footer.encyclopedia,Encyclopedia,જ્ઞાનકોશ,machine
+fe:common:footer.library,Disease Library,રોગ પુસ્તકાલય,machine
+fe:common:footer.history,Scan History,સ્કેન ઇતિહાસ,machine
+fe:common:footer.tools,Analysis Tools,વિશ્લેષણ સાધનો,machine
+fe:common:footer.about,About BioScan,બાયોસ્કેન વિશે,machine
+fe:common:footer.contact,Contact,સંપર્ક,machine
+fe:common:footer.privacy,Privacy,પ્રાઇવસી,machine
+fe:common:footer.terms,Terms,શરતો,machine
+fe:common:footer.tagline,"AI-powered plant disease intelligence for farms, labs, and greenhouses worldwide.","ખેતરો, પ્રયોગશાળાઓ અને ગ્રીનહાઉસ માટે AI-સંચાલિત છોડના રોગની માહિતી.",machine
+fe:common:footer.operational,ALL SYSTEMS OPERATIONAL,બધી સિસ્ટમો ચાલુ છે,machine
+fe:common:footer.rights,All rights reserved.,બધા હકો સુરક્ષિત છે.,machine
+fe:common:footer.disclaimer,Flora AI provides diagnostic guidance for informational purposes only. Results should be verified by a qualified agricultural expert.,ફ્લોરા AI માત્ર માહિતી માટે રોગની તપાસમાં મદદ કરે છે. પરિણામોની ચકાસણી કોઈ નિષ્ણાત ખેતીવાડી અધિકારી પાસે કરાવી લેવી.,machine
+fe:common:history.title,Scan History & Timeline,સ્કેન ઇતિહાસ અને સમયરેખા,machine
+fe:common:history.empty,No scan records found. Scan a leaf to start tracking health.,કોઈ સ્કેન રેકોર્ડ મળ્યો નથી. સ્વાસ્થ્ય તપાસવા માટે પાનનું સ્કેન કરો.,machine
+fe:common:history.clear,Clear History,ઇતિહાસ સાફ કરો,machine
+fe:common:history.diagnosesRecorded,diagnoses recorded,રોગની નોંધણી થઈ,machine
+fe:common:card.whyDetected,Why Detected (XAI),શા માટે ઓળખાયું (XAI),reviewed
+fe:common:card.visualEvidence,Visual Evidence,દ્રશ્ય પ્રમાણ,reviewed
+fe:common:card.shap,SHAP Feature Evidence,SHAP ફીચર પ્રમાણ,reviewed
+fe:common:card.environmental,Environmental Factors,પર્યાવરણ પરિબળો,reviewed
+fe:common:card.actions,Recommended Actions,ભલામણ કરેલ ક્રિયાઓ,reviewed
+fe:common:card.disclaimer,FloraAI guidance is advisory only.,FloraAI માર્ગદર્શન માત્ર સલાહ માટે છે.,reviewed
+fe:common:card.original,Original Image,મૂળ છબી,reviewed
+fe:common:card.gradcam,Grad-CAM Heatmap,Grad-CAM હીટમેપ,reviewed
+fe:common:card.shapNote,SHAP values are pre-computed by the backend from environmental sensor data.,SHAP મૂલ્યો બેકએન્ડ દ્વારા ગણવામાં આવ્યા છે. Gemini ફક્ત સ્પષ્ટીકરણ આપે છે।,reviewed
+fe:common:common.loading,Loading…,લોડ થઈ રહ્યું છે…,reviewed
+fe:common:common.error,Error,ભૂલ,reviewed
+fe:common:common.crop,Crop,પાક,reviewed
+fe:common:common.confidence,AI Confidence,AI વિશ્વાસ,reviewed
+fe:common:common.health,Health,સ્વાસ્થ્ય,reviewed
+fe:common:common.severity,Severity,ગંભીરતા,reviewed
+fe:common:common.poweredBy,Powered by Gemini AI,Gemini AI દ્વારા સંચાલિત,reviewed
+fe:common:common.context,Active Diagnosis Context,સક્રિય નિદાન સંદર્ભ,reviewed
+fe:common:common.askFollowUp,Ask a follow-up,આગળ પૂછો,reviewed
+fe:common:status.healthy,Healthy,તંદુરસ્ત,reviewed
+fe:common:status.warning,Warning,ચેતવણી,reviewed
+fe:common:status.danger,Danger,જોખમ,reviewed
+fe:common:risk.low,Low Risk,ઓછું જોખમ,machine
+fe:common:risk.medium,Medium Risk,મધ્યમ જોખમ,machine
+fe:common:risk.high,High Risk,વધુ જોખમ,machine
+fe:common:risk.severe,Severe Risk,ગંભીર જોખમ,machine
+fe:common:loader.step1,Looking at the leaf…,પાંદડું જોઈ રહ્યા છીએ…,reviewed
+fe:common:loader.step2,Checking for disease…,રોગ તપાસી રહ્યા છીએ…,reviewed
+fe:common:loader.step3,Preparing advice…,સલાહ તૈયાર કરી રહ્યા છીએ…,reviewed
+fe:common:loader.slowBackend,This is taking longer than expected. Please wait…,અપેક્ષા કરતાં વધુ સમય લાગી રહ્યો છે. કૃપા કરીને રાહ જુઓ…,reviewed
+fe:common:loader.checking,Checking your plant…,તમારા છોડની તપાસ કરી રહ્યા છીએ…,machine
+fe:common:loader.takingLonger,Taking longer than usual… please keep this page open,સામાન્ય કરતા વધુ સમય લાગી રહ્યો છે… કૃપા કરીને આ પેજ ખુલ્લું રાખો,machine
+fe:common:loader.timeoutError,Diagnosis took too long. Please check your connection and try again.,નિદાનમાં ખૂબ સમય લાગ્યો. કૃપા કરીને તમારું ઇન્ટરનેટ ચેક કરો અને ફરીથી પ્રયાસ કરો.,machine
+fe:common:loader.tryAgain,Try again,ફરીથી પ્રયાસ કરો,machine
+fe:common:nav.myProfile,My Profile,મારી પ્રોફાઇલ,machine
+fe:common:nav.scanHistory,Scan History,સ્કેનનો ઇતિહાસ,machine
+fe:common:nav.preferences,Preferences,પસંદગીઓ,machine
+fe:common:nav.signOut,Sign Out,બહાર નીકળો,machine
+fe:common:nav.proSpecialist,PRO SPECIALIST,પ્રો નિષ્ણાત,machine
+fe:common:uploader.leafImage,Leaf Image,પાંદડાનો ફોટો,machine
+fe:common:uploader.uploadHint,Upload leaf photo,પાંદડાનો ફોટો અપલોડ કરો,machine
+fe:common:uploader.dropHint,Drop image to scan,સ્કેન કરવા માટે ફોટો અહીં મૂકો,machine
+fe:common:uploader.fileLimits,JPG · PNG · WEBP · Max 10MB,JPG · PNG · WEBP · વધુમાં વધુ 10MB,machine
+fe:common:uploader.tip,"Best results: clear, well-lit close-up",સૌથી સારું પરિણામ: એકદમ સાફ અને અજવાળામાં પાડેલો નજીકનો ફોટો,machine
+fe:common:uploader.takePhoto,Take Photo,ફોટો પાડો,machine
+fe:common:uploader.chooseFile,Choose File,ફાઇલ પસંદ કરો,machine
+fe:common:uploader.invalidType,"Please upload a valid image file (JPG, PNG, or WEBP).","કૃપા કરીને સાચી ઇમેજ ફાઇલ અપલોડ કરો (JPG, PNG, અથવા WEBP).",machine
+fe:common:uploader.tooLarge,Image is too large. Please use an image under 10 MB.,ફોટો ખૂબ મોટો છે. કૃપા કરીને 10 MB થી નાનો ફોટો વાપરો.,machine
+fe:common:uploader.remove,Remove selected image,પસંદ કરેલો ફોટો હટાવો,machine
+fe:common:camera.scannerTitle,FloraAI Scanner,FloraAI સ્કેનર,machine
+fe:common:camera.positionLeaf,Position leaf in frame,પાંદડાને ચોકઠાની અંદર રાખો,machine
+fe:common:camera.alignLeaf,Align the affected leaf within the frame,જે પાંદડા પર રોગ છે તેને ચોકઠાની અંદર બરાબર ગોઠવો,machine
+fe:common:camera.retake,Retake,ફરીથી ફોટો પાડો,machine
+fe:common:camera.gallery,Gallery,ગેલેરી,machine
+fe:common:camera.flip,Flip Camera,કેમેરા ફ્લિપ કરો,machine
+fe:common:camera.accessDenied,Camera Access Denied,કેમેરા વાપરવાની પરવાનગી નથી,machine
+fe:common:camera.unavailable,Camera Unavailable,કેમેરા ઉપલબ્ધ નથી,machine
+fe:common:camera.uploadInstead,Upload Image Instead,તેના બદલે ફોટો અપલોડ કરો,machine
+fe:common:camera.tryAgain,Try Again,ફરીથી પ્રયાસ કરો,machine
+fe:common:camera.usePhoto,Use this photo,આ ફોટો વાપરો,machine
+fe:common:camera.capture,Capture photo,ફોટો પાડો,machine
+fe:common:camera.close,Close camera,કેમેરા બંધ કરો,machine
+fe:common:severity.low,Low,ઓછી,machine
+fe:common:severity.medium,Moderate,મધ્યમ,machine
+fe:common:severity.moderate,Moderate,મધ્યમ,machine
+fe:common:severity.high,High,વધુ,machine
+fe:common:severity.severe,Severe,ગંભીર,machine
+fe:common:severity.critical,Critical,ખૂબ ગંભીર,machine
+fe:common:severity.none,None,કોઈ નહીં,machine
+fe:common:status.needsAttention,Needs Attention,ધ્યાન આપવાની જરૂર છે,machine
+fe:common:status.atRisk,At Risk,જોખમમાં,machine
+fe:common:status.critical,Critical,ખૂબ ગંભીર,machine
+fe:common:status.diseaseDetected,DISEASE DETECTED,બીમારી જોવા મળી છે,machine
+fe:common:health.breakdown,HEALTH BREAKDOWN,સ્વાસ્થ્ય વિગત,machine
+fe:common:health.indexDesc,"AI health index based on visible leaf condition, color, and disease pattern analysis.","પાંદડાની હાલત, રંગ અને બીમારીના લક્ષણો જોઈને AI દ્વારા તૈયાર કરેલો સ્વાસ્થ્ય આંક.",machine
+fe:common:health.leafHealth,Leaf Health,પાંદડાનું સ્વાસ્થ્ય,machine
+fe:common:health.colorHealth,Color Health,રંગનું સ્વાસ્થ્ય,machine
+fe:common:health.visibleDamage,Visible Damage,દેખાતું નુકસાન,machine
+fe:common:health.diseaseRisk,Disease Risk,બીમારીનું જોખમ,machine
+fe:common:chat.treatTitle,Treat Disease,બીમારીની સારવાર,machine
+fe:common:chat.treatQuestion,What is the immediate recommended organic or chemical treatment for this disease?,આ બીમારી માટે અત્યારે કઈ ઓર્ગેનિક કે દવા છાંટવી જોઈએ?,machine
+fe:common:chat.irrigationRainTitle,Irrigation after rainfall,વરસાદ પછી પિયત,machine
+fe:common:chat.irrigationRainQuestion,When should I irrigate after heavy rainfall and high soil moisture?,ભારે વરસાદ અને જમીનમાં વધારે ભેજ હોય ત્યારે ક્યારે પાણી આપવું?,machine
+fe:common:chat.irrigationTitle,Irrigation timing,પિયતનો સમય,machine
+fe:common:chat.irrigationQuestion,When should I irrigate my crop after rainfall?,વરસાદ પછી પાકને ક્યારે પાણી આપવું જોઈએ?,machine
+fe:common:chat.fertilizerTitle,Fertilizer & nutrition,ખાતર અને પોષક તત્વો,machine
+fe:common:chat.fertilizerQuestion,How much urea should I apply during the tillering stage?,ફૂટ ફૂટતી વખતે (કલ્‍લૂ ફૂટતી વખતે) કેટલું યુરિયા નાખવું જોઈએ?,machine
+fe:common:chat.yellowingTitle,Yellowing leaf diagnosis,પાંદડા પીળા પડવાનું કારણ,machine
+fe:common:chat.yellowingQuestion,Why are the lower crop leaves turning yellow?,પાકનાં નીચેનાં પાંદડા કેમ પીળા પડી રહ્યા છે?,machine
+fe:common:chat.dripTitle,Drip vs Flood methods,ટિપક અને મોકળા પિયતની પદ્ધતિ,machine
+fe:common:chat.dripQuestion,What is the water savings and yield difference between drip and flood irrigation?,ટિપક અને મોકળા પિયતમાં પાણીની બચત અને પાકના ઉત્પાદનમાં કેટલો તફાવત આવે છે?,machine
+fe:common:chat.simpler,Explain simpler,સહેલી ભાષામાં સમજાવો,machine
+fe:common:chat.simplerQ,Can you explain this in simpler farmer terms with less technical jargon?,"શું તમે આને ખેડૂતો સમજી શકે તેવી સાદી ભાષામાં, ઓછી અઘરી શરતો સાથે સમજાવી શકો છો?",machine
+fe:common:chat.steps,Show steps,પગલાં બતાવો,machine
+fe:common:chat.stepsQ,What are the numbered practical action steps I should follow in order?,મારે ક્રમમાં કયા વ્યવહારુ પગલાં અનુસરવા જોઈએ?,machine
+fe:common:chat.organic,Organic option,ઓર્ગેનિક ઉપાય,machine
+fe:common:chat.organicQ,What organic and non-chemical remedies can I prepare at home?,હું ઘરે જ કયા ઓર્ગેનિક અને વગર રાસાયણિક ઉપાયો બનાવી શકું?,machine
+fe:common:tag.leafNeck,🍃 Leaf & 🌾 Neck Node,🍃 પાંદડું અને 🌾 ગર્ભ / ડોક,machine
+fe:common:tag.flagEars,🍃 Flag Leaf & 🌾 Ears,🍃 ધ્વજ પાંદડું અને 🌾 ડુંડી,machine
+fe:common:tag.stalkPith,🎋 Stalk Pith,🎋 થડનો ગર્ભ ભાગ,machine
+fe:common:tag.leafVeins,🍃 Leaf Veins,🍃 પાંદડાની નસો,machine
+fe:common:care.water,Water,પાણી,machine
+fe:common:care.sunlight,Sunlight,તડકો,machine
+fe:common:care.humidity,Humidity,હવામાં ભેજ,machine
+fe:common:care.soil,Soil,માટી,machine
+fe:common:care.asNeeded,As needed,જરૂર મુજબ,machine
+fe:common:care.fullSun,Full sun,પૂરો તડકો,machine
+fe:common:care.wellDraining,Well-draining,પાણી સહેલાઈથી નીકળી જાય તેવી,machine
+fe:common:common.copied,Copied,કોપી થઈ ગયું,machine
+fe:common:common.copy,Copy,કોપી કરો,machine
+fe:common:common.helpful,Helpful,ઉપયોગી,machine
+fe:common:chat.newChat,New Chat,નવી વાતચીત,machine
+fe:common:common.advice,Advice,સલાહ,machine
+fe:common:common.healthScore,Health Score,છોડની તંદુરસ્તીનો સ્કોર,machine
+fe:common:common.view,View,જુઓ,machine
+fe:common:common.close,Close,બંધ કરો,machine
+fe:home:home.heroPill,FLORA AI — PLANT DISEASE INTELLIGENCE,Flora AI — છોડના રોગની માહિતી,machine
+fe:home:home.heroTitle1,DIAGNOSE,ઓળખો,machine
+fe:home:home.heroTitle2,PLANT DISEASE,પાકનો રોગ,machine
+fe:home:home.heroTitle3,IN SECONDS,સેકન્ડોમાં,machine
+fe:home:home.heroSubtitle,"Instant AI crop disease detection, Grad-CAM visual evidence, and agricultural advice in your language.","AI દ્વારા પાકના રોગો તરત જ ઓળખો, ગ્રેડ-કેમ (Grad-CAM ધ્યાન નકશો) દ્વારા પુરાવા જુઓ અને તમારી ભાષામાં ખેતીની સલાહ મેળવો.",machine
+fe:home:home.scanNowFree,SCAN NOW — FREE,હમણાં સ્કેન કરો — મફત,machine
+fe:home:home.badgeNoSignup,No signup required,કોઈ એકાઉન્ટ બનાવવાની જરૂર નથી,machine
+fe:home:home.badgeAnyDevice,Works on any device,કોઈપણ મોબાઈલ કે કમ્પ્યુટરમાં ચાલે છે,machine
+fe:home:home.badgeSpeed,Results in < 3 seconds,૩ સેકન્ડથી ઓછા સમયમાં પરિણામ,machine
+fe:home:home.statsDiseases,Diseases Detected,રોગો ઓળખ્યા,machine
+fe:home:home.statsScans,Scans Analyzed,સ્કેન તપાસ્યા,machine
+fe:home:home.statsCrops,Supported Crops,પાકો માટે ઉપલબ્ધ,machine
+fe:home:home.statsAccuracy,AI Accuracy Rate,AI ની સચોટતા,machine
+fe:home:home.howItWorks,HOW IT WORKS,આ કેવી રીતે કામ કરે છે,machine
+fe:home:home.threeSteps,THREE STEPS TO DIAGNOSIS,રોગ ઓળખવાના ત્રણ સરળ પગલાં,machine
+fe:home:home.step1Title,Capture,ફોટો પાડો,machine
+fe:home:home.step1Desc,Upload or capture a clear photo of the infected leaf.,રોગવાળા પાંદડાનો ચોખ્ખો ફોટો અપલોડ કરો અથવા પાડો.,machine
+fe:home:home.step2Title,Analyze,તપાસ કરો,machine
+fe:home:home.step2Desc,AI runs multi-class disease detection and generates heatmaps.,AI અલગ-અલગ રોગોની તપાસ કરે છે અને હીટમેપ બનાવે છે.,machine
+fe:home:home.step3Title,Respond,ઉપચાર કરો,machine
+fe:home:home.step3Desc,"Receive diagnosis, risk score, treatment protocols and prevention tips.","રોગની જાણકારી, જોખમનો અંદાજ, દવાઓની માહિતી અને બચાવની રીતો મેળવો.",machine
+fe:home:home.capabilities,CAPABILITIES,ક્ષમતાઓ,machine
+fe:home:home.labTools,LAB-GRADE TOOLS,લેબ જેવા પાવરફુલ ટૂલ્સ,machine
+fe:home:home.featHeatmapTitle,Visual AI Heatmaps,ફોટા પર દેખાતા AI હીટમેપ,machine
+fe:home:home.featHeatmapDesc,Proprietary Grad-CAM visualization shows precisely where infection is located on the leaf.,આ ખાસ ગ્રેડ-કેમ (Grad-CAM ધ્યાન નકશો) દ્વારા પાંદડા પર રોગ કઈ જગ્યાએ છે તે સ્પષ્ટ દેખાય છે.,machine
+fe:home:home.featHeatmapAction,Run Scanner,સ્કેન શરૂ કરો,machine
+fe:home:home.featChatTitle,AI Expert Chat,AI નિષ્ણાત સાથે વાતચીત,machine
+fe:home:home.featChatDesc,"Powered by Gemini AI, get instant expert-level answers on disease management and fertilizers.",જેમિની AI ની મદદથી રોગની સારવાર અને ખાતર વિશે તાત્કાલિક નિષ્ણાત જેવા જવાબો મેળવો.,machine
+fe:home:home.featChatAction,Open Chat,ચેટ ખોલો,machine
+fe:home:home.featTrackingTitle,Health Tracking,છોડની તબિયત પર નજર,machine
+fe:home:home.featTrackingDesc,Monitor recovery curves and plant health scores over time with progress analytics.,સમયની સાથે છોડની રિકવરી અને તેની તબિયતના સ્કોરને રિપોર્ટ દ્વારા તપાસો.,machine
+fe:home:home.featTrackingAction,My Plants,મારા છોડ,machine
+fe:home:home.featWeatherTitle,Weather Risk Intel,હવામાનનું જોખમ,machine
+fe:home:home.featWeatherDesc,Correlates local weather conditions with disease spread probability in real time.,સ્થાનિક હવામાન અને રોગ ફેલાવાની શક્યતા વચ્ચેનો સંબંધ તાત્કાલિક બતાવે છે.,machine
+fe:home:home.featWeatherAction,Check Risk,જોખમ તપાસો,machine
+fe:home:home.featLibraryTitle,Disease Encyclopedia,વનસ્પતિ રોગ પુસ્તકાલય,machine
+fe:home:home.featLibraryDesc,Comprehensive reference library of plant diseases with symptoms and treatment databases.,"છોડના રોગો, તેના લક્ષણો અને સારવારની પૂરી માહિતી આપતી ડેટાબેઝ લાયબ્રેરી.",machine
+fe:home:home.featLibraryAction,Explore,વધુ જુઓ,machine
+fe:home:home.featInstantTitle,Instant Diagnosis,ઝટપટ નિદાન,machine
+fe:home:home.featInstantDesc,Diagnosis results in under 3 seconds. Upload from any device in the field.,૩ સેકન્ડથી ઓછા સમયમાં રોગનું નિદાન. ખેતરમાં ગમે ત્યારે કોઈપણ ફોનથી અપલોડ કરો.,machine
+fe:home:home.featInstantAction,Try Now,હમણાં ટ્રાય કરો,machine
+fe:home:home.edgePill,BIOSCAN EDGE,બાયોસ્કેન એજ,machine
+fe:home:home.edgeTitle,"BUILT FOR FARMS, LABS AND FIELDS","ખેતરો, લેબ અને વાડીઓ માટે ખાસ બનેલું",machine
+fe:home:home.edgeDesc,"BioScan works on any device — whether you are in a greenhouse, in a lab, or in the middle of a field with just your phone.","બાયોસ્કેન કોઈપણ ફોન કે ઉપકરણ પર કામ કરે છે — પછી ભલે તમે ગ્રીનહાઉસમાં હોવ, લેબમાં હોવ કે પછી ખેતરની વચમાં ઊભા હોવ.",machine
+fe:home:home.deviceMobile,📱 Mobile,📱 મોબાઈલ,machine
+fe:home:home.deviceDesktop,💻 Desktop,💻 ડેસ્કટોપ,machine
+fe:home:home.deviceLab,🔬 Lab Screen,🔬 લેબ સ્ક્રીન,machine
+fe:home:home.deviceField,🌾 Field Tablet,🌾 ખેતરનું ટેબ્લેટ,machine
+fe:home:home.deviceDashboard,🖥 Dashboard,🖥 ડેશબોર્ડ,machine
+fe:home:home.startScanning,Start Scanning,સ્કેન કરવાનું શરૂ કરો,machine
+fe:home:home.askChat,Ask AI Chat,AI ચેટને પૂછો,machine
+fe:home:home.faqPill,FAQ,વારંવાર પૂછાતા પ્રશ્નો,machine
+fe:home:home.faqTitle,COMMON QUESTIONS,સામાન્ય પ્રશ્નો,machine
+fe:home:home.faq1Q,Which crops are currently supported?,હાલમાં કયા પાકો માટે સપોર્ટ મળે છે?,machine
+fe:home:home.faq1A,"BioScan currently supports Rice, Wheat, Sugarcane, and Cotton, with more crops being added regularly. Our AI model is trained on 127+ disease classes.","બાયોસ્કેન (BioScan) હાલમાં ડાંગર, ઘઉં, શેરડી અને કપાસને સપોર્ટ કરે છે, અને બીજા પાકો પણ નિયમિતપણે ઉમેરાઈ રહ્યા છે. અમારું AI મોડેલ ૧૨૭+ રોગો પર તાલીમ પામેલું છે.",machine
+fe:home:home.faq2Q,How accurate is the disease detection?,રોગ ઓળખવાની ચોકસાઈ કેટલી છે?,machine
+fe:home:home.faq2A,"Our AI model achieves 97.3% accuracy on our validation dataset. For best results, capture clear, well-lit photos.","અમારું AI મોડેલ ૯૭.૩% ચોકસાઈ આપે છે. સારા પરિણામ માટે, સાફ અને સૂર્યના અજવાળામાં ફોટો પાડો.",machine
+fe:home:home.faq3Q,Is my data private?,શું મારી માહિતી સુરક્ષિત છે?,machine
+fe:home:home.faq3A,Yes. Your uploaded images are processed securely and never shared with third parties.,હા. તમારા અપલોડ કરેલા ફોટા સુરક્ષિત રીતે પ્રોસેસ થાય છે અને ક્યારેય કોઈની સાથે શેર કરવામાં આવતા નથી.,machine
+fe:home:home.faq4Q,Can I use BioScan offline?,શું હું ઇન્ટરનેટ વગર બાયોસ્કેન વાપરી શકું?,machine
+fe:home:home.faq4A,Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline mode.,હાલમાં AI વિશ્લેષણ માટે બાયોસ્કેનને ઇન્ટરનેટ કનેક્શનની જરૂર પડે છે. અમે ઇન્ટરનેટ વગર ચાલે તેવા મોડ પર કામ કરી રહ્યા છીએ.,machine
+fe:home:home.faq5Q,What image format and size works best?,કયા પ્રકારનો અને કદનો ફોટો શ્રેષ્ઠ કામ કરે છે?,machine
+fe:home:home.faq5A,"JPG, PNG, or WebP images up to 10MB. Capture the leaf against natural light at 2-4 megapixel resolution.","૧૦MB સુધીના JPG, PNG, અથવા WebP ફોટા. કુદરતી અજવાળામાં પાંદડાનો ૨-૪ મેગાપિક્સલનો ફોટો પાડો.",machine
+fe:home:home.ctaReady,READY TO SCAN YOUR PLANTS?,તમારા છોડને સ્કેન કરવા તૈયાર છો?,machine
+fe:home:home.ctaDesc,Upload a photo right now — no signup needed. Get AI diagnosis in seconds.,હમણાં જ ફોટો અપલોડ કરો — કોઈ સાઇનઅપની જરૂર નથી. સેકન્ડોમાં AI નિદાન મેળવો.,machine
+fe:home:home.ctaLaunch,Launch BioScanner,બાયોસ્કેનર શરૂ કરો,machine
+fe:home:home.greeting,"Good morning, Farmer","નમસ્તે, ખેડૂત મિત્ર",reviewed
+fe:home:home.scanCta,Scan a leaf,પાંદડું સ્કેન કરો,reviewed
+fe:home:home.diseaseRiskToday,Disease risk today,આજનો રોગ જોખમ,reviewed
+fe:home:home.recentScans,Recent scans,તાજેતરના સ્કેન,reviewed
+fe:library:library.title,Plant Disease Encyclopedia,વનસ્પતિ રોગ જ્ઞાનકોશ,machine
+fe:library:library.subtitle,Complete pathology reference for farmers with field symptoms and scientific treatment protocols.,ખેડૂતો માટે ખેતરના લક્ષણો અને વૈજ્ઞાનિક સારવારની પદ્ધતિઓ સાથેની સંપૂર્ણ માહિતી.,machine
+fe:library:library.searchPlaceholder,"Search by disease name, symptom, or pathogen…","રોગના નામ, લક્ષણ અથવા જીવાતથી શોધો…",machine
+fe:library:library.allCrops,All Crops,બધા પાકો,machine
+fe:library:library.affectedOrgans,Affected Organs:,અસરગ્રસ્ત ભાગો:,machine
+fe:library:library.noMatches,No matching diseases found,કોઈ મળતો આવતો રોગ મળ્યો નથી,machine
+fe:library:library.viewProtocol,View Treatment Protocol,સારવારની પદ્ધતિ જુઓ,machine
+fe:library:library.back,Back to Encyclopedia,જ્ઞાનકોશમાં પાછા જાઓ,machine
+fe:library:library.scanForThis,Scan leaf for this disease,આ રોગ માટે પાંદડું સ્કેન કરો,machine
+fe:library:library.overview,Disease Overview,રોગની ઝાંખી,machine
+fe:library:library.whereToLook,Where to look on plant,છોડ પર ક્યાં જોવું,machine
+fe:library:library.favors,Conditions that favor infection,રોગ વધવા માટેનું અનુકૂળ વાતાવરણ,machine
+fe:library:library.spreads,How it spreads,આ કેવી રીતે ફેલાય છે,machine
+fe:library:library.organic,Organic / Biocontrol,ઓર્ગેનિક / જૈવિક નિયંત્રણ,machine
+fe:library:library.chemical,Chemical / Fungicide Protocol,રાસાયણિક / ફૂગનાશક પદ્ધતિ,machine
+fe:library:library.profilesCount,Disease Profiles · 4 Crops,રોગની માહિતી · 4 પાક,machine
+fe:library:library.diseasesCount,Diseases,રોગો,machine
+fe:library:library.noMatchesTitle,No Disease Matches Found,કોઈ રોગ મળ્યો નથી,machine
+fe:library:library.noMatchesDesc,No diseases matched your search for the selected filter. Try adjusting your query or resetting filters.,તમે જે શોધ્યું છે તેને લગતો કોઈ રોગ મળ્યો નથી. કૃપા કરીને બીજું નામ લખીને જુઓ અથવા ફિલ્ટર રીસેટ કરો.,machine
+fe:library:library.clearFilters,Clear Filters,ફિલ્ટર સાફ કરો,machine
+fe:library:library.impactSeverity,Impact Severity,નુકસાનની ગંભીરતા,machine
+fe:library:library.anatomyFocus,Anatomy focus:,છોડનો ભાગ:,machine
+fe:library:library.riceDesc,"Staple cereal vulnerable to blast fungi, brown spots, and leaf miner beetles.","મુખ્ય અનાજ જે બ્લાસ્ટ રોગ, કાળા ધાબા અને પાન ખાનાર જીવાત સામે સંવેદનશીલ છે.",machine
+fe:library:library.riceParts,"Leaf Blade, Sheath, Neck Node & Grain","પાંદડાની પટ્ટી, પાયો, ગળાની ગાંઠ અને દાણા",machine
+fe:library:library.wheatDesc,Cereal crop prone to stripe/brown rust fungi and septoria leaf blotch.,અનાજનો પાક જેને કથ્થઈ ગેરુ અને પાંદડાના ડાઘનો રોગ થવાનું જોખમ રહે છે.,machine
+fe:library:library.wheatParts,"Flag Leaf, Upper Canopy & Spike Ears","મુખ્ય પાંદડું, ઉપરનો ભાગ અને ડુંડી",machine
+fe:library:library.sugarcaneDesc,Perennial cash crop susceptible to red rot stalk decay and mosaic virus.,રોકડિયો પાક જેને લાલ સડો અને મોઝેક વાયરસ થવાની શક્યતા રહે છે.,machine
+fe:library:library.sugarcaneParts,"Internal Stalk, Stem Internodes & Whorl Leaves","અંદરનો ભાગ, સાંઠાનીગાંઠો અને ઉપરના પાંદડા",machine
+fe:library:library.cottonDesc,Fiber crop challenged by bacterial blight lesions and whitefly curl virus.,રૂનો પાક જેમાં બેક્ટેરિયલ બ્લાઈટ અને સફેદ માખીના વાયરસની સમસ્યા થાય છે.,machine
+fe:library:library.cottonParts,"Angular Leaf Veins, Main Stem & Bolls","પાંદડાની નસો, મુખ્ય થડ અને જીંડવા",machine
+fe:plants:crop.rice,Rice,ડાંગર,machine
+fe:plants:crop.wheat,Wheat,ઘઉં,machine
+fe:plants:crop.sugarcane,Sugarcane,શેરડી,machine
+fe:plants:crop.cotton,Cotton,કપાસ,machine
+fe:plants:plants.title,Active Crop Health Registry,પાકના સ્વાસ્થ્યની નોંધણી,machine
+fe:plants:plants.badge,Crop Monitoring,પાકની દેખરેખ,machine
+fe:plants:plants.registerNew,Register New Specimen,નવો નમૂનો નોંધો,machine
+fe:plants:plants.healthySpecimens,Healthy Specimens,તંદુરસ્ત છોડ,machine
+fe:plants:plants.attentionRequired,Attention Required,ધ્યાન આપવું જરૂરી છે,machine
+fe:plants:plants.highRisk,High Pathogen Risk,રોગનું વધુ જોખમ,machine
+fe:plants:plants.allCrops,All Crops,બધા પાક,machine
+fe:plants:plants.healthy,Healthy,તંદુરસ્ત,machine
+fe:plants:plants.needsAttention,Needs Attention,ધ્યાન જોઈએ છે,machine
+fe:plants:plants.searchPlaceholder,Search plants by name or species…,નામ કે જાતથી છોડ શોધો...,machine
+fe:plants:plants.empty,No monitored plants found,દેખરેખ હેઠળ કોઈ છોડ મળ્યો નથી,machine
+fe:plants:plants.emptyDesc,Start by scanning a leaf in the scanner to monitor recovery.,સુધારણા તપાસવા માટે સ્કેનરમાં પાંદડાનું સ્કેન કરવાનું શરૂ કરો.,machine
+fe:plants:plants.scanFirst,Scan Plant Now,હવે છોડ સ્કેન કરો,machine
+fe:profile:profile.title,Settings & Farm Profile,સેટિંગ્સ અને ખેતરની પ્રોફાઇલ,machine
+fe:profile:profile.verified,VERIFIED,ચકાસેલું,machine
+fe:profile:profile.pro,PRO SPECIALIST,પ્રો સ્પેશિયાલિસ્ટ,machine
+fe:profile:profile.notifications,NOTIFICATIONS,નોટિફિકેશન,machine
+fe:profile:profile.diseaseAlerts,Disease Alerts,રોગની ચેતવણીઓ,machine
+fe:profile:profile.diseaseAlertsDesc,Get notified when crop infection risk is high,પાકમાં રોગનું જોખમ વધારે હોય ત્યારે સૂચના મેળવો,machine
+fe:profile:profile.weeklyReports,Weekly Reports,સાપ્તાહિક રિપોર્ટ,machine
+fe:profile:profile.weeklyReportsDesc,Summary of your plant health and treatments,તમારા છોડના સ્વાસ્થ્ય અને સારવારનો સારાંશ,machine
+fe:profile:profile.preferences,PREFERENCES,પસંદગીઓ,machine
+fe:profile:profile.language,Language,ભાષા,machine
+fe:profile:profile.units,Units,એકમ (Units),machine
+fe:profile:profile.unitsVal,"Metric (°C, mm, km/h)","મેટ્રિક (°C, mm, km/h)",machine
+fe:profile:profile.weatherOverride,Manual Weather Data,મેન્યુઅલ હવામાન ડેટા,machine
+fe:profile:profile.manualActive,MANUAL ACTIVE,મેન્યુઅલ ચાલુ છે,machine
+fe:profile:profile.autoGps,AUTO GPS,ઓટો GPS,machine
+fe:profile:profile.weatherTitle,Agro-Climatic Weather Override,હવામાન સેટિંગ બદલો,machine
+fe:profile:profile.city,City / Village,શહેર / ગામ,machine
+fe:profile:profile.state,State / Region,રાજ્ય / વિસ્તાર,machine
+fe:profile:profile.temp,Temperature (°C),તાપમાન (°C),machine
+fe:profile:profile.humidity,Relative Humidity (%),ભેજનું પ્રમાણ (%),machine
+fe:profile:profile.rainfall,Rainfall (24h mm),વરસાદ (24 કલાક mm),machine
+fe:profile:profile.wind,Wind Speed (km/h),પવનની ઝડપ (km/h),machine
+fe:profile:profile.condition,Weather Condition,હવામાનની સ્થિતિ,machine
+fe:profile:profile.riskLevel,Environmental Risk Level,વાતાવરણનું જોખમ સ્તર,machine
+fe:profile:profile.riskReason,Risk Assessment Explanation,જોખમ તપાસનું કારણ,machine
+fe:profile:profile.applyWeather,Apply Weather Data,હવામાનનો ડેટા લાગુ કરો,machine
+fe:profile:profile.resetGps,Reset to Live GPS,લાઇવ GPS પર રીસેટ કરો,machine
+fe:profile:profile.savedSuccess,Manual weather data saved and applied across the entire app!,મેન્યુઅલ હવામાન ડેટા સેવ થઈ ગયો છે અને આખી એપમાં લાગુ થઈ ગયો છે!,machine
+fe:profile:profile.resetSuccess,Reset to live GPS sensors and Open-Meteo weather data!,લાઇવ GPS સેન્સર અને Open-Meteo હવામાન ડેટા પર રીસેટ થઈ ગયું છે!,machine
+fe:profile:profile.privacy,PRIVACY & DATA,પ્રાઇવસી અને ડેટા,machine
+fe:profile:profile.dataSharing,Data Sharing,ડેટા શેરિંગ,machine
+fe:profile:profile.dataSharingDesc,Help improve agronomic AI models,ખેતીના AI મોડલ સુધારવામાં મદદ કરો,machine
+fe:profile:profile.privacyPolicy,Privacy Policy,પ્રાઇવસી પોલિસી,machine
+fe:profile:profile.deleteData,Delete My Data,મારો ડેટા કાઢી નાખો,machine
+fe:profile:profile.support,SUPPORT,સપોર્ટ,machine
+fe:profile:profile.helpFaq,Help & FAQ,મદદ અને પ્રશ્નો (FAQ),machine
+fe:profile:profile.contactSupport,Contact Agronomist Support,કૃષિ નિષ્ણાતનો સંપર્ક કરો,machine
+fe:profile:profile.signOut,SIGN OUT,સાઇન આઉટ,machine
+fe:profile:profile.footerText,FLORA AI • PLANT DISEASE INTELLIGENCE PLATFORM,FLORA AI • પ્લાન્ટ ડિસીઝ ઇન્ટેલિજન્સ પ્લેટફોર્મ,machine
+fe:scan:scan.workspace,DIAGNOSTIC WORKSPACE,રોગ તપાસવાનું સ્થળ,machine
+fe:scan:scan.title,Plant Disease Scanner,છોડ રોગ સ્કેનર,reviewed
+fe:scan:scan.subtitle,Upload a leaf photo to get instant AI-powered pathology and Grad-CAM diagnosis.,પાંદડાની ફોટો અપલોડ કરો અને તાત્કાલિક AI નિદાન મેળવો।,reviewed
+fe:scan:scan.reset,Reset,રીસેટ,machine
+fe:scan:scan.selectCrop,Select Crop,પાક પસંદ કરો,reviewed
+fe:scan:scan.uploadHint,Upload leaf image,પાંદડાની છબી અપલોડ કરો,reviewed
+fe:scan:scan.diagnosing,Diagnosing your plant…,તમારા છોડનું નિદાન થઈ રહ્યું છે…,reviewed
+fe:scan:scan.diagnoseCta,Diagnose Plant Health,છોડનું સ્વાસ્થ્ય તપાસો,machine
+fe:scan:scan.ready,Ready for Diagnostics,તપાસ માટે તૈયાર,machine
+fe:scan:scan.aiDetection,AI Disease Detection,AI દ્વારા રોગની ઓળખ,machine
+fe:scan:scan.visualHeatmap,Visual Heatmap,વિઝ્યુઅલ હીટમેપ,machine
+fe:scan:scan.complete,Diagnosis Complete,તપાસ પૂરી થઈ,machine
+fe:scan:scan.severity,Severity,ગંભીરતા,machine
+fe:scan:scan.retake,Retake,ફરીથી ફોટો લો,machine
+fe:scan:scan.flip,Flip Camera,કેમેરા ફેરવો,machine
+fe:scan:scan.gallery,Gallery,ગેલેરી,machine
+fe:scan:scan.tipLight,Good light,સારો પ્રકાશ,reviewed
+fe:scan:scan.tipOneLeaf,One leaf,એક પાંદડું,reviewed
+fe:scan:scan.tipHold,Hold steady,સ્થિર રાખો,reviewed
+fe:scan:scan.trySample,Try a sample,નમૂનો અજમાવો,reviewed
+fe:scan:scan.healthIndex,Health Index,છોડનું સ્વાસ્થ્ય,machine
+fe:scan:scan.diseaseProbabilities,Disease Probabilities,રોગ થવાની શક્યતા,machine
+fe:scan:scan.saveToPlants,Save to My Plants,મારા છોડમાં સેવ કરો,machine
+fe:scan:scan.scanAnother,Scan Another,બીજો ફોટો સ્કેન કરો,machine
+fe:scan:scan.environmentalFactors,Environmental & Moisture Factors,વાતાવરણ અને ભેજનું પ્રમાણ,machine
+be:disease:bacterial_leaf_blight:display,Bacterial Leaf Blight,બેક્ટેરિયલ પાનનો સુકારો,machine
+be:disease:bacterial_leaf_blight:crop,Rice,ડાંગર,machine
+be:disease:bacterial_leaf_blight:severity,High,વધુ,machine
+be:disease:bacterial_leaf_blight:description,A serious bacterial disease caused by Xanthomonas oryzae pv. oryzae. Leaves show water-soaked margins that turn yellow and eventually white.,"આ એક ગંભીર બેક્ટેરિયલ રોગ છે જે ઝેન્થોમોનાસ ઓરાયઝી પીવી ઓરાયઝી (Xanthomonas oryzae pv. oryzae) ના કારણે થાય છે. પાનની કિનારીઓ પાણી પલાળેલી દેખાય છે, જે પછીથી પીળી અને છેવટે સફેદ થઈ જાય છે.",machine
+be:disease:bacterial_leaf_blight:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_blight:fav:rainfall,Heavy (storm/flooding),વધુ (વાવાઝોડું/પૂર),machine
+be:disease:brown_spot:display,Brown Spot,બ્રાઉન સ્પોટ (બદામી ધાબા),machine
+be:disease:brown_spot:crop,Rice,ડાંગર,machine
+be:disease:brown_spot:severity,Medium,મધ્યમ,machine
+be:disease:brown_spot:description,Fungal disease caused by Cochliobolus miyabeanus. Oval to circular brown lesions with yellow halos appear on leaves.,આ કોક્લિયોબોલસ મિયાબિયાનસ (Cochliobolus miyabeanus) નામની ફૂગથી થતો રોગ છે. પાન પર પીળા રંગની સરહદવાળા ગોળાકાર કે લંબગોળ બદામી ડાઘ પડે છે.,machine
+be:disease:brown_spot:fav:temperature,22–32°C,22–32°C,machine
+be:disease:brown_spot:fav:humidity,75–90%,75–90%,machine
+be:disease:brown_spot:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:healthy:display,Healthy,સ્વસ્થ,machine
+be:disease:healthy:crop,All,બધા,machine
+be:disease:healthy:severity,None,કોઈ નહીં,machine
+be:disease:healthy:description,The leaf appears healthy with no visible disease symptoms.,પાંદડા પર રોગના કોઈ લક્ષણો દેખાતા નથી અને પાંદડું તંદુરસ્ત છે.,machine
+be:disease:healthy:fav:temperature,Any,કોઈપણ,machine
+be:disease:healthy:fav:humidity,Any,કોઈપણ,machine
+be:disease:healthy:fav:rainfall,Regular,નિયમિત,machine
+be:disease:leaf_blast:display,Leaf Blast,પાનનો બ્લાસ્ટ રોગ,machine
+be:disease:leaf_blast:crop,Rice,ડાંગર,machine
+be:disease:leaf_blast:severity,Very High,ખૂબ વધારે,machine
+be:disease:leaf_blast:description,"One of the most destructive rice diseases, caused by Magnaporthe oryzae. Diamond-shaped lesions with grey centres and brown borders appear on leaves.","આ ડાંગરનો ખૂબ જ નુકસાનકારક રોગ છે, જે મેગ્નાપોર્થે ઓરાયઝી ફૂગને કારણે થાય છે. પાંદડા પર રાખોડી કેન્દ્ર અને ભુખરી કિનારવાળા હીરા (ડાયમંડ) જેવા આકારના ડાઘ પડે છે.",machine
+be:disease:leaf_blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:leaf_blast:fav:humidity,>90%,>90%,machine
+be:disease:leaf_blast:fav:rainfall,Frequent light rain/dew,વારંવાર હળવો વરસાદ/ઓસ,machine
+be:disease:leaf_scald:display,Leaf Scald,પાનનો સ્કેલ્ડ રોગ,machine
+be:disease:leaf_scald:crop,Rice,ડાંગર,machine
+be:disease:leaf_scald:severity,Medium,મધ્યમ,machine
+be:disease:leaf_scald:description,Caused by Microdochium oryzae. Alternating light and dark brown bands appear along leaf margins creating a 'zonate' pattern.,આ માઇક્રોડોચિયમ ઓરાયઝી ફૂગના કારણે થાય છે. પાંદડાની કિનારીઓ પર આછા અને ઘાટા ભુખરા રંગના પટ્ટાઓ વારાફરતી દેખાય છે.,machine
+be:disease:leaf_scald:fav:temperature,25–30°C,25–30°C,machine
+be:disease:leaf_scald:fav:humidity,>80%,>80%,machine
+be:disease:leaf_scald:fav:rainfall,Moderate to heavy,મધ્યમથી ભારે,machine
+be:disease:sheath_blight:display,Sheath Blight,પર્ણ સુકારો (શીથ બ્લાઇટ),machine
+be:disease:sheath_blight:crop,Rice,ડાંગર,machine
+be:disease:sheath_blight:severity,High,વધુ,machine
+be:disease:sheath_blight:description,"Caused by Rhizoctonia solani. Oval greenish-grey lesions with dark brown borders appear on leaf sheaths, spreading to leaves.","આ રોગ રાઈઝોક્ટોનીયા સોલાની ફૂગના કારણે થાય છે. પાનની ડાળીઓ પર ઘાટા ભૂરા રંગની કિનારીવાળા લંબગોળ લીલાશ પડતા રાખોડી ડાઘ પડે છે, જે પાંદડા સુધી ફેલાય છે.",machine
+be:disease:sheath_blight:fav:temperature,28–32°C,28–32°C,machine
+be:disease:sheath_blight:fav:humidity,>90%,>90%,machine
+be:disease:sheath_blight:fav:rainfall,Heavy flooding,વધારે પાણી ભરાવવું,machine
+be:disease:aphid:display,Aphid Infestation,મૂવા (એફિડ) નો ઉપદ્રવ,machine
+be:disease:aphid:crop,Wheat,ઘઉં,machine
+be:disease:aphid:severity,Medium,મધ્યમ,machine
+be:disease:aphid:description,"Small soft-bodied insects that cluster on leaves and stems, sucking plant sap and potentially transmitting viruses.",નાના પોચા શરીરવાળા કીટકો જે પાંદડા અને ડાંડલા પર જૂથમાં બેસીને છોડનો રસ ચૂસે છે અને વાયરસ ફેલાવી શકે છે.,machine
+be:disease:aphid:fav:temperature,15–25°C,15–25°C,machine
+be:disease:aphid:fav:humidity,<60%,<60%,machine
+be:disease:aphid:fav:rainfall,Low,ઓછો,machine
+be:disease:black_rust:display,Black Rust (Stem Rust),કાળો ગેરુ (દાંડીનો ગેરુ),machine
+be:disease:black_rust:crop,Wheat,ઘઉં,machine
+be:disease:black_rust:severity,Very High,ખૂબ જ વધુ,machine
+be:disease:black_rust:description,Caused by Puccinia graminis. Produces brick-red to black pustules on stems and leaves. Can devastate entire crops.,પુક્સિનિયા ગ્રામિનિસ ફૂગના કારણે થાય છે. પ્રકાંડ અને પાંદડા પર ઈંટો જેવા લાલથી કાળા ફોલ્લા થાય છે. આખો પાક નષ્ટ કરી શકે છે.,machine
+be:disease:black_rust:fav:temperature,15–30°C,15–30°C,machine
+be:disease:black_rust:fav:humidity,>80%,>80%,machine
+be:disease:black_rust:fav:rainfall,Moderate with dew,ઓસ સાથે મધ્યમ વરસાદ,machine
+be:disease:blast:display,Blast (Rice Paddy),બ્લાસ્ટ રોગ (ડાંગર),machine
+be:disease:blast:crop,Rice,ડાંગર,machine
+be:disease:blast:severity,Very High,ખૂબ વધારે,machine
+be:disease:blast:description,Magnaporthe oryzae. Diamond-shaped lesions on leaves. Can also affect panicles (panicle blast).,Magnaporthe oryzae. પાંદડા પર હીરા જેવા આકારના ડાઘ પડે છે. આ રોગ ડાંગરની ડૂંડીઓને પણ નુકસાન કરે છે (બ્લાસ્ટ રોગ).,machine
+be:disease:blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:blast:fav:humidity,>90%,>90%,machine
+be:disease:blast:fav:rainfall,Frequent dew/light rain,વારંવાર ઓસ પડવું / હળવો વરસાદ,machine
+be:disease:brown_rust:display,Brown Rust (Leaf Rust),કથ્થઈ ગેરુ (પાનનો ગેરુ),machine
+be:disease:brown_rust:crop,Wheat,ઘઉં,machine
+be:disease:brown_rust:severity,High,વધારે,machine
+be:disease:brown_rust:description,Caused by Puccinia triticina. Orange-brown pustules on upper leaf surface. Very common and widespread.,Puccinia triticina દ્વારા થાય છે. પાંદડાની ઉપરની સપાટી પર નારંગી-કથ્થઈ ફોલ્લા થાય છે. આ રોગ ખૂબ સામાન્ય છે અને ઝડપથી ફેલાય છે.,machine
+be:disease:brown_rust:fav:temperature,15–22°C,15–22°C,machine
+be:disease:brown_rust:fav:humidity,>70%,>70%,machine
+be:disease:brown_rust:fav:rainfall,Light rain/dew,હળવો વરસાદ / ઓસ,machine
+be:disease:common_root_rot:display,Common Root Rot,મૂળનો કાળો સડો,machine
+be:disease:common_root_rot:crop,Wheat,ઘઉં,machine
+be:disease:common_root_rot:severity,Medium,મધ્યમ,machine
+be:disease:common_root_rot:description,Caused by Bipolaris sorokiniana. Brown to black discolouration of crown and root tissues.,Bipolaris sorokiniana દ્વારા થાય છે. છોડના પાયાના ભાગમાં અને મૂળમાં કથ્થઈથી કાળા ડાઘ પડી જાય છે.,machine
+be:disease:common_root_rot:fav:temperature,18–28°C,18–28°C,machine
+be:disease:common_root_rot:fav:humidity,Low soil moisture,જમીનમાં ઓછો ભેજ,machine
+be:disease:common_root_rot:fav:rainfall,Insufficient,અપૂરતો વરસાદ,machine
+be:disease:fusarium_head_blight:display,Fusarium Head Blight (Scab),ફ્યુસેરિયમ હેડ બ્લાઈટ (સ્કેબ),machine
+be:disease:fusarium_head_blight:crop,Wheat,ઘઉં,machine
+be:disease:fusarium_head_blight:severity,Very High,ખૂબ વધુ,machine
+be:disease:fusarium_head_blight:description,Caused by Fusarium graminearum. Bleached spikelets with pink mold. Produces mycotoxins (DON) that contaminate grain.,ફુસારીયમ ગ્રામિનેરમથી થાય છે. ગુલાબી ફૂગ સાથે સૂકા ડૂંડા. ઝેરી તત્વો (DON) બનાવે છે જે દાણાને બગાડે છે.,machine
+be:disease:fusarium_head_blight:fav:temperature,25–30°C,25–30°C,machine
+be:disease:fusarium_head_blight:fav:humidity,>90%,>90%,machine
+be:disease:fusarium_head_blight:fav:rainfall,Rain during flowering,ફૂલ આવતી વખતે વરસાદ,machine
+be:disease:leaf_blight:display,Leaf Blight,પાનનો સુકારો,machine
+be:disease:leaf_blight:crop,Wheat,ઘઉં,machine
+be:disease:leaf_blight:severity,Medium,મધ્યમ,machine
+be:disease:leaf_blight:description,Tan-brown lesions with yellow borders on older leaves.,જૂના પાંદડા પર પીળી કિનારીવાળા આછા બદામી ડાઘ.,machine
+be:disease:leaf_blight:fav:temperature,20–30°C,20–30°C,machine
+be:disease:leaf_blight:fav:humidity,>70%,>70%,machine
+be:disease:leaf_blight:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:mildew:display,Powdery Mildew,છારો રોગ,machine
+be:disease:mildew:crop,Wheat,ઘઉં,machine
+be:disease:mildew:severity,Medium,મધ્યમ,machine
+be:disease:mildew:description,"White powdery coating on leaves, caused by Blumeria graminis. Reduces photosynthesis.",બ્લુમેરિયા ગ્રામિનીસને કારણે પાંદડા પર સફેદ પાવડર જેવું થર. છોડનો ખોરાક બનાવવાની તાકાત ઘટાડે છે.,machine
+be:disease:mildew:fav:temperature,15–22°C,15–22°C,machine
+be:disease:mildew:fav:humidity,60–80%,60–80%,machine
+be:disease:mildew:fav:rainfall,Low to moderate,ઓછાથી મધ્યમ,machine
+be:disease:mite:display,Mite Infestation,ઈંચ કે જીવાતનો ઉપદ્રવ,machine
+be:disease:mite:crop,Wheat,ઘઉં,machine
+be:disease:mite:severity,Low,ઓછી,machine
+be:disease:mite:description,Tiny arachnids causing silvery stippling and bronzing of leaves.,નાની કરોળિયા જેવી જીવાત જેનાથી પાન પર ચાંદી જેવા ટપકાં થાય છે અને પાન તાંબા જેવા રંગના થઈ જાય છે.,machine
+be:disease:mite:fav:temperature,>30°C,>30°C,machine
+be:disease:mite:fav:humidity,<50%,<50%,machine
+be:disease:mite:fav:rainfall,Very low,ખૂબ ઓછો,machine
+be:disease:septoria:display,Septoria Leaf Blotch,સેપ્ટોરિયા પાનનો ડાઘ (બ્લોચ),machine
+be:disease:septoria:crop,Wheat,ઘઉં,machine
+be:disease:septoria:severity,High,વધુ,machine
+be:disease:septoria:description,Caused by Zymoseptoria tritici. Pale green-yellow blotches with brown necrosis and pycnidia on leaves.,ઝાયમોસેપ્ટોરિયા ટ્રિટિસીના કારણે થાય છે. પાન પર આછા લીલા-પીળા ડાઘ અને કથ્થઈ સુકાન તથા પિકનિડિયા જોવા મળે છે.,machine
+be:disease:septoria:fav:temperature,10–20°C,10–20°C,machine
+be:disease:septoria:fav:humidity,>80%,>80%,machine
+be:disease:septoria:fav:rainfall,Frequent rain,વારંવાર વરસાદ,machine
+be:disease:smut:display,Loose Smut,કાંગરી (લૂઝ સ્મટ),machine
+be:disease:smut:crop,Wheat,ઘઉં,machine
+be:disease:smut:severity,Medium,મધ્યમ,machine
+be:disease:smut:description,Caused by Ustilago tritici. Spikes replaced by black powdery masses of teliospores.,અસ્ટીલાગો ટ્રિટિસીના કારણે થાય છે. ડૂંડા કાળા પાવડર જેવા બીજ (ટેલિયોસ્પોર્સ) બની જાય છે.,machine
+be:disease:smut:fav:temperature,16–22°C,16–22°C,machine
+be:disease:smut:fav:humidity,>60%,>60%,machine
+be:disease:smut:fav:rainfall,Moderate during anthesis,फूल બેસતી વખતે મધ્યમ વરસાદ,machine
+be:disease:stem_fly:display,Stem Fly,સ્ટેમ ફ્લાય (ગાભમારાની માખી),machine
+be:disease:stem_fly:crop,Wheat,ઘઉં,machine
+be:disease:stem_fly:severity,Medium,મધ્યમ,machine
+be:disease:stem_fly:description,Larval mining inside wheat stems causing 'dead heart' symptoms in young plants.,ઘઉંના છોડના થડની અંદર ઈયળો ખાવાથી નાની વયના છોડમાં 'ડેડ હાર્ટ' (સૂકા ગર્ભ) ના લક્ષણો દેખાય છે.,machine
+be:disease:stem_fly:fav:temperature,15–20°C,15–20°C,machine
+be:disease:stem_fly:fav:humidity,Any,કોઈપણ,machine
+be:disease:stem_fly:fav:rainfall,Low to moderate,ઓછાથી મધ્યમ,machine
+be:disease:tan_spot:display,Tan Spot,ટૈન સ્પોટ (પીળા-ભૂરા ડાઘ),machine
+be:disease:tan_spot:crop,Wheat,ઘઉં,machine
+be:disease:tan_spot:severity,Medium,મધ્યમ,machine
+be:disease:tan_spot:description,Caused by Pyrenophora tritici-repentis. Tan-colored oval lesions with yellow borders.,પાયરેનોફોરા ટ્રીટિસી-રિપેન્ટિસ (Pyrenophora tritici-repentis) દ્વારા થાય છે. પીળી કિનારીવાળા ભૂરા રંગના લંબગોળ ડાઘ.,machine
+be:disease:tan_spot:fav:temperature,20–28°C,20–28°C,machine
+be:disease:tan_spot:fav:humidity,>70%,>70%,machine
+be:disease:tan_spot:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:yellow_rust:display,Yellow Rust (Stripe Rust),પીળો ગેરુ (સ્ટ્રાઇપ ગેરુ),machine
+be:disease:yellow_rust:crop,Wheat,ઘઉં,machine
+be:disease:yellow_rust:severity,Very High,ખૂબ જ વધુ,machine
+be:disease:yellow_rust:description,Caused by Puccinia striiformis. Bright yellow pustules in stripes along leaf veins. Very destructive in cool climates.,પ્યુક્સિનિયા સ્ટ્રાઈફોર્મિસ (Puccinia striiformis) દ્વારા થાય છે. પાંદડાની નસો સાથે પટ્ટાઓમાં ચમકદાર પીળા દાણા જેવા ફોલ્લા થાય છે. ઠંડા વાતાવરણમાં ખૂબ જ નુકસાન કરે છે.,machine
+be:disease:yellow_rust:fav:temperature,10–15°C,10–15°C,machine
+be:disease:yellow_rust:fav:humidity,>80%,>80%,machine
+be:disease:yellow_rust:fav:rainfall,Dew / light rain,ઓસ / હળવો વરસાદ,machine
+be:disease:mosaic_disease:display,Mosaic Disease,મઝેઈક રોગ,machine
+be:disease:mosaic_disease:crop,Sugarcane,શેરડી,machine
+be:disease:mosaic_disease:severity,High,વધુ,machine
+be:disease:mosaic_disease:description,Caused by Sugarcane Mosaic Virus (SCMV). Mosaic or mottled discolouration of leaves — alternating light and dark green patches.,આ રોગ સુગરકેન મોઝેક વાયરસ (SCMV) ને કારણે થાય છે. પાંદડા પર મોઝેક જેવા અથવા આછા-ઘાટા લીલા રંગના ધાબા જોવા મળે છે.,machine
+be:disease:mosaic_disease:fav:temperature,25–30°C,25–30°C,machine
+be:disease:mosaic_disease:fav:humidity,Moderate,મધ્યમ,machine
+be:disease:mosaic_disease:fav:rainfall,Any,કોઈપણ,machine
+be:disease:rust:display,Sugarcane Rust,શેરડીનો ગેરુ રોગ,machine
+be:disease:rust:crop,Sugarcane,શેરડી,machine
+be:disease:rust:severity,Medium,મધ્યમ,machine
+be:disease:rust:description,Caused by Puccinia melanocephala. Orange-brown pustules on leaf undersides causing premature leaf death.,આ રોગ પ્યુકિનિયા મેલાનોસેફાલા (Puccinia melanocephala) થી થાય છે. પાંદડાની નીચેની બાજુએ નારંગી-ભૂખરા રંગના ફોલ્લા થાય છે જેથી પાંદડા વહેલા સુકાઈ જાય છે.,machine
+be:disease:rust:fav:temperature,24–28°C,24–28°C,machine
+be:disease:rust:fav:humidity,>75%,>75%,machine
+be:disease:rust:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:bacterial_blight:display,Bacterial Blight,બેક્ટેરિયલ બ્લાઈટ (અંગમારી),machine
+be:disease:bacterial_blight:crop,Cotton,કપાસ,machine
+be:disease:bacterial_blight:severity,High,વધુ,machine
+be:disease:bacterial_blight:description,"Caused by Xanthomonas axonopodis pv. malvacearum. Angular water-soaked lesions on leaves, black cankers on stems.",આ રોગ ઝેન્થોમોનાસ એક્સોનોપોડીસ પીવી. માલવાસીયારમ (Xanthomonas axonopodis pv. malvacearum) થી થાય છે. પાંદડા પર પાણી જેવા ચોરસ ધાબા અને થડ પર કાળા ચાઠા પડે છે.,machine
+be:disease:bacterial_blight:fav:temperature,28–35°C,28–35°C,machine
+be:disease:bacterial_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_blight:fav:rainfall,Heavy,વધારે,machine
+be:disease:alternaria_leaf_spot:display,Alternaria Leaf Spot,ઓલ્ટરનેરિયા પાંદડાના ડાઘ,machine
+be:disease:alternaria_leaf_spot:crop,Cotton,કપાસ,machine
+be:disease:alternaria_leaf_spot:severity,Medium,મધ્યમ,machine
+be:disease:alternaria_leaf_spot:description,Caused by Alternaria macrospora. Dark brown to black circular spots with concentric rings on leaves.,"આ રોગ અલ્ટરનેરિયા મેક્રોસ્પોરા નામના ફૂગથી થાય છે. પાંદડા પર ગોળાકાર, ઘાટા બદામીથી કાળા ડાઘ પડે છે જેમાં વર્તુળાકાર રીંગ જેવું દેખાય છે.",machine
+be:disease:alternaria_leaf_spot:fav:temperature,25–30°C,25–30°C,machine
+be:disease:alternaria_leaf_spot:fav:humidity,>75%,>75%,machine
+be:disease:alternaria_leaf_spot:fav:rainfall,Moderate to heavy,મધ્યમથી ભારે,machine
+be:disease:hispa:display,Rice Hispa,ડાંગરની હિપ્પા,machine
+be:disease:hispa:crop,Rice,ડાંગર,machine
+be:disease:hispa:severity,Medium,મધ્યમ,machine
+be:disease:hispa:description,Caused by Dicladispa armigera (leaf beetle). Adults scrape leaf surfaces; larvae mine inside leaves creating white tunnels.,આ રોગ ડિક્લાડિસ્પા આર્મિગેરા (પાંદડા ખાનાર ભમરો) દ્વારા થાય છે. પુખ્ત ભમરા પાંદડાની સપાટી કોતરે છે; ઇયળો પાંદડાની અંદર સુરંગ બનાવીને સફેદ લકીરો કરે છે.,machine
+be:disease:hispa:fav:temperature,25–35°C,25–35°C,machine
+be:disease:hispa:fav:humidity,>75%,>75%,machine
+be:disease:hispa:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:tungro:display,Tungro Virus Disease,ટંગ્રો વાયરસ રોગ,machine
+be:disease:tungro:crop,Rice,ડાંગર,machine
+be:disease:tungro:severity,Very High,ખૂબ જ વધુ,machine
+be:disease:tungro:description,Caused by two viruses (RTBV + RTSV) transmitted by green leafhoppers. Leaves turn yellow-orange. Stunted plants with reduced tillering.,આ રોગ લીલા તડતડિયા (લીફહોપર) દ્વારા ફેલાતા બે વાયરસ (RTBV + RTSV) થી થાય છે. પાંદડા પીળા-નારંગી થઈ જાય છે. છોડ વામન (ઠૂંગા) રહી જાય છે અને ફૂટ ઓછી ફૂટે છે.,machine
+be:disease:tungro:fav:temperature,25–30°C,25–30°C,machine
+be:disease:tungro:fav:humidity,>80%,>80%,machine
+be:disease:tungro:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:dead_heart:display,Dead Heart (Stem Borer),ડેડ હાર્ટ (ગાભમારાની ઈયળ),machine
+be:disease:dead_heart:crop,Rice,ડાંગર,machine
+be:disease:dead_heart:severity,High,વધુ,machine
+be:disease:dead_heart:description,Caused by stem borer larvae (Scirpophaga incertulas). The central leaf whorl turns yellow and dies — pulled out easily.,ગાભમારાની ઈયળ (Scirpophaga incertulas) ના કારણે થાય છે. છોડની વચ્ચેનું પાન પીળું પડીને સૂકાઈ જાય છે અને સહેલાઈથી ખેંચાઈને બહાર નીકળી જાય છે.,machine
+be:disease:dead_heart:fav:temperature,25–35°C,25–35°C,machine
+be:disease:dead_heart:fav:humidity,High,વધુ,machine
+be:disease:dead_heart:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:downy_mildew:display,Downy Mildew,તળછારો રોગ,machine
+be:disease:downy_mildew:crop,Rice,ડાંગર,machine
+be:disease:downy_mildew:severity,Medium,મધ્યમ,machine
+be:disease:downy_mildew:description,Caused by Sclerophthora macrospora. Pale yellow lesions with downy growth on underside of leaves.,Sclerophthora macrospora ના કારણે થાય છે. પાંદડાની નીચેની બાજુએ રૂ જેવી ફૂગ સાથે આછા પીળા ડાઘ પડે છે.,machine
+be:disease:downy_mildew:fav:temperature,18–25°C,18–25°C,machine
+be:disease:downy_mildew:fav:humidity,>90%,>90%,machine
+be:disease:downy_mildew:fav:rainfall,Heavy flooding,ભારે વરસાદ,machine
+be:disease:bacterial_leaf_streak:display,Bacterial Leaf Streak,બેક્ટેરિયલ લીફ સ્ટ્રીક,machine
+be:disease:bacterial_leaf_streak:crop,Rice,ડાંગર,machine
+be:disease:bacterial_leaf_streak:severity,Medium,મધ્યમ,machine
+be:disease:bacterial_leaf_streak:description,"Caused by Xanthomonas oryzae pv. oryzicola. Narrow, translucent water-soaked stripes between veins.","Xanthomonas oryzae pv. oryzicola ના કારણે થાય છે. નસો વચ્ચે પાણી પલાળેલા હોય તેવી સાંકડી, પારદર્શક લીટીઓ થાય છે.",machine
+be:disease:bacterial_leaf_streak:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_streak:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_streak:fav:rainfall,Heavy,ભારે,machine
+be:disease:bacterial_panicle_blight:display,Bacterial Panicle Blight,બેક્ટેરિયલ પેનિકલ બ્લાઈટ,machine
+be:disease:bacterial_panicle_blight:crop,Rice,ડાંગર,machine
+be:disease:bacterial_panicle_blight:severity,High,વધુ,machine
+be:disease:bacterial_panicle_blight:description,"Caused by Burkholderia glumae. Sterile spikelets, grayish-brown discolouration. Significant yield loss.",આ રોગ બર્ખોલ્ડેરિયા ગ્લુમે (Burkholderia glumae) ના કારણે થાય છે. આમાં દાણા ખાલી રહી જાય છે અને કથ્થઈ-સૂથરા રંગના થઈ જાય છે. પાકને ઘણું નુકસાન થાય છે.,machine
+be:disease:bacterial_panicle_blight:fav:temperature,>30°C,>30°C,machine
+be:disease:bacterial_panicle_blight:fav:humidity,>85%,>85%,machine
+be:disease:bacterial_panicle_blight:fav:rainfall,Moderate,મધ્યમ,machine
+be:disease:normal:display,Healthy (Normal),તંદુરસ્ત (સામાન્ય),machine
+be:disease:normal:crop,Rice,ડાંગર,machine
+be:disease:normal:severity,None,કોઈ નહીં,machine
+be:disease:normal:description,No disease detected. Crop appears healthy.,કોઈ રોગ દેખાયો નથી. પાક એકદમ સારો દેખાય છે.,machine
+be:disease:normal:fav:temperature,Any,કોઈપણ,machine
+be:disease:normal:fav:humidity,Any,કોઈપણ,machine
+be:disease:normal:fav:rainfall,Regular,નિયમિત,machine

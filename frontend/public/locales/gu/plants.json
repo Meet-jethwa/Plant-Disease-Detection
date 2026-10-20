@@ -1,0 +1,19 @@
+{
+  "crop.rice": "ડાંગર",
+  "crop.wheat": "ઘઉં",
+  "crop.sugarcane": "શેરડી",
+  "crop.cotton": "કપાસ",
+  "plants.title": "પાકના સ્વાસ્થ્યની નોંધણી",
+  "plants.badge": "પાકની દેખરેખ",
+  "plants.registerNew": "નવો નમૂનો નોંધો",
+  "plants.healthySpecimens": "તંદુરસ્ત છોડ",
+  "plants.attentionRequired": "ધ્યાન આપવું જરૂરી છે",
+  "plants.highRisk": "રોગનું વધુ જોખમ",
+  "plants.allCrops": "બધા પાક",
+  "plants.healthy": "તંદુરસ્ત",
+  "plants.needsAttention": "ધ્યાન જોઈએ છે",
+  "plants.searchPlaceholder": "નામ કે જાતથી છોડ શોધો...",
+  "plants.empty": "દેખરેખ હેઠળ કોઈ છોડ મળ્યો નથી",
+  "plants.emptyDesc": "સુધારણા તપાસવા માટે સ્કેનરમાં પાંદડાનું સ્કેન કરવાનું શરૂ કરો.",
+  "plants.scanFirst": "હવે છોડ સ્કેન કરો"
+}

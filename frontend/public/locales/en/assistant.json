@@ -1,0 +1,15 @@
+{
+  "assistant.title": "AI Agronomist Chat",
+  "assistant.subtitle": "Multi-crop expert diagnostics and care protocols powered by Gemini AI.",
+  "assistant.placeholder": "Ask about this diagnosis, treatments, or preventive care…",
+  "assistant.analyzing": "Thinking…",
+  "assistant.contextActive": "Diagnosis Context Active",
+  "assistant.suggested": "Suggested questions:",
+  "assistant.followUp": "Ask a follow-up question:",
+  "assistant.emptyTitle": "Ask the AI Crop Specialist",
+  "assistant.emptyHint": "Ask questions regarding your scanned plant diagnosis, organic remedies, or seasonal prevention.",
+  "assistant.noDiagnosis": "Scan a leaf first to enable context-aware diagnosis.",
+  "assistant.weatherAdvice": "Today's Weather Advice",
+  "assistant.jumpToLatest": "Jump to latest",
+  "assistant.welcomeMsg": "Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations."
+}

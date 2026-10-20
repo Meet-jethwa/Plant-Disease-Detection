@@ -1,0 +1,716 @@
+{
+  "bacterial_leaf_blight": {
+    "display": "जीवाणु पत्ती झुलसा",
+    "crop": "धान",
+    "severity": "ज़्यादा",
+    "description": "यह ज़ैंथोमास ओरिज़ी पीवी ओरिज़ी (Xanthomonas oryzae pv. oryzae) नामक जीवाणु से होने वाली एक गंभीर बीमारी है। पत्तियों के किनारों पर पानी जैसे धब्बे दिखते हैं जो पीले और बाद में सफेद हो जाते हैं।",
+    "causes": "गर्म तापमान (25–30°C), ज्यादा नमी, और बारिश या आंधी-तूफान जिससे पत्ती के घावों के जरिए जीवाणु फैलते हैं।",
+    "treatment_summary": "कॉपर आधारित जीवाणुनाशक डालें। रोग लगे पौधे के कचरे को हटाएं। रोग प्रतिरोधी किस्मों का उपयोग करें। यूरिया (नाइट्रोजन) का ज्यादा इस्तेमाल न करें।",
+    "prevention": "बीमारी रहित, प्रमाणित बीजों का उपयोग करें। खेत में पानी निकासी का ध्यान रखें। संतुलित खाद डालें।",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "भारी (तूफान/बाढ़)"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.5,
+      "rainfall": 0.2
+    }
+  },
+  "brown_spot": {
+    "display": "भूरा धब्बा (ब्राउन स्पॉट)",
+    "crop": "धान",
+    "severity": "मध्यम",
+    "description": "यह कॉक्ಲಿಯोबोलस मियाबिएनस (Cochliobolus miyabeanus) फफूंद से होने वाली बीमारी है। पत्तियों पर गोल या अंडाकार भूरे रंग के धब्बे बन जाते हैं जिनके चारों ओर पीला घेरा होता है।",
+    "causes": "यह मिट्टी में पोषक तत्वों की कमी (खासकर पोटाश और सिलिकॉन) से जुड़ी है। गर्म, नम मौसम और खराब मिट्टी इसकी वजह से बीमारी बढ़ती है।",
+    "treatment_summary": "मैंकोजेब या इप्रोडियोन फफूंदनाशक का छिड़काव करें। मिट्टी में पोषक तत्वों की कमी (पोटाश, सिलिकॉन) को दूर करें। पौधों को बहुत पास-पास न लगाएं।",
+    "prevention": "संतुलित खाद, पानी निकासी वाली अच्छी मिट्टी, और रोग प्रतिरोधी किस्में अपनाएं।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "22–32°C",
+      "humidity": "75–90%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "healthy": {
+    "display": "स्वस्थ",
+    "crop": "सभी",
+    "severity": "कोई नहीं",
+    "description": "पत्ती स्वस्थ दिखाई देती है और इस पर बीमारी के कोई लक्षण नहीं हैं।",
+    "causes": "लागू नहीं",
+    "treatment_summary": "नियमित निगरानी और सावधानी जारी रखें।",
+    "prevention": "अच्छी खेती के तरीके अपनाएं, संतुलित खाद दें और सही से सिंचाई करें।",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "कोई भी",
+      "humidity": "कोई भी",
+      "rainfall": "नियमित"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  },
+  "leaf_blast": {
+    "display": "पत्ती का झोंका रोग (ब्लास्ट)",
+    "crop": "धान",
+    "severity": "बहुत ज़्यादा",
+    "description": "धान की सबसे खतरनाक बीमारियों में से एक, जो मैग्नापोर्टे ओराइज़ी (Magnaporthe oryzae) के कारण होती है। पत्तियों पर बीच में भूरे और किनारों पर हल्के सलेटी रंग के हीरे (डायमंड) के आकार के धब्बे बन जाते हैं।",
+    "causes": "ठंडी रातें, गर्म दिन, ज़्यादा नमी (>90%), भारी ओस, ज़रूरत से ज़्यादा नाइट्रोजन (यूरिया) डालना, और रोग के प्रति संवेदनशील किस्में।",
+    "treatment_summary": "फफूंदनाशक छिड़कें: ट्राइसाइक्लाजोल, आइसोप्रोथियोलेन, या एजोक्सिस्ट्रोबिन। नाइट्रोजन खाद कम करें। नमी कम करने के लिए खेत का पानी निकाल दें।",
+    "prevention": "ब्लास्ट-रोधी किस्मों का इस्तेमाल करें। ज़्यादा नाइट्रोजन न दें। पौधों के बीच अच्छी हवा का आना-जाना सुनिश्चित करें।",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "बार-बार हल्की बारिश/ओस"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "leaf_scald": {
+    "display": "पत्ती झुलसा (लीफ स्कैल्ड)",
+    "crop": "धान",
+    "severity": "मध्यम",
+    "description": "माइक्रोडोचियम ओराइज़ी (Microdochium oryzae) के कारण होता है। पत्ती के किनारों पर हल्के और गहरे भूरे रंग की पट्टियां बनती हैं, जिससे एक रिंग जैसा पैटर्न बन जाता है।",
+    "causes": "ज़्यादा नमी, गर्म तापमान, और पास-पास पौधे लगाना जिससे हवा का आना-जाना कम हो जाता है।",
+    "treatment_summary": "प्रोपिकोनाजोल या कार्बेन्डाजिम फफूंदनाशक का छिड़काव करें। खेत की जल निकासी और पौधों की दूरी में सुधार करें।",
+    "prevention": "कतारों के बीच ज़्यादा दूरी रखें, संतुलित खाद दें, और रोग-प्रतिरोधी किस्में लगाएं।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_carbendazim"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "मध्यम से भारी"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "sheath_blight": {
+    "display": "पर्णच्छद अंगमारी (शीथ ब्लाइट)",
+    "crop": "धान",
+    "severity": "ज्यादा",
+    "description": "यह राज़क्टोनिया सोलाणी (Rhizoctonia solani) फंगस से होता है। पौधे के तनों पर गहरे भूरे किनारे वाले अंडे के आकार के हरे-भूरे धब्बे बन जाते हैं, जो पत्तियों तक फैल जाते हैं।",
+    "causes": "ज्यादा नमी (>90%), 28–32°C तापमान, घना रोपण, नाइट्रोजन की ज्यादा मात्रा, और खेत में पानी भरा रहना जिससे फंगस फैलती है।",
+    "treatment_summary": "वैलिडामाइसिन, हेक्साकोनाज़ोल, या प्रोपिकोनाज़ोल फफूंदनाशक का छिड़काव करें। पौधों के बीच की दूरी बढ़ाएं। फसल के अंदर नमी कम करें।",
+    "prevention": "बीज कम मात्रा में बोएं, संतुलित खाद दें, और पानी का सही प्रबंधन रखें।",
+    "treatment_ids": [
+      "treat_validamycin",
+      "treat_hexaconazole",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–32°C",
+      "humidity": ">90%",
+      "rainfall": "भारी जलभराव"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "aphid": {
+    "display": "माहू (चेपा) कीट का हमला",
+    "crop": "गेहूं",
+    "severity": "मध्यम",
+    "description": "छोटे नरम शरीर वाले कीड़े जो पत्तियों और तनों पर झुंड बनाकर बैठते हैं, पौधे का रस चूसते हैं और वायरस फैला सकते हैं।",
+    "causes": "गर्म और सूखा मौसम, प्राकृतिक दुश्मनों (कीड़ों) की कमी, और घना रोपण।",
+    "treatment_summary": "इमिडाक्लोप्रिड या लैम्ब्डा-साइहैलोथrin कीटनाशक का छिड़काव करें। प्राकृतिक शिकारियों (लेडीबग कीड़ों) को बढ़ावा दें।",
+    "prevention": "समय पर बुआई करें, फसल चक्र अपनाएं, और ज्यादा नाइट्रोजन खाद से बचें।",
+    "treatment_ids": [
+      "treat_imidacloprid",
+      "treat_lambda_cyhalothrin"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–25°C",
+      "humidity": "<60%",
+      "rainfall": "कम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "black_rust": {
+    "display": "काला रतुआ (तना रतुआ)",
+    "crop": "गेहूं",
+    "severity": "बहुत ज्यादा",
+    "description": "यह पक्सिनिया ग्रेमिनिस (Puccinia graminis) से होता है। तनों और पत्तियों पर ईंट जैसे लाल से काले फफोले बन जाते हैं। इससे पूरी फसल बर्बाद हो सकती है।",
+    "causes": "गर्म तापमान (15–30°C), ओस, और आसपास के संक्रमित खेतों से हवा के जरिए उड़कर आने वाले स्पोर।",
+    "treatment_summary": "शुरुआती दौर में प्रोपिकोनाज़ोल, टेबुकोनाज़ोल, या ट्राइफ्लोक्सिस्ट्रोबिन फफूंदनाशक का छिड़काव करें।",
+    "prevention": "रोग प्रतिरोधी किस्में उगाएं। समय पर बुआई करें। उगी हुई फालतू गेहूं की बालियों को हटाएं।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole",
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–30°C",
+      "humidity": ">80%",
+      "rainfall": "मध्यम बारिश और ओस"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "blast": {
+    "display": "झोंका रोग (ब्लास्ट) (धान)",
+    "crop": "धान",
+    "severity": "बहुत ज़्यादा",
+    "description": "मैग्नापोर्टे ओराइजी (Magnaporthe oryzae)। पत्तियों पर हीरे (डायमंड) के आकार के धब्बे। बालियों को भी नुकसान पहुँचा सकता है (बालियों का झोंका रोग)।",
+    "causes": "ठंडी रातें, सुबह की ओस, ज़्यादा यूरिया (नाइट्रोजन), और रोग के प्रति संवेदनशील किस्में।",
+    "treatment_summary": "ट्राइसाइक्लाजोल, आइसोप्रोटिओलेन, एज़ोक्सिस्ट्रोबिन फफूंदनाशक।",
+    "prevention": "रोग प्रतिरोधी किस्में, संतुलित मात्रा में यूरिया, और नियंत्रित सिंचाई।",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "लगातार ओस / हल्की बारिश"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "brown_rust": {
+    "display": "भूरा रतुआ (पत्ती का रतुआ)",
+    "crop": "गेहूं",
+    "severity": "ज़्यादा",
+    "description": "पक्सिनिया ट्रीटीसिना (Puccinia triticina) के कारण होता है। पत्ती की ऊपरी सतह पर नारंगी-भूरे रंग के फफोले। बहुत आम और बड़े पैमाने पर फैलने वाला।",
+    "causes": "मध्यम तापमान (15–22°C), ओस और नमी वाला मौसम।",
+    "treatment_summary": "फफूंदनाशक: प्रोपिकोनाजोल, मैंकोजेब। बीमारी की शुरुआत में ही छिड़काव करें।",
+    "prevention": "रोग प्रतिरोधी किस्में, समय पर बुआई, फसल चक्र अपनाना।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": ">70%",
+      "rainfall": "हल्की बारिश / ओस"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "common_root_rot": {
+    "display": "आम जड़ सड़न (कॉमन रूट रोट)",
+    "crop": "गेहूं",
+    "severity": "मध्यम",
+    "description": "बायपोलारिस सोरोकिनियाना (Bipolaris sorokiniana) के कारण होता है। मुकुट और जड़ के ऊतकों का भूरे से काले रंग का होना।",
+    "causes": "सूखी मिट्टी, बुआई के समय गर्म तापमान, और मिट्टी में मौजूद संक्रमण।",
+    "treatment_summary": "ट्रिफ्लॉक्सिस्ट्रोबिन + टेबुकोनाजोल से बीज उपचार। गैर-अनाज फसलों के साथ फसल चक्र अपनाना।",
+    "prevention": "मिट्टी की उपजाऊ शक्ति को संतुलित रखना, लगातार गेहूं की खेती से बचना, और सही गहराई पर बुआई करना।",
+    "treatment_ids": [
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–28°C",
+      "humidity": "कम मिट्टी की नमी",
+      "rainfall": "अपर्याप्त"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.3,
+      "rainfall": 0.3
+    }
+  },
+  "fusarium_head_blight": {
+    "display": "फ्यूैरियम हेड ब्लाइट (स्केब)",
+    "crop": "गेहूं",
+    "severity": "बहुत ज़्यादा",
+    "description": "यह फंगस (फ्यूज़ेरियम ग्रैमिनिरम) की वजह से होता है। बालियों का रंग फीका पड़ जाता है और गुलाबी फफूंदी दिखती है। इससे ज़हरीले तत्व (DON) बनते हैं जो दाने को खराब कर देते हैं।",
+    "causes": "फूल आने के समय नमी, 25–30°C तापमान और खेत में फसल के बचे हुए अवशेष।",
+    "treatment_summary": "फूल आने की शुरुआत में थियोफैनेट-मिथाइल या मेटकोनाज़ोल का छिड़काव करें। बीमारी वाले अवशेषों को हटा दें।",
+    "prevention": "रोग-प्रतिरोधी किस्में लगाएं, कचरे को मिट्टी में दबाने के लिए जुताई करें, और खेत में पानी न रुकने दें।",
+    "treatment_ids": [
+      "treat_thiophanate_methyl",
+      "treat_metconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">90%",
+      "rainfall": "फूल आते समय बारिश"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "leaf_blight": {
+    "display": "पत्ती झुलसा",
+    "crop": "गेहूं",
+    "severity": "मध्यम",
+    "description": "पुरानी पत्तियों पर पीले किनारों वाले भूरे-हल्के भूरे धब्बे बन जाते हैं।",
+    "causes": "गर्म और नमी वाला मौसम तथा ऐसी किस्में जिन पर बीमारी जल्दी लगती है।",
+    "treatment_summary": "मैनकोजेब या प्रोपिकोनाजोल फफूंदनाशक का छिड़काव करें।",
+    "prevention": "फसल चक्र अपनाएं और रोग-प्रतिरोधी किस्मों का उपयोग करें।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–30°C",
+      "humidity": ">70%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "mildew": {
+    "display": "चूर्णिल आसिता (सफेद फफूंदी)",
+    "crop": "गेहूं",
+    "severity": "मध्यम",
+    "description": "पत्तियों पर सफेद पाउडर जैसी परत जम जाती है, जो ब्लूमरिया ग्रैमिनिस फंगस के कारण होती है। इससे पौधे का खाना बनाने का काम कम हो जाता है।",
+    "causes": "ठंडा तापमान (15–22°C), मध्यम नमी, और घनी फसल।",
+    "treatment_summary": "ट्रायडाइमीफॉन, प्रोपिकोनाजोल, या गंधक (सल्फर) आधारित फफूंदनाशक का छिड़काव करें।",
+    "prevention": "लाइन से बुवाई के दौरान कतारों में सही दूरी रखें, रोग-प्रतिरोधी किस्में लगाएं, और समय पर बुवाई करें।",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole",
+      "treat_sulfur"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": "60–80%",
+      "rainfall": "कम से मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "mite": {
+    "display": "मकड़ी कीट का हमला",
+    "crop": "गेहूं",
+    "severity": "कम",
+    "description": "छोटे मकड़ी जैसे कीड़े जो पत्तियों पर चांदी जैसे धब्बे और तांबे जैसा रंग बना देते हैं।",
+    "causes": "गर्मी और सूखा मौसम। ऐसी दवाइयों का इस्तेमाल करना जिससे प्राकृतिक दुश्मन कीट मर जाएं।",
+    "treatment_summary": "एबमेक्टिन (abamectin) या डिकोफॉल (dicofol) माइटनाशक डालें। सिंचाई बढ़ा दें।",
+    "prevention": "बहुत ज्यादा सूखा मौसम न होने दें। फायदेमंद कीटों को बचाएं।",
+    "treatment_ids": [
+      "treat_abamectin",
+      "treat_dicofol"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": "<50%",
+      "rainfall": "बहुत कम"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.3,
+      "rainfall": 0.2
+    }
+  },
+  "septoria": {
+    "display": "सेप्टोरिया पत्ती धब्बा रोग",
+    "crop": "गेहूं",
+    "severity": "ज्यादा",
+    "description": "जाइमोसेप्टोरिया ट्रिटिसी (Zymoseptoria tritici) के कारण होता है। पत्तियों पर हल्के हरे-पीले धब्बे जिन पर भूरे रंग के सड़े हुए हिस्से और छोटे दाने होते हैं।",
+    "causes": "ठंडा और गीला मौसम (10–20°C), पत्तियों का 20 घंटे से ज्यादा समय तक गीला रहना।",
+    "treatment_summary": "ट्रियाजोल (triazole) या एसडीएचआई (SDHI) फफूंदनाशक (एपोक्सीकोनाजोल, फ्लुक्सापिरोक्साड)। समय रहते छिड़काव करना बहुत जरूरी है।",
+    "prevention": "resistant किस्में, फसल चक्र, बु ाइ में देरी।",
+    "treatment_ids": [
+      "treat_epoxiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–20°C",
+      "humidity": ">80%",
+      "rainfall": "बार-बार बारिश"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "smut": {
+    "display": "ढीला कड़वा (लूज स्मट)",
+    "crop": "गेहूं",
+    "severity": "मध्यम",
+    "description": "उस्टिलागो ट्रिटिसी (Ustilago tritici) के कारण होता है। बालियों में दाने की जगह काले पाउडर जैसे बीजाणु बन जाते हैं।",
+    "causes": "फूल आते समय मध्यम तापमान और नमी वाला मौसम। यह बीमारी बीज से फैलती है।",
+    "treatment_summary": "कार्बोक्सिन (carboxin), थिरम (thiram), या टेबुकोनाजोल (tebuconazole) से बीज उपचार बहुत असरदार है।",
+    "prevention": "बीमारी रहित प्रमाणित बीज का इस्तेमाल करें। गर्म पानी से बीज उपचार करें।",
+    "treatment_ids": [
+      "treat_carboxin_thiram"
+    ],
+    "favorable_conditions": {
+      "temperature": "16–22°C",
+      "humidity": ">60%",
+      "rainfall": "फूल आते समय मध्यम बारिश"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "stem_fly": {
+    "display": "तना मक्खी",
+    "crop": "गेहूं",
+    "severity": "मध्यम",
+    "description": "छोटे पौधों के तनों के अंदर इल्लियों द्वारा सुरंग बनाने से 'डेड हार्ट' (सूखा हुआ बीच का तना) के लक्षण दिखाई देते हैं।",
+    "causes": "फसल की शुरुआती अवस्था में ठंडे तापमान (15–20°C) के दौरान इसका सबसे ज्यादा प्रकोप होता है।",
+    "treatment_summary": "अंकुरण की अवस्था में क्लोरपाइरीफास या इमिडाक्लोप्रिड का छिड़काव करें।",
+    "prevention": "जल्दी बुवाई करें, सिस्टमिक कीटनाशक से बीजों का उपचार करें, और पौधों के निचले हिस्सों की निगरानी रखें।",
+    "treatment_ids": [
+      "treat_chlorpyrifos",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–20°C",
+      "humidity": "कोई भी",
+      "rainfall": "कम से मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.25,
+      "rainfall": 0.25
+    }
+  },
+  "tan_spot": {
+    "display": "टैन स्पॉट (धब्बेदार पत्ती रोग)",
+    "crop": "गेहूं",
+    "severity": "मध्यम",
+    "description": "यह पाइरेनोफोरा ट्रिटिसी-रिपेंटिस के कारण होता है। इसमें पीले किनारों वाले भूरे रंग के अंडाकार धब्बे बनते हैं।",
+    "causes": "गर्म तापमान (20–28°C), पत्तियों पर नमी, और पिछले साल के फसल के अवशेष।",
+    "treatment_summary": "प्रोपिकोनाजोल या मैंकोजेब का छिड़काव करें। अवशेषों को दबाने के लिए जुताई करें।",
+    "prevention": "फसल चक्र अपनाएं, अवशेषों का प्रबंधन करें, और रोग-प्रतिरोधी किस्में लगाएं।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">70%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "yellow_rust": {
+    "display": "पीला रतुआ (धारीदार रतुआ)",
+    "crop": "गेहूं",
+    "severity": "बहुत ज़्यादा",
+    "description": "यह पक्सीनिया स्ट्राइफॉर्मिस के कारण होता है। पत्तियों की नसों के साथ धारियों में चमकीले पीले फफोले बन जाते हैं। ठंडे मौसम में यह बहुत नुकसान पहुंचाता है।",
+    "causes": "ठंडा तापमान (10–15°C), ओस और कोहरा, और संवेदनशील किस्में।",
+    "treatment_summary": "शुरुआत में ही प्रोपिकोनाजोल, टेबुकोनाजोल या अन्य ट्राइऐजोल फफूंदनाशक का छिड़काव करें।",
+    "prevention": "रोग-प्रतिरोधी किस्में सबसे असरदार होती हैं। जल्दी बुवाई करें। मौसम के अनुमान पर नजर रखें।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–15°C",
+      "humidity": ">80%",
+      "rainfall": "ओस / हल्की बारिश"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "mosaic_disease": {
+    "display": "मोज़ेक रोग",
+    "crop": "गन्ना",
+    "severity": "ज्यादा",
+    "description": "यह गन्ने के मोज़ेक वायरस (SCMV) की वजह से होता है। पत्तियों पर मोज़ेक जैसे या चित्तीदार निशान बन जाते हैं — जिसमें हल्के और गहरे हरे रंग के धब्बे आमने-सामने होते हैं।",
+    "causes": "यह माहू (एफिड्स - Rhopalosiphum maidis) कीट से और बीमारी वाले बीज गन्ने से फैलता है।",
+    "treatment_summary": "इसकी कोई रासायनिक दवा नहीं है। बीमारी वाले पौधों को उखाड़कर नष्ट कर दें। माहू कीट को नियंत्रित करें।",
+    "prevention": "वायरस-मुक्त बीज गन्ने का इस्तेमाल करें, रोग-प्रतिरोधी किस्में लगाएं, और माहू की संख्या को रोकें।",
+    "treatment_ids": [
+      "treat_routine_monitoring",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": "मध्यम",
+      "rainfall": "कोई भी"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.35,
+      "rainfall": 0.35
+    }
+  },
+  "rust": {
+    "display": "गन्ने का रतुआ",
+    "crop": "गन्ना",
+    "severity": "मध्यम",
+    "description": "यह पक्सिनिया मेलानोसेफला (Puccinia melanocephala) की वजह से होता है। पत्तियों के नीचे की तरफ नारंगी-भूरे रंग के फफोले बन जाते हैं जिससे पत्तियां समय से पहले सूख जाती हैं।",
+    "causes": "गर्म तापमान (24–28°C), ज्यादा नमी, और बीमारी लगने वाली किस्में।",
+    "treatment_summary": "ट्रायडाइमेफॉन या प्रोपिकोनाजोल फफूंदनाशक का छिड़काव करें। ज्यादा संक्रमित पत्तियों को हटा दें।",
+    "prevention": "रोग-प्रतिरोधी किस्में लगाएं। संतुलित खाद का इस्तेमाल करें।",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "24–28°C",
+      "humidity": ">75%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "bacterial_blight": {
+    "display": "बैक्टीरियल ब्लाइट (जीवाणु झुलसा रोग)",
+    "crop": "कपास",
+    "severity": "ज्यादा",
+    "description": "यह ज़ैंथोमोनस एक्सोनोपॉडिस पीवी मैलवेसिएरम (Xanthomonas axonopodis pv. malvacearum) की वजह से होता है। पत्तियों पर कोनेदार पानी जैसे धब्बे और तनों पर काले घाव बन जाते हैं।",
+    "causes": "गर्म और नम मौसम, बारिश की छीटें, मशीनों से चोट लगना, और संक्रमित बीज।",
+    "treatment_summary": "कॉपर ऑक्सीक्लोराइड या स्ट्रेप्टोमाइसिन का छिड़काव करें। संक्रमित कचरे को हटा दें।",
+    "prevention": "बीमारी-मुक्त प्रमाणित बीज, बीज उपचार, और फसल चक्र अपनाएं।",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–35°C",
+      "humidity": ">80%",
+      "rainfall": "भारी"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "alternaria_leaf_spot": {
+    "display": "अल्टरनेरिया पत्ती धब्बा रोग",
+    "crop": "कपास",
+    "severity": "मध्यम",
+    "description": "अल्टरनेरिया मैक्रोस्पोरा (Alternaria macrospora) के कारण होता है। पत्तियों पर गोल, गहरे भूरे से काले धब्बे जिन पर चक्र जैसे घेरे होते हैं।",
+    "causes": "زیادہ नमी और 25–30°C तापमान। कमजोर या तनावग्रस्त पौधों पर इसका असर सबसे ज्यादा होता है।",
+    "treatment_summary": "मैनकोजेब, क्लोरोथालोनिल, या इप्रोडियोन फफूंदनाशक का छिड़काव करें।",
+    "prevention": "अच्छा जल निकास, संतुलित खाद, और रोग लगे अवशेषों को हटा दें।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_chlorothalonil",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">75%",
+      "rainfall": "मध्यम से ज्यादा"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "hispa": {
+    "display": "धान का हिस्पा",
+    "crop": "धान",
+    "severity": "मध्यम",
+    "description": "डिक्लाडिसपा आर्मीजेरा (पत्ती खाने वाला भौंरा) के कारण होता है। वयस्क कीड़े पत्तियों की ऊपरी सतह को खुरचते हैं; सुंडी पत्तियों के अंदर सुरंग बनाकर सफेद लकीरें बना देती है।",
+    "causes": "ज्यादा नाइट्रोजन वाली घनी और हरी-भरी फसल। बरसात के मौसम के हालात।",
+    "treatment_summary": "मैलाथियान या मोनोक्रोटोफॉस का छिड़काव करें। प्रभावित पत्तियों को काटकर नष्ट कर दें।",
+    "prevention": "ज्यादा खाद देने से बचें, प्रतिरोधी किस्में लगाएं, बहुत पास-पास पौधे लगाने से बचें।",
+    "treatment_ids": [
+      "treat_malathion",
+      "treat_monocrotophos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">75%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "tungro": {
+    "display": "टुंग्रो वायरस रोग",
+    "crop": "धान",
+    "severity": "बहुत ज्यादा",
+    "description": "दो वायरस (RTBV + RTSV) के कारण होता है जो हरे फुदके (लीफहॉपर) द्वारा फैलाए जाते हैं। पत्तियां पीली-नारंगी हो जाती हैं। पौधे छोटे रह जाते हैं और केंले कम निकलते हैं।",
+    "causes": "हरे फुदके (नीफोटेटिक्स प्रजाति) की आबादी जो दोनों वायरस लेकर चलती है।",
+    "treatment_summary": "कोई सीधा इलाज नहीं है। बुप्रोफेजिन या इमिडाक्लोपिड डालकर फुदकों को कंट्रोल करें।",
+    "prevention": "प्रतिरोधी किस्में (उत्तरी मेराह), एक साथ बुआई, और फुदकों का प्रबंधन।",
+    "treatment_ids": [
+      "treat_buprofezin",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.35,
+      "rainfall": 0.3
+    }
+  },
+  "dead_heart": {
+    "display": "डेड हार्ट (तना छेदक)",
+    "crop": "धान",
+    "severity": "ज़्यादा",
+    "description": "तना छेदक (स्टेम बोरर) की सुंडियों के कारण होता है। बीच की पत्ती पीली पड़ जाती है और सूख जाती है — आसानी से बाहर निकल आती है।",
+    "causes": "बढ़वार के समय तना छेदक पतंगों की संख्या बढ़ना।",
+    "treatment_summary": "कार्टाप हाइड्रोक्लोराइड, क्लोरपाइरीफास या फ्लubendiamide (फ्लूबेंडियामाइड) दानेदार दवा डालें।",
+    "prevention": "जब पतंगे सक्रिय हों तब जल्दी बुवाई करने से बचें। लाइट ट्रैप (प्रकाश प्रपंच) का इस्तेमाल करें। अंडे के गुच्छे हटा दें।",
+    "treatment_ids": [
+      "treat_cartap",
+      "treat_flubendiamide",
+      "treat_chlorpyrifos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": "ज़्यादा",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "downy_mildew": {
+    "display": "मृदुरोमिल आसिता",
+    "crop": "धान",
+    "severity": "मध्यम",
+    "description": "Sclerophthora macrospora के कारण होता है। पत्तियों के नीचे की तरफ रुएदार बढ़त के साथ हल्के पीले रंग के धब्बे बन जाते हैं।",
+    "causes": "खेत में पानी भरना, ठंडा तापमान और ज़्यादा नमी।",
+    "treatment_summary": "మెటalaxyl (मेटालैक्सिल) या fosetyl-aluminium (फोसेटाइल-एल्युमिनियम) फफूंदनाशक का इस्तेमाल करें। पानी की निकासी सुधारें।",
+    "prevention": "पानी जमा न होने दें, खेत की जल निकासी सुधारें, रोग प्रतिरोधी किस्में लगाएं।",
+    "treatment_ids": [
+      "treat_metalaxyl",
+      "treat_fosetyl_al"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–25°C",
+      "humidity": ">90%",
+      "rainfall": "भारी बारिश"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_leaf_streak": {
+    "display": "बैक्टीरियल लीफ स्ट्रिक",
+    "crop": "धान",
+    "severity": "मध्यम",
+    "description": "Xanthomonas oryzae pv. oryzicola के कारण होता है। नसों के बीच पतली, पारभासी पानी जैसी भीगी हुई धारियां बन जाती हैं।",
+    "causes": "गर्म और उमस भरा मौसम। बारिश के छींटों और सिंचाई के पानी से फैलता है।",
+    "treatment_summary": "तांबे (कॉपर) आधारित जीवाणुनाशक लगाएं। संक्रमित पत्तियां हटा दें।",
+    "prevention": "प्रतिरोधी किस्मों का उपयोग करें। बहुत ज़्यादा नाइट्रोजन खाद न डालें।",
+    "treatment_ids": [
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "भारी"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_panicle_blight": {
+    "display": "बैक्टीरियल पैनिकल ब्लाइट",
+    "crop": "धान",
+    "severity": "ज्यादा",
+    "description": "यह बर्कहोलडेरिया ग्लुमे (Burkholderia glumae) की वजह से होता है। इसमें दाने खाली रह जाते हैं और उनका रंग भूरा-स्लेटी हो जाता है। इससे पैदावार में बहुत नुकसान होता है।",
+    "causes": "फूल आते समय ज्यादा तापमान (>30°C) और साथ में ज्यादा नमी होना।",
+    "treatment_summary": "बाली निकलते समय ऑक्सोलिनिक एसिड (oxolinic acid) या तांबे (copper) वाला जीवाणुनाशक डालें।",
+    "prevention": "बीमारी सहने वाली किस्में लगाएं, बाली निकलते समय पानी की कमी न होने दें।",
+    "treatment_ids": [
+      "treat_oxolinic_acid",
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": ">85%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "normal": {
+    "display": "स्वस्थ (सामान्य)",
+    "crop": "धान",
+    "severity": "कोई नहीं",
+    "description": "कोई बीमारी नहीं मिली है। फसल बिल्कुल स्वस्थ दिख रही है।",
+    "causes": "लागू नहीं",
+    "treatment_summary": "खेत की देखरेख जारी रखें और खेती के जरूरी एहतियाती काम करते रहें।",
+    "prevention": "खाद संतुलित मात्रा में दें, सही से सिंचाई करें और फसल बदलते रहें (क्रॉप रोटेशन)।",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "कोई भी",
+      "humidity": "कोई भी",
+      "rainfall": "नियमित"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  }
+}

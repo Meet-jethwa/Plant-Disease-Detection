@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   CheckCircle2, ChevronDown, Eye,
-  Info, AlertTriangle, AlertCircle, CloudRain,
+  Info, AlertTriangle, AlertCircle, CloudRain
 } from 'lucide-react'
 import type { GeminiResponse, PredictionResponse } from '../../types'
+import { useLang } from '../../contexts/LanguageContext'
+import { localizeDiseaseName } from '../../i18n/translations'
 
 interface DiagnosisCardProps {
   data?: GeminiResponse
@@ -14,7 +16,8 @@ interface DiagnosisCardProps {
   onAsk?: (question: string) => void
 }
 
-export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCardProps) {
+export function DiagnosisCard({ data, prediction }: DiagnosisCardProps) {
+  const { t, lang } = useLang()
   const [openWhatItIs, setOpenWhatItIs] = useState(true)
   const [openWhatToDo, setOpenWhatToDo] = useState(true)
   const [openWhyThinks, setOpenWhyThinks] = useState(false)
@@ -22,11 +25,11 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
 
   if (!prediction) return null
 
-  const diseaseName = prediction.predicted_class?.replace(/_/g, ' ') || 'Crop Health Condition'
+  const localizedDisease = localizeDiseaseName(prediction.predicted_class, lang)
   const confidence = Math.round(prediction.confidence_percent || (prediction.confidence * 100) || 85)
 
   // Status computation (Healthy / Warning / Danger)
-  const isHealthy = diseaseName.toLowerCase().includes('healthy')
+  const isHealthy = prediction.predicted_class?.toLowerCase().includes('healthy')
   const isSevere = prediction.disease_info?.severity?.toLowerCase() === 'severe' || confidence > 85 && !isHealthy
   const statusType: 'healthy' | 'warning' | 'danger' = isHealthy ? 'healthy' : isSevere ? 'danger' : 'warning'
 
@@ -37,11 +40,13 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
     { factor: 'Rainfall & Dew Wetness', importance_pct: 55, explanation: 'Persistent water droplets allow spore penetration into leaf stomata.' },
   ]
 
-  const actions: string[] = data?.recommended_actions || [
+  const actions: string[] = data?.actionable_steps || data?.recommended_actions || [
     prediction.disease_info?.treatment || 'Apply recommended cultural practices and maintain field sanitation.',
     'Isolate severely infected plant tissue and avoid excessive overhead sprinkler irrigation.',
     'Inspect adjacent crop rows within 48 hours to prevent cluster spread.',
   ]
+
+  const translatedCrop = t(('crop.' + (prediction.crop || '').toLowerCase()) as any) || prediction.crop || 'Specimen'
 
   return (
     <div className="rounded-2xl border border-emerald-200 bg-white overflow-hidden shadow-sm my-3 text-left">
@@ -54,37 +59,62 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
             {statusType === 'healthy' && (
               <span className="inline-flex items-center gap-1 text-emerald-800 bg-emerald-100 border-emerald-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                Healthy Specimen
+                {t('diagnosis.healthyPlant')}
               </span>
             )}
             {statusType === 'warning' && (
               <span className="inline-flex items-center gap-1 text-amber-900 bg-amber-100 border-amber-300">
                 <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
-                Warning / Moderate Risk
+                {t('status.warning')}
               </span>
             )}
             {statusType === 'danger' && (
               <span className="inline-flex items-center gap-1 text-red-900 bg-red-100 border-red-300">
                 <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
-                Danger / Severe Pathology
+                {t('status.danger')}
               </span>
             )}
           </div>
 
           <h3 className="text-lg sm:text-xl font-bold text-emerald-950 capitalize leading-tight">
-            {diseaseName}
+            {localizedDisease}
           </h3>
           <p className="text-xs text-stone-500 font-medium">
-            Crop: {prediction.crop?.toUpperCase() || 'Specimen'}
+            {t('common.crop')}: {translatedCrop}
           </p>
         </div>
 
-        {/* Diagnosis Status Badge */}
-        <div className="flex items-center gap-2 bg-emerald-50 px-3.5 py-2.5 rounded-xl border border-emerald-200">
-          <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+        {/* Confidence Ring (Sweeps 0 to value) */}
+        <div className="flex items-center gap-2.5 bg-white px-3 py-2 rounded-xl border border-emerald-200 shadow-xs">
+          <div className="relative w-11 h-11 flex items-center justify-center">
+            <svg className="w-11 h-11 -rotate-90" viewBox="0 0 36 36">
+              <path
+                className="text-emerald-100"
+                strokeWidth="3.5"
+                stroke="currentColor"
+                fill="none"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <motion.path
+                className="text-emerald-700"
+                strokeWidth="3.5"
+                strokeDasharray={`${confidence}, 100`}
+                strokeLinecap="round"
+                stroke="currentColor"
+                fill="none"
+                initial={{ strokeDasharray: '0, 100' }}
+                animate={{ strokeDasharray: `${confidence}, 100` }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+            </svg>
+            <span className="absolute text-xs font-bold text-emerald-950">
+              {confidence}%
+            </span>
+          </div>
           <div className="text-left">
-            <span className="block text-[11px] font-bold text-emerald-900 uppercase tracking-wider">Status</span>
-            <span className="block text-xs font-semibold text-emerald-700">Diagnosis Verified</span>
+            <span className="block text-[11px] font-bold text-emerald-900 uppercase tracking-wider">{t('common.confidence')}</span>
+            <span className="block text-xs text-stone-500">{t('card.diagnosisSummary')}</span>
           </div>
         </div>
       </div>
@@ -98,7 +128,7 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
         >
           <div className="flex items-center gap-2.5">
             <Info className="w-5 h-5 text-emerald-700 shrink-0" />
-            <span className="text-sm font-bold text-emerald-950">What It Is (Disease Profile)</span>
+            <span className="text-sm font-bold text-emerald-950">{t('card.diagnosisSummary')}</span>
           </div>
           <ChevronDown className={`w-4 h-4 text-emerald-700 transition-transform duration-200 ${openWhatItIs ? 'rotate-180' : ''}`} />
         </button>
@@ -136,7 +166,7 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
         >
           <div className="flex items-center gap-2.5">
             <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0" />
-            <span className="text-sm font-bold text-emerald-950">What to Do Now (Immediate Action Steps)</span>
+            <span className="text-sm font-bold text-emerald-950">{t('diagnosis.whatToDoNow')}</span>
           </div>
           <ChevronDown className={`w-4 h-4 text-emerald-700 transition-transform duration-200 ${openWhatToDo ? 'rotate-180' : ''}`} />
         </button>
@@ -177,7 +207,7 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
           >
             <div className="flex items-center gap-2.5">
               <Eye className="w-5 h-5 text-emerald-700 shrink-0" />
-              <span className="text-sm font-bold text-emerald-950">Why the AI Thinks So (Grad-CAM Evidence)</span>
+              <span className="text-sm font-bold text-emerald-950">{t('diagnosis.aiSummary')}</span>
             </div>
             <ChevronDown className={`w-4 h-4 text-emerald-700 transition-transform duration-200 ${openWhyThinks ? 'rotate-180' : ''}`} />
           </button>
@@ -206,7 +236,7 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
                           />
                         </div>
                         <p className="text-[11px] font-bold text-stone-600 text-center uppercase tracking-wider">
-                          Original Specimen
+                          {t('card.original')}
                         </p>
                       </div>
                     )}
@@ -221,7 +251,7 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
                           />
                         </div>
                         <p className="text-[11px] font-bold text-emerald-800 text-center uppercase tracking-wider">
-                          Grad-CAM Heatmap
+                          {t('card.gradcam')}
                         </p>
                       </div>
                     )}
@@ -242,7 +272,7 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
         >
           <div className="flex items-center gap-2.5">
             <CloudRain className="w-5 h-5 text-emerald-700 shrink-0" />
-            <span className="text-sm font-bold text-emerald-950">Environmental & Weather Risk</span>
+            <span className="text-sm font-bold text-emerald-950">{t('scan.environmentalFactors')}</span>
           </div>
           <ChevronDown className={`w-4 h-4 text-emerald-700 transition-transform duration-200 ${openWeatherRisk ? 'rotate-180' : ''}`} />
         </button>
@@ -262,14 +292,14 @@ export function DiagnosisCard({ data, prediction, onAsk: _onAsk }: DiagnosisCard
                   const isHighRisk = pct >= 70
                   const isModerate = pct >= 50 && pct < 70
                   const barColor = isHighRisk ? 'bg-red-500' : isModerate ? 'bg-amber-500' : 'bg-emerald-500'
-                  const statusLabel = isHighRisk ? 'High Risk' : isModerate ? 'Moderate Risk' : 'Low Risk'
+                  const statusLabel = isHighRisk ? t('risk.high') : isModerate ? t('risk.medium') : t('risk.low')
 
                   return (
                     <div key={i} className="p-3 rounded-xl bg-white border border-emerald-200/80 space-y-1.5">
                       <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
                         <span>{env.factor}</span>
                         <span className={isHighRisk ? 'text-red-700' : isModerate ? 'text-amber-800' : 'text-emerald-700'}>
-                          {statusLabel}
+                          {pct}% · {statusLabel}
                         </span>
                       </div>
                       

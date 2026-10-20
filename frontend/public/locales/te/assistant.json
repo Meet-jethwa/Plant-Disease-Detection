@@ -1,0 +1,15 @@
+{
+  "assistant.title": "AI వ్యవసాయ సహాయకుడు",
+  "assistant.subtitle": "వరి, గోధుమ, చెరకు మరియు పత్తి వ్యాధి విశ్లేషణ.",
+  "assistant.placeholder": "ఈ నిర్ధారణ గురించి అడగండి…",
+  "assistant.analyzing": "విశ్లేషిస్తోంది…",
+  "assistant.contextActive": "సందర్భం సక్రియం",
+  "assistant.suggested": "సూచించిన ప్రశ్నలు:",
+  "assistant.followUp": "తర్వాత అడగండి:",
+  "assistant.emptyTitle": "AI నిపుణుడిని అడగండి",
+  "assistant.emptyHint": "స్కాన్ చేసిన ఆకు, చికిత్స లేదా నివారణ గురించి అడగండి.",
+  "assistant.noDiagnosis": "ముందు మొక్క ఆకును స్కాన్ చేయండి.",
+  "assistant.weatherAdvice": "ఈరోజు వాతావరణ సలహా",
+  "assistant.jumpToLatest": "చివరికి వెళ్ళు",
+  "assistant.welcomeMsg": "నమస్కారం! నేను మీ మొక్కల ఆరోగ్య సహాయకుడిని. పూర్తి రోగ నిర్ధారణ కోసం మొక్క ఆకు ఫోటోను అప్‌లోడ్ చేయండి — నమ్మకం స్కోర్, గ్రాడ్-క్యామ్ (Grad-CAM దృష్టి పటం) సాక్ష్యం, వాతావరణ ముప్పు విశ్లేషణ మరియు ఆచరణాత్మక సలహాలు పొందండి."
+}

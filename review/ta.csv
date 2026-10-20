@@ -1,0 +1,738 @@
+key,english,translation,status
+fe:diagnosis:diagnosis.treatment,Treatment Plan,சிகிச்சை திட்டம்,reviewed
+fe:diagnosis:diagnosis.showTreatmentsAnyway,Show possible treatments anyway,எப்படியும் சாத்தியமான தீர்வுகளைக் காட்டு,machine
+fe:library:library.treatment,Recommended Treatment Plan,பரிந்துரைக்கப்பட்ட சிகிச்சை முறை,machine
+fe:scan:scan.treatmentGuide,Treatment Guide,சிகிச்சை வழிகாட்டி,machine
+be:disease:bacterial_leaf_blight:treatment_summary,Apply copper-based bactericides. Remove infected plant debris. Use resistant varieties. Avoid excessive nitrogen fertilization.,காப்பர் கலந்த பாக்டீரியாக்கொல்லியைத் தெளிக்கவும். நோய்த்தாக்கிய செடி கழிவுகளை அகற்றவும். நோய் எதிர்ப்பு சக்தி கொண்ட ரகங்களை நடவு செய்யவும். அதிகப்படியான தழைச்சரக்கு (நைட்ரஜன்) உரங்களைத் தவிர்க்கவும்.,machine
+be:disease:brown_spot:treatment_summary,"Apply mancozeb or iprodione fungicide. Correct soil nutrient deficiencies (potassium, silicon). Reduce dense planting.","மேன்கேசெப் அல்லது ஐப்ரோடியோன் பூஞ்சாணக்கொல்லியைத் தெளிக்கவும். மண்ணில் உள்ள சத்து குறைபாட்டை (பொட்டாசியம், சிலிக்கான்) சரிசெய்யவும். நெருக்கமாக நடுதலைத் தவிர்க்கவும்.",machine
+be:disease:healthy:treatment_summary,Continue regular monitoring and preventive care.,"தொடர்ந்து கவனித்து, தடுப்பு முறைகளைப் பின்பற்றவும்.",machine
+be:disease:leaf_blast:treatment_summary,"Apply fungicides: tricyclazole, isoprothiolane, or azoxystrobin. Reduce nitrogen fertilizer. Drain fields to reduce humidity.","பூஞ்சாணக்கொல்லிகளைத் தெளிக்கவும்: tricyclazole, isoprothiolane அல்லது azoxystrobin. தழைச்சத்து உரத்தைக் குறைக்கவும். ஈரப்பதத்தைக் குறைக்க வயலில் தேங்கிய நீரை வெளியேற்றவும்.",machine
+be:disease:leaf_scald:treatment_summary,Apply propiconazole or carbendazim fungicide. Improve field drainage and plant spacing.,propiconazole அல்லது carbendazim பூஞ்சாணக்கொல்லியைத் தெளிக்கவும். வயல் வடிகால் மற்றும் பயிர் இடைவெளியை மேம்படுத்தவும்.,machine
+be:disease:sheath_blight:treatment_summary,"Apply validamycin, hexaconazole, or propiconazole fungicides. Reduce plant density. Minimize canopy humidity.","வாலிடமைசின், ஹெக்சாகோனசோல் அல்லது ப்ரோபிகோனசோல் பூஞ்சாணக்கொல்லிகளைப் பயன்படுத்துங்கள். பயிர்களின் நெருக்கத்தைக் குறைக்கவும். இலைப்பகுதிகளில் ஈரப்பதம் தேங்குவதைக் குறையுங்கள்.",machine
+be:disease:aphid:treatment_summary,Apply imidacloprid or lambda-cyhalothrin insecticide. Encourage natural predators (ladybugs).,"இமிடாபிரிட் அல்லது லேம்டா-சைஹாலோத்ரின் பூச்சிக்கொல்லியைப் பயன்படுத்துங்கள். இயற்கையான எதிரிப் பூச்சிகளைப் (பொறிவண்டு) பாதுகாக்க, ஊக்குவிக்க வேண்டும்.",machine
+be:disease:black_rust:treatment_summary,"Apply propiconazole, tebuconazole, or trifloxystrobin fungicides at early stages.","நோயின் ஆரம்ப கட்டங்களிலேயே ப்ரோபிகோனசோல், டெபுகோனசோல் அல்லது ட்ரிப்ளாக்சோஸ்ட்ரோபின் பூஞ்சாணக்கொல்லிகளைப் பயன்படுத்துங்கள்.",machine
+be:disease:blast:treatment_summary,"Tricyclazole, isoprothiolane, azoxystrobin fungicides.","ட்ரைகிளசோல் (Tricyclazole), ஐசோப்ரோதியோலேன் (isoprothiolane), அசோக்சিস্টரோபின் (azoxystrobin) பூஞ்சாணக்கொல்லிகள்.",machine
+be:disease:brown_rust:treatment_summary,"Fungicides: propiconazole, mancozeb. Apply at early infection stage.","பூஞ்சாணக்கொல்லிகள்: ப்ரோபிகோனசோல் (propiconazole), மேன்கோசெப் (mancozeb). நோய் தொடக்க நிலையிலேயே பயன்படுத்தவும்.",machine
+be:disease:common_root_rot:treatment_summary,Seed treatment with trifloxystrobin + tebuconazole. Crop rotation with non-cereal crops.,ட்ரைஃப்ளோக்சিস্টரோபின் + டெபு<bos>3-கனசோல் (trifloxystrobin + tebuconazole) கொண்டு விதை நேர்த்தி செய்தல். தானியமல்லாத பயிர்களுடன் பயிர் சுழற்சி செய்தல்.,machine
+be:disease:fusarium_head_blight:treatment_summary,Apply thiophanate-methyl or metconazole at early flowering. Remove infected debris.,பூக்கும் தொடக்கத்திலேயே தியோபனேட்-மெத்தில் அல்லது மெட்கோனசோல் அடிக்கவும். பாதிக்கப்பட்ட குப்பைகளை அகற்றவும்.,machine
+be:disease:leaf_blight:treatment_summary,Mancozeb or propiconazole fungicide application.,மேன்கோசெப் அல்லது ப்ரோபிகோனசோல் பூஞ்சாணக்கொல்லியை அடிக்கவும்.,machine
+be:disease:mildew:treatment_summary,"Apply triadimefon, propiconazole, or sulfur-based fungicides.","டிரையடிமிபான், ப்ரோபிகோனசோல் அல்லது சல்பர் அடிப்படையிலான பூஞ்சாணக்கொல்லிகளைப் பயன்படுத்துங்கள்.",machine
+be:disease:mite:treatment_summary,Apply abamectin or dicofol miticide. Increase irrigation.,அபாமெக்டின் (abamectin) அல்லது டிகோபோல் (dicofol) சிலந்திநாசிகளை அடிக்கவும். நீர்ப்பாசனத்தை அதிகரிக்கவும்.,machine
+be:disease:septoria:treatment_summary,"Triazole or SDHI fungicides (epoxiconazole, fluxapyroxad). Early application is key.","டிரையாசோல் (Triazole) அல்லது எஸ்டிஹெச்ஐ (SDHI) பூஞ்சாணக்கொல்லிகள் (எபாக்சிகோனசோல், ப்ளக்சாபைராக்சாட்). முன்கூட்டியே அடிப்பது மிகவும் முக்கியம்.",machine
+be:disease:smut:treatment_summary,"Seed treatment with carboxin, thiram, or tebuconazole is highly effective.","கார்பாக்சின் (carboxin), தியரம் (thiram) அல்லது டெபுコナசோல் (tebuconazole) கொண்டு விதை நேர்த்தி செய்வது மிகவும் பயனுள்ளது.",machine
+be:disease:stem_fly:treatment_summary,Apply chlorpyrifos or imidacloprid at seedling stage.,நாற்றுப் பருவத்தில் குளோர்பைரிபாஸ் அல்லது இমিடாகிரிப்ரீடு தெளிக்கவும்.,machine
+be:disease:tan_spot:treatment_summary,Apply propiconazole or mancozeb. Tillage to bury residues.,ப்ரோபிகோனசோல் அல்லது மேன்கோசெப் தெளிக்கவும். எச்சங்களை மூடி உழவு செய்தல்.,machine
+be:disease:yellow_rust:treatment_summary,"Apply propiconazole, tebuconazole, or other triazole fungicides early.","ப்ரோபிகோனசோல், டெபுகோனசோல் அல்லது பிற ட்ரையாசோல் பூஞ்சாணக்கொல்லிகளை முன்கூட்டியே தெளிக்கவும்.",machine
+be:disease:mosaic_disease:treatment_summary,No chemical cure. Remove and destroy infected stools. Control aphid vectors.,இதற்கு மருந்து கிடையாது. நோய் தாக்கிய பயிர்களைப் பிடுங்கி அழிக்கணும். செதில் பூச்சிகளைக் கட்டுப்படுத்தணும்.,machine
+be:disease:rust:treatment_summary,Apply triadimefon or propiconazole fungicide. Remove severely infected leaves.,ட்ரையடிமெபான் அல்லது ப்ரோபிகோனசோல் பூஞ்சாணக்கொல்லியைத் தெளிக்கவும். கடுமையாகப் பாதிக்கபட்ட இலைகளை அகற்றவும்.,machine
+be:disease:bacterial_blight:treatment_summary,Apply copper oxychloride or streptomycin spray. Remove infected debris.,காப்பர் ஆக்சிகுளோரைடு அல்லது ஸ்ட್ರೆப்டோமைசின் மருந்தைத் தெளிக்கவும். நோய் தாக்கிய கழிவுகளை அகற்றவும்.,machine
+be:disease:alternaria_leaf_spot:treatment_summary,"Apply mancozeb, chlorothalonil, or iprodione fungicide.","மேன்கோசெப் (mancozeb), குளோரோடாலோனில் (chlorothalonil), அல்லது ஐப்ரோடியோன் (iprodione) பூஞ்சாணக்கொல்லியைத் தெளிக்கவும்.",machine
+be:disease:hispa:treatment_summary,Apply malathion or monocrotophos. Clip and destroy affected leaves.,மலாத்தியான் (malathion) அல்லது மோனோகுரோட்டோபாஸ் (monocrotophos) தெளிக்கவும். பாதிக்கப்பட்ட இலைகளை நறுக்கி அழிக்கவும்.,machine
+be:disease:tungro:treatment_summary,No direct cure. Control leafhopper vectors with buprofezin or imidacloprid.,இதற்கு நேரடியான மருந்து கிடையாது. புப்ரோபெசின் (buprofezin) அல்லது இமிடாசுக்ளோபிரிட் (imidacloprid) கொண்டு தத்துப்பூச்சிகளைக் கட்டுப்படுத்தவும்.,machine
+be:disease:dead_heart:treatment_summary,"Apply cartap hydrochloride, chlorpyrifos, or flubendiamide granules.","கார்டாப் ஹைட்ரோகுளோரைடு, குளோர்பைரிபாஸ் அல்லது ஃபுளுபென்டமைடு குருணை மருந்துகளை இடவும்.",machine
+be:disease:downy_mildew:treatment_summary,Apply metalaxyl or fosetyl-aluminium fungicide. Improve drainage.,மெட்டாலாக்சில் அல்லது போசெட்டில்-அலுமினியம் பூஞ்சாணக்கொல்லியைப் பயன்படுத்தவும். நீர் வடியும் வசதியை மேம்படுத்தவும்.,machine
+be:disease:bacterial_leaf_streak:treatment_summary,Apply copper-based bactericides. Remove infected leaves.,காப்பர் அடிப்படையிலான பாக்டீரியாக்கொல்லிகளைப் பயன்படுத்தவும். பாதிக்கப்பட்ட இலைகளை அகற்றவும்.,machine
+be:disease:bacterial_panicle_blight:treatment_summary,Apply oxolinic acid or copper-based bactericide at panicle initiation.,கதிர் வரும் பருவத்தில் ஆக்சோலினிக் அமிலம் (oxolinic acid) அல்லது தாமிரம் (copper) கலந்த பாக்டீரியாக்கொல்லியைத் தெளிக்கவும்.,machine
+be:disease:normal:treatment_summary,Continue routine monitoring and preventive agronomic practices.,வழக்கமான கண்காணிப்பு மற்றும் தடுப்பு முறைகளைத் தொடரவும்.,machine
+fe:diagnosis:diagnosis.symptoms,Detected Symptoms,கண்டறிந்த அறிகுறிகள்,reviewed
+fe:diagnosis:diagnosis.symptomsFound,Symptoms found,கண்டறியப்பட்ட அறிகுறிகள்,machine
+fe:library:library.symptoms,Key Visual Symptoms,முக்கியமான அறிகுறிகள்,machine
+fe:scan:scan.symptomsPathology,Symptoms & Pathology,அறிகுறிகள் & நோயின் தாக்கம்,machine
+be:disease:bacterial_leaf_blight:causes,"Warm temperatures (25–30°C), high humidity, and typhoon/rain-splash that spreads the bacteria through leaf wounds.","வெப்பமான காலநிலை (25–30°C), அதிக ஈரப்பதம், மற்றும் புயல்/மழை நீர் மூலம் இலைகளில் உள்ள காய்கள் வழியே பாக்டீரியா பரவுகிறது.",machine
+be:disease:brown_spot:causes,Associated with nutrient-deficient soils (especially potassium and silicon). Favoured by warm humid conditions and poor soil health.,மண்ணில் சத்துக்கள் குறைபாட்டால் (குறிப்பாக பொட்டாசியம் மற்றும் சிலிக்கான்) வருகிறது. வெதுவெதுப்பான ஈரப்பதமான காலநிலை மற்றும் மண்ணின் மோசமான தரம் இதற்கு வழிவகுக்கும்.,machine
+be:disease:healthy:causes,N/A,பொருந்தாது,machine
+be:disease:leaf_blast:causes,"Cool nights, warm days, high humidity (>90%), heavy dew, excessive nitrogen application, and susceptible varieties.","குளிர்ந்த இரவுகள், வெதுவெதுப்பான பகல் பொழுழுதுகள், அதிக ஈரப்பதம் (>90%), அதிக பனிப்பொழிவு, அதிகப்படியான தழைச்சத்து உரம் மற்றும் நோயைத் தாங்கும் திறன் இல்லாத ரகங்கள்.",machine
+be:disease:leaf_scald:causes,"High humidity, warm temperatures, and dense planting that reduces airflow.","அதிக ஈரப்பதம், வெதுவெதுப்பான வெப்பநிலை மற்றும் காற்றோட்டத்தைக் குறைக்கும் அடர்த்தியான நடவு.",machine
+be:disease:sheath_blight:causes,"High humidity (>90%), temperatures of 28–32°C, dense planting, high nitrogen levels, and flooded conditions that allow mycelium spread.","அதிக ஈரப்பதம் (90%-க்கு மேல்), 28–32°C வெப்பநிலை, நெருக்கமாக நடுவது, அதிக தழைச்சத்து மற்றும் மைசீலியம் பரவ வழிவகுக்கும் தேங்கிய நீர்.",machine
+be:disease:aphid:causes,"Warm dry conditions, absence of natural predators, and dense planting.","வெதுவெதுப்பான வறண்ட வானிலை, இயற்கையான எதிரிப் பூச்சிகள் இல்லாதது மற்றும் நெருக்கமாக நடுவது.",machine
+be:disease:black_rust:causes,"Warm temperatures (15–30°C), dew, and wind-blown spores from nearby infected fields.","வெதுவெதுப்பான வெப்பநிலை (15–30°C), பனி மற்றும் அருகில் உள்ள நோய் தாக்கிய பயிர்களிலிருந்து காற்று மூலம் பரவும் ஸ்போர்கள்.",machine
+be:disease:blast:causes,"Cool nights, morning dew, excess nitrogen, susceptible varieties.","குளிர்ந்த இரவுகள், காலைப் பனி, தழைச்சத்து அதிகமாக இருப்பது, நோய் தாக்கும் தன்மை கொண்ட ரகங்கள்.",machine
+be:disease:brown_rust:causes,"Moderate temperatures (15–22°C), dew, and humid conditions.","மிதமான வெப்பநிலை (15–22°C), பனி மற்றும் ஈரப்பதமான சூழல்.",machine
+be:disease:common_root_rot:causes,"Dry soil conditions, warm temperatures during seeding, and soil-borne inoculum.","உலர்ந்த மண் சூழல், விதைக்கும் போது அதிக வெப்பநிலை மற்றும் மண்ணில் உள்ள நோய் கிருமிகள்.",machine
+be:disease:fusarium_head_blight:causes,"Wet conditions during flowering (anthesis), temperatures of 25–30°C, and crop residues.","பூக்கும் பருவத்தில் ஈரப்பதமான காலநிலை, 25–30°C வெப்பநிலை மற்றும் பயிர் குப்பைகள்.",machine
+be:disease:leaf_blight:causes,Warm humid conditions and susceptible varieties.,வெதுவெதுப்பான ஈரப்பதமான காலநிலை மற்றும் நோய் தாக்கும் ரகங்கள்.,machine
+be:disease:mildew:causes,"Cool temperatures (15–22°C), moderate humidity, and dense canopy.","குளிர்ந்த வெப்பநிலை (15–22°C), மிதமான ஈரப்பதம் மற்றும் அடர்ந்த பயிர் வளர்ச்சி.",machine
+be:disease:mite:causes,"Hot, dry conditions. Chemical treatments that kill natural predators.",அதிக வெப்பம் மற்றும் வறண்ட காலநிலை. இயற்கையான எதிரிகளை அழிக்கும் ரசாயன மருந்துகள்.,machine
+be:disease:septoria:causes,"Cool, wet weather (10–20°C), leaf wetness periods >20 hours.","குளிர்ந்த, ஈரமான காலநிலை (10–20°C), இலைகள் 20 மணி நேரத்திற்கு மேல் ஈரமாக இருப்பது.",machine
+be:disease:smut:causes,Moderate temperatures during flowering with humid conditions. Seed-borne pathogen.,பூக்கும் தருணத்தில் மிதமான வெப்பமும் ஈரப்பதமும். விதை மூலம் பரவும் நோய்.,machine
+be:disease:stem_fly:causes,Peak activity during cool temperatures (15–20°C) at early crop stages.,ஆரம்பப் பயிர் பருவங்களில் குளிர்ந்த வெப்பநிலையில் (15–20°C) அதிகப்படியான செயல்பாடு.,machine
+be:disease:tan_spot:causes,"Warm temperatures (20–28°C), leaf wetness, and crop residue from previous season.","வெதுவெதுப்பான வெப்பநிலை (20–28°C), இலை ஈரம் மற்றும் முந்தைய பருவத்தின் பயிர் எச்சங்கள்.",machine
+be:disease:yellow_rust:causes,"Cool temperatures (10–15°C), dew and mist, and susceptible varieties.","குளிர்ந்த வெப்பநிலை (10–15°C), பனி மற்றும் மூடுபனி, மற்றும் நோய் தாக்கக்கூடிய வகைகள்.",machine
+be:disease:mosaic_disease:causes,"Transmitted by aphids (Rhopalosiphum maidis), infected planting material.","இது செதில் பூச்சிகள் (Rhopalosiphum maidis) மூலமாவும், நோய் தாக்கிய நடவுப் பொருட்கள் மூலமாவும் பரவுது.",machine
+be:disease:rust:causes,"Warm temperatures (24–28°C), high humidity, and susceptible cultivars.","வெதுவெதுப்பான வெப்பநிலை (24–28°C), அதிக ஈரப்பதம் மற்றும் நோய் தாக்கக்கூடிய ரகங்கள்.",machine
+be:disease:bacterial_blight:causes,"Warm, humid weather, rain-splash, mechanical damage, and infected seeds.","வெதுவெதுப்பான, ஈரப்பதமான வானிலை, மழைநீர் தெறிப்பது, இயந்திர காயங்கள் மற்றும் நோய் தாக்கிய விதைகள்.",machine
+be:disease:alternaria_leaf_spot:causes,High humidity and temperatures of 25–30°C. Most severe on stressed or weakened plants.,அதிக ஈரப்பதம் மற்றும் 25–30°C வெப்ப நிலை. ஊட்டச்சத்து குறைவான அல்லது பலவீனமான பயிர்களை இது பெரிதும் தாக்கும்.,machine
+be:disease:hispa:causes,"Lush, dense crops with high nitrogen. Wet season conditions.","அதிக தழைச்சத்து கொண்ட செழிப்பான, அடர்ந்த பயிர்கள். மழைக் காலச் சூழல்.",machine
+be:disease:tungro:causes,Green leafhopper (Nephotettix spp.) populations carrying both viruses.,இரண்டு வைரஸ்களையும் சுமந்து வரும் பச்சைத் தத்துப்பூச்சி (Nephotettix spp.) இனப்பெருக்கம்.,machine
+be:disease:dead_heart:causes,Stem borer moth populations during vegetative stage.,செடிகள் வளரும் பருவத்தில் தண்டு துளைப்பான் பூச்சிகளின் பெருக்கம்.,machine
+be:disease:downy_mildew:causes,"Waterlogged soils, cool temperatures, and high humidity.","நீர்தேங்கிய மண், குளிர்ந்த வெப்பநிலை மற்றும் அதிக ஈரப்பதம்.",machine
+be:disease:bacterial_leaf_streak:causes,"Warm, humid weather. Spread by rain splash and irrigation water.","வெதுவெதுப்பான, ஈரப்பதமான வானிலை. மழைநீர் மற்றும் பாசன நீர் மூலம் பரவுகிறது.",machine
+be:disease:bacterial_panicle_blight:causes,High temperatures (>30°C) during flowering combined with high humidity.,பூக்கும் பருவத்தில் அதிக வெப்பமும் (>30°C) அதனுடன் அதிக ஈரப்பதமும் இருப்பது.,machine
+be:disease:normal:causes,N/A,பொருந்தாது,machine
+fe:common:card.prevention,Prevention Plan,தடுப்பு,reviewed
+fe:library:library.prevention,Long-term Prevention,நீண்ட கால தடுப்பு முறைகள்,machine
+fe:scan:scan.longTermPrevention,Long-Term Prevention, நீண்ட கால பாதுகாப்பு,machine
+be:disease:bacterial_leaf_blight:prevention,Use certified disease-free seeds. Maintain field drainage. Apply balanced fertilization.,நோய் இல்லாத சான்றளிக்கப்பட்ட விதைகளைப் பயன்படுத்தவும். வயலில் தண்ணீர் தேங்காமல் வடிய வைக்கவும். சரியான அளவில் உரமிடவும்.,machine
+be:disease:brown_spot:prevention,"Balanced fertilization, well-drained soils, disease-resistant varieties.","சரியான அளவில் உரம் இடுதல், வயலில் நீர் தேங்காமல் பார்த்துக் கொள்ளுதல், நோய் எதிர்ப்பு சக்தி கொண்ட ரகங்களைப் பயன்படுத்துதல்.",machine
+be:disease:healthy:prevention,"Maintain good agronomic practices, balanced fertilization, and proper irrigation.","முறையான விவசாய முறைகள், சமச்சீர் உரமிடுதல் மற்றும் சரியான பாசனம் ஆகியவற்றைப் பராமரிக்கவும்.",machine
+be:disease:leaf_blast:prevention,Use blast-resistant varieties. Avoid excess nitrogen. Ensure good airflow between plants.,குலை நோய் (பிளாஸ்ட்) எதிர்ப்புத் திறன் கொண்ட ரகங்களைப் பயன்படுத்தவும். அதிகப்படியான தழைச்சத்தைத் தவிர்க்கவும். பயிர்களுக்கு இடையே நல்ல காற்றோட்டம் இருப்பதை உறுதி செய்யவும்.,machine
+be:disease:leaf_scald:prevention,"Wider row spacing, balanced nutrients, resistant varieties.","அகலமான வரிசை இடைவெளி, சமச்சீர் ஊட்டச்சத்துக்கள், நோய் எதிர்ப்பு ரகங்கள்.",machine
+be:disease:sheath_blight:prevention,"Lower seeding rates, balanced fertilization, water management.","விதைப்பு அளவைக் குறைத்தல், சரிவிகித உரமிடல், நீர் மேலாண்மை.",machine
+be:disease:aphid:prevention,"Early planting, crop rotation, avoid excessive nitrogen.","முன்கூட்டியே விதைத்தல், பயிர் சுழற்சி முறை, அதிகப்படியான தழைச்சத்தைத் தவிர்த்தல்.",machine
+be:disease:black_rust:prevention,Plant resistant varieties. Early sowing. Remove volunteer wheat plants.,நோய் எதிர்ப்புத் திறன் கொண்ட ரகங்களை நடுங்கள். முன்கூட்டியே விதைக்கவும். தானாக வளர்ந்த கோதுமைச் செடிகளை அகற்றிவிடுங்கள்.,machine
+be:disease:blast:prevention,"Resistant varieties, balanced nitrogen, regulated irrigation.","நோய் தாங்கக்கூடிய ரகங்கள், சீரான தழைச்சத்து, முறையான நீர் பாய்ச்சுதல்.",machine
+be:disease:brown_rust:prevention,"Resistant varieties, timely sowing, crop rotation.","நோய் தாங்கும் ரகங்கள், சரியான நேரத்தில் விதைப்பு, பயிர் சுழற்சி.",machine
+be:disease:common_root_rot:prevention,"Balanced soil fertility, avoid continuous wheat, proper seeding depth.","மண் வளத்தை சீராக வைத்திருத்தல், தொடர்ந்து கோதுமை பயிரிடுவதைத் தவிர்த்தல், சரியான ஆழத்தில் விதைத்தல்.",machine
+be:disease:fusarium_head_blight:prevention,"Resistant varieties, tillage to bury residues, good drainage.","நோய் எதிர்ப்பு சக்தி கொண்ட ரகங்கள், குப்பைகளை மூழ்கடிக்க உழுதல், நல்ல நீர் வடிதல்.",machine
+be:disease:leaf_blight:prevention,Crop rotation and use of resistant varieties.,பயிர் சுழற்சி மற்றும் நோய் எதிர்ப்பு ரகங்களைப் பயன்படுத்துதல்.,machine
+be:disease:mildew:prevention,"Wider row spacing, resistant varieties, early sowing.","வரிசைகளுக்கு இடையே அதிக இடைவெளி, நோய் எதிர்ப்பு ரகங்கள், முன்கூட்டியே விதைத்தல்.",machine
+be:disease:mite:prevention,Avoid overly dry conditions. Conserve beneficial insects.,அதிக வறட்சியைத் தவிர்க்கவும். நன்மை செய்யும் பூச்சிகளைப் பாதுகாக்கவும்.,machine
+be:disease:septoria:prevention,"Resistant varieties, crop rotation, delayed sowing.","எதிர்ப்பு சக்தி கொண்ட ரகங்கள், பயிர் சுழற்சி, தாமதமாக விதைத்தல்.",machine
+be:disease:smut:prevention,Use certified smut-free seed. Hot-water seed treatment.,நோய் தாக்காத சான்றளிக்கப்பட்ட விதைகளைப் பயன்படுத்தவும். சுடுநீரில் விதை நேர்த்தி.,machine
+be:disease:stem_fly:prevention,"Early sowing, treat seeds with systemic insecticide, monitor basal nodes.","முன்கூட்டியே விதைப்பு செய்தல், அமைப்புமுறை பூச்சிக்கொல்லி மூலம் விதைகளுக்குச் சிகிச்சை அளித்தல், அடிப்பகுதி கணுக்களைக் கண்காணித்தல்.",machine
+be:disease:tan_spot:prevention,"Crop rotation, residue management, resistant varieties.","பயிர் சுழற்சி, பயிர் எச்ச மேலாண்மை, எதிர்ப்புத் திறன் கொண்ட வகைகள்.",machine
+be:disease:yellow_rust:prevention,Resistant varieties are most effective. Early sowing. Monitor forecasts.,எதிர்ப்புத் திறன் கொண்ட வகைகளே மிகவும் பயனுள்ளவை. முன்கூட்டியே விதைப்பு செய்தல். வானிலை முன்னறிவிப்புகளைக் கண்காணித்தல்.,machine
+be:disease:mosaic_disease:prevention,"Use virus-free seed cane, resistant varieties, control aphid populations.","வைரஸ் இல்லாத விதை கரும்புகளைப் பயன்படுத்துங்க, எதிர்ப்புத் சக்தி கொண்ட ரகங்களை நடுங்க, செதில் பூச்சிகளைக் கட்டுப்படுத்துங்க.",machine
+be:disease:rust:prevention,Plant resistant varieties. Balanced fertilization.,நோய் எதிர்ப்புத் திறன் கொண்ட ரகங்களை நடவு செய்யுங்க. சரியான அளவு உரம் கொடுங்க.,machine
+be:disease:bacterial_blight:prevention,"Disease-free certified seed, seed treatment, crop rotation.","நோய் இல்லாத சான்றளிக்கப்பட்ட விதைகளைப் பயன்படுத்துங்க, விதை நேர்த்தி செய்யுங்க, பயிர் சுழற்சி முறையைக் கடைபிடிங்க.",machine
+be:disease:alternaria_leaf_spot:prevention,"Good drainage, balanced nutrition, remove infected debris.","நல்ல நீர்ப்பாசன வசதி, சரியான அளவு உரம், பாதிக்கப்பட்ட இலைகளை அகற்றுவது.",machine
+be:disease:hispa:prevention,"Avoid over-fertilization, resistant varieties, reduce dense planting.","அதிகமாக உரம் இடுவதைத் தவிர்க்கவும், எதிர்ப்பு சக்தி கொண்ட ரகங்களைப் பயன்படுத்தவும், நெருக்கமாக நடுதைக் குறைக்கவும.",machine
+be:disease:tungro:prevention,"Resistant varieties (Utri Merah), synchronized planting, leafhopper management.","நோய் எதிர்ப்பு சக்தி கொண்ட ரகங்கள் (உத்ரி மெராஹ்), ஒரே நேரத்தில் நடுவது, தத்துப்பூச்சி மேலாண்மை.",machine
+be:disease:dead_heart:prevention,Avoid early planting when moths are active. Use light traps. Remove egg masses.,பூச்சிகள் தீவிரமாக இருக்கும்போது முன்கூட்டியே நடுதைத் தவிர்க்கவும். விளக்கு பொறிகளைப் பயன்படுத்தவும். முட்டைத் தொகுப்புகளை அகற்றவும்.,machine
+be:disease:downy_mildew:prevention,"Avoid water stagnation, improve field drainage, resistant varieties.","நீர் தேங்குவதைத் தவிர்க்கவும், வயல் வடிகமலை மேம்படுத்தவும், எதிர்ப்புத் திறன் கொண்ட ரகங்களைப் பயன்படுத்தவும்.",machine
+be:disease:bacterial_leaf_streak:prevention,Use resistant varieties. Avoid excessive nitrogen.,எதிர்ப்புத் திறன் கொண்ட ரகங்களைப் பயன்படுத்தவும். அதிகப்படியான தழைச்சத்தைத் தவிர்க்கவும்.,machine
+be:disease:bacterial_panicle_blight:prevention,"Resistant varieties, avoid water stress at heading.","நோய் எதிர்ப்புத் திறன் கொண்ட ரகங்களை நடவு செய்ய வேண்டும், கதிர்விடும் சமயத்தில் பயிருக்குத் தண்ணீர் பற்றாக்குறை வராமல் பார்த்துக் கொள்ளவும்.",machine
+be:disease:normal:prevention,"Maintain balanced fertilization, proper irrigation, and crop rotation.","சரியான அளவில் உரம் போடுவது, முறையான நீர் பாய்ச்சுவது மற்றும் பயிர் சுழற்சி முறையைக் கடைப்பிடிப்பது.",machine
+fe:assistant:assistant.noDiagnosis,Scan a leaf first to enable context-aware diagnosis.,முதலில் தாவர இலையை ஸ்கேன் செய்யவும்.,reviewed
+fe:common:card.diagnosisSummary,Diagnosis Summary,நோயறிதல் சுருக்கம்,reviewed
+fe:diagnosis:diagnosis.title,Plant Health Report,தாவர சுகாதார அறிக்கை,reviewed
+fe:diagnosis:diagnosis.gradcam,Grad-CAM Attention Map,AI காட்சி பகுப்பாய்வு (Grad-CAM),reviewed
+fe:diagnosis:diagnosis.healthScore,Health Score,சுகாதார மதிப்பெண்,reviewed
+fe:diagnosis:diagnosis.details,Diagnosis Details,நோயறிதல் விவரங்கள்,reviewed
+fe:diagnosis:diagnosis.modelPredictions,Model Predictions,மாதிரி கணிப்புகள்,reviewed
+fe:diagnosis:diagnosis.aiSummary,Why FloraAI Thinks This,FloraAI ஏன் இப்படி நினைக்கிறது,reviewed
+fe:diagnosis:diagnosis.conditions,Current Weather,தற்போதைய நிலை,reviewed
+fe:diagnosis:diagnosis.risk,Disease Risk,நோய் அபாயம்,reviewed
+fe:diagnosis:diagnosis.expertAlert,Consult an Expert,நிபுணரை அணுகவும்,reviewed
+fe:diagnosis:diagnosis.consultExpert,This diagnosis indicates a high-severity condition. Consult a local agronomist before applying chemical treatment.,இந்த நோயறிதல் தீவிர நிலையை காட்டுகிறது. சிகிச்சைக்கு முன் நிபுணரை அணுகவும்.,reviewed
+fe:diagnosis:diagnosis.whatToDoNow,What to do now,இப்போது என்ன செய்ய வேண்டும்,reviewed
+fe:diagnosis:diagnosis.heatmapToggle,See where the problem is,பிரச்சனை எங்கே உள்ளது என்று பார்க்கவும்,reviewed
+fe:diagnosis:diagnosis.listen,Listen,கேளுங்கள்,reviewed
+fe:diagnosis:diagnosis.stopListening,Stop listening,நிறுத்து,reviewed
+fe:diagnosis:diagnosis.leafVision,Leaf Vision,இலை பார்வை,machine
+fe:diagnosis:diagnosis.originalPhoto,Original leaf photo,ஒரிஜினல் இலை போட்டோ,machine
+fe:diagnosis:diagnosis.photo,Photo,போட்டோ,machine
+fe:diagnosis:diagnosis.aiView,AI view,AI பார்வை,machine
+fe:diagnosis:diagnosis.compare,Compare,ஒப்பிடு,machine
+fe:diagnosis:diagnosis.compareHandle,Compare AI view with original,AI பார்வையையும் ஒரிஜினல் போட்டோவையும் ஒப்பிடு,machine
+fe:diagnosis:diagnosis.hotspot,Attention point,கவனிக்க வேண்டிய இடம்,machine
+fe:diagnosis:diagnosis.attentionHere,The AI paid most attention here,AI இங்கேதான் அதிக கவனம் செலுத்தியுள்ளது,machine
+fe:diagnosis:diagnosis.whereAiLooked,Where the AI looked,AI எங்கே பார்த்தது,machine
+fe:diagnosis:diagnosis.attentionLegend,Green to amber to red focus scale,"பச்சை முதல் மஞ்சள், சிவப்பு வரையிலான கவன அளவு",machine
+fe:diagnosis:diagnosis.attentionInfo,"This shows model attention, not a guaranteed diagnosis.","இது AI-யின் கவனத்தைக் காட்டுகிறது, உறுதியான நோய் கண்டறிதல் அல்ல.",machine
+fe:diagnosis:diagnosis.lowConfidenceNote,"The AI is not sure, so highlights may be approximate","AI-க்கு சரியாகத் தெரியவில்லை, எனவே அடையாளங்கள் தோராயமாக இருக்கலாம்",machine
+fe:diagnosis:diagnosis.notSureYet,Not sure yet,இன்னும் உறுதியாகத் தெரியவில்லை,machine
+fe:diagnosis:diagnosis.unrecognizedLeaf,We could not recognize this leaf,இந்த இலையை எங்களால் அடையாளம் காண முடியவில்லை,machine
+fe:diagnosis:diagnosis.unrecognizedHint,"Please retake the photo clearly, or check that the selected crop matches your plant.",தயவுசெய்து போட்டோவைத் தெளிவாக மீண்டும் எடுக்கவும் அல்லது நீங்கள் தேர்ந்தெடுத்த பயிர் சரியா எனப் பார்க்கவும்.,machine
+fe:diagnosis:diagnosis.retakePhoto,Retake photo,மீண்டும் போட்டோ எடு,machine
+fe:diagnosis:diagnosis.lowConfidenceWarning,"Warning: Because the AI is not confident, consult an agronomist before applying chemicals.","எச்சரிக்கை: AI உறுதியாக இல்லாததால், மருந்து தெளிப்பதற்கு முன் வேளாண் அதிகாரியை அணுகவும்.",machine
+fe:diagnosis:diagnosis.affectedArea,Affected Area,பாதிக்கப்பட்ட பகுதி,machine
+fe:diagnosis:diagnosis.weatherRisk,Weather Risk,வானிலை ஆபத்து,machine
+fe:diagnosis:diagnosis.weatherDetails,Weather details,வானிலை விவரங்கள்,machine
+fe:diagnosis:diagnosis.technicalDetails,Technical details,தொழில்நுட்ப விவரங்கள்,machine
+fe:diagnosis:diagnosis.tabImmediate,Immediate,உடனடித் தீர்வு,machine
+fe:diagnosis:diagnosis.tabOrganic,Organic,இயற்கை முறை,machine
+fe:diagnosis:diagnosis.tabPreventive,Preventive,தடுப்பு முறை,machine
+fe:diagnosis:diagnosis.askAiAboutThis,Ask AI about this,இதைப் பற்றி AI இடம் கேள்,machine
+fe:diagnosis:diagnosis.diseaseDetected,Disease Detected,நோய் கண்டறியப்பட்டுள்ளது,machine
+fe:diagnosis:diagnosis.healthyPlant,Healthy Plant,ஆரோக்கியமான செடி,machine
+fe:diagnosis:diagnosis.photoTips,Tips for a better photo,நல்ல போட்டோ எடுக்க சில குறிப்புகள்,machine
+fe:diagnosis:diagnosis.possibleDiseases,Possible Diseases,வர வாய்ப்புள்ள நோய்கள்,machine
+fe:diagnosis:diagnosis.confidenceIs,Confidence is,நம்பகத்தன்மை,machine
+fe:diagnosis:diagnosis.multipleMatch,Multiple conditions may match these leaf patterns.,இந்த இலை அறிகுறிகளுக்குப் பல நோய்கள் பொருந்தலாம்.,machine
+fe:diagnosis:diagnosis.disclaimer,FloraAI diagnostic assistance is advisory only. Verify with agricultural officers before crop intervention.,FloraAI நோய் கண்டறிதல் உதவி என்பது ஒரு ஆலோசனை மட்டுமே. பயிர்களில் மருந்து தெளிக்கும் முன் வேளாண் அதிகாரிகளைத் தொடர்பு கொண்டு உறுதிப்படுத்திக் கொள்ளவும்.,machine
+fe:diagnosis:weather.context,WEATHER CONTEXT,வானிலை நிலவரம்,machine
+fe:diagnosis:weather.update,UPDATE,புதுப்பி,machine
+fe:diagnosis:weather.locating,LOCATING...,இடத்தைக் கண்டுபிடிக்கிறது...,machine
+fe:diagnosis:weather.lowRisk,LOW RISK,குறைந்த ஆபத்து,machine
+fe:diagnosis:weather.mediumRisk,MEDIUM RISK,மிதமான ஆபத்து,machine
+fe:diagnosis:weather.highRisk,HIGH RISK,அதிக ஆபத்து,machine
+fe:diagnosis:weather.severeRisk,SEVERE RISK,மிகக் கடுமையான ஆபத்து,machine
+fe:diagnosis:weather.prompt,Click UPDATE to load local weather and disease risk data.,உள்ளூர் வானிலை மற்றும் நோய் அபாயத் தரவைப் பெற 'புதுப்பி' என்பதைக் கிளிக் செய்யவும்.,machine
+fe:diagnosis:diagnosis.preliminaryMeasures,Preliminary Measures:,முதற்கட்ட நடவடிக்கைகள்:,machine
+fe:diagnosis:diagnosis.factorInfluence,Environmental Factor Influence,சுற்றுச்சூழல் காரணிகளின் தாக்கம்,machine
+fe:diagnosis:diagnosis.sympLesions,Discolored foliar lesions,இலைகளில் நிறம் மாறிய புள்ளிகள்,machine
+fe:diagnosis:diagnosis.sympNecrosis,Necrotic margin formation,காயம்பட்டு காய்ந்த விளிம்புகள்,machine
+fe:diagnosis:diagnosis.sympVascular,Vascular tissue stress,நரம்பு மண்டல பாதிப்பு,machine
+fe:assistant:assistant.title,AI Agronomist Chat,AI விவசாய உதவியாளர்,reviewed
+fe:assistant:assistant.subtitle,Multi-crop expert diagnostics and care protocols powered by Gemini AI.,"நெல், கோதுமை, கரும்பு மற்றும் பருத்திக்கான நோய் பகுப்பாய்வு.",reviewed
+fe:assistant:assistant.placeholder,"Ask about this diagnosis, treatments, or preventive care…",இந்த நோயறிதலைப் பற்றி கேளுங்கள்…,reviewed
+fe:assistant:assistant.analyzing,Thinking…,பகுப்பாய்வு நடக்கிறது…,reviewed
+fe:assistant:assistant.contextActive,Diagnosis Context Active,சூழல் செயலில்,reviewed
+fe:assistant:assistant.suggested,Suggested questions:,பரிந்துரைக்கப்பட்ட கேள்விகள்:,reviewed
+fe:assistant:assistant.followUp,Ask a follow-up question:,தொடர்ந்து கேளுங்கள்:,reviewed
+fe:assistant:assistant.emptyTitle,Ask the AI Crop Specialist,AI நிபுணரிடம் கேளுங்கள்,reviewed
+fe:assistant:assistant.emptyHint,"Ask questions regarding your scanned plant diagnosis, organic remedies, or seasonal prevention.","ஸ்கேன் செய்த இலை, சிகிச்சை அல்லது தடுப்பு பற்றி கேளுங்கள்.",reviewed
+fe:assistant:assistant.weatherAdvice,Today's Weather Advice,இன்றைய வானிலை அறிவுரை,machine
+fe:assistant:assistant.jumpToLatest,Jump to latest,கடைசி செய்திக்குச் செல்,machine
+fe:assistant:assistant.welcomeMsg,"Hello! I am your AI Plant Health assistant. Upload a plant leaf photo to get a full diagnosis — confidence score, Grad-CAM visual evidence, environmental risk analysis, and practical recommendations.","வணக்கம்! நான் உங்கள் AI பயிர் நல்வாழ்வு உதவியாளர். நோயை முழுமையாகக் கண்டுபிடிக்க — உறுதித் தன்மைப் புள்ளிவிவரம், கிராட்-கேம் பார்வை வரைபடம், வானிலை ஆபத்து ஆய்வு மற்றும் எளிய வழிமுறைகளைப் பெற உங்கள் பயிர் இலையின் போட்டோவை அப்லோட் செய்யுங்கள்.",machine
+fe:common:nav.home,Home,முகப்பு,reviewed
+fe:common:nav.scan,Scanner,ஸ்கேன்,reviewed
+fe:common:nav.chat,AI Chat,AI அரட்டை,reviewed
+fe:common:nav.plants,My Plants,என் செடிகள்,reviewed
+fe:common:nav.encyclopedia,Encyclopedia,கலைக்களஞ்சியம்,reviewed
+fe:common:nav.history,History,வரலாறு,reviewed
+fe:common:nav.language,Choose language,மொழியைத் தேர்வுசெய்,reviewed
+fe:common:lang.chooseLanguage,Choose language,மொழியைத் தேர்வுசெய்,reviewed
+fe:common:btn.scanPlant,Scan Plant,செடி ஸ்கேன்,reviewed
+fe:common:btn.save,Save Plant,சேமி,reviewed
+fe:common:btn.saved,Saved,சேமிக்கப்பட்டது,reviewed
+fe:common:btn.download,Download Report,அறிக்கை பதிவிறக்கம்,reviewed
+fe:common:btn.share,Share,பகிர்,reviewed
+fe:common:btn.back,Back,பின்,reviewed
+fe:common:btn.send,Send,அனுப்பு,reviewed
+fe:common:btn.speak,Listen,கேட்கவும்,reviewed
+fe:common:btn.stopSpeaking,Stop listening,நிறுத்து,reviewed
+fe:common:btn.scanAnother,Scan Another,மற்றொரு செடி ஸ்கேன்,reviewed
+fe:common:btn.askChat,Ask AI Chat,AI கேட்கவும்,reviewed
+fe:common:btn.analyze,Analyze,பகுப்பாய்வு,reviewed
+fe:common:btn.analyzing,Analyzing…,பகுப்பாய்வு நடக்கிறது…,reviewed
+fe:common:btn.locate,Locate,இடம் கண்டறி,reviewed
+fe:common:btn.refresh,Refresh,புதுப்பி,reviewed
+fe:common:btn.cancel,Cancel,ரத்து செய்,machine
+fe:common:btn.more,More,மேலும்,machine
+fe:common:footer.platform,Platform,தளம்,machine
+fe:common:footer.data,Data,தரவு,machine
+fe:common:footer.info,Info,தகவல்,machine
+fe:common:footer.scanner,Plant Scanner,செடி ஸ்கேனர்,machine
+fe:common:footer.chat,AI Chat,AI அரட்டை,machine
+fe:common:footer.plants,My Plants,என் செடிகள்,machine
+fe:common:footer.encyclopedia,Encyclopedia,களஞ்சியம்,machine
+fe:common:footer.library,Disease Library,நோய் நூலகம்,machine
+fe:common:footer.history,Scan History,ஸ்கேன் வரலாறு,machine
+fe:common:footer.tools,Analysis Tools,ஆய்வுக் கருவிகள்,machine
+fe:common:footer.about,About BioScan,BioScan பற்றி,machine
+fe:common:footer.contact,Contact,தொடர்புக்கு,machine
+fe:common:footer.privacy,Privacy,தனியுரிமை,machine
+fe:common:footer.terms,Terms,நிபந்தனைகள்,machine
+fe:common:footer.tagline,"AI-powered plant disease intelligence for farms, labs, and greenhouses worldwide.","உலகெங்கிலும் உள்ள விவசாய நிலங்கள், ஆய்வகங்கள் மற்றும் பசுமைக்குடில்களுக்கான AI தொழில்நுட்ப பயிர் நோய் நுண்ணறிவு.",machine
+fe:common:footer.operational,ALL SYSTEMS OPERATIONAL,அனைத்து அமைப்புகளும் சரியாக வேலை செய்கின்றன,machine
+fe:common:footer.rights,All rights reserved.,அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.,machine
+fe:common:footer.disclaimer,Flora AI provides diagnostic guidance for informational purposes only. Results should be verified by a qualified agricultural expert.,ஃப்ளோரா AI (Flora AI) தகவல் நோக்கத்திற்காக மட்டுமே நோய் கண்டறிதல் வழிகாட்டுதலை வழங்குகிறது. முடிவுகளைத் தகுதியான விவசாய நிபுணரைக் கொண்டு சரிபார்க்க வேண்டும்.,machine
+fe:common:history.title,Scan History & Timeline,ஸ்கேன் வரலாறு மற்றும் காலவரிசை,machine
+fe:common:history.empty,No scan records found. Scan a leaf to start tracking health.,ஸ்கேன் பதிவுகள் எதுவும் இல்லை. ஆரோக்கியத்தைக் கண்காணிக்க ஒரு இலையை ஸ்கேன் செய்யுங்கள்.,machine
+fe:common:history.clear,Clear History,வரலாற்றை அழி,machine
+fe:common:history.diagnosesRecorded,diagnoses recorded,பதிவு செய்யப்பட்ட நோயறிதல்கள்,machine
+fe:common:card.whyDetected,Why Detected (XAI),ஏன் கண்டறியப்பட்டது (XAI),reviewed
+fe:common:card.visualEvidence,Visual Evidence,காட்சி சான்று,reviewed
+fe:common:card.shap,SHAP Feature Evidence,SHAP சான்று,reviewed
+fe:common:card.environmental,Environmental Factors,சுற்றுச்சூழல் காரணிகள்,reviewed
+fe:common:card.actions,Recommended Actions,பரிந்துரைக்கப்பட்ட நடவடிக்கைகள்,reviewed
+fe:common:card.disclaimer,FloraAI guidance is advisory only.,FloraAI வழிகாட்டுதல் ஆலோசனைக்காக மட்டுமே.,reviewed
+fe:common:card.original,Original Image,அசல் படம்,reviewed
+fe:common:card.gradcam,Grad-CAM Heatmap,Grad-CAM வெப்ப வரைபடம்,reviewed
+fe:common:card.shapNote,SHAP values are pre-computed by the backend from environmental sensor data.,SHAP மதிப்புகள் முன்னரே கணக்கிடப்பட்டவை. Gemini அவற்றை விளக்குகிறது.,reviewed
+fe:common:common.loading,Loading…,ஏற்றுகிறது…,reviewed
+fe:common:common.error,Error,பிழை,reviewed
+fe:common:common.crop,Crop,பயிர்,reviewed
+fe:common:common.confidence,AI Confidence,AI நம்பகம்,reviewed
+fe:common:common.health,Health,சுகாதாரம்,reviewed
+fe:common:common.severity,Severity,தீவிரம்,reviewed
+fe:common:common.poweredBy,Powered by Gemini AI,Gemini AI மூலம்,reviewed
+fe:common:common.context,Active Diagnosis Context,செயலில் உள்ள சூழல்,reviewed
+fe:common:common.askFollowUp,Ask a follow-up,தொடர்ந்து கேள்,reviewed
+fe:common:status.healthy,Healthy,ஆரோக்கியமானது,reviewed
+fe:common:status.warning,Warning,எச்சரிக்கை,reviewed
+fe:common:status.danger,Danger,ஆபத்து,reviewed
+fe:common:risk.low,Low Risk,குறைந்த ஆபத்து,machine
+fe:common:risk.medium,Medium Risk,நடுத்தர ஆபத்து,machine
+fe:common:risk.high,High Risk,அதிக ஆபத்து,machine
+fe:common:risk.severe,Severe Risk,அதிக ஆபத்து,machine
+fe:common:loader.step1,Looking at the leaf…,இலையைப் பார்க்கிறது…,reviewed
+fe:common:loader.step2,Checking for disease…,நோயை சரிபார்க்கிறது…,reviewed
+fe:common:loader.step3,Preparing advice…,ஆலோசனையை தயார் செய்கிறது…,reviewed
+fe:common:loader.slowBackend,This is taking longer than expected. Please wait…,எதிர்பார்த்ததை விட அதிக நேரம் ஆகிறது. காத்திருக்கவும்…,reviewed
+fe:common:loader.checking,Checking your plant…,உங்கள் செடியைப் பார்க்கிறோம்…,machine
+fe:common:loader.takingLonger,Taking longer than usual… please keep this page open,வழக்கத்தை விட அதிக நேரம் எடுக்குது… தயவுசெய்து இந்தப் பக்கத்தை மூடாமல் வையுங்கள்,machine
+fe:common:loader.timeoutError,Diagnosis took too long. Please check your connection and try again.,கண்டறிவதற்கு ரொம்ப நேரம் ஆகிவிட்டது. உங்கள் இன்டர்நெட் இணைப்பைச் சரிபார்த்துவிட்டு மீண்டும் முயற்சிக்கவும்.,machine
+fe:common:loader.tryAgain,Try again,மீண்டும் முயற்சிக்கவும்,machine
+fe:common:nav.myProfile,My Profile,என் விபரம்,machine
+fe:common:nav.scanHistory,Scan History,பார்த்த செடிகளின் வரலாறு,machine
+fe:common:nav.preferences,Preferences,விருப்பங்கள்,machine
+fe:common:nav.signOut,Sign Out,வெளியேறு,machine
+fe:common:nav.proSpecialist,PRO SPECIALIST,புரோ ஸ்பெஷலிஸ்ட்,machine
+fe:common:uploader.leafImage,Leaf Image,இலைப் படம்,machine
+fe:common:uploader.uploadHint,Upload leaf photo,இலையின் போட்டியை அப்லோட் செய்யவும்,machine
+fe:common:uploader.dropHint,Drop image to scan,ஸ்கேன் செய்யப் படத்தை இங்கே போடவும்,machine
+fe:common:uploader.fileLimits,JPG · PNG · WEBP · Max 10MB,JPG · PNG · WEBP · அதிகபட்சம் 10MB,machine
+fe:common:uploader.tip,"Best results: clear, well-lit close-up","சிறந்த பலனுக்கு: தெளிவாக, வெளிச்சமான அருகில் எடுத்த படம்",machine
+fe:common:uploader.takePhoto,Take Photo,படம் எடுக்கவும்,machine
+fe:common:uploader.chooseFile,Choose File,கோப்பைத் தேர்ந்தெடுக்கவும்,machine
+fe:common:uploader.invalidType,"Please upload a valid image file (JPG, PNG, or WEBP).","சரியான படக் கோப்பை அப்லோட் செய்யவும் (JPG, PNG, அல்லது WEBP).",machine
+fe:common:uploader.tooLarge,Image is too large. Please use an image under 10 MB.,படம் ரொம்ப பெரிசா இருக்கு. 10 MB-க்கு குறைவான படத்தைப் பயன்படுத்தவும்.,machine
+fe:common:uploader.remove,Remove selected image,தேர்ந்தெடுத்த படத்தை நீக்கவும்,machine
+fe:common:camera.scannerTitle,FloraAI Scanner,FloraAI ஸ்கேனர்,machine
+fe:common:camera.positionLeaf,Position leaf in frame,இலையைச் சட்டத்திற்குள் வைக்கவும்,machine
+fe:common:camera.alignLeaf,Align the affected leaf within the frame,பாதிக்கப்பட்ட இலையைச் சட்டத்திற்குள் சரியாக வைக்கவும்,machine
+fe:common:camera.retake,Retake,மீண்டும் எடுக்கவும்,machine
+fe:common:camera.gallery,Gallery,கேலரி,machine
+fe:common:camera.flip,Flip Camera,கேமராவைத் திருப்பு,machine
+fe:common:camera.accessDenied,Camera Access Denied,கேமரா அனுமதி மறுக்கப்பட்டுள்ளது,machine
+fe:common:camera.unavailable,Camera Unavailable,கேமரா கிடைக்கவில்லை,machine
+fe:common:camera.uploadInstead,Upload Image Instead,அதற்குப் பதிலாகப் படத்தை அப்லோட் செய்யவும்,machine
+fe:common:camera.tryAgain,Try Again,மீண்டும் முயற்சிக்கவும்,machine
+fe:common:camera.usePhoto,Use this photo,இந்த போட்டோவை பயன்படுத்து,machine
+fe:common:camera.capture,Capture photo,போட்டோ எடு,machine
+fe:common:camera.close,Close camera,கேமராவை மூடு,machine
+fe:common:severity.low,Low,குறைவு,machine
+fe:common:severity.medium,Moderate,மிதமானது,machine
+fe:common:severity.moderate,Moderate,மிதமானது,machine
+fe:common:severity.high,High,அதிகம்,machine
+fe:common:severity.severe,Severe,மிக அதிகம்,machine
+fe:common:severity.critical,Critical,மிக ஆபத்தானது,machine
+fe:common:severity.none,None,எதுவுமில்லை,machine
+fe:common:status.needsAttention,Needs Attention,கவனம் தேவை,machine
+fe:common:status.atRisk,At Risk,ஆபத்து நிலையில் உள்ளது,machine
+fe:common:status.critical,Critical,மிக ஆபத்தானது,machine
+fe:common:status.diseaseDetected,DISEASE DETECTED,நோய் கண்டறியப்பட்டுள்ளது,machine
+fe:common:health.breakdown,HEALTH BREAKDOWN,உடல்நல விவரம்,machine
+fe:common:health.indexDesc,"AI health index based on visible leaf condition, color, and disease pattern analysis.","இலையின் தோற்றம், நிறம் மற்றும் நோய் அறிகுறிகளை வைத்து AI மூலம் கணக்கிடப்பட்ட பயிர் ஆரோக்கிய அளவு.",machine
+fe:common:health.leafHealth,Leaf Health,இலை ஆரோக்கியம்,machine
+fe:common:health.colorHealth,Color Health,நிற ஆரோக்கியம்,machine
+fe:common:health.visibleDamage,Visible Damage,வெளியே தெரியும் பாதிப்பு,machine
+fe:common:health.diseaseRisk,Disease Risk,நோய் அபாயம்,machine
+fe:common:chat.treatTitle,Treat Disease,நோய்க்கு சிகிச்சை அளிக்கவும்,machine
+fe:common:chat.treatQuestion,What is the immediate recommended organic or chemical treatment for this disease?,இந்த நோய்க்கு உடனடியாக என்ன இயற்கை அல்லது ரசாயன மருந்தைப் பயன்படுத்த வேண்டும்?,machine
+fe:common:chat.irrigationRainTitle,Irrigation after rainfall,மழைக்குப் பின் பாசனம்,machine
+fe:common:chat.irrigationRainQuestion,When should I irrigate after heavy rainfall and high soil moisture?,அதிக மழை பெய்து நிலத்தில் ஈரம் அதிகமாக இருக்கும்போது எப்போது தண்ணீர் பாய்ச்ச வேண்டும்?,machine
+fe:common:chat.irrigationTitle,Irrigation timing,தண்ணீர் பாய்ச்சும் நேரம்,machine
+fe:common:chat.irrigationQuestion,When should I irrigate my crop after rainfall?,மழைக்குப் பிறகு பயிருக்கு எப்போது தண்ணீர் பாய்ச்ச வேண்டும்?,machine
+fe:common:chat.fertilizerTitle,Fertilizer & nutrition,உரம் மற்றும் சத்துக்கள்,machine
+fe:common:chat.fertilizerQuestion,How much urea should I apply during the tillering stage?,கதிர் வரும் பருவத்தில் எவ்வளவு யூரியா உரம் போட வேண்டும்?,machine
+fe:common:chat.yellowingTitle,Yellowing leaf diagnosis,மஞ்சள் நிற இலைகள் பற்றிய ஆய்வு,machine
+fe:common:chat.yellowingQuestion,Why are the lower crop leaves turning yellow?,கீழே உள்ள பயிர் இலைகள் ஏன் மஞ்சள் நிறமாக மாறுகின்றன?,machine
+fe:common:chat.dripTitle,Drip vs Flood methods,சொட்டு நீர் மற்றும் மூழ்கடிப்பு பாசன முறை,machine
+fe:common:chat.dripQuestion,What is the water savings and yield difference between drip and flood irrigation?,"சொட்டு நீர் பாசனத்துக்கும் மூழ்கடிப்பு பாசனத்துக்கும் இடையே எவ்வளவு தண்ணீர் மிச்சமாகும், மற்றும் மகசூல் எவ்வளவு வேறுபடும்?",machine
+fe:common:chat.simpler,Explain simpler,இன்னும் எளிமையாகச் சொல்லுங்க,machine
+fe:common:chat.simplerQ,Can you explain this in simpler farmer terms with less technical jargon?,விவசாயிக்குப் புரியுற மாதிரி ரொம்பக் கடினமான வார்த்தைகள் இல்லாம எளிமையா சொல்ல முடியுமா?,machine
+fe:common:chat.steps,Show steps,படிநிலைகளைக் காட்டு,machine
+fe:common:chat.stepsQ,What are the numbered practical action steps I should follow in order?,"நான் வரிசையா என்னென்ன வேலைகளைச் செய்யணும்னு ஒண்ணு, ரெண்டுன்னு எண் போட்டுச் சொல்லுங்க?",machine
+fe:common:chat.organic,Organic option,இயற்கை முறை,machine
+fe:common:chat.organicQ,What organic and non-chemical remedies can I prepare at home?,வீட்டிலேயே தயாரிக்கக்கூடிய இயற்கை மற்றும் ரசாயனம் கலக்காத மருந்துகள் என்னென்ன?,machine
+fe:common:tag.leafNeck,🍃 Leaf & 🌾 Neck Node,🍃 இலை & 🌾 கழுத்து பகுதி,machine
+fe:common:tag.flagEars,🍃 Flag Leaf & 🌾 Ears,🍃 கொடி இலை & 🌾 கதிர்,machine
+fe:common:tag.stalkPith,🎋 Stalk Pith,🎋 தண்டுப் பகுதி,machine
+fe:common:tag.leafVeins,🍃 Leaf Veins,🍃 இலை நரம்புகள்,machine
+fe:common:care.water,Water,தண்ணீர்,machine
+fe:common:care.sunlight,Sunlight,சூரிய ஒளி,machine
+fe:common:care.humidity,Humidity,ஈரப்பதம்,machine
+fe:common:care.soil,Soil,மண்,machine
+fe:common:care.asNeeded,As needed,தேவைக்கேற்ப,machine
+fe:common:care.fullSun,Full sun,நிறைய வெயில்,machine
+fe:common:care.wellDraining,Well-draining,நீர் வடியும் வசதி,machine
+fe:common:common.copied,Copied,நகலெடுக்கப்பட்டது,machine
+fe:common:common.copy,Copy,நகலெடு,machine
+fe:common:common.helpful,Helpful,பயனுள்ளது,machine
+fe:common:chat.newChat,New Chat,புதிய உரையாடல்,machine
+fe:common:common.advice,Advice,அறிவுரை,machine
+fe:common:common.healthScore,Health Score,உயிர்ச்சத்து மதிப்பெண்,machine
+fe:common:common.view,View,பார்,machine
+fe:common:common.close,Close,மூடு,machine
+fe:home:home.heroPill,FLORA AI — PLANT DISEASE INTELLIGENCE,ஃப்ளோரா ஏஐ — தாவர நோய் கண்டறிதல் தொழில்நுட்பம்,machine
+fe:home:home.heroTitle1,DIAGNOSE,கண்டறியுங்கள்,machine
+fe:home:home.heroTitle2,PLANT DISEASE,தாவர நோய்கள்,machine
+fe:home:home.heroTitle3,IN SECONDS,நொடிகளில்,machine
+fe:home:home.heroSubtitle,"Instant AI crop disease detection, Grad-CAM visual evidence, and agricultural advice in your language.","உடனடி ஏஐ பயிர் நோய் கண்டறிதல், கிராட்-கேம் (Grad-CAM பார்வை வரைபடம்) மூலம் சான்றுகள் மற்றும் உங்கள் சொந்த மொழியில் விவசாய ஆலோசனைகள்.",machine
+fe:home:home.scanNowFree,SCAN NOW — FREE,இப்போதே ஸ்கேன் செய்யுங்கள் — இலவசம்,machine
+fe:home:home.badgeNoSignup,No signup required,பதிவு செய்யத் தேவையில்லை,machine
+fe:home:home.badgeAnyDevice,Works on any device,எந்தக் கருவியிலும் வேலை செய்யும்,machine
+fe:home:home.badgeSpeed,Results in < 3 seconds,3 நொடிகளுக்குள் முடிவு கிடைக்கும்,machine
+fe:home:home.statsDiseases,Diseases Detected,கண்டறியப்பட்ட நோய்கள்,machine
+fe:home:home.statsScans,Scans Analyzed,ஆய்வு செய்யப்பட்ட ஸ்கேன்கள்,machine
+fe:home:home.statsCrops,Supported Crops,ஆதரிக்கப்படும் பயிரl்கள்,machine
+fe:home:home.statsAccuracy,AI Accuracy Rate,ஏஐ துல்லிய விகிதம்,machine
+fe:home:home.howItWorks,HOW IT WORKS,இது எப்படி வேலை செய்கிறது,machine
+fe:home:home.threeSteps,THREE STEPS TO DIAGNOSIS,நோய் கண்டறிய மூன்று எளிய வழிகள்,machine
+fe:home:home.step1Title,Capture,புகைப்படம் எடுங்கள்,machine
+fe:home:home.step1Desc,Upload or capture a clear photo of the infected leaf.,நோய்த்தாக்கிய இலையின் தெளிவான போட்டோவை அப்லோடு செய்யவும் அல்லது எடுக்கவும்.,machine
+fe:home:home.step2Title,Analyze,பரிசோதனை,machine
+fe:home:home.step2Desc,AI runs multi-class disease detection and generates heatmaps.,செயற்கை நுண்ணறிவு (AI) பல வகையான நோய்களைக் கண்டுபிடித்து வெப்ப வரைபடங்களை உருவாக்குகிறது.,machine
+fe:home:home.step3Title,Respond,தீர்வு,machine
+fe:home:home.step3Desc,"Receive diagnosis, risk score, treatment protocols and prevention tips.","நோய் கண்டறிதல், ஆபத்து மதிப்பெண், சிகிச்சை முறைகள் மற்றும் தடுப்பு வழிகளைப் பெறுங்கள்.",machine
+fe:home:home.capabilities,CAPABILITIES,வசதிகள்,machine
+fe:home:home.labTools,LAB-GRADE TOOLS,ஆய்வக தர கருவிகள்,machine
+fe:home:home.featHeatmapTitle,Visual AI Heatmaps,காட்சிப் படுத்தும் AI வெப்ப வரைபடங்கள்,machine
+fe:home:home.featHeatmapDesc,Proprietary Grad-CAM visualization shows precisely where infection is located on the leaf.,ஸ்பெஷல் Grad-CAM பார்வை வரைபடம் மூலம் இலையில் நோய் எங்குள்ளது என்பதைத் துல்லியமாகக் காட்டுகிறது.,machine
+fe:home:home.featHeatmapAction,Run Scanner,ஸ்கேனரை இயக்கு,machine
+fe:home:home.featChatTitle,AI Expert Chat,AI நிபுணர் அரட்டை,machine
+fe:home:home.featChatDesc,"Powered by Gemini AI, get instant expert-level answers on disease management and fertilizers.","ஜெமினி AI (Gemini AI) மூலம், நோய் மேலாண்மை மற்றும் உரங்கள் பற்றிய நிபுணர் ஆலோசனைகளை உடனுக்குடன் பெறுங்கள்.",machine
+fe:home:home.featChatAction,Open Chat,அரட்டையைத் திற,machine
+fe:home:home.featTrackingTitle,Health Tracking,ஆரோக்கிய கண்காணிப்பு,machine
+fe:home:home.featTrackingDesc,Monitor recovery curves and plant health scores over time with progress analytics.,முன்னேற்ற பகுப்பாய்வு மூலம் பயிர் குணமடையும் நிலையையும் ஆரோக்கிய மதிப்பெண்களையும் காலத்திற்கேற்ப கண்காணிக்கவும்.,machine
+fe:home:home.featTrackingAction,My Plants,எனது பயிர்கள்,machine
+fe:home:home.featWeatherTitle,Weather Risk Intel,வானிலை ஆபத்து தகவல்,machine
+fe:home:home.featWeatherDesc,Correlates local weather conditions with disease spread probability in real time.,உள்ளூர் வானிலை நிலவரங்களையும் நோய் பரவும் வாய்ப்பையும் உண்மையான நேரத்தில் ஒப்பிட்டுக் காட்டுகிறது.,machine
+fe:home:home.featWeatherAction,Check Risk,ஆபத்தைச் சோதிக்கவும்,machine
+fe:home:home.featLibraryTitle,Disease Encyclopedia,நோய் களஞ்சியம்,machine
+fe:home:home.featLibraryDesc,Comprehensive reference library of plant diseases with symptoms and treatment databases.,அறிகுறிகள் மற்றும் சிகிச்சை விவரங்களுடன் கூடிய பயிர் நோய்களின் முழுமையான குறிப்புத் தகவல் தளம்.,machine
+fe:home:home.featLibraryAction,Explore,பார்வையிடவும்,machine
+fe:home:home.featInstantTitle,Instant Diagnosis,உடனடி நோய் கண்டறிதல்,machine
+fe:home:home.featInstantDesc,Diagnosis results in under 3 seconds. Upload from any device in the field.,3 வினாடிகளுக்குள் நோய் கண்டறியப்படும். வயலில் இருந்தபடியே எந்தக் கருவி மூலமாகவும் அப்லோடு செய்யலாம்.,machine
+fe:home:home.featInstantAction,Try Now,இப்போது முயற்சிக்கவும்,machine
+fe:home:home.edgePill,BIOSCAN EDGE,பயோஸ்கான் எட்ஜ் (BIOSCAN EDGE),machine
+fe:home:home.edgeTitle,"BUILT FOR FARMS, LABS AND FIELDS","பண்ணைகள், ஆய்வகங்கள் மற்றும் வயல்களுக்காக உருவாக்கப்பட்டது",machine
+fe:home:home.edgeDesc,"BioScan works on any device — whether you are in a greenhouse, in a lab, or in the middle of a field with just your phone.","பயோஸ்கான் எந்தக் கருவியிலும் வேலை செய்யும் — நீங்கள் கிரீன்ஹவுஸில் இருந்தாலும், ஆய்வகத்தில் இருந்தாலும், அல்லது உங்கள் போனுடன் வயலின் நடுவில் இருந்தாலும் சரி.",machine
+fe:home:home.deviceMobile,📱 Mobile,📱 மொபைல்,machine
+fe:home:home.deviceDesktop,💻 Desktop,💻 டெஸ்க்டாப்,machine
+fe:home:home.deviceLab,🔬 Lab Screen,🔬 லேப் ஸ்கிரீன்,machine
+fe:home:home.deviceField,🌾 Field Tablet,🌾 ஃபீல்ட் டேப்லெட்,machine
+fe:home:home.deviceDashboard,🖥 Dashboard,🖥 டேஷ்போர்டு,machine
+fe:home:home.startScanning,Start Scanning,ஸ்கேன் செய்யத் தொடங்குங்கள்,machine
+fe:home:home.askChat,Ask AI Chat,AI சாட்டிடம் கேளுங்கள்,machine
+fe:home:home.faqPill,FAQ,அடிக்கடி கேட்கப்படும் கேள்விகள்,machine
+fe:home:home.faqTitle,COMMON QUESTIONS,பொதுவான கேள்விகள்,machine
+fe:home:home.faq1Q,Which crops are currently supported?,தற்போது எந்த பயிர்களுக்கு ஆதரவு உள்ளது?,machine
+fe:home:home.faq1A,"BioScan currently supports Rice, Wheat, Sugarcane, and Cotton, with more crops being added regularly. Our AI model is trained on 127+ disease classes.","பயோஸ்கேன் (BioScan) தற்போது நெல், கோதுமை, கரும்பு மற்றும் பருத்தி ஆகியவற்றுக்கு ஆதரவளிக்கிறது, மேலும் பல பயிர்கள் விரைவில் சேர்க்கப்பட்டு வருகின்றன. எங்கள் AI மாதிரி 127+ நோய்ப் பிரிவுகளில் பயிற்சி பெற்றுள்ளது.",machine
+fe:home:home.faq2Q,How accurate is the disease detection?,நோய் கண்டுபிடிப்பு எவ்வளவு துல்லியமானது?,machine
+fe:home:home.faq2A,"Our AI model achieves 97.3% accuracy on our validation dataset. For best results, capture clear, well-lit photos.","எங்கள் AI மாதிரி 97.3% துல்லியத்தைக் கொண்டுள்ளது. சிறந்த பலன்களுக்கு, தெளிவான மற்றும் நல்ல வெளிச்சம் உள்ள புகைப்படங்களை எடுக்கவும்.",machine
+fe:home:home.faq3Q,Is my data private?,எனது தரவு பாதுகாப்பாக இருக்குமா?,machine
+fe:home:home.faq3A,Yes. Your uploaded images are processed securely and never shared with third parties.,"ஆம். நீங்கள் பதிவேற்றும் படங்கள் பாதுகாப்பாகப் பரிசீலிக்கப்படும், எக்காரணம் கொண்டும் மூன்றாம் தரப்பினருடன் பகிரப்படாது.",machine
+fe:home:home.faq4Q,Can I use BioScan offline?,பயோஸ்கேனை (BioScan) இன்டர்நெட் இல்லாமல் (ஆஃப்லைன்) பயன்படுத்தலாமா?,machine
+fe:home:home.faq4A,Currently BioScan requires an internet connection for AI analysis. We are working on a lightweight offline mode.,தற்போது AI பகுப்பாய்விற்கு பயோஸ்கேனுக்கு இன்டர்நெட் இணைப்பு தேவைப்படுகிறது. நாங்கள் ஆஃப்லைன் வசதிக்காக வேலை செய்து வருகிறோம்.,machine
+fe:home:home.faq5Q,What image format and size works best?,எந்தப் பட வடிவம் (format) மற்றும் அளவு சிறந்தது?,machine
+fe:home:home.faq5A,"JPG, PNG, or WebP images up to 10MB. Capture the leaf against natural light at 2-4 megapixel resolution.","10MB வரை உள்ள JPG, PNG அல்லது WebP படங்கள். இயற்கை வெளிச்சத்தில் 2-4 மெகாபிக்சல் அளவில் இலையைப் புகைப்படம் எடுக்கவும்.",machine
+fe:home:home.ctaReady,READY TO SCAN YOUR PLANTS?,உங்கள் பயிர்களை ஸ்கேன் செய்யத் தயாரா?,machine
+fe:home:home.ctaDesc,Upload a photo right now — no signup needed. Get AI diagnosis in seconds.,இப்போதே ஒரு புகைப்படத்தைப் பதிவேற்றுங்கள் — பதிவு செய்யத் தேவையில்லை. சில நொடிகளில் AI மூலம் நோயைக் கண்டறியுங்கள்.,machine
+fe:home:home.ctaLaunch,Launch BioScanner,பயோஸ்கேனரைத் (BioScanner) தொடங்குங்கள்,machine
+fe:home:home.greeting,"Good morning, Farmer","வணக்கம், விவசாயி",reviewed
+fe:home:home.scanCta,Scan a leaf,இலையை ஸ்கேன் செய்யவும்,reviewed
+fe:home:home.diseaseRiskToday,Disease risk today,இன்றைய நோய் ஆபத்து,reviewed
+fe:home:home.recentScans,Recent scans,சமீபத்திய ஸ்கேன்கள்,reviewed
+fe:library:library.title,Plant Disease Encyclopedia,பயிர் நோய் களஞ்சியம்,machine
+fe:library:library.subtitle,Complete pathology reference for farmers with field symptoms and scientific treatment protocols.,விவசாயிகளுக்காக வயல்வெளி அறிகுறிகள் மற்றும் அறிவியல் பூர்வமான சிகிச்சை முறைகளுடன் கூடிய முழுமையான வழிகாட்டி.,machine
+fe:library:library.searchPlaceholder,"Search by disease name, symptom, or pathogen…","நோய் பெயர், அறிகுறி அல்லது கிருமி மூலம் தேடுங்கள்…",machine
+fe:library:library.allCrops,All Crops,அனைத்து பயிர்களும்,machine
+fe:library:library.affectedOrgans,Affected Organs:,பாதிக்கப்பட்ட பகுதிகள்:,machine
+fe:library:library.noMatches,No matching diseases found,பொருத்தமான நோய்கள் எதுவும் கிடைக்கவில்லை,machine
+fe:library:library.viewProtocol,View Treatment Protocol,சிகிச்சை முறையைக் காண்க,machine
+fe:library:library.back,Back to Encyclopedia,களஞ்சியத்திற்குத் திரும்பு,machine
+fe:library:library.scanForThis,Scan leaf for this disease,இந்த நோய்க்காக இலையை ஸ்கேன் செய்யவும்,machine
+fe:library:library.overview,Disease Overview,நோய் கண்ணோட்டம்,machine
+fe:library:library.whereToLook,Where to look on plant,செடியில் எங்கு பார்க்க வேண்டும்,machine
+fe:library:library.favors,Conditions that favor infection,நோய் பரவ உதவும் சூழல்,machine
+fe:library:library.spreads,How it spreads,இது எப்படி பரவுகிறது,machine
+fe:library:library.organic,Organic / Biocontrol,இயற்கை முறை / உயிரியல் கட்டுப்பாடு,machine
+fe:library:library.chemical,Chemical / Fungicide Protocol,வேதிப்பொருள் / பூஞ்சாணக்கொல்லி முறை,machine
+fe:library:library.profilesCount,Disease Profiles · 4 Crops,நோய் விவரங்கள் · 4 பயிர்கள்,machine
+fe:library:library.diseasesCount,Diseases,நோய்கள்,machine
+fe:library:library.noMatchesTitle,No Disease Matches Found,நோய்கள் எதுவும் பொருந்தவில்லை,machine
+fe:library:library.noMatchesDesc,No diseases matched your search for the selected filter. Try adjusting your query or resetting filters.,நீங்கள் தேடிய வார்த்தைக்கும் வடிப்பானுக்கும் எந்த நோயும் பொருந்தவில்லை. தேடும் சொல்லை மாற்றவும் அல்லது வடிப்பான்களை மீட்டமைக்கவும்.,machine
+fe:library:library.clearFilters,Clear Filters,வடிப்பான்களை நீக்கு,machine
+fe:library:library.impactSeverity,Impact Severity,சேதாரத்தின் அளவு,machine
+fe:library:library.anatomyFocus,Anatomy focus:,பாதிக்கும் பகுதி:,machine
+fe:library:library.riceDesc,"Staple cereal vulnerable to blast fungi, brown spots, and leaf miner beetles.","குலை நோய் (பிளாஸ்ட்), இலைப்புள்ளி மற்றும் இலை துளைப்பான் பூச்சிகளால் எளிதில் பாதிக்கப்படும் முக்கிய தானியம்.",machine
+fe:library:library.riceParts,"Leaf Blade, Sheath, Neck Node & Grain","இலை அலகுகள், உறை, கதிர் கணு & தானியம்",machine
+fe:library:library.wheatDesc,Cereal crop prone to stripe/brown rust fungi and septoria leaf blotch.,பழுப்பு துரு நோய் மற்றும் செப்டோரியா இலை கருகல் நோயால் பாதிக்கப்படக்கூடிய கோதுமை பயிர்.,machine
+fe:library:library.wheatParts,"Flag Leaf, Upper Canopy & Spike Ears","கொடி இலை, மேல் விதானம் & கதிர்",machine
+fe:library:library.sugarcaneDesc,Perennial cash crop susceptible to red rot stalk decay and mosaic virus.,தண்டு செவ்வழுகல் நோய் மற்றும் மொசைக் வைரஸால் பாதிக்கப்படும் நீண்ட கால லாப பயிர்.,machine
+fe:library:library.sugarcaneParts,"Internal Stalk, Stem Internodes & Whorl Leaves","உள்ளகத் தண்டு, தண்டு கணுக்கள் & சுருள் இலைகள்",machine
+fe:library:library.cottonDesc,Fiber crop challenged by bacterial blight lesions and whitefly curl virus.,பாக்டீரியா கருகல் மற்றும் வெள்ளீச்சியால் உண்டாகும் சுருள் வைரஸ் தாக்கும் நாற்றுப் பயிர்.,machine
+fe:library:library.cottonParts,"Angular Leaf Veins, Main Stem & Bolls","கோண இலை நரம்புகள், பிரதான தண்டு & காய்கள்",machine
+fe:plants:crop.rice,Rice,நெல்லு,machine
+fe:plants:crop.wheat,Wheat,கோதுமை,machine
+fe:plants:crop.sugarcane,Sugarcane,கரும்பு,machine
+fe:plants:crop.cotton,Cotton,பருத்தி,machine
+fe:plants:plants.title,Active Crop Health Registry,செயலில் உள்ள பயிர் ஆரோக்கிய பதிவு,machine
+fe:plants:plants.badge,Crop Monitoring,பயிர் கண்காணிப்பு,machine
+fe:plants:plants.registerNew,Register New Specimen,புதிய பயிரைப் பதிவு செய்,machine
+fe:plants:plants.healthySpecimens,Healthy Specimens,ஆரோக்கியமான பயிர்கள்,machine
+fe:plants:plants.attentionRequired,Attention Required,கவனம் தேவை,machine
+fe:plants:plants.highRisk,High Pathogen Risk,நோய் தாக்கும் அதிக ஆபத்து,machine
+fe:plants:plants.allCrops,All Crops,அனைத்து பயிர்களும்,machine
+fe:plants:plants.healthy,Healthy,ஆரோக்கியமாக உள்ளது,machine
+fe:plants:plants.needsAttention,Needs Attention,கவனம் தேவைப்படுகிறது,machine
+fe:plants:plants.searchPlaceholder,Search plants by name or species…,பெயர் அல்லது இனம் வைத்து பயிரைத் தேடுங்கள்...,machine
+fe:plants:plants.empty,No monitored plants found,கண்காணிக்கப்படும் பயிர்கள் எதுவும் இல்லை,machine
+fe:plants:plants.emptyDesc,Start by scanning a leaf in the scanner to monitor recovery.,"பயிர் வளர்ச்சியைக் கண்காணிக்க, ஸ்கேனரில் இலையை ஸ்கேன் செய்யத் தொடங்குங்கள்.",machine
+fe:plants:plants.scanFirst,Scan Plant Now,இப்போதே பயிரை ஸ்கேன் செய்யவும்,machine
+fe:profile:profile.title,Settings & Farm Profile,அமைப்புகள் & விவசாயி விவரங்கள்,machine
+fe:profile:profile.verified,VERIFIED,சரிபார்க்கப்பட்டது,machine
+fe:profile:profile.pro,PRO SPECIALIST,ப்ரோ நிபுணர்,machine
+fe:profile:profile.notifications,NOTIFICATIONS,அறிவிப்புகள்,machine
+fe:profile:profile.diseaseAlerts,Disease Alerts,நோய் எச்சரிக்கைகள்,machine
+fe:profile:profile.diseaseAlertsDesc,Get notified when crop infection risk is high,பயிர்களுக்கு நோய் தாக்குதல் ஆபத்து அதிகமாகும்போது தகவல் பெறவும்,machine
+fe:profile:profile.weeklyReports,Weekly Reports,வாராந்திர அறிக்கைகள்,machine
+fe:profile:profile.weeklyReportsDesc,Summary of your plant health and treatments,உங்கள் பயிர் ஆரோக்கியம் மற்றும் அளிக்கப்பட்ட சிகிச்சைகள் பற்றிய விவரம்,machine
+fe:profile:profile.preferences,PREFERENCES,விருப்பத்தேர்வுகள்,machine
+fe:profile:profile.language,Language,மொழி,machine
+fe:profile:profile.units,Units,அலகுகள்,machine
+fe:profile:profile.unitsVal,"Metric (°C, mm, km/h)","மெட்ரிக் (°C, mm, km/h)",machine
+fe:profile:profile.weatherOverride,Manual Weather Data,கைமுறை வானிலை விவரம்,machine
+fe:profile:profile.manualActive,MANUAL ACTIVE,கைமுறை இயக்கம் செயலில் உள்ளது,machine
+fe:profile:profile.autoGps,AUTO GPS,தானியங்கி ஜி.பி.எஸ் (GPS),machine
+fe:profile:profile.weatherTitle,Agro-Climatic Weather Override,வானிலை மாற்ற அமைப்பு,machine
+fe:profile:profile.city,City / Village,நகரம் / கிராமம்,machine
+fe:profile:profile.state,State / Region,மாநிலம் / பகுதி,machine
+fe:profile:profile.temp,Temperature (°C),வெப்பநிலை (°C),machine
+fe:profile:profile.humidity,Relative Humidity (%),ஈரப்பதம் (%),machine
+fe:profile:profile.rainfall,Rainfall (24h mm),மழை அளவு (24 மணிநேரம் மிமீ),machine
+fe:profile:profile.wind,Wind Speed (km/h),காற்றின் வேகம் (கிமீ/மணி),machine
+fe:profile:profile.condition,Weather Condition,வானிலை நிலவரம்,machine
+fe:profile:profile.riskLevel,Environmental Risk Level,சுற்றுச்சூழல் ஆபத்து நிலை,machine
+fe:profile:profile.riskReason,Risk Assessment Explanation,ஆபத்து மதிப்பீட்டு விளக்கம்,machine
+fe:profile:profile.applyWeather,Apply Weather Data,வானிலை தரவைப் பயன்படுத்து,machine
+fe:profile:profile.resetGps,Reset to Live GPS,நேரலை ஜிபிஎஸ் (GPS)-க்கு மாற்று,machine
+fe:profile:profile.savedSuccess,Manual weather data saved and applied across the entire app!,"கைமுறை வானிலை தரவு சேமிக்கப்பட்டு, ஆப் முழுவதும் பயன்படுத்தப்படுகிறது!",machine
+fe:profile:profile.resetSuccess,Reset to live GPS sensors and Open-Meteo weather data!,நேரலை ஜிபிஎஸ் சென்சார்கள் மற்றும் ஓபன்-மெட்டியோ (Open-Meteo) வானிலை தரவுக்கு மாற்றப்பட்டது!,machine
+fe:profile:profile.privacy,PRIVACY & DATA,தனியுரிமை & தரவு,machine
+fe:profile:profile.dataSharing,Data Sharing,தரவு பகிர்வு,machine
+fe:profile:profile.dataSharingDesc,Help improve agronomic AI models,வேளாண் AI மாடல்களை மேம்படுத்த உதவுங்கள்,machine
+fe:profile:profile.privacyPolicy,Privacy Policy,தனியுரிமைக் கொள்கை,machine
+fe:profile:profile.deleteData,Delete My Data,என் தரவை நீக்கு,machine
+fe:profile:profile.support,SUPPORT,உதவி,machine
+fe:profile:profile.helpFaq,Help & FAQ,உதவி & கேள்வி-பதிலl,machine
+fe:profile:profile.contactSupport,Contact Agronomist Support,வேளாண் நிபுணர் உதவியைத் தொடர்புகொள்ளவும்,machine
+fe:profile:profile.signOut,SIGN OUT,வெளியேறு,machine
+fe:profile:profile.footerText,FLORA AI • PLANT DISEASE INTELLIGENCE PLATFORM,ஃப்ளோரா AI • பயிர் நோய் கண்டறிதல் தளம்,machine
+fe:scan:scan.workspace,DIAGNOSTIC WORKSPACE,நோய் கண்டறிதல் பகுதி,machine
+fe:scan:scan.title,Plant Disease Scanner,தாவர நோய் ஸ்கேனர்,reviewed
+fe:scan:scan.subtitle,Upload a leaf photo to get instant AI-powered pathology and Grad-CAM diagnosis.,இலை புகைப்படம் பதிவேற்றி உடனடி AI நோயறிதல் பெறுங்கள்.,reviewed
+fe:scan:scan.reset,Reset,மீட்டமை,machine
+fe:scan:scan.selectCrop,Select Crop,பயிர் தேர்வு,reviewed
+fe:scan:scan.uploadHint,Upload leaf image,இலை படத்தை பதிவேற்றவும்,reviewed
+fe:scan:scan.diagnosing,Diagnosing your plant…,உங்கள் செடி பரிசோதிக்கப்படுகிறது…,reviewed
+fe:scan:scan.diagnoseCta,Diagnose Plant Health,செடியின் ஆரோக்கியத்தைக் கண்டுபிடி,machine
+fe:scan:scan.ready,Ready for Diagnostics,நோய் கண்டறியத் தயார்,machine
+fe:scan:scan.aiDetection,AI Disease Detection,AI நோய் கண்டறிதல்,machine
+fe:scan:scan.visualHeatmap,Visual Heatmap,காட்சி வெப்ப வரைபடம்,machine
+fe:scan:scan.complete,Diagnosis Complete,நோய் கண்டறிதல் முடிந்தது,machine
+fe:scan:scan.severity,Severity,தீவிரத்தன்மை,machine
+fe:scan:scan.retake,Retake,மீண்டும் எடு,machine
+fe:scan:scan.flip,Flip Camera,கேமராவைத் திருப்பு,machine
+fe:scan:scan.gallery,Gallery,கேலரி,machine
+fe:scan:scan.tipLight,Good light,நல்ல வெளிச்சம்,reviewed
+fe:scan:scan.tipOneLeaf,One leaf,ஒரு இலை,reviewed
+fe:scan:scan.tipHold,Hold steady,அசையாமல் பிடிக்கவும்,reviewed
+fe:scan:scan.trySample,Try a sample,மாதிரியை முயற்சிக்கவும்,reviewed
+fe:scan:scan.healthIndex,Health Index,செடியின் ஆரோக்கியம்,machine
+fe:scan:scan.diseaseProbabilities,Disease Probabilities,நோய் தாக்குவதற்கான வாய்ப்புகள்,machine
+fe:scan:scan.saveToPlants,Save to My Plants,எனது செடிகளில் சேமிக்கவும்,machine
+fe:scan:scan.scanAnother,Scan Another,மற்றொன்றைச் ஸ்கேன் செய்,machine
+fe:scan:scan.environmentalFactors,Environmental & Moisture Factors,வானிலை & ஈரப்பதம்,machine
+be:disease:bacterial_leaf_blight:display,Bacterial Leaf Blight,பாக்டீரியா இலைக்கருகல் நோய்,machine
+be:disease:bacterial_leaf_blight:crop,Rice,நெல்லு,machine
+be:disease:bacterial_leaf_blight:severity,High,அதிகம்,machine
+be:disease:bacterial_leaf_blight:description,A serious bacterial disease caused by Xanthomonas oryzae pv. oryzae. Leaves show water-soaked margins that turn yellow and eventually white.,"சாந்தோமோனாஸ் ஒரைசே (Xanthomonas oryzae pv. oryzae) என்ற பாக்டீரியாவால் வரும் கடுமையான நோய். இலை ஓரங்களில் தண்ணீர் பட்டது போல் ஆரம்பித்து, மஞ்சள் நிறமாகி, கடைசியில் வெள்ளையாகிவிடும்.",machine
+be:disease:bacterial_leaf_blight:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_blight:fav:rainfall,Heavy (storm/flooding),அதிக மழை (புயல்/வெள்ளம்),machine
+be:disease:brown_spot:display,Brown Spot,பழுப்பு இலைப்புள்ளி நோய்,machine
+be:disease:brown_spot:crop,Rice,நெல்லு,machine
+be:disease:brown_spot:severity,Medium, நடுத்தரம்,machine
+be:disease:brown_spot:description,Fungal disease caused by Cochliobolus miyabeanus. Oval to circular brown lesions with yellow halos appear on leaves.,காக்ಲಿಯோபோலஸ் மியாபியானஸ் (Cochliobolus miyabeanus) என்ற பூஞ்சையால் ஏற்படும் நோய். இலைகளில் நீள்வட்ட அல்லது வட்ட வடிவில் மஞ்சள் வளையத்துடன் கூடிய பழுப்பு நிற புள்ளிகள் தோன்றும்.,machine
+be:disease:brown_spot:fav:temperature,22–32°C,22–32°C,machine
+be:disease:brown_spot:fav:humidity,75–90%,75–90%,machine
+be:disease:brown_spot:fav:rainfall,Moderate,மிதமான மழை,machine
+be:disease:healthy:display,Healthy,ஆரோக்கியமானது,machine
+be:disease:healthy:crop,All,அனைத்தும்,machine
+be:disease:healthy:severity,None,இல்லை,machine
+be:disease:healthy:description,The leaf appears healthy with no visible disease symptoms.,நோய் அறிகுறிகள் எதுவும் இல்லாமல் இலை ஆரோக்கியமாக உள்ளது.,machine
+be:disease:healthy:fav:temperature,Any,எந்த வெப்பநிலையும்,machine
+be:disease:healthy:fav:humidity,Any,எந்த ஈரப்பதமும்,machine
+be:disease:healthy:fav:rainfall,Regular,வழக்கமான,machine
+be:disease:leaf_blast:display,Leaf Blast,இலை குலை நோய் (பிளாஸ்ட்),machine
+be:disease:leaf_blast:crop,Rice,நெல்லு,machine
+be:disease:leaf_blast:severity,Very High,மிக அதிகம்,machine
+be:disease:leaf_blast:description,"One of the most destructive rice diseases, caused by Magnaporthe oryzae. Diamond-shaped lesions with grey centres and brown borders appear on leaves.",மேக்னாபோர்தே ஒரைசே (Magnaporthe oryzae) பூஞ்சையால் ஏற்படும் நெல் பயிரின் மிக முக்கிய அழிவு நோய்களில் ஒன்றாகும். இலைகளில் சாம்பல் நிற மையப் பகுதியும் பழுப்பு நிற விளிம்புகளும் கொண்ட வைரம் (மகிழம்பூ) வடிவப் புள்ளிகள் தோன்றும்.,machine
+be:disease:leaf_blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:leaf_blast:fav:humidity,>90%,>90%,machine
+be:disease:leaf_blast:fav:rainfall,Frequent light rain/dew,அடிக்கடி லேசான மழை/பனி,machine
+be:disease:leaf_scald:display,Leaf Scald,இலை கருகல் நோய்,machine
+be:disease:leaf_scald:crop,Rice,நெல்லு,machine
+be:disease:leaf_scald:severity,Medium,நடுத்தரம்,machine
+be:disease:leaf_scald:description,Caused by Microdochium oryzae. Alternating light and dark brown bands appear along leaf margins creating a 'zonate' pattern.,மைக்ரோடோச்சியம் ஒரைசே (Microdochium oryzae) பூஞ்சையால் ஏற்படுகிறது. இலை விளிம்புகளில் மாறி மாறி வரும் வெளிச்சமான மற்றும் அடர்ந்த பழுப்பு நிற பட்டைகள் வட்ட வடிவிலான அமைப்பை உருவாக்குகின்றன.,machine
+be:disease:leaf_scald:fav:temperature,25–30°C,25–30°C,machine
+be:disease:leaf_scald:fav:humidity,>80%,>80%,machine
+be:disease:leaf_scald:fav:rainfall,Moderate to heavy,மிதமான முதல் அதிக மழை,machine
+be:disease:sheath_blight:display,Sheath Blight,இலை உறை அழுகல் நோய்,machine
+be:disease:sheath_blight:crop,Rice,நெல்லு,machine
+be:disease:sheath_blight:severity,High,அதிகம்,machine
+be:disease:sheath_blight:description,"Caused by Rhizoctonia solani. Oval greenish-grey lesions with dark brown borders appear on leaf sheaths, spreading to leaves.","இது ரைசோக்டோனியா சொலானி (Rhizoctonia solani) என்ற பூஞ்சையால் வருகிறது. இலை மடல்களில் அடர் பழுப்பு நிற ஓரங்களுடன் கூடிய நீள்வட்ட பச்சை-சாம்பல் நிறப் புள்ளிகள் தோன்றி, இலைகளுக்கும் பரவுகிறது.",machine
+be:disease:sheath_blight:fav:temperature,28–32°C,28–32°C,machine
+be:disease:sheath_blight:fav:humidity,>90%,>90%,machine
+be:disease:sheath_blight:fav:rainfall,Heavy flooding,அதிகமாக நீர் தேங்குவது,machine
+be:disease:aphid:display,Aphid Infestation,செதில் பூச்சி (அபிட்) தாக்குதல்,machine
+be:disease:aphid:crop,Wheat,கோதுமை,machine
+be:disease:aphid:severity,Medium,நடுத்தரம்,machine
+be:disease:aphid:description,"Small soft-bodied insects that cluster on leaves and stems, sucking plant sap and potentially transmitting viruses.","இலைகள் மற்றும் தண்டுகளில் கூட்டமாக இருக்கும் மென்மையான சிறிய பூச்சிகள், பயிர் சாற்றை உறிஞ்சி வைரஸ் நோய்களைப் பரப்பலாம்.",machine
+be:disease:aphid:fav:temperature,15–25°C,15–25°C,machine
+be:disease:aphid:fav:humidity,<60%,<60%,machine
+be:disease:aphid:fav:rainfall,Low,குறைவு,machine
+be:disease:black_rust:display,Black Rust (Stem Rust),கருப்பு துரு நோய் (தண்டு துரு நோய்),machine
+be:disease:black_rust:crop,Wheat,கோதுமை,machine
+be:disease:black_rust:severity,Very High,மிக அதிகம்,machine
+be:disease:black_rust:description,Caused by Puccinia graminis. Produces brick-red to black pustules on stems and leaves. Can devastate entire crops.,இது பக்ஸினியா கிராமினிஸ் (Puccinia graminis) பூஞ்சையால் வருகிறது. தண்டுகள் மற்றும் இலைகளில் செங்கல்-சிவப்பு முதல் கருப்பு நிற கொப்புளங்களை உருவாக்குகிறது. முழுப் பயிரையும் சேதப்படுத்திவிடும்.,machine
+be:disease:black_rust:fav:temperature,15–30°C,15–30°C,machine
+be:disease:black_rust:fav:humidity,>80%,>80%,machine
+be:disease:black_rust:fav:rainfall,Moderate with dew,பனியுடன் கூடிய மிதமான மழை,machine
+be:disease:blast:display,Blast (Rice Paddy),குலை நோய் (பிளாஸ்ட்) (நெல்),machine
+be:disease:blast:crop,Rice,நெல்,machine
+be:disease:blast:severity,Very High,மிக அதிகம்,machine
+be:disease:blast:description,Magnaporthe oryzae. Diamond-shaped lesions on leaves. Can also affect panicles (panicle blast).,மாக்னாபோர்டே ஒரைசே (Magnaporthe oryzae). இலைகளில் வைரம் போன்ற வடிவத்தில் புள்ளிகள் உண்டாகும். கதிர்களையும் பாதிக்கும் (கதிர் குலை நோய்).,machine
+be:disease:blast:fav:temperature,20–28°C,20–28°C,machine
+be:disease:blast:fav:humidity,>90%,>90%,machine
+be:disease:blast:fav:rainfall,Frequent dew/light rain,அடிக்கடி பனி / லேசான மழை,machine
+be:disease:brown_rust:display,Brown Rust (Leaf Rust),பழுப்பு துரு நோய் (இலை துரு நோய்),machine
+be:disease:brown_rust:crop,Wheat,கோதுமை,machine
+be:disease:brown_rust:severity,High,அதிகம்,machine
+be:disease:brown_rust:description,Caused by Puccinia triticina. Orange-brown pustules on upper leaf surface. Very common and widespread.,பக்சினியா ட்ரிட்டிசினா (Puccinia triticina) பூஞ்சையால் ஏற்படுகிறது. இலைகளின் மேல் பகுதியில் ஆரஞ்சு-பழுப்பு நிற கொப்புளங்கள் ஏற்படும். இது மிகவும் பொதுவானது மற்றும் பரவலாகக் காணப்படும்.,machine
+be:disease:brown_rust:fav:temperature,15–22°C,15–22°C,machine
+be:disease:brown_rust:fav:humidity,>70%,>70%,machine
+be:disease:brown_rust:fav:rainfall,Light rain/dew,லேசான மழை / பனி,machine
+be:disease:common_root_rot:display,Common Root Rot,பொதுவான வேர் அழுகல் நோய்,machine
+be:disease:common_root_rot:crop,Wheat,கோதுமை,machine
+be:disease:common_root_rot:severity,Medium,நடுத்தரம்,machine
+be:disease:common_root_rot:description,Caused by Bipolaris sorokiniana. Brown to black discolouration of crown and root tissues.,பைபோலாரிஸ் சொரோசினிஆனா (Bipolaris sorokiniana) பூஞ்சையால் ஏற்படுகிறது. தண்டு மற்றும் வேர் திசுக்கள் பழுப்பு முதல் கருப்பு நிறமாக மாறுதல்.,machine
+be:disease:common_root_rot:fav:temperature,18–28°C,18–28°C,machine
+be:disease:common_root_rot:fav:humidity,Low soil moisture,குறைந்த மண் ஈரப்பதம்,machine
+be:disease:common_root_rot:fav:rainfall,Insufficient,போதிய மழையின்மை,machine
+be:disease:fusarium_head_blight:display,Fusarium Head Blight (Scab),பியூசேரியம் கதிர் அழுகல் நோய் (ஸ்கேப்),machine
+be:disease:fusarium_head_blight:crop,Wheat,கோதுமை,machine
+be:disease:fusarium_head_blight:severity,Very High,மிக அதிகம்,machine
+be:disease:fusarium_head_blight:description,Caused by Fusarium graminearum. Bleached spikelets with pink mold. Produces mycotoxins (DON) that contaminate grain.,இது ஃப்யூசேரியம் கிராமினாரம் (Fusarium graminearum) பூஞ்சையால் ஏற்படுகிறது. கதிர்கள் வெளுத்துப்போய் இளஞ்சிவப்பு நிற பூஞ்சை வளரும். இது தானியங்களை நச்சுப்படுத்தும் நச்சுப்பொருட்களை (DON) உருவாக்குகிறது.,machine
+be:disease:fusarium_head_blight:fav:temperature,25–30°C,25–30°C,machine
+be:disease:fusarium_head_blight:fav:humidity,>90%,>90%,machine
+be:disease:fusarium_head_blight:fav:rainfall,Rain during flowering,பூக்கும் போது மழை,machine
+be:disease:leaf_blight:display,Leaf Blight,இலைக்கருகல் நோய்,machine
+be:disease:leaf_blight:crop,Wheat,கோதுமை,machine
+be:disease:leaf_blight:severity,Medium,நடுத்தரம்,machine
+be:disease:leaf_blight:description,Tan-brown lesions with yellow borders on older leaves.,பழைய இலைகளில் மஞ்சள் விளிம்புகளுடன் கூடிய பழுப்பு நிற புள்ளிகள்.,machine
+be:disease:leaf_blight:fav:temperature,20–30°C,20–30°C,machine
+be:disease:leaf_blight:fav:humidity,>70%,>70%,machine
+be:disease:leaf_blight:fav:rainfall,Moderate,மிதமானது,machine
+be:disease:mildew:display,Powdery Mildew,சாம்பல் நோய்,machine
+be:disease:mildew:crop,Wheat,கோதுமை,machine
+be:disease:mildew:severity,Medium,நடுத்தரம்,machine
+be:disease:mildew:description,"White powdery coating on leaves, caused by Blumeria graminis. Reduces photosynthesis.","இலைகளில் வெள்ளை நிற தூள் போன்ற படலம், இது ப்ளூரியா கிராமினிஸ் (Blumeria graminis) பூஞ்சையால் ஏற்படுகிறது. ஒளிச்சேர்க்கையைக் குறைக்கிறது.",machine
+be:disease:mildew:fav:temperature,15–22°C,15–22°C,machine
+be:disease:mildew:fav:humidity,60–80%,60–80%,machine
+be:disease:mildew:fav:rainfall,Low to moderate,குறைந்தது முதல் மிதமானது வரை,machine
+be:disease:mite:display,Mite Infestation,நூற்புழு / சிலந்திப்பூச்சித் தாக்குதல்,machine
+be:disease:mite:crop,Wheat,கோதுமை,machine
+be:disease:mite:severity,Low,குறைவு,machine
+be:disease:mite:description,Tiny arachnids causing silvery stippling and bronzing of leaves.,இலைகளில் வெள்ளந்திவலைகள் மற்றும் வெண்கல நிறத்தை உண்டாக்கும் சிறிய ஒட்டுண்ணிகள்.,machine
+be:disease:mite:fav:temperature,>30°C,>30°C,machine
+be:disease:mite:fav:humidity,<50%,<50%,machine
+be:disease:mite:fav:rainfall,Very low,மிகக் குறைவு,machine
+be:disease:septoria:display,Septoria Leaf Blotch,செப்டோரியா இலைப்புள்ளி நோய்,machine
+be:disease:septoria:crop,Wheat,கோதுமை,machine
+be:disease:septoria:severity,High,அதிகம்,machine
+be:disease:septoria:description,Caused by Zymoseptoria tritici. Pale green-yellow blotches with brown necrosis and pycnidia on leaves.,"சைமோசெப்டோரியா ட்ரிடிகை (Zymoseptoria tritici) மூலம் ஏற்படுகிறது. இலைகளில் வெளிச்சமான பச்சை-மஞ்சள் புள்ளிகள், காய்ந்த கருமை நிறம் மற்றும் சிறு புள்ளிகள் காணப்படும்.",machine
+be:disease:septoria:fav:temperature,10–20°C,10–20°C,machine
+be:disease:septoria:fav:humidity,>80%,>80%,machine
+be:disease:septoria:fav:rainfall,Frequent rain,அடிக்கடி மழை,machine
+be:disease:smut:display,Loose Smut,கரிப்பூட்டை நோய்,machine
+be:disease:smut:crop,Wheat,கோதுமை,machine
+be:disease:smut:severity,Medium,நடுத்தரம்,machine
+be:disease:smut:description,Caused by Ustilago tritici. Spikes replaced by black powdery masses of teliospores.,உஸ்டிலாகோ ட்ரிடிகை (Ustilago tritici) மூலம் ஏற்படுகிறது. கதிர் பகுதி கருமையான தூள் போன்ற ஸ்போர்களால் மூடப்பட்டிருக்கும்.,machine
+be:disease:smut:fav:temperature,16–22°C,16–22°C,machine
+be:disease:smut:fav:humidity,>60%,>60%,machine
+be:disease:smut:fav:rainfall,Moderate during anthesis,பூக்கும் பருவத்தில் மிதமான மழை,machine
+be:disease:stem_fly:display,Stem Fly,தண்டு ஈ,machine
+be:disease:stem_fly:crop,Wheat,கோதுமை,machine
+be:disease:stem_fly:severity,Medium,நடுத்தரம்,machine
+be:disease:stem_fly:description,Larval mining inside wheat stems causing 'dead heart' symptoms in young plants.,இளஞ் செடிகளில் 'டெட் ஹார்ட்' (உலர்ந்த குருத்து) அறிகுறிகளை ஏற்படுத்தும் கோதுமைத் தண்டுகளுக்குள் புழுக்கள் துளையிடுதல்.,machine
+be:disease:stem_fly:fav:temperature,15–20°C,15–20°C,machine
+be:disease:stem_fly:fav:humidity,Any,எந்த நிலையும்,machine
+be:disease:stem_fly:fav:rainfall,Low to moderate,குறைவு முதல் மிதமானது,machine
+be:disease:tan_spot:display,Tan Spot,பழுப்பு புள்ளி நோய்,machine
+be:disease:tan_spot:crop,Wheat,கோதுமை,machine
+be:disease:tan_spot:severity,Medium,நடுத்தரம்,machine
+be:disease:tan_spot:description,Caused by Pyrenophora tritici-repentis. Tan-colored oval lesions with yellow borders.,பீரெனோஃபோரா டிரிடிசி-ரெபென்டிஸ் (Pyrenophora tritici-repentis) மூலம் ஏற்படுகிறது. மஞ்சள் விளிம்புகளுடன் பழுப்பு நிற நீள்வட்டப் புண்கள்.,machine
+be:disease:tan_spot:fav:temperature,20–28°C,20–28°C,machine
+be:disease:tan_spot:fav:humidity,>70%,>70%,machine
+be:disease:tan_spot:fav:rainfall,Moderate,மிதமானது,machine
+be:disease:yellow_rust:display,Yellow Rust (Stripe Rust),மஞ்சள் துரு நோய் (கோடு துரு நோய்),machine
+be:disease:yellow_rust:crop,Wheat,கோதுமை,machine
+be:disease:yellow_rust:severity,Very High,மிக அதிகம்,machine
+be:disease:yellow_rust:description,Caused by Puccinia striiformis. Bright yellow pustules in stripes along leaf veins. Very destructive in cool climates.,பக்சினியா ஸ்ட்ரைஃபார்மிஸ் (Puccinia striiformis) மூலம் ஏற்படுகிறது. இலை நரம்புகள் வழியே கோடுகளாகப் பிரகாசமான மஞ்சள் கொப்புளங்கள். குளிர்ந்த காலநிலையில் மிகவும் சேதத்தை ஏற்படுத்தும்.,machine
+be:disease:yellow_rust:fav:temperature,10–15°C,10–15°C,machine
+be:disease:yellow_rust:fav:humidity,>80%,>80%,machine
+be:disease:yellow_rust:fav:rainfall,Dew / light rain,பனி / லேசான மழை,machine
+be:disease:mosaic_disease:display,Mosaic Disease,மொசைக் நோய்,machine
+be:disease:mosaic_disease:crop,Sugarcane,கரும்பு,machine
+be:disease:mosaic_disease:severity,High,அதிகம்,machine
+be:disease:mosaic_disease:description,Caused by Sugarcane Mosaic Virus (SCMV). Mosaic or mottled discolouration of leaves — alternating light and dark green patches.,இது கரும்பு மொசைக் வைரஸ் (SCMV) மூலமா வருது. இலையில மாறி மாறி இலசான மற்றும் அடர் பச்சை நிறத்துல திட்டு திட்டா மாறிரும்.,machine
+be:disease:mosaic_disease:fav:temperature,25–30°C,25–30°C,machine
+be:disease:mosaic_disease:fav:humidity,Moderate,மிதமானது,machine
+be:disease:mosaic_disease:fav:rainfall,Any,எப்படியும் இருக்கலாம்,machine
+be:disease:rust:display,Sugarcane Rust,கரும்பு துரு நோய்,machine
+be:disease:rust:crop,Sugarcane,கரும்பு,machine
+be:disease:rust:severity,Medium,மிதமானது,machine
+be:disease:rust:description,Caused by Puccinia melanocephala. Orange-brown pustules on leaf undersides causing premature leaf death.,இது பக்ஸினியா மெலனோசெபாலே (Puccinia melanocephala) பூஞ்சானால வருது. இலைகளுக்கு அடியில் ஆரஞ்சு-பழுப்பு நிற கொப்புளங்கள் தோன்றி இலைகள் சீக்கிரமே காய்ந்துடும்.,machine
+be:disease:rust:fav:temperature,24–28°C,24–28°C,machine
+be:disease:rust:fav:humidity,>75%,>75%,machine
+be:disease:rust:fav:rainfall,Moderate,மிதமானது,machine
+be:disease:bacterial_blight:display,Bacterial Blight,பாக்டீரியா கருகல் நோய்,machine
+be:disease:bacterial_blight:crop,Cotton,பருத்தி,machine
+be:disease:bacterial_blight:severity,High,அதிகம்,machine
+be:disease:bacterial_blight:description,"Caused by Xanthomonas axonopodis pv. malvacearum. Angular water-soaked lesions on leaves, black cankers on stems.","இது சாந்தோமோனாஸ் ஆக்சோபோடிஸ் பிவி. மால்வாசியாரம் (Xanthomonas axonopodis pv. malvacearum) மூலமா வருது. இலைகளில் கோண வடிவில் நீர் போன்ற புள்ளிகளும், தண்டுகளில் கருப்பு புண்களும் ஏற்படும்.",machine
+be:disease:bacterial_blight:fav:temperature,28–35°C,28–35°C,machine
+be:disease:bacterial_blight:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_blight:fav:rainfall,Heavy,அதிகம்,machine
+be:disease:alternaria_leaf_spot:display,Alternaria Leaf Spot, ஆல்டர்நேரியா இலைப்புள்ளி நோய்,machine
+be:disease:alternaria_leaf_spot:crop,Cotton,பருத்தி,machine
+be:disease:alternaria_leaf_spot:severity,Medium,நடுத்தரம்,machine
+be:disease:alternaria_leaf_spot:description,Caused by Alternaria macrospora. Dark brown to black circular spots with concentric rings on leaves.,"ஆல்டர்நேரியா மேக்ரோஸ்போரா (Alternaria macrospora) பூஞ்சையால் வருகிறது. இலைகளில் வட்டமான அடர் பழுப்பு முதல் கருப்பு நிறப் புள்ளிகள் காணப்படும், அதில் வளைவான வளையங்கள் இருக்கும்.",machine
+be:disease:alternaria_leaf_spot:fav:temperature,25–30°C,25–30°C,machine
+be:disease:alternaria_leaf_spot:fav:humidity,>75%,>75%,machine
+be:disease:alternaria_leaf_spot:fav:rainfall,Moderate to heavy,மிதமான முதல் அதிக மழை,machine
+be:disease:hispa:display,Rice Hispa,நெல் இலைப்பேன் (ஹிஸ்பா),machine
+be:disease:hispa:crop,Rice,நெல்லு,machine
+be:disease:hispa:severity,Medium,நடுத்தரம்,machine
+be:disease:hispa:description,Caused by Dicladispa armigera (leaf beetle). Adults scrape leaf surfaces; larvae mine inside leaves creating white tunnels.,டைக்ளாடிஸ்பா ஆர்மிஜெரா (Dicladispa armigera) (இலை வண்டு) மூலம் ஏற்படுகிறது. முதிர்ந்த வண்டுகள் இலைகளின் மேற்பரப்பைச் சுரண்டுகின்றன; புழுக்கள் இலைகளுக்குள் துளையிட்டு வெள்ளையான சுரங்கப் பாதைகளை உருவாக்குகின்றன.,machine
+be:disease:hispa:fav:temperature,25–35°C,25–35°C,machine
+be:disease:hispa:fav:humidity,>75%,>75%,machine
+be:disease:hispa:fav:rainfall,Moderate,மிதமானது,machine
+be:disease:tungro:display,Tungro Virus Disease,துங்ரோ வைரஸ் நோய்,machine
+be:disease:tungro:crop,Rice,நெல்லு,machine
+be:disease:tungro:severity,Very High,மிக அதிகம்,machine
+be:disease:tungro:description,Caused by two viruses (RTBV + RTSV) transmitted by green leafhoppers. Leaves turn yellow-orange. Stunted plants with reduced tillering.,பச்சைத் தத்துப்பூச்சிகளால் பரப்பப்படும் இரண்டு வைரஸ்கள் (RTBV + RTSV) மூலம் ஏற்படுகிறது. இலைகள் மஞ்சள்-ஆரஞ்சு நிறமாக மாறும். பயிர்கள் வளர்ச்சி குன்றி தூர்கள் குறைவாக வரும்.,machine
+be:disease:tungro:fav:temperature,25–30°C,25–30°C,machine
+be:disease:tungro:fav:humidity,>80%,>80%,machine
+be:disease:tungro:fav:rainfall,Moderate,மிதமானது,machine
+be:disease:dead_heart:display,Dead Heart (Stem Borer),டெட் ஹார்ட் (குருத்துப் பூச்சி),machine
+be:disease:dead_heart:crop,Rice,நெல்லு,machine
+be:disease:dead_heart:severity,High,அதிகம்,machine
+be:disease:dead_heart:description,Caused by stem borer larvae (Scirpophaga incertulas). The central leaf whorl turns yellow and dies — pulled out easily.,தண்டு துளைப்பான் புழுக்களால் (ஸ்கிர்போபேகா இன்கர்டுலாஸ்) ஏற்படுகிறது. நடுவிலுள்ள இலை சுருள் மஞ்சள் நிறமாக மாறி காய்ந்துவிடும் - லேசாக இழுத்தாலே வந்துவிடும்.,machine
+be:disease:dead_heart:fav:temperature,25–35°C,25–35°C,machine
+be:disease:dead_heart:fav:humidity,High,அதிகம்,machine
+be:disease:dead_heart:fav:rainfall,Moderate,மிதமானது,machine
+be:disease:downy_mildew:display,Downy Mildew,அடிச்சாம்பல் நோய்,machine
+be:disease:downy_mildew:crop,Rice,நெல்லு,machine
+be:disease:downy_mildew:severity,Medium,நடுத்தரம்,machine
+be:disease:downy_mildew:description,Caused by Sclerophthora macrospora. Pale yellow lesions with downy growth on underside of leaves.,ஸ்கெலொப்டோர மாக்கிரோஸ்போரா என்ற பூஞ்சையால் ஏற்படுகிறது. இலைகளின் அடிப்பகுதியில் பஞ்சு போன்ற வளர்ச்சியுடன் வெளிறிய மஞ்சள் நிறப் புள்ளிகள் காணப்படும்.,machine
+be:disease:downy_mildew:fav:temperature,18–25°C,18–25°C,machine
+be:disease:downy_mildew:fav:humidity,>90%,>90%,machine
+be:disease:downy_mildew:fav:rainfall,Heavy flooding,அதிக வெள்ளம்,machine
+be:disease:bacterial_leaf_streak:display,Bacterial Leaf Streak,பாக்டீரியா இலைக்கோடு நோய்,machine
+be:disease:bacterial_leaf_streak:crop,Rice,நெல்லு,machine
+be:disease:bacterial_leaf_streak:severity,Medium,நடுத்தரம்,machine
+be:disease:bacterial_leaf_streak:description,"Caused by Xanthomonas oryzae pv. oryzicola. Narrow, translucent water-soaked stripes between veins.","சாந்தோமோனாஸ் ஒரைசே பிவி. ஒரைசிகோலா என்ற பாக்டீரியாவால் ஏற்படுகிறது. நரம்புகளுக்கு இடையில் குறுகிய, ஊடுருவக்கூடிய நீர் போன்ற கோடுகள் காணப்படும்.",machine
+be:disease:bacterial_leaf_streak:fav:temperature,25–35°C,25–35°C,machine
+be:disease:bacterial_leaf_streak:fav:humidity,>80%,>80%,machine
+be:disease:bacterial_leaf_streak:fav:rainfall,Heavy,அதிகம்,machine
+be:disease:bacterial_panicle_blight:display,Bacterial Panicle Blight,பாக்டீரியா கதிர் கருகல் நோய்,machine
+be:disease:bacterial_panicle_blight:crop,Rice,நெல்லு,machine
+be:disease:bacterial_panicle_blight:severity,High,அதிகம்,machine
+be:disease:bacterial_panicle_blight:description,"Caused by Burkholderia glumae. Sterile spikelets, grayish-brown discolouration. Significant yield loss.","இது 'பர்க்கோல்டீரியா குளுமே' (Burkholderia glumae) என்ற பாக்டீரியாவால் வருகிறது. நெல் மணிகள் வெம்பாமல் பதறாகிவிடும், சாம்பல் கலந்த பழுப்பு நிறமாக மாறும். இதனால் மகசூல் ரொம்ப குறையும்.",machine
+be:disease:bacterial_panicle_blight:fav:temperature,>30°C,>30°C,machine
+be:disease:bacterial_panicle_blight:fav:humidity,>85%,>85%,machine
+be:disease:bacterial_panicle_blight:fav:rainfall,Moderate,மிதமான மழை,machine
+be:disease:normal:display,Healthy (Normal),ஆரோக்கியமானது (வழக்கமான நிலை),machine
+be:disease:normal:crop,Rice,நெல்,machine
+be:disease:normal:severity,None,இல்லை,machine
+be:disease:normal:description,No disease detected. Crop appears healthy.,நோய் எதுவும் கண்டுபிடிக்கப்படவில்லை. பயிர் ஆரோக்கியமாக உள்ளது.,machine
+be:disease:normal:fav:temperature,Any,எந்த வெப்பநிலையும்,machine
+be:disease:normal:fav:humidity,Any,எந்த ஈரப்பதமும்,machine
+be:disease:normal:fav:rainfall,Regular,வழக்கமான மழை,machine

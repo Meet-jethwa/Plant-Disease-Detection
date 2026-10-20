@@ -1,0 +1,19 @@
+{
+  "crop.rice": "धान",
+  "crop.wheat": "गेहूं",
+  "crop.sugarcane": "गन्ना",
+  "crop.cotton": "कपास",
+  "plants.title": "सक्रिय फसल स्वास्थ्य रिकॉर्ड",
+  "plants.badge": "फसल की निगरानी",
+  "plants.registerNew": "नया पौधा दर्ज करें",
+  "plants.healthySpecimens": "स्वस्थ पौधे",
+  "plants.attentionRequired": "ध्यान देने की जरूरत है",
+  "plants.highRisk": "बीमारी का ज्यादा खतरा",
+  "plants.allCrops": "सभी फसलें",
+  "plants.healthy": "स्वस्थ",
+  "plants.needsAttention": "ध्यान चाहिए",
+  "plants.searchPlaceholder": "नाम या प्रजाति से पौधे खोजें…",
+  "plants.empty": "निगरानी करने के लिए कोई पौधा नहीं मिला",
+  "plants.emptyDesc": "सुधार देखने के लिए स्कैनर में पौधे की पत्ती को स्कैन करें।",
+  "plants.scanFirst": "अभी पौधे को स्कैन करें"
+}

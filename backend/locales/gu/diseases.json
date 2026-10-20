@@ -1,0 +1,716 @@
+{
+  "bacterial_leaf_blight": {
+    "display": "બેક્ટેરિયલ પાનનો સુકારો",
+    "crop": "ડાંગર",
+    "severity": "વધુ",
+    "description": "આ એક ગંભીર બેક્ટેરિયલ રોગ છે જે ઝેન્થોમોનાસ ઓરાયઝી પીવી ઓરાયઝી (Xanthomonas oryzae pv. oryzae) ના કારણે થાય છે. પાનની કિનારીઓ પાણી પલાળેલી દેખાય છે, જે પછીથી પીળી અને છેવટે સફેદ થઈ જાય છે.",
+    "causes": "વધુ તાપમાન (25–30°C), વધુ ભેજ અને વરસાદના છાંટા કે વાવાઝોડાથી પાનના ઘા દ્વારા બેક્ટેરિયા ફેલાય છે.",
+    "treatment_summary": "કોપર યુક્ત જીવાણુનાશક છાંટો. રોગવાળા છોડના અવશેષો દૂર કરો. રોગપ્રતિકારક જાતો વાવો. વધુ પડતું નાઇટ્રોજન ખાતર ના નાખો.",
+    "prevention": "રોગમુક્ત પ્રમાણિત બિયારણ વાપરો. ખેતરમાં પાણી ભરાવા ન દો, નિકાલ સારો રાખો. સંતુલિત ખાતર આપો.",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "વધુ (વાવાઝોડું/પૂર)"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.5,
+      "rainfall": 0.2
+    }
+  },
+  "brown_spot": {
+    "display": "બ્રાઉન સ્પોટ (બદામી ધાબા)",
+    "crop": "ડાંગર",
+    "severity": "મધ્યમ",
+    "description": "આ કોક્લિયોબોલસ મિયાબિયાનસ (Cochliobolus miyabeanus) નામની ફૂગથી થતો રોગ છે. પાન પર પીળા રંગની સરહદવાળા ગોળાકાર કે લંબગોળ બદામી ડાઘ પડે છે.",
+    "causes": "આ જમીનમાં પોષક તત્વોની ઉણપ (ખાસ કરીને પોટેશિયમ અને સિલિકોન) ને કારણે થાય છે. ગરમ, ભેજવાળું વાતાવરણ અને ખરાબ જમીન સ્વાસ્થ્ય આ રોગને વધારે છે.",
+    "treatment_summary": "મેન્કોઝેબ અથવા ઇપ્રોડિઓન ફૂગનાશક છાંટો. જમીનમાં પોષક તત્વોની ઉણપ (પોટેશિયમ, સિલિકોન) દૂર કરો. છોડ બહુ નજીક-નજીક ન વાવો.",
+    "prevention": "સંતુલિત ખાતર, પાણીના સારા નિકાલવાળી જમીન અને રોગપ્રતિકારક જાતો વાપરો.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "22–32°C",
+      "humidity": "75–90%",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "healthy": {
+    "display": "સ્વસ્થ",
+    "crop": "બધા",
+    "severity": "કોઈ નહીં",
+    "description": "પાંદડા પર રોગના કોઈ લક્ષણો દેખાતા નથી અને પાંદડું તંદુરસ્ત છે.",
+    "causes": "લાગુ પડતું નથી",
+    "treatment_summary": "નિયમિત દેખરેખ રાખતા રહो અને સાવચેતીના પગલાં ચાલુ રાખો.",
+    "prevention": "ખેતીની સારી પદ્ધતિઓ અપનાવો, ખાતરનું સંતુલન રાખો અને યોગ્ય પિયત આપો.",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "કોઈપણ",
+      "humidity": "કોઈપણ",
+      "rainfall": "નિયમિત"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  },
+  "leaf_blast": {
+    "display": "પાનનો બ્લાસ્ટ રોગ",
+    "crop": "ડાંગર",
+    "severity": "ખૂબ વધારે",
+    "description": "આ ડાંગરનો ખૂબ જ નુકસાનકારક રોગ છે, જે મેગ્નાપોર્થે ઓરાયઝી ફૂગને કારણે થાય છે. પાંદડા પર રાખોડી કેન્દ્ર અને ભુખરી કિનારવાળા હીરા (ડાયમંડ) જેવા આકારના ડાઘ પડે છે.",
+    "causes": "ઠંડી રાતો, ગરમ દિવસો, વધુ ભેજ (>90%), ભારે ઓસ, નાઇટ્રોજન ખાતરનો વધુ પડતો ઉપયોગ અને રોગ સામે સંવેદનશીલ જાતો.",
+    "treatment_summary": "ફૂગનાશક દવાઓ છાંટો: ટ્રાયસાઇક્લાઝોલ, આસોપ્રોથિયોલેન, અથવા એઝોક્સિસ્ટ્રોબિન. નાઇટ્રોજન ખાતર ઓછું કરો. ભેજ ઘટાડવા માટે ખેતરમાંથી પાણી બહાર કાઢી નાખો.",
+    "prevention": "બ્લાસ્ટ રોગ સામે રક્ષણ આપતી જાતો વાવો. વધુ પડતું નાઇટ્રોજન ના નાખો. છોડ વચ્ચે સારો હવા ઉજાસ રહે તેની ખાતરી કરો.",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "વારંવાર હળવો વરસાદ/ઓસ"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "leaf_scald": {
+    "display": "પાનનો સ્કેલ્ડ રોગ",
+    "crop": "ડાંગર",
+    "severity": "મધ્યમ",
+    "description": "આ માઇક્રોડોચિયમ ઓરાયઝી ફૂગના કારણે થાય છે. પાંદડાની કિનારીઓ પર આછા અને ઘાટા ભુખરા રંગના પટ્ટાઓ વારાફરતી દેખાય છે.",
+    "causes": "વધુ ભેજ, ગરમ તાપમાન, અને ઘાટી વાવણી જેનાથી હવા ઉજાસ ઘટે છે.",
+    "treatment_summary": "પ્રોપિકોનાઝોલ અથવા કાર્બેન્ડાઝિમ ફૂગનાશક છાંટો. ખેતરનો નિતાર સુધારો અને છોડ વચ્ચે પૂરતું અંતર રાખો.",
+    "prevention": "હરોળ વચ્ચે વધુ અંતર રાખો, સંતુલિત ખાતર વાપરો, રોગ પ્રતિકારક જાતો વાવો.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_carbendazim"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "મધ્યમથી ભારે"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "sheath_blight": {
+    "display": "પર્ણ સુકારો (શીથ બ્લાઇટ)",
+    "crop": "ડાંગર",
+    "severity": "વધુ",
+    "description": "આ રોગ રાઈઝોક્ટોનીયા સોલાની ફૂગના કારણે થાય છે. પાનની ડાળીઓ પર ઘાટા ભૂરા રંગની કિનારીવાળા લંબગોળ લીલાશ પડતા રાખોડી ડાઘ પડે છે, જે પાંદડા સુધી ફેલાય છે.",
+    "causes": "વધુ ભેજ (>90%), તાપમાન 28–32°C, નજીક-નજીક છોડ વાવવા, નાઇટ્રોજનનું વધુ પ્રમાણ, અને ખેતરમાં પાણી ભરાઈ રહેવાથી ફૂગ ફેલાય છે.",
+    "treatment_summary": "વેલિડામાયસીન, હેક્સાકોનાઝોલ અથવા પ્રોપિકોનાઝોલ ફૂગનાશક છાંટો. છોડ વચ્ચે અંતર રાખો. પાકમાં ભેજનું પ્રમાણ ઓછું કરો.",
+    "prevention": "બિયારણ ઓછું વાવો, ખાતરનું પ્રમાણ સંતુલિત રાખો, પાણીનું યોગ્ય સંચાલન કરો.",
+    "treatment_ids": [
+      "treat_validamycin",
+      "treat_hexaconazole",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–32°C",
+      "humidity": ">90%",
+      "rainfall": "વધારે પાણી ભરાવવું"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "aphid": {
+    "display": "મૂવા (એફિડ) નો ઉપદ્રવ",
+    "crop": "ઘઉં",
+    "severity": "મધ્યમ",
+    "description": "નાના પોચા શરીરવાળા કીટકો જે પાંદડા અને ડાંડલા પર જૂથમાં બેસીને છોડનો રસ ચૂસે છે અને વાયરસ ફેલાવી શકે છે.",
+    "causes": "ગરમ અને સૂકું વાતાવરણ, કુદરતી દુશ્મન જીવાતોનો અભાવ, અને ঘন વાવેતર.",
+    "treatment_summary": "ઇમિડાક્લોપ્રિડ અથવા લેમ્ડા-સાયહેલોથ્રિન જંતુનાશક છાંટો. કુદરતી દુશ્મન જીવાતોને (લેડીબગ) પ્રોત્સાહિત કરો.",
+    "prevention": "વહેલી વાવણી કરો, પાકની ફેરબદલી કરો, વધુ પડતા નાઇટ્રોજન ખાતરથી બચો.",
+    "treatment_ids": [
+      "treat_imidacloprid",
+      "treat_lambda_cyhalothrin"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–25°C",
+      "humidity": "<60%",
+      "rainfall": "ઓછો"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "black_rust": {
+    "display": "કાળો ગેરુ (દાંડીનો ગેરુ)",
+    "crop": "ઘઉં",
+    "severity": "ખૂબ જ વધુ",
+    "description": "પુક્સિનિયા ગ્રામિનિસ ફૂગના કારણે થાય છે. પ્રકાંડ અને પાંદડા પર ઈંટો જેવા લાલથી કાળા ફોલ્લા થાય છે. આખો પાક નષ્ટ કરી શકે છે.",
+    "causes": "ગરમ તાપમાન (15–30°C), ઓસ, અને આસપાસના રોગગ્રસ્ત ખેતરોમાંથી હવા દ્વારા ઉડતા બીજાણુઓ.",
+    "treatment_summary": "શરૂઆતની અવસ્થામાં પ્રોપિકોનાઝોલ, ટેબુકોનાઝોલ અથવા ટ્રાઇફ્લોક્સીસ્ટ્રોબિન ફૂગનાશક છાંટો.",
+    "prevention": "રોગ પ્રતિકારક જાતો વાવો. વહેલી વાવણી કરો. ઘઉંના નીંદણવાળા છોડ દૂર કરો.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole",
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–30°C",
+      "humidity": ">80%",
+      "rainfall": "ઓસ સાથે મધ્યમ વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "blast": {
+    "display": "બ્લાસ્ટ રોગ (ડાંગર)",
+    "crop": "ડાંગર",
+    "severity": "ખૂબ વધારે",
+    "description": "Magnaporthe oryzae. પાંદડા પર હીરા જેવા આકારના ડાઘ પડે છે. આ રોગ ડાંગરની ડૂંડીઓને પણ નુકસાન કરે છે (બ્લાસ્ટ રોગ).",
+    "causes": "ઠંડી રાતો, સવારનું ઓસ, નાઇટ્રોજનનો વધુ પડતો ઉપયોગ, અને રોગ સામે ઓછી તાકાતવાળી જાતો.",
+    "treatment_summary": "ટ્રાઇસાઇક્લાઝોલ, આઇસોપ્રોથિઓલેન, એઝોક્સિસ્ટ્રોબિન ફૂગનાશક.",
+    "prevention": "રોગ પ્રતિકારક જાતો વાવો, માપસર નાઇટ્રોજન આપો, અને પાણીનું નિયંત્રણ રાખો.",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "વારંવાર ઓસ પડવું / હળવો વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "brown_rust": {
+    "display": "કથ્થઈ ગેરુ (પાનનો ગેરુ)",
+    "crop": "ઘઉં",
+    "severity": "વધારે",
+    "description": "Puccinia triticina દ્વારા થાય છે. પાંદડાની ઉપરની સપાટી પર નારંગી-કથ્થઈ ફોલ્લા થાય છે. આ રોગ ખૂબ સામાન્ય છે અને ઝડપથી ફેલાય છે.",
+    "causes": "મધ્યમ તાપમાન (15–22°C), ઓસ, અને ભેજવાળું વાતાવરણ.",
+    "treatment_summary": "ફૂગનાશક: પ્રોપિકોનાઝોલ, મેન્કોઝેબ. રોગની શરૂઆતમાં જ છંટકાવ કરો.",
+    "prevention": "રોગ પ્રતિકારક જાતો વાવો, સમયસર વાવણી કરો, અને પાકની ફેરબદલી કરો.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": ">70%",
+      "rainfall": "હળવો વરસાદ / ઓસ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "common_root_rot": {
+    "display": "મૂળનો કાળો સડો",
+    "crop": "ઘઉં",
+    "severity": "મધ્યમ",
+    "description": "Bipolaris sorokiniana દ્વારા થાય છે. છોડના પાયાના ભાગમાં અને મૂળમાં કથ્થઈથી કાળા ડાઘ પડી જાય છે.",
+    "causes": "સૂકી માટી, વાવણી વખતે ગરમ તાપમાન, અને જમીનમાં રહેલા રોગના જંતુઓ.",
+    "treatment_summary": "ટ્રાઇફ્લોક્સિસ્ટ્રોબિન + ટેબુકોનાઝોલથી બિયારણની માવજત કરો. અનાજ સિવાયના અન્ય પાકોની ફેરબદલી કરો.",
+    "prevention": "જમીનમાં પોષક તત્વોનું સંતુલન રાખો, સતત ઘઉં વાવવાનું ટાળો, અને યોગ્ય ઊંડાઈએ વાવણી કરો.",
+    "treatment_ids": [
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–28°C",
+      "humidity": "જમીનમાં ઓછો ભેજ",
+      "rainfall": "અપૂરતો વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.3,
+      "rainfall": 0.3
+    }
+  },
+  "fusarium_head_blight": {
+    "display": "ફ્યુસેરિયમ હેડ બ્લાઈટ (સ્કેબ)",
+    "crop": "ઘઉં",
+    "severity": "ખૂબ વધુ",
+    "description": "ફુસારીયમ ગ્રામિનેરમથી થાય છે. ગુલાબી ફૂગ સાથે સૂકા ડૂંડા. ઝેરી તત્વો (DON) બનાવે છે જે દાણાને બગાડે છે.",
+    "causes": "ફૂલ આવતી વખતે ભેજવાળું વાતાવરણ, 25–30°C તાપમાન, અને ખેતરમાં પાકના અવશેષો પડેલા રહેવા.",
+    "treatment_summary": "ફૂલ બેસવાની શરૂઆતમાં થિયોફાનેટ-મિથાઈલ અથવા મેટકોનાઝોલ છાંટો. રોગવાળો કચરો દૂર કરો.",
+    "prevention": "રોગ પ્રતિકારક જાતો વાવો, કચરો ડાટી દેવા ખેડ કરો, પાણીની સારી નિકાલ રાખો.",
+    "treatment_ids": [
+      "treat_thiophanate_methyl",
+      "treat_metconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">90%",
+      "rainfall": "ફૂલ આવતી વખતે વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "leaf_blight": {
+    "display": "પાનનો સુકારો",
+    "crop": "ઘઉં",
+    "severity": "મધ્યમ",
+    "description": "જૂના પાંદડા પર પીળી કિનારીવાળા આછા બદામી ડાઘ.",
+    "causes": "ગરમ અને ભેજવાળું વાતાવરણ અને રોગ સામે ન ટકી શકે તેવી જાતો.",
+    "treatment_summary": "મેન્કોઝેબ અથવા પ્રોપિકોનાઝોલ ફૂગનાશકનો છંટકાવ કરો.",
+    "prevention": "પાકની ફેરબદલી કરો અને રોગ પ્રતિકારક જાતો વાવો.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–30°C",
+      "humidity": ">70%",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "mildew": {
+    "display": "છારો રોગ",
+    "crop": "ઘઉં",
+    "severity": "મધ્યમ",
+    "description": "બ્લુમેરિયા ગ્રામિનીસને કારણે પાંદડા પર સફેદ પાવડર જેવું થર. છોડનો ખોરાક બનાવવાની તાકાત ઘટાડે છે.",
+    "causes": "ઠંડુ તાપમાન (15–22°C), મધ્યમ ભેજ, અને છોડ ખૂબ નજીક હોવા.",
+    "treatment_summary": "ટ્રાયડિમેફોન, પ્રોપિકોનાઝોલ, અથવા સલ્ફર આધારિત ફૂગનાશક છાંટો.",
+    "prevention": "હરોળ વચ્ચે વધુ જગ્યા રાખો, રોગ પ્રતિકારક જાતો વાવો, વહેલી વાવણી કરો.",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole",
+      "treat_sulfur"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": "60–80%",
+      "rainfall": "ઓછાથી મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "mite": {
+    "display": "ઈંચ કે જીવાતનો ઉપદ્રવ",
+    "crop": "ઘઉં",
+    "severity": "ઓછી",
+    "description": "નાની કરોળિયા જેવી જીવાત જેનાથી પાન પર ચાંદી જેવા ટપકાં થાય છે અને પાન તાંબા જેવા રંગના થઈ જાય છે.",
+    "causes": "ગરમ અને સૂકું વાતાવરણ. રાસાયણિક દવાઓ જે કુદરતી શત્રુજીવાતોને મારી નાખે છે.",
+    "treatment_summary": "અબામેક્ટિન અથવા ડાયકોફોલ મિટિસાઇડ (જંતુનાશક) છાંટો. પિયત (પાણી) વધારો.",
+    "prevention": "વધુ પડતી સૂકી પરિસ્થિતિ ટાળો. ફાયદાકારક જીવાતોનું રક્ષણ કરો.",
+    "treatment_ids": [
+      "treat_abamectin",
+      "treat_dicofol"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": "<50%",
+      "rainfall": "ખૂબ ઓછો"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.3,
+      "rainfall": 0.2
+    }
+  },
+  "septoria": {
+    "display": "સેપ્ટોરિયા પાનનો ડાઘ (બ્લોચ)",
+    "crop": "ઘઉં",
+    "severity": "વધુ",
+    "description": "ઝાયમોસેપ્ટોરિયા ટ્રિટિસીના કારણે થાય છે. પાન પર આછા લીલા-પીળા ડાઘ અને કથ્થઈ સુકાન તથા પિકનિડિયા જોવા મળે છે.",
+    "causes": "ઠંડું, ભીનું વાતાવરણ (10–20°C), પાન 20 કલાકથી વધુ સમય સુધી ભીનાં રહેવા.",
+    "treatment_summary": "ટ્રાયઝોલ અથવા SDHI ફૂગનાશક (એપોક્સિકોનાઝોલ, ફ્લક્સાસાયરોક્સાડ). સમયસર દવા છાંટવી ખૂબ જરૂરી છે.",
+    "prevention": "રોગ પ્રતિકારક જાતો, પાકની ફેરબદલી, મોડું વાવેતર.",
+    "treatment_ids": [
+      "treat_epoxiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–20°C",
+      "humidity": ">80%",
+      "rainfall": "વારંવાર વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "smut": {
+    "display": "કાંગરી (લૂઝ સ્મટ)",
+    "crop": "ઘઉં",
+    "severity": "મધ્યમ",
+    "description": "અસ્ટીલાગો ટ્રિટિસીના કારણે થાય છે. ડૂંડા કાળા પાવડર જેવા બીજ (ટેલિયોસ્પોર્સ) બની જાય છે.",
+    "causes": "फूल બેસતી વખતે મધ્યમ તાપમાન અને ભેજવાળું વાતાવરણ. બીજ દ્વારા ફેલાતો રોગ.",
+    "treatment_summary": "બિયારણને કાર્બોક્સિન, થિરામ અથવા ટેબુકોનાઝોલની માવજત આપવી ખૂબ જ અસરકારક છે.",
+    "prevention": "પ્રમાણિત અને રોગમુક્ત બિયારણ વાપરો. બિયારણની ગરમ પાણીથી માવજત કરો.",
+    "treatment_ids": [
+      "treat_carboxin_thiram"
+    ],
+    "favorable_conditions": {
+      "temperature": "16–22°C",
+      "humidity": ">60%",
+      "rainfall": "फूल બેસતી વખતે મધ્યમ વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "stem_fly": {
+    "display": "સ્ટેમ ફ્લાય (ગાભમારાની માખી)",
+    "crop": "ઘઉં",
+    "severity": "મધ્યમ",
+    "description": "ઘઉંના છોડના થડની અંદર ઈયળો ખાવાથી નાની વયના છોડમાં 'ડેડ હાર્ટ' (સૂકા ગર્ભ) ના લક્ષણો દેખાય છે.",
+    "causes": "પાકની શરૂઆતની અવસ્થામાં ઠંડા તાપમાન (15–20°C) દરમિયાન સૌથી વધુ પ્રવૃત્તિ.",
+    "treatment_summary": "છોડની શરૂઆતની અવસ્થામાં ક્લોરપાયરિફોસ અથવા ઇમિડાક્લોપ્રિડ છાટો.",
+    "prevention": "વહેલી વાવણી કરો, બિયારણને પ્રણાલીગત (સિસ્ટેમિક) જંતુનાશકથી માઈક્રો-ટ્રીટમેન્ટ આપો, અને છોડના પાયાના ભાગ પર નજર રાખો.",
+    "treatment_ids": [
+      "treat_chlorpyrifos",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–20°C",
+      "humidity": "કોઈપણ",
+      "rainfall": "ઓછાથી મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.25,
+      "rainfall": 0.25
+    }
+  },
+  "tan_spot": {
+    "display": "ટૈન સ્પોટ (પીળા-ભૂરા ડાઘ)",
+    "crop": "ઘઉં",
+    "severity": "મધ્યમ",
+    "description": "પાયરેનોફોરા ટ્રીટિસી-રિપેન્ટિસ (Pyrenophora tritici-repentis) દ્વારા થાય છે. પીળી કિનારીવાળા ભૂરા રંગના લંબગોળ ડાઘ.",
+    "causes": "ગરમ તાપમાન (20–28°C), પાંદડા પર ભીનાશ, અને પાછલી સિઝનનો પાક અવશેષ.",
+    "treatment_summary": "પ્રોપિકોનાઝોલ અથવા મેન્કોઝેબ છાટો. અવશેષોને દાટી દેવા માટે ખેડાણ કરો.",
+    "prevention": "પાકની ફેરબદલી, અવશેષોનું વ્યવસ્થાપન, અને રોગપ્રતિકારક જાતો.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">70%",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "yellow_rust": {
+    "display": "પીળો ગેરુ (સ્ટ્રાઇપ ગેરુ)",
+    "crop": "ઘઉં",
+    "severity": "ખૂબ જ વધુ",
+    "description": "પ્યુક્સિનિયા સ્ટ્રાઈફોર્મિસ (Puccinia striiformis) દ્વારા થાય છે. પાંદડાની નસો સાથે પટ્ટાઓમાં ચમકદાર પીળા દાણા જેવા ફોલ્લા થાય છે. ઠંડા વાતાવરણમાં ખૂબ જ નુકસાન કરે છે.",
+    "causes": "ઠંડુ તાપમાન (10–15°C), ઓસ અને ઝાકળ, અને રોગ લાગુ પડે તેવી જાતો.",
+    "treatment_summary": "શરૂઆતમાં જ પ્રોપિકોનાઝોલ, ટેબુકોનાઝોલ, અથવા અન્ય ટ્રાએઝોલ ફૂગનાશક છાટો.",
+    "prevention": "રોગપ્રતિકારક જાતો સૌથી વધુ અસરકારક છે. વહેલી વાવણી કરો. હવામાનની આગાહી પર નજર રાખો.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–15°C",
+      "humidity": ">80%",
+      "rainfall": "ઓસ / હળવો વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "mosaic_disease": {
+    "display": "મઝેઈક રોગ",
+    "crop": "શેરડી",
+    "severity": "વધુ",
+    "description": "આ રોગ સુગરકેન મોઝેક વાયરસ (SCMV) ને કારણે થાય છે. પાંદડા પર મોઝેક જેવા અથવા આછા-ઘાટા લીલા રંગના ધાબા જોવા મળે છે.",
+    "causes": "આ મોલોમશી (Rhopalosiphum maidis) દ્વારા અને રોગગ્રસ્ત બિયારણ વાવવાથી ફેલાય છે.",
+    "treatment_summary": "આની કોઈ રાસાયણિક દવા નથી. રોગગ્રસ્ત છોડને કાઢીને નાશ કરો. મોલોમશીનું નિયંત્રણ કરો.",
+    "prevention": "વાયરસ મુક્ત બિયારણ વાપરો, રોગ સામે રક્ષણ આપતી જાતો વાવો, મોલોમશીની સંખ્યા નિયંત્રિત કરો.",
+    "treatment_ids": [
+      "treat_routine_monitoring",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": "મધ્યમ",
+      "rainfall": "કોઈપણ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.35,
+      "rainfall": 0.35
+    }
+  },
+  "rust": {
+    "display": "શેરડીનો ગેરુ રોગ",
+    "crop": "શેરડી",
+    "severity": "મધ્યમ",
+    "description": "આ રોગ પ્યુકિનિયા મેલાનોસેફાલા (Puccinia melanocephala) થી થાય છે. પાંદડાની નીચેની બાજુએ નારંગી-ભૂખરા રંગના ફોલ્લા થાય છે જેથી પાંદડા વહેલા સુકાઈ જાય છે.",
+    "causes": "વધારે તાપમાન (24–28°C), વધુ ભેજ અને રોગ લાગુ પડે તેવી જાતો.",
+    "treatment_summary": "ટ્રાયડિમેફોન અથવા પ્રોપિકોનાઝોલ ફૂગનાશક છાંટો. ખૂબ વધારે રોગવાળા પાંદડા કાઢી નાખો.",
+    "prevention": "રોગ પ્રતિકારક જાતો વાવો. ખાતરનું સંતુલન રાખો.",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "24–28°C",
+      "humidity": ">75%",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "bacterial_blight": {
+    "display": "બેક્ટેરિયલ બ્લાઈટ (અંગમારી)",
+    "crop": "કપાસ",
+    "severity": "વધુ",
+    "description": "આ રોગ ઝેન્થોમોનાસ એક્સોનોપોડીસ પીવી. માલવાસીયારમ (Xanthomonas axonopodis pv. malvacearum) થી થાય છે. પાંદડા પર પાણી જેવા ચોરસ ધાબા અને થડ પર કાળા ચાઠા પડે છે.",
+    "causes": "ગરમ અને ભેજવાળું વાતાવરણ, વરસાદના છાંટા, યાંત્રિક ઈજા અને રોગગ્રસ્ત બીજ.",
+    "treatment_summary": "કોપર ઓક્સીક્લોરાઈડ અથવા સ્ટ્રેપ્ટોમાઈસિનનો છંટકાવ કરો. રોગગ્રસ્ત કચરો દૂર કરો.",
+    "prevention": "રોગમુક્ત પ્રમાણિત બિયારણ, બીજ માવજત અને પાક ફેરબદલી કરો.",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–35°C",
+      "humidity": ">80%",
+      "rainfall": "વધારે"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "alternaria_leaf_spot": {
+    "display": "ઓલ્ટરનેરિયા પાંદડાના ડાઘ",
+    "crop": "કપાસ",
+    "severity": "મધ્યમ",
+    "description": "આ રોગ અલ્ટરનેરિયા મેક્રોસ્પોરા નામના ફૂગથી થાય છે. પાંદડા પર ગોળાકાર, ઘાટા બદામીથી કાળા ડાઘ પડે છે જેમાં વર્તુળાકાર રીંગ જેવું દેખાય છે.",
+    "causes": "વધુ પડતો ભેજ અને 25–30°C તાપમાન. નબળા કે નબળી સ્થિતિવાળા છોડ પર આ રોગ સૌથી વધુ જોખમી બને છે.",
+    "treatment_summary": "મેન્કોઝેબ, ક્લોરોથાલોનિલ અથવા આઇપ્રોડિયોન ફૂગનાશક છાંટો.",
+    "prevention": "સારું પાણી નિકાલ કરો, પૂરતા પ્રમાણમાં ખાતર નાખો, અને રોગવાળા કચરાને દૂર કરો.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_chlorothalonil",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">75%",
+      "rainfall": "મધ્યમથી ભારે"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "hispa": {
+    "display": "ડાંગરની હિપ્પા",
+    "crop": "ડાંગર",
+    "severity": "મધ્યમ",
+    "description": "આ રોગ ડિક્લાડિસ્પા આર્મિગેરા (પાંદડા ખાનાર ભમરો) દ્વારા થાય છે. પુખ્ત ભમરા પાંદડાની સપાટી કોતરે છે; ઇયળો પાંદડાની અંદર સુરંગ બનાવીને સફેદ લકીરો કરે છે.",
+    "causes": "વધુ નાઇટ્રોજનયુક્ત અને ઘાટ્ટા ઊગેલા પાક. ચોમાસાની સ્થિતિ.",
+    "treatment_summary": "મેલાથિયોન અથવા મોનોક્રોટોફોસ છાંટો. રોગવાળા પાંદડા કાપીને નાશ કરો.",
+    "prevention": "વધુ પડતું ખાતર નાખવાનું ટાળો, રોગપ્રતિકારક જાતો વાવો, અને પાક ખૂબ નજીક-નજીક ન વાવો.",
+    "treatment_ids": [
+      "treat_malathion",
+      "treat_monocrotophos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">75%",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "tungro": {
+    "display": "ટંગ્રો વાયરસ રોગ",
+    "crop": "ડાંગર",
+    "severity": "ખૂબ જ વધુ",
+    "description": "આ રોગ લીલા તડતડિયા (લીફહોપર) દ્વારા ફેલાતા બે વાયરસ (RTBV + RTSV) થી થાય છે. પાંદડા પીળા-નારંગી થઈ જાય છે. છોડ વામન (ઠૂંગા) રહી જાય છે અને ફૂટ ઓછી ફૂટે છે.",
+    "causes": "બંને વાયરસ વહન કરતા લીલા તડતડિયા (Nephotettix spp.) ની વસ્તી.",
+    "treatment_summary": "આની કોઈ સીધી દવા નથી. બુપ્રોફેઝિન અથવા ઇમિડાક્લોપ્રિડ છાંટીને તડતડિયા (લીફહોપર) કાબૂમાં રાખો.",
+    "prevention": "રોગપ્રતિકારક જાતો (ઉટ્રી મેરાહ) વાવો, એક સાથે રોપણી કરો, અને તડતડિયાનું નિયંત્રણ કરો.",
+    "treatment_ids": [
+      "treat_buprofezin",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.35,
+      "rainfall": 0.3
+    }
+  },
+  "dead_heart": {
+    "display": "ડેડ હાર્ટ (ગાભમારાની ઈયળ)",
+    "crop": "ડાંગર",
+    "severity": "વધુ",
+    "description": "ગાભમારાની ઈયળ (Scirpophaga incertulas) ના કારણે થાય છે. છોડની વચ્ચેનું પાન પીળું પડીને સૂકાઈ જાય છે અને સહેલાઈથી ખેંચાઈને બહાર નીકળી જાય છે.",
+    "causes": "છોડની વૃદ્ધિની અવસ્થા દરમિયાન ગાભમારાની ઈયળના પતંગિયાઓનો ઉપદ્રવ.",
+    "treatment_summary": "કાર્ટાપ હાઇડ્રોક્લોરાઇડ, ક્લોરપાયરિફોસ અથવા ફ્લુબેન્ડિયામાઇડ દાણાદાર દવા નાખો.",
+    "prevention": "જ્યારે પતંગિયા સક્રિય હોય ત્યારે વહેલી વાવણી કરવાનું ટાળો. લાઈટ ટ્રેપ (દિવા અસરો) નો ઉપયોગ કરો. ઈંડાના સમૂહને દૂર કરો.",
+    "treatment_ids": [
+      "treat_cartap",
+      "treat_flubendiamide",
+      "treat_chlorpyrifos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": "વધુ",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "downy_mildew": {
+    "display": "તળછારો રોગ",
+    "crop": "ડાંગર",
+    "severity": "મધ્યમ",
+    "description": "Sclerophthora macrospora ના કારણે થાય છે. પાંદડાની નીચેની બાજુએ રૂ જેવી ફૂગ સાથે આછા પીળા ડાઘ પડે છે.",
+    "causes": "ભરાઈ રહેલું પાણી, ઠંડુ તાપમાન અને વધુ ભેજ.",
+    "treatment_summary": "મેટાલક્સિલ અથવા ફોસેટિલ-એલ્યુમિનિયમ ફૂગનાશક છાંટો. પાણી નિકાલની વ્યવસ્થા સુધારો.",
+    "prevention": "પાણી ભરાવા ન દો, ખેતરમાં પાણીના નિકાલમાં સુધારો કરો, રોગ પ્રતિકારક જાતો વાપરો.",
+    "treatment_ids": [
+      "treat_metalaxyl",
+      "treat_fosetyl_al"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–25°C",
+      "humidity": ">90%",
+      "rainfall": "ભારે વરસાદ"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_leaf_streak": {
+    "display": "બેક્ટેરિયલ લીફ સ્ટ્રીક",
+    "crop": "ડાંગર",
+    "severity": "મધ્યમ",
+    "description": "Xanthomonas oryzae pv. oryzicola ના કારણે થાય છે. નસો વચ્ચે પાણી પલાળેલા હોય તેવી સાંકડી, પારદર્શક લીટીઓ થાય છે.",
+    "causes": "ગરમ અને ભેજવાળું વાતાવરણ. વરસાદના છાંટા અને સિંચાઈના પાણીથી ફેલાય છે.",
+    "treatment_summary": "તાંબા (કોપર) આધારિત જીવાણુનાશક છાંટો. રોગગ્રસ્ત પાંદડા કાઢી નાખો.",
+    "prevention": "રોગ પ્રતિકારક જાતો વાપરો. નાઇટ્રોજન ખાતર વધુ પડતું ન નાખો.",
+    "treatment_ids": [
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "ભારે"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_panicle_blight": {
+    "display": "બેક્ટેરિયલ પેનિકલ બ્લાઈટ",
+    "crop": "ડાંગર",
+    "severity": "વધુ",
+    "description": "આ રોગ બર્ખોલ્ડેરિયા ગ્લુમે (Burkholderia glumae) ના કારણે થાય છે. આમાં દાણા ખાલી રહી જાય છે અને કથ્થઈ-સૂથરા રંગના થઈ જાય છે. પાકને ઘણું નુકસાન થાય છે.",
+    "causes": "ફૂલ આવતી વખતે વધુ તાપમાન (>30°C) અને સાથે વધુ ભેજ હોવાને કારણે.",
+    "treatment_summary": "કૂંસ (ડોંક) ફૂટતી વખતે ઓક્સોલિનિક એસિડ અથવા તાંબાવાળું જીવાણુનાશક છાંટો.",
+    "prevention": "રોગ સામે રક્ષણ આપતી જાતો વાવો, ડૂંડા બેસતી વખતે પાણીની તંગી ન પડવા દો.",
+    "treatment_ids": [
+      "treat_oxolinic_acid",
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": ">85%",
+      "rainfall": "મધ્યમ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "normal": {
+    "display": "તંદુરસ્ત (સામાન્ય)",
+    "crop": "ડાંગર",
+    "severity": "કોઈ નહીં",
+    "description": "કોઈ રોગ દેખાયો નથી. પાક એકદમ સારો દેખાય છે.",
+    "causes": "લાગુ નથી",
+    "treatment_summary": "ખેતરની નિયમિત દેખરેખ રાખવી અને ખેતીના જરૂરી નિયમોનું પાલન કરતા રહેવું.",
+    "prevention": "ખાતરનું યોગ્ય પ્રમાણ જાળવો, પિયર સરખી રીતે આપો અને પાકની ફેરબદલી કરો.",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "કોઈપણ",
+      "humidity": "કોઈપણ",
+      "rainfall": "નિયમિત"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  }
+}

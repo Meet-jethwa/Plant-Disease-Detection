@@ -1,0 +1,716 @@
+{
+  "bacterial_leaf_blight": {
+    "display": "जिवाणूजन्य पानांचा करपा",
+    "crop": "भात",
+    "severity": "जास्त",
+    "description": "झॅंथोमोनस ओरिजाए पीव्ही. ओरिजाए मुळे होणारा एक गंभीर जिवाणूजन्य रोग. पानांच्या कडांवर पाणी साचल्यासारखे दिसते, जे पिवळे आणि शेवटी पांढरे होतात.",
+    "causes": "उबदार तापमान (२५–३०°C), जास्त आर्द्रता आणि वादळ/पावसाचे तुषार ज्यामुळे पानांच्या जखमांमधून जिवाणू पसरतात.",
+    "treatment_summary": "तांबेयुक्त जिवाणूनाशक वापरा. रोगाची लागण झालेले पिकाचे अवशेष काढून टाका. रोगप्रतिकारक वाण वापरा. नत्राचा अतिवापर टाळा.",
+    "prevention": "प्रमाणित रोगमुक्त बियाणे वापरा. शेतात पाण्याचा निचरा व्यवस्थित ठेवा. संतुलित खत व्यवस्थापन करा.",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "२५–३५°C",
+      "humidity": ">८०%",
+      "rainfall": "जास्त (वादळ/पाणथळ जमीन)"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.5,
+      "rainfall": 0.2
+    }
+  },
+  "brown_spot": {
+    "display": "तपकिरी ठिपका",
+    "crop": "भात",
+    "severity": "मध्यम",
+    "description": "कोक्लिओबोलस मियाबियानस मुळे होणारा बुरशीजन्य रोग. पानांवर पिवळ्या वर्तुळासह लंबगोलाकार ते गोलाकार तपकिरी डाग पडतात.",
+    "causes": "जमिनीत अन्नद्रव्यांची कमतरता (विशेषतः पालाश आणि सिलिकॉन) असणे. उबदार दमट हवामान आणि खराब जमीन आरोग्यामुळे वाढतो.",
+    "treatment_summary": "मँकोझेब किंवा इप्रोडिओन बुरशीनाशक फवारा. जमिनीतील अन्नद्रव्यांची कमतरता (पालाश, सिलिकॉन) दूर करा. लागवड दाट करू नका.",
+    "prevention": "संतुलित खत व्यवस्थापन, पाण्याचा चांगला निचरा होणाऱ्या जमिनी, रोगप्रतिकारक वाण.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "२२–३२°C",
+      "humidity": "७५–९०%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "healthy": {
+    "display": "निरोगी",
+    "crop": "सर्व",
+    "severity": "काहीही नाही",
+    "description": "पान निरोगी दिसते आहे आणि त्यावर रोगाची कोणतीही लक्षणे दिसत नाहीत.",
+    "causes": "लागू नाही",
+    "treatment_summary": "शेतावर सतत लक्ष ठेवा आणि काळजी घेत राहा.",
+    "prevention": "शेतीची योग्य कामे करा, खतांचा समतोल वापर करा आणि योग्य प्रमाणात पाणी द्या.",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "कोणतेही",
+      "humidity": "कोणतीही",
+      "rainfall": "नियमित"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  },
+  "leaf_blast": {
+    "display": "पानांचा करपा / ब्लास्ट रोग",
+    "crop": "भात",
+    "severity": "खूप जास्त",
+    "description": "मॅग्नापोर्टे ओरिझाई (Magnaporthe oryzae) मुळे होणारा हा धान्याचा एक अत्यंत भयानक रोग आहे. पानांवर γ-आकाराचे किंवा हिऱ्याच्या आकाराचे डाग पडतात, ज्यांचे मधले भाग राखाडी आणि कडा तपकिरी असतात.",
+    "causes": "थंड रात्री, उष्ण दिवस, जास्त आर्द्रता (>90%), जास्त दव, नत्राचा (नायट्रोजन) अतिवापर आणि रोगाला बळी पडणाऱ्या जाती.",
+    "treatment_summary": "बुरशीनाशके फवारा: ट्रायसायक्लाझोल, आयसोप्रोटिओलेन किंवा ॲझोक्सिस्ट्रोबिन. नत्राची खते कमी करा. आर्द्रता कमी करण्यासाठी शेतातील पाणी उपसून काढा.",
+    "prevention": "करपा रोधक जातींची निवड करा. नत्राचा अतिवापर टाळा. झाडांमध्ये पुरेशी मोकळी हवा खेळती राहील याची काळजी घ्या.",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "सतत हलका पाऊस/दव"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "leaf_scald": {
+    "display": "पानांची स्कॅल्ड (करपा)",
+    "crop": "भात",
+    "severity": "मध्यम",
+    "description": "मायक्रोडोचियम ओरिझाई (Microdochium oryzae) मुळे हा रोग होतो. पानांच्या कडांवर आलटून-पालटून फिकट आणि गडद तपकिरी पट्टे तयार होतात.",
+    "causes": "जास्त आर्द्रता, उष्ण तापमान आणि दाट लागवड ज्यामुळे हवा खेळती राहत नाही.",
+    "treatment_summary": "प्रोपिकोनाजोल किंवा कार्बेन्डाझिम बुरशीनाशक फवारा. शेतातून पाण्याचा निचरा सुधार ⁠आणि रोपांमधील अंतर ठेवा.",
+    "prevention": "ओळींमध्ये जास्त अंतर ठेवा, समतोल खते द्या आणि रोग प्रतिकारक जाती वापरा.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_carbendazim"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "मध्यम ते मुसळधार"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "sheath_blight": {
+    "display": "खोडाचा करपा (शीथ ब्लाइट)",
+    "crop": "भात",
+    "severity": "जास्त",
+    "description": "ऱ्हिजोक्टोनिया सोलानीमुळे होतो. पानांच्या शीतावर गडद तपकिरी कडा असलेले अंडाकृती हिरवे-पांढरट डाग पडतात, जे पानांवर पसरतात.",
+    "causes": "जास्त दमटपणा (>90%), २८–३२°C तापमान, दाट लागवड, नत्राचे जास्त प्रमाण आणि शेतात साचलेले पाणी ज्यामुळे मायसिलीयम पसरतो.",
+    "treatment_summary": "व्हॅलिडामायसिन, हेक्साकोनाझोल किंवा प्रोपिकोनाझोल बुरशीनाशक फवारा. झाडांची लागवड विरळ करा. पानांमधला दमटपणा कमी ठेवा.",
+    "prevention": "बियाणे कमी प्रमाणात पेरणी, योग्य खत व्यवस्थापन, पाणी व्यवस्थापन.",
+    "treatment_ids": [
+      "treat_validamycin",
+      "treat_hexaconazole",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "२८–३२°C",
+      "humidity": ">९०%",
+      "rainfall": "भरपूर पाणी साचणे"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "aphid": {
+    "display": "मावा प्रादुर्भाव",
+    "crop": "गहू",
+    "severity": "मध्यम",
+    "description": "लहान मऊ शरीराचे कीटक जे पाने आणि खोडावर गोळा होतात, झाडाचा रस शोषून घेतात आणि विषाणू पसरवू शकतात.",
+    "causes": "कोमट कोरडे हवामान, नैसर्गिक शत्रू नसणे आणि दाट लागवड.",
+    "treatment_summary": "इमिडाक्लोप्रिड किंवा लॅम्ब्डा-सायहॅलोथ्रीन कीटकनाशक फवारा. नैसर्गिक शत्रूंना (लेडीबग) वाढू द्या.",
+    "prevention": "लवकर पेरणी, पीक फेरपालट, नत्राचा अतिवापर टाळा.",
+    "treatment_ids": [
+      "treat_imidacloprid",
+      "treat_lambda_cyhalothrin"
+    ],
+    "favorable_conditions": {
+      "temperature": "१५–२५°C",
+      "humidity": "<६०%",
+      "rainfall": "कमी"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "black_rust": {
+    "display": "काळा तांबेरा (खोड तांबेरा)",
+    "crop": "गहू",
+    "severity": "खूप जास्त",
+    "description": "पुक्सिनिया ग्रॅमिनिसमुळे होतो. खोडावर आणि पानांवर विटांसारख्या लाल ते काळ्या रंगाच्या फोड्या येतात. संपूर्ण पीक उद्ध्वस्त करू शकते.",
+    "causes": "कोमट तापमान (१५–३०°C), दव आणि जवळच्या संक्रमित शेतातून वाऱ्याद्वारे उडून येणारे बिजाणू.",
+    "treatment_summary": "सुरुवातीच्या टप्प्यात प्रोपिकोनाझोल, टेबिकोनाझोल किंवा ट्रायफ्लोक्झोस्ट्रोबिन बुरशीनाशक फवारा.",
+    "prevention": "रोगास प्रतिकार करणाऱ्या जातींची लागवड करा. लवकर पेरणी करा. उगवून आलेली गव्हाची अतिरिक्त रोपे काढून टाका.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole",
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "१५–३०°C",
+      "humidity": ">८०%",
+      "rainfall": "दिव्यासह मध्यम पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "blast": {
+    "display": "करपा / ब्लास्ट रोग (तांदूळ शेती)",
+    "crop": "तांदूळ",
+    "severity": "खूप जास्त",
+    "description": "मॅग्नापोर्टे ओरिझाई (Magnaporthe oryzae). पानांवर हिऱ्याच्या आकाराचे डाग पडतात. पिकाच्या कणसांवरही प्रादुर्भाव होऊ शकतो (कणसाचा करपा / ब्लास्ट रोग).",
+    "causes": "थंड रात्री, सकाळचे दव, नत्राचा अतिवापर, आणि रोगप्रतिकारशक्ती नसलेल्या जाती.",
+    "treatment_summary": "ट्रायकॉझोल (Tricyclazole), आयसोप्रोत्थिओलेन (isoprothiolane), ॲझोक्सिस्ट्रोबिन (azoxystrobin) ही बुरशीनाशके वापरा.",
+    "prevention": "रोगप्रतिकारक जातींची निवड, नत्राचा संतुलित वापर, आणि पाण्याचे नियंत्रण.",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "सतत दव / हलका पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "brown_rust": {
+    "display": "तपकिरी तांबेरा (पानाचा तांबेरा)",
+    "crop": "गहू",
+    "severity": "जास्त",
+    "description": "पुक्सिनिया टिटिसिना (Puccinia triticina) मुळे होतो. पानांच्या वरच्या बाजूला केशरी-तपकिरी रंगाचे फोड येतात. हा रोग खूप सामान्य आणि पसरणारा आहे.",
+    "causes": "मध्यम तापमान (15–22°C), दव, आणि दमट हवामान.",
+    "treatment_summary": "बुरशीनाशके: प्रोपिकोनाझोल, मँकोझेब. रोगाची लक्षणे दिसू लागताच फवारणी करा.",
+    "prevention": "रोगप्रतिकारक जाती, वेळेवर पेरणी, आणि फेरपालट.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": ">70%",
+      "rainfall": "हलका पाऊस / दव"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "common_root_rot": {
+    "display": "साधारण मूळकुज (रूट रॉट)",
+    "crop": "गहू",
+    "severity": "मध्यम",
+    "description": "बायपोलारिस सोरोकिनियाना (Bipolaris sorokiniana) मुळे होतो. मुळांचा आणि खोडाचा भाग तपकिरी ते काळा पडतो.",
+    "causes": "कोडी माती, पेरणीच्या वेळी जास्त तापमान, आणि मातीतील जिवाणू.",
+    "treatment_summary": "ट्रायफ्लोक्झोस्ट्रोबिन + टेब्युकोनाझोलची बीजप्रक्रिया करा. तृणधान्य नसलेल्या पिकांसोबत फेरपालट करा.",
+    "prevention": "मातीची सुपीकता राखा, सलग गहू पिकवणे टाळा, आणि योग्य खोलीवर पेरणी करा.",
+    "treatment_ids": [
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–28°C",
+      "humidity": "मातीतील कमी ओलावा",
+      "rainfall": "अपुरा पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.3,
+      "rainfall": 0.3
+    }
+  },
+  "fusarium_head_blight": {
+    "display": "फ्युझॅरियम हेडब्लाइट (स्कॅब)",
+    "crop": "गहू",
+    "severity": "खूप जास्त",
+    "description": "फ्युसेरियम ग्रॅमिनियममुळे होतो. पांढरे पडलेले कणीस ज्यावर गुलाबी बुरशी असते. विषारी घटक (DON) तयार होतात ज्यामुळे दाणे खराब होतात.",
+    "causes": "फुलोरा येताना दमट हवामान, २५–३०°C तापमान आणि पिकाचे अवशेष.",
+    "treatment_summary": "फुलोरा सुरुवातीच्या काळात थायोफॅनेट-मिथाइल किंवा मेटकोनाझोल फवारा. बाधित अवशेष काढून टाका.",
+    "prevention": "रोगप्रतिकारक वाण वापरा, अवशेष जमिनीत गाडण्यासाठी नांगरणी करा, पाण्याचा चांगला निचरा ठेवा.",
+    "treatment_ids": [
+      "treat_thiophanate_methyl",
+      "treat_metconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "२५–३०°C",
+      "humidity": ">९०%",
+      "rainfall": "फुलोऱ्याच्या काळात पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "leaf_blight": {
+    "display": "पानांचा करपा",
+    "crop": "गहू",
+    "severity": "मध्यम",
+    "description": "जुन्या पानांवर पिवळ्या कडा असलेले तांबूस-तपकिरी डाग.",
+    "causes": "उष्ण दमट हवामान आणि रोगाला बळी पडणारे वाण.",
+    "treatment_summary": "मँकोझेब किंवा प्रोपिकोनाझोल बुरशीनाशक फवारा.",
+    "prevention": "पीक फेरपालट करा आणि रोगप्रतिकारक वाण वापर.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "२०–३०°C",
+      "humidity": ">७०%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "mildew": {
+    "display": "भुरी रोग",
+    "crop": "गहू",
+    "severity": "मध्यम",
+    "description": "पानांवर पांढरा पावडरसारखा थर, जो ब्लुमेरिया ग्रॅमिनिसमुळे होतो. प्रकाशसंश्लेषण कमी होते.",
+    "causes": "थंड तापमान (१५–२२°C), मध्यम आर्द्रता आणि दाट पीक.",
+    "treatment_summary": "ट्रायडिमफॉन, प्रोपिकोनाझोल किंवा गंधक (सल्फर) युक्त बुरशीनाशके फवारा.",
+    "prevention": "ओळींमध्ये जास्त अंतर ठेवा, रोगप्रतिकारक वाण वापरा, लवकर पेरणी करा.",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole",
+      "treat_sulfur"
+    ],
+    "favorable_conditions": {
+      "temperature": "१५–२२°C",
+      "humidity": "६०–८०%",
+      "rainfall": "कमी ते मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "mite": {
+    "display": "कोळी प्रादुर्भाव",
+    "crop": "गहू",
+    "severity": "कमी",
+    "description": "लहान कोळी कीटक, ज्यामुळं पानांवर पांढुरके ठिपके पडतात आणि पाने कांस्य रंगाची होतात.",
+    "causes": "उष्ण आणि कोरडे हवामान. उपद्रवी कीटकांना खाणारे मित्र कीटक मारणारी रासायनिक औषधे.",
+    "treatment_summary": "अबामामेक्टिन (abamectin) किंवा डायकोफॉल (dicofol) हे कोळीनाशक वापरा. पाणी देण्याचे प्रमाण वाढवा.",
+    "prevention": "शेतात खूप कोरडेपणा येऊ देऊ नका. मित्र कीटकांचे रक्षण करा.",
+    "treatment_ids": [
+      "treat_abamectin",
+      "treat_dicofol"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": "<50%",
+      "rainfall": "खूप कमी"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.3,
+      "rainfall": 0.2
+    }
+  },
+  "septoria": {
+    "display": "सेप्टोरिया पानांचे ठिपके (लीफ ब्लॉच)",
+    "crop": "गहू",
+    "severity": "जास्त",
+    "description": "झायमोसेप्टोरिया ट्रीटीसी (Zymoseptoria tritici) मुळे होते. पानांवर फिकट हिरवे-पिवळे डाग पडून नंतर पाने सुकतात आणि त्यावर काळे टिपुस दिसतात.",
+    "causes": "थंड, दमट हवामान (10–20°C), पाने 20 तासांपेक्षा जास्त वेळ ओली राहणे.",
+    "treatment_summary": "ट्रायझोल (Triazole) किंवा एसडीएचआय (SDHI) बुरशीनाशके (इपोक्सिकोनाजोल, फ्लक्सॅप्रॉक्साड). लवकरात लवकर औषध मारणे फायद्याचे ठरते.",
+    "prevention": "रोगप्रतिकारक वाण वापरा, पिकांची फेरपालट करा, पेरणी उशिरा करा.",
+    "treatment_ids": [
+      "treat_epoxiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–20°C",
+      "humidity": ">80%",
+      "rainfall": "सतत पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "smut": {
+    "display": "कण्या (लुज स्मट)",
+    "crop": "गहू",
+    "severity": "मध्यम",
+    "description": "उस्टिलागो ट्रीटीसी (Ustilago tritici) मुळे होते. पिकाच्या कणसांचे काळ्या पावडरसारख्या बुरशीमध्ये रूपांतर होते.",
+    "causes": "फुलोऱ्याच्या वेळी मध्यम तापमान आणि दमट हवामान. हा बियाण्यामार्फत पसरणारा रोग आहे.",
+    "treatment_summary": "कार्बोक्सिन (carboxin), थिराम (thiram) किंवा टेबुकोनाजोल (tebuconazole) ने बियाण्याला प्रक्रिया करणे खूप प्रभावी ठरते.",
+    "prevention": "रोगमुक्त प्रमाणित बियाणे वापर. बियाण्याला गरम पाण्याच्या प्रक्रियेचा उपचार द्या.",
+    "treatment_ids": [
+      "treat_carboxin_thiram"
+    ],
+    "favorable_conditions": {
+      "temperature": "16–22°C",
+      "humidity": ">60%",
+      "rainfall": "फुलोऱ्याच्या काळात मध्यम पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "stem_fly": {
+    "display": "खोड माशी",
+    "crop": "गहू",
+    "severity": "मध्यम",
+    "description": "गव्हाच्या खोडात अळ्या भुसभुशीत करून खातात, ज्यामुळे लहान रोपांमध्ये 'डेड हार्ट' (कोरडे शेंडे) लक्षणे दिसतात.",
+    "causes": "पिकाच्या सुरुवातीच्या वाढीच्या काळात थंड हवामानात (15–20°C) प्रादुर्भाव वाढतो.",
+    "treatment_summary": "रोपांच्या वाढीच्या काळात क्लोरपायरीफोस किंवा इमिडाक्लोप्रिड फवारा.",
+    "prevention": "लवकर पेरणी करा, बियाण्यांना सिस्टिमॅटिक कीटकनाशकाची प्रक्रिया करा, जमिनीलगतच्या गाठींची पाहणी करा.",
+    "treatment_ids": [
+      "treat_chlorpyrifos",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–20°C",
+      "humidity": "कोणतीही",
+      "rainfall": "कमी ते मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.25,
+      "rainfall": 0.25
+    }
+  },
+  "tan_spot": {
+    "display": "टॅन स्पॉट",
+    "crop": "गहू",
+    "severity": "मध्यम",
+    "description": "पायरिनोफोरा ट्रीटीसी-रिपेन्टीसमुळे होतो. पिवळ्या कडा असलेले तांबूस-तपकिरी अंडाकृती डाग पडतात.",
+    "causes": "उबदार तापमान (20–28°C), पानांवर ओलावा आणि गेल्या हंगामातील पिकाचे अवशेष.",
+    "treatment_summary": "प्रोपिकोनाजोल किंवा मँकोझेब फवारा. अवशेष जमिनीखाली गाडण्यासाठी नांगरणी करा.",
+    "prevention": "पीक फेरपालट, अवशेषांचे व्यवस्थापन, रोगटपणा सहन करणाऱ्या जाती.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">70%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "yellow_rust": {
+    "display": "पिवळा तांबेरा (स्ट्राइप रस्ट)",
+    "crop": "गहू",
+    "severity": "खूप जास्त",
+    "description": "प्युक्सिनिया स्ट्रायफॉर्मिसमुळे होतो. पानांच्या नसांच्या रेषेत चमकदार पिवळे पुटकुळ्यासारखे डाग पडतात. थंड हवामानात खूप नुकसान होते.",
+    "causes": "थंड तापमान (10–15°C), दव आणि धुके, आणि रोगाला बळी पडणाऱ्या जाती.",
+    "treatment_summary": "सुरुवातीलाच प्रोपिकोनाजोल, टेबुकोनाजोल किंवा इतर ट्रायझोल बुरशीनाशक फवारा.",
+    "prevention": "रोगप्रतिकारक जाती सर्वात प्रभावी आहेत. लवकर पेरणी करा. हवामान अंदाजावर लक्ष ठेवा.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–15°C",
+      "humidity": ">80%",
+      "rainfall": "दव / हलका पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "mosaic_disease": {
+    "display": "मोझॅक रोग",
+    "crop": "ऊस",
+    "severity": "जास्त",
+    "description": "सुगारकेन मोझॅक व्हायरस (SCMV) मुळे होतो. पानांवर मोझॅक किंवा पट्टेदार रंग उडणे - फिकट आणि गडद हिरवे डाग आलटून-पालटून दिसतात.",
+    "causes": "मावा किडीद्वारे (Rhopalosiphum maidis) आणि रोगाचा प्रादुर्भाव झालेल्या बेण्यामुळे पसरतो.",
+    "treatment_summary": "यावर कोणतेही रासायनिक औषध नाही. रोगाने ग्रासलेली झाडे उपटून नष्ट करा. मावा किडीचे नियंत्रण करा.",
+    "prevention": "विषाणूमुक्त बेणे वापरा, रोगप्रतिकारक जाती लावा, मावा किडीची संख्या नियंत्रणात ठेवा.",
+    "treatment_ids": [
+      "treat_routine_monitoring",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": "मध्यम",
+      "rainfall": "कोणतीही"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.35,
+      "rainfall": 0.35
+    }
+  },
+  "rust": {
+    "display": "उसाचा तांबेरा",
+    "crop": "ऊस",
+    "severity": "मध्यम",
+    "description": "प्युक्सिनिया मेलॅनोसेफला (Puccinia melanocephala) मुळे होतो. पानाच्या खालच्या बाजूला नारिंगी-तपकिरी फोड येतात, ज्यामुळे पाने वेळेआधीच सुकतात.",
+    "causes": "उबदार तापमान (24–28°C), जास्त आद्रता आणि रोगट जाती.",
+    "treatment_summary": "ट्रायडिमफॉन किंवा प्रोपिकोनाजोल बुरशीनाशक फवारा. जास्त प्रादुर्भाव झालेली पाने काढून टाका.",
+    "prevention": "रोगप्रतिकारक जाती लावा. संतुलित खते द्या.",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "24–28°C",
+      "humidity": ">75%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "bacterial_blight": {
+    "display": "जिवाणूजन्य करपा",
+    "crop": "कापूस",
+    "severity": "जास्त",
+    "description": "झॅंथोमोनस ॲक्सोनोपोडिस पीव्ही. म्हाल्व्हासेरम (Xanthomonas axonopodis pv. malvacearum) मुळे होतो. पानांवर कोनीय पाणी साचल्यासारखे डाग, खोडावर काळे फोड.",
+    "causes": "उबदार, दमट हवामान, पावसाचे तुषार, यांत्रिक इजा आणि संक्रमित बियाणे.",
+    "treatment_summary": "कॉपर ऑक्सिक्लोराईड किंवा स्ट्रेप्टोमायसीनची फवारणी करा. रोगाने खराब झालेले अवशेष काढून टाका.",
+    "prevention": "रोगमुक्त प्रमाणित बियाणे वापरा, बियाण्याला प्रक्रिया करा, पिकांची फेरपालट करा.",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–35°C",
+      "humidity": ">80%",
+      "rainfall": "जास्त"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "alternaria_leaf_spot": {
+    "display": "अल्टरनेरिया पानावर डाग",
+    "crop": "कापूस",
+    "severity": "मध्यम",
+    "description": "अल्टरनेरिया मॅक्रोस्पोरामुळे होते. पानांवर गोल, गडद तपकिरी ते काळे डाग पडतात ज्यांच्यावर वर्तुळाकार रेषा असतात.",
+    "causes": "जास्त दमट हवामान आणि २५–३०°C तापमान. कमकुवत किंवा ताण आलेल्या पिकांवर याचा जास्त प्रादुर्भाव होतो.",
+    "treatment_summary": "मँकोझेब, क्लोरोथॅलोनील किंवा इप्रोडिओन बुरशीनाशक फवारा.",
+    "prevention": "पाण्याचा चांगला निचरा ठेवा, पिकाला योग्य खते द्या, रोगट पालापाचोळा काढून नष्ट करा.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_chlorothalonil",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">75%",
+      "rainfall": "मध्यम ते जास्त"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "hispa": {
+    "display": "धान्याची हिस्पा कीड",
+    "crop": "भात",
+    "severity": "मध्यम",
+    "description": "डिक्लॅडिस्पा आर्मिगेरा (पान खाणारा भुंगा) मुळे होते. प्रौढ कीटक पानांचा वरचा भाग खातात; अळ्या पानांच्या आत खाऊन पांढरे बोगदे तयार करतात.",
+    "causes": "नत्रयुक्त खतांचा जादा वापर असलेली दाट पिके. पावसाळ्यातील दमट हवामान.",
+    "treatment_summary": "मॅलॅथियान किंवा मोनोक्रोटोफोस वापरा. प्रादुर्भाव झालेली पाने कापून नष्ट करा.",
+    "prevention": "खतांचा अतिवापर टाळा, प्रतिकारक्षम जाती वापरा, लागवड फार दाट करू नका.",
+    "treatment_ids": [
+      "treat_malathion",
+      "treat_monocrotophos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">75%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "tungro": {
+    "display": "तुंग्रो विषाणू रोग",
+    "crop": "भात",
+    "severity": "खूप जास्त",
+    "description": "हिरव्या तुडतुड्यांद्वारे पसरवल्या जाणाऱ्या दोन विषाणूंमुळे (RTBV + RTSV) होतो. पाने पिवळी-केशरी होतात. झाडे बुटकी होतात आणि फुटवे कमी येतात.",
+    "causes": "दोन्ही विषाणूंचे वहन करणारे हिरवे तुडतुडे (निफोटीटिक्स प्रजाती) यांची संख्या वाढल्यामुळे.",
+    "treatment_summary": "यावर थेट कोणताही उपाय नाही. तुडतुड्यांचा बिमोड करण्यासाठी बुप्रोफेझिन किंवा इमिडाक्लोप्रिड वापरा.",
+    "prevention": "प्रतिकारक्षम जाती (उत्त्री मेराह) वापरा, एकाच वेळी लागवड करा, तुडतुड्यांचे नियंत्रण करा.",
+    "treatment_ids": [
+      "treat_buprofezin",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.35,
+      "rainfall": 0.3
+    }
+  },
+  "dead_heart": {
+    "display": "डेड हार्ट (खोडकिडा)",
+    "crop": "भात",
+    "severity": "जास्त",
+    "description": "खोडकिडीच्या अळ्यांमुळे (स्सिर्पोफॅगा इन्सेर्टुलास) होतो. पानांचा मधला भाग पिवळा पडतो आणि मरतो - सहज बाहेर निघतो.",
+    "causes": "वाढीच्या काळात खोडकिडीच्या पतंगांची संख्या वाढणे.",
+    "treatment_summary": "कार्टॅप हायड्रोक्लोराइड, क्लोरपायरीफोस किंवा फ्लुबेन्डामाइड दाणेदार औषध वापरा.",
+    "prevention": "पतंग सक्रिय असताना लवकर लागवड करणे टाळा. प्रकाश सापळे वापरा. अंड्यांचे पुंजके गोळा करून नष्ट करा.",
+    "treatment_ids": [
+      "treat_cartap",
+      "treat_flubendiamide",
+      "treat_chlorpyrifos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": "जास्त",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "downy_mildew": {
+    "display": "केवडा रोग",
+    "crop": "भात",
+    "severity": "मध्यम",
+    "description": "स्क्लेरोफ्थोरा मॅक्रोस्पोरामुळे होतो. पानांच्या खालील बाजूला फिकट पिवळे डाग आणि बुरशीची वाढ दिसते.",
+    "causes": "पाण्यात तुंबलेली शेती, थंड तापमान आणि जास्त आर्द्रता.",
+    "treatment_summary": "मेटलॅक्सिल किंवा फोसेटील-ॲल्युमिनियम बुरशीनाशक फवारा. पाण्याचा निचरा सुधार 1.",
+    "prevention": "पाणी साचू देऊ नका, शेतातून पाण्याचा निचरा चांगला करा, रोगप्रतिकारक जाती वापरा.",
+    "treatment_ids": [
+      "treat_metalaxyl",
+      "treat_fosetyl_al"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–25°C",
+      "humidity": ">90%",
+      "rainfall": "भरपूर पाऊस"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_leaf_streak": {
+    "display": "जिवाणूजन्य पानावरील रेषा रोग",
+    "crop": "भात",
+    "severity": "मध्यम",
+    "description": "झँथomonas ओरिजाए पीव्ही. ओरिझिकोलामुळे होतो. शिरांच्यामध्ये संडासच्या पाण्यासारख्या अरुंद, पारदर्शक रेषा दिसतात.",
+    "causes": "उबदार, दमट हवामान. पावसाचे तुषार आणि सिंचनाच्या पाण्यामुळे पसरतो.",
+    "treatment_summary": "तांबेयुक्त जिवाणूनाशक वापरा. रोगट पाने काढून टाका.",
+    "prevention": "रोगप्रतिकारक जाती वापरा. नत्राचा अतिवापर टाळा.",
+    "treatment_ids": [
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "जास्त"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_panicle_blight": {
+    "display": "जिवाणूजन्य कणीस करपा",
+    "crop": "भात",
+    "severity": "जास्त",
+    "description": "बर् Burkholderia glumae मुळे होते. दाणे पोकळ राहतात, करड्या-तपकिरी रंगाचे होतात. उत्पादनात खूप मोठे नुकसान होते.",
+    "causes": "फुलोरा येण्याच्या काळात जास्त तापमान (>30°C) आणि हवेतील जास्त दमटपणा.",
+    "treatment_summary": "कणीस बाहेर पडण्याच्या सुरुवातीला ऑक्झोलिनिक ॲसिड किंवा तांबेयुक्त जिवाणूनाशक वापरा.",
+    "prevention": "रोगप्रतिकारक वाण वापरा, कणीस बाहेर पडताना पाण्याचा ताण पडू देऊ नका.",
+    "treatment_ids": [
+      "treat_oxolinic_acid",
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": ">85%",
+      "rainfall": "मध्यम"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "normal": {
+    "display": "निरोगी (सामान्य)",
+    "crop": "भात",
+    "severity": "काही नाही",
+    "description": "कोणताही रोग आढळला नाही. पीक निरोगी दिसत आहे.",
+    "causes": "लागू नाही",
+    "treatment_summary": "शेताची नियमित पाहणी करत राहा आणि पिकाची काळजी घेत राहा.",
+    "prevention": "खतांचे योग्य प्रमाण ठेवा, योग्य वेळी पाणी द्या आणि पिकांची फेरपालट करा.",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "कोणतेही",
+      "humidity": "कोणतेही",
+      "rainfall": "नियमित"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  }
+}
