@@ -345,16 +345,16 @@ async def predict_disease(
     crop: str = Form("rice"),
     latitude: float | None = Form(None),
     longitude: float | None = Form(None),
-    model_type: str = Form("multimodal"),
+    temperature: float | None = Form(None),
+    humidity: float | None = Form(None),
+    rainfall: float | None = Form(None),
+    wind_speed: float | None = Form(None),
+    city: str | None = Form(None),
+    model_type: str = Form("auto"),
 ):
-    weather_payload = (
-        weather_from_coordinates(latitude, longitude)
-        if latitude is not None and longitude is not None
-        else DEFAULT_LOCATION_PROFILES[0]
-    )
-
-    if model_type not in {"multimodal", "keras"}:
-        raise HTTPException(status_code=400, detail="model_type must be 'multimodal' or 'keras'.")
+    crop_key = crop.lower()
+    if crop_key not in SUPPORTED_CROPS:
+        raise HTTPException(status_code=400, detail=f"Unsupported crop: {crop_key}")
 
     if not file.filename:
         raise HTTPException(status_code=400, detail="Please select an image file.")
@@ -363,44 +363,88 @@ async def predict_disease(
     if not file_bytes:
         raise HTTPException(status_code=400, detail="The uploaded file is empty.")
 
-    if model_type == "multimodal":
+    # ── Fetch or build weather data ──────────────────────────────────────────────
+    if latitude is not None and longitude is not None:
+        weather_payload = weather_from_coordinates(latitude, longitude)
+    else:
+        weather_payload = dict(DEFAULT_LOCATION_PROFILES[0])
+
+    weather_dict = dict(weather_payload["weather"])
+    loc_dict = dict(weather_payload["location"])
+
+    if temperature is not None:
+        weather_dict["temperature_c"] = float(temperature)
+    if humidity is not None:
+        weather_dict["humidity_percent"] = int(round(humidity))
+    if rainfall is not None:
+        weather_dict["rainfall_mm"] = float(rainfall)
+    if wind_speed is not None:
+        weather_dict["wind_kmh"] = float(wind_speed)
+    if city and city.strip():
+        loc_dict["city"] = city.strip()
+
+    weather_payload = {
+        **weather_payload,
+        "location": loc_dict,
+        "weather": weather_dict,
+    }
+
+    # ── Multimodal weather analysis (7-day temporal attention) ───────────────────
+    multimodal_result = None
+    try:
+        from backend.multimodal_loader import predict_multimodal_disease
+        multimodal_result = predict_multimodal_disease(file_bytes, weather_dict, crop_hint=crop_key)
+    except Exception as mm_exc:
+        pass
+
+    # ── Model prediction: Prefer crop Keras model for high accuracy & Grad-CAM ──
+    predictions = None
+    label_map = None
+    model = None
+    gradcam_enabled = False
+    original_rgb = None
+
+    use_keras = (model_type != "multimodal_only") and (crop_key in MODEL_FILES)
+    if use_keras:
+        try:
+            model, label_map = load_crop_model(crop_key)
+            image_array, original_rgb = preprocess_image(file_bytes)
+            predictions = model.predict(image_array, verbose=0)[0]
+            gradcam_enabled = True
+        except Exception as exc:
+            use_keras = False
+
+    if not use_keras or predictions is None:
+        # Fallback to multimodal PyTorch model
         try:
             image = Image.open(io.BytesIO(file_bytes)).convert("RGB")
-            predictions = predict_multimodal(image, weather_payload["weather"])
+            raw_preds = predict_multimodal(image, weather_payload["weather"])
             original_rgb = np.asarray(image, dtype=np.uint8)
-            crop_prefix = crop.lower()
+            crop_prefix = crop_key
             crop_indexes = [
                 index for index, name in enumerate(CLASS_NAMES)
                 if name.startswith(f"{crop_prefix}_")
             ]
             if not crop_indexes:
-                raise HTTPException(status_code=400, detail=f"Unsupported crop: {crop}")
-            predictions = predictions[crop_indexes]
+                raise HTTPException(status_code=400, detail=f"Unsupported crop: {crop_key}")
+
+            # Re-normalize probabilities across the selected crop's classes
+            sub_preds = np.array([raw_preds[idx] for idx in crop_indexes], dtype=np.float32)
+            sub_sum = float(np.sum(sub_preds))
+            if sub_sum > 0:
+                predictions = sub_preds / sub_sum
+            else:
+                predictions = sub_preds
+
             label_map = {
-                str(index): CLASS_NAMES[crop_indexes[index]].split("_", 1)[1]
-                for index in range(len(crop_indexes))
+                str(i): CLASS_NAMES[crop_indexes[i]].split("_", 1)[1]
+                for i in range(len(crop_indexes))
             }
+            gradcam_enabled = False
         except HTTPException:
             raise
         except Exception as exc:
-            raise HTTPException(status_code=500, detail=f"Multimodal prediction failed: {exc}") from exc
-        gradcam_enabled = False
-    else:
-        try:
-            model, label_map = load_crop_model(crop)
-        except ValueError as exc:
-            raise HTTPException(status_code=400, detail=str(exc)) from exc
-        except FileNotFoundError as exc:
-            raise HTTPException(status_code=404, detail=str(exc)) from exc
-        except Exception as exc:  # pragma: no cover
-            raise HTTPException(status_code=500, detail=f"Model load failed: {exc}") from exc
-
-        try:
-            image_array, original_rgb = preprocess_image(file_bytes)
-            predictions = model.predict(image_array, verbose=0)[0]
-        except Exception as exc:
             raise HTTPException(status_code=500, detail=f"Prediction failed: {exc}") from exc
-        gradcam_enabled = True
 
     top_indexes = np.argsort(predictions)[::-1][:3]
     top3 = [
@@ -423,15 +467,15 @@ async def predict_disease(
         health_score = max(5, min(90, int(round((1.0 - confidence) * 100))))
 
     disease_info = get_disease_info(normalized_label)
-    if gradcam_enabled:
+    if gradcam_enabled and model is not None:
         overlay_original, overlay_highlight, raw_heatmap, affected_area_percent = generate_gradcam_overlay(original_rgb, model, alpha=0.55)
     else:
         overlay_original, overlay_highlight, raw_heatmap, affected_area_percent = None, None, None, 0.0
 
     if overlay_original is None or overlay_highlight is None:
         if gradcam_enabled:
-            print(f"[GradCAM] Failed for crop={crop}. Returning original image only.")
-        original_image = image_to_data_url(original_rgb)
+            print(f"[GradCAM] Failed for crop={crop_key}. Returning original image only.")
+        original_image = image_to_data_url(original_rgb) if original_rgb is not None else ""
         highlighted_image = None
         gradcam_heatmap = None
         affected_area_percent = 0.0
@@ -444,7 +488,7 @@ async def predict_disease(
     weather_importance = compute_weather_feature_importance(disease_info, weather_payload["weather"])
 
     summary = (
-        f"Detected {normalized_label} in {crop.lower()} with {round(confidence * 100, 2)}% confidence. "
+        f"Detected {normalized_label} in {crop_key} with {round(confidence * 100, 2)}% confidence. "
         f"Likely cause: {disease_info.get('causes', 'Condition-specific causes unavailable.')}"
     )
 
@@ -470,6 +514,7 @@ async def predict_disease(
             "risk_level": risk_level,
             "risk_reason": risk_reason,
             "feature_importance": weather_importance,
+            "weather_importance_days": multimodal_result.get("weather_importance_days") if multimodal_result else None,
         },
         "analysis_summary": summary,
         "original_image": original_image,
