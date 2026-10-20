@@ -1,0 +1,716 @@
+{
+  "bacterial_leaf_blight": {
+    "display": "Bacterial Leaf Blight",
+    "crop": "Rice",
+    "severity": "High",
+    "description": "A serious bacterial disease caused by Xanthomonas oryzae pv. oryzae. Leaves show water-soaked margins that turn yellow and eventually white.",
+    "causes": "Warm temperatures (25–30°C), high humidity, and typhoon/rain-splash that spreads the bacteria through leaf wounds.",
+    "treatment_summary": "Apply copper-based bactericides. Remove infected plant debris. Use resistant varieties. Avoid excessive nitrogen fertilization.",
+    "prevention": "Use certified disease-free seeds. Maintain field drainage. Apply balanced fertilization.",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "Heavy (storm/flooding)"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.5,
+      "rainfall": 0.2
+    }
+  },
+  "brown_spot": {
+    "display": "Brown Spot",
+    "crop": "Rice",
+    "severity": "Medium",
+    "description": "Fungal disease caused by Cochliobolus miyabeanus. Oval to circular brown lesions with yellow halos appear on leaves.",
+    "causes": "Associated with nutrient-deficient soils (especially potassium and silicon). Favoured by warm humid conditions and poor soil health.",
+    "treatment_summary": "Apply mancozeb or iprodione fungicide. Correct soil nutrient deficiencies (potassium, silicon). Reduce dense planting.",
+    "prevention": "Balanced fertilization, well-drained soils, disease-resistant varieties.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "22–32°C",
+      "humidity": "75–90%",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "healthy": {
+    "display": "Healthy",
+    "crop": "All",
+    "severity": "None",
+    "description": "The leaf appears healthy with no visible disease symptoms.",
+    "causes": "N/A",
+    "treatment_summary": "Continue regular monitoring and preventive care.",
+    "prevention": "Maintain good agronomic practices, balanced fertilization, and proper irrigation.",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "Any",
+      "humidity": "Any",
+      "rainfall": "Regular"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  },
+  "leaf_blast": {
+    "display": "Leaf Blast",
+    "crop": "Rice",
+    "severity": "Very High",
+    "description": "One of the most destructive rice diseases, caused by Magnaporthe oryzae. Diamond-shaped lesions with grey centres and brown borders appear on leaves.",
+    "causes": "Cool nights, warm days, high humidity (>90%), heavy dew, excessive nitrogen application, and susceptible varieties.",
+    "treatment_summary": "Apply fungicides: tricyclazole, isoprothiolane, or azoxystrobin. Reduce nitrogen fertilizer. Drain fields to reduce humidity.",
+    "prevention": "Use blast-resistant varieties. Avoid excess nitrogen. Ensure good airflow between plants.",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "Frequent light rain/dew"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "leaf_scald": {
+    "display": "Leaf Scald",
+    "crop": "Rice",
+    "severity": "Medium",
+    "description": "Caused by Microdochium oryzae. Alternating light and dark brown bands appear along leaf margins creating a 'zonate' pattern.",
+    "causes": "High humidity, warm temperatures, and dense planting that reduces airflow.",
+    "treatment_summary": "Apply propiconazole or carbendazim fungicide. Improve field drainage and plant spacing.",
+    "prevention": "Wider row spacing, balanced nutrients, resistant varieties.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_carbendazim"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "Moderate to heavy"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "sheath_blight": {
+    "display": "Sheath Blight",
+    "crop": "Rice",
+    "severity": "High",
+    "description": "Caused by Rhizoctonia solani. Oval greenish-grey lesions with dark brown borders appear on leaf sheaths, spreading to leaves.",
+    "causes": "High humidity (>90%), temperatures of 28–32°C, dense planting, high nitrogen levels, and flooded conditions that allow mycelium spread.",
+    "treatment_summary": "Apply validamycin, hexaconazole, or propiconazole fungicides. Reduce plant density. Minimize canopy humidity.",
+    "prevention": "Lower seeding rates, balanced fertilization, water management.",
+    "treatment_ids": [
+      "treat_validamycin",
+      "treat_hexaconazole",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–32°C",
+      "humidity": ">90%",
+      "rainfall": "Heavy flooding"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "aphid": {
+    "display": "Aphid Infestation",
+    "crop": "Wheat",
+    "severity": "Medium",
+    "description": "Small soft-bodied insects that cluster on leaves and stems, sucking plant sap and potentially transmitting viruses.",
+    "causes": "Warm dry conditions, absence of natural predators, and dense planting.",
+    "treatment_summary": "Apply imidacloprid or lambda-cyhalothrin insecticide. Encourage natural predators (ladybugs).",
+    "prevention": "Early planting, crop rotation, avoid excessive nitrogen.",
+    "treatment_ids": [
+      "treat_imidacloprid",
+      "treat_lambda_cyhalothrin"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–25°C",
+      "humidity": "<60%",
+      "rainfall": "Low"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "black_rust": {
+    "display": "Black Rust (Stem Rust)",
+    "crop": "Wheat",
+    "severity": "Very High",
+    "description": "Caused by Puccinia graminis. Produces brick-red to black pustules on stems and leaves. Can devastate entire crops.",
+    "causes": "Warm temperatures (15–30°C), dew, and wind-blown spores from nearby infected fields.",
+    "treatment_summary": "Apply propiconazole, tebuconazole, or trifloxystrobin fungicides at early stages.",
+    "prevention": "Plant resistant varieties. Early sowing. Remove volunteer wheat plants.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole",
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–30°C",
+      "humidity": ">80%",
+      "rainfall": "Moderate with dew"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "blast": {
+    "display": "Blast (Rice Paddy)",
+    "crop": "Rice",
+    "severity": "Very High",
+    "description": "Magnaporthe oryzae. Diamond-shaped lesions on leaves. Can also affect panicles (panicle blast).",
+    "causes": "Cool nights, morning dew, excess nitrogen, susceptible varieties.",
+    "treatment_summary": "Tricyclazole, isoprothiolane, azoxystrobin fungicides.",
+    "prevention": "Resistant varieties, balanced nitrogen, regulated irrigation.",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "Frequent dew/light rain"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "brown_rust": {
+    "display": "Brown Rust (Leaf Rust)",
+    "crop": "Wheat",
+    "severity": "High",
+    "description": "Caused by Puccinia triticina. Orange-brown pustules on upper leaf surface. Very common and widespread.",
+    "causes": "Moderate temperatures (15–22°C), dew, and humid conditions.",
+    "treatment_summary": "Fungicides: propiconazole, mancozeb. Apply at early infection stage.",
+    "prevention": "Resistant varieties, timely sowing, crop rotation.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": ">70%",
+      "rainfall": "Light rain/dew"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "common_root_rot": {
+    "display": "Common Root Rot",
+    "crop": "Wheat",
+    "severity": "Medium",
+    "description": "Caused by Bipolaris sorokiniana. Brown to black discolouration of crown and root tissues.",
+    "causes": "Dry soil conditions, warm temperatures during seeding, and soil-borne inoculum.",
+    "treatment_summary": "Seed treatment with trifloxystrobin + tebuconazole. Crop rotation with non-cereal crops.",
+    "prevention": "Balanced soil fertility, avoid continuous wheat, proper seeding depth.",
+    "treatment_ids": [
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–28°C",
+      "humidity": "Low soil moisture",
+      "rainfall": "Insufficient"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.3,
+      "rainfall": 0.3
+    }
+  },
+  "fusarium_head_blight": {
+    "display": "Fusarium Head Blight (Scab)",
+    "crop": "Wheat",
+    "severity": "Very High",
+    "description": "Caused by Fusarium graminearum. Bleached spikelets with pink mold. Produces mycotoxins (DON) that contaminate grain.",
+    "causes": "Wet conditions during flowering (anthesis), temperatures of 25–30°C, and crop residues.",
+    "treatment_summary": "Apply thiophanate-methyl or metconazole at early flowering. Remove infected debris.",
+    "prevention": "Resistant varieties, tillage to bury residues, good drainage.",
+    "treatment_ids": [
+      "treat_thiophanate_methyl",
+      "treat_metconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">90%",
+      "rainfall": "Rain during flowering"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "leaf_blight": {
+    "display": "Leaf Blight",
+    "crop": "Wheat",
+    "severity": "Medium",
+    "description": "Tan-brown lesions with yellow borders on older leaves.",
+    "causes": "Warm humid conditions and susceptible varieties.",
+    "treatment_summary": "Mancozeb or propiconazole fungicide application.",
+    "prevention": "Crop rotation and use of resistant varieties.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–30°C",
+      "humidity": ">70%",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "mildew": {
+    "display": "Powdery Mildew",
+    "crop": "Wheat",
+    "severity": "Medium",
+    "description": "White powdery coating on leaves, caused by Blumeria graminis. Reduces photosynthesis.",
+    "causes": "Cool temperatures (15–22°C), moderate humidity, and dense canopy.",
+    "treatment_summary": "Apply triadimefon, propiconazole, or sulfur-based fungicides.",
+    "prevention": "Wider row spacing, resistant varieties, early sowing.",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole",
+      "treat_sulfur"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": "60–80%",
+      "rainfall": "Low to moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "mite": {
+    "display": "Mite Infestation",
+    "crop": "Wheat",
+    "severity": "Low",
+    "description": "Tiny arachnids causing silvery stippling and bronzing of leaves.",
+    "causes": "Hot, dry conditions. Chemical treatments that kill natural predators.",
+    "treatment_summary": "Apply abamectin or dicofol miticide. Increase irrigation.",
+    "prevention": "Avoid overly dry conditions. Conserve beneficial insects.",
+    "treatment_ids": [
+      "treat_abamectin",
+      "treat_dicofol"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": "<50%",
+      "rainfall": "Very low"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.3,
+      "rainfall": 0.2
+    }
+  },
+  "septoria": {
+    "display": "Septoria Leaf Blotch",
+    "crop": "Wheat",
+    "severity": "High",
+    "description": "Caused by Zymoseptoria tritici. Pale green-yellow blotches with brown necrosis and pycnidia on leaves.",
+    "causes": "Cool, wet weather (10–20°C), leaf wetness periods >20 hours.",
+    "treatment_summary": "Triazole or SDHI fungicides (epoxiconazole, fluxapyroxad). Early application is key.",
+    "prevention": "Resistant varieties, crop rotation, delayed sowing.",
+    "treatment_ids": [
+      "treat_epoxiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–20°C",
+      "humidity": ">80%",
+      "rainfall": "Frequent rain"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "smut": {
+    "display": "Loose Smut",
+    "crop": "Wheat",
+    "severity": "Medium",
+    "description": "Caused by Ustilago tritici. Spikes replaced by black powdery masses of teliospores.",
+    "causes": "Moderate temperatures during flowering with humid conditions. Seed-borne pathogen.",
+    "treatment_summary": "Seed treatment with carboxin, thiram, or tebuconazole is highly effective.",
+    "prevention": "Use certified smut-free seed. Hot-water seed treatment.",
+    "treatment_ids": [
+      "treat_carboxin_thiram"
+    ],
+    "favorable_conditions": {
+      "temperature": "16–22°C",
+      "humidity": ">60%",
+      "rainfall": "Moderate during anthesis"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "stem_fly": {
+    "display": "Stem Fly",
+    "crop": "Wheat",
+    "severity": "Medium",
+    "description": "Larval mining inside wheat stems causing 'dead heart' symptoms in young plants.",
+    "causes": "Peak activity during cool temperatures (15–20°C) at early crop stages.",
+    "treatment_summary": "Apply chlorpyrifos or imidacloprid at seedling stage.",
+    "prevention": "Early sowing, treat seeds with systemic insecticide, monitor basal nodes.",
+    "treatment_ids": [
+      "treat_chlorpyrifos",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–20°C",
+      "humidity": "Any",
+      "rainfall": "Low to moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.25,
+      "rainfall": 0.25
+    }
+  },
+  "tan_spot": {
+    "display": "Tan Spot",
+    "crop": "Wheat",
+    "severity": "Medium",
+    "description": "Caused by Pyrenophora tritici-repentis. Tan-colored oval lesions with yellow borders.",
+    "causes": "Warm temperatures (20–28°C), leaf wetness, and crop residue from previous season.",
+    "treatment_summary": "Apply propiconazole or mancozeb. Tillage to bury residues.",
+    "prevention": "Crop rotation, residue management, resistant varieties.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">70%",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "yellow_rust": {
+    "display": "Yellow Rust (Stripe Rust)",
+    "crop": "Wheat",
+    "severity": "Very High",
+    "description": "Caused by Puccinia striiformis. Bright yellow pustules in stripes along leaf veins. Very destructive in cool climates.",
+    "causes": "Cool temperatures (10–15°C), dew and mist, and susceptible varieties.",
+    "treatment_summary": "Apply propiconazole, tebuconazole, or other triazole fungicides early.",
+    "prevention": "Resistant varieties are most effective. Early sowing. Monitor forecasts.",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–15°C",
+      "humidity": ">80%",
+      "rainfall": "Dew / light rain"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "mosaic_disease": {
+    "display": "Mosaic Disease",
+    "crop": "Sugarcane",
+    "severity": "High",
+    "description": "Caused by Sugarcane Mosaic Virus (SCMV). Mosaic or mottled discolouration of leaves — alternating light and dark green patches.",
+    "causes": "Transmitted by aphids (Rhopalosiphum maidis), infected planting material.",
+    "treatment_summary": "No chemical cure. Remove and destroy infected stools. Control aphid vectors.",
+    "prevention": "Use virus-free seed cane, resistant varieties, control aphid populations.",
+    "treatment_ids": [
+      "treat_routine_monitoring",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": "Moderate",
+      "rainfall": "Any"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.35,
+      "rainfall": 0.35
+    }
+  },
+  "rust": {
+    "display": "Sugarcane Rust",
+    "crop": "Sugarcane",
+    "severity": "Medium",
+    "description": "Caused by Puccinia melanocephala. Orange-brown pustules on leaf undersides causing premature leaf death.",
+    "causes": "Warm temperatures (24–28°C), high humidity, and susceptible cultivars.",
+    "treatment_summary": "Apply triadimefon or propiconazole fungicide. Remove severely infected leaves.",
+    "prevention": "Plant resistant varieties. Balanced fertilization.",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "24–28°C",
+      "humidity": ">75%",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "bacterial_blight": {
+    "display": "Bacterial Blight",
+    "crop": "Cotton",
+    "severity": "High",
+    "description": "Caused by Xanthomonas axonopodis pv. malvacearum. Angular water-soaked lesions on leaves, black cankers on stems.",
+    "causes": "Warm, humid weather, rain-splash, mechanical damage, and infected seeds.",
+    "treatment_summary": "Apply copper oxychloride or streptomycin spray. Remove infected debris.",
+    "prevention": "Disease-free certified seed, seed treatment, crop rotation.",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–35°C",
+      "humidity": ">80%",
+      "rainfall": "Heavy"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "alternaria_leaf_spot": {
+    "display": "Alternaria Leaf Spot",
+    "crop": "Cotton",
+    "severity": "Medium",
+    "description": "Caused by Alternaria macrospora. Dark brown to black circular spots with concentric rings on leaves.",
+    "causes": "High humidity and temperatures of 25–30°C. Most severe on stressed or weakened plants.",
+    "treatment_summary": "Apply mancozeb, chlorothalonil, or iprodione fungicide.",
+    "prevention": "Good drainage, balanced nutrition, remove infected debris.",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_chlorothalonil",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">75%",
+      "rainfall": "Moderate to heavy"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "hispa": {
+    "display": "Rice Hispa",
+    "crop": "Rice",
+    "severity": "Medium",
+    "description": "Caused by Dicladispa armigera (leaf beetle). Adults scrape leaf surfaces; larvae mine inside leaves creating white tunnels.",
+    "causes": "Lush, dense crops with high nitrogen. Wet season conditions.",
+    "treatment_summary": "Apply malathion or monocrotophos. Clip and destroy affected leaves.",
+    "prevention": "Avoid over-fertilization, resistant varieties, reduce dense planting.",
+    "treatment_ids": [
+      "treat_malathion",
+      "treat_monocrotophos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">75%",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "tungro": {
+    "display": "Tungro Virus Disease",
+    "crop": "Rice",
+    "severity": "Very High",
+    "description": "Caused by two viruses (RTBV + RTSV) transmitted by green leafhoppers. Leaves turn yellow-orange. Stunted plants with reduced tillering.",
+    "causes": "Green leafhopper (Nephotettix spp.) populations carrying both viruses.",
+    "treatment_summary": "No direct cure. Control leafhopper vectors with buprofezin or imidacloprid.",
+    "prevention": "Resistant varieties (Utri Merah), synchronized planting, leafhopper management.",
+    "treatment_ids": [
+      "treat_buprofezin",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.35,
+      "rainfall": 0.3
+    }
+  },
+  "dead_heart": {
+    "display": "Dead Heart (Stem Borer)",
+    "crop": "Rice",
+    "severity": "High",
+    "description": "Caused by stem borer larvae (Scirpophaga incertulas). The central leaf whorl turns yellow and dies — pulled out easily.",
+    "causes": "Stem borer moth populations during vegetative stage.",
+    "treatment_summary": "Apply cartap hydrochloride, chlorpyrifos, or flubendiamide granules.",
+    "prevention": "Avoid early planting when moths are active. Use light traps. Remove egg masses.",
+    "treatment_ids": [
+      "treat_cartap",
+      "treat_flubendiamide",
+      "treat_chlorpyrifos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": "High",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "downy_mildew": {
+    "display": "Downy Mildew",
+    "crop": "Rice",
+    "severity": "Medium",
+    "description": "Caused by Sclerophthora macrospora. Pale yellow lesions with downy growth on underside of leaves.",
+    "causes": "Waterlogged soils, cool temperatures, and high humidity.",
+    "treatment_summary": "Apply metalaxyl or fosetyl-aluminium fungicide. Improve drainage.",
+    "prevention": "Avoid water stagnation, improve field drainage, resistant varieties.",
+    "treatment_ids": [
+      "treat_metalaxyl",
+      "treat_fosetyl_al"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–25°C",
+      "humidity": ">90%",
+      "rainfall": "Heavy flooding"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_leaf_streak": {
+    "display": "Bacterial Leaf Streak",
+    "crop": "Rice",
+    "severity": "Medium",
+    "description": "Caused by Xanthomonas oryzae pv. oryzicola. Narrow, translucent water-soaked stripes between veins.",
+    "causes": "Warm, humid weather. Spread by rain splash and irrigation water.",
+    "treatment_summary": "Apply copper-based bactericides. Remove infected leaves.",
+    "prevention": "Use resistant varieties. Avoid excessive nitrogen.",
+    "treatment_ids": [
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "Heavy"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_panicle_blight": {
+    "display": "Bacterial Panicle Blight",
+    "crop": "Rice",
+    "severity": "High",
+    "description": "Caused by Burkholderia glumae. Sterile spikelets, grayish-brown discolouration. Significant yield loss.",
+    "causes": "High temperatures (>30°C) during flowering combined with high humidity.",
+    "treatment_summary": "Apply oxolinic acid or copper-based bactericide at panicle initiation.",
+    "prevention": "Resistant varieties, avoid water stress at heading.",
+    "treatment_ids": [
+      "treat_oxolinic_acid",
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": ">85%",
+      "rainfall": "Moderate"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "normal": {
+    "display": "Healthy (Normal)",
+    "crop": "Rice",
+    "severity": "None",
+    "description": "No disease detected. Crop appears healthy.",
+    "causes": "N/A",
+    "treatment_summary": "Continue routine monitoring and preventive agronomic practices.",
+    "prevention": "Maintain balanced fertilization, proper irrigation, and crop rotation.",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "Any",
+      "humidity": "Any",
+      "rainfall": "Regular"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  }
+}

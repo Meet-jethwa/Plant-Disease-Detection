@@ -13,7 +13,14 @@ import { LeafVision } from '../components/LeafVision'
 import { WeatherCard } from '../components/WeatherCard'
 import { DiseaseRisk } from '../components/DiseaseRisk'
 import { useLang } from '../contexts/LanguageContext'
-import { LANGUAGE_META, localizeDiseaseName } from '../i18n/translations'
+import { LANGUAGE_META } from '../i18n/translations'
+import {
+  localizeDiseaseName,
+  getLocalizedDiseaseInfo,
+  ORGANIC_STEPS,
+  localizeWeatherRisk,
+  localizeWeatherCondition,
+} from '../i18n/diseaseHelper'
 import type { PredictionResponse, LocationContextData } from '../types'
 
 // ── Configurable Confidence Thresholds ───────────────────────────────────────────
@@ -75,7 +82,19 @@ export function DiagnosisResultPage({
   }, [])
 
   // ── Derived Data ─────────────────────────────────────────────────────────────
-  const disease = prediction.disease_info
+  const localizedInfo = useMemo(() => {
+    return getLocalizedDiseaseInfo(prediction.predicted_class, lang)
+  }, [prediction.predicted_class, lang])
+
+  const disease = {
+    ...prediction.disease_info,
+    display: localizedInfo.display || prediction.disease_info.display,
+    description: localizedInfo.description || prediction.disease_info.description,
+    treatment: localizedInfo.treatment || prediction.disease_info.treatment,
+    causes: localizedInfo.causes || prediction.disease_info.causes,
+    prevention: localizedInfo.prevention || prediction.disease_info.prevention,
+  }
+
   const isHealthy = prediction.predicted_class.toLowerCase().includes('healthy')
 
   const confidence = typeof prediction.confidence_percent === 'number'
@@ -86,44 +105,44 @@ export function DiagnosisResultPage({
   const isUnknownConfidence = confidence < UNKNOWN_CONFIDENCE
 
   const affectedAreaPct = prediction.affected_area_percent ?? 18
-  const weatherRisk = prediction.weather_context?.risk_level ?? locationData?.risk_level ?? 'Low'
-  const weatherDesc = prediction.weather_context?.weather?.condition ?? locationData?.weather?.condition ?? 'Moderate'
+  const rawRisk = prediction.weather_context?.risk_level ?? locationData?.risk_level ?? 'Low'
+  const rawCondition = prediction.weather_context?.weather?.condition ?? locationData?.weather?.condition ?? 'Moderate'
+
+  const weatherRisk = localizeWeatherRisk(rawRisk, lang)
+  const weatherDesc = localizeWeatherCondition(rawCondition, lang)
 
   // Build 3 to 5 clear steps for each tab
   const immediateSteps = useMemo(() => {
-    const raw = (disease.treatment || '')
-      .split('\n')
-      .map(s => s.replace(/^\d+\.\s*/, '').trim())
-      .filter(Boolean)
+    const rawText = disease.treatment || ''
+    const raw = rawText
+      .split(/(?:\. |\n|\। )/)
+      .map(s => s.replace(/^\d+[\.\)]\s*/, '').trim())
+      .filter(s => s.length > 5)
     if (raw.length > 0) return raw.slice(0, 5)
     return [
-      'Isolate or prune visibly infected leaves to prevent spore transmission.',
-      'Refrain from overhead canopy spraying to minimize leaf wetness.',
-      'Inspect surrounding crop rows for early lesion manifestation.',
-      'Consult a certified local agronomist before chemical fungicide application.',
+      t('diagnosis.stepIsolate'),
+      t('diagnosis.stepRefrain'),
+      t('diagnosis.stepInspect'),
+      t('diagnosis.stepConsult'),
     ]
-  }, [disease.treatment])
+  }, [disease.treatment, t])
 
-  const organicSteps = [
-    'Apply 2% cold-pressed neem oil spray in the late afternoon every 5 to 7 days.',
-    'Dust wood ash or use organic copper-based Bordeaux mixture (1%) for fungal deterrence.',
-    'Incorporate Trichoderma bio-agent into soil root zones during evening watering.',
-    'Remove infected debris away from fields and burn or deeply bury it.',
-  ]
+  const organicSteps = ORGANIC_STEPS[lang] || ORGANIC_STEPS.en
 
   const preventiveSteps = useMemo(() => {
-    const raw = (disease.prevention || '')
-      .split('.')
-      .map(s => s.trim())
-      .filter(Boolean)
+    const rawText = disease.prevention || ''
+    const raw = rawText
+      .split(/(?:\. |\n|\। )/)
+      .map(s => s.replace(/^\d+[\.\)]\s*/, '').trim())
+      .filter(s => s.length > 5)
     if (raw.length > 0) return raw.slice(0, 4)
     return [
-      'Maintain adequate inter-plant spacing to ensure unobstructed cross-ventilation.',
-      'Apply balanced NPK fertilizer and avoid excessive nitrogen application.',
-      'Schedule drip or furrow irrigation to minimize surface foliage dampness.',
-      'Adopt resistant regional seed varieties for subsequent seasonal planting.',
+      t('diagnosis.stepSpacing'),
+      t('diagnosis.stepFertilizer'),
+      t('diagnosis.stepIrrigation'),
+      t('diagnosis.stepCultivars'),
     ]
-  }, [disease.prevention])
+  }, [disease.prevention, t])
 
   const currentTabSteps =
     activeTreatmentTab === 'immediate'
@@ -797,7 +816,7 @@ export function DiagnosisResultPage({
                 {t('diagnosis.weatherRisk')}
               </p>
               <p className={`text-base sm:text-lg font-bold mt-1 ${
-                weatherRisk.toLowerCase().includes('high') ? 'text-amber-800' : 'text-emerald-800'
+                rawRisk.toLowerCase().includes('high') ? 'text-amber-800' : 'text-emerald-800'
               }`}>
                 {weatherRisk} — {weatherDesc}
               </p>

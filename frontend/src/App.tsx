@@ -329,6 +329,7 @@ function AppContent() {
         const formData = new FormData()
         if (selectedFile) formData.append('file', selectedFile)
         formData.append('crop', selectedCrop)
+        formData.append('lang', lang)
 
         if (locationData?.location?.latitude && locationData?.location?.longitude) {
           formData.append('latitude', String(locationData.location.latitude))

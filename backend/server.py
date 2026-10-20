@@ -351,6 +351,7 @@ async def predict_disease(
     wind_speed: float | None = Form(None),
     city: str | None = Form(None),
     model_type: str = Form("auto"),
+    lang: str = Form("en"),
 ):
     crop_key = crop.lower()
     if crop_key not in SUPPORTED_CROPS:
@@ -466,7 +467,7 @@ async def predict_disease(
     else:
         health_score = max(5, min(90, int(round((1.0 - confidence) * 100))))
 
-    disease_info = get_disease_info(normalized_label)
+    disease_info = get_disease_info(normalized_label, lang=lang)
     if gradcam_enabled and model is not None:
         overlay_original, overlay_highlight, raw_heatmap, affected_area_percent = generate_gradcam_overlay(original_rgb, model, alpha=0.55)
     else:

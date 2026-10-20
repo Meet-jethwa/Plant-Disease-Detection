@@ -794,43 +794,79 @@ CHATBOT_KB = {
 }
 
 
-def get_disease_info(disease_name: str) -> dict:
+import json
+from pathlib import Path
+from functools import lru_cache
+
+LOCALES_DIR = Path(__file__).resolve().parent / "locales"
+
+@lru_cache(maxsize=16)
+def _load_localized_disease_db(lang: str) -> dict:
+    fpath = LOCALES_DIR / lang / "diseases.json"
+    if fpath.exists():
+        try:
+            return json.loads(fpath.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+def get_disease_info(disease_name: str, lang: str = "en") -> dict:
     """
-    Look up a disease by name. Tries normalized key lookup with fuzzy matching.
-    Returns the disease dict, or a default 'unknown' entry.
+    Look up a disease by name with multilingual support.
+    Returns the disease dict localized into `lang` if available.
     """
-    # Normalize: lowercase, replace spaces with underscores
     key = disease_name.lower().strip().replace(" ", "_").replace("-", "_").replace("(", "").replace(")", "")
+    cleaned_key = re.sub(r"^(rice|wheat|cotton|sugarcane)_+", "", key)
 
-    # Direct match
+    info = None
     if key in DISEASE_DB:
-        return DISEASE_DB[key]
+        info = DISEASE_DB[key]
+    elif cleaned_key in DISEASE_DB:
+        info = DISEASE_DB[cleaned_key]
+    else:
+        for db_key, item in DISEASE_DB.items():
+            if key in db_key or db_key in key or cleaned_key in db_key or db_key in cleaned_key:
+                info = item
+                break
 
-    # Partial match — find first entry whose key contains our search term
-    for db_key, info in DISEASE_DB.items():
-        if key in db_key or db_key in key:
-            return info
+    if info is None:
+        info = {
+            "display":      disease_name.replace("_", " ").title(),
+            "crop":         "Unknown",
+            "severity":     "Unknown",
+            "description":  "No detailed information available for this condition.",
+            "causes":       "Information not available.",
+            "treatment":    "Consult an agricultural extension officer for specific treatment advice.",
+            "prevention":   "Monitor crops regularly and maintain good agronomic practices.",
+            "favorable_conditions": {
+                "temperature": "Variable",
+                "humidity":    "Variable",
+                "rainfall":    "Variable",
+            },
+            "weather_weights": {"temperature": 0.33, "humidity": 0.33, "rainfall": 0.34},
+        }
 
-    # Check display names
-    for db_key, info in DISEASE_DB.items():
-        if key in info.get("display", "").lower().replace(" ", "_"):
-            return info
+    # If non-English language requested, overlay localized fields from backend/locales/{lang}/diseases.json
+    if lang and lang != "en":
+        loc_db = _load_localized_disease_db(lang)
+        loc_item = loc_db.get(key) or loc_db.get(cleaned_key)
+        if not loc_item:
+            for k, v in loc_db.items():
+                if k in key or key in k or k in cleaned_key or cleaned_key in k:
+                    loc_item = v
+                    break
+        if loc_item:
+            return {
+                **info,
+                "display": loc_item.get("display") or info.get("display"),
+                "description": loc_item.get("description") or info.get("description"),
+                "causes": loc_item.get("causes") or info.get("causes"),
+                "treatment": loc_item.get("treatment_summary") or loc_item.get("treatment") or info.get("treatment"),
+                "prevention": loc_item.get("prevention") or info.get("prevention"),
+            }
 
-    return {
-        "display":      disease_name.replace("_", " ").title(),
-        "crop":         "Unknown",
-        "severity":     "Unknown",
-        "description":  "No detailed information available for this condition.",
-        "causes":       "Information not available.",
-        "treatment":    "Consult an agricultural extension officer for specific treatment advice.",
-        "prevention":   "Monitor crops regularly and maintain good agronomic practices.",
-        "favorable_conditions": {
-            "temperature": "Variable",
-            "humidity":    "Variable",
-            "rainfall":    "Variable",
-        },
-        "weather_weights": {"temperature": 0.33, "humidity": 0.33, "rainfall": 0.34},
-    }
+    return info
 
 
 def compute_weather_feature_importance(disease_info: dict, weather: dict) -> dict:

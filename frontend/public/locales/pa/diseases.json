@@ -1,0 +1,716 @@
+{
+  "bacterial_leaf_blight": {
+    "display": "ਜੀਵਾਣੂ ਪੱਤਾ ਝੁਲਸ ਰੋਗ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਜ਼ੈਂਥੋਮੋਨਸ ਓਰਾਈਜ਼ੀ ਪੀਵੀ ਓਰਾਈਜ਼ੀ ਨਾਮਕ ਬੈਕਟੀਰੀਆ ਕਾਰਨ ਹੋਣ ਵਾਲੀ ਇੱਕ ਗੰਭੀਰ ਬਿਮਾਰੀ ਹੈ। ਪੱਤਿਆਂ 'ਤੇ ਪਾਣੀ ਵਰਗੇ ਕਿਨਾਰੇ ਬਣ ਜਾਂਦੇ ਹਨ ਜੋ ਪੀਲੇ ਅਤੇ ਫਿਰ ਚਿੱਟੇ ਹੋ ਜਾਂਦੇ ਹਨ।",
+    "causes": "ਗਰਮ ਤਾਪਮਾਨ (25–30°C), ਵੱਧ ਨਮੀ, ਅਤੇ ਮੀਂਹ ਜਾਂ ਹਨ੍ਹੇਰੀ ਜਿਸ ਨਾਲ ਬੈਕਟੀਰੀਆ ਪੱਤਿਆਂ ਦੇ ਜ਼ਖ਼ਮਾਂ ਰਾਹੀਂ ਫੈਲਦਾ ਹੈ।",
+    "treatment_summary": "ਕਾਪਰ ਵਾਲੇ ਜੀਵਾਣੂਨਾਸ਼ਕ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਬਿਮਾਰ ਪੌਦਿਆਂ ਦੀ ਰਹਿੰਦ-ਖੂੰਹਦ ਨੂੰ ਹਟਾਓ। ਬਿਮਾਰੀ ਰੋਧਕ ਕਿਸਮਾਂ ਵਰਤੋ। ਨਾਈਟ੍ਰੋਜਨ ਖਾਦ ਦੀ ਜ਼ਿਆਦਾ ਵਰਤੋਂ ਨਾ ਕਰੋ।",
+    "prevention": "ਬਿਮਾਰੀ ਤੋਂ ਮੁਕਤ ਪ੍ਰਮਾਣਿਤ ਬੀਜ ਵਰਤੋ। ਖੇਤ ਵਿੱਚ ਪਾਣੀ ਦੇ ਨਿਕਾਸ ਦਾ ਧਿਆਨ ਰੱਖੋ। ਸੰਤੁਲਿਤ ਖਾਦ ਪਾਓ।",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "ਭਾਰੀ (ਤੂਫ਼ਾਨ/ਹੜ੍ਹ)"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.5,
+      "rainfall": 0.2
+    }
+  },
+  "brown_spot": {
+    "display": "ਭੂਰਾ ਧੱਬਾ ਰੋਗ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਇਹ ਕੋਕਲੀਓਬੋਲਸ ਮਿਯਾਬਿਆਨਸ ਉੱਲੀ ਕਾਰਨ ਹੁੰਦੀ ਹੈ। ਪੱਤਿਆਂ ਉੱਤੇ ਗੋਲ ਜਾਂ ਆਂਡੇ ਦੇ ਆਕਾਰ ਦੇ ਭੂਰੇ ਧੱਬੇ ਬਣ ਜਾਂਦੇ ਹਨ ਜਿਨ੍ਹਾਂ ਦੇ ਆਲੇ-ਦੁਆਲੇ ਪੀਲਾ ਘੇਰਾ ਹੁੰਦਾ ਹੈ।",
+    "causes": "ਇਹ ਮਿੱਟੀ ਵਿੱਚ ਪੌਸ਼ਟਿਕ ਤੱਤਾਂ (ਖਾਸ ਕਰਕੇ ਪੋਟਾਸ਼ੀਅਮ ਅਤੇ ਸਿਲੀਕਾਨ) ਦੀ ਕਾਰਨ ਹੁੰਦੀ ਹੈ। ਗਰਮ ਨਮੀ ਵਾਲੇ ਮੌਸਮ ਅਤੇ ਮਿੱਟੀ ਦੀ ਮਾੜੀ ਸਿਹਤ ਕਾਰਨ ਇਹ ਵੱਧ ਫੈਲਦੀ ਹੈ।",
+    "treatment_summary": "ਮੈਨਕੋਜ਼ੇਬ ਜਾਂ ਆਈਪ੍ਰੋਡੀਓਨ ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋ। ਮਿੱਟੀ ਵਿੱਚ ਪੌਸ਼ਟਿਕ ਤੱਤਾਂ ਦੀ ਕਮੀ (ਪੋਟਾਸ਼ੀਅਮ, ਸਿਲੀਕਾਨ) ਨੂੰ ਪੂਰਾ ਕਰੋ। ਬਹੁਤ ਸੰਘਣੀ ਬਿਜਾਈ ਘਟਾਓ।",
+    "prevention": "ਸੰਤੁਲਿਤ ਖਾਦ, ਚੰਗੇ ਨਿਕਾਸ ਵਾਲੀ ਮਿੱਟੀ, ਅਤੇ ਬਿਮਾਰੀ ਰੋਧਕ ਕਿਸਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "22–32°C",
+      "humidity": "75–90%",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "healthy": {
+    "display": "ਤੰਦਰੁਸਤ",
+    "crop": "ਸਾਰੇ",
+    "severity": "ਕੋਈ ਨਹੀਂ",
+    "description": "ਪੱਤਾ ਬਿਲਕੁਲ ਤੰਦਰੁਸਤ ਲੱਗਦਾ ਹੈ ਅਤੇ ਇਸ ਉੱਤੇ ਬਿਮਾਰੀ ਦਾ ਕੋਈ ਲੱਛਣ ਨਹੀਂ ਦਿਖਾਈ ਦੇ ਰਿਹਾ।",
+    "causes": "ਲਾਗੂ ਨਹੀਂ",
+    "treatment_summary": "ਆਪਣੀ ਫ਼ਸਲ ਦੀ ਨਿਯਮਤ ਦੇਖਭਾਲ ਅਤੇ ਨਿਗਰਾਨੀ ਰੱਖੋ।",
+    "prevention": "ਖੇਤੀ ਦੇ ਚੰਗੇ ਤਰੀਕੇ ਅਪਣਾਓ, ਲੋੜ ਮੁਤਾਬਕ ਖਾਦ ਪਾਓ ਅਤੇ ਸਹੀ ਸਿੰਚਾਈ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "ਕੋਈ ਵੀ",
+      "humidity": "ਕੋਈ ਵੀ",
+      "rainfall": "ਲੋੜ ਮੁਤਾਬਕ"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  },
+  "leaf_blast": {
+    "display": "ਪੱਤੇ ਦਾ ਝੁਲਸ ਰੋਗ (ਬਲਾਸਟ)",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਬਹੁਤ ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਝੋਨੇ ਦੀਆਂ ਸਭ ਤੋਂ ਖ਼ਤਰਨਾਕ ਬਿਮਾਰੀਆਂ ਵਿੱਚੋਂ ਇੱਕ ਹੈ, ਜੋ ਕਿ ਮੈਗਨਾਪੋਰਥੇ ਓਰਾਈਜ਼ੀ (Magnaporthe oryzae) ਕਾਰਨ ਹੁੰਦੀ ਹੈ। ਪੱਤਿਆਂ ਉੱਤੇ ਸਲੇਟੀ ਰੰਗ ਦੇ ਕੇਂਦਰ ਅਤੇ ਭੂਰੇ ਕਿਨਾਰਿਆਂ ਵਾਲੇ ਹੀਰੇ (ਡਾਇਮੰਡ) ਦੇ ਆਕਾਰ ਦੇ ਦਾਣੇ/ਦਾਗ ਬਣ ਜਾਂਦੇ ਹਨ।",
+    "causes": "ਠੰਢੀਆਂ ਰਾਤਾਂ, ਨਿੱਘੇ ਦਿਨ, ਬਹੁਤ ਜ਼ਿਆਦਾ ਨਮੀ (>90%), ਭਾਰੀ ਤ੍ਰੇਲ, ਯੂਰੀਆ/ਨਾਈਟ੍ਰੋਜਨ ਦੀ ਜ਼ਿਆਦਾ ਵਰਤੋਂ, ਅਤੇ ਬਿਮਾਰੀ ਪ੍ਰਤੀ ਸੰਵੇਦਨਸ਼ੀਲ ਕਿਸਮਾਂ।",
+    "treatment_summary": "ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋ: ਟ੍ਰਾਈਸਾਈਕਲਾਜ਼ੋਲ, ਆਈਸੋਪ੍ਰੋਥਾਇਓਲੇਨ, ਜਾਂ ਐਜ਼ੋਕਸਿਸਟ੍ਰੋਬਿਨ। ਨਾਈਟ੍ਰੋਜਨ ਖਾਦ ਦੀ ਵਰਤੋਂ ਘਟਾਓ। ਨਮੀ ਨੂੰ ਘਟਾਉਣ ਲਈ ਖੇਤ ਵਿੱਚੋਂ ਪਾਣੀ ਕੱਢ ਦਿਓ।",
+    "prevention": "ਝੁਲਸ ਰੋਗ (ਬਲਾਸਟ) ਰੋਧਕ ਕਿਸਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਲੋੜ ਤੋਂ ਵੱਧ ਨਾਈਟ੍ਰੋਜਨ ਨਾ ਪਾਓ। ਪੌਦਿਆਂ ਵਿਚਕਾਰ ਹਵਾ ਦਾ ਸਹੀ ਆਵਾਜਾਈ ਯਕੀਨੀ ਬਣਾਓ।",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "ਵਾਰ-ਵਾਰ ਹਲਕੀ ਬਾਰਸ਼/ਤ੍ਰੇਲ"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "leaf_scald": {
+    "display": "ਪੱਤੇ ਦਾ ਸਕੇਲਡ (ਝੁਲਸਣਾ)",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਇਹ ਮਾਈਕ੍ਰੋਡੋਚੀਮ ਓਰਾਈਜ਼ੀ (Microdochium oryzae) ਕਾਰਨ ਹੁੰਦੀ ਹੈ। ਪੱਤਿਆਂ ਦੇ ਕਿਨਾਰਿਆਂ ਦੇ ਨਾਲ-ਨਾਲ ਹਲਕੇ ਅਤੇ ਗੂੜ੍ਹੇ ਭੂਰੇ ਰੰਗ ਦੀਆਂ ਪੱਟੀਆਂ ਬਣ ਜਾਂਦੀਆਂ ਹਨ।",
+    "causes": "ਜ਼ਿਆਦਾ ਨਮੀ, ਗਰਮ ਤਾਪਮਾਨ, ਅਤੇ ਸੰਘਣੀ ਲਵਾਈ ਜਿਸ ਨਾਲ ਹਵਾ ਦਾ ਆਵਾਜਾਈ ਘੱਟ ਜਾਂਦੀ ਹੈ।",
+    "treatment_summary": "ਪ੍ਰੋਪੀਕੋਨਾਜ਼ੋਲ ਜਾਂ ਕਾਰਬੈਂਡਾਜ਼ਿਮ ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋ। ਖੇਤ ਵਿੱਚ ਪਾਣੀ ਕੱਢਣ ਦਾ ਪ੍ਰਬੰਧ ਸੁਧਾਰੋ ਅਤੇ ਪੌਦਿਆਂ ਵਿੱਚ ਸਹੀ ਫ਼ਾਸਲਾ ਰੱਖੋ।",
+    "prevention": "ਕਤਾਰਾਂ ਵਿੱਚ ਵੱਧ ਫ਼ਾਸਲਾ ਰੱਖੋ, ਸੰਤੁਲਿਤ ਖਾਦ ਪਾਓ, ਰੋਧਕ ਕਿਸਮਾਂ ਦੀ ਚੋਣ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_carbendazim"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "ਦਰਮਿਆਨੀ ਤੋਂ ਭਾਰੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "sheath_blight": {
+    "display": "ਸ਼ੀਥ ਬਲਾਈਟ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਬਹੁਤ ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਰਾਈਜੋਕਟੋਨੀਆ ਸੋਲਾਨੀ (Rhizoctonia solani) ਉੱਲੀ ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਪੱਤਿਆਂ ਦੇ ਮੋਢਿਆਂ 'ਤੇ ਗੂੜ੍ਹੇ ਭੂਰੇ ਰੰਗ ਦੇ ਕਿਨਾਰਿਆਂ ਵਾਲੇ ਅੰਡਾਕਾਰ ਹਰੇ-ਸਲੇਟੀ ਦਾਗ ਬਣ ਜਾਂਦੇ ਹਨ, ਜੋ ਪੱਤਿਆਂ ਵੱਲ ਫੈਲਦੇ ਹਨ।",
+    "causes": "ਜ਼ਿਆਦਾ ਨਮੀ (>90%), 28–32°C ਤਾਪਮਾਨ, ਸੰਘਣੀ ਬਿਜਾਈ, ਨਾਈਟ੍ਰੋਜਨ ਦੀ ਵੱਧ ਮਾਤਰਾ, ਅਤੇ ਖੇਤ ਵਿੱਚ ਖੜ੍ਹਾ ਪਾਣੀ ਜਿਸ ਨਾਲ ਉੱਲੀ ਫੈਲਦੀ ਹੈ।",
+    "treatment_summary": "ਵੈਲਡਾਮਾਈਸਿਨ (validamycin), ਹੈਕਸਾਕੋਨਾਜ਼ੋਲ (hexaconazole), ਜਾਂ ਪ੍ਰੋਪੀਕੋਨਾਜ਼ੋਲ (propiconazole) ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋ। ਬੂਟਿਆਂ ਦੀ ਘਣਤਾ ਘਟਾਓ। ਫਸਲ ਵਿੱਚ ਨਮੀ ਘੱਟ ਰੱਖੋ।",
+    "prevention": "ਬੀਜ ਦੀ ਮਾਤਰਾ ਘੱਟ ਪਾਓ, ਸੰਤੁਲਿਤ ਖਾਦ ਪਾਓ, ਅਤੇ ਪਾਣੀ ਦਾ ਸਹੀ ਪ੍ਰਬੰਧ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_validamycin",
+      "treat_hexaconazole",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–32°C",
+      "humidity": ">90%",
+      "rainfall": "ਭਾਰੀ ਪਾਣੀ ਖੜ੍ਹਾ ਹੋਣਾ"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "aphid": {
+    "display": "ਤੇਲੇ ਦਾ ਹਮਲਾ",
+    "crop": "ਕਣਕ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਛੋਟੇ ਨਰਮ ਸਰੀਰ ਵਾਲੇ ਕੀੜੇ ਜੋ ਪੱਤਿਆਂ ਅਤੇ ਤਣਿਆਂ 'ਤੇ ਇਕੱਠੇ ਹੋ ਕੇ ਰਸ ਚੂਸਦੇ ਹਨ ਅਤੇ ਵਾਇਰਸ ਫੈਲਾ ਸਕਦੇ ਹਨ।",
+    "causes": "ਗਰਮ ਖੁਸ਼ਕ ਮੌਸਮ, ਕੁਦਰਤੀ ਸ਼ਿਕਾਰੀ ਕੀੜਿਆਂ ਦੀ ਘਾਟ, ਅਤੇ ਸੰਘਣੀ ਬਿਜਾਈ।",
+    "treatment_summary": "ਇমিਡਾਕਲੋਪ੍ਰਿਡ (imidacloprid) ਜਾਂ ਲੈਮਡਾ-ਸਾਈਹੈਲੋਥ੍ਰਿਨ (lambda-cyhalothrin) ਕੀੜੇਮਾਰ ਦਵਾਈ ਵਰਤੋ। ਕੁਦਰਤੀ ਸ਼ਿਕਾਰੀਆਂ (ਲੇਡੀ ਬੱਗ) ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰੋ।",
+    "prevention": "ਅਗੇਤੀ ਬਿਜਾਈ ਕਰੋ, ਫਸਲ ਬਦਲ ਕੇ ਬੀਜੋ, ਲੋੜ ਤੋਂ ਵੱਧ ਨਾਈਟ੍ਰੋਜਨ ਤੋਂ ਪਰਹੇਜ਼ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_imidacloprid",
+      "treat_lambda_cyhalothrin"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–25°C",
+      "humidity": "<60%",
+      "rainfall": "ਘੱਟ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "black_rust": {
+    "display": "ਕਾਲੀ ਕੁੰਗੀ (ਤਣੇ ਦੀ ਕੁੰਗੀ)",
+    "crop": "ਕਣਕ",
+    "severity": "ਬਹੁਤ ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਪੁਕੀਨੀਆ ਗ੍ਰੈਮਿਨਿਸ (Puccinia graminis) ਕਰਕੇ ਹੁੰਦੀ ਹੈ। ਤਣਿਆਂ ਅਤੇ ਪੱਤਿਆਂ 'ਤੇ ਇੱਟਾਂ ਵਰਗੇ ਲਾਲ ਤੋਂ ਕਾਲੇ ਰੰਗ ਦੇ ਦਾਣੇ ਬਣ ਜਾਂਦੇ ਹਨ। ਇਹ ਪੂਰੀ ਫਸਲ ਤਬਾਹ ਕਰ ਸਕਦੀ ਹੈ।",
+    "causes": "ਗਰਮ ਤਾਪਮਾਨ (15–30°C), ਤ੍ਰੇਲ, ਅਤੇ ਨੇੜਲੇ ਬਿਮਾਰ ਖੇਤਾਂ ਤੋਂ ਹਵਾ ਰਾਹੀਂ ਆਉਣ ਵਾਲੇ ਬੀਜਾਣু।",
+    "treatment_summary": "ਸ਼ੁਰੂਆਤੀ ਪੜਾਅ ਵਿੱਚ ਪ੍ਰੋਪੀਕੋਨਾਜ਼ੋਲ (propiconazole), ਟੇਬუკੋਨਾਜ਼ੋਲ (tebuconazole), ਜਾਂ ਟ੍ਰਾਈਫਲੋਕਸੀਸਟ੍ਰੋਬਿਨ (trifloxystrobin) ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋ।",
+    "prevention": "ਬਿਮਾਰੀ ਰੋਧਕ ਕਿਸਮਾਂ ਬੀਜੋ। ਅਗੇਤੀ ਬਿਜਾਈ ਕਰੋ। ਫਸਲ ਵਿੱਚ ਉੱਗੇ ਹੋਏ ਫਾਜ਼ਲ ਕਣਕ ਦੇ ਬੂਟੇ ਪੁੱਟ ਦਿਓ।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole",
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–30°C",
+      "humidity": ">80%",
+      "rainfall": "ਤ੍ਰੇਲ ਦੇ ਨਾਲ ਦਰਮਿਆਨੀ ਬਾਰਸ਼"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "blast": {
+    "display": "ਝੁਲਸ ਰੋਗ (ਬਲਾਸਟ) (ਝੋਨਾ)",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਬਹੁਤ ਜ਼ਿਆਦਾ",
+    "description": "ਮੈਗਨਾਪੋਰਥ ਓਰਾਈਜ਼ੀ (Magnaporthe oryzae)। ਪੱਤਿਆਂ ਉੱਤੇ ਹੀਰੇ (ਡਾਇਮੰਡ) ਵਰਗੇ ਦਾਣੇ ਜਾਂ ਧੱਬੇ ਬਣ ਜਾਂਦੇ ਹਨ। ਇਹ ਬੱਲੀਆਂ ਨੂੰ ਵੀ ਨੁਕਸਾਨ ਪਹੁੰਚਾ ਸਕਦਾ ਹੈ (ਬੱਲੀ ਦਾ ਝੁਲਸ ਰੋਗ)।",
+    "causes": "ਠੰਢੀਆਂ ਰਾਤਾਂ, ਸਵੇਰ ਦੀ ਤਰੇਲ, ਯੂਰੀਆ (ਨਾਈਟ੍ਰੋਜਨ) ਦੀ ਜ਼ਿਆਦਾ ਵਰਤੋਂ, ਅਤੇ ਬਿਮਾਰੀ ਨੂੰ ਜਲਦੀ ਫੜਨ ਵਾਲੀਆਂ ਕਿਸਮਾਂ।",
+    "treatment_summary": "ਟਰਾਈਸਾਈਕਲਾਜ਼ੋਲ, ਆਈਸੋਪ੍ਰੋਥਾਇਓਲੇਨ, ਐਜ਼ੋਕਸੀਸਟ੍ਰੋਬਿਨ ਉੱਲੀਨਾਸ਼ਕ।",
+    "prevention": "ਬਿਮਾਰੀ ਰੋਧਕ ਕਿਸਮਾਂ, ਸੰਤੁਲਿਤ ਨਾਈਟ੍ਰੋਜਨ, ਅਤੇ ਸਹੀ ਪਾਣੀ ਦਾ ਪ੍ਰਬੰਧ।",
+    "treatment_ids": [
+      "treat_tricyclazole",
+      "treat_isoprothiolane",
+      "treat_azoxystrobin"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">90%",
+      "rainfall": "ਵਾਰ-ਵਾਰ ਤਰੇਲ / ਹਲਕੀ ਬਾਰਸ਼"
+    },
+    "weather_weights": {
+      "temperature": 0.2,
+      "humidity": 0.55,
+      "rainfall": 0.25
+    }
+  },
+  "brown_rust": {
+    "display": "ਭੂਰੀ ਕੁੰਗੀ (ਪੱਤਿਆਂ ਦੀ ਕੁੰਗੀ)",
+    "crop": "ਕਣਕ",
+    "severity": "ਜ਼ਿਆਦਾ",
+    "description": "ਪੁਕੀਨੀਆ ਟ੍ਰਿਟੀਸੀਨਾ (Puccinia triticina) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਪੱਤੇ ਦੇ ਉੱਪਰਲੇ ਹਿੱਸੇ ਉੱਤੇ ਸੰਤਰੀ-ਭੂਰੇ ਰੰਗ ਦੇ ਦਾਣੇ ਜਾਂ ਫ਼ੋੜੇ ਬਣ ਜਾਂਦੇ ਹਨ। ਇਹ ਬਹੁਤ ਆਮ ਅਤੇ ਵੱਡੇ ਪੱਧਰ 'ਤੇ ਫੈਲਣ ਵਾਲੀ ਬਿਮਾਰੀ ਹੈ।",
+    "causes": "ਦਰਮਿਆਨਾ ਤਾਪਮਾਨ (15–22°C), ਤਰੇਲ, ਅਤੇ ਸਿੱਲ੍ਹ ਵਾਲਾ ਮੌਸਮ।",
+    "treatment_summary": "ਉੱਲੀਨਾਸ਼ਕ: ਪ੍ਰੋਪੀਕੋਨਾਜ਼ੋਲ, ਮੈਨਕੋਜ਼ੇਬ। ਬਿਮਾਰੀ ਦੇ ਸ਼ੁਰੂਆਤੀ ਦੌਰ ਵਿੱਚ ਛਿੜਕਾਅ ਕਰੋ।",
+    "prevention": "ਬਿਮਾਰੀ ਰੋਧਕ ਕਿਸਮਾਂ, ਸਮੇਂ ਸਿਰ ਬਿਜਾਈ, ਫ਼ਸਲ ਬਦਲ ਕੇ ਬੀਜਣਾ (ਫਸਲੀ ਚੱਕਰ)।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": ">70%",
+      "rainfall": "ਹਲਕੀ ਬਾਰਸ਼ / ਤਰੇਲ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "common_root_rot": {
+    "display": "ਆਮ ਜੜ੍ਹ ਦਾ ਸੜਨਾ (ਰੂਟ ਰੋਟ)",
+    "crop": "ਕਣਕ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਬਾਈਪੋਲਾਰਿਸ ਸੋਰੋਕਿਨਿਆਨਾ (Bipolaris sorokiniana) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਤਾਜ ਅਤੇ ਜੜ੍ਹ ਦੀਆਂ ਨਾੜੀਆਂ ਦਾ ਭੂਰੇ ਤੋਂ ਕਾਲੇ ਰੰਗ ਵਿੱਚ ਬਦਲ ਜਾਣਾ।",
+    "causes": "ਮਿੱਟੀ ਵਿੱਚ ਸਿੱਲ੍ਹ ਦੀ ਘਾਟ, ਬਿਜਾਈ ਸਮੇਂ ਗਰਮ ਤਾਪਮਾਨ, ਅਤੇ ਮਿੱਟੀ ਵਿੱਚ ਮੌਜੂਦ ਬਿਮਾਰੀ ਦੇ ਜਰਾਸੀਮ।",
+    "treatment_summary": "ਬੀਜ ਨੂੰ ਟ੍ਰਾਈਫਲੋਕਸੀਸਟ੍ਰੋਬਿਨ + ਟੈਬੂਕੋਨਾਜ਼ੋਲ ਨਾਲ ਸੋਧੋ। ਕਣਕ ਤੋਂ ਇਲਾਵਾ ਹੋਰ ਫ਼ਸਲਾਂ ਨਾਲ ਫਸਲੀ ਚੱਕਰ ਅਪਣਾਓ।",
+    "prevention": "ਮਿੱਟੀ ਦੀ ਉਪਜਾਊ ਸ਼ਕਤੀ ਨੂੰ ਸੰਤੁਲਿਤ ਰੱਖੋ, ਲਗਾਤਾਰ ਕਣਕ ਦੀ ਬਿਜਾਈ ਤੋਂ ਪਰਹੇਜ਼ ਕਰੋ, ਬੀਜ ਦੀ ਸਹੀ ਡੂੰਘਾਈ ਰੱਖੋ।",
+    "treatment_ids": [
+      "treat_trifloxystrobin_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–28°C",
+      "humidity": "ਘੱਟ ਮਿੱਟੀ ਦੀ ਸਿੱਲ੍ਹ",
+      "rainfall": "ਨਾ-ਕਾਫ਼ੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.3,
+      "rainfall": 0.3
+    }
+  },
+  "fusarium_head_blight": {
+    "display": "ਫਿਊਜ਼ੇਰੀਅਮ ਹੈੱਡ ਬਲਾਈਟ (ਸਕੈਬ)",
+    "crop": "ਕਣਕ",
+    "severity": "ਬਹੁਤ ਜ਼ਿਆਦਾ",
+    "description": "ਫਿਊਜ਼ੇਰੀਅਮ ਗ੍ਰੈਮੀਨੇਰੀਅਮ (Fusarium graminearum) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਗੁਲਾਬੀ ਉੱਲੀ ਵਾਲੀਆਂ ਸਿੱਟੀਆਂ ਦਾ ਰੰਗ ਫਿੱਕਾ ਪੈ ਜਾਂਦਾ ਹੈ। ਇਹ ਜ਼ਹਿਰੀਲੇ ਤੱਤ (DON) ਪੈਦਾ ਕਰਦਾ ਹੈ ਜੋ ਦਾਣਿਆਂ ਨੂੰ ਖਰਾਬ ਕਰਦੇ ਹਨ।",
+    "causes": "ਫੁੱਲ ਨਿਕਲਣ ਸਮੇਂ ਗਿੱਲਾ ਮੌਸਮ, 25–30°C ਤਾਪਮਾਨ, ਅਤੇ ਫਸਲ ਦੀ ਰਹਿੰਦ-ਖੂੰਹਦ।",
+    "treatment_summary": "ਫੁੱਲ ਨਿਕਲਣ ਦੀ ਸ਼ੁਰੂਆਤ ਵਿੱਚ thiophanate-methyl ਜਾਂ metconazole ਦੀ ਵਰਤੋਂ ਕਰੋ। ਬਿਮਾਰ ਰਹਿੰਦ-ਖੂੰਹਦ ਨੂੰ ਬਾਹਰ ਕੱਢੋ।",
+    "prevention": "ਰੋਧਕ ਕਿਸਮਾਂ, ਰਹਿੰਦ-ਖੂੰਹਦ ਨੂੰ ਮਿੱਟੀ ਵਿੱਚ ਦਬਾਉਣ ਲਈ ਵਾਹਣ, ਅਤੇ ਚੰਗਾ ਨਿਕਾਸ।",
+    "treatment_ids": [
+      "treat_thiophanate_methyl",
+      "treat_metconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">90%",
+      "rainfall": "ਫੁੱਲ ਆਉਣ ਸਮੇਂ ਮੀਂਹ"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.45,
+      "rainfall": 0.3
+    }
+  },
+  "leaf_blight": {
+    "display": "ਪੱਤਾ ਝੁਲਸ ਰੋਗ",
+    "crop": "ਕਣਕ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਪੁਰਾਣੇ ਪੱਤਿਆਂ ਉੱਤੇ ਪੀਲੇ ਕਿਨਾਰਿਆਂ ਵਾਲੇ ਭੂਰੇ-ਹਲਕੇ ਧੱਬੇ।",
+    "causes": "ਗਰਮ ਸਿੱਲ੍ਹਾ ਮੌਸਮ ਅਤੇ ਬਿਮਾਰੀ ਨੂੰ ਜਲਦੀ ਫੜਨ ਵਾਲੀਆਂ ਕਿਸਮਾਂ।",
+    "treatment_summary": "Mancozeb ਜਾਂ propiconazole ਉੱਲੀਨਾਸ਼ਕ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+    "prevention": "ਫਸਲੀ ਚੱਕਰ ਅਤੇ ਰੋਧਕ ਕਿਸਮਾਂ ਦੀ ਵਰਤੋਂ।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–30°C",
+      "humidity": ">70%",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "mildew": {
+    "display": "ਚਿੱਟਾ ਰੋਗ (ਪਾਊਡਰੀ ਮਿਲਡਿਊ)",
+    "crop": "ਕਣਕ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਪੱਤਿਆਂ ਉੱਤੇ ਚਿੱਟੇ ਪਾਊਡਰ ਵਰਗੀ ਪਰਤ, ਜੋ Blumeria graminis ਕਰਕੇ ਹੁੰਦੀ ਹੈ। ਇਹ ਫੋਟੋਸਿੰਥੇਸਿਸ (ਪ੍ਰਕਾਸ਼ ਸੰਸ਼ਲੇਸ਼ਣ) ਨੂੰ ਘਟਾਉਂਦੀ ਹੈ।",
+    "causes": "ਠੰਢਾ ਤਾਪਮਾਨ (15–22°C), ਦਰਮਿਆਨੀ ਸਿੱਲਾਪਣ, ਅਤੇ ਸੰਘਣੀ ਫਸਲ।",
+    "treatment_summary": "triadimefon, propiconazole, ਜਾਂ ਗੰਧਕ (sulfur) ਆਧਾਰਿਤ ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋਂ।",
+    "prevention": "ਕਤਾਰਾਂ ਵਿੱਚ ਵੱਧ ਫਾਸਲਾ, ਰੋਧਕ ਕਿਸਮਾਂ, ਅਤੇ ਜਲਦੀ ਬਿਜਾਈ।",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole",
+      "treat_sulfur"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–22°C",
+      "humidity": "60–80%",
+      "rainfall": "ਘੱਟ ਤੋਂ ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "mite": {
+    "display": "ਮੇਟ ਦਾ ਹਮਲਾ",
+    "crop": "ਕਣਕ",
+    "severity": "ਘੱਟ",
+    "description": "ਛੋਟੇ ਕੀੜੇ ਜੋ ਪੱਤਿਆਂ ਉੱਤੇ ਚਾਂਦੀ ਵਰਗੇ ਦਾਣੇ ਅਤੇ ਤਾਂਬੇ ਵਰਗਾ ਰੰਗ ਬਣਾ ਦਿੰਦੇ ਹਨ।",
+    "causes": "ਗਰਮ ਅਤੇ ਸੁੱਕਾ ਮੌਸਮ। ਰਸਾਇਣਕ ਦਵਾਈਆਂ ਜੋ ਕੁਦਰਤੀ ਸ਼ਿਕਾਰੀਆਂ ਨੂੰ ਮਾਰ ਦਿੰਦੀਆਂ ਹਨ।",
+    "treatment_summary": "ਅਬਾਮੈਕਟਿਨ (abamectin) ਜਾਂ ਡਿਕੋਫੋਲ (dicofol) ਮਾਈਟ-ਨਾਸ਼ਕ ਵਰਤੋਂ। ਪਾਣੀ ਦੀ ਸਿੰਚਾਈ ਵਧਾਓ।",
+    "prevention": "ਬਹੁਤਾ ਸੁੱਕਾ ਮੌਸਮ ਨਾ ਹੋਣ ਦਿਓ। ਫ਼ਾਇਦੇਮੰਦ ਕੀੜਿਆਂ ਦੀ ਰੱਖਿਆ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_abamectin",
+      "treat_dicofol"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": "<50%",
+      "rainfall": "ਬਹੁਤ ਘੱਟ"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.3,
+      "rainfall": 0.2
+    }
+  },
+  "septoria": {
+    "display": "ਸੈਪਟੋਰੀਆ ਪੱਤਾ ਧੱਬਾ (Septoria Leaf Blotch)",
+    "crop": "ਕਣਕ",
+    "severity": "ਜ਼ਿਆਦਾ",
+    "description": "ਜ਼ਾਈਮੋਸੈਪਟੋਰੀਆ ਟ੍ਰਿਟੀਸੀ (Zymoseptoria tritici) ਕਾਰਨ ਹੁੰਦਾ ਹੈ। ਪੱਤਿਆਂ ਉੱਤੇ ਹਲਕੇ ਹਰੇ-ਪੀਲੇ ਧੱਬੇ ਜਿਨ੍ਹਾਂ ਉੱਤੇ ਭੂਰੇ ਰੰਗ ਦਾ ਸੁੱਕਾਪਣ ਅਤੇ ਛੋਟੇ ਦਾਣੇ ਹੁੰਦੇ ਹਨ।",
+    "causes": "ਠੰਢਾ, ਗਿੱਲਾ ਮੌਸਮ (10–20°C), ਪੱਤਿਆਂ ਦਾ 20 ਘੰਟੇ ਤੋਂ ਵੱਧ ਸਮਾਂ ਗਿੱਲਾ ਰਹਿਣਾ।",
+    "treatment_summary": "ਟ੍ਰਾਈਆਜ਼ੋਲ (triazole) ਜਾਂ ਐਸ.ਡੀ.ਐਚ.ਆਈ. (SDHI) ਉੱਲੀਨਾਸ਼ਕ (epoxiconazole, fluxapyroxad)। ਸਮੇਂ ਸਿਰ ਛਿੜਕਾਅ ਕਰਨਾ ਬਹੁਤ ਜ਼ਰੂਰੀ ਹੈ।",
+    "prevention": "ਬਿਮਾਰੀ ਰੋਧਕ ਬੀਜ, ਫ਼ਸਲ ਬਦਲ ਕੇ ਬੀਜਣਾ, ਲੇਟ ਬਿਜਾਈ।",
+    "treatment_ids": [
+      "treat_epoxiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–20°C",
+      "humidity": ">80%",
+      "rainfall": "ਵਾਰ-ਵਾਰ ਮੀਂਹ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.4,
+      "rainfall": 0.3
+    }
+  },
+  "smut": {
+    "display": "ਕੰਗਿਆਰੀ (Loose Smut)",
+    "crop": "ਕਣਕ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਉਸਟੀਲਾਗੋ ਟ੍ਰਿਟੀਸੀ (Ustilago tritici) ਕਾਰਨ ਹੁੰਦਾ ਹੈ। ਬੱਲੀਆਂ ਕਾਲੇ ਪਾਊਡਰ ਵਰਗੇ ਕਣਾਂ ਵਿੱਚ ਬਦਲ ਜਾਂਦੀਆਂ ਹਨ।",
+    "causes": "ਬੂਰ ਪੈਣ ਵੇਲੇ ਦਰਮਿਆਨਾ ਤਾਪਮਾਨ ਅਤੇ ਸਿੱਲ੍ਹਾ ਮੌਸਮ। ਇਹ ਬਿਮਾਰੀ ਬੀਜ ਰਾਹੀਂ ਫੈਲਦੀ ਹੈ।",
+    "treatment_summary": "ਕਾਰਬੋਕਸਿਨ (carboxin), ਥੀਰਮ (thiram), ਜਾਂ ਟੈਬੁਕੋਨਾਜ਼ੋਲ (tebuconazole) ਨਾਲ ਬੀਜ ਸੋਧਣਾ ਬਹੁਤ ਅਸਰਦਾਰ ਹੈ।",
+    "prevention": "ਪ੍ਰਮਾਣਿਤ ਕੰਗਿਆਰੀ-ਮੁਕਤ ਬੀਜ ਵਰਤੋਂ। ਗਰਮ ਪਾਣੀ ਨਾਲ ਬੀਜ ਸੋਧੋ।",
+    "treatment_ids": [
+      "treat_carboxin_thiram"
+    ],
+    "favorable_conditions": {
+      "temperature": "16–22°C",
+      "humidity": ">60%",
+      "rainfall": "ਬੂਰ ਪੈਣ ਵੇਲੇ ਦਰਮਿਆਨਾ ਮੀਂਹ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "stem_fly": {
+    "display": "ਤਣੇ ਦੀ ਮੱਖੀ (Stem Fly)",
+    "crop": "ਕਣਕ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਕਣਕ ਦੇ ਤਣੇ ਦੇ ਅੰਦਰ ਸੁੰਡੀਆਂ ਵੱਢਦੀਆਂ ਹਨ ਜਿਸ ਨਾਲ ਛੋਟੇ ਬੂਟਿਆਂ ਵਿੱਚ 'ਮੁਰਝਾਇਆ ਦਿਲ' (ਡੈੱਡ ਹਾਰਟ) ਦੇ ਲੱਛਣ ਦਿਖਾਈ ਦਿੰਦੇ ਹਨ।",
+    "causes": "ਫਸਲ ਦੇ ਸ਼ੁਰੂਆਤੀ ਪੜਾਵਾਂ ਵਿੱਚ ਠੰਢੇ ਤਾਪਮਾਨ (15–20°C) ਦੌਰਾਨ ਇਸਦਾ ਪ੍ਰਕੋਪ ਵੱਧ ਹੁੰਦਾ ਹੈ।",
+    "treatment_summary": "ਬੂਟੇ ਨਿੱਕੇ ਹੁੰਦੇ ਸਮੇਂ chlorpyrifos ਜਾਂ imidacloprid ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+    "prevention": "ਗੇਤੀ ਬਿਜਾਈ ਕਰੋ, ਬੀਜਾਂ ਨੂੰ ਸਿਸਟਮਿਕ ਕੀਟਨਾਸ਼ਕ ਨਾਲ ਸੋਧੋ, ਮੁੱਢਾਂ ਦੀ ਨਿਗਰਾਨੀ ਰੱਖੋ।",
+    "treatment_ids": [
+      "treat_chlorpyrifos",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "15–20°C",
+      "humidity": "ਕੋਈ ਵੀ",
+      "rainfall": "ਘੱਟ ਤੋਂ ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.5,
+      "humidity": 0.25,
+      "rainfall": 0.25
+    }
+  },
+  "tan_spot": {
+    "display": "ਟੈਨ ਸਪਾਟ (ਭੂਰੇ ਦਾਗ)",
+    "crop": "ਕਣਕ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "Pyrenophora tritici-repentis ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਪੀਲੇ ਕਿਨਾਰਿਆਂ ਵਾਲੇ ਭੂਰੇ ਰੰਗ ਦੇ ਅੰਡਾਕਾਰ ਦਾਗ ਬਣ ਜਾਂਦੇ ਹਨ।",
+    "causes": "ਗਰਮ ਤਾਪਮਾਨ (20–28°C), ਪੱਤਿਆਂ ਉੱਤੇ ਨਮੀ, ਅਤੇ ਪਿਛਲੇ ਸیزਨ ਦੀ ਫਸਲ ਦੀ ਰਹਿੰਦ-ਖੂੰਹਦ।",
+    "treatment_summary": "propiconazole ਜਾਂ mancozeb ਦੀ ਵਰਤੋਂ ਕਰੋ। ਰਹਿੰਦ-ਖੂੰਹਦ ਨੂੰ ਦਬਾਉਣ ਲਈ ਵਾਹੁਣ ਕਰੋ।",
+    "prevention": "ਫਸਲੀ ਚੱਕਰ ਅਪਣਾਓ, ਰਹਿੰਦ-ਖੂੰਹਦ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ, ਬਿਮਾਰੀ ਸਹਿਣਯੋਗ ਕਿਸਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_mancozeb"
+    ],
+    "favorable_conditions": {
+      "temperature": "20–28°C",
+      "humidity": ">70%",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.4,
+      "rainfall": 0.25
+    }
+  },
+  "yellow_rust": {
+    "display": "ਪੀਲੀ ਕੁੰਗੀ (ਧਾਰੀਦਾਰ ਕੁੰਗੀ)",
+    "crop": "ਕਣਕ",
+    "severity": "ਬਹੁਤ ਜ਼ਿਆਦਾ",
+    "description": "Puccinia striiformis ਕਰਕੇ ਹੁੰਦੀ ਹੈ। ਪੱਤਿਆਂ ਦੀਆਂ ਨਾੜੀਆਂ ਦੇ ਨਾਲ-ਨਾਲ ਲੰਬੀਆਂ ਧਾਰੀਆਂ ਵਿੱਚ ਚਮਕਦਾਰ ਪੀਲੇ ਦਾਣੇ ਬਣ ਜਾਂਦੇ ਹਨ। ਠੰਢੇ ਮੌਸਮ ਵਿੱਚ ਇਹ ਬਹੁਤ ਨੁਕਸਾਨ ਕਰਦੀ ਹੈ।",
+    "causes": "ਠੰਢਾ ਤਾਪਮਾਨ (10–15°C), ਤ੍ਰੇਲ ਅਤੇ ਧੁੰਦ, ਅਤੇ ਬਿਮਾਰੀ ਪ੍ਰਤੀ ਸੰਵੇਦਨਸ਼ੀਲ ਕਿਸਮਾਂ।",
+    "treatment_summary": "propiconazole, tebuconazole, ਜਾਂ ਹੋਰ ਟ੍ਰਾਈਜੋਲ ਉੱਲੀਨਾਸ਼ਕਾਂ ਦੀ ਸਮੇਂ ਸਿਰ ਵਰਤੋਂ ਕਰੋ।",
+    "prevention": "ਬਿਮਾਰੀ ਰੋਧਕ ਕਿਸਮਾਂ ਸਭ ਤੋਂ ਵੱਧ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਹਨ। ਗੇਤੀ ਬਿਜਾਈ ਕਰੋ। ਮੌਸਮ ਦੀ ਭਵਿੱਖਬਾਣੀ ਉੱਤੇ ਨਜ਼ਰ ਰੱਖੋ।",
+    "treatment_ids": [
+      "treat_propiconazole",
+      "treat_tebuconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "10–15°C",
+      "humidity": ">80%",
+      "rainfall": "ਤ੍ਰੇਲ / ਹਲਕੀ ਬਾਰਸ਼"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "mosaic_disease": {
+    "display": "ਮੋਜ਼ੇਕ ਰੋਗ",
+    "crop": "ਗੰਨਾ",
+    "severity": "ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਗੰਨੇ ਦੇ ਮੋਜ਼ੇਕ ਵਾਇਰਸ (SCMV) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਪੱਤਿਆਂ ਉੱਤੇ ਹਲਕੇ ਅਤੇ ਗੂੜ੍ਹੇ ਹਰੇ ਰੰਗ ਦੇ ਧੱਬੇ ਬਣ ਜਾਂਦੇ ਹਨ।",
+    "causes": "ਇਹ ਤੇਲੇ (Rhopalosiphum maidis) ਰਾਹੀਂ ਅਤੇ ਬਿਮਾਰ ਬੀਜ ਨਾਲ ਫੈਲਦਾ ਹੈ।",
+    "treatment_summary": "ਇਸ ਦਾ ਕੋਈ ਰਸਾਇਣਕ ਇਲਾਜ ਨਹੀਂ ਹੈ। ਬਿਮਾਰ ਬੂਟਿਆਂ ਨੂੰ ਪੁੱਟ ਕੇ ਨਸ਼ਟ ਕਰ ਦਿਓ। ਤੇਲੇ ਦੀ ਰੋਕਥਾਮ ਕਰੋ।",
+    "prevention": "ਵਾਇਰਸ-ਮੁਕਤ ਬੀਜ ਵਰਤੋ, ਰੋਧਕ ਕਿਸਮਾਂ ਉਗਾਓ ਅਤੇ ਤੇਲੇ ਨੂੰ ਕਾਬੂ ਵਿੱਚ ਰੱਖੋ।",
+    "treatment_ids": [
+      "treat_routine_monitoring",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": "ਦਰਮਿਆਨੀ",
+      "rainfall": "ਕੋਈ ਵੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.35,
+      "rainfall": 0.35
+    }
+  },
+  "rust": {
+    "display": "ਗੰਨੇ ਦਾ ਕੁੰਗੀ ਰੋਗ",
+    "crop": "ਗੰਨਾ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਇਹ ਪੁਕੀਨੀਆ ਮੇਲਾਨੋਸੇਫਾਲਾ (Puccinia melanocephala) ਉੱਲੀ ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਪੱਤਿਆਂ ਦੇ ਹੇਠਲੇ ਪਾਸੇ ਸੰਤਰੀ-ਭੂਰੇ ਰੰਗ ਦੇ ਦਾਣੇ ਬਣ ਜਾਂਦੇ ਹਨ ਜਿਸ ਨਾਲ ਪੱਤੇ ਸਮੇਂ ਤੋਂ ਪਹਿਲਾਂ ਸੁੱਕ ਜਾਂਦੇ ਹਨ।",
+    "causes": "ਗਰਮ ਤਾਪਮਾਨ (24–28°C), ਵੱਧ ਨਮੀ ਅਤੇ ਬਿਮਾਰੀ ਨੂੰ ਸਹਿਣ ਨਾ ਕਰ ਸਕਣ ਵਾਲੀਆਂ ਕਿਸਮਾਂ।",
+    "treatment_summary": "ਟ੍ਰਾਈਡਾਈਮੇਫਾਨ (triadimefon) ਜਾਂ ਪ੍ਰੋਪੀਕੋਨਾਜ਼ੋਲ (propiconazole) ਉੱਲੀਨਾਸ਼ਕ ਦਾ ਛਿੜਕਾਅ ਕਰੋ। ਬਹੁਤ ਜ਼ਿਆਦਾ ਬਿਮਾਰ ਪੱਤੇ ਤੋੜ ਦਿਓ।",
+    "prevention": "ਰੋਧਕ ਕਿਸਮਾਂ ਦੀ ਬਿਜਾਈ ਕਰੋ। ਖਾਦਾਂ ਦੀ ਸੰਤੁਲਿਤ ਵਰਤੋਂ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_triadimefon",
+      "treat_propiconazole"
+    ],
+    "favorable_conditions": {
+      "temperature": "24–28°C",
+      "humidity": ">75%",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.45,
+      "rainfall": 0.2
+    }
+  },
+  "bacterial_blight": {
+    "display": "ਬੈਕਟੀਰੀਅਲ ਬਲਾਈਟ (ਅੰਗਮਾਰੀ)",
+    "crop": "ਨਰਮਾ/ਕਪਾਹ",
+    "severity": "ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਜ਼ੈਂਥੋਮੋਨਾਸ ਐਕਸੋਨੋਪੋਡਿਸ ਪੀਵੀ ਮਲਵਾਸੀਅਰਮ (Xanthomonas axonopodis pv. malvacearum) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਪੱਤਿਆਂ ਉੱਤੇ ਕੋਣ ਵਾਲੇ ਪਾਣੀ ਨਾਲ ਭਿੱਜੇ ਦਾਗ ਅਤੇ ਤਣਿਆਂ ਉੱਤੇ ਕਾਲੇ ਜ਼ਖ਼ਮ ਹੋ ਜਾਂਦੇ ਹਨ।",
+    "causes": "ਗਰਮ ਅਤੇ ਨਮੀ ਵਾਲਾ ਮੌਸਮ, ਮੀਂਹ ਦੇ ਛਿੱਟੇ, ਮਸ਼ੀਨੀ ਨੁਕਸਾਨ ਅਤੇ ਬਿਮਾਰ ਬੀਜ।",
+    "treatment_summary": "ਕਾਪਰ ਆਕਸੀਕਲੋਰਾਈਡ (copper oxychloride) ਜਾਂ ਸਟ੍ਰੈਪਟੋਮਾਈਸਿਨ (streptomycin) ਦਾ ਛਿੜਕਾਅ ਕਰੋ। ਬਿਮਾਰ ਰਹਿੰਦ-ਖੂੰਹਦ ਨੂੰ ਹਟਾ ਦਿਓ।",
+    "prevention": "ਬਿਮਾਰੀ-ਮੁਕਤ ਪ੍ਰਮਾਣਿਤ ਬੀਜ ਵਰਤੋ, ਬੀਜ ਸੋਧ ਕਰੋ ਅਤੇ ਫਸਲ ਬਦਲ ਕੇ ਬੀਜੋ।",
+    "treatment_ids": [
+      "treat_copper_bactericide",
+      "treat_streptomycin_copper"
+    ],
+    "favorable_conditions": {
+      "temperature": "28–35°C",
+      "humidity": ">80%",
+      "rainfall": "ਭਾਰੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "alternaria_leaf_spot": {
+    "display": "ਅਲਟਰਨੇਰੀਆ ਪੱਤਾ ਦਾਗ (Alternaria Leaf Spot)",
+    "crop": "ਨਰਮਾ/ਕਪਾਹ",
+    "severity": "ਮੱਧਮ",
+    "description": "ਇਹ ਅਲਟਰਨੇਰੀਆ ਮੈਕਰੋਸਪੋਰਾ (Alternaria macrospora) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਪੱਤਿਆਂ ਉੱਤੇ ਗੂੜ੍ਹੇ ਭੂਰੇ ਤੋਂ ਕਾਲੇ ਰੰਗ ਦੇ ਗੋਲ ਦਾਣੇ ਬਣ ਜਾਂਦੇ ਹਨ ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਗੋਲ ਘੇਰੇ ਹੁੰਦੇ ਹਨ।",
+    "causes": "ਜ਼ਿਆਦਾ ਨਮੀ ਅਤੇ 25–30°C ਤਾਪਮਾਨ। ਇਹ ਕਮਜ਼ੋਰ ਜਾਂ ਤਣਾਅ ਵਾਲੇ ਬੂਟਿਆਂ ਵਿੱਚ ਜ਼ਿਆਦਾ ਫੈਲਦਾ ਹੈ।",
+    "treatment_summary": "ਮੈਨਕੋਜ਼ੇਬ, ਕਲੋਰੋਥੈਲੋਨਿਲ ਜਾਂ ਆਈਪ୍ରോਡੀਓਨ ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋ।",
+    "prevention": "ਚੰਗਾ ਨਿਕਾਸ, ਪੌਸ਼ਟਿਕ ਤੱਤਾਂ ਦਾ ਪੂਰਾ ਧਿਆਨ ਰੱਖੋ, ਅਤੇ ਬਿਮਾਰ ਪੱਤੇ ਹਟਾ ਦਿਓ।",
+    "treatment_ids": [
+      "treat_mancozeb",
+      "treat_chlorothalonil",
+      "treat_iprodione"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">75%",
+      "rainfall": "ਦਰਮਿਆਨੀ ਤੋਂ ਭਾਰੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "hispa": {
+    "display": "ਝੋਨੇ ਦਾ ਹਿਸਪਾ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਮੱਧਮ",
+    "description": "ਇਹ ਡਿਕਲਾਡਿਸਪਾ ਆਰਮੀਗੇਰਾ (ਪੱਤੇ ਖਾਣ ਵਾਲਾ ਕੀੜਾ) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਵੱਡੇ ਕੀੜੇ ਪੱਤਿਆਂ ਦੀ ਉੱਪਰਲੀ ਸਤ੍ਹਾ ਖੁਰਚਦੇ ਹਨ; ਸੁੰਡੀਆਂ ਪੱਤਿਆਂ ਦੇ ਅੰਦਰ ਸੁਰੰਗਾਂ ਬਣਾ ਕੇ ਚਿੱਟੀਆਂ ਲਕੀਰਾਂ ਕਰ ਦਿੰਦੀਆਂ ਹਨ।",
+    "causes": "ਘਣੀਆਂ ਫ਼ਸਲਾਂ ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਨਾਈਟ੍ਰੋਜਨ ਦੀ ਮਾਤਰਾ ਜ਼ਿਆਦਾ ਹੋਵੇ। ਬਰਸਾਤ ਦੇ ਮੌਸਮ ਵਿੱਚ ਇਹ ਵੱਧਦਾ ਹੈ।",
+    "treatment_summary": "ਮੈਲਾਥੀਅਨ ਜਾਂ ਮੋਨੋਕ੍ਰੋਟੋਫੌਸ ਛਿੜਕੋ। ਬਿਮਾਰ ਪੱਤਿਆਂ ਨੂੰ ਵੱਢ ਕੇ ਨਸ਼ਟ ਕਰ ਦਿਓ।",
+    "prevention": "ਜ਼ਿਆਦਾ ਖਾਦ ਪਾਉਣ ਤੋਂ ਬਚੋ, ਰੋਧਕ ਕਿਸਮਾਂ ਵਰਤੋ, ਅਤੇ ਬਹੁਤ ਸੰਘਣੀ ਲਵਾਈ ਨਾ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_malathion",
+      "treat_monocrotophos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">75%",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "tungro": {
+    "display": "ਟੰਗਰੋ ਵਾਇਰਸ ਬਿਮਾਰੀ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਬਹੁਤ ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਦੋ ਵਾਇਰਸਾਂ (RTBV + RTSV) ਕਰਕੇ ਹੁੰਦੀ ਹੈ ਜੋ ਹਰੇ ਤੇਲੇ ਰਾਹੀਂ ਫੈਲਦੇ ਹਨ। ਪੱਤੇ ਪੀਲੇ-ਸੰਤਰੀ ਰੰਗ ਦੇ ਹੋ ਜਾਂਦੇ ਹਨ। ਬੂਟੇ ਛੋਟੇ ਰਹਿ ਜਾਂਦੇ ਹਨ ਅਤੇ ਗਰਾਂ ਘੱਟ ਨਿਕਲਦੇ ਹਨ।",
+    "causes": "ਹਰੇ ਤੇਲੇ (Nephotettix spp.) ਦੀ ਆਬਾਦੀ ਜਿਨ੍ਹਾਂ ਕੋਲ ਦੋਵੇਂ ਵਾਇਰਸ ਹੁੰਦੇ ਹਨ।",
+    "treatment_summary": "ਕੋਈ ਸਿੱਧਾ ਇਲਾਜ ਨਹੀਂ ਹੈ। ਤੇਲੇ ਦੀ ਰੋਕਥਾਮ ਲਈ ਬੁਪ੍ਰੋਫੇਜ਼ਿਨ ਜਾਂ ਇਮੀਡਾਕਲੋਪ੍ਰਿਡ ਵਰਤੋ।",
+    "prevention": "ਰੋਧਕ ਕਿਸਮਾਂ (ਉਤਰੀ ਮੇਰਾਹ), ਇੱਕੋ ਸਮੇਂ ਤੇ ਬਿਜਾਈ, ਅਤੇ ਤੇਲੇ ਦੀ ਰੋਕਥਾਮ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_buprofezin",
+      "treat_imidacloprid"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–30°C",
+      "humidity": ">80%",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.35,
+      "humidity": 0.35,
+      "rainfall": 0.3
+    }
+  },
+  "dead_heart": {
+    "display": "ਡੈੱਡ ਹਾਰਟ (ਤਣਾ ਵਿੰਨ੍ਹਣ ਵਾਲਾ ਕੀੜਾ)",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਜ਼ਿਆਦਾ",
+    "description": "ਇਹ ਤਣੇ ਦੇ ਗੜੂੰਏ (Scirpophaga incertulas) ਦੇ ਲਾਰਵੇ ਕਾਰਨ ਹੁੰਦਾ ਹੈ। ਵਿਚਕਾਰਲੇ ਪੱਤੇ ਪੀਲੇ ਪੈ ਜਾਂਦੇ ਹਨ ਅਤੇ ਸੁੱਕ ਜਾਂਦੇ ਹਨ — ਜੋ ਆਸਾਨੀ ਨਾਲ ਖਿੱਚੇ ਜਾਂਦੇ ਹਨ।",
+    "causes": "ਵਾਧੇ ਦੇ ਸਮੇਂ ਤਣੇ ਦੇ ਗੜੂੰਏ ਦੀ ਗਿਣਤੀ ਵਧਣਾ।",
+    "treatment_summary": "ਕਾਰਟੈਪ ਹਾਈਡ੍ਰੋਕਲੋਰਾਈਡ, ਕਲੋਰਪਾਈਰੀਫਾਸ, ਜਾਂ ਫਲੂਬੈਂਡਿਆਮਾਈਡ ਦਾ ਦਾਣੇਦਾਰ ਛਿੜਕਾਅ ਕਰੋ।",
+    "prevention": "ਜਦੋਂ ਕੀੜੇ ਜ਼ਿਆਦਾ ਹੋਣ ਤਾਂ ਫ਼ਸਲ ਚੇਤੀ ਬੀਜਣ ਤੋਂ ਗੁਰੇਜ਼ ਕਰੋ। ਰੌਸ਼ਨੀ ਵਾਲੇ ਦਾਣੇ (ਲਾਈਟ ਟਰੈਪ) ਵਰਤੋ। ਆਂਡਿਆਂ ਦੇ ਗੁੱਛੇ ਹਟਾਓ।",
+    "treatment_ids": [
+      "treat_cartap",
+      "treat_flubendiamide",
+      "treat_chlorpyrifos"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": "ਜ਼ਿਆਦਾ",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.35,
+      "rainfall": 0.25
+    }
+  },
+  "downy_mildew": {
+    "display": "ਡਾਊਨੀ ਮਿਲਡਿਊ ਰੋਗ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਇਹ Sclerophthora macrospora ਕਾਰਨ ਹੁੰਦਾ ਹੈ। ਪੱਤਿਆਂ ਦੇ ਹੇਠਲੇ ਪਾਸੇ ਫ਼ਿੱਕੇ ਪੀਲੇ ਦਾਗ਼ ਅਤੇ ਉੱਲੀ ਵਰਗਾ ਵਾਧਾ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ।",
+    "causes": "ਖੇਤ ਵਿੱਚ ਪਾਣੀ ਖੜ੍ਹਾ ਰਹਿਣਾ, ਠੰਢਾ ਤਾਪਮਾਨ, ਅਤੇ ਜ਼ਿਆਦਾ ਨਮੀ।",
+    "treatment_summary": "ਮੈਟਾਲੈਕਸਿਲ ਜਾਂ ਫੋਸੇਟਿਲ-ਅਲਮੀਨੀਅਮ ਉੱਲੀਨਾਸ਼ਕ ਵਰਤੋ। ਪਾਣੀ ਨਿਕਾਸ ਦਾ ਸੁਧਾਰ ਕਰੋ।",
+    "prevention": "ਪਾਣੀ ਖੜ੍ਹਾ ਨਾ ਹੋਣ ਦਿਓ, ਖੇਤ ਵਿੱਚੋਂ ਪਾਣੀ ਦੇ ਨਿਕਾਸ ਨੂੰ ਠੀਕ ਕਰੋ, ਰੋਗ-ਰੋਧਕ ਕਿਸਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+    "treatment_ids": [
+      "treat_metalaxyl",
+      "treat_fosetyl_al"
+    ],
+    "favorable_conditions": {
+      "temperature": "18–25°C",
+      "humidity": ">90%",
+      "rainfall": "ਭਾਰੀ ਮੀਂਹ"
+    },
+    "weather_weights": {
+      "temperature": 0.25,
+      "humidity": 0.5,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_leaf_streak": {
+    "display": "ਬੈਕਟੀਰੀਅਲ ਲੀਫ ਸਟ੍ਰੀਕ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਦਰਮਿਆਨੀ",
+    "description": "ਇਹ Xanthomonas oryzae pv. oryzicola ਕਾਰਨ ਹੁੰਦਾ ਹੈ। ਨਾੜੀਆਂ ਦੇ ਵਿਚਕਾਰ ਪਤਲੀਆਂ, ਪਾਣੀ ਨਾਲ ਭਰੀਆਂ ਹੋਈਆਂ ਪਾਰਦਰਸ਼ੀ ਧਾਰੀਆਂ ਬਣ ਜਾਂਦੀਆਂ ਹਨ।",
+    "causes": "ਗਰਮ ਅਤੇ ਨਮੀ ਵਾਲਾ ਮੌਸਮ। ਮੀਂਹ ਦੇ ਛਿੱਟਿਆਂ ਅਤੇ ਸਿੰਚਾਈ ਦੇ ਪਾਣੀ ਨਾਲ ਫੈਲਦਾ ਹੈ।",
+    "treatment_summary": "ਕਾਪਰ-ਆਧਾਰਿਤ ਜੀਵਾਣੂਨਾਸ਼ਕ ਵਰਤੋ। ਬਿਮਾਰ ਪੱਤੇ ਹਟਾ ਦਿਓ।",
+    "prevention": "ਰੋਗ-ਰੋਧਕ ਕਿਸਮਾਂ ਵਰਤੋ। ਯੂਰੀਆ (ਨਾਈਟ੍ਰੋਜਨ) ਲੋੜ ਤੋਂ ਵੱਧ ਨਾ ਪਾਓ।",
+    "treatment_ids": [
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": "25–35°C",
+      "humidity": ">80%",
+      "rainfall": "ਭਾਰੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.3,
+      "humidity": 0.45,
+      "rainfall": 0.25
+    }
+  },
+  "bacterial_panicle_blight": {
+    "display": "ਬੈਕਟੀਰੀਅਲ ਪੈਨਿਕਲ ਬਲਾਈਟ",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਭਾਰੀ",
+    "description": "ਇਹ ਬਰਕਹੋਲਡੀਰੀਆ ਗਲੂਮੇ (Burkholderia glumae) ਕਰਕੇ ਹੁੰਦਾ ਹੈ। ਦਾਣੇ ਖਾਲੀ ਰਹਿ ਜਾਂਦੇ ਹਨ, ਸਲੇਟੀ-ਭੂਰੇ ਰੰਗ ਦੇ ਦਾਗ ਪੈ ਜਾਂਦੇ ਹਨ। ਝਾੜ ਦਾ ਬਹੁਤ ਨੁਕਸਾਨ ਹੁੰਦਾ ਹੈ।",
+    "causes": "ਬੂer ਆਉਣ ਵੇਲੇ ਵੱਧ ਤਾਪਮਾਨ (>30°C) ਅਤੇ ਨਾਲ ਹੀ ਵੱਧ ਨਮੀ ਹੋਣਾ।",
+    "treatment_summary": "ਬੂਝਾ ਨਿਕਲਣ ਵੇਲੇ ਔਕਸੋਲਿਨਿਕ ਐਸਿਡ (oxolinic acid) ਜਾਂ ਤਾਂਬੇ (copper) ਵਾਲਾ ਜੀਵਾਣੂਨਾਸ਼ਕ ਵਰਤੋ।",
+    "prevention": "ਬਿਮਾਰੀ ਸਹਿਣ ਕਰਨ ਵਾਲੀਆਂ ਕਿਸਮਾਂ ਬੀਜੋ, ਨਿੱਬੜਨ ਵੇਲੇ ਪਾਣੀ ਦੀ ਘਾਟ ਨਾ ਆਉਣ ਦਿਓ।",
+    "treatment_ids": [
+      "treat_oxolinic_acid",
+      "treat_copper_bactericide"
+    ],
+    "favorable_conditions": {
+      "temperature": ">30°C",
+      "humidity": ">85%",
+      "rainfall": "ਦਰਮਿਆਨੀ"
+    },
+    "weather_weights": {
+      "temperature": 0.4,
+      "humidity": 0.4,
+      "rainfall": 0.2
+    }
+  },
+  "normal": {
+    "display": "ਤੰਦਰੁਸਤ (ਸਧਾਰਨ)",
+    "crop": "ਝੋਨਾ",
+    "severity": "ਕੋਈ ਨਹੀਂ",
+    "description": "ਕੋਈ ਬਿਮਾਰੀ ਨਹੀਂ ਲੱਭੀ। ਫਸਲ ਤੰਦਰੁਸਤ ਲੱਗ ਰਹੀ ਹੈ।",
+    "causes": "ਲਾਗੂ ਨਹੀਂ ਹੁੰਦਾ",
+    "treatment_summary": "ਆਪਣੀ ਫਸਲ ਦੀ ਨਿਯਮਤ ਦੇਖਭਾਲ ਕਰਦੇ ਰਹੋ ਅਤੇ ਬਚਾਅ ਵਾਲੇ ਖੇਤੀ ਤਰੀਕੇ ਅਪਣਾਓ।",
+    "prevention": "ਖਾਦਾਂ ਦੀ ਸਹੀ ਮਾਤਰਾ ਰੱਖੋ, ਪਾਣੀ ਢੁਕਵਾਂ ਦਿਓ ਅਤੇ ਫਸਲ ਬਦਲ ਕੇ ਬੀਜੋ (crop rotation)।",
+    "treatment_ids": [
+      "treat_routine_monitoring"
+    ],
+    "favorable_conditions": {
+      "temperature": "ਕੋਈ ਵੀ",
+      "humidity": "ਕੋਈ ਵੀ",
+      "rainfall": "ਆਮ"
+    },
+    "weather_weights": {
+      "temperature": 0.33,
+      "humidity": 0.33,
+      "rainfall": 0.34
+    }
+  }
+}
