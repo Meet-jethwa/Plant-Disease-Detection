@@ -17,7 +17,6 @@ import { DiagnosisResultPage } from './pages/DiagnosisResultPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { LoginPage } from './pages/LoginPage'
 import { useLang } from './contexts/LanguageContext'
-import { getLocalizedDiseaseInfo, localizeDiseaseName } from './i18n/diseaseHelper'
 import type { Plant, LocationContextData, StartSessionPayload, AskPayload } from './types'
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
@@ -245,84 +244,7 @@ function AppContent() {
     }
   }
 
-  function generateFallbackPrediction(cropName: string, imageUri: string | null): PredictionResponse {
-    const cropLower = cropName.toLowerCase()
-    const isRice = cropLower.includes('rice')
-    const isWheat = cropLower.includes('wheat')
-    const isSugarcane = cropLower.includes('sugar')
-
-    const diseaseName = isRice
-      ? 'Rice Blast'
-      : isWheat
-      ? 'Yellow Rust'
-      : isSugarcane
-      ? 'Red Rot'
-      : 'Bacterial Blight'
-
-    const dInfo = getLocalizedDiseaseInfo(diseaseName, lang)
-    const localizedTitle = localizeDiseaseName(diseaseName, lang)
-
-    const affectedPart = isRice
-      ? '🍃 Leaf Blade & 🌾 Neck Node'
-      : isWheat
-      ? '🍃 Flag Leaf & 🌾 Ears'
-      : isSugarcane
-      ? '🎋 Internal Stalk & 🪵 Stem Pith'
-      : '🍃 Angular Leaf Veins & 🌿 Stem'
-
-    const imageToUse = imageUri || (isRice ? 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80' : 'https://images.unsplash.com/photo-1501430654243-c934cec2e1c0?auto=format&fit=crop&w=800&q=80')
-
-    const gradcamSvgOverlay = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450"><image href="${imageToUse}" width="600" height="450" preserveAspectRatio="xMidYMid slice"/><radialGradient id="jetHotspot" cx="52%" cy="46%" r="35%"><stop offset="0%" stop-color="%23DC2626" stop-opacity="0.88"/><stop offset="30%" stop-color="%23EA580C" stop-opacity="0.80"/><stop offset="55%" stop-color="%23FACC15" stop-opacity="0.70"/><stop offset="78%" stop-color="%2322C55E" stop-opacity="0.45"/><stop offset="92%" stop-color="%233B82F6" stop-opacity="0.25"/><stop offset="100%" stop-color="%231E3A8A" stop-opacity="0.0"/></radialGradient><ellipse cx="312" cy="208" rx="150" ry="115" fill="url(%23jetHotspot)"/></svg>`
-
-    const gradcamPureHeatmap = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450"><rect width="600" height="450" fill="%23000080"/><radialGradient id="pureJet" cx="52%" cy="46%" r="40%"><stop offset="0%" stop-color="%23FF0000"/><stop offset="25%" stop-color="%23FFA500"/><stop offset="50%" stop-color="%23FFFF00"/><stop offset="75%" stop-color="%2300FF00"/><stop offset="90%" stop-color="%2300FFFF"/><stop offset="100%" stop-color="%23000080"/></radialGradient><ellipse cx="312" cy="208" rx="160" ry="120" fill="url(%23pureJet)"/></svg>`
-
-    return {
-      crop: cropName.charAt(0).toUpperCase() + cropName.slice(1),
-      predicted_class: diseaseName,
-      confidence: 0.942,
-      confidence_percent: 94.2,
-      health_score: 62,
-      scientific_name: isRice ? 'Oryza sativa' : isWheat ? 'Triticum aestivum' : isSugarcane ? 'Saccharum officinarum' : 'Gossypium hirsutum',
-      affected_area_percent: 22,
-      top3: [
-        { class: diseaseName, confidence: 0.942 },
-        { class: isRice ? 'Brown Spot' : isWheat ? 'Brown Rust' : isSugarcane ? 'Mosaic Virus' : 'Leaf Curl', confidence: 0.041 },
-        { class: 'Healthy', confidence: 0.017 },
-      ],
-      disease_info: {
-        display: dInfo.display || localizedTitle,
-        severity: dInfo.severity || 'Moderate',
-        description: dInfo.description || `${diseaseName} affecting ${cropName} crop leaves. Produces characteristic foliar lesions and vascular discoloration.`,
-        causes: dInfo.causes || 'High humidity (>85%), leaf wetness duration, and warm ambient temperature.',
-        treatment: dInfo.treatment || '1. Apply targeted fungicide treatment.\n2. Prune infected foliage away from field.\n3. Avoid excess nitrogen fertilization.\n4. Improve field spacing and airflow.',
-        prevention: dInfo.prevention || 'Plant resistant crop varieties, ensure balanced NPK soil nutrition, and monitor daily weather risk.',
-      },
-      symptoms: [
-        { name: `Discolored lesions on ${affectedPart}`, confidence: 95 },
-        { name: 'Chlorotic yellow halo bordering necrotic spot', confidence: 88 },
-        { name: 'Foliar wilting and spot aggregation', confidence: 82 },
-      ],
-      possible_causes: [
-        { name: 'Fungal / Bacterial Pathogen Infection', description: 'Primary biotic agent responsible for foliar symptoms.' },
-        { name: 'Extended Leaf Wetness & Humidity', description: 'Environmental conditions favoring spore germination.' },
-      ],
-      analysis_summary: `${localizedTitle} detected in ${cropName} with 94.2% confidence. Affected organ: ${affectedPart}.`,
-      original_image: imageToUse,
-      highlighted_image: gradcamSvgOverlay,
-      gradcam_heatmap: gradcamPureHeatmap,
-      weather_context: {
-        location: locationData?.location ?? { city: 'Ahmedabad', state: 'Gujarat', country: 'India', latitude: 23.03, longitude: 72.58 },
-        weather: locationData?.weather ?? { temperature_c: 31.5, humidity_percent: 78, rainfall_mm: 6.2, wind_kmh: 12.5, condition: 'Humid & Overcast' },
-        risk_level: 'High',
-        feature_importance: {
-          'Humidity (>80%)': 0.42,
-          'Leaf Wetness Duration': 0.35,
-        },
-      },
-    }
-  }
-
-  async function analyzePlant() {
+  async function analyzePlant(weatherProfileOverride?: string) {
     if (!selectedFile && !previewUrl) {
       setError('Please select or upload a plant image first.')
       return
@@ -332,35 +254,31 @@ function AppContent() {
     setError(null)
 
     try {
-      let predData: PredictionResponse
+      const formData = new FormData()
+      if (selectedFile) formData.append('file', selectedFile)
+      formData.append('crop', selectedCrop)
+      formData.append('lang', lang)
 
-      try {
-        const formData = new FormData()
-        if (selectedFile) formData.append('file', selectedFile)
-        formData.append('crop', selectedCrop)
-        formData.append('lang', lang)
-
-        if (locationData?.location?.latitude && locationData?.location?.longitude) {
-          formData.append('latitude', String(locationData.location.latitude))
-          formData.append('longitude', String(locationData.location.longitude))
-        }
-
-        const response = await fetch(`${API_BASE}/api/predict`, {
-          method: 'POST',
-          body: formData,
-        })
-
-        if (!response.ok) {
-          throw new Error('Prediction API returned error status.')
-        }
-
-        const data = await response.json()
-        predData = data as PredictionResponse
-      } catch (networkErr) {
-        console.warn('Backend server fetch failed. Using instant prediction fallback:', networkErr)
-        predData = generateFallbackPrediction(selectedCrop, previewUrl)
+      if (weatherProfileOverride && weatherProfileOverride !== 'auto') {
+        formData.append('weather_profile', weatherProfileOverride)
       }
 
+      if (locationData?.location?.latitude && locationData?.location?.longitude) {
+        formData.append('latitude', String(locationData.location.latitude))
+        formData.append('longitude', String(locationData.location.longitude))
+      }
+
+      const response = await fetch(`${API_BASE}/api/predict`, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const errJson = await response.json().catch(() => null)
+        throw new Error(errJson?.detail || `Prediction failed with status ${response.status}`)
+      }
+
+      const predData = (await response.json()) as PredictionResponse
       setPrediction(predData)
 
       // Start diagnosis chat session in background so it never blocks viewing results

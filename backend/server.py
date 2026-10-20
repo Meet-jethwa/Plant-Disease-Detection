@@ -43,6 +43,8 @@ MODEL_FILES = {
     },
 }
 
+SUPPORTED_CROPS = set(MODEL_FILES.keys())
+
 app = FastAPI(title="FloraAI Plant Disease API")
 app.add_middleware(
     CORSMiddleware,
@@ -302,6 +304,52 @@ def weather_from_coordinates(latitude: float, longitude: float) -> dict:
     }
 
 
+# ── Disease Weather Profiles (Project v3 Dataset) ───────────────────────────
+_WEATHER_PROFILES_CACHE = None
+
+def _get_disease_weather_profiles() -> dict:
+    global _WEATHER_PROFILES_CACHE
+    if _WEATHER_PROFILES_CACHE is None:
+        p_path = MODELS_DIR / "disease_weather_profiles.json"
+        if p_path.exists():
+            try:
+                with open(p_path, "r", encoding="utf-8") as f:
+                    _WEATHER_PROFILES_CACHE = json.load(f)
+            except Exception as e:
+                print(f"[server] Warning loading disease_weather_profiles.json: {e}")
+                _WEATHER_PROFILES_CACHE = {}
+        else:
+            _WEATHER_PROFILES_CACHE = {}
+    return _WEATHER_PROFILES_CACHE
+
+
+@app.get("/api/weather/disease-profiles")
+def get_disease_weather_profiles(crop: str | None = None):
+    """
+    Returns pre-computed meteorological profiles from the Project v3 dataset
+    for demonstration and accurate model testing.
+    """
+    profiles = _get_disease_weather_profiles()
+    result = []
+    for key, p in profiles.items():
+        if crop and p.get("crop", "").lower() != crop.lower():
+            continue
+        result.append({
+            "key": key,
+            "crop": p.get("crop"),
+            "disease": p.get("disease"),
+            "display_name": p.get("display_name"),
+            "avg_temp_c": p.get("avg_temp_c"),
+            "avg_humidity_pct": p.get("avg_humidity_pct"),
+            "total_rainfall_mm": p.get("total_rainfall_mm"),
+            "avg_wind_kmh": p.get("avg_wind_kmh"),
+            "condition_summary": p.get("condition_summary"),
+            "description": p.get("description"),
+        })
+    result.sort(key=lambda x: x["display_name"])
+    return {"profiles": result}
+
+
 # ── Standard routes ───────────────────────────────────────────────────────────
 
 @app.get("/api/health")
@@ -352,6 +400,7 @@ async def predict_disease(
     city: str | None = Form(None),
     model_type: str = Form("auto"),
     lang: str = Form("en"),
+    weather_profile: str | None = Form(None),
 ):
     crop_key = crop.lower()
     if crop_key not in SUPPORTED_CROPS:
@@ -373,6 +422,26 @@ async def predict_disease(
     weather_dict = dict(weather_payload["weather"])
     loc_dict = dict(weather_payload["location"])
 
+    # ── Demonstration override: Project v3 Disease Weather Profile ──────────
+    weather_features_7x11 = None
+    is_manual_profile = False
+    profile_info = None
+
+    if weather_profile and weather_profile.strip() and weather_profile.strip().lower() != "auto":
+        profiles = _get_disease_weather_profiles()
+        profile_data = profiles.get(weather_profile.strip())
+        if profile_data:
+            is_manual_profile = True
+            profile_info = profile_data
+            weather_features_7x11 = profile_data.get("features_7x11")
+            weather_dict["temperature_c"] = profile_data.get("avg_temp_c", weather_dict.get("temperature_c"))
+            weather_dict["humidity_percent"] = int(round(profile_data.get("avg_humidity_pct", weather_dict.get("humidity_percent"))))
+            weather_dict["rainfall_mm"] = profile_data.get("total_rainfall_mm", weather_dict.get("rainfall_mm"))
+            weather_dict["wind_kmh"] = profile_data.get("avg_wind_kmh", weather_dict.get("wind_kmh"))
+            weather_dict["condition"] = profile_data.get("condition_summary", weather_dict.get("condition"))
+            loc_dict["city"] = f"{profile_data.get('disease')} Profile"
+            loc_dict["state"] = f"Project v3 ({profile_data.get('crop', '').capitalize()})"
+
     # Apply manual farmer overrides if provided
     if temperature is not None:
         weather_dict["temperature_c"] = float(temperature)
@@ -389,6 +458,9 @@ async def predict_disease(
         **weather_payload,
         "location": loc_dict,
         "weather": weather_dict,
+        "is_manual_profile": is_manual_profile,
+        "profile_key": weather_profile if is_manual_profile else None,
+        "profile_display": profile_info.get("display_name") if profile_info else None,
     }
 
     overlay_original = None
@@ -404,6 +476,7 @@ async def predict_disease(
                 image=file_bytes,
                 weather=weather_dict,
                 crop_hint=crop_key,
+                weather_features_7x11=weather_features_7x11,
             )
             predicted_label = mm_result["predicted_disease"]
             normalized_label = normalize_class_name(predicted_label)

@@ -64,7 +64,7 @@ _load_env_file()
 
 # ── Gemini model ──────────────────────────────────────────────────────────────
 _GEMINI_MODEL = "gemini-3.5-flash-lite"
-_FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-3.5-flash"]
+_FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-3.8-flash"]
 
 # ── Disclaimer ────────────────────────────────────────────────────────────────
 _DISCLAIMER = (
@@ -265,21 +265,21 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
 
     Args:
         context: Full DiagnosisContext dict including crop, disease, confidence,
-                 top3, weather, feature_importance, gradcam_image_b64, disease_info, language.
+                 top3, weather, feature_importance, disease_info, language.
 
     Returns:
-        Structured GeminiResponse dict (Mode A schema) or rule-based fallback.
+        Structured GeminiResponse dict (Mode A schema) or error state.
     """
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
-        return _fallback_initial(context)
+        return _fallback_initial(context, "GEMINI_API_KEY is not configured in backend/.env.")
 
     try:
         from google import genai
         client = genai.Client(api_key=api_key)
     except Exception as exc:
         print(f"[gemini_chat] genai Client initialization failed: {exc}")
-        return _fallback_initial(context)
+        return _fallback_initial(context, f"Google GenAI Client initialization failed: {exc}")
 
     disease = context.get("predicted_class") or context.get("disease") or "Unknown Condition"
     crop = context.get("crop") or "plant"
@@ -289,7 +289,7 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
     weather = context.get("weather") or {}
     fi = context.get("feature_importance") or {}
     disease_info = context.get("disease_info") or {}
-    gradcam_b64 = context.get("gradcam_image_b64") or ""
+    affected_area = context.get("affected_area_percent")
     language_code = context.get("language") or "en"
     target_lang = _lang_name(language_code)
 
@@ -323,11 +323,18 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
         for k, v in sorted(fi.items(), key=lambda x: -x[1])
     ]
 
+    visual_note = (
+        f"Grad-CAM visual inspection detected active lesion hotspots covering approximately {affected_area}% of the leaf surface."
+        if affected_area is not None else
+        "Grad-CAM visual inspection identified foliar lesion activation in the highlighted regions."
+    )
+
     context_block = json.dumps({
         "crop": crop,
         "disease": disease,
         "confidence_pct": conf_pct,
         "top_3_predictions": top3,
+        "visual_findings": visual_note,
         "environment": {
             "temperature_c": weather.get("temperature_c"),
             "humidity_percent": weather.get("humidity_percent"),
@@ -346,14 +353,10 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
         f"Diagnosis Context:\n{context_block}\n"
         f"{knowledge_block}\n"
         f"Return ONLY valid JSON matching this exact structure:\n{_MODE_A_SCHEMA}\n\n"
-        f"Fill every field with real, specific content. "
-        f"environmental_factors must include ALL SHAP features with their pre-computed importance_pct values."
+        f"Fill every field with real, specific content. Keep text crisp and agricultural-practical."
     )
 
     parts: list[Any] = [user_message]
-    img_part = _build_image_part(gradcam_b64)
-    if img_part:
-        parts.append(img_part)
 
     last_error = None
     for model_name in _FALLBACK_MODELS:
@@ -365,8 +368,8 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
                 config=types.GenerateContentConfig(
                     system_instruction=system_instruction,
                     response_mime_type="application/json",
-                    temperature=0.3,
-                    max_output_tokens=1800,
+                    temperature=0.25,
+                    max_output_tokens=750,
                 ),
             )
             result = json.loads(response.text)
@@ -393,7 +396,7 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
             continue
 
     print(f"[gemini_chat] Initial diagnosis generation failed on all models: {last_error}")
-    return _fallback_initial(context)
+    return _fallback_initial(context, f"Gemini API request failed: {last_error}")
 
 
 # ── Mode B — Focused follow-up chat ──────────────────────────────────────────
@@ -562,8 +565,8 @@ def ask_gemini_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
                 contents=parts,
                 config=types.GenerateContentConfig(
                     system_instruction=system_instruction,
-                    temperature=0.4,
-                    max_output_tokens=800,
+                    temperature=0.3,
+                    max_output_tokens=500,
                 ),
             )
             chat_answer = (response.text or "").strip()
@@ -578,154 +581,41 @@ def ask_gemini_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
             continue
 
     print(f"[gemini_chat] All Gemini models failed. Error: {last_error}")
-    return _fallback_chat(context, intent)
+    return _fallback_chat(context, intent, f"Gemini API request failed: {last_error}")
 
 
-# ── Rule-based fallbacks ──────────────────────────────────────────────────────
+# ── Error fallbacks (No fake outputs) ──────────────────────────────────────────
 
-def _fallback_initial(context: dict[str, Any]) -> dict[str, Any]:
-    """Rule-based fallback for Mode A when Gemini is unavailable."""
-    from backend.disease_info import get_disease_info
-
-    disease = context.get("predicted_class") or context.get("disease") or "Unknown Condition"
-    crop = context.get("crop") or "plant"
-    confidence = context.get("confidence") or 0.0
-    conf_pct = round(confidence * 100, 2) if confidence <= 1.0 else round(confidence, 2)
-    fi = context.get("feature_importance") or {}
-    disease_info = context.get("disease_info") or get_disease_info(disease)
-
-    env_factors = [
-        {
-            "factor": k,
-            "importance_pct": round(float(v), 1),
-            "explanation": (
-                f"{'High' if v > 40 else 'Moderate' if v > 20 else 'Lower'} influence "
-                f"on {disease} risk based on current conditions."
-            ),
-        }
-        for k, v in sorted(fi.items(), key=lambda x: -x[1])
-    ]
-
-    top_factor = env_factors[0]["factor"] if env_factors else "humidity"
-    treatment = disease_info.get("treatment", "Consult a local agricultural extension officer.")
-    prevention = disease_info.get("prevention", "Monitor crops regularly.")
-    actions = [s.strip() for s in treatment.split(".") if s.strip()][:5]
-    prev_steps = [s.strip() for s in prevention.split(".") if s.strip()][:3]
-
+def _fallback_initial(context: dict[str, Any], err_msg: str = "Gemini AI generation unavailable") -> dict[str, Any]:
+    """Error fallback for Mode A when Gemini is unavailable. Returns clear error structure."""
     return {
-        "diagnosis_summary": (
-            f"The deep learning model has detected {disease} in your {crop} crop "
-            f"with {conf_pct}% confidence. {disease_info.get('description', '')}"
-        ),
-        "why_detected": [
-            f"The AI model identified visual patterns characteristic of {disease}.",
-            "Grad-CAM analysis indicates the model focused on highlighted leaf regions in the heatmap image.",
-            f"Environmental analysis shows {top_factor} has the strongest contribution to disease risk.",
-        ],
+        "error": True,
+        "message": err_msg,
+        "diagnosis_summary": f"Gemini AI interpretation unavailable ({err_msg}). Please ensure your GEMINI_API_KEY is configured and valid.",
+        "why_detected": [],
         "visual_explanation": {
-            "original_image_explanation": (
-                f"The uploaded image shows your {crop} leaf. The CNN analysed visual texture, "
-                f"colour distribution, and lesion patterns to produce the {disease} classification."
-            ),
-            "gradcam_explanation": (
-                "The Grad-CAM heatmap highlights regions where the model had the strongest activation. "
-                "Warmer colours (red/orange) indicate areas that most influenced the classification. "
-                "This shows model attention, not a confirmed symptom map."
-            ),
+            "original_image_explanation": "Visual explanation unavailable.",
+            "gradcam_explanation": "Grad-CAM explanation unavailable."
         },
-        "environmental_factors": env_factors,
-        "recommended_actions": [a for a in actions if a],
-        "prevention": [p for p in prev_steps if p],
+        "environmental_factors": [],
+        "recommended_actions": [],
+        "prevention": [],
         "follow_up_questions": [
-            "What should I do now?",
-            "Why was this disease detected?",
-            "Can you explain the Grad-CAM heatmap?",
-            "Is the weather increasing the risk?",
+            "How do I configure my Gemini API key?",
+            "What disease was detected by the model?"
         ],
         "disclaimer": _DISCLAIMER,
     }
 
 
-def _fallback_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
-    """Rule-based fallback for Mode B when Gemini is unavailable."""
-    from backend.disease_info import get_disease_info
-
-    disease = context.get("predicted_class") or context.get("disease") or "Unknown Condition"
-    crop = context.get("crop") or "plant"
-    confidence = context.get("confidence") or 0.0
-    conf_pct = round(confidence * 100, 2) if confidence <= 1.0 else round(confidence, 2)
-    fi = context.get("feature_importance") or {}
-    weather = context.get("weather") or {}
-    disease_info = context.get("disease_info") or get_disease_info(disease)
-
-    if intent == "treatment":
-        treatment = disease_info.get("treatment", "Consult a local agricultural extension officer.")
-        answer = (
-            f"Since the model detected **{disease}** with {conf_pct}% confidence, "
-            f"here are the recommended steps:\n\n{treatment}\n\n"
-            "Please consult a local agronomist before applying any chemical treatment."
-        )
-
-    elif intent == "gradcam":
-        answer = (
-            f"The Grad-CAM heatmap shows **where the CNN concentrated its visual attention** "
-            f"when predicting {disease}.\n\n"
-            "**Red/orange areas** indicate stronger model activation.\n"
-            "**Yellow areas** indicate moderate contribution.\n"
-            "**Blue areas** indicate weaker contribution.\n\n"
-            "This is model attention — it does not confirm that every highlighted pixel contains the disease."
-        )
-
-    elif intent in ("shap", "environment"):
-        shap_lines = "\n".join(
-            f"**{k}** — {round(float(v), 1)}%"
-            for k, v in sorted(fi.items(), key=lambda x: -x[1])
-        )
-        answer = (
-            f"**SHAP contributions** show how much each environmental feature influenced "
-            f"the disease risk score for {disease}:\n\n{shap_lines}\n\n"
-            f"Current conditions: humidity {weather.get('humidity_percent', 'N/A')}%, "
-            f"temperature {weather.get('temperature_c', 'N/A')}°C.\n\n"
-            "These percentages describe relative contributions — they do not mean the factor caused that share of the disease."
-        )
-
-    elif intent == "prevention":
-        prevention = disease_info.get("prevention", "Monitor crops regularly and consult a local extension officer.")
-        answer = f"**Prevention measures for {disease}:**\n\n{prevention}"
-
-    elif intent == "why_detected":
-        answer = (
-            f"The CNN identified visual patterns consistent with **{disease}** "
-            f"and assigned **{conf_pct}% confidence** to this prediction.\n\n"
-            "The Grad-CAM heatmap shows which leaf regions most influenced the classification. "
-            "This is model attention — not a pixel-level biological confirmation.\n\n"
-            "Environmental conditions, particularly humidity, also align with known risk factors for this disease."
-        )
-
-    else:
-        msg_lower = (context.get("message") or context.get("question") or "").lower().strip()
-        has_diag = bool(context.get("predicted_class") or context.get("disease"))
-
-        if msg_lower in ("hi", "hello", "hey", "greetings", "namaste"):
-            answer = (
-                "Hello! I am **FloraAI**, your AI assistant for plant disease diagnosis, crop health, "
-                "and general agricultural guidance. How can I help you today?"
-            )
-        elif not has_diag:
-            answer = (
-                "I am **FloraAI**, an intelligent AI assistant. You can ask me general questions about "
-                "agriculture, crop management, soil health, or general topics. You can also upload a plant leaf image "
-                "for AI disease diagnosis and visual heatmap analysis!"
-            )
-        else:
-            answer = (
-                f"Regarding your active scan, the model detected **{disease}** in your {crop} with {conf_pct}% confidence. "
-                "Feel free to ask about treatment protocols, prevention, environmental risk factors (SHAP), "
-                "or Grad-CAM visual heatmaps, as well as general farming and agricultural questions!"
-            )
-
-    follow_ups = FOLLOW_UP_BY_INTENT.get(intent, FOLLOW_UP_BY_INTENT["general"])
-    return {"chat_answer": answer, "follow_up_questions": follow_ups, "intent": intent}
+def _fallback_chat(context: dict[str, Any], intent: str, err_msg: str = "Gemini AI assistant unavailable") -> dict[str, Any]:
+    """Error fallback for Mode B when Gemini is unavailable. Returns genuine error response."""
+    return {
+        "error": True,
+        "chat_answer": f"⚠️ Gemini AI error: {err_msg}. The assistant cannot generate responses without a functional Gemini API connection.",
+        "follow_up_questions": [],
+        "intent": intent,
+    }
 
 
 # ── Legacy wrapper (kept for backward compatibility) ─────────────────────────

@@ -213,9 +213,9 @@ def extract_weather_tensor(
     mean, std = get_weather_stats()
     today = target_date or date.today()
 
-    # Case 1: Pre-computed or raw numpy array [7, 11] or [1, 7, 11]
-    if isinstance(weather_input, np.ndarray):
-        arr = weather_input.squeeze()
+    # Case 1: Pre-computed or raw array/list [7, 11] or [1, 7, 11]
+    if isinstance(weather_input, (np.ndarray, list)):
+        arr = np.array(weather_input, dtype=np.float32).squeeze()
         if arr.shape == (7, 11):
             normalized = (arr - mean) / (std + 1e-8)
             return torch.tensor(normalized, dtype=torch.float32).unsqueeze(0)
@@ -375,6 +375,7 @@ def predict_multimodal(
     image: Image.Image | bytes,
     weather: dict | None = None,
     crop_hint: str | None = None,
+    weather_features_7x11: list | np.ndarray | None = None,
 ) -> Dict[str, Any]:
     """
     Run full multimodal inference.
@@ -400,7 +401,12 @@ def predict_multimodal(
     original_rgb = np.asarray(pil_img, dtype=np.uint8)
 
     img_tensor = preprocess_image_pytorch(pil_img)
-    wx_tensor = extract_weather_tensor(weather)
+    if weather_features_7x11 is not None:
+        wx_tensor = extract_weather_tensor(weather_features_7x11)
+    elif isinstance(weather, dict) and "features_7x11" in weather:
+        wx_tensor = extract_weather_tensor(weather["features_7x11"])
+    else:
+        wx_tensor = extract_weather_tensor(weather)
 
     with torch.no_grad():
         logits, attn_weights = model(img_tensor, wx_tensor, return_attention=True)

@@ -6,6 +6,8 @@ Covers Rice (6 + 10 classes), Wheat (15), Sugarcane (3), Cotton (3).
 Provides: description, causes, treatment, favorable weather conditions, chatbot answers.
 """
 
+import re
+
 # ── Knowledge Base ─────────────────────────────────────────────────────────────
 # Key = lowercase normalized disease name (underscores, no spaces)
 DISEASE_DB = {

@@ -1,6 +1,5 @@
-// ScanPage.tsx — Main plant scanner with stages: crop → upload → preview → analyze → result
-import { useState } from 'react'
-import { AlertTriangle, CheckCircle2, RotateCcw, Scan, Sparkles, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { AlertTriangle, CheckCircle2, CloudSun, RotateCcw, Scan, Sparkles, X } from 'lucide-react'
 import { CropSelector } from '../components/CropSelector'
 import { ImageUploader } from '../components/ImageUploader'
 import { CameraScanner } from '../components/CameraScanner'
@@ -11,7 +10,9 @@ import { TreatmentCard } from '../components/TreatmentCard'
 import { MOCK_CROPS } from '../data/mockData'
 import { useLang } from '../contexts/LanguageContext'
 import { localizeDiseaseName } from '../i18n/translations'
-import type { Crop, PredictionResponse } from '../types'
+import type { Crop, DiseaseWeatherProfile, PredictionResponse } from '../types'
+
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
 
 export type { Crop, PredictionResponse }
 
@@ -23,7 +24,7 @@ interface ScanPageProps {
   previewUrl: string | null
   onFileChange: (file: File) => void
   onSelectSamplePreset: (crop: string, key: string) => void
-  onAnalyzePlant: () => void
+  onAnalyzePlant: (weatherProfile?: string) => void
   isPredicting: boolean
   prediction: PredictionResponse | null
   locationData: unknown
@@ -52,8 +53,33 @@ export function ScanPage({
   const [showCamera, setShowCamera] = useState(false)
   const [tab, setTab] = useState<Tab>('overview')
 
+  // Demonstration weather profiles (Project v3 dataset)
+  const [selectedWeatherProfile, setSelectedWeatherProfile] = useState<string>('auto')
+  const [profiles, setProfiles] = useState<DiseaseWeatherProfile[]>([])
+  const [loadingProfiles, setLoadingProfiles] = useState<boolean>(false)
+
   const cropNameKey = `crop.${selectedCrop.toLowerCase()}`
   const cropLabel = t(cropNameKey) !== cropNameKey ? t(cropNameKey) : (crops.find(c => c.name === selectedCrop)?.label ?? selectedCrop)
+
+  useEffect(() => {
+    let active = true
+    setLoadingProfiles(true)
+    fetch(`${API_BASE}/api/weather/disease-profiles?crop=${encodeURIComponent(selectedCrop)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (active && data.profiles) {
+          setProfiles(data.profiles)
+          setSelectedWeatherProfile('auto')
+        }
+      })
+      .catch(() => {
+        if (active) setProfiles([])
+      })
+      .finally(() => {
+        if (active) setLoadingProfiles(false)
+      })
+    return () => { active = false }
+  }, [selectedCrop])
 
   function handleCameraCapture(file: File) {
     setShowCamera(false)
@@ -64,7 +90,7 @@ export function ScanPage({
     if (!selectedFile && !previewUrl) {
       return
     }
-    onAnalyzePlant()
+    onAnalyzePlant(selectedWeatherProfile)
   }
 
   const tabs: { id: Tab; label: string }[] = [
@@ -119,6 +145,72 @@ export function ScanPage({
                 selectedCrop={selectedCrop}
                 onSelect={setSelectedCrop}
               />
+            </div>
+
+            {/* Demonstration Weather Profile Override */}
+            <div className="card p-4 sm:p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <CloudSun className="w-4 h-4 text-emerald-700" />
+                  <label htmlFor="weather-profile-select" className="text-sm font-bold text-[#17211D]">
+                    Environmental Profile
+                  </label>
+                </div>
+                {selectedWeatherProfile !== 'auto' ? (
+                  <span className="badge badge-green text-[10px] font-semibold">
+                    Dataset Override
+                  </span>
+                ) : (
+                  <span className="badge badge-slate text-[10px] font-medium">
+                    Auto GPS
+                  </span>
+                )}
+              </div>
+
+              <p className="text-xs text-[#66736C] leading-relaxed">
+                Live GPS weather is automatically fetched. For demonstration, you can override it with authentic 7-day meteorological data from the Project v3 research dataset.
+              </p>
+
+              <select
+                id="weather-profile-select"
+                value={selectedWeatherProfile}
+                onChange={(e) => setSelectedWeatherProfile(e.target.value)}
+                disabled={loadingProfiles}
+                className="w-full text-xs sm:text-sm p-2.5 rounded-xl border border-[#D4E8DC] bg-white text-[#17211D] font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-none"
+              >
+                <option value="auto">🌐 Live GPS Weather (Automatic)</option>
+                {profiles.map((p) => (
+                  <option key={p.key} value={p.key}>
+                    🔬 {p.disease} (~{p.avg_temp_c}°C, {p.avg_humidity_pct}% RH, {p.total_rainfall_mm}mm rain)
+                  </option>
+                ))}
+              </select>
+
+              {/* Selected Profile Details Preview */}
+              {selectedWeatherProfile !== 'auto' && (() => {
+                const activeP = profiles.find(p => p.key === selectedWeatherProfile)
+                if (!activeP) return null
+                return (
+                  <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-xs space-y-1.5 animate-in fade-in duration-200">
+                    <div className="flex items-center justify-between text-emerald-950 font-bold">
+                      <span>{activeP.display_name}</span>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedWeatherProfile('auto')}
+                        className="text-[11px] text-emerald-700 hover:text-emerald-900 underline font-semibold cursor-pointer"
+                      >
+                        Reset to Auto
+                      </button>
+                    </div>
+                    <p className="text-[11px] text-emerald-800">
+                      {activeP.condition_summary} • ~{activeP.avg_temp_c}°C • ~{activeP.avg_humidity_pct}% RH • {activeP.total_rainfall_mm}mm rain
+                    </p>
+                    <p className="text-[10px] text-[#4A5E52] italic">
+                      ✓ Historical 7-day × 11-feature weather sequence will be fed into the multimodal model.
+                    </p>
+                  </div>
+                )
+              })()}
             </div>
 
             {/* Image Uploader */}

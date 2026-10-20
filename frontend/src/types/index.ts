@@ -49,6 +49,19 @@ export type Cause = {
   description: string
 }
 
+export type DiseaseWeatherProfile = {
+  key: string
+  crop: string
+  disease: string
+  display_name: string
+  avg_temp_c: number
+  avg_humidity_pct: number
+  total_rainfall_mm: number
+  avg_wind_kmh: number
+  condition_summary: string
+  description: string
+}
+
 export type PredictionResponse = {
   crop: string
   predicted_class: string
@@ -63,6 +76,10 @@ export type PredictionResponse = {
     risk_level?: string
     risk_reason?: string
     feature_importance?: Record<string, number>
+    is_manual_profile?: boolean
+    profile_key?: string
+    profile_display?: string
+    weather_importance_days?: number[]
   }
   analysis_summary: string
   original_image: string

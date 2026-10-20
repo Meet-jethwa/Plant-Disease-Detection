@@ -554,6 +554,20 @@ export function DiagnosisResultPage({
           </button>
           {accordions.vision && (
             <div className="border-t border-[#D4E8DC] p-4 sm:p-5">
+              <div className="mb-4 grid grid-cols-3 gap-2.5 text-center">
+                <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
+                  <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('common.confidence')}</p>
+                  <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{Math.round(confidence)}%</p>
+                </div>
+                <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
+                  <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.affectedArea')}</p>
+                  <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{affectedAreaPct}%</p>
+                </div>
+                <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
+                  <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.weatherRisk')}</p>
+                  <p className="text-base sm:text-lg font-bold text-amber-800 mt-0.5">{weatherRisk}</p>
+                </div>
+              </div>
               <LeafVision prediction={prediction} />
             </div>
           )}
@@ -664,7 +678,7 @@ export function DiagnosisResultPage({
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0 flex-1">
                 {/* Status Pill with icon and word */}
-                <div className="mb-2.5">
+                <div className="mb-2.5 flex flex-wrap items-center gap-2">
                   <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold ${
                     isHealthy
                       ? 'bg-emerald-100 text-emerald-900 border border-emerald-200'
@@ -682,6 +696,11 @@ export function DiagnosisResultPage({
                       </>
                     )}
                   </span>
+                  {prediction.weather_context?.is_manual_profile && (
+                    <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                      🔬 {prediction.weather_context.profile_display || 'Project v3 Weather Profile'}
+                    </span>
+                  )}
                 </div>
 
                 {/* Disease name at 28px */}
@@ -695,32 +714,9 @@ export function DiagnosisResultPage({
                   </p>
                 )}
 
-                <p className="mt-2.5 text-sm text-[#4A5E52] leading-relaxed line-clamp-3">
+                <p className="mt-2.5 text-sm text-[#4A5E52] leading-relaxed">
                   {disease.description}
                 </p>
-              </div>
-
-              {/* Confidence Ring Gauge */}
-              <div className="relative flex h-16 w-16 sm:h-20 sm:w-20 shrink-0 items-center justify-center">
-                <svg className="h-full w-full -rotate-90" viewBox="0 0 44 44">
-                  <circle cx="22" cy="22" r="18" fill="none" stroke="#DDF3E8" strokeWidth="4" />
-                  <circle
-                    cx="22"
-                    cy="22"
-                    r="18"
-                    fill="none"
-                    stroke="#15803D"
-                    strokeWidth="4"
-                    strokeDasharray={2 * Math.PI * 18}
-                    strokeDashoffset={2 * Math.PI * 18 * (1 - confidence / 100)}
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <div className="absolute text-center">
-                  <span className="text-sm sm:text-base font-bold text-[#10231D]">
-                    {Math.round(confidence)}%
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -798,41 +794,6 @@ export function DiagnosisResultPage({
             </ol>
           </div>
 
-          {/* 3. Three Key Facts in One Row */}
-          <div className="grid grid-cols-3 gap-3">
-            {/* Fact 1: Affected Area */}
-            <div className="rounded-xl border border-[#D4E8DC] bg-white p-3.5 sm:p-4 text-center">
-              <p className="text-xs sm:text-sm text-[#66736C]">
-                {t('diagnosis.affectedArea')}
-              </p>
-              <p className="text-base sm:text-lg font-bold text-[#10231D] mt-1">
-                {affectedAreaPct}%
-              </p>
-            </div>
-
-            {/* Fact 2: Weather Risk */}
-            <div className="rounded-xl border border-[#D4E8DC] bg-white p-3.5 sm:p-4 text-center">
-              <p className="text-xs sm:text-sm text-[#66736C]">
-                {t('diagnosis.weatherRisk')}
-              </p>
-              <p className={`text-base sm:text-lg font-bold mt-1 ${
-                rawRisk.toLowerCase().includes('high') ? 'text-amber-800' : 'text-emerald-800'
-              }`}>
-                {weatherRisk} — {weatherDesc}
-              </p>
-            </div>
-
-            {/* Fact 3: Confidence */}
-            <div className="rounded-xl border border-[#D4E8DC] bg-white p-3.5 sm:p-4 text-center">
-              <p className="text-xs sm:text-sm text-[#66736C]">
-                {t('common.confidence')}
-              </p>
-              <p className="text-base sm:text-lg font-bold text-[#10231D] mt-1">
-                {Math.round(confidence)}%
-              </p>
-            </div>
-          </div>
-
         </div>
 
         {/* ── Right Column (Collapsed Accordions) ── */}
@@ -864,6 +825,26 @@ export function DiagnosisResultPage({
                   transition={{ duration: 0.2 }}
                   className="border-t border-[#D4E8DC] p-4 sm:p-5"
                 >
+                  {/* Detailed AI Diagnostics (moved into dropdown from direct view) */}
+                  <div className="mb-4 grid grid-cols-3 gap-2.5 text-center">
+                    <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
+                      <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('common.confidence')}</p>
+                      <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{Math.round(confidence)}%</p>
+                    </div>
+                    <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
+                      <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.affectedArea')}</p>
+                      <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{affectedAreaPct}%</p>
+                    </div>
+                    <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
+                      <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.weatherRisk')}</p>
+                      <p className={`text-sm sm:text-base font-bold mt-0.5 ${
+                        rawRisk.toLowerCase().includes('high') ? 'text-amber-800' : 'text-emerald-800'
+                      }`}>
+                        {weatherRisk} {weatherDesc ? `• ${weatherDesc}` : ''}
+                      </p>
+                    </div>
+                  </div>
+
                   <LeafVision prediction={prediction} />
                 </motion.div>
               )}
