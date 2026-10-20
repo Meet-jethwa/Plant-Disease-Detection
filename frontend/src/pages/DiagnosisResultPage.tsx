@@ -51,9 +51,9 @@ export function DiagnosisResultPage({
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [showTreatmentsAnyway, setShowTreatmentsAnyway] = useState(false)
 
-  // Accordion toggles (all collapsed by default per specification)
+  // Accordion toggles (Grad-CAM vision open by default for immediate XAI inspection)
   const [accordions, setAccordions] = useState({
-    vision: false,
+    vision: true,
     symptoms: false,
     weather: false,
     technical: false,

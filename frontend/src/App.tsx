@@ -17,6 +17,7 @@ import { DiagnosisResultPage } from './pages/DiagnosisResultPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { LoginPage } from './pages/LoginPage'
 import { useLang } from './contexts/LanguageContext'
+import { getLocalizedDiseaseInfo, localizeDiseaseName } from './i18n/diseaseHelper'
 import type { Plant, LocationContextData, StartSessionPayload, AskPayload } from './types'
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
@@ -258,6 +259,9 @@ function AppContent() {
       ? 'Red Rot'
       : 'Bacterial Blight'
 
+    const dInfo = getLocalizedDiseaseInfo(diseaseName, lang)
+    const localizedTitle = localizeDiseaseName(diseaseName, lang)
+
     const affectedPart = isRice
       ? '🍃 Leaf Blade & 🌾 Neck Node'
       : isWheat
@@ -267,6 +271,10 @@ function AppContent() {
       : '🍃 Angular Leaf Veins & 🌿 Stem'
 
     const imageToUse = imageUri || (isRice ? 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80' : 'https://images.unsplash.com/photo-1501430654243-c934cec2e1c0?auto=format&fit=crop&w=800&q=80')
+
+    const gradcamSvgOverlay = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450"><image href="${imageToUse}" width="600" height="450" preserveAspectRatio="xMidYMid slice"/><radialGradient id="jetHotspot" cx="52%" cy="46%" r="35%"><stop offset="0%" stop-color="%23DC2626" stop-opacity="0.88"/><stop offset="30%" stop-color="%23EA580C" stop-opacity="0.80"/><stop offset="55%" stop-color="%23FACC15" stop-opacity="0.70"/><stop offset="78%" stop-color="%2322C55E" stop-opacity="0.45"/><stop offset="92%" stop-color="%233B82F6" stop-opacity="0.25"/><stop offset="100%" stop-color="%231E3A8A" stop-opacity="0.0"/></radialGradient><ellipse cx="312" cy="208" rx="150" ry="115" fill="url(%23jetHotspot)"/></svg>`
+
+    const gradcamPureHeatmap = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450"><rect width="600" height="450" fill="%23000080"/><radialGradient id="pureJet" cx="52%" cy="46%" r="40%"><stop offset="0%" stop-color="%23FF0000"/><stop offset="25%" stop-color="%23FFA500"/><stop offset="50%" stop-color="%23FFFF00"/><stop offset="75%" stop-color="%2300FF00"/><stop offset="90%" stop-color="%2300FFFF"/><stop offset="100%" stop-color="%23000080"/></radialGradient><ellipse cx="312" cy="208" rx="160" ry="120" fill="url(%23pureJet)"/></svg>`
 
     return {
       crop: cropName.charAt(0).toUpperCase() + cropName.slice(1),
@@ -282,12 +290,12 @@ function AppContent() {
         { class: 'Healthy', confidence: 0.017 },
       ],
       disease_info: {
-        display: diseaseName,
-        severity: 'Moderate',
-        description: `${diseaseName} affecting ${cropName} crop leaves. Produces characteristic foliar lesions and vascular discoloration.`,
-        causes: 'High humidity (>85%), leaf wetness duration, and warm ambient temperature.',
-        treatment: '1. Apply targeted fungicide treatment.\n2. Prune infected foliage away from field.\n3. Avoid excess nitrogen fertilization.\n4. Improve field spacing and airflow.',
-        prevention: 'Plant resistant crop varieties, ensure balanced NPK soil nutrition, and monitor daily weather risk.',
+        display: dInfo.display || localizedTitle,
+        severity: dInfo.severity || 'Moderate',
+        description: dInfo.description || `${diseaseName} affecting ${cropName} crop leaves. Produces characteristic foliar lesions and vascular discoloration.`,
+        causes: dInfo.causes || 'High humidity (>85%), leaf wetness duration, and warm ambient temperature.',
+        treatment: dInfo.treatment || '1. Apply targeted fungicide treatment.\n2. Prune infected foliage away from field.\n3. Avoid excess nitrogen fertilization.\n4. Improve field spacing and airflow.',
+        prevention: dInfo.prevention || 'Plant resistant crop varieties, ensure balanced NPK soil nutrition, and monitor daily weather risk.',
       },
       symptoms: [
         { name: `Discolored lesions on ${affectedPart}`, confidence: 95 },
@@ -298,12 +306,13 @@ function AppContent() {
         { name: 'Fungal / Bacterial Pathogen Infection', description: 'Primary biotic agent responsible for foliar symptoms.' },
         { name: 'Extended Leaf Wetness & Humidity', description: 'Environmental conditions favoring spore germination.' },
       ],
-      analysis_summary: `${diseaseName} detected in ${cropName} with 94.2% confidence. Affected organ: ${affectedPart}. Recommended immediate fungicide treatment protocol.`,
+      analysis_summary: `${localizedTitle} detected in ${cropName} with 94.2% confidence. Affected organ: ${affectedPart}.`,
       original_image: imageToUse,
-      highlighted_image: imageToUse,
+      highlighted_image: gradcamSvgOverlay,
+      gradcam_heatmap: gradcamPureHeatmap,
       weather_context: {
         location: locationData?.location ?? { city: 'Ahmedabad', state: 'Gujarat', country: 'India', latitude: 23.03, longitude: 72.58 },
-        weather: locationData?.weather ?? { temperature_c: 31.5, humidity_percent: 78, rainfall_mm: 6.2, wind_kmh: 12.5, condition: 'Partly Humid' },
+        weather: locationData?.weather ?? { temperature_c: 31.5, humidity_percent: 78, rainfall_mm: 6.2, wind_kmh: 12.5, condition: 'Humid & Overcast' },
         risk_level: 'High',
         feature_importance: {
           'Humidity (>80%)': 0.42,

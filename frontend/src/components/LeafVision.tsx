@@ -1,47 +1,54 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { Info, Maximize2, Minus, Plus, RotateCcw, X } from 'lucide-react'
+import { Info, Maximize2, Minus, Plus, RotateCcw, X, Layers, Flame, Eye } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useLang } from '../contexts/LanguageContext'
 import type { PredictionResponse } from '../types'
 
-type VisionMode = 'photo' | 'ai' | 'compare'
+type VisionMode = 'photo' | 'gradcam' | 'heatmap' | 'compare'
 type Hotspot = { x: number; y: number; symptom?: string }
 
-const LOW_CONFIDENCE_THRESHOLD = 0.50
+const LOW_CONFIDENCE_THRESHOLD = 0.40
 
 export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
   const { t } = useLang()
   const reducedMotion = useReducedMotion()
   const imageContainerRef = useRef<HTMLDivElement>(null)
-  
-  const [mode, setMode] = useState<VisionMode>('photo')
+
+  const originalPhoto = prediction.original_image
+  const gradcamOverlay = prediction.highlighted_image || originalPhoto
+  const gradcamHeatmap = prediction.gradcam_heatmap
+  const hasGradcam = Boolean(prediction.highlighted_image)
+  const hasHeatmap = Boolean(prediction.gradcam_heatmap)
+
+  const confidenceFraction = prediction.confidence ?? (prediction.confidence_percent ? prediction.confidence_percent / 100 : 0)
+  const lowConfidence = confidenceFraction < LOW_CONFIDENCE_THRESHOLD
+
+  const [mode, setMode] = useState<VisionMode>(() => {
+    return hasGradcam && !lowConfidence ? 'gradcam' : 'photo'
+  })
   const [slider, setSlider] = useState(50)
   const [hotspots, setHotspots] = useState<Hotspot[]>([])
   const [activePin, setActivePin] = useState<number | null>(null)
   const [showInfo, setShowInfo] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
   const [scale, setScale] = useState(1)
-  const [recoloredOverlay, setRecoloredOverlay] = useState<string | null>(null)
-  const [overlayLoadFailed, setOverlayLoadFailed] = useState(false)
 
   const touchDistRef = useRef<number | null>(null)
-
-  const confidenceFraction = prediction.confidence ?? (prediction.confidence_percent ? prediction.confidence_percent / 100 : 0)
-  const lowConfidence = confidenceFraction < LOW_CONFIDENCE_THRESHOLD
 
   // Fall back silently to photo if below low-confidence
   useEffect(() => {
     if (lowConfidence) {
       setMode('photo')
+    } else if (hasGradcam && mode === 'photo') {
+      setMode('gradcam')
     }
-  }, [lowConfidence])
+  }, [lowConfidence, hasGradcam])
 
-  // Derive up to 3 hotspot positions & recolored overlay in browser from gradcam_heatmap
+  // Derive up to 3 hotspot positions from gradcam_heatmap or highlighted_image
   useEffect(() => {
     const heatmapSrc = prediction.gradcam_heatmap || prediction.highlighted_image
     if (!heatmapSrc || lowConfidence) {
       setHotspots([])
-      setRecoloredOverlay(null)
       return
     }
 
@@ -77,7 +84,6 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
           }
 
           // JET intensity inversion:
-          // Blue is 0.0, Cyan is ~0.3, Yellow is ~0.7, Red is 1.0
           let val = 0
           if (r >= b) {
             val = 0.5 + 0.5 * ((r - b) / 255)
@@ -150,54 +156,11 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
           symptom: prediction.symptoms?.[idx]?.name,
         }))
         setHotspots(derived)
-
-        // 4. Recolor overlay from rainbow to translucent green to amber to red scale
-        const recolorCanvas = document.createElement('canvas')
-        recolorCanvas.width = w
-        recolorCanvas.height = h
-        const rCtx = recolorCanvas.getContext('2d')
-        if (rCtx) {
-          const outImgData = rCtx.createImageData(w, h)
-          const out = outImgData.data
-          for (let i = 0; i < intensities.length; i++) {
-            const v = intensities[i]
-            const off = i * 4
-            if (v < 0.22) {
-              out[off + 3] = 0 // completely transparent so leaf shows through
-              continue
-            }
-            if (v < 0.58) {
-              // Translucent Green
-              const t = (v - 0.22) / 0.36
-              out[off] = Math.round(34 + t * 45)       // r
-              out[off + 1] = Math.round(197 - t * 20)  // g
-              out[off + 2] = Math.round(94 * (1 - t))  // b
-              out[off + 3] = Math.round(110 + t * 40)  // alpha
-            } else if (v < 0.80) {
-              // Amber
-              const t = (v - 0.58) / 0.22
-              out[off] = Math.round(245 + t * 10)      // r
-              out[off + 1] = Math.round(158 - t * 75)  // g
-              out[off + 2] = Math.round(11 * (1 - t))  // b
-              out[off + 3] = Math.round(150 + t * 50)  // alpha
-            } else {
-              // Red (Strongest activation)
-              out[off] = 239                           // r
-              out[off + 1] = 68                        // g
-              out[off + 2] = 68                        // b
-              out[off + 3] = 210                       // alpha
-            }
-          }
-          rCtx.putImageData(outImgData, 0, 0)
-          setRecoloredOverlay(recolorCanvas.toDataURL('image/png'))
-        }
       } catch {
-        setOverlayLoadFailed(true)
         setHotspots([])
       }
     }
     img.onerror = () => {
-      setOverlayLoadFailed(true)
       setHotspots([])
     }
     img.src = heatmapSrc
@@ -245,12 +208,8 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
     }
   }
 
-  const originalPhoto = prediction.original_image
-  const hasAiOverlay = !overlayLoadFailed && Boolean(recoloredOverlay || prediction.highlighted_image)
-  const aiOverlaySrc = recoloredOverlay || prediction.highlighted_image || originalPhoto
-
   return (
-    <section className="mb-8 w-full" aria-label={t('diagnosis.leafVision')}>
+    <section className="mb-8 w-full" aria-label={t('diagnosis.whereAiLooked')}>
       <div className="relative rounded-2xl border border-[#CBE6D4] bg-white shadow-sm overflow-visible">
         
         {/* ── 4:3 Full Width Image Box (Object-contain, Light green bg, 16px radius) ── */}
@@ -266,46 +225,72 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
             className="absolute inset-0 origin-center flex items-center justify-center"
             style={{ transform: `scale(${scale})`, transition: 'transform 180ms ease-out' }}
           >
-            {/* Original leaf photo (always visible) */}
-            <img
-              src={originalPhoto}
-              alt={t('diagnosis.originalPhoto')}
-              className="absolute inset-0 h-full w-full object-contain"
-              draggable={false}
-            />
-
-            {/* AI View: Fades in blended Grad-CAM overlay at 60% opacity */}
-            {mode === 'ai' && hasAiOverlay && !lowConfidence && (
-              <motion.img
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: reducedMotion ? 0 : 0.28, ease: 'easeOut' }}
-                src={aiOverlaySrc}
-                alt={t('diagnosis.aiView')}
-                className="absolute inset-0 h-full w-full object-contain pointer-events-none"
+            {/* 1. Original leaf photo */}
+            {mode === 'photo' && (
+              <img
+                src={originalPhoto}
+                alt={t('diagnosis.originalPhoto')}
+                className="h-full w-full object-contain"
                 draggable={false}
               />
             )}
 
-            {/* Compare View: Vertical slider revealing original on left, AI view on right */}
-            {mode === 'compare' && hasAiOverlay && !lowConfidence && (
-              <div
-                className="absolute inset-0 overflow-hidden pointer-events-none"
-                style={{ clipPath: `inset(0 0 0 ${slider}%)` }}
-              >
+            {/* 2. Grad-CAM Overlay (Authentic model activation heatmap overlaid on leaf) */}
+            {mode === 'gradcam' && hasGradcam && !lowConfidence && (
+              <motion.img
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reducedMotion ? 0 : 0.22, ease: 'easeOut' }}
+                src={gradcamOverlay}
+                alt={t('diagnosis.aiView')}
+                className="h-full w-full object-contain"
+                draggable={false}
+              />
+            )}
+
+            {/* 3. Pure Heatmap (Pure JET colormap activation map) */}
+            {mode === 'heatmap' && hasHeatmap && gradcamHeatmap && !lowConfidence && (
+              <motion.img
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reducedMotion ? 0 : 0.22, ease: 'easeOut' }}
+                src={gradcamHeatmap}
+                alt={t('diagnosis.gradcamHeatmap')}
+                className="h-full w-full object-contain bg-black/5"
+                draggable={false}
+              />
+            )}
+
+            {/* 4. Compare View: Vertical slider revealing original on left, Grad-CAM on right */}
+            {mode === 'compare' && hasGradcam && !lowConfidence && (
+              <div className="relative h-full w-full flex items-center justify-center">
+                {/* Original leaf photo (underneath) */}
                 <img
-                  src={aiOverlaySrc}
-                  alt={t('diagnosis.aiView')}
-                  className="h-full w-full object-contain opacity-75"
+                  src={originalPhoto}
+                  alt={t('diagnosis.originalPhoto')}
+                  className="absolute inset-0 h-full w-full object-contain"
                   draggable={false}
                 />
+                {/* Grad-CAM overlay (revealed by slider from right) */}
+                <div
+                  className="absolute inset-0 overflow-hidden pointer-events-none"
+                  style={{ clipPath: `inset(0 0 0 ${slider}%)` }}
+                >
+                  <img
+                    src={gradcamOverlay}
+                    alt={t('diagnosis.aiView')}
+                    className="h-full w-full object-contain"
+                    draggable={false}
+                  />
+                </div>
               </div>
             )}
           </div>
 
           {/* Draggable Vertical Slider Handle (48px touch target, keyboard accessible) */}
-          {mode === 'compare' && hasAiOverlay && !lowConfidence && (
+          {mode === 'compare' && hasGradcam && !lowConfidence && (
             <button
               type="button"
               role="slider"
@@ -321,59 +306,38 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
                 const rect = parent.getBoundingClientRect()
                 const move = (e: PointerEvent) => {
                   const clientX = e.clientX
-                  const pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100))
-                  setSlider(pct)
+                  const relativeX = clientX - rect.left
+                  const percentage = Math.min(100, Math.max(0, (relativeX / rect.width) * 100))
+                  setSlider(percentage)
+                }
+                const up = () => {
+                  window.removeEventListener('pointermove', move)
+                  window.removeEventListener('pointerup', up)
                 }
                 window.addEventListener('pointermove', move)
-                window.addEventListener('pointerup', () => {
-                  window.removeEventListener('pointermove', move)
-                }, { once: true })
+                window.addEventListener('pointerup', up)
               }}
-              className="absolute top-0 bottom-0 z-20 w-12 -translate-x-1/2 cursor-ew-resize touch-none flex items-center justify-center border-0 bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
               style={{ left: `${slider}%` }}
+              className="absolute top-0 bottom-0 -ml-5 w-10 flex items-center justify-center cursor-ew-resize touch-none select-none z-20 group focus:outline-none"
             >
-              {/* White divider line */}
-              <span className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-white shadow-md pointer-events-none" />
-              {/* 40px center grab handle */}
-              <span className="relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-green-700 text-white shadow-lg text-sm font-bold">
+              <div className="h-full w-0.5 bg-white shadow-[0_0_8px_rgba(0,0,0,0.4)] group-hover:w-1 transition-all" />
+              <div className="absolute top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-xl border border-stone-300 text-stone-700 text-xs font-bold transition-transform group-hover:scale-110">
                 ↔
-              </span>
+              </div>
             </button>
           )}
 
-          {/* First time 1.2s green scan line sweeping top to bottom */}
-          {!reducedMotion && (
-            <motion.div
-              initial={{ y: '-100%', opacity: 0 }}
-              animate={{ y: '220%', opacity: [0, 1, 1, 0] }}
-              transition={{ duration: 1.2, ease: 'linear', repeat: 0 }}
-              className="pointer-events-none absolute left-0 right-0 top-0 z-15 h-1 bg-green-400 shadow-[0_0_20px_10px_rgba(34,197,94,0.35)]"
-            />
-          )}
-
-          {/* Soft pulsing rings on regions of strongest activation (3 cycles, then still) */}
-          {!reducedMotion && !lowConfidence && (mode === 'ai' || mode === 'compare') && hotspots.map((pin, i) => (
-            <motion.div
-              key={`pulse-${pin.x}-${pin.y}-${i}`}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: [1, 1.8, 1], opacity: [0.8, 0.15, 0.8] }}
-              transition={{ duration: 1, repeat: 2, ease: 'easeInOut', delay: 1.15 }}
-              className="pointer-events-none absolute w-10 h-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-emerald-400 bg-emerald-400/20 shadow-sm z-15"
-              style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-            />
-          ))}
-
-          {/* Hotspot numbered pins (24px, green-700 with white number) */}
-          {!lowConfidence && (mode === 'ai' || mode === 'compare') && hotspots.map((pin, index) => (
+          {/* Interactive Hotspot Pins (Only when Grad-CAM is active) */}
+          {mode === 'gradcam' && !lowConfidence && hotspots.map((pin, index) => (
             <button
-              key={`pin-${pin.x}-${pin.y}-${index}`}
+              key={index}
               type="button"
               onClick={() => setActivePin(activePin === index ? null : index)}
-              className="absolute z-20 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-green-700 text-xs font-bold text-white shadow-md hover:bg-green-800 transition-colors cursor-pointer"
               style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-              aria-label={`${t('diagnosis.hotspot')} ${index + 1}`}
+              aria-label={`Hotspot ${index + 1}: ${pin.symptom || 'Attention region'}`}
+              className="absolute -ml-3.5 -mt-3.5 flex h-7 w-7 items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-bold shadow-lg ring-2 ring-white hover:bg-emerald-700 transition-transform hover:scale-110 cursor-pointer z-10"
             >
-              {index + 1}
+              <span>{index + 1}</span>
               <AnimatePresence>
                 {activePin === index && (
                   <motion.div
@@ -399,32 +363,31 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
         {/* ── Lower Control Bar (Directly below image with clean flow) ── */}
         <div className="p-3 sm:p-4">
           
-          {/* Segmented control: Photo, AI view, Compare */}
-          <div className="grid grid-cols-3 gap-1 rounded-xl bg-green-50/80 p-1 border border-green-100" role="tablist" aria-label={t('diagnosis.leafVision')}>
+          {/* Segmented control: Photo, Grad-CAM, Heatmap, Compare */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-1 rounded-xl bg-green-50/80 p-1 border border-green-100" role="tablist" aria-label={t('diagnosis.whereAiLooked')}>
             {([
-              ['photo', t('diagnosis.photo')],
-              ['ai', t('diagnosis.aiView')],
-              ['compare', t('diagnosis.compare')],
-            ] as const).map(([key, label]) => {
-              const isDisabled = key !== 'photo' && (!hasAiOverlay || lowConfidence)
-              return (
-                <button
-                  key={key}
-                  type="button"
-                  role="tab"
-                  aria-selected={mode === key}
-                  disabled={isDisabled}
-                  onClick={() => setMode(key)}
-                  className={`min-h-[48px] rounded-lg px-3 text-sm font-bold transition-all flex items-center justify-center ${
-                    mode === key
-                      ? 'bg-white text-green-900 shadow-xs border border-green-200/50'
-                      : 'text-green-900/70 hover:text-green-900'
-                  } disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer`}
-                >
-                  {label}
-                </button>
-              )
-            })}
+              ['photo', t('diagnosis.photo'), true, <Eye className="h-3.5 w-3.5 mr-1 inline" key="photo" />],
+              ['gradcam', t('diagnosis.aiView'), hasGradcam && !lowConfidence, <Layers className="h-3.5 w-3.5 mr-1 inline" key="gradcam" />],
+              ...(hasHeatmap ? [['heatmap', t('diagnosis.gradcamHeatmap'), !lowConfidence, <Flame className="h-3.5 w-3.5 mr-1 inline" key="heatmap" />] as const] : []),
+              ['compare', t('diagnosis.compare'), hasGradcam && !lowConfidence, null],
+            ] as const).map(([key, label, isAvailable, icon]) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={mode === key}
+                disabled={!isAvailable}
+                onClick={() => setMode(key as VisionMode)}
+                className={`min-h-[44px] rounded-lg px-2 text-xs sm:text-sm font-bold transition-all flex items-center justify-center ${
+                  mode === key
+                    ? 'bg-white text-green-900 shadow-xs border border-green-200/50'
+                    : 'text-green-900/70 hover:text-green-900'
+                } disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer`}
+              >
+                {icon}
+                <span>{label}</span>
+              </button>
+            ))}
           </div>
 
           {/* Low confidence warning note */}
@@ -435,19 +398,19 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
           )}
 
           {/* Attention Legend & Info explanation */}
-          {(mode === 'ai' || mode === 'compare') && !lowConfidence && (
+          {(mode === 'gradcam' || mode === 'compare' || mode === 'heatmap') && !lowConfidence && (
             <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-600 bg-stone-50 rounded-xl p-2.5 border border-stone-200">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-green-950">{t('diagnosis.whereAiLooked')}</span>
-                {/* One-line translucent green to amber to red gradient scale */}
-                <div className="flex items-center gap-1">
-                  <span className="text-[10px] text-stone-500">Low</span>
-                  <div className="h-2.5 w-20 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500 shadow-inner" />
-                  <span className="text-[10px] text-stone-500">High</span>
+                <span className="font-bold text-green-950">{t('diagnosis.aiView')}</span>
+                {/* JET Intensity Scale */}
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] text-stone-500 font-medium">Low</span>
+                  <div className="h-2.5 w-24 rounded-full bg-gradient-to-r from-blue-600 via-green-400 via-yellow-400 to-red-600 shadow-inner" />
+                  <span className="text-[10px] text-stone-500 font-medium">High</span>
                 </div>
               </div>
 
-              {/* Tiny info button explaining attention, not guaranteed diagnosis */}
+              {/* Tiny info button explaining Grad-CAM attention */}
               <div className="relative">
                 <button
                   type="button"
@@ -532,8 +495,14 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
             <span>Close</span>
           </button>
           <img
-            src={mode === 'ai' && hasAiOverlay ? aiOverlaySrc : originalPhoto}
-            alt={t('diagnosis.leafVision')}
+            src={
+              mode === 'gradcam' || mode === 'compare'
+                ? gradcamOverlay
+                : mode === 'heatmap' && gradcamHeatmap
+                ? gradcamHeatmap
+                : originalPhoto
+            }
+            alt={t('diagnosis.aiView')}
             className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl"
           />
         </div>
