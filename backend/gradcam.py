@@ -216,15 +216,8 @@ def generate_gradcam_overlay(
 
         H, W = orig_uint8.shape[:2]
 
-        try:
-            in_shape = model.input_shape
-            target_h = in_shape[1] if in_shape and in_shape[1] is not None else 224
-            target_w = in_shape[2] if in_shape and in_shape[2] is not None else 224
-        except Exception:
-            target_h, target_w = 224, 224
-
-        img_resized = cv2.resize(orig_uint8, (target_w, target_h), interpolation=cv2.INTER_AREA)
-        img_batch = np.expand_dims(img_resized.astype(np.float32), axis=0)
+        img_224 = cv2.resize(orig_uint8, (224, 224), interpolation=cv2.INTER_AREA)
+        img_batch = np.expand_dims(img_224.astype(np.float32), axis=0)
 
         heatmap = _get_gradcam_heatmap(img_batch, model, last_conv_layer_name)
         if heatmap is None:
