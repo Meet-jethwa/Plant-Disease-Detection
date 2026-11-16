@@ -39,8 +39,8 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
   useEffect(() => {
     if (lowConfidence) {
       setMode('photo')
-    } else if (hasGradcam && mode === 'photo') {
-      setMode('gradcam')
+    } else if (hasGradcam) {
+      setMode(prev => (prev === 'photo' ? 'gradcam' : prev))
     }
   }, [lowConfidence, hasGradcam])
 
@@ -345,11 +345,11 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute top-8 left-1/2 w-52 -translate-x-1/2 rounded-xl bg-emerald-950/95 p-3 text-left text-xs font-medium text-white shadow-2xl backdrop-blur-md z-30"
+                    className="absolute top-8 left-1/2 w-52 -translate-x-1/2 rounded-xl bg-emerald-950/95 p-3 text-left text-sm font-medium text-white shadow-2xl backdrop-blur-md z-30"
                   >
                     <p className="font-bold text-emerald-300 mb-0.5">{t('diagnosis.attentionHere')}</p>
                     {pin.symptom && (
-                      <p className="text-[11px] text-stone-200 mt-1 border-t border-emerald-800/60 pt-1">
+                      <p className="text-xs text-stone-200 mt-1 border-t border-emerald-800/60 pt-1">
                         {pin.symptom}
                       </p>
                     )}
@@ -378,7 +378,7 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
                 aria-selected={mode === key}
                 disabled={!isAvailable}
                 onClick={() => setMode(key as VisionMode)}
-                className={`min-h-[44px] rounded-lg px-2 text-xs sm:text-sm font-bold transition-all flex items-center justify-center ${
+                className={`min-h-[44px] rounded-lg px-2 text-sm font-bold transition-all flex items-center justify-center ${
                   mode === key
                     ? 'bg-white text-green-900 shadow-xs border border-green-200/50'
                     : 'text-green-900/70 hover:text-green-900'
@@ -392,21 +392,21 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
 
           {/* Low confidence warning note */}
           {lowConfidence && (
-            <div className="mt-3 rounded-xl bg-amber-50 p-3 border border-amber-200 text-xs font-medium text-amber-900">
+            <div className="mt-3 rounded-xl bg-amber-50 p-3 border border-amber-200 text-sm font-medium text-amber-900">
               {t('diagnosis.lowConfidenceNote')}
             </div>
           )}
 
           {/* Attention Legend & Info explanation */}
           {(mode === 'gradcam' || mode === 'compare' || mode === 'heatmap') && !lowConfidence && (
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-600 bg-stone-50 rounded-xl p-2.5 border border-stone-200">
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm text-stone-600 bg-stone-50 rounded-xl p-2.5 border border-stone-200">
               <div className="flex items-center gap-2">
                 <span className="font-bold text-green-950">{t('diagnosis.aiView')}</span>
                 {/* JET Intensity Scale */}
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] text-stone-500 font-medium">Low</span>
+                  <span className="text-xs text-stone-500 font-medium">Low</span>
                   <div className="h-2.5 w-24 rounded-full bg-gradient-to-r from-blue-600 via-green-400 via-yellow-400 to-red-600 shadow-inner" />
-                  <span className="text-[10px] text-stone-500 font-medium">High</span>
+                  <span className="text-xs text-stone-500 font-medium">High</span>
                 </div>
               </div>
 
@@ -415,7 +415,7 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
                 <button
                   type="button"
                   onClick={() => setShowInfo(!showInfo)}
-                  className="inline-flex items-center gap-1 text-green-700 hover:text-green-900 text-xs font-semibold cursor-pointer"
+                  className="inline-flex items-center gap-1 text-green-700 hover:text-green-900 text-sm font-semibold cursor-pointer"
                   title={t('diagnosis.attentionInfo')}
                   aria-label={t('diagnosis.attentionInfo')}
                 >
@@ -424,7 +424,7 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
                 </button>
 
                 {showInfo && (
-                  <div className="absolute right-0 bottom-7 z-30 w-64 rounded-xl bg-white p-3 text-xs text-stone-700 shadow-xl border border-green-200">
+                  <div className="absolute right-0 bottom-7 z-30 w-64 rounded-xl bg-white p-3 text-sm text-stone-700 shadow-xl border border-green-200">
                     <p className="font-bold text-green-950 mb-1">{t('diagnosis.whereAiLooked')}</p>
                     <p className="leading-relaxed">{t('diagnosis.attentionInfo')}</p>
                   </div>
@@ -435,7 +435,7 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
 
           {/* Zoom controls & Fullscreen toggle */}
           <div className="mt-3 flex items-center justify-between pt-1 border-t border-green-50">
-            <span className="text-xs text-stone-500">
+            <span className="text-sm text-stone-500">
               {scale > 1 ? `${Math.round(scale * 100)}% zoom` : '100%'}
             </span>
 
@@ -444,7 +444,7 @@ export function LeafVision({ prediction }: { prediction: PredictionResponse }) {
                 <button
                   type="button"
                   onClick={() => setScale(1)}
-                  className="h-9 px-2.5 rounded-lg border border-green-200 text-green-900 text-xs font-semibold hover:bg-green-50 flex items-center gap-1 cursor-pointer"
+                  className="h-9 px-2.5 rounded-lg border border-green-200 text-green-900 text-sm font-semibold hover:bg-green-50 flex items-center gap-1 cursor-pointer"
                   aria-label="Reset zoom"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />

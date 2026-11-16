@@ -56,7 +56,9 @@ function AppContent() {
     try {
       const saved = localStorage.getItem('flora_scanned_plants')
       if (saved) return JSON.parse(saved)
-    } catch (_) {}
+    } catch {
+      // ignore
+    }
     return []
   })
 
@@ -95,7 +97,9 @@ function AppContent() {
       if (updated) {
         try {
           setLocationData(JSON.parse(updated))
-        } catch (_) {}
+        } catch {
+          // ignore
+        }
       } else {
         void fetchLocation()
       }
@@ -205,7 +209,9 @@ function AppContent() {
         setLocationData(JSON.parse(savedManual) as LocationContextData)
         setIsLocating(false)
         return
-      } catch (_) {}
+      } catch {
+        // ignore
+      }
     }
     const fallback = async () => {
       try {
@@ -325,7 +331,9 @@ function AppContent() {
       }
       setPlants((prev) => {
         const next = [newScannedPlant, ...prev]
-        try { localStorage.setItem('flora_scanned_plants', JSON.stringify(next)) } catch (_) {}
+        try { localStorage.setItem('flora_scanned_plants', JSON.stringify(next)) } catch {
+          // ignore
+        }
         return next
       })
 
@@ -476,7 +484,7 @@ function AppContent() {
     if (data) {
       localStorage.setItem('flora_ai_manual_weather', JSON.stringify(data))
       setLocationData(data)
-      addToast('success', 'Weather Data Updated', `${data.location.city} • ${data.weather.temperature_c}°C`)
+      addToast('success', 'Weather Data Updated', `${data.location.city}, ${data.weather.temperature_c}°C`)
     } else {
       localStorage.removeItem('flora_ai_manual_weather')
       void fetchLocation()

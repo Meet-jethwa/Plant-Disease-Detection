@@ -6,7 +6,7 @@ import {
   Bookmark, AlertTriangle, CheckCircle2,
   Volume2, VolumeX, ChevronDown, ChevronUp, Sun,
   Camera, Leaf, MoreVertical, ShieldAlert,
-  Info
+  Info, Microscope
 } from 'lucide-react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { LeafVision } from '../components/LeafVision'
@@ -115,8 +115,8 @@ export function DiagnosisResultPage({
   const immediateSteps = useMemo(() => {
     const rawText = disease.treatment || ''
     const raw = rawText
-      .split(/(?:\. |\n|\। )/)
-      .map(s => s.replace(/^\d+[\.\)]\s*/, '').trim())
+      .split(/(?:\. |\n|। )/)
+      .map(s => s.replace(/^\d+[.)]\s*/, '').trim())
       .filter(s => s.length > 5)
     if (raw.length > 0) return raw.slice(0, 5)
     return [
@@ -132,8 +132,8 @@ export function DiagnosisResultPage({
   const preventiveSteps = useMemo(() => {
     const rawText = disease.prevention || ''
     const raw = rawText
-      .split(/(?:\. |\n|\। )/)
-      .map(s => s.replace(/^\d+[\.\)]\s*/, '').trim())
+      .split(/(?:\. |\n|। )/)
+      .map(s => s.replace(/^\d+[.)]\s*/, '').trim())
       .filter(s => s.length > 5)
     if (raw.length > 0) return raw.slice(0, 4)
     return [
@@ -267,17 +267,17 @@ export function DiagnosisResultPage({
             <AlertTriangle className="h-8 w-8" />
           </div>
 
-          <h1 className="text-2xl sm:text-[28px] font-bold text-[#17211D] leading-tight mb-2">
+          <h1 className="text-2xl sm:text-[28px] font-bold text-[var(--color-ink)] leading-tight mb-2">
             {t('diagnosis.unrecognizedLeaf')}
           </h1>
 
-          <p className="max-w-md text-base text-[#4A5E52] leading-relaxed mb-6">
+          <p className="max-w-md text-base text-[var(--color-ink-2)] leading-relaxed mb-6">
             {t('diagnosis.unrecognizedHint')}
           </p>
 
           {/* Leaf image preview */}
           {prediction.original_image && (
-            <div className="mb-6 h-48 w-48 overflow-hidden rounded-2xl border border-[#D4E8DC] bg-[#F0FAF4] shadow-xs">
+            <div className="mb-6 h-48 w-48 overflow-hidden rounded-2xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] shadow-xs">
               <img
                 src={prediction.original_image}
                 alt="Uploaded leaf"
@@ -288,7 +288,7 @@ export function DiagnosisResultPage({
 
           {/* Photo quality tips */}
           <div className="mb-8 w-full max-w-md rounded-xl bg-stone-50 border border-stone-200 p-4 text-left">
-            <p className="text-sm font-bold text-[#17211D] mb-3 flex items-center gap-2">
+            <p className="text-sm font-bold text-[var(--color-ink)] mb-3 flex items-center gap-2">
               <Sun className="h-4 w-4 text-amber-600" />
               <span>{t('diagnosis.photoTips')}</span>
             </p>
@@ -411,10 +411,10 @@ export function DiagnosisResultPage({
                 <AlertTriangle className="h-4 w-4" />
                 {t('diagnosis.notSureYet')}
               </span>
-              <h1 className="text-2xl sm:text-[28px] font-bold text-[#17211D] leading-tight">
+              <h1 className="text-2xl sm:text-[28px] font-bold text-[var(--color-ink)] leading-tight">
                 {t('diagnosis.notSureYet')}
               </h1>
-              <p className="text-sm text-[#4A5E52] mt-1">
+              <p className="text-sm text-[var(--color-ink-2)] mt-1">
                 {t('diagnosis.confidenceIs')} {Math.round(confidence)}%. {t('diagnosis.multipleMatch')}
               </p>
             </div>
@@ -422,13 +422,13 @@ export function DiagnosisResultPage({
             {/* Circular Ring Gauge */}
             <div className="relative flex h-16 w-16 shrink-0 items-center justify-center self-start sm:self-auto">
               <svg className="h-full w-full -rotate-90" viewBox="0 0 44 44">
-                <circle cx="22" cy="22" r="18" fill="none" stroke="#FEF3C7" strokeWidth="4" />
+                <circle cx="22" cy="22" r="18" fill="none" className="stroke-amber-100" strokeWidth="4" />
                 <circle
                   cx="22"
                   cy="22"
                   r="18"
                   fill="none"
-                  stroke="#D97706"
+                  className="stroke-amber-600"
                   strokeWidth="4"
                   strokeDasharray={2 * Math.PI * 18}
                   strokeDashoffset={2 * Math.PI * 18 * (1 - confidence / 100)}
@@ -443,7 +443,7 @@ export function DiagnosisResultPage({
 
           {/* Top 3 possible diseases as plain rows */}
           <div className="mt-5 border-t border-stone-100 pt-4">
-            <p className="text-sm font-bold text-[#17211D] mb-3">
+            <p className="text-sm font-bold text-[var(--color-ink)] mb-3">
               {t('diagnosis.possibleDiseases')}
             </p>
             <div className="space-y-2.5">
@@ -456,7 +456,7 @@ export function DiagnosisResultPage({
                     <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white border border-stone-300 text-xs font-bold text-stone-700">
                       {idx + 1}
                     </span>
-                    <span className="text-sm font-semibold text-[#17211D]">
+                    <span className="text-sm font-semibold text-[var(--color-ink)]">
                       {localizeDiseaseName(item.class, lang)}
                     </span>
                   </div>
@@ -536,13 +536,13 @@ export function DiagnosisResultPage({
         </div>
 
         {/* Collapsible Leaf Vision Accordion */}
-        <div className="rounded-2xl border border-[#D4E8DC] bg-white overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-[var(--color-green-200)] bg-white overflow-hidden shadow-sm">
           <button
             type="button"
             onClick={() => toggleAccordion('vision')}
             className="w-full min-h-[48px] px-5 py-4 flex items-center justify-between text-left cursor-pointer hover:bg-stone-50 transition-colors"
           >
-            <span className="text-base font-bold text-[#17211D] flex items-center gap-2">
+            <span className="text-base font-bold text-[var(--color-ink)] flex items-center gap-2">
               <Camera className="h-4 w-4 text-emerald-700" />
               <span>{t('diagnosis.whereAiLooked')}</span>
             </span>
@@ -553,18 +553,18 @@ export function DiagnosisResultPage({
             )}
           </button>
           {accordions.vision && (
-            <div className="border-t border-[#D4E8DC] p-4 sm:p-5">
+            <div className="border-t border-[var(--color-green-200)] p-4 sm:p-5">
               <div className="mb-4 grid grid-cols-3 gap-2.5 text-center">
-                <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
-                  <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('common.confidence')}</p>
-                  <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{Math.round(confidence)}%</p>
+                <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
+                  <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('common.confidence')}</p>
+                  <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{Math.round(confidence)}%</p>
                 </div>
-                <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
-                  <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.affectedArea')}</p>
-                  <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{affectedAreaPct}%</p>
+                <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
+                  <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.affectedArea')}</p>
+                  <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{affectedAreaPct}%</p>
                 </div>
-                <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
-                  <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.weatherRisk')}</p>
+                <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
+                  <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.weatherRisk')}</p>
                   <p className="text-base sm:text-lg font-bold text-amber-800 mt-0.5">{weatherRisk}</p>
                 </div>
               </div>
@@ -574,7 +574,7 @@ export function DiagnosisResultPage({
         </div>
 
         {/* Sticky Bottom Bar */}
-        <div className="sticky bottom-0 z-30 -mx-4 -mb-6 bg-white/95 backdrop-blur-md border-t border-[#D4E8DC] p-3 sm:p-4 px-4 sm:px-6">
+        <div className="sticky bottom-0 z-30 -mx-4 -mb-6 bg-white/95 backdrop-blur-md border-t border-[var(--color-green-200)] p-3 sm:p-4 px-4 sm:px-6">
           <div className="mx-auto max-w-4xl grid grid-cols-2 gap-3">
             <button
               type="button"
@@ -619,8 +619,8 @@ export function DiagnosisResultPage({
         </button>
 
         <div className="text-center hidden sm:block">
-          <h1 className="text-lg font-bold text-[#17211D]">{t('diagnosis.title')}</h1>
-          <p className="text-sm text-[#64736C] capitalize">{t(('crop.' + prediction.crop.toLowerCase()) as any) || prediction.crop}</p>
+          <h1 className="text-lg font-bold text-[var(--color-ink)]">{t('diagnosis.title')}</h1>
+          <p className="text-sm text-[var(--color-ink-2)] capitalize">{t(('crop.' + prediction.crop.toLowerCase()) as any) || prediction.crop}</p>
         </div>
 
         {/* Single "More" Menu Button */}
@@ -674,7 +674,7 @@ export function DiagnosisResultPage({
         <div className="lg:col-span-7 space-y-6">
 
           {/* 1. Verdict Card */}
-          <div className="rounded-2xl border border-[#D4E8DC] bg-white p-5 sm:p-6 shadow-sm">
+          <div className="rounded-2xl border border-[var(--color-green-200)] bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0 flex-1">
                 {/* Status Pill with icon and word */}
@@ -697,24 +697,25 @@ export function DiagnosisResultPage({
                     )}
                   </span>
                   {prediction.weather_context?.is_manual_profile && (
-                    <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                      🔬 {prediction.weather_context.profile_display || 'Project v3 Weather Profile'}
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                      <Microscope className="w-3 h-3 shrink-0" />
+                      <span>{prediction.weather_context.profile_display || 'Project v3 Weather Profile'}</span>
                     </span>
                   )}
                 </div>
 
                 {/* Disease name at 28px */}
-                <h2 className="text-[28px] font-bold text-[#10231D] leading-tight break-words">
+                <h2 className="text-[28px] font-bold text-[var(--color-ink)] leading-tight break-words">
                   {localizeDiseaseName(prediction.predicted_class, lang)}
                 </h2>
 
                 {prediction.scientific_name && (
-                  <p className="text-sm italic text-[#64736C] mt-1">
+                  <p className="text-sm italic text-[var(--color-ink-2)] mt-1">
                     {prediction.scientific_name}
                   </p>
                 )}
 
-                <p className="mt-2.5 text-sm text-[#4A5E52] leading-relaxed">
+                <p className="mt-2.5 text-sm text-[var(--color-ink-2)] leading-relaxed">
                   {disease.description}
                 </p>
               </div>
@@ -722,9 +723,9 @@ export function DiagnosisResultPage({
           </div>
 
           {/* 2. "What to do now" (3 to 5 numbered steps at 18px with Tabs + Listen button) */}
-          <div className="rounded-2xl border border-[#D4E8DC] bg-white p-5 sm:p-6 shadow-sm">
+          <div className="rounded-2xl border border-[var(--color-green-200)] bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-              <h3 className="text-xl font-bold text-[#10231D]">
+              <h3 className="text-xl font-bold text-[var(--color-ink)]">
                 {t('diagnosis.whatToDoNow')}
               </h3>
 
@@ -783,10 +784,10 @@ export function DiagnosisResultPage({
             <ol className="space-y-4">
               {currentTabSteps.map((step, idx) => (
                 <li key={idx} className="flex items-start gap-3.5">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E8F5EE] border border-[#B0D8C4] text-sm font-bold text-[#15803D] mt-0.5">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-green-100)] border border-[var(--color-green-300)] text-sm font-bold text-[var(--color-brand)] mt-0.5">
                     {idx + 1}
                   </span>
-                  <p className="text-[18px] font-medium text-[#10231D] leading-relaxed">
+                  <p className="text-[18px] font-medium text-[var(--color-ink)] leading-relaxed">
                     {step}
                   </p>
                 </li>
@@ -800,13 +801,13 @@ export function DiagnosisResultPage({
         <div className="lg:col-span-5 space-y-4">
 
           {/* Accordion 1: Where the AI looked (Photo / AI view / Compare viewer) */}
-          <div className="rounded-2xl border border-[#D4E8DC] bg-white overflow-hidden shadow-sm">
+          <div className="rounded-2xl border border-[var(--color-green-200)] bg-white overflow-hidden shadow-sm">
             <button
               type="button"
               onClick={() => toggleAccordion('vision')}
               className="w-full min-h-[48px] px-5 py-4 flex items-center justify-between text-left cursor-pointer hover:bg-stone-50 transition-colors"
             >
-              <span className="text-base font-bold text-[#17211D] flex items-center gap-2">
+              <span className="text-base font-bold text-[var(--color-ink)] flex items-center gap-2">
                 <Camera className="h-4 w-4 text-emerald-700" />
                 <span>{t('diagnosis.whereAiLooked')}</span>
               </span>
@@ -823,20 +824,20 @@ export function DiagnosisResultPage({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="border-t border-[#D4E8DC] p-4 sm:p-5"
+                  className="border-t border-[var(--color-green-200)] p-4 sm:p-5"
                 >
                   {/* Detailed AI Diagnostics (moved into dropdown from direct view) */}
                   <div className="mb-4 grid grid-cols-3 gap-2.5 text-center">
-                    <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
-                      <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('common.confidence')}</p>
-                      <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{Math.round(confidence)}%</p>
+                    <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
+                      <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('common.confidence')}</p>
+                      <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{Math.round(confidence)}%</p>
                     </div>
-                    <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
-                      <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.affectedArea')}</p>
-                      <p className="text-base sm:text-lg font-bold text-[#10231D] mt-0.5">{affectedAreaPct}%</p>
+                    <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
+                      <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.affectedArea')}</p>
+                      <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{affectedAreaPct}%</p>
                     </div>
-                    <div className="rounded-xl border border-[#D4E8DC] bg-[#F7FAF8] p-3 shadow-xs">
-                      <p className="text-[11px] sm:text-xs text-[#66736C] font-semibold">{t('diagnosis.weatherRisk')}</p>
+                    <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
+                      <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.weatherRisk')}</p>
                       <p className={`text-sm sm:text-base font-bold mt-0.5 ${
                         rawRisk.toLowerCase().includes('high') ? 'text-amber-800' : 'text-emerald-800'
                       }`}>
@@ -852,13 +853,13 @@ export function DiagnosisResultPage({
           </div>
 
           {/* Accordion 2: Symptoms found */}
-          <div className="rounded-2xl border border-[#D4E8DC] bg-white overflow-hidden shadow-sm">
+          <div className="rounded-2xl border border-[var(--color-green-200)] bg-white overflow-hidden shadow-sm">
             <button
               type="button"
               onClick={() => toggleAccordion('symptoms')}
               className="w-full min-h-[48px] px-5 py-4 flex items-center justify-between text-left cursor-pointer hover:bg-stone-50 transition-colors"
             >
-              <span className="text-base font-bold text-[#17211D] flex items-center gap-2">
+              <span className="text-base font-bold text-[var(--color-ink)] flex items-center gap-2">
                 <Leaf className="h-4 w-4 text-emerald-700" />
                 <span>{t('diagnosis.symptomsFound')}</span>
               </span>
@@ -875,7 +876,7 @@ export function DiagnosisResultPage({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="border-t border-[#D4E8DC] p-5 space-y-3"
+                  className="border-t border-[var(--color-green-200)] p-5 space-y-3"
                 >
                   {(prediction.symptoms ?? [
                     { name: t('diagnosis.sympLesions'), confidence: Math.round(confidence) },
@@ -883,7 +884,7 @@ export function DiagnosisResultPage({
                     { name: t('diagnosis.sympVascular'), confidence: Math.max(10, Math.round(confidence - 28)) },
                   ]).map((sym, idx) => (
                     <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200/70">
-                      <span className="text-sm font-semibold text-[#17211D]">{sym.name}</span>
+                      <span className="text-sm font-semibold text-[var(--color-ink)]">{sym.name}</span>
                       <span className="text-sm font-bold text-stone-700">{sym.confidence}%</span>
                     </div>
                   ))}
@@ -893,13 +894,13 @@ export function DiagnosisResultPage({
           </div>
 
           {/* Accordion 3: Weather details */}
-          <div className="rounded-2xl border border-[#D4E8DC] bg-white overflow-hidden shadow-sm">
+          <div className="rounded-2xl border border-[var(--color-green-200)] bg-white overflow-hidden shadow-sm">
             <button
               type="button"
               onClick={() => toggleAccordion('weather')}
               className="w-full min-h-[48px] px-5 py-4 flex items-center justify-between text-left cursor-pointer hover:bg-stone-50 transition-colors"
             >
-              <span className="text-base font-bold text-[#17211D] flex items-center gap-2">
+              <span className="text-base font-bold text-[var(--color-ink)] flex items-center gap-2">
                 <Sun className="h-4 w-4 text-emerald-700" />
                 <span>{t('diagnosis.weatherDetails')}</span>
               </span>
@@ -916,7 +917,7 @@ export function DiagnosisResultPage({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="border-t border-[#D4E8DC] p-5 space-y-4"
+                  className="border-t border-[var(--color-green-200)] p-5 space-y-4"
                 >
                   {locationData && (
                     <WeatherCard data={locationData} isLoading={false} onRefresh={() => {}} />
@@ -931,13 +932,13 @@ export function DiagnosisResultPage({
           </div>
 
           {/* Accordion 4: Technical details (Only real API data, hides hard-coded health breakdown) */}
-          <div className="rounded-2xl border border-[#D4E8DC] bg-white overflow-hidden shadow-sm">
+          <div className="rounded-2xl border border-[var(--color-green-200)] bg-white overflow-hidden shadow-sm">
             <button
               type="button"
               onClick={() => toggleAccordion('technical')}
               className="w-full min-h-[48px] px-5 py-4 flex items-center justify-between text-left cursor-pointer hover:bg-stone-50 transition-colors"
             >
-              <span className="text-base font-bold text-[#17211D] flex items-center gap-2">
+              <span className="text-base font-bold text-[var(--color-ink)] flex items-center gap-2">
                 <Info className="h-4 w-4 text-emerald-700" />
                 <span>{t('diagnosis.technicalDetails')}</span>
               </span>
@@ -954,19 +955,19 @@ export function DiagnosisResultPage({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="border-t border-[#D4E8DC] p-5 space-y-4"
+                  className="border-t border-[var(--color-green-200)] p-5 space-y-4"
                 >
                   {/* Top-3 Model Probability Distribution */}
                   {prediction.top3 && prediction.top3.length > 0 && (
                     <div>
-                      <p className="text-sm font-bold text-[#17211D] mb-3">{t('diagnosis.possibleDiseases')}</p>
+                      <p className="text-sm font-bold text-[var(--color-ink)] mb-3">{t('diagnosis.possibleDiseases')}</p>
                       <div className="space-y-2">
                         {prediction.top3.map((item, i) => (
                           <div key={i} className="flex items-center gap-2 text-sm">
                             <span className="w-5 h-5 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-xs font-bold text-emerald-800 shrink-0">
                               {i + 1}
                             </span>
-                            <span className="text-sm text-[#10231D] font-medium flex-1 truncate">
+                            <span className="text-sm text-[var(--color-ink)] font-medium flex-1 truncate">
                               {localizeDiseaseName(item.class, lang)}
                             </span>
                             <span className="text-sm font-bold text-stone-700 shrink-0">
@@ -981,7 +982,7 @@ export function DiagnosisResultPage({
                   {/* Weather feature importance (if returned by backend API) */}
                   {prediction.weather_context?.feature_importance && Object.keys(prediction.weather_context.feature_importance).length > 0 && (
                     <div className="pt-3 border-t border-stone-100">
-                      <p className="text-sm font-bold text-[#17211D] mb-2.5">{t('diagnosis.factorInfluence')}</p>
+                      <p className="text-sm font-bold text-[var(--color-ink)] mb-2.5">{t('diagnosis.factorInfluence')}</p>
                       <div className="space-y-2">
                         {Object.entries(prediction.weather_context.feature_importance).map(([factor, weight], idx) => (
                           <div key={idx} className="flex items-center justify-between text-sm">
@@ -1002,7 +1003,7 @@ export function DiagnosisResultPage({
       </div>
 
       {/* Sticky Bottom Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#D4E8DC] p-3 sm:p-4 shadow-lg">
+      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[var(--color-green-200)] p-3 sm:p-4 shadow-lg">
         <div className="mx-auto max-w-4xl grid grid-cols-2 gap-3">
           <button
             type="button"

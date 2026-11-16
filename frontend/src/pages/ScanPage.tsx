@@ -1,3 +1,4 @@
+// ScanPage.tsx — FloraAI two-column plant diagnostic scanner
 import { useEffect, useState } from 'react'
 import { AlertTriangle, CheckCircle2, CloudSun, RotateCcw, Scan, Sparkles, X } from 'lucide-react'
 import { CropSelector } from '../components/CropSelector'
@@ -53,7 +54,7 @@ export function ScanPage({
   const [showCamera, setShowCamera] = useState(false)
   const [tab, setTab] = useState<Tab>('overview')
 
-  // Demonstration weather profiles (Project v3 dataset)
+  // Weather profiles
   const [selectedWeatherProfile, setSelectedWeatherProfile] = useState<string>('auto')
   const [profiles, setProfiles] = useState<DiseaseWeatherProfile[]>([])
   const [loadingProfiles, setLoadingProfiles] = useState<boolean>(false)
@@ -94,10 +95,10 @@ export function ScanPage({
   }
 
   const tabs: { id: Tab; label: string }[] = [
-    { id: 'overview',   label: t('diagnosis.details')     },
-    { id: 'causes',     label: t('card.whyDetected')       },
-    { id: 'treatment',  label: t('diagnosis.treatment')    },
-    { id: 'prevention', label: t('card.prevention')   },
+    { id: 'overview',   label: t('diagnosis.details')  },
+    { id: 'causes',     label: t('card.whyDetected')    },
+    { id: 'treatment',  label: t('diagnosis.treatment') },
+    { id: 'prevention', label: t('card.prevention')    },
   ]
 
   return (
@@ -111,35 +112,36 @@ export function ScanPage({
         />
       )}
 
-      <div className="space-y-6 pb-4">
+      <div className="max-w-5xl mx-auto space-y-8 pb-12">
         {/* Page Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#D4E8DC]">
-          <div>
-            <p className="eyebrow mb-1">{t('scan.workspace')}</p>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#17211D]">{t('scan.title')}</h1>
-            <p className="text-sm text-[#66736C] mt-1">
-              {t('scan.subtitle')}
-            </p>
+        <div className="text-center pb-4 border-b border-[#E4E7E2] space-y-2 relative">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-ink)]">
+            {t('scan.title')}
+          </h1>
+          <p className="text-sm text-[var(--color-ink-2)] max-w-xl mx-auto">
+            {t('scan.subtitle')}
+          </p>
+          <div className="pt-1 flex justify-center">
+            <button
+              type="button"
+              onClick={onReset}
+              className="btn btn-secondary btn-sm inline-flex items-center gap-1.5"
+              aria-label={t('scan.reset')}
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>{t('scan.reset')}</span>
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={onReset}
-            className="btn btn-secondary btn-sm self-start sm:self-auto shrink-0"
-            aria-label={t('scan.reset')}
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            {t('scan.reset')}
-          </button>
         </div>
 
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        {/* Main Two-Column Layout (single column below 1024px; two equal columns from lg up) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-          {/* Left column — controls */}
-          <div className="lg:col-span-5 space-y-5">
+          {/* Left Column: Diagnostics Input Controls */}
+          <div className="space-y-6 w-full">
 
-            {/* Crop Selector */}
-            <div className="card p-4 sm:p-5">
+            {/* Crop Selector Card */}
+            <div className="bg-white rounded-2xl border border-[#E4E7E2] p-5 shadow-sm">
               <CropSelector
                 crops={crops}
                 selectedCrop={selectedCrop}
@@ -147,28 +149,26 @@ export function ScanPage({
               />
             </div>
 
-            {/* Demonstration Weather Profile Override */}
-            <div className="card p-4 sm:p-5 space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <CloudSun className="w-4 h-4 text-emerald-700" />
-                  <label htmlFor="weather-profile-select" className="text-sm font-bold text-[#17211D]">
-                    Environmental Profile
-                  </label>
-                </div>
+            {/* Environmental Profile Card */}
+            <div className="bg-white rounded-2xl border border-[#E4E7E2] p-5 space-y-3.5 shadow-sm text-center">
+              <div className="flex items-center justify-center gap-2 flex-wrap">
+                <CloudSun className="w-4 h-4 shrink-0 text-[var(--color-green-700)]" />
+                <label htmlFor="weather-profile-select" className="text-sm font-bold text-[var(--color-ink)]">
+                  Environmental Profile
+                </label>
                 {selectedWeatherProfile !== 'auto' ? (
-                  <span className="badge badge-green text-[10px] font-semibold">
+                  <span className="badge badge-green text-xs font-semibold">
                     Dataset Override
                   </span>
                 ) : (
-                  <span className="badge badge-slate text-[10px] font-medium">
+                  <span className="badge badge-slate text-xs font-medium">
                     Auto GPS
                   </span>
                 )}
               </div>
 
-              <p className="text-xs text-[#66736C] leading-relaxed">
-                Live GPS weather is automatically fetched. For demonstration, you can override it with authentic 7-day meteorological data from the Project v3 research dataset.
+              <p className="text-sm text-[var(--color-ink-2)] leading-relaxed max-w-md mx-auto">
+                Live GPS weather is automatically detected. You may optionally select a research weather profile.
               </p>
 
               <select
@@ -176,12 +176,12 @@ export function ScanPage({
                 value={selectedWeatherProfile}
                 onChange={(e) => setSelectedWeatherProfile(e.target.value)}
                 disabled={loadingProfiles}
-                className="w-full text-xs sm:text-sm p-2.5 rounded-xl border border-[#D4E8DC] bg-white text-[#17211D] font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-none"
+                className="input !min-h-[46px] text-sm py-2.5 cursor-pointer"
               >
-                <option value="auto">🌐 Live GPS Weather (Automatic)</option>
+                <option value="auto">Live GPS Weather (Automatic)</option>
                 {profiles.map((p) => (
                   <option key={p.key} value={p.key}>
-                    🔬 {p.disease} (~{p.avg_temp_c}°C, {p.avg_humidity_pct}% RH, {p.total_rainfall_mm}mm rain)
+                    {p.disease} (~{p.avg_temp_c}°C, {p.avg_humidity_pct}% RH, {p.total_rainfall_mm}mm rain)
                   </option>
                 ))}
               </select>
@@ -191,30 +191,27 @@ export function ScanPage({
                 const activeP = profiles.find(p => p.key === selectedWeatherProfile)
                 if (!activeP) return null
                 return (
-                  <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-xs space-y-1.5 animate-in fade-in duration-200">
-                    <div className="flex items-center justify-between text-emerald-950 font-bold">
+                  <div className="p-3.5 rounded-xl bg-[#F2F4F0] border border-[#E4E7E2] text-sm space-y-1.5 animate-fade-in">
+                    <div className="flex items-center justify-between text-[var(--color-ink)] font-bold">
                       <span>{activeP.display_name}</span>
                       <button
                         type="button"
                         onClick={() => setSelectedWeatherProfile('auto')}
-                        className="text-[11px] text-emerald-700 hover:text-emerald-900 underline font-semibold cursor-pointer"
+                        className="text-sm text-[var(--color-green-700)] hover:underline font-semibold cursor-pointer bg-transparent border-none"
                       >
                         Reset to Auto
                       </button>
                     </div>
-                    <p className="text-[11px] text-emerald-800">
+                    <p className="text-sm text-[var(--color-ink-2)]">
                       {activeP.condition_summary} • ~{activeP.avg_temp_c}°C • ~{activeP.avg_humidity_pct}% RH • {activeP.total_rainfall_mm}mm rain
-                    </p>
-                    <p className="text-[10px] text-[#4A5E52] italic">
-                      ✓ Historical 7-day × 11-feature weather sequence will be fed into the multimodal model.
                     </p>
                   </div>
                 )
               })()}
             </div>
 
-            {/* Image Uploader */}
-            <div className="card p-4 sm:p-5 space-y-4">
+            {/* Image Uploader Card */}
+            <div className="bg-white rounded-2xl border border-[#E4E7E2] p-5 space-y-4 shadow-sm">
               <ImageUploader
                 onFile={onFileChange}
                 onCameraOpen={() => setShowCamera(true)}
@@ -223,35 +220,35 @@ export function ScanPage({
                 onClear={onReset}
               />
 
-              {/* Error */}
+              {/* Error Alert */}
               {error && (
-                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 border border-red-200">
-                  <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
-                  <p className="text-xs text-red-800 font-medium">{error}</p>
-                  <button type="button" onClick={() => {}} className="ml-auto">
-                    <X className="w-3.5 h-3.5 text-red-400" />
+                <div className="flex items-center gap-2 p-3.5 rounded-xl bg-[var(--color-danger-bg)] border border-[var(--color-danger-border)]">
+                  <AlertTriangle className="w-4 h-4 text-[var(--color-danger)] shrink-0" />
+                  <p className="text-sm text-[var(--color-danger)] font-medium flex-1">{error}</p>
+                  <button type="button" onClick={onReset} className="text-[var(--color-danger)] bg-transparent border-none cursor-pointer">
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
               )}
 
-              {/* Analyze CTA — Shown ONLY when a photo is uploaded */}
+              {/* Primary Analyze CTA Button */}
               {(selectedFile || previewUrl) && (
                 <button
                   type="button"
                   onClick={handleValidatedAnalyze}
                   disabled={isPredicting}
-                  className="btn btn-primary btn-lg w-full"
+                  className="btn btn-primary btn-lg w-full flex items-center justify-center gap-2.5 mt-2"
                   aria-label={t('scan.diagnoseCta')}
                 >
                   {isPredicting ? (
                     <>
-                      <Scan className="w-5 h-5 animate-pulse" />
-                      {t('scan.diagnosing')}
+                      <Scan className="w-5 h-5 animate-spin" />
+                      <span>{t('scan.diagnosing')}</span>
                     </>
                   ) : (
                     <>
                       <Sparkles className="w-5 h-5" />
-                      {t('scan.diagnoseCta')}
+                      <span>{t('scan.diagnoseCta')}</span>
                     </>
                   )}
                 </button>
@@ -259,8 +256,8 @@ export function ScanPage({
             </div>
           </div>
 
-          {/* Right column — result / loader / placeholder */}
-          <div className="lg:col-span-7">
+          {/* Right Column: Diagnostic Results / Preview / Empty State */}
+          <div className="w-full">
             {isPredicting ? (
               <AnalysisLoader
                 imageUrl={previewUrl}
@@ -270,17 +267,17 @@ export function ScanPage({
                 onRetry={handleValidatedAnalyze}
               />
             ) : prediction ? (
-              <div className="space-y-5">
+              <div className="space-y-6">
 
-                {/* Result header */}
-                <div className="card p-5 space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
+                {/* Primary Result Banner */}
+                <div className="bg-white rounded-2xl border border-[#E4E7E2] p-6 space-y-5 shadow-sm">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="badge badge-green">
-                        <CheckCircle2 className="w-3 h-3" />
+                        <CheckCircle2 className="w-3.5 h-3.5" />
                         {t('scan.complete')}
                       </span>
-                      <span className="text-xs text-[#66736C] font-medium uppercase tracking-wider">
+                      <span className="text-sm text-[var(--color-ink-2)] font-medium">
                         {t(('crop.' + prediction.crop.toLowerCase()) as any) || prediction.crop}
                       </span>
                     </div>
@@ -293,31 +290,31 @@ export function ScanPage({
                     </span>
                   </div>
 
-                  <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div className="flex items-start justify-between gap-6 flex-wrap sm:flex-nowrap">
                     <div className="flex-1 min-w-0">
-                      <h2 className="text-xl sm:text-2xl font-bold text-[#17211D] leading-tight">
+                      <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-ink)] leading-snug">
                         {localizeDiseaseName(prediction.predicted_class, lang)}
                       </h2>
-                      <p className="text-xs text-[#66736C] mt-1.5 leading-relaxed max-w-lg">
+                      <p className="text-sm text-[var(--color-ink-2)] mt-2 leading-relaxed">
                         {prediction.analysis_summary}
                       </p>
                     </div>
-                    {/* Health score */}
-                    <div className="shrink-0 text-center p-3 rounded-xl bg-[#F0FAF4] border border-[#B0D8C4]">
-                      <div className="text-2xl font-bold text-[#159A70]">{prediction.health_score}</div>
-                      <div className="text-[10px] text-[#159A70] font-semibold">/ 100</div>
-                      <div className="text-[9px] text-[#66736C] mt-0.5">{t('scan.healthIndex')}</div>
+                    {/* Health score pill card */}
+                    <div className="shrink-0 text-center p-3.5 rounded-xl bg-[#F2F4F0] border border-[#E4E7E2] min-w-[90px]">
+                      <div className="text-2xl font-bold text-[var(--color-green-700)]">{prediction.health_score}</div>
+                      <div className="text-sm text-[var(--color-green-700)] font-semibold">/ 100</div>
+                      <div className="text-sm text-[var(--color-ink-2)] mt-0.5">{t('scan.healthIndex')}</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Health Score Breakdown */}
-                <div className="card p-5">
+                {/* Health Score Breakdown Card */}
+                <div className="bg-white rounded-2xl border border-[#E4E7E2] p-6 shadow-sm">
                   <HealthScore score={prediction.health_score} />
                 </div>
 
-                {/* Heatmap */}
-                <div className="card p-5">
+                {/* Heatmap Card */}
+                <div className="bg-white rounded-2xl border border-[#E4E7E2] p-6 shadow-sm">
                   <HeatmapViewer
                     originalImage={prediction.original_image}
                     highlightedImage={prediction.highlighted_image}
@@ -325,32 +322,32 @@ export function ScanPage({
                   />
                 </div>
 
-                {/* Diagnosis Tabs */}
-                <div className="card p-5 space-y-4">
+                {/* Diagnosis Details & Action Protocols */}
+                <div className="bg-white rounded-2xl border border-[#E4E7E2] p-6 space-y-5 shadow-sm">
                   <div className="tab-group overflow-x-auto">
-                    {tabs.map(t => (
+                    {tabs.map(item => (
                       <button
-                        key={t.id}
+                        key={item.id}
                         type="button"
-                        onClick={() => setTab(t.id)}
-                        className={`tab-item whitespace-nowrap ${tab === t.id ? 'active' : ''}`}
+                        onClick={() => setTab(item.id)}
+                        className={`tab-item whitespace-nowrap ${tab === item.id ? 'active' : ''}`}
                       >
-                        {t.label}
+                        {item.label}
                       </button>
                     ))}
                   </div>
 
-                  <div className="min-h-[100px] text-sm text-[#10231D] leading-relaxed">
+                  <div className="min-h-[100px] text-sm text-[var(--color-ink)] leading-relaxed">
                     {tab === 'overview' && (
                       <div className="space-y-2">
-                        <h4 className="font-bold text-[#10231D]">{t('scan.symptomsPathology')}</h4>
-                        <p className="text-[#64736C] text-xs">{prediction.disease_info.description}</p>
+                        <h4 className="font-bold text-[var(--color-ink)]">{t('scan.symptomsPathology')}</h4>
+                        <p className="text-[var(--color-ink-2)] text-sm leading-relaxed">{prediction.disease_info.description}</p>
                       </div>
                     )}
                     {tab === 'causes' && (
                       <div className="space-y-2">
-                        <h4 className="font-bold text-[#10231D]">{t('scan.environmentalFactors')}</h4>
-                        <p className="text-[#64736C] text-xs">{prediction.disease_info.causes}</p>
+                        <h4 className="font-bold text-[var(--color-ink)]">{t('scan.environmentalFactors')}</h4>
+                        <p className="text-[var(--color-ink-2)] text-sm leading-relaxed">{prediction.disease_info.causes}</p>
                       </div>
                     )}
                     {tab === 'treatment' && (
@@ -362,29 +359,31 @@ export function ScanPage({
                     )}
                     {tab === 'prevention' && (
                       <div className="space-y-2">
-                        <h4 className="font-bold text-[#10231D]">{t('scan.longTermPrevention')}</h4>
-                        <p className="text-[#64736C] text-xs">{prediction.disease_info.prevention}</p>
+                        <h4 className="font-bold text-[var(--color-ink)]">{t('scan.longTermPrevention')}</h4>
+                        <p className="text-[var(--color-ink-2)] text-sm leading-relaxed">{prediction.disease_info.prevention}</p>
                       </div>
                     )}
                   </div>
 
-                  {/* Top 3 probabilities */}
-                  <div className="pt-4 border-t border-[#EDF7F2] space-y-2">
-                    <p className="section-label">{t('scan.diseaseProbabilities')}</p>
+                  {/* Top 3 Probabilities */}
+                  <div className="pt-4 border-t border-[#E4E7E2] space-y-3">
+                    <h3 className="text-sm font-semibold text-[var(--color-ink)]">{t('scan.diseaseProbabilities')}</h3>
                     {prediction.top3.map((item, i) => (
-                      <div key={item.class} className="space-y-1">
-                        <div className="flex justify-between text-xs">
-                          <span className="text-[#64736C] font-medium truncate pr-2">
+                      <div key={item.class} className="space-y-1.5">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--color-ink-2)] font-medium truncate pr-2">
                             {localizeDiseaseName(item.class, lang)}
                           </span>
-                          <span className="text-[#0B8F68] font-bold shrink-0">{(item.confidence * 100).toFixed(1)}%</span>
+                          <span className="text-[var(--color-green-700)] font-bold shrink-0">
+                            {(item.confidence * 100).toFixed(1)}%
+                          </span>
                         </div>
                         <div className="progress-track">
                           <div
                             className="progress-fill"
                             style={{
                               width: `${item.confidence * 100}%`,
-                              background: i === 0 ? '#0B8F68' : '#94A09B',
+                              background: i === 0 ? 'var(--color-green-700)' : 'var(--color-green-200)',
                             }}
                           />
                         </div>
@@ -393,34 +392,45 @@ export function ScanPage({
                   </div>
                 </div>
 
-                {/* Action buttons */}
+                {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3">
-                  <button type="button" className="btn btn-primary flex-1 min-w-0">
+                  <button type="button" className="btn btn-primary flex-1 min-w-[200px] flex items-center justify-center gap-2">
                     <CheckCircle2 className="w-4 h-4" />
-                    {t('scan.saveToPlants')}
+                    <span>{t('scan.saveToPlants')}</span>
                   </button>
-                  <button type="button" onClick={onReset} className="btn btn-secondary">
+                  <button type="button" onClick={onReset} className="btn btn-secondary flex items-center justify-center gap-2">
                     <Scan className="w-4 h-4" />
-                    {t('scan.scanAnother')}
+                    <span>{t('scan.scanAnother')}</span>
                   </button>
                 </div>
               </div>
             ) : (
-              /* Empty placeholder */
-              <div className="card-lg p-12 flex flex-col items-center justify-center text-center min-h-[400px] space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-[#DDF7EA] border border-[#B9E8D1] flex items-center justify-center">
-                  <Scan className="w-8 h-8 text-[#0B8F68]" />
+              /* Clear, Generously Scaled Empty State */
+              <div className="bg-white rounded-2xl border border-[#E4E7E2] p-8 sm:p-12 flex flex-col items-center justify-center text-center h-full min-h-[420px] space-y-6 shadow-sm">
+                <div className="w-16 h-16 rounded-2xl bg-[#F2F4F0] border border-[#E4E7E2] flex items-center justify-center text-[var(--color-green-700)]">
+                  <Scan className="w-8 h-8" />
                 </div>
-                <div className="space-y-1 max-w-sm">
-                  <h3 className="text-xl font-bold text-[#10231D]">{t('scan.ready')}</h3>
-                  <p className="text-sm text-[#64736C] leading-relaxed">
+                <div className="space-y-2 max-w-md">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--color-ink)]">
+                    {t('scan.ready')}
+                  </h3>
+                  <p className="text-sm text-[var(--color-ink-2)] leading-relaxed">
                     {t('scan.subtitle')}
                   </p>
                 </div>
-                <div className="flex flex-wrap justify-center gap-2 text-xs text-[#64736C]">
-                  <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#0B8F68]" /> {t('scan.aiDetection')}</span>
-                  <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#0B8F68]" /> {t('scan.visualHeatmap')}</span>
-                  <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#0B8F68]" /> {t('scan.treatmentGuide')}</span>
+                <div className="flex flex-wrap justify-center gap-3 text-xs font-semibold text-[var(--color-ink)] pt-2">
+                  <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F2F4F0] border border-[#E4E7E2]">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--color-green-700)]" />
+                    {t('scan.aiDetection')}
+                  </span>
+                  <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F2F4F0] border border-[#E4E7E2]">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--color-green-700)]" />
+                    {t('scan.visualHeatmap')}
+                  </span>
+                  <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F2F4F0] border border-[#E4E7E2]">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--color-green-700)]" />
+                    {t('scan.treatmentGuide')}
+                  </span>
                 </div>
               </div>
             )}

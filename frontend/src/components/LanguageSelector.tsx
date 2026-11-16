@@ -75,14 +75,14 @@ export function LanguageSelector({ compact = false, variant = 'dark' }: Language
         aria-label="Select Language"
         className={`flex items-center gap-1.5 rounded-lg border transition-all cursor-pointer font-medium ${
           compact
-            ? 'px-2.5 py-1.5 text-xs bg-[var(--color-green-50)] border-[var(--color-green-200)] text-[var(--color-green-700)] hover:bg-[var(--color-green-100)]'
+            ? 'px-2.5 py-1.5 text-sm bg-[var(--color-green-50)] border-[var(--color-green-200)] text-[var(--color-green-700)] hover:bg-[var(--color-green-100)]'
             : variant === 'light'
-            ? 'px-2.5 py-1.5 text-xs bg-[#F0FAF4] border-[#0B8F68]/20 text-[#0B8F68] hover:bg-[#DDF3E8] shadow-sm'
-            : 'px-2.5 py-1.5 text-xs bg-white/15 border-white/25 text-white hover:bg-white/25 shadow-sm'
+            ? 'px-2.5 py-1.5 text-sm bg-[var(--color-green-50)] border-[var(--color-green-200)] text-[var(--color-green-700)] hover:bg-[var(--color-green-100)] shadow-sm'
+            : 'px-2.5 py-1.5 text-sm bg-white/15 border-white/25 text-white hover:bg-white/25 shadow-sm'
         }`}
       >
-        <Globe className={`w-3.5 h-3.5 flex-shrink-0 ${compact || variant === 'light' ? 'text-[var(--color-green-700)]' : 'text-[#3DFF8F]'}`} />
-        <span className="font-semibold text-xs tracking-wide" lang={activeLang.code}>
+        <Globe className={`w-3.5 h-3.5 flex-shrink-0 ${compact || variant === 'light' ? 'text-[var(--color-green-700)]' : 'text-green-200'}`} />
+        <span className="font-semibold text-sm tracking-wide" lang={activeLang.code}>
           {activeLang.native}
         </span>
         <ChevronDown className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''} ${compact || variant === 'light' ? 'text-[var(--color-green-700)]/70' : 'text-white/70'}`} />
@@ -104,13 +104,13 @@ export function LanguageSelector({ compact = false, variant = 'dark' }: Language
             aria-label="Languages"
             className={`
               fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl p-3 border-t border-slate-200
-              md:absolute md:bottom-auto md:top-full md:left-auto md:right-0 md:mt-1.5 md:w-56 md:rounded-xl md:shadow-xl md:border md:border-[#E0EBE4] md:p-1.5
+              md:absolute md:bottom-auto md:top-full md:left-auto md:right-0 md:mt-1.5 md:w-56 md:rounded-xl md:shadow-xl md:border md:border-[var(--color-green-200)] md:p-1.5
               animate-fade-in text-slate-800 max-h-[80vh] md:max-h-80 overflow-y-auto
             `}
           >
             {/* Mobile handle & header */}
             <div className="flex md:hidden items-center justify-between px-3 pb-2 pt-1 border-b border-gray-100">
-              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider">Select Language</div>
+              <div className="text-sm font-semibold text-gray-700">Select language</div>
               <button
                 type="button"
                 onClick={closeDropdown}
@@ -140,26 +140,26 @@ export function LanguageSelector({ compact = false, variant = 'dark' }: Language
                     className={`
                       w-full text-left px-3 py-2.5 md:py-2 rounded-lg text-sm flex items-center justify-between transition-colors
                       min-h-[48px] md:min-h-[40px] cursor-pointer
-                      ${isSelected ? 'bg-[#F0FAF4] text-[#0B8F68] font-semibold' : 'text-slate-700 hover:bg-slate-50'}
-                      ${isFocused ? 'ring-2 ring-[#0B8F68]/30' : ''}
+                      ${isSelected ? 'bg-[var(--color-green-50)] text-[var(--color-green-700)] font-semibold' : 'text-slate-700 hover:bg-slate-50'}
+                      ${isFocused ? 'ring-2 ring-[var(--color-green-700)]/30' : ''}
                     `}
                     style={{ fontFamily: l.font }}
                   >
                     <div className="flex flex-col text-left">
                       {/* Native name primary label */}
-                      <span className="text-sm font-bold text-slate-900 tracking-wide">
+                      <span className="text-sm font-semibold text-slate-900">
                         {l.native}
                       </span>
                       {/* English name secondary label */}
                       {l.code !== 'en' && (
-                        <span className="text-[11px] text-slate-400 font-sans font-normal">
+                        <span className="text-xs text-slate-500 font-sans font-normal">
                           {l.english}
                         </span>
                       )}
                     </div>
 
                     {isSelected && (
-                      <Check className="w-4 h-4 text-[#0B8F68] flex-shrink-0" />
+                      <Check className="w-4 h-4 text-[var(--color-green-700)] flex-shrink-0" />
                     )}
                   </button>
                 )

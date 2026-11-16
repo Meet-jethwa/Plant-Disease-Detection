@@ -61,5 +61,14 @@
   "diagnosis.factorInfluence": "मौसम का असर",
   "diagnosis.sympLesions": "पत्तियों पर रंग उड़ना या धब्बे",
   "diagnosis.sympNecrosis": "किनारों का सूखना या सड़ना",
-  "diagnosis.sympVascular": "पौधे की नसों में कमजोरी"
+  "diagnosis.sympVascular": "पौधे की नसों में कमजोरी",
+  "diagnosis.gradcamHeatmap": "हीटमैप",
+  "diagnosis.stepIsolate": "संक्रमित पौधों को तुरंत अलग करें ताकि बीमारी पास की फसलों में न फैले।",
+  "diagnosis.stepRefrain": "पत्तियों को सूखा रखने और फंगस को रोकने के लिए ऊपर से पानी देने से बचें।",
+  "diagnosis.stepInspect": "धब्बों या लक्षणों की शुरुआती पहचान के लिए आस-पास के पौधों की साप्ताहिक जाँच करें।",
+  "diagnosis.stepConsult": "अनुमोदित उपचार और दवाओं के लिए अपने स्थानीय कृषि अधिकारी से सलाह लें।",
+  "diagnosis.stepSpacing": "उचित धूप और हवा के लिए पौधों के बीच पर्याप्त दूरी बनाए रखें।",
+  "diagnosis.stepFertilizer": "अत्यधिक नाइट्रोजन खाद का प्रयोग न करें, जिससे पौधे रोग के प्रति संवेदनशील हो जाते हैं।",
+  "diagnosis.stepIrrigation": "पत्तियों के गीलेपन को कम करने के लिए ड्रिप सिंचाई का उपयोग करें।",
+  "diagnosis.stepCultivars": "अपने क्षेत्र के लिए अनुशंसित प्रमाणित रोग-प्रतिरोधी बीजों का प्रयोग करें।"
 }

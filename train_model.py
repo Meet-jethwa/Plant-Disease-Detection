@@ -47,7 +47,7 @@ LABEL_SMOOTHING = 0.1
 DROPOUT_RATE = 0.4
 SEED = 42
 
-BASE_DIR = Path(r"d:\clg\major project\Project folder")
+BASE_DIR = Path(__file__).resolve().parent
 MODELS_DIR = BASE_DIR / "models"
 PLOTS_DIR = BASE_DIR / "plots"
 MODELS_DIR.mkdir(exist_ok=True)

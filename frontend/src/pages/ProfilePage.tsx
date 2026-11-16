@@ -32,53 +32,40 @@ function SettingRow({ icon: Icon, label, description, value, toggle, defaultOn =
       {...(isClickable ? { type: 'button' as const } : {})}
       id={id}
       onClick={toggle ? () => setOn(v => !v) : onClick}
-      style={{
-        width: '100%', display: 'flex', alignItems: 'center', gap: 12,
-        padding: '12px 16px', borderRadius: 8, transition: 'all 0.15s ease',
-        background: 'transparent', border: 'none', cursor: isClickable ? 'pointer' : 'default', textAlign: 'left',
-        fontFamily: 'var(--font-body)',
-      }}
-      onMouseEnter={e => { if (isClickable) e.currentTarget.style.background = '#F0FAF4' }}
-      onMouseLeave={e => { if (isClickable) e.currentTarget.style.background = 'transparent' }}
+      className={`w-full min-h-[52px] flex items-center gap-3.5 px-4 py-3 rounded-xl transition-colors text-left ${
+        isClickable ? 'cursor-pointer hover:bg-stone-50' : ''
+      }`}
     >
-      <div style={{
-        width: 36, height: 36, borderRadius: 9, flexShrink: 0,
-        background: '#F0FAF4', border: '1px solid rgba(11,143,104,0.2)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        <Icon style={{ width: 16, height: 16, color: '#0B8F68' }} />
+      <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center shrink-0 text-emerald-700">
+        <Icon className="w-5 h-5" />
       </div>
-      <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
-        <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>{label}</p>
-        {description && <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 1 }}>{description}</p>}
+
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-semibold text-[var(--color-ink)]">{label}</p>
+        {description && <p className="text-sm text-[var(--color-ink-2)] mt-0.5">{description}</p>}
       </div>
+
       {toggle ? (
         <div
-          style={{
-            width: 44, height: 24, borderRadius: 999, position: 'relative', flexShrink: 0,
-            background: on ? 'rgba(11,143,104,0.2)' : '#E2E8F0',
-            border: `1px solid ${on ? 'rgba(11,143,104,0.4)' : '#CBD5E1'}`,
-            boxShadow: on ? '0 0 8px rgba(11,143,104,0.15)' : 'none',
-            transition: 'all 0.2s ease',
-            cursor: 'pointer',
-          }}
-          role="switch" aria-checked={on} aria-label={label}
+          className={`w-11 h-6 rounded-full relative shrink-0 transition-colors cursor-pointer ${
+            on ? 'bg-emerald-600' : 'bg-stone-200'
+          }`}
+          role="switch"
+          aria-checked={on}
+          aria-label={label}
         >
-          <span style={{
-            position: 'absolute', top: 3,
-            width: 16, height: 16, borderRadius: '50%',
-            background: on ? '#0B8F68' : '#94A3B8',
-            transform: on ? 'translateX(24px)' : 'translateX(3px)',
-            transition: 'all 0.2s ease',
-            boxShadow: on ? '0 0 6px rgba(11,143,104,0.3)' : 'none',
-          }} />
+          <span
+            className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-xs transition-transform ${
+              on ? 'translate-x-5.5' : 'translate-x-0.5'
+            }`}
+          />
         </div>
       ) : value ? (
-        <span style={{ fontSize: '0.75rem', color: '#0B8F68', background: '#F0FAF4', border: '1px solid rgba(11,143,104,0.2)', padding: typeof value === 'string' ? '3px 8px' : 0, borderRadius: 6, fontWeight: 600 }}>
+        <span className="text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
           {value}
         </span>
       ) : (
-        <ChevronRight style={{ width: 15, height: 15, color: 'var(--text-muted)', flexShrink: 0 }} />
+        <ChevronRight className="w-4 h-4 text-stone-400 shrink-0" />
       )}
     </Component>
   )
@@ -125,7 +112,9 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
         if (parsed.weather?.condition) setCondition(parsed.weather.condition)
         if (parsed.risk_level) setRiskLevel(parsed.risk_level)
         if (parsed.risk_reason) setRiskReason(parsed.risk_reason)
-      } catch (_) {}
+      } catch {
+        // invalid storage
+      }
     } else if (locationData) {
       if (locationData.location?.city) setCity(locationData.location.city)
       if (locationData.location?.state) setStateName(locationData.location.state)
@@ -190,67 +179,60 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
   }
 
   const stats = [
-    { label: t('nav.plants'),  value: 8,  icon: Leaf,       color: '#0B8F68' },
-    { label: t('home.statsScans'),   value: 24, icon: ScanLine,   color: '#0EA5E9' },
-    { label: t('plants.healthy'), value: 19, icon: HeartPulse, color: '#0B8F68' },
-    { label: t('history.diagnosesRecorded'), value: 6,  icon: BookMarked, color: '#D97706' },
+    { label: t('nav.plants'),  value: 8,  icon: Leaf,       color: 'text-emerald-700' },
+    { label: t('home.statsScans'),   value: 24, icon: ScanLine,   color: 'text-blue-700' },
+    { label: t('plants.healthy'), value: 19, icon: HeartPulse, color: 'text-emerald-700' },
+    { label: t('history.diagnosesRecorded'), value: 6,  icon: BookMarked, color: 'text-amber-700' },
   ]
 
   return (
-    <div className="animate-fade-in" style={{ maxWidth: 680, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div className="max-w-[680px] mx-auto px-4 py-6 pb-24 space-y-6">
+      
       {/* Profile header card */}
-      <div className="bio-card" style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginBottom: 24 }}>
+      <div className="rounded-2xl border border-[var(--color-green-200)] bg-white p-5 sm:p-6 shadow-xs space-y-6">
+        <div className="flex items-center gap-4 sm:gap-5">
           {/* Avatar */}
-          <div style={{ position: 'relative', flexShrink: 0 }}>
-            <div style={{
-              width: 76, height: 76, borderRadius: 18,
-              background: 'linear-gradient(135deg, rgba(11,143,104,0.15), rgba(14,165,233,0.12))',
-              border: '2px solid rgba(11,143,104,0.3)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 16px rgba(11,143,104,0.1)',
-            }}>
-              <User style={{ width: 30, height: 30, color: '#0B8F68' }} />
+          <div className="relative shrink-0">
+            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800">
+              <User className="w-8 h-8" />
             </div>
-            <button type="button" aria-label="Change profile photo" id="profile-avatar-btn" style={{
-              position: 'absolute', bottom: -4, right: -4,
-              width: 28, height: 28, borderRadius: '50%',
-              background: '#FFFFFF', border: '1px solid rgba(11,143,104,0.3)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', color: '#0B8F68',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
-            }}>
-              <Camera style={{ width: 12, height: 12 }} />
+            <button
+              type="button"
+              aria-label="Change profile photo"
+              id="profile-avatar-btn"
+              className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-600 shadow-2xs hover:text-emerald-700 cursor-pointer"
+            >
+              <Camera className="w-3.5 h-3.5" />
             </button>
           </div>
 
           <div>
-            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4, letterSpacing: '0.02em' }}>
-              MEET JETHWA
+            <h1 className="text-xl sm:text-2xl font-bold text-[var(--color-ink)]">
+              Meet Jethwa
             </h1>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>meetjethwa@example.com</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span className="badge badge-green">
-                <Check style={{ width: 10, height: 10 }} />
-                {t('profile.verified')}
+            <p className="text-xs sm:text-sm text-[var(--color-ink-2)] mt-0.5">meetjethwa@example.com</p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <Check className="w-3 h-3" />
+                <span>{t('profile.verified')}</span>
               </span>
-              <span className="badge badge-green">
-                <Zap style={{ width: 10, height: 10 }} />
-                {t('profile.pro')}
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <Zap className="w-3 h-3" />
+                <span>{t('profile.pro')}</span>
               </span>
             </div>
           </div>
         </div>
 
         {/* Stats grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           {stats.map(stat => {
             const Icon = stat.icon
             return (
-              <div key={stat.label} style={{ textAlign: 'center', padding: '12px 8px', borderRadius: 10, background: '#F0FAF4', border: '1px solid var(--border-subtle)' }}>
-                <Icon style={{ width: 18, height: 18, color: stat.color, margin: '0 auto 6px' }} />
-                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', fontWeight: 700, color: stat.color, lineHeight: 1 }}>{stat.value}</p>
-                <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: 3, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>{stat.label.toUpperCase()}</p>
+              <div key={stat.label} className="text-center p-3 rounded-xl bg-stone-50 border border-stone-200/70">
+                <Icon className={`w-4 h-4 ${stat.color} mx-auto mb-1`} />
+                <p className={`text-xl font-bold ${stat.color}`}>{stat.value}</p>
+                <p className="text-sm text-[var(--color-ink-2)] mt-0.5 line-clamp-1">{stat.label}</p>
               </div>
             )
           })}
@@ -258,15 +240,15 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
       </div>
 
       {/* ── NOTIFICATIONS SECTION ── */}
-      <div className="bio-card" style={{ padding: '6px 8px' }}>
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.notifications')}</p>
+      <div className="rounded-2xl border border-stone-200 bg-white p-2 sm:p-3 shadow-xs">
+        <p className="px-3 pt-2 pb-1 text-sm font-semibold text-[var(--color-ink)]">{t('profile.notifications')}</p>
         <SettingRow icon={Bell} label={t('profile.diseaseAlerts')} description={t('profile.diseaseAlertsDesc')} toggle defaultOn id="pref-disease-alerts" />
         <SettingRow icon={Bell} label={t('profile.weeklyReports')} description={t('profile.weeklyReportsDesc')} toggle defaultOn={false} id="pref-weekly-reports" />
       </div>
 
-      {/* ── PREFERENCES SECTION (Includes Manual Weather Data) ── */}
-      <div className="bio-card" style={{ padding: '6px 8px' }} id="preferences-section">
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.preferences')}</p>
+      {/* ── PREFERENCES SECTION ── */}
+      <div className="rounded-2xl border border-stone-200 bg-white p-2 sm:p-3 shadow-xs space-y-1" id="preferences-section">
+        <p className="px-3 pt-2 pb-1 text-sm font-semibold text-[var(--color-ink)]">{t('profile.preferences')}</p>
         
         {/* Language */}
         <SettingRow icon={Globe} label={t('profile.language')} value={<LanguageSelector variant="light" />} id="pref-language" />
@@ -275,84 +257,80 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
         <SettingRow icon={Shield} label={t('profile.units')} value={t('profile.unitsVal')} id="pref-units" />
 
         {/* Manual Weather Data Setting Row */}
-        <div style={{ borderTop: '1px solid #EDF7F2', marginTop: 4, paddingTop: 4 }}>
+        <div className="border-t border-stone-100 pt-1">
           <button
             type="button"
             id="pref-weather-toggle"
             onClick={() => setIsWeatherOpen(prev => !prev)}
-            style={{
-              width: '100%', display: 'flex', alignItems: 'center', gap: 12,
-              padding: '12px 16px', borderRadius: 8, transition: 'all 0.15s ease',
-              background: isWeatherOpen ? '#F0FAF4' : 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
-            }}
+            className={`w-full min-h-[52px] flex items-center gap-3.5 px-4 py-3 rounded-xl transition-colors text-left cursor-pointer ${
+              isWeatherOpen ? 'bg-stone-50' : 'hover:bg-stone-50'
+            }`}
           >
-            <div style={{
-              width: 36, height: 36, borderRadius: 9, flexShrink: 0,
-              background: '#F0FAF4', border: '1px solid rgba(11,143,104,0.2)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <CloudRain style={{ width: 16, height: 16, color: '#0B8F68' }} />
+            <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center shrink-0 text-emerald-700">
+              <CloudRain className="w-5 h-5" />
             </div>
-            <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-semibold text-[var(--color-ink)]">
                   {t('profile.weatherOverride')}
                 </p>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
                   isManualActive ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
                 }`}>
                   {isManualActive ? t('profile.manualActive') : t('profile.autoGps')}
                 </span>
               </div>
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 1 }}>
+              <p className="text-sm text-[var(--color-ink-2)] mt-0.5 truncate">
                 {city} • {temperature}°C • {humidity}% RH • {rainfall} mm
               </p>
             </div>
+
             {isWeatherOpen ? (
-              <ChevronDown style={{ width: 16, height: 16, color: '#0B8F68' }} />
+              <ChevronDown className="w-4 h-4 text-emerald-700 shrink-0" />
             ) : (
-              <ChevronRight style={{ width: 16, height: 16, color: 'var(--text-muted)' }} />
+              <ChevronRight className="w-4 h-4 text-stone-400 shrink-0" />
             )}
           </button>
 
           {/* Expandable Manual Weather Configuration Form */}
           {isWeatherOpen && (
-            <div className="p-4 mx-2 my-2 rounded-xl border border-[#D4E8DC] bg-[#FAFDFB] space-y-4 animate-fade-in">
-              <div className="flex items-center justify-between pb-3 border-b border-[#E0EBE4]">
+            <div className="p-4 mx-1 my-2 rounded-xl border border-[var(--color-green-200)] bg-stone-50/60 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-stone-200">
                 <div className="flex items-center gap-2">
-                  <Sliders className="w-4 h-4 text-[#0B8F68]" />
-                  <span className="text-xs font-bold text-[#111827] uppercase tracking-wide">
+                  <Sliders className="w-4 h-4 text-emerald-700" />
+                  <span className="text-sm font-semibold text-[var(--color-ink)]">
                     {t('profile.weatherTitle')}
                   </span>
                 </div>
-                <span className="text-[11px] text-[#64736C]">
+                <span className="text-xs text-[var(--color-ink-2)]">
                   {isManualActive ? t('profile.manualActive') : t('profile.autoGps')}
                 </span>
               </div>
 
               {/* Form inputs */}
-              <form onSubmit={handleSaveManualWeather} className="space-y-3.5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <form onSubmit={handleSaveManualWeather} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {/* City */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.city')}
                     </label>
-                    <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
-                      <MapPin className="w-3.5 h-3.5 text-[#0B8F68] shrink-0" />
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-stone-200 bg-white min-h-[44px]">
+                      <MapPin className="w-4 h-4 text-emerald-700 shrink-0" />
                       <input
                         type="text"
                         value={city}
                         onChange={e => setCity(e.target.value)}
                         placeholder="e.g. Mumbai, Nashik, Pune"
-                        className="w-full text-xs text-[#111827] font-medium bg-transparent outline-none"
+                        className="w-full text-sm text-stone-900 bg-transparent outline-none"
                       />
                     </div>
                   </div>
 
                   {/* State */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.state')}
                     </label>
                     <input
@@ -360,90 +338,90 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                       value={stateName}
                       onChange={e => setStateName(e.target.value)}
                       placeholder="e.g. Maharashtra, Punjab"
-                      className="w-full px-3 py-2 text-xs text-[#111827] font-medium rounded-lg border border-[#D4E8DC] bg-white outline-none focus:border-[#0B8F68]"
+                      className="w-full px-3 py-2 text-sm text-stone-900 rounded-xl border border-stone-200 bg-white outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 min-h-[44px]"
                     />
                   </div>
 
                   {/* Temperature */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.temp')}
                     </label>
-                    <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
-                      <Thermometer className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-stone-200 bg-white min-h-[44px]">
+                      <Thermometer className="w-4 h-4 text-orange-600 shrink-0" />
                       <input
                         type="number"
                         step="0.1"
                         value={temperature}
                         onChange={e => setTemperature(parseFloat(e.target.value) || 0)}
-                        className="w-full text-xs text-[#111827] font-semibold bg-transparent outline-none"
+                        className="w-full text-sm text-stone-900 font-semibold bg-transparent outline-none"
                       />
                     </div>
                   </div>
 
                   {/* Humidity */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.humidity')}
                     </label>
-                    <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
-                      <Droplets className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-stone-200 bg-white min-h-[44px]">
+                      <Droplets className="w-4 h-4 text-blue-600 shrink-0" />
                       <input
                         type="number"
                         min="0"
                         max="100"
                         value={humidity}
                         onChange={e => setHumidity(parseInt(e.target.value) || 0)}
-                        className="w-full text-xs text-[#111827] font-semibold bg-transparent outline-none"
+                        className="w-full text-sm text-stone-900 font-semibold bg-transparent outline-none"
                       />
                     </div>
                   </div>
 
                   {/* Rainfall */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.rainfall')}
                     </label>
-                    <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
-                      <CloudRain className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-stone-200 bg-white min-h-[44px]">
+                      <CloudRain className="w-4 h-4 text-blue-600 shrink-0" />
                       <input
                         type="number"
                         step="0.1"
                         min="0"
                         value={rainfall}
                         onChange={e => setRainfall(parseFloat(e.target.value) || 0)}
-                        className="w-full text-xs text-[#111827] font-semibold bg-transparent outline-none"
+                        className="w-full text-sm text-stone-900 font-semibold bg-transparent outline-none"
                       />
                     </div>
                   </div>
 
                   {/* Wind */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.wind')}
                     </label>
-                    <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#D4E8DC] bg-white">
-                      <Wind className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-stone-200 bg-white min-h-[44px]">
+                      <Wind className="w-4 h-4 text-emerald-700 shrink-0" />
                       <input
                         type="number"
                         step="0.1"
                         min="0"
                         value={wind}
                         onChange={e => setWind(parseFloat(e.target.value) || 0)}
-                        className="w-full text-xs text-[#111827] font-semibold bg-transparent outline-none"
+                        className="w-full text-sm text-stone-900 font-semibold bg-transparent outline-none"
                       />
                     </div>
                   </div>
 
                   {/* Condition */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.condition')}
                     </label>
                     <select
                       value={condition}
                       onChange={e => setCondition(e.target.value)}
-                      className="w-full px-3 py-2 text-xs text-[#111827] font-medium rounded-lg border border-[#D4E8DC] bg-white outline-none focus:border-[#0B8F68] cursor-pointer"
+                      className="w-full px-3 py-2 text-sm text-stone-900 rounded-xl border border-stone-200 bg-white outline-none focus:border-emerald-600 cursor-pointer min-h-[44px]"
                     >
                       <option value="Clear / Sunny">Clear / Sunny</option>
                       <option value="Partly Cloudy">Partly Cloudy</option>
@@ -457,13 +435,13 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
 
                   {/* Risk Level */}
                   <div>
-                    <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
                       {t('profile.riskLevel')}
                     </label>
                     <select
                       value={riskLevel}
                       onChange={e => setRiskLevel(e.target.value)}
-                      className="w-full px-3 py-2 text-xs text-[#111827] font-medium rounded-lg border border-[#D4E8DC] bg-white outline-none focus:border-[#0B8F68] cursor-pointer"
+                      className="w-full px-3 py-2 text-sm text-stone-900 rounded-xl border border-stone-200 bg-white outline-none focus:border-emerald-600 cursor-pointer min-h-[44px]"
                     >
                       <option value="Low">{t('risk.low')}</option>
                       <option value="Moderate">{t('risk.medium')}</option>
@@ -475,7 +453,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
 
                 {/* Risk Reason text */}
                 <div>
-                  <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider block mb-1">
+                  <label className="text-xs font-semibold text-stone-700 block mb-1">
                     {t('profile.riskReason')}
                   </label>
                   <input
@@ -483,24 +461,23 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                     value={riskReason}
                     onChange={e => setRiskReason(e.target.value)}
                     placeholder="e.g. High humidity and rainfall support elevated disease progression risk."
-                    className="w-full px-3 py-2 text-xs text-[#111827] rounded-lg border border-[#D4E8DC] bg-white outline-none focus:border-[#0B8F68]"
+                    className="w-full px-3 py-2 text-sm text-stone-900 rounded-xl border border-stone-200 bg-white outline-none focus:border-emerald-600 min-h-[44px]"
                   />
                 </div>
 
                 {/* Live Preview Pill */}
-                <div className="p-3 rounded-xl bg-white border border-[#D4E8DC] flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm">📍</span>
-                    <span className="text-xs font-bold text-[#111827]">{city}, {stateName}</span>
-                    <span className="text-[#D4E8DC]">|</span>
-                    <span className="text-xs text-[#4B5563] font-medium">
+                <div className="p-3.5 rounded-xl bg-white border border-stone-200 flex flex-wrap items-center justify-between gap-2 shadow-2xs">
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="font-bold text-[var(--color-ink)]">{city}, {stateName}</span>
+                    <span className="text-stone-300">|</span>
+                    <span className="text-[var(--color-ink-2)]">
                       {temperature}°C • {humidity}% RH • {rainfall} mm
                     </span>
                   </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                  <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
                     riskLevel === 'High' || riskLevel === 'Severe'
-                      ? 'bg-amber-100 text-amber-800'
-                      : 'bg-emerald-100 text-emerald-800'
+                      ? 'bg-amber-100 text-amber-900'
+                      : 'bg-emerald-100 text-emerald-900'
                   }`}>
                     {riskLevel}
                   </span>
@@ -508,34 +485,34 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
 
                 {/* Feedback banners */}
                 {savedFeedback && (
-                  <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 animate-fade-in">
-                    <Check className="w-4 h-4 text-emerald-600" />
+                  <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>{t('profile.savedSuccess')}</span>
                   </div>
                 )}
                 {resetFeedback && (
-                  <div className="p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold flex items-center gap-2 animate-fade-in">
-                    <Check className="w-4 h-4 text-blue-600" />
+                  <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold flex items-center gap-2">
+                    <Check className="w-4 h-4 text-blue-600 shrink-0" />
                     <span>{t('profile.resetSuccess')}</span>
                   </div>
                 )}
 
                 {/* Action Buttons */}
-                <div className="flex items-center gap-2 pt-2">
+                <div className="flex items-center gap-3 pt-1">
                   <button
                     type="submit"
-                    className="px-4 py-2.5 rounded-xl bg-[#0B8F68] text-white text-xs font-bold hover:bg-[#097354] transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
+                    className="btn btn-primary min-h-[44px] px-4 flex items-center gap-2 text-xs sm:text-sm font-semibold cursor-pointer"
                   >
-                    <Check className="w-3.5 h-3.5" />
+                    <Check className="w-4 h-4" />
                     <span>{t('profile.applyWeather')}</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={handleResetToLiveGPS}
-                    className="px-4 py-2.5 rounded-xl border border-[#D4E8DC] bg-white text-[#4B5563] text-xs font-semibold hover:bg-slate-50 transition-colors flex items-center gap-1.5 cursor-pointer"
+                    className="btn btn-secondary min-h-[44px] px-4 flex items-center gap-2 text-xs sm:text-sm font-semibold cursor-pointer"
                   >
-                    <RefreshCw className="w-3.5 h-3.5" />
+                    <RefreshCw className="w-4 h-4" />
                     <span>{t('profile.resetGps')}</span>
                   </button>
                 </div>
@@ -546,27 +523,31 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
       </div>
 
       {/* ── PRIVACY & DATA SECTION ── */}
-      <div className="bio-card" style={{ padding: '6px 8px' }}>
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.privacy')}</p>
+      <div className="rounded-2xl border border-stone-200 bg-white p-2 sm:p-3 shadow-xs">
+        <p className="px-3 pt-2 pb-1 text-sm font-semibold text-[var(--color-ink)]">{t('profile.privacy')}</p>
         <SettingRow icon={Shield} label={t('profile.dataSharing')} description={t('profile.dataSharingDesc')} toggle defaultOn id="pref-data-sharing" />
         <SettingRow icon={Shield} label={t('profile.privacyPolicy')} id="pref-privacy" />
         <SettingRow icon={Shield} label={t('profile.deleteData')} id="pref-delete-data" />
       </div>
 
       {/* ── SUPPORT SECTION ── */}
-      <div className="bio-card" style={{ padding: '6px 8px' }}>
-        <p className="eyebrow" style={{ padding: '12px 8px 6px', paddingLeft: 16 }}>{t('profile.support')}</p>
+      <div className="rounded-2xl border border-stone-200 bg-white p-2 sm:p-3 shadow-xs">
+        <p className="px-3 pt-2 pb-1 text-sm font-semibold text-[var(--color-ink)]">{t('profile.support')}</p>
         <SettingRow icon={HelpCircle} label={t('profile.helpFaq')} id="pref-help" />
         <SettingRow icon={HelpCircle} label={t('profile.contactSupport')} id="pref-contact" />
       </div>
 
       {/* Logout */}
-      <button type="button" className="btn btn-danger btn-lg" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }} id="profile-logout-btn">
-        <LogOut style={{ width: 16, height: 16 }} />
-        {t('profile.signOut')}
+      <button
+        type="button"
+        className="btn btn-secondary w-full min-h-[48px] text-red-700 border-red-200 hover:bg-red-50 flex items-center justify-center gap-2 text-sm font-semibold cursor-pointer"
+        id="profile-logout-btn"
+      >
+        <LogOut className="w-4 h-4" />
+        <span>{t('profile.signOut')}</span>
       </button>
 
-      <p style={{ textAlign: 'center', fontSize: '0.7rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+      <p className="text-center text-xs text-stone-400">
         {t('profile.footerText')}
       </p>
     </div>

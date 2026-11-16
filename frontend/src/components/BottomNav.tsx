@@ -1,5 +1,4 @@
 // BottomNav.tsx — FloraAI clean white bottom navigation
-// Inspired by app/static/styles.css: clean white bg, green active indicator, pill-shaped scan button
 import { Link, useLocation } from 'react-router-dom'
 import { Home, Scan, Leaf, MessageSquare, BookOpen } from 'lucide-react'
 import { useLang } from '../contexts/LanguageContext'
@@ -9,10 +8,10 @@ export function BottomNav() {
   const { t } = useLang()
 
   const tabs = [
-    { path: '/',          labelKey: 'nav.home' as const,        icon: Home },
-    { path: '/plants',    labelKey: 'nav.plants' as const,      icon: Leaf },
-    { path: '/scan',      labelKey: 'nav.scan' as const,        icon: Scan },
-    { path: '/assistant', labelKey: 'nav.chat' as const,        icon: MessageSquare },
+    { path: '/',          labelKey: 'nav.home'         as const, icon: Home },
+    { path: '/plants',    labelKey: 'nav.plants'       as const, icon: Leaf },
+    { path: '/scan',      labelKey: 'nav.scan'         as const, icon: Scan },
+    { path: '/assistant', labelKey: 'nav.chat'         as const, icon: MessageSquare },
     { path: '/library',   labelKey: 'nav.encyclopedia' as const, icon: BookOpen },
   ]
 
@@ -21,12 +20,7 @@ export function BottomNav() {
       aria-label="Main navigation"
       className="mobile-bottom-nav lg:hidden"
     >
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-around',
-        padding: '4px 0',
-        paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 4px)',
-        maxWidth: 480, margin: '0 auto',
-      }}>
+      <div className="flex items-center justify-around max-w-[480px] mx-auto pb-[calc(env(safe-area-inset-bottom,0px)+4px)] pt-1">
         {tabs.map(tab => {
           const isActive = location.pathname === tab.path
             || (tab.path !== '/' && location.pathname.startsWith(tab.path))
@@ -39,27 +33,21 @@ export function BottomNav() {
                 key={tab.path}
                 to={tab.path}
                 aria-label={t(tab.labelKey)}
-                style={{
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
-                  marginTop: -16, textDecoration: 'none',
-                }}
+                className="flex flex-col items-center gap-0.5 no-underline -mt-4 min-h-[44px] min-w-[44px]"
               >
-                {/* Raised scan FAB — pill button like app's .nav-cta */}
-                <div style={{
-                  width: 52, height: 52, borderRadius: 16,
-                  background: isActive ? 'var(--color-green-600)' : 'var(--color-green-700)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  boxShadow: '0 4px 14px rgba(21, 128, 61, 0.35)',
-                  border: '2px solid rgba(255,255,255,0.9)',
-                  transition: 'background 0.18s ease, transform 0.12s ease',
-                }}>
-                  <Scan style={{ width: 22, height: 22, color: '#FFFFFF' }} />
+                {/* Raised scan FAB */}
+                <div
+                  className={`w-[52px] h-[52px] rounded-2xl flex items-center justify-center border-2 border-white/90 shadow-[0_4px_14px_rgba(21,128,61,0.35)] transition-all ${
+                    isActive ? 'bg-[var(--color-green-600)]' : 'bg-[var(--color-green-700)]'
+                  }`}
+                >
+                  <Scan className="w-[22px] h-[22px] text-white" />
                 </div>
-                <span style={{
-                  fontSize: '10px', fontWeight: 600,
-                  color: isActive ? 'var(--color-green-700)' : 'var(--color-ink-2)',
-                  transition: 'color 0.15s ease', letterSpacing: '0.02em',
-                }}>
+                <span
+                  className={`text-xs font-semibold tracking-wide ${
+                    isActive ? 'text-[var(--color-green-700)]' : 'text-[var(--color-ink-2)]'
+                  }`}
+                >
                   {t(tab.labelKey)}
                 </span>
               </Link>
@@ -71,30 +59,22 @@ export function BottomNav() {
               key={tab.path}
               to={tab.path}
               aria-label={t(tab.labelKey)}
-              style={{
-                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
-                padding: '6px 12px', minWidth: 44, minHeight: 52, justifyContent: 'center',
-                textDecoration: 'none', position: 'relative',
-              }}
+              className="flex flex-col items-center gap-0.5 px-3 no-underline relative min-w-[44px] min-h-[52px] justify-center"
             >
-              {/* Active top indicator — slim green bar, like app's nav-links hover */}
+              {/* Active top indicator bar */}
               {isActive && (
-                <span style={{
-                  position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
-                  width: 24, height: 2.5, borderRadius: 999,
-                  background: 'var(--color-green-600)',
-                }} />
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-[2.5px] rounded-full bg-[var(--color-green-600)]" />
               )}
-              <Icon style={{
-                width: 20, height: 20,
-                color: isActive ? 'var(--color-green-700)' : 'var(--color-ink-2)',
-                transition: 'color 0.15s ease',
-              }} />
-              <span style={{
-                fontSize: '10px', fontWeight: isActive ? 600 : 400,
-                color: isActive ? 'var(--color-green-700)' : 'var(--color-ink-2)',
-                transition: 'color 0.15s ease', letterSpacing: '0.01em',
-              }}>
+              <Icon
+                className={`w-5 h-5 transition-colors ${
+                  isActive ? 'text-[var(--color-green-700)]' : 'text-[var(--color-ink-2)]'
+                }`}
+              />
+              <span
+                className={`text-xs tracking-wide transition-colors ${
+                  isActive ? 'font-semibold text-[var(--color-green-700)]' : 'font-normal text-[var(--color-ink-2)]'
+                }`}
+              >
                 {t(tab.labelKey)}
               </span>
             </Link>

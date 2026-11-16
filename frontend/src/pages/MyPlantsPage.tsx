@@ -1,8 +1,9 @@
 // MyPlantsPage.tsx — Monitored Specimens Dashboard
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Plus, Search, Sprout } from 'lucide-react'
+import { Plus, Search, Sprout, HeartPulse, AlertTriangle, ShieldAlert } from 'lucide-react'
 import { PlantCard } from '../components/PlantCard'
+import { EmptyState } from '../components/ui/EmptyState'
 import { useLang } from '../contexts/LanguageContext'
 import type { Plant } from '../types'
 
@@ -52,18 +53,16 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
   }
 
   return (
-    <div style={{ maxWidth: '1240px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px', paddingBottom: '40px' }}>
+    <div className="mx-auto max-w-[1200px] px-4 sm:px-6 py-6 pb-24 space-y-6">
       
       {/* ── Top Header ── */}
-      <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', padding: '20px 24px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+      <div className="rounded-2xl border border-[var(--color-green-200)] bg-white p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#159A70' }} />
-            <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#159A70', letterSpacing: '0.05em' }}>
-              {t('plants.badge')}
-            </span>
+          <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-green-50)] px-3 py-1 text-xs font-semibold text-[var(--color-brand)] border border-[var(--color-green-200)] mb-2">
+            <Sprout className="h-3.5 w-3.5" />
+            <span>{t('plants.badge')}</span>
           </div>
-          <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0F172A', margin: 0 }}>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-ink)]">
             {t('plants.title')}
           </h1>
         </div>
@@ -71,59 +70,82 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
         <button
           type="button"
           onClick={() => navigate('/scan')}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 16px', background: '#159A70', color: '#ffffff', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}
+          className="btn btn-primary min-h-[44px] px-4 flex items-center gap-2 text-sm font-semibold cursor-pointer shrink-0"
         >
-          <Plus style={{ width: '15px', height: '15px' }} />
-          {t('plants.registerNew')}
+          <Plus className="h-4 w-4" />
+          <span>{t('plants.registerNew')}</span>
         </button>
       </div>
 
       {/* ── Metric Summary Cards ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>{t('plants.healthySpecimens')}</span>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#159A70', marginTop: '4px' }}>{counts.healthy}</div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="rounded-2xl border border-[#E4E7E2] bg-white p-4 sm:p-5 shadow-xs flex items-center justify-between">
+          <div>
+            <span className="text-sm font-medium text-stone-500">
+              {t('plants.healthySpecimens')}
+            </span>
+            <div className="text-2xl sm:text-3xl font-bold text-emerald-700 mt-1">
+              {counts.healthy}
+            </div>
+          </div>
+          <div className="h-10 w-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0">
+            <HeartPulse className="h-5 w-5" />
+          </div>
         </div>
-        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>{t('plants.attentionRequired')}</span>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#D97706', marginTop: '4px' }}>{counts.attention}</div>
+
+        <div className="rounded-2xl border border-[#E4E7E2] bg-white p-4 sm:p-5 shadow-xs flex items-center justify-between">
+          <div>
+            <span className="text-sm font-medium text-stone-500">
+              {t('plants.attentionRequired')}
+            </span>
+            <div className="text-2xl sm:text-3xl font-bold text-amber-700 mt-1">
+              {counts.attention}
+            </div>
+          </div>
+          <div className="h-10 w-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 shrink-0">
+            <AlertTriangle className="h-5 w-5" />
+          </div>
         </div>
-        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>{t('plants.highRisk')}</span>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#DC2626', marginTop: '4px' }}>{counts.risk}</div>
+
+        <div className="rounded-2xl border border-[#E4E7E2] bg-white p-4 sm:p-5 shadow-xs flex items-center justify-between">
+          <div>
+            <span className="text-sm font-medium text-stone-500">
+              {t('plants.highRisk')}
+            </span>
+            <div className="text-2xl sm:text-3xl font-bold text-red-700 mt-1">
+              {counts.risk}
+            </div>
+          </div>
+          <div className="h-10 w-10 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-red-700 shrink-0">
+            <ShieldAlert className="h-5 w-5" />
+          </div>
         </div>
       </div>
 
       {/* ── Search & Filter Tabs ── */}
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <div style={{ position: 'relative', flex: 1, minWidth: '260px' }}>
-          <Search style={{ width: '15px', height: '15px', color: '#94A3B8', position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+        <div className="relative flex-1 min-w-[240px]">
+          <Search className="h-4 w-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t('plants.searchPlaceholder')}
-            style={{ width: '100%', padding: '9px 12px 9px 34px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13px', outline: 'none', background: '#ffffff' }}
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-white text-stone-900 placeholder-stone-400 text-sm focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all min-h-[44px]"
           />
         </div>
 
-        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           {FILTER_TABS.map((tab) => (
             <button
               key={tab.key}
               type="button"
               onClick={() => setFilter(tab.key)}
-              style={{
-                padding: '7px 12px',
-                borderRadius: '8px',
-                fontSize: '12px',
-                fontWeight: 600,
-                background: filter === tab.key ? '#159A70' : '#ffffff',
-                color: filter === tab.key ? '#ffffff' : '#475569',
-                border: '1px solid',
-                borderColor: filter === tab.key ? '#159A70' : '#CBD5E1',
-                cursor: 'pointer',
-              }}
+              className={`min-h-[44px] px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer whitespace-nowrap border ${
+                filter === tab.key
+                  ? 'bg-emerald-700 text-white border-emerald-800 shadow-xs'
+                  : 'bg-white text-stone-700 border-stone-200 hover:bg-stone-50'
+              }`}
             >
               {tab.label} ({counts[tab.key]})
             </button>
@@ -133,33 +155,29 @@ export function MyPlantsPage({ plants = [] }: MyPlantsPageProps) {
 
       {/* ── Grid ── */}
       {plants.length === 0 ? (
-        <div style={{ background: '#ffffff', border: '1px solid #D4E8DC', borderRadius: '16px', padding: '56px 24px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#F0FBF5', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0B8F68', marginBottom: '16px' }}>
-            <Sprout style={{ width: '28px', height: '28px' }} />
-          </div>
-          <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#10231D', margin: '0 0 8px 0' }}>
-            {t('plants.empty')}
-          </h2>
-          <p style={{ fontSize: '14px', color: '#64736C', maxWidth: '440px', margin: '0 0 24px 0', lineHeight: 1.5 }}>
-            {t('plants.emptyDesc')}
-          </p>
-          <button
-            type="button"
-            onClick={() => navigate('/scan')}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: '#0B8F68', color: '#ffffff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}
-          >
-            <Plus style={{ width: '16px', height: '16px' }} />
-            {t('plants.scanFirst')}
-          </button>
-        </div>
+        <EmptyState
+          icon={<Sprout className="h-8 w-8 text-emerald-700" />}
+          title={t('plants.empty')}
+          description={t('plants.emptyDesc')}
+          action={
+            <button
+              type="button"
+              onClick={() => navigate('/scan')}
+              className="btn btn-primary min-h-[44px] px-4 flex items-center gap-2 text-sm font-semibold cursor-pointer"
+            >
+              <Plus className="h-4 w-4" />
+              <span>{t('plants.scanFirst')}</span>
+            </button>
+          }
+        />
       ) : filtered.length === 0 ? (
-        <div style={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '48px', textAlign: 'center', color: '#64748B' }}>
-          <p style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>{t('plants.empty')}</p>
+        <div className="rounded-2xl border border-stone-200 bg-white p-12 text-center text-stone-500 shadow-xs">
+          <p className="text-sm font-semibold">{t('plants.empty')}</p>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((plant) => (
-            <div key={plant.id} onClick={() => navigate(`/plants/${plant.id}`)} style={{ cursor: 'pointer' }}>
+            <div key={plant.id} onClick={() => navigate(`/plants/${plant.id}`)} className="cursor-pointer">
               <PlantCard plant={plant} />
             </div>
           ))}

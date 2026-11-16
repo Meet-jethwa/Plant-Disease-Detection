@@ -2,12 +2,13 @@
  * FloraAI — Button primitive
  *
  * Features:
- * - min-height 48px (md) / 56px (lg) — ≥48px touch target always
+ * - min-height 48px (md) / 56px (lg) / 40px (sm) — touch target compliant
  * - whileTap scale(0.97) press feedback via framer-motion
  * - loading spinner state
  * - full-width option
  * - aria-busy during loading
- * - wraps text — no single-line truncation (critical for 30–40% longer i18n strings)
+ * - wraps text — no single-line truncation (critical for i18n strings)
+ * - zero inline styles
  */
 
 import { forwardRef } from 'react'
@@ -19,7 +20,7 @@ import { pressTap } from '../../lib/motion'
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline'
 type ButtonSize    = 'md' | 'lg' | 'sm'
 
-interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
+export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   children?: React.ReactNode
   variant?: ButtonVariant
   size?: ButtonSize
@@ -85,16 +86,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading ? (
           <Loader2
-            style={{ width: 18, height: 18, flexShrink: 0 }}
-            className="animate-spin"
+            className="w-4.5 h-4.5 shrink-0 animate-spin"
             aria-hidden
           />
         ) : leftIcon ? (
-          <span aria-hidden style={{ display: 'flex', flexShrink: 0 }}>{leftIcon}</span>
+          <span aria-hidden className="flex shrink-0">{leftIcon}</span>
         ) : null}
-        <span style={{ flex: loading ? '1' : undefined }}>{children}</span>
+        <span className={loading ? 'flex-1' : undefined}>{children}</span>
         {!loading && rightIcon && (
-          <span aria-hidden style={{ display: 'flex', flexShrink: 0 }}>{rightIcon}</span>
+          <span aria-hidden className="flex shrink-0">{rightIcon}</span>
         )}
       </motion.button>
     )

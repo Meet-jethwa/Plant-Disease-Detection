@@ -107,23 +107,23 @@ export function HeatmapViewer({
   return (
     <>
       {/* ── Main Card ─────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#D4E8DC] bg-white overflow-hidden shadow-sm">
+      <div className="rounded-2xl border border-[#E4E7E2] bg-white overflow-hidden shadow-sm">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[#D4E8DC] bg-[#F5FBF7]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[#E4E7E2] bg-[#F2F4F0]">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-[#0B8F68]/10 flex items-center justify-center">
-              <ZoomIn className="w-4 h-4 text-[#0B8F68]" />
+            <div className="w-7 h-7 rounded-lg bg-white border border-[#E4E7E2] flex items-center justify-center">
+              <ZoomIn className="w-4 h-4 text-[var(--color-green-700)]" />
             </div>
             <div>
-              <p className="text-sm font-700 text-[#10231D] leading-none">Grad-CAM Analysis</p>
-              <p className="text-[10px] text-[#64736C] mt-0.5">AI visual attention map</p>
+              <p className="text-sm font-bold text-[var(--color-ink)] leading-none">Grad-CAM Analysis</p>
+              <p className="text-sm text-[var(--color-ink-2)] mt-0.5">AI visual attention map</p>
             </div>
           </div>
 
           {/* Affected area badge + fullscreen */}
           <div className="flex items-center gap-2">
             <div
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-600"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
               style={{ background: severityColor + '15', color: severityColor }}
             >
               <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: severityColor }} />
@@ -132,25 +132,25 @@ export function HeatmapViewer({
             <button
               type="button"
               onClick={() => setFullscreen(true)}
-              className="w-7 h-7 rounded-lg bg-[#F5F8F5] border border-[#D4E8DC] flex items-center justify-center hover:bg-[#DDF7EA] transition-colors"
+              className="w-7 h-7 rounded-lg bg-white border border-[#E4E7E2] flex items-center justify-center hover:bg-[#F2F4F0] transition-colors cursor-pointer"
               aria-label="View fullscreen"
             >
-              <Maximize2 className="w-3.5 h-3.5 text-[#64736C]" />
+              <Maximize2 className="w-3.5 h-3.5 text-[var(--color-ink-2)]" />
             </button>
           </div>
         </div>
 
         {/* Mode selector tabs */}
-        <div className="flex gap-1 p-3 bg-[#F5FBF7] border-b border-[#D4E8DC]">
+        <div className="flex gap-1 p-3 bg-[#F2F4F0] border-b border-[#E4E7E2]">
           {tabs.map(({ key, label, icon }) => (
             <button
               key={key}
               type="button"
               onClick={() => setMode(key)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-600 transition-all flex-1 justify-center ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all flex-1 justify-center cursor-pointer min-h-[36px] ${
                 mode === key
-                  ? 'bg-[#0B8F68] text-white shadow-sm'
-                  : 'bg-white text-[#64736C] border border-[#D4E8DC] hover:border-[#0B8F68]/40 hover:text-[#0B8F68]'
+                  ? 'bg-[var(--color-green-700)] text-white shadow-sm'
+                  : 'bg-white text-[var(--color-ink-2)] border border-[#E4E7E2] hover:border-[var(--color-green-700)] hover:text-[var(--color-green-700)]'
               }`}
             >
               {icon}
@@ -166,7 +166,7 @@ export function HeatmapViewer({
           {/* Color legend (top-right) — only in Grad-CAM / heatmap mode */}
           {showLegend && mode !== 'original' && (
             <div className="absolute top-3 right-3 bg-black/65 backdrop-blur-sm rounded-xl p-2.5 space-y-1.5 z-10">
-              <p className="text-[9px] font-700 text-white/70 uppercase tracking-wider mb-1">Intensity</p>
+              <p className="text-xs font-semibold text-white/80 mb-1">Intensity</p>
               {COLOR_SCALE.map(({ label, color }) => (
                 <div key={label} className="flex items-center gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ background: color }} />
@@ -185,8 +185,8 @@ export function HeatmapViewer({
 
           {/* Mode label pill (bottom-left) */}
           <div className="absolute bottom-3 left-3 z-10">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm">
-              <span className="text-[10px] font-600 text-white">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm">
+              <span className="text-xs font-semibold text-white">
                 {mode === 'original'
                   ? 'Original uploaded image'
                   : mode === 'heatmap'
@@ -198,30 +198,30 @@ export function HeatmapViewer({
         </div>
 
         {/* Intensity scale bar */}
-        <div className="px-4 py-3 border-t border-[#D4E8DC]">
-          <p className="text-[10px] font-700 text-[#10231D] uppercase tracking-wider mb-2">Activation Intensity Scale</p>
+        <div className="px-4 py-3 border-t border-[#E4E7E2]">
+          <p className="text-sm font-semibold text-[var(--color-ink)] mb-2">Activation intensity scale</p>
           <div className="flex gap-1">
             {COLOR_SCALE.map(({ label, color, desc }) => (
               <div key={label} className="flex-1 group relative">
                 <div className="h-2 rounded-sm" style={{ background: color }} />
-                <p className="text-[8px] text-[#64736C] mt-1 text-center hidden sm:block">{label}</p>
+                <p className="text-xs text-[#64736C] mt-1 text-center hidden sm:block">{label}</p>
                 {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-[#10231D] text-white text-[9px] rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-[#10231D] text-white text-xs rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                   {desc}
                 </div>
               </div>
             ))}
           </div>
-          <div className="flex justify-between text-[9px] text-[#64736C] mt-1">
-            <span>← Healthy</span>
-            <span>Diseased →</span>
+          <div className="flex justify-between text-xs text-[#64736C] mt-1">
+            <span>Healthy</span>
+            <span>Diseased</span>
           </div>
         </div>
 
         {/* Disclaimer */}
         <div className="flex items-start gap-2 px-4 py-3 bg-amber-50 border-t border-amber-100">
-          <Info className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
-          <p className="text-[10px] text-amber-700 leading-relaxed">
+          <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <p className="text-sm text-amber-800 leading-relaxed">
             <strong>Grad-CAM</strong> highlights regions the AI focused on. <span className="font-semibold text-red-600">Red/orange</span> = disease hotspots, <span className="font-semibold text-yellow-600">yellow</span> = moderate concern, <span className="font-semibold text-green-700">green/blue</span> = healthy regions. Always verify with a qualified agronomist before treatment.
           </p>
         </div>
@@ -241,16 +241,16 @@ export function HeatmapViewer({
             onClick={e => e.stopPropagation()}
           >
             {/* Fullscreen header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-[#0B8F68]">
-              <p className="text-sm font-700 text-white">Grad-CAM — Full View</p>
+            <div className="flex items-center justify-between px-4 py-3 bg-[var(--color-green-700)]">
+              <p className="text-sm font-bold text-white">Grad-CAM — Full View</p>
               <div className="flex gap-2">
                 {tabs.map(({ key, label }) => (
                   <button
                     key={key}
                     type="button"
                     onClick={() => setMode(key)}
-                    className={`px-3 py-1 rounded-lg text-xs font-600 transition-colors ${
-                      mode === key ? 'bg-white text-[#0B8F68]' : 'bg-white/10 text-white/70 hover:bg-white/20'
+                    className={`px-3 py-1 rounded-lg text-sm font-semibold transition-colors ${
+                      mode === key ? 'bg-white text-[var(--color-green-700)]' : 'bg-white/10 text-white/80 hover:bg-white/20'
                     }`}
                   >
                     {label}
@@ -273,20 +273,20 @@ export function HeatmapViewer({
 
               {/* Fullscreen legend */}
               <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm rounded-xl p-3 space-y-2 z-10">
-                <p className="text-[9px] font-700 text-white/60 uppercase tracking-wider">Intensity Scale</p>
+                <p className="text-sm font-medium text-white/80">Intensity scale</p>
                 {COLOR_SCALE.map(({ label, color, desc }) => (
                   <div key={label} className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: color }} />
                     <div>
-                      <p className="text-[10px] font-600 text-white leading-none">{label}</p>
-                      <p className="text-[9px] text-white/50">{desc}</p>
+                      <p className="text-xs font-semibold text-white leading-none">{label}</p>
+                      <p className="text-xs text-white/60">{desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="px-4 py-2 bg-[#086E50] text-[10px] text-white/70 text-center border-t border-white/10">
+            <div className="px-4 py-2 bg-[var(--color-green-800)] text-sm text-white/80 text-center border-t border-white/10">
               Click outside to close ·{' '}
               {mode === 'original' ? 'Original uploaded image' : 'AI attention heatmap — red = disease hotspot'}
             </div>

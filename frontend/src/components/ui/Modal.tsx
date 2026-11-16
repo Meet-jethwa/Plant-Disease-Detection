@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { X } from 'lucide-react'
 
-interface ModalProps {
+export interface ModalProps {
   open: boolean
   onClose: () => void
   title?: string
@@ -11,7 +11,12 @@ interface ModalProps {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
-const maxWidthPx: Record<string, number> = { sm: 380, md: 480, lg: 560, xl: 680 }
+const maxWidthClass: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
+  sm: 'sm:max-w-[380px]',
+  md: 'sm:max-w-[480px]',
+  lg: 'sm:max-w-[560px]',
+  xl: 'sm:max-w-[680px]',
+}
 
 export function Modal({ open, onClose, title, children, maxWidth = 'md' }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -35,45 +40,36 @@ export function Modal({ open, onClose, title, children, maxWidth = 'md' }: Modal
 
   return (
     <div
-      style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: '0' }}
+      className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
     >
-      {/* Backdrop — no blur (expensive on low-end Android) */}
+      {/* Backdrop */}
       <div
-        style={{ position: 'absolute', inset: 0, background: 'rgba(11, 46, 28, 0.5)' }}
+        className="absolute inset-0 bg-emerald-950/50 transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Panel — full-width bottom sheet on mobile, centered card on desktop */}
+      {/* Panel */}
       <div
         ref={dialogRef}
-        className="animate-fade-in-up"
-        style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: maxWidthPx[maxWidth],
-          background: 'var(--color-white)',
-          borderRadius: '20px 20px 0 0',
-          boxShadow: '0 -8px 40px rgba(21, 128, 61, 0.12)',
-          maxHeight: '90dvh',
-          overflowY: 'auto',
-          paddingBottom: 'env(safe-area-inset-bottom, 16px)',
-        }}
+        className={`animate-fade-in-up relative w-full ${maxWidthClass[maxWidth]} bg-white rounded-t-2xl sm:rounded-2xl shadow-xl max-h-[90dvh] overflow-y-auto pb-[env(safe-area-inset-bottom,16px)] sm:pb-0 border border-[var(--color-green-100)]`}
       >
         {/* Header */}
         {title && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px 16px', borderBottom: '1px solid var(--color-green-100)' }}>
-            <h2 id="modal-title" style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-ink)' }}>{title}</h2>
+          <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--color-green-100)]">
+            <h2 id="modal-title" className="text-lg font-bold text-[var(--color-ink)]">
+              {title}
+            </h2>
             <button
               type="button"
               onClick={onClose}
-              style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', border: 'none', cursor: 'pointer', borderRadius: 12, color: 'var(--color-ink-2)' }}
+              className="w-11 h-11 min-h-[44px] min-w-[44px] flex items-center justify-center bg-transparent border-none cursor-pointer rounded-xl text-[var(--color-ink-2)] hover:bg-[var(--color-green-50)] transition-colors"
               aria-label="Close"
             >
-              <X style={{ width: 20, height: 20 }} />
+              <X className="w-5 h-5" />
             </button>
           </div>
         )}
@@ -81,14 +77,14 @@ export function Modal({ open, onClose, title, children, maxWidth = 'md' }: Modal
           <button
             type="button"
             onClick={onClose}
-            style={{ position: 'absolute', top: 10, right: 12, width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-green-50)', border: 'none', cursor: 'pointer', borderRadius: 12, zIndex: 10, color: 'var(--color-ink-2)' }}
+            className="absolute top-2.5 right-3 w-11 h-11 min-h-[44px] min-w-[44px] flex items-center justify-center bg-[var(--color-green-50)] border-none cursor-pointer rounded-xl z-10 text-[var(--color-ink-2)] hover:bg-[var(--color-green-100)] transition-colors"
             aria-label="Close"
           >
-            <X style={{ width: 20, height: 20 }} />
+            <X className="w-5 h-5" />
           </button>
         )}
 
-        <div style={{ padding: '20px' }}>{children}</div>
+        <div className="p-5">{children}</div>
       </div>
     </div>
   )

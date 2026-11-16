@@ -108,22 +108,22 @@ export function ManualWeatherModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-[#D4E8DC] overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-[var(--color-green-200)] overflow-hidden flex flex-col max-h-[90vh]">
         {/* Modal Header */}
-        <div className="px-6 py-4.5 bg-gradient-to-r from-[#0B6344] to-[#04402F] text-white flex items-center justify-between">
+        <div className="px-6 py-4.5 bg-gradient-to-r from-emerald-800 to-emerald-950 text-white flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center">
               <Thermometer className="w-4 h-4 text-emerald-300" />
             </div>
             <div>
               <h3 className="text-base font-bold text-white">Manual Weather & Location</h3>
-              <p className="text-xs text-emerald-200/80">Configure environmental data for AI disease diagnosis</p>
+              <p className="text-sm text-emerald-100">Configure environmental data for AI disease diagnosis</p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -132,9 +132,9 @@ export function ManualWeatherModal({
         {/* Modal Body */}
         <div className="p-6 overflow-y-auto space-y-5">
           {/* Quick city fetch */}
-          <div className="p-4 rounded-xl bg-[#F0FAF4] border border-[#B0D8C4] space-y-2.5">
-            <label className="text-xs font-bold text-[#10231D] flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#0B8F68]" />
+          <div className="p-4 rounded-xl bg-[var(--color-green-50)] border border-[var(--color-green-300)] space-y-2.5">
+            <label className="text-sm font-bold text-[var(--color-ink)] flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-emerald-700" />
               Auto-fetch by City / District Name
             </label>
             <div className="flex gap-2">
@@ -143,41 +143,41 @@ export function ManualWeatherModal({
                 value={cityInput}
                 onChange={(e) => setCityInput(e.target.value)}
                 placeholder="e.g. Ludhiana, Nashik, Hyderabad..."
-                className="input input-sm flex-1 bg-white text-xs font-semibold"
+                className="input input-sm flex-1 bg-white text-sm font-semibold"
                 onKeyDown={(e) => { if (e.key === 'Enter') void handleSearchCity() }}
               />
               <button
                 type="button"
                 onClick={() => void handleSearchCity()}
                 disabled={isSearchingCity}
-                className="btn btn-primary btn-sm shrink-0 gap-1 text-xs"
+                className="btn btn-primary btn-sm shrink-0 gap-1 text-sm cursor-pointer"
               >
                 {isSearchingCity ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Search className="w-3.5 h-3.5" />}
                 Fetch
               </button>
             </div>
             {searchFeedback && (
-              <p className="text-[11px] font-medium text-[#0B8F68]">{searchFeedback}</p>
+              <p className="text-sm font-medium text-emerald-800">{searchFeedback}</p>
             )}
           </div>
 
           {/* Manual Parameter Sliders / Inputs */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#10231D] uppercase tracking-wider">Custom Weather Parameters</span>
-              <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
-                Manual Override
+              <span className="text-sm font-semibold text-[var(--color-ink)]">Custom weather parameters</span>
+              <span className="text-xs font-medium text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full">
+                Manual override
               </span>
             </div>
 
             {/* Temperature */}
             <div className="space-y-1.5">
-              <div className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-[#10231D] flex items-center gap-1.5">
-                  <Thermometer className="w-3.5 h-3.5 text-orange-500" />
+              <div className="flex justify-between items-center text-sm">
+                <span className="font-semibold text-[var(--color-ink)] flex items-center gap-1.5">
+                  <Thermometer className="w-3.5 h-3.5 text-orange-600" />
                   Temperature (°C)
                 </span>
-                <span className="font-bold text-[#0B8F68] text-sm">{temp}°C</span>
+                <span className="font-bold text-emerald-800 text-sm">{temp}°C</span>
               </div>
               <input
                 type="range"
@@ -186,9 +186,9 @@ export function ManualWeatherModal({
                 step="0.5"
                 value={temp}
                 onChange={(e) => setTemp(parseFloat(e.target.value))}
-                className="w-full accent-[#0B8F68]"
+                className="w-full accent-emerald-700"
               />
-              <div className="flex justify-between text-[10px] text-[#64736C]">
+              <div className="flex justify-between text-xs text-[var(--color-ink-2)]">
                 <span>5°C (Cool)</span>
                 <span>28°C (Optimal)</span>
                 <span>48°C (Hot)</span>
@@ -197,12 +197,12 @@ export function ManualWeatherModal({
 
             {/* Relative Humidity */}
             <div className="space-y-1.5">
-              <div className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-[#10231D] flex items-center gap-1.5">
-                  <Droplets className="w-3.5 h-3.5 text-blue-500" />
+              <div className="flex justify-between items-center text-sm">
+                <span className="font-semibold text-[var(--color-ink)] flex items-center gap-1.5">
+                  <Droplets className="w-3.5 h-3.5 text-blue-600" />
                   Relative Humidity (%)
                 </span>
-                <span className="font-bold text-[#0B8F68] text-sm">{humidity}%</span>
+                <span className="font-bold text-emerald-800 text-sm">{humidity}%</span>
               </div>
               <input
                 type="range"
@@ -211,9 +211,9 @@ export function ManualWeatherModal({
                 step="1"
                 value={humidity}
                 onChange={(e) => setHumidity(parseInt(e.target.value, 10))}
-                className="w-full accent-[#0B8F68]"
+                className="w-full accent-emerald-700"
               />
-              <div className="flex justify-between text-[10px] text-[#64736C]">
+              <div className="flex justify-between text-xs text-[var(--color-ink-2)]">
                 <span>20% (Dry)</span>
                 <span>65% (Moderate)</span>
                 <span>100% (Saturated)</span>
@@ -222,12 +222,12 @@ export function ManualWeatherModal({
 
             {/* Rainfall */}
             <div className="space-y-1.5">
-              <div className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-[#10231D] flex items-center gap-1.5">
-                  <CloudRain className="w-3.5 h-3.5 text-indigo-500" />
+              <div className="flex justify-between items-center text-sm">
+                <span className="font-semibold text-[var(--color-ink)] flex items-center gap-1.5">
+                  <CloudRain className="w-3.5 h-3.5 text-indigo-600" />
                   Rainfall (mm)
                 </span>
-                <span className="font-bold text-[#0B8F68] text-sm">{rainfall} mm</span>
+                <span className="font-bold text-emerald-800 text-sm">{rainfall} mm</span>
               </div>
               <input
                 type="range"
@@ -236,9 +236,9 @@ export function ManualWeatherModal({
                 step="0.5"
                 value={rainfall}
                 onChange={(e) => setRainfall(parseFloat(e.target.value))}
-                className="w-full accent-[#0B8F68]"
+                className="w-full accent-emerald-700"
               />
-              <div className="flex justify-between text-[10px] text-[#64736C]">
+              <div className="flex justify-between text-xs text-[var(--color-ink-2)]">
                 <span>0 mm (None)</span>
                 <span>15 mm (Moderate)</span>
                 <span>60 mm (Heavy)</span>
@@ -247,12 +247,12 @@ export function ManualWeatherModal({
 
             {/* Wind Speed */}
             <div className="space-y-1.5">
-              <div className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-[#10231D] flex items-center gap-1.5">
-                  <Wind className="w-3.5 h-3.5 text-emerald-500" />
+              <div className="flex justify-between items-center text-sm">
+                <span className="font-semibold text-[var(--color-ink)] flex items-center gap-1.5">
+                  <Wind className="w-3.5 h-3.5 text-emerald-600" />
                   Wind Speed (km/h)
                 </span>
-                <span className="font-bold text-[#0B8F68] text-sm">{wind} km/h</span>
+                <span className="font-bold text-emerald-800 text-sm">{wind} km/h</span>
               </div>
               <input
                 type="range"
@@ -261,17 +261,17 @@ export function ManualWeatherModal({
                 step="1"
                 value={wind}
                 onChange={(e) => setWind(parseFloat(e.target.value))}
-                className="w-full accent-[#0B8F68]"
+                className="w-full accent-emerald-700"
               />
             </div>
 
             {/* Weather Condition */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-[#10231D]">Sky / Atmosphere Condition</label>
+              <label className="text-sm font-semibold text-[var(--color-ink)]">Sky / Atmosphere Condition</label>
               <select
                 value={condition}
                 onChange={(e) => setCondition(e.target.value)}
-                className="select select-sm w-full bg-white text-xs font-medium"
+                className="select select-sm w-full bg-white text-sm font-medium border border-stone-200 rounded-xl"
               >
                 <option value="Sunny / Clear">Sunny / Clear</option>
                 <option value="Partly Cloudy">Partly Cloudy</option>
@@ -285,11 +285,11 @@ export function ManualWeatherModal({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-4 bg-[#F9FDF9] border-t border-[#D4E8DC] flex flex-wrap items-center justify-between gap-3">
+        <div className="px-6 py-4 bg-stone-50 border-t border-[var(--color-green-200)] flex flex-wrap items-center justify-between gap-3">
           <button
             type="button"
             onClick={handleResetLive}
-            className="btn btn-secondary btn-sm gap-1 text-xs"
+            className="btn btn-secondary btn-sm gap-1 text-sm font-semibold cursor-pointer"
             title="Clear manual weather and fetch real live GPS/IP weather"
           >
             <RefreshCw className="w-3.5 h-3.5" />
@@ -299,14 +299,14 @@ export function ManualWeatherModal({
             <button
               type="button"
               onClick={onClose}
-              className="btn btn-secondary btn-sm text-xs"
+              className="btn btn-secondary btn-sm text-sm font-semibold cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={handleSaveManual}
-              className="btn btn-primary btn-sm gap-1 text-xs"
+              className="btn btn-primary btn-sm gap-1 text-sm font-semibold cursor-pointer"
             >
               <Check className="w-3.5 h-3.5" />
               Apply Weather

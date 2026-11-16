@@ -99,8 +99,8 @@ export function HistoryDrawer({
                   <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center mx-auto mb-2">
                     <MessageSquare className="w-5 h-5" />
                   </div>
-                  <p className="text-xs font-bold text-emerald-950 mb-1">{t('history.empty')}</p>
-                  <p className="text-[11px] text-stone-500 leading-relaxed">
+                  <p className="text-sm font-bold text-emerald-950 mb-1">{t('history.empty')}</p>
+                  <p className="text-sm text-stone-600 leading-relaxed">
                     {t('assistant.emptyHint')}
                   </p>
                 </div>
@@ -110,7 +110,7 @@ export function HistoryDrawer({
                     key={idx}
                     type="button"
                     onClick={() => { onSelectQuery(q); onClose() }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50/70 border border-transparent hover:border-emerald-200 text-xs text-stone-700 hover:text-emerald-950 font-medium flex items-center justify-between gap-2 group transition-all cursor-pointer"
+                    className="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50/70 border border-transparent hover:border-emerald-200 text-sm text-stone-700 hover:text-emerald-950 font-medium flex items-center justify-between gap-2 group transition-all cursor-pointer"
                   >
                     <span className="truncate flex-1">{q}</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-all shrink-0" />
@@ -120,7 +120,7 @@ export function HistoryDrawer({
             </div>
 
             {/* Footer */}
-            <div className="p-3 bg-emerald-50/50 border-t border-emerald-100 text-[11px] text-stone-500 text-center">
+            <div className="p-3 bg-emerald-50/50 border-t border-emerald-100 text-sm text-stone-600 text-center">
               FloraAI Agronomy Engine v2.4
             </div>
           </motion.aside>

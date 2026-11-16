@@ -7,10 +7,10 @@ import type { Plant, HistoryItem, Crop, TimelineEntry } from '../types'
 import { PLANT_IMAGES } from './plantImages'
 
 export const MOCK_CROPS: Crop[] = [
-  { name: 'rice',     label: 'Rice',     emoji: '🌾', sciName: 'Oryza sativa' },
-  { name: 'wheat',    label: 'Wheat',    emoji: '🌾', sciName: 'Triticum aestivum' },
-  { name: 'sugarcane',label: 'Sugarcane',emoji: '🎋', sciName: 'Saccharum officinarum' },
-  { name: 'cotton',   label: 'Cotton',   emoji: '🌿', sciName: 'Gossypium hirsutum' },
+  { name: 'rice',     label: 'Rice',     emoji: '', sciName: 'Oryza sativa' },
+  { name: 'wheat',    label: 'Wheat',    emoji: '', sciName: 'Triticum aestivum' },
+  { name: 'sugarcane',label: 'Sugarcane',emoji: '', sciName: 'Saccharum officinarum' },
+  { name: 'cotton',   label: 'Cotton',   emoji: '', sciName: 'Gossypium hirsutum' },
 ]
 
 export const CROP_IMAGES = {

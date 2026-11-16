@@ -86,12 +86,12 @@ export function DiseaseRisk({ riskLevel, riskReason, compact = false }: DiseaseR
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span className={`text-xs font-bold uppercase tracking-wider ${config.textColor}`}>
+          <span className={`text-sm font-semibold ${config.textColor}`}>
             {config.label}
           </span>
         </div>
         {normalizedRiskReason && (
-          <p className="text-xs text-[#4A5E52] mt-1 leading-relaxed">
+          <p className="text-sm text-[var(--color-ink-2)] mt-1 leading-relaxed">
             {normalizedRiskReason}
           </p>
         )}

@@ -1,4 +1,4 @@
-// WeatherCard.tsx — BioScan Lab dark weather & risk widget
+// WeatherCard.tsx — FloraAI calm weather & risk context card
 import { MapPin, Thermometer, Droplets, Wind, RefreshCw } from 'lucide-react'
 import { useLang } from '../contexts/LanguageContext'
 import type { LocationContextData } from '../types'
@@ -14,84 +14,86 @@ export function WeatherCard({ data, isLoading, onRefresh, compact = false }: Wea
   const { t } = useLang()
 
   const riskConfig: Record<string, { label: string; color: string; bg: string; border: string }> = {
-    Low:    { label: t('risk.low'),    color: 'var(--neon-green)', bg: 'rgba(0,255,136,0.08)', border: 'rgba(0,255,136,0.25)' },
-    Medium: { label: t('risk.medium'), color: 'var(--neon-amber)', bg: 'rgba(255,184,0,0.08)', border: 'rgba(255,184,0,0.25)' },
-    High:   { label: t('risk.high'),   color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' },
-    Severe: { label: t('risk.severe'), color: 'var(--neon-red)',   bg: 'rgba(255,69,96,0.08)', border: 'rgba(255,69,96,0.25)' },
+    Low:    { label: t('risk.low'),    color: 'text-[var(--color-green-700)]', bg: 'bg-[var(--color-green-50)]',   border: 'border-[var(--color-green-200)]' },
+    Medium: { label: t('risk.medium'), color: 'text-[var(--color-warn)]',       bg: 'bg-[var(--color-warn-bg)]',    border: 'border-[var(--color-warn-border)]' },
+    High:   { label: t('risk.high'),   color: 'text-[var(--color-danger)]',     bg: 'bg-[var(--color-danger-bg)]', border: 'border-[var(--color-danger-border)]' },
+    Severe: { label: t('risk.severe'), color: 'text-[var(--color-danger)]',     bg: 'bg-[var(--color-danger-bg)]', border: 'border-[var(--color-danger-border)]' },
   }
 
   const risk = riskConfig[data?.risk_level ?? ''] ?? riskConfig['Medium']
 
   return (
-    <div className="bio-card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <MapPin style={{ width: 13, height: 13, color: 'var(--neon-cyan)' }} />
-          <span className="eyebrow">{t('weather.context')}</span>
+    <div className="bg-white rounded-2xl border border-[var(--color-green-200)] p-4 flex flex-col gap-3 shadow-sm">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-1.5 text-[var(--color-green-700)]">
+          <MapPin className="w-4 h-4 shrink-0" />
+          <span className="text-sm font-semibold text-[var(--color-ink)]">{t('weather.context')}</span>
         </div>
-        <button type="button" onClick={onRefresh} disabled={isLoading} aria-label={t('weather.update')}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 4, background: 'none', border: 'none',
-            cursor: 'pointer', color: 'var(--neon-green)', fontSize: '0.65rem',
-            fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', opacity: isLoading ? 0.5 : 1,
-          }}>
-          <RefreshCw style={{ width: 11, height: 11, animation: isLoading ? 'bio-spin 1s linear infinite' : 'none' }} />
+        <button
+          type="button"
+          onClick={onRefresh}
+          disabled={isLoading}
+          aria-label={t('weather.update')}
+          className="flex items-center gap-1.5 text-sm font-semibold text-[var(--color-green-700)] hover:text-[var(--color-green-800)] cursor-pointer disabled:opacity-50 min-h-[44px] px-2 bg-transparent border-none transition-colors"
+        >
+          <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
           <span>{t('weather.update')}</span>
         </button>
       </div>
 
       {isLoading ? (
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-          <span className="animate-pulse-dot" style={{ display: 'inline-block', marginRight: 6 }}>●</span>
-          {t('weather.locating')}
+        <div className="text-sm text-[var(--color-ink-2)] flex items-center gap-2 py-2">
+          <span className="w-2 h-2 rounded-full bg-[var(--color-green-500)] animate-pulse" />
+          <span>{t('weather.locating')}</span>
         </div>
       ) : data ? (
         <>
           <div>
-            <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 2 }}>
+            <div className="text-sm font-bold text-[var(--color-ink)]">
               {data.location.city}, {data.location.state}
             </div>
             {!compact && (
-              <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{data.location.country}</div>
+              <div className="text-xs text-[var(--color-ink-2)]">{data.location.country}</div>
             )}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+          <div className="grid grid-cols-3 gap-2">
             {[
-              { icon: Thermometer, value: `${data.weather.temperature_c}°C`, color: '#FF8C4A' },
-              { icon: Droplets,    value: `${data.weather.humidity_percent}%`, color: 'var(--neon-cyan)' },
-              { icon: Wind,        value: `${data.weather.wind_kmh}km/h`, color: 'var(--text-secondary)' },
-            ].map(({ icon: Icon, value, color }) => (
-              <div key={value} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '8px 4px', borderRadius: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-subtle)' }}>
-                <Icon style={{ width: 13, height: 13, color }} />
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{value}</span>
+              { icon: Thermometer, value: `${data.weather.temperature_c}°C` },
+              { icon: Droplets,    value: `${data.weather.humidity_percent}%` },
+              { icon: Wind,        value: `${data.weather.wind_kmh}km/h` },
+            ].map(({ icon: Icon, value }) => (
+              <div
+                key={value}
+                className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[var(--color-green-50)] border border-[var(--color-green-100)]"
+              >
+                <Icon className="w-3.5 h-3.5 text-[var(--color-green-700)]" />
+                <span className="text-xs font-bold text-[var(--color-ink)]">{value}</span>
               </div>
             ))}
           </div>
 
-          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+          <div className="text-xs text-[var(--color-ink-2)]">
             {data.weather.condition}
           </div>
 
           {/* Risk indicator */}
-          <div style={{
-            display: 'flex', alignItems: 'flex-start', gap: 8,
-            padding: '10px 12px', borderRadius: 8,
-            background: risk.bg, border: `1px solid ${risk.border}`,
-          }}>
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: risk.color, boxShadow: `0 0 6px ${risk.color}`, flexShrink: 0, marginTop: 3 }} />
+          <div className={`flex items-start gap-2.5 p-3 rounded-xl border ${risk.bg} ${risk.border}`}>
+            <span className={`w-2 h-2 rounded-full shrink-0 mt-1 bg-current ${risk.color}`} />
             <div>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: risk.color, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
+              <span className={`text-xs font-bold ${risk.color}`}>
                 {risk.label}
               </span>
               {!compact && data.risk_reason && (
-                <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.5 }}>{data.risk_reason}</p>
+                <p className="text-sm text-[var(--color-ink-2)] mt-0.5 leading-relaxed">
+                  {data.risk_reason}
+                </p>
               )}
             </div>
           </div>
         </>
       ) : (
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+        <div className="text-sm text-[var(--color-ink-2)] py-2">
           {t('weather.prompt')}
         </div>
       )}

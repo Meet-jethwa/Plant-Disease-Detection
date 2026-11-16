@@ -1,4 +1,4 @@
-// CropSelector.tsx — Scrollable crop selection grid
+// CropSelector.tsx — Accessible crop selection grid
 import type { Crop } from '../types'
 import { MOCK_CROPS } from '../data/mockData'
 import { useLang } from '../contexts/LanguageContext'
@@ -13,9 +13,9 @@ export function CropSelector({ crops = MOCK_CROPS, selectedCrop, onSelect }: Cro
   const { t } = useLang()
 
   return (
-    <div>
-      <p className="section-label mb-3 text-center">{t('scan.selectCrop')}</p>
-      <div className="grid grid-cols-4 gap-2">
+    <div className="space-y-3">
+      <p className="text-sm font-semibold text-[var(--color-ink)] text-left">{t('scan.selectCrop')}</p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
         {crops.map(crop => {
           const isSelected = selectedCrop === crop.name
           const cropKey = `crop.${crop.name.toLowerCase()}`
@@ -27,21 +27,15 @@ export function CropSelector({ crops = MOCK_CROPS, selectedCrop, onSelect }: Cro
               type="button"
               onClick={() => onSelect(crop.name)}
               aria-pressed={isSelected}
-              className={`flex flex-col items-center gap-1 p-2 sm:p-3 rounded-xl border text-center cursor-pointer transition-all ${
+              className={`flex items-center justify-center p-3 rounded-xl border text-center cursor-pointer transition-all min-h-[48px] sm:min-h-[52px] ${
                 isSelected
-                  ? 'bg-[#0B8F68] text-white border-[#065E44] shadow-md shadow-[#0B8F68]/25'
-                  : 'bg-white text-[#64736C] border-[#D4E8DC] hover:border-[#0B8F68] hover:bg-[#F0FBF5] hover:text-[#10231D]'
+                  ? 'bg-[var(--color-green-700)] text-white border-[var(--color-green-700)] font-semibold shadow-sm'
+                  : 'bg-white text-[var(--color-ink)] border-[#E4E7E2] hover:border-[var(--color-green-700)] hover:bg-[#F2F4F0]'
               }`}
             >
-              <span className="text-xl sm:text-2xl leading-none" role="img" aria-label={translatedName}>
-                {crop.emoji ?? '🌿'}
-              </span>
-              <span className="text-[10px] sm:text-xs font-semibold leading-tight mt-0.5 truncate w-full text-center">
+              <span className="text-sm font-semibold leading-tight truncate w-full text-center">
                 {translatedName}
               </span>
-              {isSelected && (
-                <span className="w-1.5 h-1.5 rounded-full bg-white/80 mt-0.5" />
-              )}
             </button>
           )
         })}

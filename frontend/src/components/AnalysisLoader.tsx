@@ -111,10 +111,10 @@ export function AnalysisLoader({
 
   return (
     <div className="w-full flex items-center justify-center p-4">
-      <div className="w-full max-w-sm rounded-2xl border border-[#D4E8DC] bg-white p-6 shadow-sm flex flex-col items-center text-center">
+      <div className="w-full max-w-sm rounded-2xl border border-[var(--color-green-200)] bg-white p-6 shadow-sm flex flex-col items-center text-center">
         
         {/* Leaf photo thumbnail (96px, rounded) */}
-        <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-[#B0D8C4] bg-[#F0FAF4] shadow-xs flex items-center justify-center shrink-0">
+        <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-[var(--color-green-300)] bg-[var(--color-green-50)] shadow-xs flex items-center justify-center shrink-0">
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -122,7 +122,7 @@ export function AnalysisLoader({
               className="h-full w-full object-cover"
             />
           ) : (
-            <Leaf className="h-10 w-10 text-[#15803D]" />
+            <Leaf className="h-10 w-10 text-[var(--color-brand)]" />
           )}
 
           {/* Soft green scan line sweeping across thumbnail (transform & opacity only) */}
@@ -142,7 +142,7 @@ export function AnalysisLoader({
           <p
             aria-live="polite"
             className={`text-[20px] font-semibold leading-snug ${
-              isTimeoutError ? 'text-red-700' : 'text-[#17211D]'
+              isTimeoutError ? 'text-red-700' : 'text-[var(--color-ink)]'
             }`}
           >
             {displaySentence}
@@ -189,7 +189,7 @@ export function AnalysisLoader({
             </div>
 
             {/* Percentage in 16px bold text on the right */}
-            <span className="w-12 text-right text-base font-bold text-[#17211D] tabular-nums shrink-0">
+            <span className="w-12 text-right text-base font-bold text-[var(--color-ink)] tabular-nums shrink-0">
               {roundedPercentage}%
             </span>
           </div>
@@ -219,7 +219,7 @@ export function AnalysisLoader({
             <button
               type="button"
               onClick={onCancel}
-              className="min-h-[48px] px-4 py-3 text-sm font-medium text-[#66736C] hover:text-[#17211D] transition-colors cursor-pointer flex items-center justify-center"
+              className="min-h-[48px] px-4 py-3 text-sm font-medium text-[var(--color-ink-2)] hover:text-[var(--color-ink)] transition-colors cursor-pointer flex items-center justify-center"
               aria-label={t('btn.cancel')}
             >
               {t('btn.cancel')}

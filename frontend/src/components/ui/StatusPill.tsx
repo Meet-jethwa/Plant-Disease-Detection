@@ -5,13 +5,15 @@
  * - ALWAYS icon + text together. Never color-only for disease severity.
  * - Sentence-case labels.
  * - Three states: healthy | warning | danger
+ * - Zero inline styles
  */
 
 import { CheckCircle2, AlertTriangle, XCircle } from 'lucide-react'
+import type { SeverityStatus } from '../../lib/theme'
 
-type Severity = 'healthy' | 'warning' | 'danger'
+export type Severity = SeverityStatus
 
-interface StatusPillProps {
+export interface StatusPillProps {
   severity: Severity
   label?: string
   className?: string
@@ -28,16 +30,8 @@ export function StatusPill({ severity, label, className = '' }: StatusPillProps)
 
   return (
     <span className={`${baseClass} ${className}`} role="status">
-      <Icon style={{ width: 16, height: 16, flexShrink: 0 }} aria-hidden />
+      <Icon className="w-4 h-4 shrink-0" aria-hidden />
       <span>{label ?? defaultLabel}</span>
     </span>
   )
-}
-
-/** Maps a disease severity string to a StatusPill severity value */
-export function severityToStatus(severity: string): Severity {
-  const s = severity.toLowerCase()
-  if (s === 'healthy' || s === 'low') return 'healthy'
-  if (s === 'severe' || s === 'critical' || s === 'high') return 'danger'
-  return 'warning'
 }

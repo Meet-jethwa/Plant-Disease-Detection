@@ -61,5 +61,14 @@
   "diagnosis.factorInfluence": "ਵਾਤਾਵਰਣ ਦਾ ਅਸਰ",
   "diagnosis.sympLesions": "ਪੱਤਿਆਂ 'ਤੇ ਰੰਗ ਬਦਲਣ ਵਾਲੇ ਦਾਗ",
   "diagnosis.sympNecrosis": "ਕੰਢਿਆਂ ਦਾ ਸੁੱਕਣਾ ਜਾਂ ਗਲਣਾ",
-  "diagnosis.sympVascular": "ਨਸਾਂ ਵਿੱਚ ਖਿੱਚ ਜਾਂ ਕਮਜ਼ੋਰੀ"
+  "diagnosis.sympVascular": "ਨਸਾਂ ਵਿੱਚ ਖਿੱਚ ਜਾਂ ਕਮਜ਼ੋਰੀ",
+  "diagnosis.gradcamHeatmap": "ਹੀਟਮੈਪ",
+  "diagnosis.stepIsolate": "ਬਿਮਾਰੀ ਹੋਰ ਫ਼ਸਲਾਂ ਵਿੱਚ ਨਾ ਫੈਲੇ ਇਸ ਲਈ ਪ੍ਰਭਾਵਿਤ ਬੂਟਿਆਂ ਨੂੰ ਤੁਰੰਤ ਵੱਖ ਕਰੋ।",
+  "diagnosis.stepRefrain": "ਪੱਤਿਆਂ ਨੂੰ ਸੁੱਕਾ ਰੱਖਣ ਅਤੇ ਉੱਲੀ ਦੇ ਫੈਲਾਅ ਨੂੰ ਰੋਕਣ ਲਈ ਉੱਪਰੋਂ ਪਾਣੀ ਦੇਣ ਤੋਂ ਬਚੋ।",
+  "diagnosis.stepInspect": "ਲੱਛਣਾਂ ਦੀ ਜਲਦੀ ਪਛਾਣ ਲਈ ਆਲੇ-ਦੁਆਲੇ ਦੇ ਬੂਟਿਆਂ ਦੀ ਹਰ ਹਫ਼ਤੇ ਜਾਂਚ ਕਰੋ।",
+  "diagnosis.stepConsult": "ਸਹੀ ਇਲਾਜ ਅਤੇ ਉਪਾਵਾਂ ਲਈ ਆਪਣੇ ਸਥਾਨਕ ਖੇਤੀਬਾੜੀ ਅਧਿਕਾਰੀ ਨਾਲ ਸਲਾਹ ਕਰੋ।",
+  "diagnosis.stepSpacing": "ਹਵਾ ਅਤੇ ਧੁੱਪ ਦੇ ਸਹੀ ਸੰਚਾਰ ਲਈ ਬੂਟਿਆਂ ਵਿਚਕਾਰ ਢੁਕਵਾਂ ਫਾਸਲਾ ਰੱਖੋ।",
+  "diagnosis.stepFertilizer": "ਬਹੁਤ ਜ਼ਿਆਦਾ ਨਾਈਟ੍ਰੋਜਨ ਖਾਦ ਦੀ ਵਰਤੋਂ ਨਾ ਕਰੋ, ਜਿਸ ਨਾਲ ਬੂਟੇ ਬਿਮਾਰੀ ਪ੍ਰਤੀ ਕਮਜ਼ੋਰ ਹੋ ਜਾਂਦੇ ਹਨ।",
+  "diagnosis.stepIrrigation": "ਪੱਤਿਆਂ ਦੀ ਨਮੀ ਘਟਾਉਣ ਲਈ ਤੁਪਕਾ ਸਿੰਚਾਈ ਪ੍ਰਣਾਲੀ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+  "diagnosis.stepCultivars": "ਆਪਣੇ ਖੇਤਰ ਲਈ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀਆਂ ਪ੍ਰਮਾਣਿਤ ਬਿਮਾਰੀ-ਰੋਧਕ ਕਿਸਮਾਂ ਹੀ ਬੀਜੋ।"
 }

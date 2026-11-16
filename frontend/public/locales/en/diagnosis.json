@@ -61,5 +61,14 @@
   "diagnosis.factorInfluence": "Environmental Factor Influence",
   "diagnosis.sympLesions": "Discolored foliar lesions",
   "diagnosis.sympNecrosis": "Necrotic margin formation",
-  "diagnosis.sympVascular": "Vascular tissue stress"
+  "diagnosis.sympVascular": "Vascular tissue stress",
+  "diagnosis.gradcamHeatmap": "Pure Heatmap",
+  "diagnosis.stepIsolate": "Isolate affected plants immediately to avoid spreading to adjacent crops.",
+  "diagnosis.stepRefrain": "Avoid overhead watering to keep plant foliage dry and inhibit fungal spread.",
+  "diagnosis.stepInspect": "Inspect surrounding plants weekly for early detection of lesions or spots.",
+  "diagnosis.stepConsult": "Consult your local agricultural extension officer for approved control measures.",
+  "diagnosis.stepSpacing": "Maintain adequate plant spacing to allow healthy air circulation and sunlight.",
+  "diagnosis.stepFertilizer": "Avoid excessive nitrogen fertilization which creates succulent, susceptible tissue.",
+  "diagnosis.stepIrrigation": "Switch to drip or furrow irrigation to minimize leaf wetness duration.",
+  "diagnosis.stepCultivars": "Use certified resistant seed varieties recommended for your agro-climatic zone."
 }

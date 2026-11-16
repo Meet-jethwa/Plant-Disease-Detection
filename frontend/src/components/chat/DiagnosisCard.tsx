@@ -108,13 +108,13 @@ export function DiagnosisCard({ data, prediction }: DiagnosisCardProps) {
                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
               />
             </svg>
-            <span className="absolute text-xs font-bold text-emerald-950">
+            <span className="absolute text-sm font-bold text-emerald-950">
               {confidence}%
             </span>
           </div>
           <div className="text-left">
-            <span className="block text-[11px] font-bold text-emerald-900 uppercase tracking-wider">{t('common.confidence')}</span>
-            <span className="block text-xs text-stone-500">{t('card.diagnosisSummary')}</span>
+            <span className="block text-sm font-semibold text-emerald-900">{t('common.confidence')}</span>
+            <span className="block text-sm text-stone-600">{t('card.diagnosisSummary')}</span>
           </div>
         </div>
       </div>
@@ -235,7 +235,7 @@ export function DiagnosisCard({ data, prediction }: DiagnosisCardProps) {
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <p className="text-[11px] font-bold text-stone-600 text-center uppercase tracking-wider">
+                        <p className="text-sm font-semibold text-stone-600 text-center">
                           {t('card.original')}
                         </p>
                       </div>
@@ -250,7 +250,7 @@ export function DiagnosisCard({ data, prediction }: DiagnosisCardProps) {
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <p className="text-[11px] font-bold text-emerald-800 text-center uppercase tracking-wider">
+                        <p className="text-sm font-semibold text-emerald-800 text-center">
                           {t('card.gradcam')}
                         </p>
                       </div>

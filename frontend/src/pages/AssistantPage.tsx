@@ -1,5 +1,4 @@
 // AssistantPage.tsx — FloraAI Conversational Field & Crop Advisor
-// Mobile-first 100dvh chat with pinned composer, centered hero desktop column, and collapsible history drawer
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -165,35 +164,35 @@ export function AssistantPage({
     return () => clearTimeout(timer)
   }, [isAsking])
 
-  // Track session user queries
+  // Extract session queries for history
   const sessionQueries = useMemo(() => {
-    return chat.filter(m => m.role === 'user').map(m => m.text)
+    return chat
+      .filter((m) => m.role === 'user')
+      .map((m) => m.text)
   }, [chat])
 
-  // Auto-scroll to latest message
+  // Scroll to bottom
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  // Auto-scroll on new messages
   useEffect(() => {
     if (!showScrollBottom) {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
   }, [chat, isAsking, showScrollBottom])
 
-  // Handle scroll detection for "Jump to latest"
+  // Handle scroll to show/hide jump-to-bottom button
   function handleScroll() {
     if (!messagesContainerRef.current) return
     const { scrollTop, scrollHeight, clientHeight } = messagesContainerRef.current
-    const distanceFromBottom = scrollHeight - scrollTop - clientHeight
-    setShowScrollBottom(distanceFromBottom > 160)
-  }
-
-  function scrollToBottom() {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-    setShowScrollBottom(false)
+    const isScrolledUp = scrollHeight - scrollTop - clientHeight > 180
+    setShowScrollBottom(isScrolledUp)
   }
 
   // Text to speech handler
   function handleToggleSpeak(text: string, index: number) {
-    if (!('speechSynthesis' in window)) return
-
     if (speakingIndex === index) {
       window.speechSynthesis.cancel()
       setSpeakingIndex(null)
@@ -209,7 +208,6 @@ export function AssistantPage({
     utterance.lang = bcp47
     utterance.rate = 0.95
 
-    // Pick exact voice or best prefix match; fall back to browser default
     const voices = window.speechSynthesis.getVoices()
     const voice = voices.find((v) => v.lang === bcp47)
       ?? voices.find((v) => v.lang.startsWith(bcp47.split('-')[0]))
@@ -252,10 +250,9 @@ export function AssistantPage({
     ]
   }, [chat, t])
 
-  // Weather chip string (temp + one-word condition, dropping unexplained soil %)
+  // Weather chip string (quiet secondary element)
   const tempVal = locationData?.weather?.temperature_c ? `${locationData.weather.temperature_c.toFixed(0)}°C` : '31°C'
   const conditionVal = locationData?.weather?.condition || 'Overcast'
-  // Weather question generated from current weather context
   const weatherQuestion = useMemo(() => {
     if (lang === 'hi') {
       return `आज के मौसम (${conditionVal}, ${tempVal}) के बाद फसल की सिंचाई और देखभाल के लिए मुझे क्या करना चाहिए?`
@@ -263,58 +260,56 @@ export function AssistantPage({
     return `What should I do about crop irrigation and protection after today's weather (${conditionVal}, ${tempVal})?`
   }, [conditionVal, tempVal, lang])
 
-  // Is chat currently in empty state (only initial welcome message, 0 user messages)
   const isOnlyWelcome = sessionQueries.length === 0
 
   return (
-    <div className="flex flex-col h-full max-h-full min-h-0 bg-[#F7FAF8] overflow-hidden select-text relative w-full">
+    <div className="flex flex-col h-full max-h-full min-h-0 bg-[var(--color-bg)] overflow-hidden select-text relative w-full">
       
-      {/* ── Slim Header (Pinned, 24px horizontal padding so chips never touch edges) ── */}
-      <header className="h-14 sm:h-16 bg-white border-b border-emerald-100 px-6 flex items-center justify-between shrink-0 z-20 shadow-xs">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 shrink-0">
-            <Leaf className="w-5 h-5" />
+      {/* ── Header: Centered Max-Width Column (~720px) ── */}
+      <header className="h-14 sm:h-16 bg-white border-b border-[var(--color-green-100)] shrink-0 z-20 shadow-xs">
+        <div className="max-w-[720px] mx-auto w-full h-full px-4 sm:px-6 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-xl bg-[var(--color-green-100)] flex items-center justify-center text-[var(--color-green-700)] shrink-0">
+              <Leaf className="w-4 sm:w-5 h-4 sm:h-5" />
+            </div>
+            <div className="min-w-0">
+              <h1 className="text-base sm:text-lg font-bold text-[var(--color-ink)] truncate leading-tight">
+                {copy.title}
+              </h1>
+              <p className="text-xs text-[var(--color-ink-2)] truncate hidden sm:block">
+                Field intelligence & disease protocols
+              </p>
+            </div>
           </div>
-          <div className="min-w-0">
-            <h1 className="text-base sm:text-lg font-bold text-emerald-950 truncate leading-tight">
-              {copy.title}
-            </h1>
-            <p className="text-xs text-stone-500 truncate hidden sm:block">
-              Field intelligence & disease protocols
-            </p>
+
+          {/* Right side: Quiet secondary weather chip + History button */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => handleSend(weatherQuestion)}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[var(--color-green-50)] text-[var(--color-green-700)] border border-[var(--color-green-200)] text-xs font-medium hover:bg-[var(--color-green-100)] transition-colors cursor-pointer min-h-[36px]"
+              aria-label={`Ask weather advice: ${weatherQuestion}`}
+              title="Tap for weather context advice"
+            >
+              <CloudSun className="w-3.5 h-3.5 text-[var(--color-green-700)] shrink-0" />
+              <span>{tempVal} · {conditionVal}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setIsHistoryOpen(true)}
+              className="h-9 px-3 rounded-xl border border-[var(--color-green-200)] hover:border-[var(--color-green-400)] bg-white hover:bg-[var(--color-green-50)] text-[var(--color-ink)] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer min-h-[36px] shrink-0"
+              aria-label="Open conversation history panel"
+            >
+              <Clock className="w-3.5 h-3.5 text-[var(--color-ink-2)] shrink-0" />
+              <span className="hidden sm:inline">History</span>
+              {sessionQueries.length > 0 && (
+                <span className="w-4 h-4 rounded-full bg-[var(--color-green-700)] text-white text-xs flex items-center justify-center font-bold">
+                  {sessionQueries.length}
+                </span>
+              )}
+            </button>
           </div>
-        </div>
-
-        {/* Right side: Tappable Weather Advice chip + History button */}
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={() => handleSend(weatherQuestion)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-semibold hover:bg-emerald-100 focus-visible:ring-2 focus-visible:ring-emerald-700 transition-colors cursor-pointer shadow-2xs"
-            aria-label={`Ask weather advice: ${weatherQuestion}`}
-            title="Tap for irrigation & disease advice based on today's weather"
-          >
-            <CloudSun className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-            <span className="font-bold">{tempVal} · {conditionVal}</span>
-            <span className="hidden sm:inline text-[10px] text-emerald-800 font-bold bg-emerald-200/70 px-1.5 py-0.5 rounded ml-0.5">
-              Advice
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setIsHistoryOpen(true)}
-            className="h-9 px-3 rounded-xl border border-emerald-200 hover:border-emerald-400 bg-white hover:bg-emerald-50 text-emerald-900 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-700"
-            aria-label="Open conversation history panel"
-          >
-            <Clock className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-            <span className="hidden sm:inline">History</span>
-            {sessionQueries.length > 0 && (
-              <span className="w-4 h-4 rounded-full bg-emerald-700 text-white text-[10px] flex items-center justify-center">
-                {sessionQueries.length}
-              </span>
-            )}
-          </button>
         </div>
       </header>
 
@@ -325,7 +320,7 @@ export function AssistantPage({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="bg-amber-600 text-white text-xs font-bold px-4 py-2 flex items-center justify-center gap-2 shrink-0 z-10 shadow-xs"
+            className="bg-[var(--color-warn)] text-white text-xs font-bold px-4 py-2 flex items-center justify-center gap-2 shrink-0 z-10 shadow-xs"
           >
             <WifiOff className="w-4 h-4" />
             <span>{copy.offlineMsg}</span>
@@ -333,17 +328,16 @@ export function AssistantPage({
         )}
       </AnimatePresence>
 
-      {/* ── Message Area (Only This Container Scrolls, Centered max-w-[720px]) ── */}
+      {/* ── Message Area (Centered max-w-[720px], generous 16-24px rhythm) ── */}
       <main
         ref={messagesContainerRef}
         onScroll={handleScroll}
         role="log"
         aria-live="polite"
-        className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 flex flex-col items-center min-h-0"
+        className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 flex flex-col items-center min-h-0"
       >
         <div className="w-full max-w-[720px] flex-1 flex min-h-0 flex-col justify-center">
           
-          {/* Empty state when no queries have been asked yet */}
           {isOnlyWelcome ? (
             <EmptyStateChat
               headline={copy.emptyHeadline}
@@ -353,7 +347,6 @@ export function AssistantPage({
               onSelectSuggestion={handleSend}
             />
           ) : (
-            /* Rendered Message List */
             <div className="space-y-4 pb-4">
               {chat.map((msg, idx) => (
                 <MessageBubble
@@ -376,26 +369,25 @@ export function AssistantPage({
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-start gap-3 my-3 text-left"
                 >
-                  <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-1 shadow-2xs">
+                  <div className="w-8 h-8 rounded-full bg-[var(--color-green-100)] text-[var(--color-green-700)] flex items-center justify-center shrink-0 mt-1">
                     <Leaf className="w-4 h-4" />
                   </div>
-                  <div className="bg-white border border-emerald-200 rounded-[6px_20px_20px_20px] px-4 py-3 shadow-xs space-y-1.5">
-                    {/* Animated 3 Green Dots */}
+                  <div className="bg-white border border-[var(--color-green-200)] rounded-2xl rounded-tl-sm px-4 py-3 shadow-xs space-y-1.5">
                     <div className="flex items-center gap-1.5 h-5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600 animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="w-2 h-2 rounded-full bg-emerald-600 animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="w-2 h-2 rounded-full bg-emerald-600 animate-bounce" style={{ animationDelay: '300ms' }} />
+                      <span className="w-2 h-2 rounded-full bg-[var(--color-green-600)] animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-2 h-2 rounded-full bg-[var(--color-green-600)] animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-2 h-2 rounded-full bg-[var(--color-green-600)] animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
-                    <p className="text-xs text-stone-500 font-medium">
+                    <p className="text-xs text-[var(--color-ink-2)] font-medium">
                       Checking local conditions & generating agro advice…
                     </p>
                     {takingLonger && (
-                      <div className="pt-2 border-t border-emerald-100 flex items-center gap-2 text-xs text-amber-800">
+                      <div className="pt-2 border-t border-[var(--color-green-100)] flex items-center gap-2 text-xs text-[var(--color-warn)]">
                         <span>{copy.takingLonger}</span>
                         <button
                           type="button"
                           onClick={() => handleSend(lastQuery)}
-                          className="font-bold underline text-emerald-800 cursor-pointer"
+                          className="font-bold underline text-[var(--color-green-700)] cursor-pointer"
                         >
                           {copy.retry}
                         </button>
@@ -405,17 +397,17 @@ export function AssistantPage({
                 </motion.div>
               )}
 
-              {/* Inline Error Card with Retry */}
+              {/* Error card with Retry */}
               {errorMsg && (
-                <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-900 flex items-start gap-3 my-3">
-                  <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                <div className="p-4 rounded-2xl bg-[var(--color-danger-bg)] border border-[var(--color-danger-border)] text-[var(--color-danger)] flex items-start gap-3 my-3">
+                  <AlertTriangle className="w-5 h-5 text-[var(--color-danger)] shrink-0 mt-0.5" />
                   <div className="flex-1 text-xs">
                     <p className="font-bold text-sm mb-0.5">Response Generation Error</p>
-                    <p className="text-stone-700 mb-2">{errorMsg}</p>
+                    <p className="text-[var(--color-ink-2)] mb-2">{errorMsg}</p>
                     <button
                       type="button"
                       onClick={() => handleSend(lastQuery)}
-                      className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-[var(--color-danger)] hover:opacity-90 text-white font-bold inline-flex items-center gap-1.5 transition-opacity cursor-pointer border-none"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>{copy.retry}</span>
@@ -440,7 +432,7 @@ export function AssistantPage({
             exit={{ opacity: 0, y: 10 }}
             type="button"
             onClick={scrollToBottom}
-            className="fixed bottom-36 sm:bottom-32 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full bg-emerald-800 text-white shadow-xl text-xs font-bold flex items-center gap-1.5 hover:bg-emerald-900 focus-visible:ring-2 focus-visible:ring-emerald-600 transition-all cursor-pointer"
+            className="fixed bottom-36 sm:bottom-32 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full bg-[var(--color-green-900)] text-white shadow-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[var(--color-green-950)] transition-all cursor-pointer border-none"
           >
             <ArrowDown className="w-3.5 h-3.5" />
             <span>{t('assistant.jumpToLatest')}</span>
@@ -448,8 +440,8 @@ export function AssistantPage({
         )}
       </AnimatePresence>
 
-      {/* ── Composer Container (Pinned at Bottom, max-w-[720px] Centered) ── */}
-      <footer className="w-full bg-white/95 backdrop-blur-md border-t border-emerald-100 px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 sm:p-4 shrink-0 z-20 flex justify-center">
+      {/* ── Composer Container (Centered max-w-[720px], generous padding) ── */}
+      <footer className="w-full bg-white/95 backdrop-blur-md border-t border-[var(--color-green-100)] px-4 pb-[calc(14px+env(safe-area-inset-bottom))] pt-3 sm:py-4 shrink-0 z-20 flex justify-center">
         <div className="w-full max-w-[720px]">
           <ChatComposer
             input={input}
@@ -467,19 +459,17 @@ export function AssistantPage({
         </div>
       </footer>
 
-      {/* ── History Drawer / Slide Panel ── */}
+      {/* ── History Drawer ── */}
       <HistoryDrawer
         isOpen={isHistoryOpen}
         onClose={() => setIsHistoryOpen(false)}
         sessionQueries={sessionQueries}
         onSelectQuery={handleSend}
         onNewChat={() => {
-          // If a new chat is triggered, preserve only initial greeting
           setInput('')
           setErrorMsg(null)
         }}
         onClearSession={() => {
-          // Local session clear
           setInput('')
         }}
       />

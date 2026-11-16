@@ -62,7 +62,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
         </button>
         <div className="text-center">
           <div className="text-white font-bold text-sm">{t('camera.scannerTitle')}</div>
-          <div className="text-white/60 text-xs">{t('camera.positionLeaf')}</div>
+          <div className="text-white/80 text-sm">{t('camera.positionLeaf')}</div>
         </div>
         <button
           type="button"
@@ -78,7 +78,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
       <div className="flex-1 relative overflow-hidden">
         {/* Permission Denied */}
         {(camera.state === 'denied' || camera.state === 'unavailable') && (
-          <div className="absolute inset-0 bg-[#0F291E] flex flex-col items-center justify-center gap-6 p-6 z-20">
+          <div className="absolute inset-0 bg-stone-900 flex flex-col items-center justify-center gap-6 p-6 z-20">
             <div className="w-20 h-20 rounded-3xl bg-red-900/40 flex items-center justify-center">
               {camera.state === 'denied' ? (
                 <CameraOff className="w-10 h-10 text-red-400" />
@@ -98,7 +98,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <button
                 type="button"
                 onClick={onUploadInstead}
-                className="w-full py-3 rounded-xl bg-[#0B8F68] text-white font-bold text-sm flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl bg-[var(--color-green-700)] text-white font-bold text-sm flex items-center justify-center gap-2 min-h-[44px]"
               >
                 <Image className="w-5 h-5" />
                 {t('camera.uploadInstead')}
@@ -143,11 +143,11 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
                 'bottom-0 left-0 border-b-[3px] border-l-[3px] rounded-bl-lg',
                 'bottom-0 right-0 border-b-[3px] border-r-[3px] rounded-br-lg',
               ].map((cls, i) => (
-                <div key={i} className={`absolute w-8 h-8 border-[#0B8F68] ${cls}`} />
+                <div key={i} className={`absolute w-8 h-8 border-[var(--color-green-500)] ${cls}`} />
               ))}
               {/* Scan line */}
               <div
-                className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#0B8F68] to-transparent opacity-80"
+                className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-green-500)] to-transparent opacity-80"
                 style={{ animation: 'scan-line 2.5s ease-in-out infinite' }}
               />
             </div>
@@ -173,14 +173,14 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <RotateCcw className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">{t('camera.retake')}</span>
+              <span className="text-white/80 text-sm font-medium">{t('camera.retake')}</span>
             </button>
 
             {/* Use Photo */}
             <button
               type="button"
               onClick={() => { if (camera.capturedFile) onCapture(camera.capturedFile) }}
-              className="w-20 h-20 rounded-full bg-[#0B8F68] flex items-center justify-center shadow-lg shadow-[#0B8F68]/50 hover:bg-[#087A59] transition-colors"
+              className="w-20 h-20 rounded-full bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-700/50 hover:bg-emerald-700 transition-colors cursor-pointer"
               aria-label={t('camera.usePhoto')}
             >
               <Camera className="w-8 h-8 text-white" />
@@ -195,7 +195,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <Image className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">{t('camera.gallery')}</span>
+              <span className="text-white/80 text-sm font-medium">{t('camera.gallery')}</span>
             </button>
           </>
         ) : (
@@ -209,7 +209,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <Image className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">{t('camera.gallery')}</span>
+              <span className="text-white/80 text-sm font-medium">{t('camera.gallery')}</span>
             </button>
 
             {/* Capture */}
@@ -232,7 +232,7 @@ export function CameraScanner({ onCapture, onClose, onUploadInstead }: CameraSca
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                 <FlipHorizontal className="w-5 h-5 text-white" />
               </div>
-              <span className="text-white/70 text-xs">{t('camera.flip')}</span>
+              <span className="text-white/80 text-sm font-medium">{t('camera.flip')}</span>
             </button>
           </>
         )}

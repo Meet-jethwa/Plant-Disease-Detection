@@ -1,6 +1,6 @@
 // PlantDetailPage.tsx — Full plant details: care info, latest diagnosis, health timeline
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Scan, MessageSquare, Clock, Leaf } from 'lucide-react'
+import { ArrowLeft, Scan, MessageSquare, Clock, Leaf, AlertTriangle, CheckCircle2 } from 'lucide-react'
 import { PlantTimeline } from '../components/PlantTimeline'
 import { DiseaseCard } from '../components/DiseaseCard'
 import { EmptyState } from '../components/ui/EmptyState'
@@ -13,6 +13,35 @@ interface PlantDetailPageProps {
   plants?: Plant[]
 }
 
+function getStatusBadge(status: string) {
+  if (status === 'Healthy') {
+    return {
+      cls: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+      Icon: CheckCircle2,
+      strokeClass: 'stroke-emerald-600',
+    }
+  }
+  if (status === 'Needs Attention') {
+    return {
+      cls: 'bg-amber-50 text-amber-800 border-amber-200',
+      Icon: AlertTriangle,
+      strokeClass: 'stroke-amber-600',
+    }
+  }
+  if (status === 'At Risk') {
+    return {
+      cls: 'bg-orange-50 text-orange-800 border-orange-200',
+      Icon: AlertTriangle,
+      strokeClass: 'stroke-orange-600',
+    }
+  }
+  return {
+    cls: 'bg-red-50 text-red-800 border-red-200',
+    Icon: AlertTriangle,
+    strokeClass: 'stroke-red-600',
+  }
+}
+
 export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
   const navigate = useNavigate()
   const { t, lang } = useLang()
@@ -22,13 +51,17 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
 
   if (!plant) {
     return (
-      <div className="max-w-2xl mx-auto py-12">
+      <div className="max-w-2xl mx-auto py-12 px-4">
         <EmptyState
-          icon={<Leaf className="w-8 h-8" />}
+          icon={<Leaf className="w-8 h-8 text-emerald-700" />}
           title={t('plants.empty')}
           description={t('plants.emptyDesc')}
           action={
-            <button type="button" onClick={() => navigate('/plants')} className="btn btn-primary">
+            <button
+              type="button"
+              onClick={() => navigate('/plants')}
+              className="btn btn-primary min-h-[44px] px-4 text-sm font-semibold cursor-pointer"
+            >
               {t('btn.back')}
             </button>
           }
@@ -37,67 +70,63 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
     )
   }
 
-  const statusBadgeClass =
-    plant.status === 'Healthy' ? 'badge-green' :
-    plant.status === 'Needs Attention' ? 'badge-amber' :
-    plant.status === 'At Risk' ? 'badge-orange' : 'badge-red'
-
-  const scoreColor =
-    plant.healthScore >= 85 ? '#0B8F68' :
-    plant.healthScore >= 65 ? '#D97706' :
-    plant.healthScore >= 45 ? '#EA580C' : '#DC2626'
+  const statusConfig = getStatusBadge(plant.status)
 
   return (
-    <div className="max-w-3xl mx-auto py-6 animate-fade-in">
-      {/* Back */}
-      <div className="flex items-center gap-3 mb-5">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 pb-24 space-y-6">
+      
+      {/* Back & Title Header */}
+      <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={() => navigate('/plants')}
-          className="btn btn-secondary btn-icon"
+          className="btn btn-secondary min-h-[44px] w-11 flex items-center justify-center p-0 cursor-pointer shrink-0"
           aria-label={t('btn.back')}
           id="plant-detail-back-btn"
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div>
-          <h1 className="text-lg font-700 text-[#10231D]">{plant.name}</h1>
-          <p className="text-sm italic text-[#64736C]">{plant.scientificName}</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-[var(--color-ink)] leading-tight">{plant.name}</h1>
+          <p className="text-sm italic text-[var(--color-ink-2)]">{plant.scientificName}</p>
         </div>
       </div>
 
       {/* Hero card */}
-      <div className="card-lg overflow-hidden mb-5">
+      <div className="rounded-2xl border border-[#E4E7E2] bg-white overflow-hidden shadow-xs">
         <div className="grid sm:grid-cols-2">
           {/* Image */}
-          <div className="h-56 sm:h-full bg-[#EDF7F2] flex items-center justify-center overflow-hidden">
+          <div className="h-56 sm:h-auto bg-stone-100 flex items-center justify-center overflow-hidden">
             {plant.image ? (
               <img src={plant.image} alt={plant.name} className="w-full h-full object-cover" />
             ) : (
-              <div className="text-[#0B8F68] opacity-30 text-6xl">🌿</div>
+              <div className="p-8 text-center text-emerald-700/30">
+                <Leaf className="w-16 h-16 mx-auto" />
+              </div>
             )}
           </div>
 
           {/* Info */}
-          <div className="p-5">
-            <div className="flex items-center gap-2 mb-3">
-              <span className={`badge ${statusBadgeClass}`}>
-                {t(('status.' + (plant.status === 'Needs Attention' ? 'needsAttention' : plant.status === 'At Risk' ? 'atRisk' : plant.status.toLowerCase())) as any) || plant.status}
+          <div className="p-5 sm:p-6 space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${statusConfig.cls}`}>
+                <statusConfig.Icon className="w-3.5 h-3.5" />
+                <span>{t(('status.' + (plant.status === 'Needs Attention' ? 'needsAttention' : plant.status === 'At Risk' ? 'atRisk' : plant.status.toLowerCase())) as any) || plant.status}</span>
               </span>
-              <span className="badge badge-slate capitalize">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-700 border border-stone-200 capitalize">
                 {t(('crop.' + plant.species.toLowerCase()) as any) || plant.species}
               </span>
             </div>
 
             {/* Health Score ring */}
-            <div className="flex items-center gap-4 mb-4">
-              <div className="relative w-16 h-16">
+            <div className="flex items-center gap-4">
+              <div className="relative w-16 h-16 shrink-0">
                 <svg viewBox="0 0 36 36" className="w-16 h-16 -rotate-90">
-                  <circle cx="18" cy="18" r="15.9" fill="none" stroke="#E8F5EE" strokeWidth="2.5" />
+                  <circle cx="18" cy="18" r="15.9" fill="none" className="stroke-stone-200" strokeWidth="2.5" />
                   <circle
                     cx="18" cy="18" r="15.9"
                     fill="none"
-                    stroke={scoreColor}
+                    className={statusConfig.strokeClass}
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeDasharray={`${plant.healthScore} ${100 - plant.healthScore}`}
@@ -105,44 +134,45 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs font-800 text-[#10231D]">{plant.healthScore}</span>
+                  <span className="text-sm font-bold text-[var(--color-ink)]">{plant.healthScore}</span>
                 </div>
               </div>
               <div>
-                <p className="text-2xl font-800 text-[#10231D]">{plant.healthScore}<span className="text-sm font-400 text-[#64736C]">/100</span></p>
-                <p className="text-xs text-[#64736C]">{t('diagnosis.healthScore')}</p>
+                <p className="text-2xl font-bold text-[var(--color-ink)]">{plant.healthScore}<span className="text-sm font-normal text-stone-400">/100</span></p>
+                <p className="text-sm text-[var(--color-ink-2)]">{t('diagnosis.healthScore')}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 text-xs text-[#94A09B] mb-4">
-              <Clock className="w-3.5 h-3.5" />
-              {plant.lastScanned}
+            <div className="flex items-center gap-1.5 text-sm text-stone-500">
+              <Clock className="w-3.5 h-3.5 text-stone-400" />
+              <span>{plant.lastScanned}</span>
             </div>
 
             {plant.latestDisease && plant.latestDisease !== 'None detected' && (
-              <div className="text-xs bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 text-amber-800 font-500 mb-4">
-                ⚠ {localizeDiseaseName(plant.latestDisease, lang)}
+              <div className="text-sm bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-amber-900 font-medium flex items-center gap-1.5">
+                <AlertTriangle className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                <span>{localizeDiseaseName(plant.latestDisease, lang)}</span>
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 pt-2">
               <button
                 type="button"
                 onClick={() => navigate('/scan')}
-                className="btn btn-primary btn-sm gap-1.5"
+                className="btn btn-primary min-h-[44px] px-3 flex items-center justify-center gap-1.5 text-sm font-semibold cursor-pointer"
                 id="plant-detail-scan-btn"
               >
                 <Scan className="w-3.5 h-3.5" />
-                {t('btn.scanAnother')}
+                <span>{t('btn.scanAnother')}</span>
               </button>
               <button
                 type="button"
                 onClick={() => navigate('/assistant')}
-                className="btn btn-secondary btn-sm gap-1.5"
+                className="btn btn-secondary min-h-[44px] px-3 flex items-center justify-center gap-1.5 text-sm font-semibold cursor-pointer"
                 id="plant-detail-ask-btn"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                {t('btn.askChat')}
+                <span>{t('btn.askChat')}</span>
               </button>
             </div>
           </div>
@@ -151,8 +181,8 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
 
       {/* Latest Diagnosis */}
       {plant.latestDisease && plant.latestDisease !== 'None detected' && (
-        <div className="mb-5">
-          <h2 className="text-base font-700 text-[#10231D] mb-3">{t('diagnosis.title')}</h2>
+        <div className="space-y-3">
+          <h2 className="text-base font-bold text-[var(--color-ink)]">{t('diagnosis.title')}</h2>
           <DiseaseCard
             diseaseName={plant.latestDisease}
             severity={plant.status === 'At Risk' ? 'High' : plant.status === 'Needs Attention' ? 'Moderate' : 'Low'}
@@ -162,9 +192,11 @@ export function PlantDetailPage({ plants = [] }: PlantDetailPageProps) {
       )}
 
       {/* Health Timeline */}
-      <div className="mb-6">
-        <h2 className="text-base font-700 text-[#10231D] mb-3">{t('history.title')}</h2>
-        <PlantTimeline entries={MOCK_TIMELINE} />
+      <div className="space-y-3">
+        <h2 className="text-base font-bold text-[var(--color-ink)]">{t('history.title')}</h2>
+        <div className="rounded-2xl border border-[var(--color-green-200)] bg-white p-5 sm:p-6 shadow-xs">
+          <PlantTimeline entries={MOCK_TIMELINE} />
+        </div>
       </div>
     </div>
   )

@@ -61,5 +61,14 @@
   "diagnosis.factorInfluence": "વાતાવરણની અસર",
   "diagnosis.sympLesions": "પાંદડા પર રંગ બદલાવ અને ડાઘ",
   "diagnosis.sympNecrosis": "કિનારીઓ સૂકાઈ જવી",
-  "diagnosis.sympVascular": "અંદરની નસોને નુકસાન"
+  "diagnosis.sympVascular": "અંદરની નસોને નુકસાન",
+  "diagnosis.gradcamHeatmap": "હીટમેપ",
+  "diagnosis.stepIsolate": "રોગ અન્ય પાકમાં ન ફેલાય તે માટે અસરગ્રસ્ત છોડને તરત જ અલગ કરો.",
+  "diagnosis.stepRefrain": "પાંદડા સૂકા રહે અને ફૂગ ન ફેલાય તે માટે ઉપરથી પાણી છાંટવાનું ટાળો.",
+  "diagnosis.stepInspect": "લક્ષણોની વહેલી જાણ માટે આસપાસના છોડની દર અઠવાડિયે તપાસ કરો.",
+  "diagnosis.stepConsult": "યોગ્ય દવા અને સારવાર માટે સ્થાનિક કૃષિ અધિકારીનો સંપર્ક કરો.",
+  "diagnosis.stepSpacing": "સૂર્યપ્રકાશ અને હવાની અવરજવર માટે છોડ વચ્ચે યોગ્ય અંતર રાખો.",
+  "diagnosis.stepFertilizer": "વધુ પડતું નાઈટ્રોજન ખાતર ન આપો, જેથી પાક રોગ સામે નબળો ન પડે.",
+  "diagnosis.stepIrrigation": "પાંદડા ભીના ન રહે તે માટે ટપક સિંચાઈ પદ્ધતિનો ઉપયોગ કરો.",
+  "diagnosis.stepCultivars": "તમારા વિસ્તાર માટે ભલામણ કરેલ પ્રમાણિત રોગ-પ્રતિકારક બિયારણ વાવો."
 }

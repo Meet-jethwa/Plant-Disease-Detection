@@ -1,4 +1,4 @@
-// TreatmentCard.tsx — BioScan Lab dark treatment protocol card
+// TreatmentCard.tsx — FloraAI treatment protocol card
 import { useState } from 'react'
 import { Leaf, FlaskConical, ShieldCheck, AlertTriangle } from 'lucide-react'
 import { useLang } from '../contexts/LanguageContext'
@@ -24,80 +24,79 @@ export function TreatmentCard({ treatment, prevention, severity }: TreatmentCard
   ]
 
   const tabs = [
-    { id: 'immediate' as const, label: t('diagnosis.tabImmediate'),  icon: AlertTriangle, color: 'var(--neon-red)' },
-    { id: 'organic'   as const, label: t('diagnosis.tabOrganic'),    icon: Leaf,          color: 'var(--neon-green)' },
-    { id: 'preventive'as const, label: t('diagnosis.tabPreventive'), icon: ShieldCheck,   color: 'var(--neon-cyan)' },
+    { id: 'immediate' as const,  label: t('diagnosis.tabImmediate'),  icon: AlertTriangle },
+    { id: 'organic'   as const,  label: t('diagnosis.tabOrganic'),    icon: Leaf },
+    { id: 'preventive'as const,  label: t('diagnosis.tabPreventive'), icon: ShieldCheck },
   ]
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <FlaskConical style={{ width: 15, height: 15, color: 'var(--neon-green)' }} />
-        <h3 className="eyebrow">{t('diagnosis.treatment')}</h3>
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-2 text-[var(--color-green-700)]">
+        <FlaskConical className="w-4 h-4 shrink-0" />
+        <h3 className="text-sm font-semibold text-[var(--color-ink)]">{t('diagnosis.treatment')}</h3>
       </div>
 
       {/* Tab switcher */}
-      <div className="tab-group">
-        {tabs.map(tTab => (
-          <button
-            key={tTab.id} type="button"
-            onClick={() => setTab(tTab.id)}
-            className={`tab-item ${tab === tTab.id ? 'active' : ''}`}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.75rem',
-              color: tab === tTab.id ? tTab.color : undefined,
-            }}
-          >
-            <tTab.icon style={{ width: 12, height: 12 }} />
-            {tTab.label}
-          </button>
-        ))}
+      <div className="tab-group overflow-x-auto">
+        {tabs.map(tTab => {
+          const Icon = tTab.icon
+          const isActive = tab === tTab.id
+          return (
+            <button
+              key={tTab.id}
+              type="button"
+              onClick={() => setTab(tTab.id)}
+              className={`tab-item flex items-center justify-center gap-1.5 text-sm font-semibold whitespace-nowrap min-h-[40px] cursor-pointer ${
+                isActive ? 'active text-[var(--color-green-700)]' : 'text-[var(--color-ink-2)]'
+              }`}
+            >
+              <Icon className="w-3.5 h-3.5 shrink-0" />
+              <span>{tTab.label}</span>
+            </button>
+          )
+        })}
       </div>
 
       {/* Tab content */}
-      <div className="animate-fade-in" style={{ minHeight: 120 }}>
+      <div className="animate-fade-in min-h-[120px]">
         {tab === 'immediate' && (
-          <ol style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <ol className="flex flex-col gap-2.5 list-none p-0 m-0">
             {steps.map((step, i) => (
-              <li key={i} style={{ display: 'flex', gap: 12 }}>
-                <span style={{
-                  flexShrink: 0, width: 22, height: 22, borderRadius: 6,
-                  background: 'rgba(255,69,96,0.1)', border: '1px solid rgba(255,69,96,0.25)',
-                  color: 'var(--neon-red)', fontWeight: 700, fontSize: '0.65rem',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'var(--font-mono)',
-                }}>
-                  {String(i + 1).padStart(2, '0')}
+              <li key={i} className="flex items-start gap-3">
+                <span className="shrink-0 w-6 h-6 rounded-md bg-[var(--color-green-100)] text-[var(--color-green-800)] font-bold text-xs flex items-center justify-center mt-0.5">
+                  {i + 1}
                 </span>
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.65, paddingTop: 2 }}>{step}</span>
+                <span className="text-sm text-[var(--color-ink-2)] leading-relaxed pt-0.5">
+                  {step}
+                </span>
               </li>
             ))}
           </ol>
         )}
 
         {tab === 'organic' && (
-          <ol style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <ol className="flex flex-col gap-2.5 list-none p-0 m-0">
             {organicSteps.map((step, i) => (
-              <li key={i} style={{ display: 'flex', gap: 12 }}>
-                <span style={{
-                  flexShrink: 0, width: 22, height: 22, borderRadius: 6,
-                  background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.25)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  <Leaf style={{ width: 11, height: 11, color: 'var(--neon-green)' }} />
+              <li key={i} className="flex items-start gap-3">
+                <span className="shrink-0 w-6 h-6 rounded-md bg-[var(--color-green-100)] text-[var(--color-green-700)] flex items-center justify-center mt-0.5">
+                  <Leaf className="w-3.5 h-3.5" />
                 </span>
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.65, paddingTop: 2 }}>{step}</span>
+                <span className="text-sm text-[var(--color-ink-2)] leading-relaxed pt-0.5">
+                  {step}
+                </span>
               </li>
             ))}
           </ol>
         )}
 
         {tab === 'preventive' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div className="flex flex-col gap-2.5">
             {prevention.split('.').filter(s => s.trim()).map((s, i) => (
-              <div key={i} style={{ display: 'flex', gap: 10 }}>
-                <ShieldCheck style={{ width: 14, height: 14, color: 'var(--neon-cyan)', flexShrink: 0, marginTop: 3 }} />
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>{s.trim()}.</span>
+              <div key={i} className="flex items-start gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-[var(--color-green-700)] shrink-0 mt-1" />
+                <span className="text-sm text-[var(--color-ink-2)] leading-relaxed">
+                  {s.trim()}.
+                </span>
               </div>
             ))}
           </div>
@@ -106,14 +105,10 @@ export function TreatmentCard({ treatment, prevention, severity }: TreatmentCard
 
       {/* Severe alert */}
       {isSevere && (
-        <div style={{
-          display: 'flex', alignItems: 'flex-start', gap: 10,
-          padding: '12px 14px', borderRadius: 10,
-          background: 'rgba(255,184,0,0.08)', border: '1px solid rgba(255,184,0,0.25)',
-        }}>
-          <AlertTriangle style={{ width: 15, height: 15, color: 'var(--neon-amber)', flexShrink: 0, marginTop: 1 }} />
-          <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-            <strong style={{ color: 'var(--neon-amber)' }}>{t('diagnosis.expertAlert')}:</strong>{' '}
+        <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[var(--color-warn-bg)] border border-[var(--color-warn-border)]">
+          <AlertTriangle className="w-4 h-4 text-[var(--color-warn)] shrink-0 mt-0.5" />
+          <p className="text-sm text-[var(--color-ink-2)] leading-relaxed">
+            <strong className="text-[var(--color-warn)] font-bold">{t('diagnosis.expertAlert')}:</strong>{' '}
             {t('diagnosis.consultExpert')}
           </p>
         </div>

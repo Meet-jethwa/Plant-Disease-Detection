@@ -1,4 +1,4 @@
-// AppLayout.tsx — FloraAI clean layout inspired by app/static/styles.css
+// AppLayout.tsx — FloraAI clean layout
 import type { ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
@@ -23,7 +23,7 @@ export function AppLayout({ children, locationData, isLocating, onFetchLocation,
   const isAssistantPage = location.pathname === '/assistant'
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--color-page-bg)', position: 'relative' }}>
+    <div className="min-h-screen flex flex-col relative bg-[var(--color-page-bg)]">
       {/* Desktop nav (lg+) */}
       <Navbar
         locationData={locationData}
@@ -37,25 +37,10 @@ export function AppLayout({ children, locationData, isLocating, onFetchLocation,
 
       {/* Main content */}
       <main
-        style={{
-          flex: 1,
-          width: '100%',
-          maxWidth: isAssistantPage ? '100%' : '1440px',
-          margin: '0 auto',
-          padding: isAssistantPage ? '0' : '0 16px',
-          paddingTop: isAssistantPage ? '0' : '24px',
-          paddingBottom: isAssistantPage ? '0' : '88px',
-          position: 'relative',
-          display: isAssistantPage ? 'flex' : undefined,
-          flexDirection: isAssistantPage ? 'column' : undefined,
-          minHeight: 0,
-          overflow: isAssistantPage ? 'hidden' : undefined,
-          height: isAssistantPage ? 'calc(100dvh - 56px)' : undefined,
-        }}
         className={
           isAssistantPage
-            ? 'lg:h-[calc(100dvh-70px)]'
-            : 'sm:px-6 lg:px-8 xl:px-10 lg:pb-16'
+            ? 'flex-1 w-full flex flex-col min-h-0 overflow-hidden h-[calc(100dvh-56px)] lg:h-[calc(100dvh-70px)]'
+            : 'flex-1 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-20 lg:pb-16'
         }
       >
         {children}
@@ -68,7 +53,7 @@ export function AppLayout({ children, locationData, isLocating, onFetchLocation,
         </div>
       )}
 
-      {/* Mobile bottom navigation (hidden on /assistant page to give full viewport to composer) */}
+      {/* Mobile bottom navigation (hidden on /assistant page) */}
       {!isAssistantPage && <BottomNav />}
     </div>
   )

@@ -12,9 +12,9 @@ export function ModelSelector({ selectedModel, onSelectModel }: ModelSelectorPro
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <p className="section-label">Select AI Model</p>
-        <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#E6F4ED] text-[#0B8F68]">
-          Dual Engine
+        <p className="text-sm font-semibold text-[var(--color-ink)]">Select AI model</p>
+        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-[#E4E7E2]">
+          Dual engine
         </span>
       </div>
 
@@ -25,24 +25,24 @@ export function ModelSelector({ selectedModel, onSelectModel }: ModelSelectorPro
           onClick={() => onSelectModel('multimodal')}
           className={`relative flex flex-col p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             selectedModel === 'multimodal'
-              ? 'bg-gradient-to-br from-[#0B8F68] to-[#087353] text-white border-[#065E44] shadow-md shadow-[#0B8F68]/20'
-              : 'bg-white text-[#10231D] border-[#D4E8DC] hover:border-[#0B8F68] hover:bg-[#F0FBF5]'
+              ? 'bg-emerald-700 text-white border-emerald-800 shadow-xs'
+              : 'bg-white text-[var(--color-ink)] border-[#E4E7E2] hover:border-emerald-500 hover:bg-stone-50'
           }`}
         >
           <div className="flex items-center justify-between w-full mb-1.5">
             <div className="flex items-center gap-2">
-              <Sparkles className={`w-4 h-4 ${selectedModel === 'multimodal' ? 'text-amber-300' : 'text-[#0B8F68]'}`} />
-              <span className="font-bold text-xs sm:text-sm">Best Model (Multimodal)</span>
+              <Sparkles className={`w-4 h-4 ${selectedModel === 'multimodal' ? 'text-amber-300' : 'text-emerald-700'}`} />
+              <span className="font-bold text-sm">Best Model (Multimodal)</span>
             </div>
             {selectedModel === 'multimodal' ? (
               <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
             ) : (
-              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 uppercase">
+              <span className="text-xs font-medium px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
                 Recommended
               </span>
             )}
           </div>
-          <p className={`text-[11px] leading-relaxed ${selectedModel === 'multimodal' ? 'text-emerald-50' : 'text-[#64736C]'}`}>
+          <p className={`text-sm leading-relaxed ${selectedModel === 'multimodal' ? 'text-emerald-50' : 'text-[var(--color-ink-2)]'}`}>
             Leaf photo + weather data fusion across 33 crop disease classes.
           </p>
         </button>
@@ -53,20 +53,20 @@ export function ModelSelector({ selectedModel, onSelectModel }: ModelSelectorPro
           onClick={() => onSelectModel('old_models')}
           className={`relative flex flex-col p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             selectedModel === 'old_models'
-              ? 'bg-[#10231D] text-white border-[#0A1713] shadow-md'
-              : 'bg-white text-[#10231D] border-[#D4E8DC] hover:border-[#10231D] hover:bg-slate-50'
+              ? 'bg-stone-800 text-white border-stone-900 shadow-xs'
+              : 'bg-white text-[var(--color-ink)] border-[#E4E7E2] hover:border-stone-500 hover:bg-stone-50'
           }`}
         >
           <div className="flex items-center justify-between w-full mb-1.5">
             <div className="flex items-center gap-2">
-              <Layers className={`w-4 h-4 ${selectedModel === 'old_models' ? 'text-teal-300' : 'text-slate-600'}`} />
-              <span className="font-bold text-xs sm:text-sm">Old Models</span>
+              <Layers className={`w-4 h-4 ${selectedModel === 'old_models' ? 'text-teal-300' : 'text-stone-500'}`} />
+              <span className="font-bold text-sm">Old Models</span>
             </div>
             {selectedModel === 'old_models' && (
               <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
             )}
           </div>
-          <p className={`text-[11px] leading-relaxed ${selectedModel === 'old_models' ? 'text-slate-300' : 'text-[#64736C]'}`}>
+          <p className={`text-sm leading-relaxed ${selectedModel === 'old_models' ? 'text-stone-300' : 'text-[var(--color-ink-2)]'}`}>
             Classic crop-specific models (Rice, Wheat, Sugarcane, Cotton).
           </p>
         </button>

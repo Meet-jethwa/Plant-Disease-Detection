@@ -6,13 +6,14 @@
  * - Respects env(safe-area-inset-bottom)
  * - Backdrop closes on click
  * - Focus trapped inside (via aria-modal)
+ * - Zero unnecessary inline styles
  */
 
 import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { sheetVariants, backdropVariants } from '../../lib/motion'
 
-interface BottomSheetProps {
+export interface BottomSheetProps {
   open: boolean
   onClose: () => void
   title?: string
@@ -63,7 +64,7 @@ export function BottomSheet({ open, onClose, title, children, maxHeight = 85 }: 
             role="dialog"
             aria-modal="true"
             aria-label={title}
-            className="bottom-sheet"
+            className="bottom-sheet touch-none"
             variants={sheetVariants}
             initial="hidden"
             animate="visible"
@@ -74,18 +75,18 @@ export function BottomSheet({ open, onClose, title, children, maxHeight = 85 }: 
             onDragEnd={(_, info) => {
               if (info.offset.y > 80) onClose()
             }}
-            style={{ maxHeight: `${maxHeight}dvh`, touchAction: 'none' }}
+            style={{ maxHeight: `${maxHeight}dvh` }}
           >
             {/* Drag handle */}
             <div className="sheet-drag-handle" aria-hidden />
 
             {title && (
-              <div style={{ padding: '8px 20px 16px', borderBottom: '1px solid var(--color-green-100)' }}>
-                <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-ink)' }}>{title}</h2>
+              <div className="px-5 pt-2 pb-4 border-b border-[var(--color-green-100)]">
+                <h2 className="text-lg font-bold text-[var(--color-ink)]">{title}</h2>
               </div>
             )}
 
-            <div style={{ overflowY: 'auto', touchAction: 'pan-y' }}>
+            <div className="overflow-y-auto touch-pan-y">
               {children}
             </div>
           </motion.div>
