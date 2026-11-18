@@ -43,22 +43,29 @@ from pathlib import Path
 from typing import Any
 
 def _load_env_file():
-    """Ensure GEMINI_API_KEY is loaded from .env if present in project root."""
-    if not os.environ.get("GEMINI_API_KEY"):
-        env_path = Path(__file__).resolve().parent.parent / ".env"
-        if env_path.exists():
-            try:
-                with open(env_path, "r", encoding="utf-8") as f:
-                    for line in f:
-                        line = line.strip()
-                        if line and not line.startswith("#") and "=" in line:
-                            k, v = line.split("=", 1)
-                            k = k.strip()
-                            v = v.strip().strip("'\"")
-                            if k and k not in os.environ:
-                                os.environ[k] = v
-            except Exception:
-                pass
+    """Ensure GEMINI_API_KEY is loaded from .env if present in project root or current working dir."""
+    if not os.environ.get("GEMINI_API_KEY", "").strip():
+        candidate_paths = [
+            Path(__file__).resolve().parent.parent / ".env",
+            Path(__file__).resolve().parent / ".env",
+            Path.cwd() / ".env",
+        ]
+        for env_path in candidate_paths:
+            if env_path.exists():
+                try:
+                    with open(env_path, "r", encoding="utf-8") as f:
+                        for line in f:
+                            line = line.strip()
+                            if line and not line.startswith("#") and "=" in line:
+                                k, v = line.split("=", 1)
+                                k = k.strip()
+                                v = v.strip().strip("'\"")
+                                if k and (k not in os.environ or not os.environ[k].strip()):
+                                    os.environ[k] = v
+                    if os.environ.get("GEMINI_API_KEY", "").strip():
+                        break
+                except Exception:
+                    pass
 
 _load_env_file()
 
@@ -270,8 +277,10 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
     Returns:
         Structured GeminiResponse dict (Mode A schema) or error state.
     """
+    if not os.environ.get("GEMINI_API_KEY", "").strip() and "GEMINI_API_KEY" not in os.environ:
+        _load_env_file()
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
-    if not api_key:
+    if not api_key or api_key == "your_gemini_api_key_here":
         return _fallback_initial(context, "GEMINI_API_KEY is not configured in backend/.env.")
 
     try:
@@ -415,16 +424,18 @@ def ask_gemini_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
     Returns:
         { "chat_answer": str, "follow_up_questions": list[str], "intent": str }
     """
+    if not os.environ.get("GEMINI_API_KEY", "").strip() and "GEMINI_API_KEY" not in os.environ:
+        _load_env_file()
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
-    if not api_key:
-        return _fallback_chat(context, intent)
+    if not api_key or api_key == "your_gemini_api_key_here":
+        return _fallback_chat(context, intent, "GEMINI_API_KEY is not configured in .env")
 
     try:
         from google import genai
         client = genai.Client(api_key=api_key)
     except Exception as exc:
         print(f"[gemini_chat] genai Client initialization failed: {exc}")
-        return _fallback_chat(context, intent)
+        return _fallback_chat(context, intent, f"Google GenAI Client initialization failed: {exc}")
 
     disease = context.get("predicted_class") or context.get("disease") or ""
     crop = context.get("crop") or ""
