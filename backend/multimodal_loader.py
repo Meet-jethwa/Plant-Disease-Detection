@@ -258,11 +258,14 @@ def extract_weather_tensor(
             for idx, d_idx in enumerate(range(len(times) - 7, len(times))):
                 t_max = float(daily.get("temperature_2m_max", [28.0] * len(times))[d_idx])
                 t_min = float(daily.get("temperature_2m_min", [20.0] * len(times))[d_idx])
-                t_mean = float(daily.get("temperature_2m_mean", [(t_max + t_min) / 2.0])[d_idx])
+                t_means = daily.get("temperature_2m_mean")
+                t_mean = float(t_means[d_idx]) if t_means and d_idx < len(t_means) else (t_max + t_min) / 2.0
                 rh_max = float(daily.get("relative_humidity_2m_max", [90.0] * len(times))[d_idx])
-                rh_mean = float(daily.get("relative_humidity_2m_mean", [75.0] * len(times))[d_idx])
+                rh_means = daily.get("relative_humidity_2m_mean")
+                rh_mean = float(rh_means[d_idx]) if rh_means and d_idx < len(rh_means) else 75.0
                 precip = float(daily.get("precipitation_sum", [0.0] * len(times))[d_idx])
-                dewpoint = float(daily.get("dew_point_2m_mean", [t_mean - ((100 - rh_mean) / 5)])[d_idx])
+                dewpoints = daily.get("dew_point_2m_mean")
+                dewpoint = float(dewpoints[d_idx]) if dewpoints and d_idx < len(dewpoints) else t_mean - ((100.0 - rh_mean) / 5.0)
                 wind_max = float(daily.get("wind_speed_10m_max", [12.0] * len(times))[d_idx])
                 soil_t = float(daily.get("soil_temperature_0cm", [0.0] * len(times))[d_idx])
                 try:

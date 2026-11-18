@@ -120,10 +120,11 @@ class StartSessionRequest(BaseModel):
 class AskRequest(BaseModel):
     """
     Payload for POST /api/assistant/ask (follow-up chat).
-    Only sends the diagnosis_id and the user's message — no images.
+    Accepts message or question, and diagnosis_id.
     """
     diagnosis_id: str
-    message: str
+    message: str | None = None
+    question: str | None = None
     language: str = "en"
 
 
@@ -192,15 +193,20 @@ def image_to_data_url(image_array: np.ndarray) -> str:
     return f"data:image/jpeg;base64,{encoded}"
 
 
-def get_weather_risk(weather: dict) -> tuple[str, str]:
-    humidity = float(weather.get("humidity_percent", 50))
-    rainfall = float(weather.get("rainfall_mm", 0))
+def get_weather_risk(weather: dict, crop: str = "rice") -> tuple[str, str]:
+    try:
+        from backend.forecasting import predict_disease_risk
+        res = predict_disease_risk(weather, crop=crop)
+        return res["risk_level"], res["reasoning"]
+    except Exception:
+        humidity = float(weather.get("humidity_percent", 50))
+        rainfall = float(weather.get("rainfall_mm", 0))
 
-    if humidity >= 80 or rainfall >= 15:
-        return "High", "High humidity or heavy rainfall can strongly accelerate fungal and bacterial spread."
-    if humidity >= 65 or rainfall >= 5:
-        return "Medium", "Current conditions may support disease progression if leaf wetness remains high."
-    return "Low", "Weather risk is currently lower, but continue routine monitoring."
+        if humidity >= 80 or rainfall >= 15:
+            return "High", "High humidity or heavy rainfall can strongly accelerate fungal and bacterial spread."
+        if humidity >= 65 or rainfall >= 5:
+            return "Medium", "Current conditions may support disease progression if leaf wetness remains high."
+        return "Low", "Weather risk is currently lower, but continue routine monitoring."
 
 
 def fetch_real_location_info(latitude: float, longitude: float) -> tuple[str, str, str]:
@@ -348,6 +354,30 @@ def get_disease_weather_profiles(crop: str | None = None):
         })
     result.sort(key=lambda x: x["display_name"])
     return {"profiles": result}
+
+
+@app.get("/api/weather/forecast-risk")
+def get_risk_forecast(
+    crop: str = "rice",
+    temperature: float = 28.0,
+    humidity: float = 70.0,
+    rainfall: float = 2.0,
+    wind_speed: float = 10.0,
+):
+    from backend.forecasting import forecast_7day_disease_progression, predict_disease_risk
+    wx = {
+        "temperature_c": temperature,
+        "humidity_percent": humidity,
+        "rainfall_mm": rainfall,
+        "wind_kmh": wind_speed,
+    }
+    current_risk = predict_disease_risk(wx, crop=crop)
+    outlook = forecast_7day_disease_progression(wx, crop=crop)
+    return {
+        "crop": crop,
+        "current_assessment": current_risk,
+        "seven_day_outlook": outlook,
+    }
 
 
 # ── Standard routes ───────────────────────────────────────────────────────────
@@ -541,7 +571,7 @@ async def predict_disease(
     else:
         health_score = max(5, min(90, int(round((1.0 - confidence) * 100))))
 
-    disease_info = get_disease_info(normalized_label, lang=lang)
+    disease_info = get_disease_info(normalized_label, lang=lang, crop=crop_key)
 
     if overlay_original is None:
         original_image = image_to_data_url(original_rgb) if 'original_rgb' in locals() and original_rgb is not None else ""
@@ -551,7 +581,7 @@ async def predict_disease(
     highlighted_image = image_to_data_url(overlay_highlight) if overlay_highlight is not None else None
     gradcam_heatmap = image_to_data_url(raw_heatmap) if raw_heatmap is not None else None
 
-    risk_level, risk_reason = get_weather_risk(weather_payload["weather"])
+    risk_level, risk_reason = get_weather_risk(weather_payload["weather"], crop=crop_key)
     weather_importance = compute_weather_feature_importance(disease_info, weather_payload["weather"])
 
     summary = (
@@ -575,6 +605,11 @@ async def predict_disease(
             "causes": disease_info.get("causes"),
             "treatment": disease_info.get("treatment"),
             "prevention": disease_info.get("prevention"),
+        },
+        "risk_level": risk_level,
+        "weather_risk": {
+            "level": risk_level,
+            "reason": risk_reason,
         },
         "weather_context": {
             **weather_payload,
@@ -603,7 +638,7 @@ def start_diagnosis_session(payload: StartSessionRequest):
     """
     disease_info = payload.disease_info or {}
     if payload.predicted_class and not disease_info:
-        disease_info = get_disease_info(payload.predicted_class)
+        disease_info = get_disease_info(payload.predicted_class, lang=payload.language or "en", crop=payload.crop)
 
     # Build the full context for Mode A
     context: dict = {
@@ -631,6 +666,7 @@ def start_diagnosis_session(payload: StartSessionRequest):
     return {
         "diagnosis_id": payload.diagnosis_id,
         "gemini_response": gemini_response,
+        **gemini_response,
     }
 
 
@@ -645,7 +681,8 @@ def ask_assistant(payload: AskRequest):
 
     Returns a focused answer (Mode B) — NOT the full diagnosis report.
     """
-    message = payload.message.strip()
+    raw_msg = payload.message or payload.question or ""
+    message = raw_msg.strip()
     if not message:
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
 

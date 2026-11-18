@@ -142,7 +142,7 @@ DISEASE_DB = {
         "weather_weights": {"temperature": 0.35, "humidity": 0.45, "rainfall": 0.20},
     },
 
-    "blast": {
+    "wheat_blast": {
         "display":      "Wheat Blast",
         "crop":         "Wheat",
         "severity":     "Very High",
@@ -401,7 +401,23 @@ DISEASE_DB = {
     },
 
     # ── RICE PADDY (10 classes) — additional classes ───────────────────────────
-    "blast": {  # already covered by leaf_blast but short key may come from paddy model
+    "rice_blast": {
+        "display":      "Blast (Rice Paddy)",
+        "crop":         "Rice",
+        "severity":     "Very High",
+        "description":  "Magnaporthe oryzae. Diamond-shaped lesions on leaves. Can also affect panicles (panicle blast).",
+        "causes":       "Cool nights, morning dew, excess nitrogen, susceptible varieties.",
+        "treatment":    "Tricyclazole, isoprothiolane, azoxystrobin fungicides.",
+        "prevention":   "Resistant varieties, balanced nitrogen, regulated irrigation.",
+        "favorable_conditions": {
+            "temperature": "20–28°C",
+            "humidity":    ">90%",
+            "rainfall":    "Frequent dew/light rain",
+        },
+        "weather_weights": {"temperature": 0.20, "humidity": 0.55, "rainfall": 0.25},
+    },
+
+    "blast": {  # default alias for rice blast
         "display":      "Blast (Rice Paddy)",
         "crop":         "Rice",
         "severity":     "Very High",
@@ -813,20 +829,50 @@ def _load_localized_disease_db(lang: str) -> dict:
     return {}
 
 
-def get_disease_info(disease_name: str, lang: str = "en") -> dict:
+def get_disease_info(disease_name: str, lang: str = "en", crop: str | None = None) -> dict:
     """
-    Look up a disease by name with multilingual support.
+    Look up a disease by name with multilingual support and crop-specific disambiguation.
     Returns the disease dict localized into `lang` if available.
     """
     key = disease_name.lower().strip().replace(" ", "_").replace("-", "_").replace("(", "").replace(")", "")
     cleaned_key = re.sub(r"^(rice|wheat|cotton|sugarcane)_+", "", key)
 
+    crop_str = crop.lower().strip() if crop else ""
+    if not crop_str:
+        for c in ("wheat", "rice", "cotton", "sugarcane"):
+            if key.startswith(f"{c}_"):
+                crop_str = c
+                break
+
     info = None
-    if key in DISEASE_DB:
-        info = DISEASE_DB[key]
-    elif cleaned_key in DISEASE_DB:
-        info = DISEASE_DB[cleaned_key]
-    else:
+
+    # 1. Look up exact crop-prefixed key (e.g., wheat_blast, rice_blast)
+    if crop_str:
+        prefixed_key = f"{crop_str}_{cleaned_key}"
+        if prefixed_key in DISEASE_DB:
+            info = DISEASE_DB[prefixed_key]
+
+    # 2. Look up key or cleaned_key directly
+    if info is None:
+        if key in DISEASE_DB:
+            candidate = DISEASE_DB[key]
+            if not crop_str or candidate.get("crop", "").lower() in (crop_str, "all"):
+                info = candidate
+        if info is None and cleaned_key in DISEASE_DB:
+            candidate = DISEASE_DB[cleaned_key]
+            if not crop_str or candidate.get("crop", "").lower() in (crop_str, "all"):
+                info = candidate
+
+    # 3. Fuzzy search respecting crop
+    if info is None and crop_str:
+        for db_key, item in DISEASE_DB.items():
+            if (key in db_key or db_key in key or cleaned_key in db_key or db_key in cleaned_key):
+                if item.get("crop", "").lower() in (crop_str, "all"):
+                    info = item
+                    break
+
+    # 4. General fallback fuzzy search
+    if info is None:
         for db_key, item in DISEASE_DB.items():
             if key in db_key or db_key in key or cleaned_key in db_key or db_key in cleaned_key:
                 info = item

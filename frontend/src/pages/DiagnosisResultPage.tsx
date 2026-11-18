@@ -101,8 +101,15 @@ export function DiagnosisResultPage({
     ? prediction.confidence_percent
     : (prediction.confidence != null ? prediction.confidence * 100 : 0)
 
-  const isMediumConfidence = confidence >= UNKNOWN_CONFIDENCE && confidence < LOW_CONFIDENCE
-  const isUnknownConfidence = confidence < UNKNOWN_CONFIDENCE
+  // Dynamic unrecognized cutoff: crops with 10+ classes (Wheat: 15 classes, uniform chance = 6.67%)
+  // have a lower uniform baseline. An unrecognized threshold of 12% (>1.8x random chance) ensures
+  // wheat diseases in the 12-25% range enter Tier 2 ("Not sure yet / multiple matches")
+  // instead of falsely displaying "We could not recognize this leaf".
+  const isLargeClassCrop = (prediction.crop || '').toLowerCase().includes('wheat')
+  const unknownThreshold = isLargeClassCrop ? 12 : UNKNOWN_CONFIDENCE
+
+  const isMediumConfidence = confidence >= unknownThreshold && confidence < LOW_CONFIDENCE
+  const isUnknownConfidence = confidence < unknownThreshold
 
   const affectedAreaPct = prediction.affected_area_percent ?? 18
   const rawRisk = prediction.weather_context?.risk_level ?? locationData?.risk_level ?? 'Low'

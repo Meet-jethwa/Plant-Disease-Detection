@@ -9,6 +9,7 @@ models/*.keras
 models/*.h5
 models/*.pth
 .env
+models/
 
 # ─── Python / Virtual Environment ───
 __pycache__/
@@ -22,8 +23,25 @@ env/
 venv/
 .env/
 .env
+.env.*
+!.env.example
 .venv/
 ENV/
+
+# ─── Testing, Coverage & Benchmarks ───
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mutmut-cache/
+tests/performance/results.jtl
+tests/performance/jmeter_html_report/
+
+# ─── Frontend Dependencies & Builds ───
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
 
 # ─── OS files ───
 .DS_Store

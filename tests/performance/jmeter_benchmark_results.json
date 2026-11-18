@@ -1,0 +1,53 @@
+[
+  {
+    "tier": "API Health Probe",
+    "virtual_users": 20,
+    "total_requests": 200,
+    "success": 200,
+    "failed": 0,
+    "error_rate_pct": 0.0,
+    "duration_sec": 0.86,
+    "throughput_rps": 232.48,
+    "latency_min_ms": 17.8,
+    "latency_mean_ms": 82.58,
+    "latency_p50_ms": 34.99,
+    "latency_p90_ms": 333.65,
+    "latency_p95_ms": 528.67,
+    "latency_p99_ms": 537.69,
+    "latency_max_ms": 545.26
+  },
+  {
+    "tier": "Crops Metadata",
+    "virtual_users": 25,
+    "total_requests": 200,
+    "success": 200,
+    "failed": 0,
+    "error_rate_pct": 0.0,
+    "duration_sec": 0.46,
+    "throughput_rps": 436.6,
+    "latency_min_ms": 5.32,
+    "latency_mean_ms": 53.27,
+    "latency_p50_ms": 48.87,
+    "latency_p90_ms": 96.73,
+    "latency_p95_ms": 103.91,
+    "latency_p99_ms": 114.32,
+    "latency_max_ms": 115.19
+  },
+  {
+    "tier": "Weather Risk Forecaster",
+    "virtual_users": 25,
+    "total_requests": 150,
+    "success": 150,
+    "failed": 0,
+    "error_rate_pct": 0.0,
+    "duration_sec": 13.41,
+    "throughput_rps": 11.19,
+    "latency_min_ms": 1055.04,
+    "latency_mean_ms": 2150.21,
+    "latency_p50_ms": 1895.07,
+    "latency_p90_ms": 3916.63,
+    "latency_p95_ms": 3930.99,
+    "latency_p99_ms": 3946.27,
+    "latency_max_ms": 3949.29
+  }
+]

@@ -1,0 +1,25 @@
+TestID,Step,Keyword,Target,Value,ExpectedResult
+TS_KDT_01,1,CHECK_HEALTH,service,,ok
+TS_KDT_01,2,SELECT_CROP,crop,rice,rice
+TS_KDT_01,3,OVERRIDE_WEATHER,temperature_c,29.0,29.0
+TS_KDT_01,4,OVERRIDE_WEATHER,humidity_percent,85.0,85.0
+TS_KDT_01,5,UPLOAD_IMAGE,image,leaf_sample.jpg,valid_bytes
+TS_KDT_01,6,EXECUTE_PREDICTION,api,,200
+TS_KDT_01,7,VERIFY_PREDICTION_FIELD,crop,rice,rice
+TS_KDT_01,8,VERIFY_PREDICTION_FIELD,confidence,min_threshold,0.10
+TS_KDT_01,9,VERIFY_RISK_LEVEL,risk_level,High,High
+TS_KDT_02,1,SELECT_CROP,crop,wheat,wheat
+TS_KDT_02,2,OVERRIDE_WEATHER,temperature_c,18.0,18.0
+TS_KDT_02,3,OVERRIDE_WEATHER,humidity_percent,50.0,50.0
+TS_KDT_02,4,UPLOAD_IMAGE,image,leaf_sample.jpg,valid_bytes
+TS_KDT_02,5,EXECUTE_PREDICTION,api,,200
+TS_KDT_02,6,FORECAST_7DAY_RISK,forecast,,7_days
+TS_KDT_03,1,SELECT_CROP,crop,cotton,cotton
+TS_KDT_03,2,UPLOAD_IMAGE,image,leaf_sample.jpg,valid_bytes
+TS_KDT_03,3,EXECUTE_PREDICTION,api,,200
+TS_KDT_03,4,START_ASSISTANT_SESSION,assistant,session_init,success
+TS_KDT_03,5,ASK_ASSISTANT_QUESTION,question,What is the recommended treatment protocol?,has_text
+TS_KDT_04,1,SELECT_CROP,crop,invalid_crop_xyz,,invalid_crop
+TS_KDT_04,2,UPLOAD_IMAGE,image,leaf_sample.jpg,valid_bytes
+TS_KDT_04,3,EXECUTE_PREDICTION,api,,400
+

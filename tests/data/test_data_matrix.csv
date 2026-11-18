@@ -1,0 +1,17 @@
+TestCaseID,Crop,Temperature,Humidity,Rainfall,WindSpeed,Lang,ExpectedStatus,ExpectedRisk,Description
+TC_DDT_01,rice,28.5,88.0,18.0,12.0,en,200,High,Rice monsoon humid high risk condition
+TC_DDT_02,wheat,18.0,55.0,0.0,8.0,en,200,Low,Wheat cool dry low risk condition
+TC_DDT_03,sugarcane,32.0,78.0,8.5,15.0,en,200,Medium,Sugarcane tropical warm moderate risk
+TC_DDT_04,cotton,34.0,62.0,2.0,14.0,en,200,Medium,Cotton semi-arid moderate humidity
+TC_DDT_05,rice,44.0,95.0,50.0,25.0,en,200,High,Extreme heatwave and tropical storm boundary
+TC_DDT_06,wheat,10.0,30.0,0.0,5.0,en,200,Low,Extreme low temperature and arid winter boundary
+TC_DDT_07,sugarcane,28.0,100.0,80.0,20.0,en,200,High,Maximum 100 percent relative humidity saturation
+TC_DDT_08,cotton,29.0,75.0,5.0,10.0,hi,200,Medium,Localized Hindi language output
+TC_DDT_09,rice,30.0,82.0,12.0,12.0,gu,200,High,Localized Gujarati language output
+TC_DDT_10,wheat,22.0,68.0,4.0,9.0,mr,200,Medium,Localized Marathi language output
+TC_DDT_11,cotton,31.0,70.0,6.0,11.0,ta,200,Medium,Localized Tamil language output
+TC_DDT_12,rice,27.0,85.0,14.0,13.0,te,200,High,Localized Telugu language output
+TC_DDT_13,sugarcane,29.0,80.0,10.0,10.0,bn,200,High,Localized Bengali language output
+TC_DDT_14,wheat,19.0,58.0,1.0,7.0,pa,200,Low,Localized Punjabi language output
+TC_DDT_15,barley,25.0,60.0,2.0,10.0,en,400,None,Negative invalid crop validation boundary
+

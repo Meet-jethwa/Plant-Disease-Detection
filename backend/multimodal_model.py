@@ -445,7 +445,25 @@ def predict_multimodal(
             # If crop_sum >= 0.15, full confidence within crop. If crop_sum < 0.15, attenuated.
             credibility = min(1.0, crop_sum / 0.15)
             normalized_within_crop = float(crop_probs[best_local_idx] / (crop_sum + 1e-8))
-            confidence = round(normalized_within_crop * (0.85 + 0.15 * credibility), 4)
+
+            # Crop-aware confidence calibration:
+            # Compensates for the class imbalance across crops: Wheat has 15 classes,
+            # Rice 6, Sugarcane 5, Cotton 7. For 15 classes, uniform baseline is 1/15 = 6.67%.
+            # A 20% prediction represents 3x random chance, which is a strong top candidate
+            # that belongs in Tier 2 ("Not sure yet / multiple matches") rather than being
+            # discarded as "unrecognized leaf".
+            K = len(crop_indices)
+            uniform_baseline = 1.0 / max(1, K)
+
+            def _calibrate_prob(p_val: float) -> float:
+                if p_val >= uniform_baseline:
+                    margin = (p_val - uniform_baseline) / max(1e-8, (1.0 - uniform_baseline))
+                    base = 0.35 + 0.65 * margin
+                else:
+                    base = 0.35 * (p_val / max(1e-8, uniform_baseline))
+                return round(float(base * credibility), 4)
+
+            confidence = _calibrate_prob(normalized_within_crop)
 
             # Top 3 within selected crop
             sorted_local = np.argsort(crop_probs)[::-1]
@@ -453,28 +471,51 @@ def predict_multimodal(
             for loc in sorted_local[:3]:
                 c_idx = crop_indices[loc]
                 d_name = CLASS_NAMES[c_idx].split("_", 1)[1]
+                cand_norm = float(crop_probs[loc] / (crop_sum + 1e-8))
                 top3.append({
                     "class": d_name,
                     "raw_class": CLASS_NAMES[c_idx],
-                    "confidence": round(float(crop_probs[loc] / (crop_sum + 1e-8)), 4),
+                    "confidence": _calibrate_prob(cand_norm),
                 })
         else:
-            confidence = float(probs[selected_idx])
+            K = len(CLASS_NAMES)
+            uniform_baseline = 1.0 / max(1, K)
+
+            def _calibrate_global(p_val: float) -> float:
+                if p_val >= uniform_baseline:
+                    margin = (p_val - uniform_baseline) / max(1e-8, (1.0 - uniform_baseline))
+                    base = 0.35 + 0.65 * margin
+                else:
+                    base = 0.35 * (p_val / max(1e-8, uniform_baseline))
+                return round(float(base), 4)
+
+            confidence = _calibrate_global(float(probs[selected_idx]))
             top3 = [
                 {
                     "class": CLASS_NAMES[i].split("_", 1)[1] if "_" in CLASS_NAMES[i] else CLASS_NAMES[i],
                     "raw_class": CLASS_NAMES[i],
-                    "confidence": round(float(probs[i]), 4),
+                    "confidence": _calibrate_global(float(probs[i])),
                 }
                 for i in top_indexes[:3]
             ]
     else:
-        confidence = float(probs[selected_idx])
+        K = len(CLASS_NAMES)
+        uniform_baseline = 1.0 / max(1, K)
+
+        def _calibrate_global(p_val: float) -> float:
+            if p_val >= uniform_baseline:
+                margin = (p_val - uniform_baseline) / max(1e-8, (1.0 - uniform_baseline))
+                base = 0.35 + 0.65 * margin
+            else:
+                base = 0.35 * (p_val / max(1e-8, uniform_baseline))
+            return round(float(base), 4)
+
+        confidence = _calibrate_global(float(probs[selected_idx]))
         top3 = [
             {
                 "class": CLASS_NAMES[i].split("_", 1)[1] if "_" in CLASS_NAMES[i] else CLASS_NAMES[i],
                 "raw_class": CLASS_NAMES[i],
-                "confidence": round(float(probs[i]), 4),
+                "confidence": _calibrate_global(float(probs[i])),
             }
             for i in top_indexes[:3]
         ]

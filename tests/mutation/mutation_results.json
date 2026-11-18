@@ -1,0 +1,209 @@
+{
+  "target": "C:\\Users\\meetj\\Desktop\\Plant Disease Detection\\Plant-Disease-Detection\\backend\\forecasting.py",
+  "total_tested": 25,
+  "killed": 25,
+  "survived": 0,
+  "mutation_score_percent": 100.0,
+  "details": [
+    {
+      "id": 1,
+      "type": "BinOp (Add -> Sub)",
+      "lineno": 60,
+      "status": "KILLED",
+      "reason": "AssertionError: Leaf wetness duration must positively dr",
+      "duration_ms": 64.3
+    },
+    {
+      "id": 2,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 60,
+      "status": "KILLED",
+      "reason": "AssertionError: Leaf wetness duration must positively dr",
+      "duration_ms": 15.8
+    },
+    {
+      "id": 3,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 60,
+      "status": "KILLED",
+      "reason": "AssertionError: Leaf wetness duration must positively dr",
+      "duration_ms": 31.2
+    },
+    {
+      "id": 4,
+      "type": "Compare (Gt -> LtE)",
+      "lineno": 60,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase leaf wetness dura",
+      "duration_ms": 52.6
+    },
+    {
+      "id": 5,
+      "type": "BinOp (Sub -> Add)",
+      "lineno": 66,
+      "status": "KILLED",
+      "reason": "AssertionError: ",
+      "duration_ms": 127.3
+    },
+    {
+      "id": 6,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 66,
+      "status": "KILLED",
+      "reason": "AssertionError: ",
+      "duration_ms": 136.4
+    },
+    {
+      "id": 7,
+      "type": "BinOp (Sub -> Add)",
+      "lineno": 67,
+      "status": "KILLED",
+      "reason": "AssertionError: Infection score mean out of range: 76.46",
+      "duration_ms": 75.8
+    },
+    {
+      "id": 8,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 75,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase infection score",
+      "duration_ms": 54.8
+    },
+    {
+      "id": 9,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 75,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase infection score",
+      "duration_ms": 16.7
+    },
+    {
+      "id": 10,
+      "type": "BinOp (Add -> Sub)",
+      "lineno": 76,
+      "status": "KILLED",
+      "reason": "AssertionError: High humidity must strongly increase inf",
+      "duration_ms": 54.4
+    },
+    {
+      "id": 11,
+      "type": "BinOp (Add -> Sub)",
+      "lineno": 76,
+      "status": "KILLED",
+      "reason": "AssertionError: Leaf wetness duration must positively dr",
+      "duration_ms": 45.8
+    },
+    {
+      "id": 12,
+      "type": "BinOp (Add -> Sub)",
+      "lineno": 76,
+      "status": "KILLED",
+      "reason": "AssertionError: Infection score mean out of range: 21.56",
+      "duration_ms": 58.3
+    },
+    {
+      "id": 13,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 76,
+      "status": "KILLED",
+      "reason": "AssertionError: Infection score mean out of range: 74.83",
+      "duration_ms": 37.8
+    },
+    {
+      "id": 14,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 77,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase infection score",
+      "duration_ms": 43.9
+    },
+    {
+      "id": 15,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 78,
+      "status": "KILLED",
+      "reason": "AssertionError: Infection score mean out of range: 1.444",
+      "duration_ms": 32.6
+    },
+    {
+      "id": 16,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 79,
+      "status": "KILLED",
+      "reason": "AssertionError: Infection score mean out of range: 1.444",
+      "duration_ms": 10.3
+    },
+    {
+      "id": 17,
+      "type": "BinOp (Add -> Sub)",
+      "lineno": 84,
+      "status": "KILLED",
+      "reason": "AssertionError: ",
+      "duration_ms": 63.2
+    },
+    {
+      "id": 18,
+      "type": "Compare (GtE -> Lt)",
+      "lineno": 89,
+      "status": "KILLED",
+      "reason": "AssertionError: Missing risk category Low",
+      "duration_ms": 54.2
+    },
+    {
+      "id": 19,
+      "type": "Compare (GtE -> Lt)",
+      "lineno": 91,
+      "status": "KILLED",
+      "reason": "AssertionError: Missing risk category Low",
+      "duration_ms": 14.3
+    },
+    {
+      "id": 20,
+      "type": "BinOp (Add -> Sub)",
+      "lineno": 194,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase high risk probabi",
+      "duration_ms": 848.8
+    },
+    {
+      "id": 21,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 194,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase high risk probabi",
+      "duration_ms": 894.4
+    },
+    {
+      "id": 22,
+      "type": "BinOp (Mult -> FloorDiv)",
+      "lineno": 194,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase high risk probabi",
+      "duration_ms": 907.8
+    },
+    {
+      "id": 23,
+      "type": "Compare (Gt -> LtE)",
+      "lineno": 194,
+      "status": "KILLED",
+      "reason": "AssertionError: Rainfall must increase high risk probabi",
+      "duration_ms": 1007.0
+    },
+    {
+      "id": 24,
+      "type": "Compare (Eq -> NotEq)",
+      "lineno": 199,
+      "status": "KILLED",
+      "reason": "AssertionError: Rice must have higher high-risk vulnerab",
+      "duration_ms": 965.4
+    },
+    {
+      "id": 25,
+      "type": "Compare (GtE -> Lt)",
+      "lineno": 213,
+      "status": "KILLED",
+      "reason": "AssertionError: Must mention humidity when humidity >= 7",
+      "duration_ms": 759.9
+    }
+  ]
+}

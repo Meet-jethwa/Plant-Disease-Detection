@@ -171,6 +171,45 @@ Trained checkpoints and confusion matrix plots are saved to:
 
 ---
 
+## 🧪 Comprehensive Software Testing & QA Suite
+
+FloraAI includes an automated test framework covering all testing methodologies:
+
+| Test Category | Methodology & Framework | Scope & Test Count | Live Server Needed? | Run Command |
+| :--- | :--- | :--- | :--- | :--- |
+| **Unit Testing** | `pytest` + `TestClient` | 69 tests (API, Knowledge Base, Grad-CAM, Forecaster, PyTorch Tensors, Gemini Chat) | **No** (Standalone) | `pytest tests/unit -v` |
+| **Data-Driven (DDT)** | `pytest` + JSON Matrix | 15 test cases (Multi-crop multi-weather matrix permutations) | **No** (Standalone) | `pytest tests/data_driven -v` |
+| **Keyword-Driven (KDT)** | Action-Word Engine | 4 scenarios / 24 steps (Navigation, Prediction, Health Check, Forecast) | **No** (Standalone) | `pytest tests/keyword_driven -v` |
+| **Security & Pen-Testing** | Custom OWASP ZAP Runner | 6 test suites (SQLi, XSS, Path Traversal, File Fuzzing, CORS, Headers) | **No** (Standalone) | `pytest tests/security -v` |
+| **End-to-End (E2E)** | Selenium WebDriver (Chrome) | 6 scenarios (Home, Scanner, Multi-crop selector, Indic Switcher, Upload) | **Yes** (Vite on `5173`) | `pytest tests/e2e -v` |
+| **Load & Stress Testing** | Apache JMeter Simulator | 3 tiers / 550 requests (Health, Crops metadata, 25-user Risk Forecaster) | **Yes** (FastAPI on `8000`) | `python tests/performance/run_jmeter_simulation.py` |
+| **Mutation Testing** | `mutmut` AST Engine | 25 mutants in `backend/forecasting.py` (100% Mutation Score) | **No** (Standalone) | `python tests/mutation/run_mutation_tests.py` |
+
+### Running the Test Suites
+
+```powershell
+# 1. Run all 94 standalone automated tests (Unit + DDT + KDT + Security):
+& ".\.venv\Scripts\python.exe" -m pytest tests/unit tests/data_driven tests/keyword_driven tests/security -v
+
+# 2. Run test coverage analysis across backend:
+& ".\.venv\Scripts\python.exe" -m pytest --cov=backend tests/
+
+# 3. Run AST mutation testing (100% score):
+& ".\.venv\Scripts\python.exe" tests/mutation/run_mutation_tests.py
+
+# 4. Run Selenium E2E browser tests (start backend on 8000 and frontend on 5173 first):
+& ".\.venv\Scripts\python.exe" -m pytest tests/e2e -v
+
+# 5. Run JMeter multi-tier concurrency benchmark:
+& ".\.venv\Scripts\python.exe" tests/performance/run_jmeter_simulation.py
+```
+
+### Complete Testing Documentation
+- **[Comprehensive Software Testing & Results Report](test_result.md)**: Master testing report containing the full 94-test execution breakdown, 100% mutation analysis, code coverage, OWASP ZAP security audits, Apache JMeter load benchmarks, and step-by-step hands-on execution guide.
+- **[Methodology & Documentation Directory](docs/)**: Complete testing architecture, tool exploration, feature inventory, test cases, and execution logs.
+
+---
+
 ## 🔒 Security & Privacy
 
 - `.env` is gitignored and untracked. API keys are never bundled into client-side JavaScript.
