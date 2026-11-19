@@ -71,18 +71,15 @@ def test_extract_weather_tensor_from_numpy():
 
 
 def test_extract_weather_tensor_from_scalar_dict():
-    """Verify single-day current weather dict synthesizes valid 7-day standardized sequence."""
+    """Verify single-day current weather dict without 7-day data is rejected (no synthetic sequences)."""
     current_wx = {
         "temperature_c": 29.5,
         "humidity_percent": 84.0,
         "rainfall_mm": 12.0,
         "wind_kmh": 14.0,
     }
-    tensor = extract_weather_tensor(current_wx, target_date=date(2026, 7, 15))
-
-    assert isinstance(tensor, torch.Tensor)
-    assert tensor.shape == (1, 7, 11)
-    assert not torch.isnan(tensor).any()
+    with pytest.raises(ValueError, match="Multimodal inference requires a genuine 7-day"):
+        extract_weather_tensor(current_wx, target_date=date(2026, 7, 15))
 
 
 def test_extract_weather_tensor_from_daily_sequence():
@@ -130,9 +127,10 @@ def test_predict_multimodal_disease_inference():
     buf = io.BytesIO()
     Image.fromarray(dummy_img).save(buf, format="JPEG")
 
+    valid_seq = [[28.0, 20.0, 24.0, 85.0, 70.0, 5.0, 18.0, 12.0, 0.0, 0.5, 0.86] for _ in range(7)]
     res = predict_multimodal_disease(
         file_bytes=buf.getvalue(),
-        weather_dict={"temperature_c": 30.0, "humidity_percent": 85.0},
+        weather_dict={"features_7x11": valid_seq},
         crop_hint="rice",
     )
 

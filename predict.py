@@ -53,8 +53,9 @@ def predict_with_multimodal(image_path: Path, crop_name: str) -> dict:
 
     res = predict_multimodal(
         image=image_bytes,
-        weather=default_weather,
+        weather=None,
         crop_hint=crop_name,
+        allow_image_only=True,
     )
 
     return {

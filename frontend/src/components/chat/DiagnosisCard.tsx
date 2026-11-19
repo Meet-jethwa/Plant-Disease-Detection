@@ -33,12 +33,17 @@ export function DiagnosisCard({ data, prediction }: DiagnosisCardProps) {
   const isSevere = prediction.disease_info?.severity?.toLowerCase() === 'severe' || confidence > 85 && !isHealthy
   const statusType: 'healthy' | 'warning' | 'danger' = isHealthy ? 'healthy' : isSevere ? 'danger' : 'warning'
 
-  // Environmental risks
-  const envFactors = data?.environmental_factors || [
-    { factor: 'Relative Humidity', importance_pct: 78, explanation: 'Elevated humidity above 80% accelerates foliar fungal germination.' },
-    { factor: 'Ambient Temperature', importance_pct: 64, explanation: 'Warm canopy microclimate sustains active pathogen sporulation.' },
-    { factor: 'Rainfall & Dew Wetness', importance_pct: 55, explanation: 'Persistent water droplets allow spore penetration into leaf stomata.' },
-  ]
+  // Environmental risks: use genuine SHAP from Gemini response or prediction context (never fallback to static 78/64/55%)
+  const envFactors: Array<{ factor: string; importance_pct: number; explanation?: string }> | null =
+    data?.environmental_factors && data.environmental_factors.length > 0
+      ? data.environmental_factors
+      : prediction.weather_context?.feature_importance && Object.keys(prediction.weather_context.feature_importance).length > 0
+      ? Object.entries(prediction.weather_context.feature_importance).map(([factor, pct]) => ({
+          factor,
+          importance_pct: Math.round(Number(pct)),
+          explanation: `Model sensitivity attribution from multimodal weather encoder: ${pct}% magnitude share.`,
+        }))
+      : null
 
   const actions: string[] = data?.actionable_steps || data?.recommended_actions || [
     prediction.disease_info?.treatment || 'Apply recommended cultural practices and maintain field sanitation.',
@@ -287,36 +292,46 @@ export function DiagnosisCard({ data, prediction }: DiagnosisCardProps) {
               className="overflow-hidden"
             >
               <div className="px-5 pb-5 space-y-3">
-                {envFactors.map((env, i) => {
-                  const pct = env.importance_pct || 50
-                  const isHighRisk = pct >= 70
-                  const isModerate = pct >= 50 && pct < 70
-                  const barColor = isHighRisk ? 'bg-red-500' : isModerate ? 'bg-amber-500' : 'bg-emerald-500'
-                  const statusLabel = isHighRisk ? t('risk.high') : isModerate ? t('risk.medium') : t('risk.low')
+                {envFactors && envFactors.length > 0 ? (
+                  envFactors.map((env, i) => {
+                    const pct = env.importance_pct || 50
+                    const isHighRisk = pct >= 70
+                    const isModerate = pct >= 50 && pct < 70
+                    const barColor = isHighRisk ? 'bg-red-500' : isModerate ? 'bg-amber-500' : 'bg-emerald-500'
+                    const statusLabel = isHighRisk ? t('risk.high') : isModerate ? t('risk.medium') : t('risk.low')
 
-                  return (
-                    <div key={i} className="p-3 rounded-xl bg-white border border-emerald-200/80 space-y-1.5">
-                      <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
-                        <span>{env.factor}</span>
-                        <span className={isHighRisk ? 'text-red-700' : isModerate ? 'text-amber-800' : 'text-emerald-700'}>
-                          {pct}% · {statusLabel}
-                        </span>
+                    return (
+                      <div key={i} className="p-3 rounded-xl bg-white border border-emerald-200/80 space-y-1.5">
+                        <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
+                          <span>{env.factor}</span>
+                          <span className={isHighRisk ? 'text-red-700' : isModerate ? 'text-amber-800' : 'text-emerald-700'}>
+                            {pct}% · {statusLabel}
+                          </span>
+                        </div>
+
+                        {/* Bar indicator */}
+                        <div className="w-full h-2 rounded-full bg-emerald-100 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${barColor}`}
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
+
+                        {env.explanation && (
+                          <p className="text-xs text-stone-600 leading-relaxed">
+                            {env.explanation}
+                          </p>
+                        )}
                       </div>
-                      
-                      {/* Bar indicator */}
-                      <div className="w-full h-2 rounded-full bg-emerald-100 overflow-hidden">
-                        <div
-                          className={`h-full rounded-full ${barColor}`}
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                      
-                      <p className="text-xs text-stone-600 leading-relaxed">
-                        {env.explanation}
-                      </p>
-                    </div>
-                  )
-                })}
+                    )
+                  })
+                ) : (
+                  <p className="text-xs text-stone-500 italic py-2">
+                    {prediction.model_mode === 'image_only_fallback'
+                      ? 'Environmental SHAP explainability is disabled for image-only inference mode.'
+                      : 'Environmental SHAP feature attributions are unavailable for this observation.'}
+                  </p>
+                )}
               </div>
             </motion.div>
           )}

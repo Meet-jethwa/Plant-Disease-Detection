@@ -82,7 +82,7 @@ def predict_disease_risk(weather_data: dict, crop: str = "rice") -> dict:
     if not reasons:
         reasons.append("Current climatic variables are within sub-optimal pathogen incubation range.")
 
-    shap_data = compute_shap_feature_importance(weather_data, crop=crop_lower)
+    breakdown = compute_rule_based_risk_breakdown(weather_data, crop=crop_lower)
 
     return {
         "crop": crop_lower,
@@ -90,9 +90,10 @@ def predict_disease_risk(weather_data: dict, crop: str = "rice") -> dict:
         "confidence": confidence,
         "probabilities": prob_map,
         "reasoning": " ".join(reasons),
-        "shap_values": shap_data["shap_values"],
-        "feature_importance": shap_data["feature_importance"],
-        "shap_explanation": shap_data,
+        "shap_values": breakdown["attribution_values"],
+        "feature_importance": breakdown["feature_importance"],
+        "risk_breakdown": breakdown,
+        "shap_explanation": breakdown,
         "inputs": {
             "temperature_c": temp,
             "humidity_percent": hum,
@@ -103,11 +104,13 @@ def predict_disease_risk(weather_data: dict, crop: str = "rice") -> dict:
     }
 
 
-def compute_shap_feature_importance(weather_data: dict, crop: str = "rice") -> dict:
+def compute_rule_based_risk_breakdown(weather_data: dict, crop: str = "rice") -> dict:
     """
-    Compute SHAP (Shapley Additive exPlanations) values for phytopathological infection risk.
-    Evaluates exact Shapley values across Temperature, Humidity, Leaf Wetness, and Rainfall
-    relative to a neutral agricultural baseline.
+    Compute rule-based environmental factor attribution for phytopathological infection risk.
+    Evaluates sensitivity across Temperature, Humidity, Leaf Wetness, and Rainfall
+    relative to a neutral agricultural baseline using phytopathological equations.
+    NOTE: This is a rule-based risk heuristic; genuine model SHAP on the trained multimodal
+    classifier is computed in backend/multimodal_model.py.
     """
     import math
     import itertools
@@ -163,11 +166,16 @@ def compute_shap_feature_importance(weather_data: dict, crop: str = "rice") -> d
 
     return {
         "feature_importance": importance,
+        "attribution_values": {name: round(v, 3) for name, v in zip(names, shap_vals)},
         "shap_values": {name: round(v, 3) for name, v in zip(names, shap_vals)},
         "base_value": round(base_score, 2),
         "infection_score": round(current_score, 2),
-        "method": "SHAP (Exact Shapley Additive exPlanations)",
+        "method": "Rule-Based Environmental Risk Attribution Heuristic",
     }
+
+
+# Backwards compatibility alias
+compute_shap_feature_importance = compute_rule_based_risk_breakdown
 
 
 def forecast_7day_disease_progression(

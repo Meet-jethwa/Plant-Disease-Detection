@@ -120,7 +120,7 @@ def test_tc_sec_03_path_traversal_resistance():
     traversal_payloads = [
         "../../../../../../windows/win.ini",
         "../../../../../../etc/passwd",
-        "....//....//models/disease_risk_forecaster.joblib",
+        "....//....//models/best_model_multimodal.pth",
     ]
 
     for payload in traversal_payloads:

@@ -863,11 +863,13 @@ def get_disease_info(disease_name: str, lang: str = "en", crop: str | None = Non
     return info
 
 
-def compute_weather_shap_values(disease_info: dict, weather: dict, crop: str = "rice") -> dict:
+def compute_rule_based_weather_attribution(disease_info: dict, weather: dict, crop: str = "rice") -> dict:
     """
-    Compute SHAP (SHapley Additive exPlanations) values for environmental disease risk.
-    Uses cooperative game theory to allocate credit/blame across microclimatic variables
-    (Temperature, Humidity, Rainfall, Wind Speed) against a neutral agricultural baseline.
+    Compute rule-based environmental factor attribution for risk indicators.
+    Uses cooperative allocation across microclimatic variables (Temperature, Humidity, Rainfall, Wind Speed)
+    against a neutral agronomic baseline using phytopathological suitability rules.
+    NOTE: This is a heuristic risk indicator; for trained multimodal neural network explainability,
+    see compute_multimodal_weather_shap in backend/multimodal_model.py.
     """
     import math
     import itertools
@@ -906,7 +908,6 @@ def compute_weather_shap_values(disease_info: dict, weather: dict, crop: str = "
     curr_features = [temp, hum, rain, wind]
     feature_names = ["Temperature", "Humidity", "Rainfall", "Wind Speed"]
 
-    # Exact Shapley attribution: phi_i = sum_S [|S|!(|N|-|S|-1)! / |N|!] * (f(S U {i}) - f(S))
     N = 4
     shap_vals = [0.0] * N
     for i in range(N):
@@ -942,19 +943,24 @@ def compute_weather_shap_values(disease_info: dict, weather: dict, crop: str = "
     return {
         "feature_importance": normalized,
         "shap_values": {name: round(val, 3) for name, val in zip(feature_names, shap_vals)},
+        "attribution_values": {name: round(val, 3) for name, val in zip(feature_names, shap_vals)},
         "base_value": round(base_score, 2),
         "risk_score": round(current_score, 2),
-        "method": "SHAP (Exact Shapley Additive exPlanations)",
+        "method": "Rule-Based Environmental Attribution Heuristic",
     }
 
 
-def compute_weather_feature_importance(disease_info: dict, weather: dict, crop: str = "rice") -> dict:
+def compute_rule_based_feature_importance(disease_info: dict, weather: dict, crop: str = "rice") -> dict:
     """
-    Calculate environmental factor importance using SHAP (Shapley Additive exPlanations).
-    Replaces static profile weights with true cooperative game-theoretic feature attribution.
+    Calculate environmental factor importance using rule-based pathogen suitability attribution.
     """
-    shap_data = compute_weather_shap_values(disease_info, weather, crop=crop)
-    return shap_data["feature_importance"]
+    attribution_data = compute_rule_based_weather_attribution(disease_info, weather, crop=crop)
+    return attribution_data["feature_importance"]
+
+
+# Backwards compatibility aliases
+compute_weather_shap_values = compute_rule_based_weather_attribution
+compute_weather_feature_importance = compute_rule_based_feature_importance
 
 
 def chatbot_response(user_input: str) -> str:

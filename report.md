@@ -310,34 +310,48 @@ $$z_{\text{low}} = \frac{52.0 - I}{5.5}, \quad z_{\text{med}} = 2.5 - \frac{|I -
 $$p(\text{Risk} = k) = \frac{\exp(z_k)}{\sum_{j \in \{\text{low}, \text{med}, \text{high}\}} \exp(z_j)}$$
 The discrete risk category assigned is $\arg\max_k p_k$.
 
-### 4.5 Exact SHAP Feature Attribution Engine
-To explain environmental disease risk to agricultural officers, FloraAI implements an exact Shapley value computation engine based on cooperative game theory. 
+### 4.5 Genuine Model-Based SHAP Explainability Engine (PyTorch GradientExplainer)
+To deliver true, model-based environmental interpretability rather than heuristic approximations, FloraAI implements a genuine Shapley Additive exPlanations (SHAP) engine directly connected to the trained `MultimodalClassifier` PyTorch computation graph.
 
-Let $N = \{1, 2, 3, 4\}$ denote the set of evaluated meteorological features:
-- Feature 1: Temperature ($T$)
-- Feature 2: Relative Humidity ($\text{RH}$)
-- Feature 3: Leaf Wetness Duration ($L_W$)
-- Feature 4: Rainfall Accumulation ($P$)
+#### Deep Multimodal Attribution Architecture
+The inference pipeline isolates the environmental feature stream while holding the high-dimensional visual embedding $\mathbf{f}_{\text{img}} \in \mathbb{R}^{512}$ invariant:
+1. **Visual Embedding Invariance**: For a query leaf image $\mathbf{I}$, the EfficientNetV2-S visual backbone computes $\mathbf{f}_{\text{img}} = \text{ImageFC}(\text{EfficientNetV2-S}(\mathbf{I}))$. This vector is frozen and registered as an immutable buffer inside an explainability submodel $\mathcal{M}_{\text{env}}$.
+2. **Environmental Sensitivity Submodel**:
+   $$\mathcal{M}_{\text{env}}(\mathbf{W}) = \text{Softmax}\left(\text{Classifier}\left(\left[\mathbf{f}_{\text{img}} \,\|\, \text{WeatherEncoder}(\mathbf{W})\right]\right)\right)_{c^*}$$
+   where $c^* = \arg\max_c p(c)$ denotes the predicted disease class index.
+3. **Empirical Multi-Crop Training Background**: Rather than using arbitrary zeros or random Gaussian noise, the background reference distribution $\mathbf{B} \in \mathbb{R}^{K \times 7 \times 11}$ ($K \in [16, 33]$) is loaded directly from empirical training meteorological sequences spanning all four economic crops and distinct pathological conditions.
+4. **PyTorch GradientExplainer**: Using `shap.GradientExplainer`, the engine computes the expected gradients of the target class probability with respect to the input meteorological tensor $\mathbf{W} \in \mathbb{R}^{1 \times 7 \times 11}$ over the background distribution:
+   $$\Phi(\mathbf{W})_{t, j} \approx \frac{1}{K} \sum_{k=1}^K (\mathbf{W}_{t, j} - \mathbf{B}_{k, t, j}) \times \int_0^1 \frac{\partial \mathcal{M}_{\text{env}}(\mathbf{B}_k + \alpha(\mathbf{W} - \mathbf{B}_k))}{\partial \mathbf{W}_{t, j}} \, d\alpha$$
+   where $t \in [1, 7]$ indexes the 7 incubation days, and $j \in [0, 10]$ indexes the 11 meteorological features.
 
-The baseline null coalitional state $\mathbf{x}_{\text{base}}$ represents benign non-conducive conditions:
-$$\mathbf{x}_{\text{base}} = [T = 18.0^\circ\text{C}, \, \text{RH} = 45.0\%, \, L_W = 2.0\text{h}, \, P = 0.0\text{mm}]$$
+#### Feature Aggregation & Attribution Metrics
+The resulting $7 \times 11$ raw attribution tensor is aggregated into 7 agronomic feature groups:
+- **Temperature**: Features 0 (`temp_max`), 1 (`temp_min`), 2 (`temp_mean`) with unit $^\circ\text{C}$
+- **Relative Humidity**: Features 3 (`rh_max`), 4 (`rh_mean`) with unit $\%$
+- **Rainfall / Precipitation**: Feature 5 (`precip_sum`) with unit $\text{mm}$
+- **Dew Point / Foliar Moisture**: Feature 6 (`dewpoint_mean`) with unit $^\circ\text{C}$
+- **Wind Speed**: Feature 7 (`wind_max`) with unit $\text{km/h}$
+- **Soil Temperature**: Feature 8 (`soil_temp`) with unit $^\circ\text{C}$
+- **Seasonality**: Features 9 (`month_sin`), 10 (`month_cos`) with cyclic harmonics
 
-The scoring function $v(S)$ evaluates the infection pressure score $I$ when features in subset $S \subseteq N$ assume their observed values $\mathbf{x}_S$, while features outside $S$ ($i \notin S$) are held at baseline $\mathbf{x}_{\text{base}}$.
+For each environmental factor group $g$:
+- **Net Signed SHAP Value ($\phi_g^{\text{net}}$)**: Represents directional impact on model confidence. Positive values ($\phi_g^{\text{net}} > +0.0001$) elevate disease probability; negative values ($\phi_g^{\text{net}} < -0.0001$) inhibit disease probability:
+  $$\phi_g^{\text{net}} = \sum_{t=1}^7 \sum_{j \in g} \Phi_{t, j}$$
+- **Relative Importance Percentage ($\bar{\phi}_g$)**: Computed strictly as the aggregation of mean absolute SHAP magnitudes across the 7-day incubation window, explicitly distinguished from raw signed values:
+  $$M_g = \frac{1}{7} \sum_{t=1}^7 \left|\sum_{j \in g} \Phi_{t, j}\right|, \quad \bar{\phi}_g = \frac{M_g}{\sum_{g'} M_{g'}} \times 100\%$$
 
-For each feature $i \in N$, the exact Shapley attribution $\phi_i$ is computed across all $2^{|N|-1} = 8$ complementary coalitions (16 total subset evaluations for $2^4$):
-$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! \, (|N| - |S| - 1)!}{|N|!} \left[v(S \cup \{i\}) - v(S)\right]$$
+> **Scientific Interpretation Invariant**: The system interface clearly documents that SHAP attributions quantify the mathematical sensitivity of the neural network's decision boundary to environmental features, not biological causation.
 
-#### Mathematical Verification of the Efficiency Axiom
-The implementation verifies that the sum of the four Shapley attributions matches the difference between the full model evaluation and the baseline model:
-$$\sum_{i=1}^4 \phi_i = f(\mathbf{x}) - f(\mathbf{x}_{\text{base}})$$
-Normalized percentage contributions are presented to the farmer as relative importance bars:
-$$\bar{\phi}_i = \frac{\max(0.0, \, \phi_i)}{\sum_{j=1}^4 \max(0.0, \, \phi_j)} \times 100\%$$
+#### Rule-Based Risk Attribution (Secondary Screen)
+For rapid heuristic screening without model evaluation, FloraAI retains a separate, explicitly labelled **Rule-Based Environmental Risk Attribution Heuristic** ($N=4$ biophysical parameters). This heuristic is strictly isolated from model SHAP in API contracts and UI presentation.
 
-### 4.6 Open-Meteo Real-Time Telemetry & Geocoding Integration
-FloraAI integrates directly with the Open-Meteo REST APIs:
-1. **Forward Geocoding (`geocoding-api.open-meteo.com/v1/search`)**: Allows farmers or agricultural extension workers to query any village, tehsil, or city (e.g., `"Ludhiana"`, `"Surat"`, `"Guntur"`). The endpoint returns exact coordinates ($\phi, \lambda$), administrative state, and elevation.
-2. **Reverse Geocoding**: Resolves client device GPS coordinates to localized administrative names.
-3. **Live Atmospheric Forecast Telemetry (`api.open-meteo.com/v1/forecast`)**: Queries the global weather model for 7-day hourly and daily projections, extracting 2m air temperature, relative humidity, precipitation, wind speed, surface pressure, cloud cover, and WMO weather condition codes.
+### 4.6 Open-Meteo Real-Time Telemetry & Historical Observations Integration
+FloraAI replaces all synthetic and formula-based weather approximations with genuine meteorological observations retrieved via Open-Meteo:
+1. **Forward Geocoding (`geocoding-api.open-meteo.com/v1/search`)**: Converts farm village, tehsil, district, or city names into exact latitude and longitude coordinates ($\phi, \lambda$). If geocoding fails, the system returns an explicit HTTP 404 error rather than silently defaulting to Delhi coordinates.
+2. **Past 7-Day Observation Retrieval (`api.open-meteo.com/v1/forecast?past_days=7`)**: For diagnoses of existing foliar lesions, the system queries the 7 days immediately preceding the diagnosis date. This provides authentic incubation-period weather under which the pathogen colonized the host leaf.
+3. **Historical Archive API (`archive-api.open-meteo.com/v1/archive`)**: When the user provides a specific image capture date older than 5 days, FloraAI queries the Open-Meteo Historical Archive API across $[t_{\text{capture}} - 6, \, t_{\text{capture}}]$ to reconstruct true historical exposure.
+4. **Elimination of Artificial Weather Fallbacks**: Synthetic sequence generation (`temp_offsets`, `rh_offsets`, pseudo-random formulas `seed % 50`, and silent Mumbai/Ahmedabad cycling) has been completely excised. If meteorological retrieval fails, the system raises an explicit HTTP 502 error, preventing the multimodal network from processing fabricated observations.
+5. **Demonstration & Testing Mode**: Fixed research weather profiles from the training dataset are maintained strictly under an optional, clearly labelled demonstration mode (`🔬 Demonstration Mode`) that explicitly notifies the user when live weather is being overridden for sensitivity benchmarking.
 
 ### 4.7 7-Day Outbreak Progression Forecasting Engine
 The forecasting engine evaluates daily risk trajectories across the upcoming 7-day horizon. For each day $t \in [1, 7]$:
@@ -408,21 +422,30 @@ To prevent AI translation hallucinations from prescribing lethal or ineffective 
 The backend is implemented in Python 3.12 utilizing **FastAPI** as the ASGI asynchronous web framework running on **Uvicorn**:
 - **PyTorch 2.6.0 + CUDA 12.4**: Executes tensor manipulations, 1D-CNN temporal forward passes, and multi-head attention operations.
 - **Timm 1.0.15**: Provides the EfficientNetV2-S convolutional backbone.
-- **SHAP 0.54.1**: Provides exact game-theoretic Shapley feature attribution.
-- **NumPy 1.26.4**: Pinned for cross-compatibility between PyTorch, TensorFlow/Keras fallback engines, and SHAP.
+- **SHAP 0.54.1**: Provides genuine game-theoretic Shapley feature attribution via `GradientExplainer`.
+- **Consolidated Model Architecture**: `backend/multimodal_model.py` serves as the authoritative single implementation for architecture definition, weights loading, 7-day weather normalization, and Grad-CAM/SHAP extraction; `backend/multimodal_loader.py` is consolidated as a transparent re-export interface ensuring 100% test compatibility.
+- **Upload Security Hardening**: Every incoming foliar image undergoes strict multi-tier verification before tensor ingestion:
+  1. Maximum payload size restriction of 15 MB.
+  2. MIME type whitelist validation (`image/jpeg`, `image/png`, `image/webp`).
+  3. PIL decompression bomb verification and image header verification.
+  4. Dimensional bounding constraints ($64 \times 64 \le \text{dimensions} \le 4096 \times 4096$).
 - **Pydantic v2**: Enforces strict request/response data contracts, input type validation, and boundary checking.
 
 ### 5.2 Frontend Single Page Application (React 19, TypeScript, Vite)
 The user interface is engineered as a responsive Progressive Web Application (PWA):
-- **React 19 & TypeScript 5.6**: Type-safe component architecture.
-- **Vite 8.2**: Ultra-fast build toolchain and hot-module replacement.
+- **React 19 & TypeScript 5.6**: Type-safe component architecture with zero build-time warnings.
+- **Vite 8.2**: Ultra-fast build toolchain and production asset minification.
+- **Geocoded Farm Location Selector**: Direct Open-Meteo Geocoding integration supporting real-time autocomplete across Indian villages, towns, talukas, and districts, displaying live coordinates, elevation, and administrative state.
+- **Demonstration Mode Isolation**: Testing and research weather profiles are clearly labelled and isolated from live production diagnosis paths.
+- **Transparent XAI Visualization**: HeatmapViewer presents attention activation coverage percent (with salience scale legend: Baseline -> Peak Activation) rather than misleading clinical lesion boundaries.
 - **Tailwind CSS**: Utility-first styling framework supporting dark/light theme switching and responsive breakpoints for mobile displays (390px viewport width) and desktop monitors (1920px).
-- **Lucide Icons**: Crisp, accessible agricultural iconography.
 
 ### 5.3 Context-Conditioned LLM Consultation Assistant
 To assist farmers with treatment planning, FloraAI incorporates a contextual agronomic chat assistant powered by the Google GenAI SDK (`gemini-2.5-flash`):
-- **Mode A (Initial Diagnosis Envelope)**: When a leaf diagnosis completes, a structured agronomic context envelope is constructed containing the detected disease, pathogen classification, canopy involvement percentage, local weather conditions, and approved active ingredients. The LLM parses this context into a non-technical summary with actionable next steps.
-- **Mode B (Interactive Multi-Turn Advisory)**: The farmer can ask follow-up questions (e.g., *"Can I spray fungicide if it rains this evening?"*). The assistant cross-references current atmospheric forecasts, advising against contact sprays if precipitation is imminent.
+- **Instant Pre-Registered Diagnosis Sessions**: During `/api/predict`, the backend automatically generates a unique `diagnosis_id` and pre-registers the complete pathological context (disease, crop, confidence, Grad-CAM, 7-day weather, and approved chemical treatments) into the session store.
+- **Immediate Diagnostic Intelligence**: When arriving from `/diagnosis` or `/scan`, the frontend immediately surfaces a comprehensive diagnosis breakdown and suggested questions without requiring asynchronous user waits.
+- **Mode A (Initial Diagnosis Envelope)**: Constructs a structured agronomic context envelope containing detected disease, canopy activation percentage, local atmospheric conditions, and approved active ingredients.
+- **Mode B (Interactive Multi-Turn Advisory)**: The farmer can ask follow-up questions via `/api/assistant/ask` transmitting only `diagnosis_id` and query text. The backend looks up historical evidence and cross-references recent weather observations.
 - **Offline Fallback Matrix**: If external LLM APIs are unreachable or `GEMINI_API_KEY` is not configured, the assistant gracefully falls back to deterministic rule-based advice extracted from `backend/disease_info.py`.
 
 ### 5.4 REST API Contract & Endpoint Inventory
@@ -430,14 +453,15 @@ To assist farmers with treatment planning, FloraAI incorporates a contextual agr
 | Method | Endpoint Route | Request Parameters / Payload | Response Schema & Payload Description |
 | :--- | :--- | :--- | :--- |
 | `GET` | `/api/health` | None | `{"status": "ok", "service": "FloraAI backend"}` |
+| `GET` | `/api/model/status` | None | Checkpoint verification, SHA-256 weight integrity, 33-class taxonomy, and weather normalization feature schema |
 | `GET` | `/api/crops` | None | Array of supported crops: `["rice", "wheat", "sugarcane", "cotton"]` |
-| `POST` | `/api/predict` | `image` (multipart file), `crop` (str), `lang` (str) | Diagnostic classification, confidence, Grad-CAM data URL, SHAP values, localized treatment guide |
-| `GET` | `/api/weather/forecast-risk` | `crop`, `temp`, `humidity`, `rain`, `wind` | Infection score, categorical risk (`Low`/`Med`/`High`), 7-day outlook |
-| `GET` | `/api/weather/disease-profiles` | `crop` (optional query filter) | Pre-computed meteorological risk matrices for all crop diseases |
+| `POST` | `/api/predict` | `file` (multipart), `crop`, `latitude`, `longitude`, `lang` | Diagnostic classification, `model_mode`, honest Softmax confidence, Grad-CAM data, SHAP explanation, `diagnosis_id`, treatments |
+| `GET` | `/api/weather/forecast-risk` | `crop`, `latitude`, `longitude`, `temperature`, `humidity`, `rainfall`, `wind` | Infection score, categorical risk (`Low`/`Med`/`High`), 7-day outlook using resolved Open-Meteo coordinates |
+| `GET` | `/api/weather/disease-profiles` | `crop` (optional query filter) | Pre-computed meteorological risk matrices for sensitivity benchmarking in demonstration mode |
 | `GET` | `/api/location/fetch` | `lat`, `lon` (optional) OR `city` (query) | Reverse geocoded locality, live temperature, humidity, rain, wind, WMO weather code |
-| `GET` | `/api/location/search` | `query` (city/district string) | Array of matching locations with latitude, longitude, and administrative state via Open-Meteo Geocoding |
-| `POST` | `/api/assistant/start` | `crop`, `disease_name`, `weather`, `lang` | Session initialization, initial clinical diagnosis summary |
-| `POST` | `/api/assistant/ask` | `session_id`, `message`, `lang` | Contextual agricultural advisory response |
+| `GET` | `/api/location/search` | `query` (city/village/district string) | Array of matching locations with latitude, longitude, elevation, and administrative state via Open-Meteo Geocoding |
+| `POST` | `/api/assistant/start` | `diagnosis_id`, `crop`, `predicted_class`, `weather`, `lang` | Session initialization / synchronization, initial Mode A clinical diagnosis summary |
+| `POST` | `/api/assistant/ask` | `diagnosis_id`, `message`, `lang` | Contextual agricultural advisory response leveraging server-side session context |
 
 ---
 

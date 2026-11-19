@@ -1,5 +1,6 @@
 // AssistantPage.tsx — FloraAI Conversational Field & Crop Advisor
 import { useState, useRef, useEffect, useMemo } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Leaf, Clock, ArrowDown, WifiOff,
@@ -121,13 +122,15 @@ export function AssistantPage({
   latestPrediction,
   locationData,
 }: AssistantPageProps) {
+  const location = useLocation()
+  const activePrediction = latestPrediction || (location.state as any)?.prediction
   const { lang, t } = useLang()
   const copy = LOCAL_COPY[lang] || LOCAL_COPY.en
 
   const [input, setInput] = useState('')
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const [isOnline, setIsOnline] = useState(navigator.onLine)
-  const [selectedCrop, setSelectedCrop] = useState(latestPrediction?.crop || 'Rice')
+  const [selectedCrop, setSelectedCrop] = useState(activePrediction?.crop || 'Rice')
   const [showScrollBottom, setShowScrollBottom] = useState(false)
   const [speakingIndex, setSpeakingIndex] = useState<number | null>(null)
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
@@ -260,7 +263,7 @@ export function AssistantPage({
     return `What should I do about crop irrigation and protection after today's weather (${conditionVal}, ${tempVal})?`
   }, [conditionVal, tempVal, lang])
 
-  const isOnlyWelcome = sessionQueries.length === 0
+  const isOnlyWelcome = chat.length <= 1 && sessionQueries.length === 0
 
   return (
     <div className="flex flex-col h-full max-h-full min-h-0 bg-[var(--color-bg)] overflow-hidden select-text relative w-full">
@@ -336,13 +339,65 @@ export function AssistantPage({
         aria-live="polite"
         className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 flex flex-col items-center min-h-0"
       >
-        <div className="w-full max-w-[720px] flex-1 flex min-h-0 flex-col justify-center">
+        <div className="w-full max-w-[720px] flex-1 flex min-h-0 flex-col">
           
+          {/* ── Active Diagnosis Context Card (Shown prominently when arriving from /diagnosis) ── */}
+          {activePrediction && (
+            <div className="mb-4 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-300 text-left shadow-xs shrink-0">
+              <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-emerald-600 text-white">
+                    <Leaf className="w-4 h-4" />
+                  </span>
+                  <span className="text-xs font-bold text-emerald-950 uppercase tracking-wider">
+                    Active Plant Diagnosis Context
+                  </span>
+                </div>
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-white text-emerald-800 border border-emerald-200">
+                  {(activePrediction.confidence_percent || (activePrediction.confidence * 100)).toFixed(1)}% Confidence
+                </span>
+              </div>
+
+              <div className="text-base font-extrabold text-stone-900">
+                {activePrediction.crop} — {activePrediction.predicted_class}
+              </div>
+              <p className="text-xs text-stone-600 mt-1 line-clamp-2">
+                {activePrediction.disease_info?.description || activePrediction.analysis_summary}
+              </p>
+
+              {/* Quick contextual action chips */}
+              <div className="mt-3 flex items-center gap-2 flex-wrap pt-2 border-t border-emerald-200/80">
+                <span className="text-[11px] font-semibold text-emerald-900 shrink-0">Ask AI:</span>
+                <button
+                  type="button"
+                  onClick={() => handleSend(`What are the recommended treatments and application steps for ${activePrediction.crop} ${activePrediction.predicted_class}?`)}
+                  className="px-2.5 py-1 rounded-lg bg-white border border-emerald-300 text-emerald-900 text-xs font-semibold hover:bg-emerald-100 transition-colors cursor-pointer"
+                >
+                  Treatments & Dosage
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend(`Can you explain the Grad-CAM visual evidence and affected leaf region for this diagnosis?`)}
+                  className="px-2.5 py-1 rounded-lg bg-white border border-emerald-300 text-emerald-900 text-xs font-semibold hover:bg-emerald-100 transition-colors cursor-pointer"
+                >
+                  Grad-CAM Visual Heatmap
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend(`How did the recent weather and environmental variables influence this infection?`)}
+                  className="px-2.5 py-1 rounded-lg bg-white border border-emerald-300 text-emerald-900 text-xs font-semibold hover:bg-emerald-100 transition-colors cursor-pointer"
+                >
+                  Weather Influence & SHAP
+                </button>
+              </div>
+            </div>
+          )}
+
           {isOnlyWelcome ? (
             <EmptyStateChat
               headline={copy.emptyHeadline}
               subtitle={copy.emptySubtitle}
-              latestPrediction={latestPrediction}
+              latestPrediction={activePrediction}
               locationData={locationData}
               onSelectSuggestion={handleSend}
             />
@@ -358,7 +413,7 @@ export function AssistantPage({
                   onCopy={handleCopy}
                   isCopied={copiedIndex === idx}
                   onAsk={handleSend}
-                  latestPrediction={latestPrediction}
+                  latestPrediction={activePrediction}
                 />
               ))}
 

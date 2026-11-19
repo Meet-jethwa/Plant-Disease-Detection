@@ -23,10 +23,13 @@ export type WeatherData = {
 
 export type LocationData = {
   city: string
-  state: string
-  country: string
+  state?: string
+  country?: string
   latitude: number
   longitude: number
+  elevation?: number
+  timezone?: string
+  source?: 'browser_gps' | 'open_meteo_geocoding' | 'demonstration_profile' | 'manual'
 }
 
 export type DiseaseInfo = {
@@ -63,11 +66,20 @@ export type DiseaseWeatherProfile = {
 }
 
 export type PredictionResponse = {
+  diagnosis_id?: string
+  model_mode?: 'multimodal_fusion' | 'image_only_fallback'
+  multimodal_fusion?: boolean
+  confidence_type?: string
   crop: string
   predicted_class: string
   confidence: number              // 0.0–1.0
   confidence_percent: number
   health_score: number
+  health_assessment?: {
+    score: number
+    metric_type: string
+    interpretation: string
+  }
   top3: Array<{ class: string; confidence: number }>
   disease_info: DiseaseInfo
   weather_context: {
@@ -76,6 +88,29 @@ export type PredictionResponse = {
     risk_level?: string
     risk_reason?: string
     feature_importance?: Record<string, number>
+    shap_values?: Record<string, number>
+    shap_explanation?: {
+      target_class?: string
+      raw_class?: string
+      method?: string
+      background_samples_count?: number
+      feature_groups?: Record<string, {
+        net_shap_value: number
+        mean_abs_magnitude: number
+        relative_importance_pct: number
+        impact: string
+        unit: string
+        daily_shap?: number[]
+      }>
+      feature_importance?: Record<string, number>
+      explanation_context?: {
+        interpretation_note?: string
+        aggregation_method?: string
+        image_held_constant?: boolean
+      }
+    }
+    observation_dates?: string[]
+    is_historical_archive?: boolean
     is_manual_profile?: boolean
     profile_key?: string
     profile_display?: string
@@ -88,6 +123,7 @@ export type PredictionResponse = {
   // Extended fields (may be absent — handle gracefully)
   symptoms?: Symptom[]
   possible_causes?: Cause[]
+  activation_coverage_percent?: number
   affected_area_percent?: number
   scientific_name?: string
 }
@@ -125,6 +161,7 @@ export type HistoryItem = {
   image_url: string
   severity?: string
   status?: HealthStatus
+  full_prediction?: PredictionResponse
 }
 
 // ── Gemini Structured Response (Mode A — initial diagnosis) ──────────────────

@@ -93,9 +93,9 @@ def test_compute_weather_shap_values():
     assert "feature_importance" in shap_res
     assert "base_value" in shap_res
     assert "risk_score" in shap_res
-    assert shap_res["method"].startswith("SHAP")
+    assert "Rule-Based" in shap_res["method"] or "Attribution" in shap_res["method"]
 
-    # High humidity and rain should have positive risk-increasing SHAP attributions
+    # High humidity and rain should have positive risk-increasing attributions
     assert shap_res["shap_values"]["Humidity"] > 0
     assert shap_res["shap_values"]["Rainfall"] > 0
     total = sum(shap_res["feature_importance"].values())

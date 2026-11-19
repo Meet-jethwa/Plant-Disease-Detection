@@ -6,33 +6,32 @@ interface HeatmapViewerProps {
   originalImage: string
   highlightedImage: string
   gradcamHeatmap?: string          // pure JET colormap (no blend)
+  activationCoveragePercent?: number
   affectedAreaPercent?: number
 }
 
 type ViewMode = 'gradcam' | 'heatmap' | 'original'
 
 const COLOR_SCALE = [
-  { label: 'Critical',  color: '#DC2626', desc: 'Heavily affected' },
-  { label: 'High',      color: '#EA580C', desc: 'Severely affected' },
-  { label: 'Moderate',  color: '#D97706', desc: 'Moderately affected' },
-  { label: 'Low',       color: '#65A30D', desc: 'Mildly affected' },
-  { label: 'Healthy',   color: '#16A34A', desc: 'Unaffected region' },
+  { label: 'Peak Activation',   color: '#DC2626', desc: 'Strongest influence on diagnosis (>0.75)' },
+  { label: 'High Salience',     color: '#EA580C', desc: 'Elevated visual attention (0.50–0.75)' },
+  { label: 'Moderate Salience', color: '#D97706', desc: 'Contextual leaf patterns (0.25–0.50)' },
+  { label: 'Low Salience',      color: '#65A30D', desc: 'Minor model influence (0.10–0.25)' },
+  { label: 'Baseline / Foliar', color: '#2563EB', desc: 'Background leaf tissue (<0.10)' },
 ]
 
 export function HeatmapViewer({
   originalImage,
   highlightedImage,
   gradcamHeatmap,
-  affectedAreaPercent = 18,
+  activationCoveragePercent,
+  affectedAreaPercent,
 }: HeatmapViewerProps) {
   const [mode, setMode] = useState<ViewMode>('gradcam')
   const [fullscreen, setFullscreen] = useState(false)
   const [showLegend, setShowLegend] = useState(true)
 
-  const severityColor =
-    affectedAreaPercent >= 60 ? '#DC2626'
-    : affectedAreaPercent >= 35 ? '#D97706'
-    : '#16A34A'
+  const coverage = activationCoveragePercent ?? affectedAreaPercent
 
   const hasRawHeatmap = Boolean(gradcamHeatmap)
 
@@ -120,15 +119,14 @@ export function HeatmapViewer({
             </div>
           </div>
 
-          {/* Affected area badge + fullscreen */}
+          {/* Activation coverage badge + fullscreen */}
           <div className="flex items-center gap-2">
-            <div
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
-              style={{ background: severityColor + '15', color: severityColor }}
-            >
-              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: severityColor }} />
-              ~{affectedAreaPercent}% affected
-            </div>
+            {coverage !== undefined && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                ~{coverage}% attention coverage
+              </div>
+            )}
             <button
               type="button"
               onClick={() => setFullscreen(true)}
@@ -213,8 +211,8 @@ export function HeatmapViewer({
             ))}
           </div>
           <div className="flex justify-between text-xs text-[#64736C] mt-1">
-            <span>Healthy</span>
-            <span>Diseased</span>
+            <span>Baseline Attention (Cool)</span>
+            <span>Peak Activation (Hot)</span>
           </div>
         </div>
 
@@ -222,7 +220,7 @@ export function HeatmapViewer({
         <div className="flex items-start gap-2 px-4 py-3 bg-amber-50 border-t border-amber-100">
           <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
           <p className="text-sm text-amber-800 leading-relaxed">
-            <strong>Grad-CAM</strong> highlights regions the AI focused on. <span className="font-semibold text-red-600">Red/orange</span> = disease hotspots, <span className="font-semibold text-yellow-600">yellow</span> = moderate concern, <span className="font-semibold text-green-700">green/blue</span> = healthy regions. Always verify with a qualified agronomist before treatment.
+            <strong>Grad-CAM</strong> reveals spatial regions where the convolutional image encoder concentrated its visual attention during classification. Warmer regions (red/orange) had the highest influence on this diagnosis, while cooler regions (blue/cyan) provided baseline context. Attention maps explain neural feature sensitivity, not verified biological lesion margins.
           </p>
         </div>
       </div>

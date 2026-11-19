@@ -6,7 +6,7 @@ import {
   Bookmark, AlertTriangle, CheckCircle2,
   Volume2, VolumeX, ChevronDown, ChevronUp, Sun,
   Camera, Leaf, MoreVertical, ShieldAlert,
-  Info, Microscope
+  Info, Microscope, FlaskConical, Sparkles
 } from 'lucide-react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { LeafVision } from '../components/LeafVision'
@@ -30,6 +30,7 @@ export const UNKNOWN_CONFIDENCE = 25
 interface DiagnosisResultPageProps {
   prediction: PredictionResponse
   locationData: LocationContextData | null
+  diagnosisId?: string | null
   onReset: () => void
   onSaveToPlants?: () => void
 }
@@ -37,6 +38,7 @@ interface DiagnosisResultPageProps {
 export function DiagnosisResultPage({
   prediction,
   locationData,
+  diagnosisId,
   onReset,
   onSaveToPlants,
 }: DiagnosisResultPageProps) {
@@ -111,7 +113,7 @@ export function DiagnosisResultPage({
   const isMediumConfidence = confidence >= unknownThreshold && confidence < LOW_CONFIDENCE
   const isUnknownConfidence = confidence < unknownThreshold
 
-  const affectedAreaPct = prediction.affected_area_percent ?? 18
+  const affectedAreaPct = prediction.activation_coverage_percent ?? prediction.affected_area_percent
   const rawRisk = prediction.weather_context?.risk_level ?? locationData?.risk_level ?? 'Low'
   const rawCondition = prediction.weather_context?.weather?.condition ?? locationData?.weather?.condition ?? 'Moderate'
 
@@ -206,7 +208,7 @@ export function DiagnosisResultPage({
       `Crop:         ${prediction.crop}`,
       `Condition:    ${prediction.predicted_class}`,
       `Confidence:   ${confidence.toFixed(1)}%`,
-      `Affected Area:${affectedAreaPct}%`,
+      `Activation Coverage: ${affectedAreaPct != null ? `${affectedAreaPct}%` : 'N/A'}`,
       `Weather Risk: ${weatherRisk}`,
       '---',
       disease.description,
@@ -327,7 +329,7 @@ export function DiagnosisResultPage({
             </button>
             <button
               type="button"
-              onClick={() => navigate('/assistant')}
+              onClick={() => navigate('/assistant', { state: { prediction, diagnosisId } })}
               className="btn btn-secondary min-h-[48px] flex-1 flex items-center justify-center gap-2 text-base font-semibold cursor-pointer"
             >
               <MessageSquare className="h-5 w-5" />
@@ -567,8 +569,8 @@ export function DiagnosisResultPage({
                   <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{Math.round(confidence)}%</p>
                 </div>
                 <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
-                  <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.affectedArea')}</p>
-                  <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{affectedAreaPct}%</p>
+                  <p className="text-sm text-[var(--color-ink-2)] font-semibold">Salient Attention Area</p>
+                  <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{affectedAreaPct != null ? `${affectedAreaPct}%` : 'N/A'}</p>
                 </div>
                 <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
                   <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.weatherRisk')}</p>
@@ -593,7 +595,7 @@ export function DiagnosisResultPage({
             </button>
             <button
               type="button"
-              onClick={() => navigate('/assistant')}
+              onClick={() => navigate('/assistant', { state: { prediction, diagnosisId } })}
               className="btn btn-primary min-h-[48px] flex items-center justify-center gap-2 text-sm font-semibold cursor-pointer"
             >
               <MessageSquare className="h-4 w-4" />
@@ -703,10 +705,20 @@ export function DiagnosisResultPage({
                       </>
                     )}
                   </span>
+                  {prediction.model_mode === 'multimodal_fusion' || prediction.multimodal_fusion ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-300">
+                      <Sparkles className="w-3 h-3 text-emerald-700 shrink-0" />
+                      <span>Multimodal Fusion (Image + Weather)</span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-stone-100 text-stone-700 border border-stone-300">
+                      <span>Image-Only Inference</span>
+                    </span>
+                  )}
                   {prediction.weather_context?.is_manual_profile && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-300">
                       <Microscope className="w-3 h-3 shrink-0" />
-                      <span>{prediction.weather_context.profile_display || 'Project v3 Weather Profile'}</span>
+                      <span>{prediction.weather_context.profile_display || 'Demonstration Weather Profile'}</span>
                     </span>
                   )}
                 </div>
@@ -840,8 +852,8 @@ export function DiagnosisResultPage({
                       <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{Math.round(confidence)}%</p>
                     </div>
                     <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
-                      <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.affectedArea')}</p>
-                      <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{affectedAreaPct}%</p>
+                      <p className="text-sm text-[var(--color-ink-2)] font-semibold">Salient Attention Area</p>
+                      <p className="text-base sm:text-lg font-bold text-[var(--color-ink)] mt-0.5">{affectedAreaPct != null ? `${affectedAreaPct}%` : 'N/A'}</p>
                     </div>
                     <div className="rounded-xl border border-[var(--color-green-200)] bg-[var(--color-green-50)] p-3 shadow-xs">
                       <p className="text-sm text-[var(--color-ink-2)] font-semibold">{t('diagnosis.weatherRisk')}</p>
@@ -933,6 +945,107 @@ export function DiagnosisResultPage({
                     riskLevel={weatherRisk}
                     riskReason={prediction.weather_context?.risk_reason ?? locationData?.risk_reason}
                   />
+
+                  {/* ── Genuine Multimodal SHAP Explainability Section ── */}
+                  {(() => {
+                    const shapExp = prediction.weather_context?.shap_explanation
+                    const featureGroups = shapExp?.feature_groups
+                    const obsDates = prediction.weather_context?.observation_dates
+                    const isArchive = prediction.weather_context?.is_historical_archive
+                    const targetClass = shapExp?.target_class || prediction.predicted_class
+
+                    if (!featureGroups || Object.keys(featureGroups).length === 0) {
+                      return null
+                    }
+
+                    return (
+                      <div className="rounded-xl border border-emerald-200 bg-stone-50/70 p-4 space-y-3.5">
+                        <div className="flex items-start justify-between gap-2 flex-wrap">
+                          <div>
+                            <div className="flex items-center gap-1.5">
+                              <FlaskConical className="w-4 h-4 text-emerald-700" />
+                              <h4 className="text-sm font-bold text-stone-900">
+                                Environmental AI Attribution (SHAP Analysis)
+                              </h4>
+                            </div>
+                            <p className="text-xs text-stone-600 mt-0.5">
+                              Multimodal model sensitivity for predicted diagnosis:{' '}
+                              <span className="font-bold text-emerald-900">{targetClass}</span>
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            {obsDates && obsDates.length >= 7 && (
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white text-stone-700 border border-stone-200">
+                                {obsDates[0]} → {obsDates[obsDates.length - 1]} ({isArchive ? 'Archive' : '7-Day Telemetry'})
+                              </span>
+                            )}
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300">
+                              PyTorch GradientExplainer
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="space-y-2 pt-1">
+                          {Object.entries(featureGroups).map(([groupName, data]) => {
+                            const netVal = data.net_shap_value
+                            const isElevating = netVal > 0.0001
+                            const isInhibiting = netVal < -0.0001
+                            const pct = data.relative_importance_pct ?? 0
+
+                            return (
+                              <div key={groupName} className="p-2.5 rounded-lg bg-white border border-stone-200/90 space-y-1.5">
+                                <div className="flex items-center justify-between text-xs font-semibold">
+                                  <span className="text-stone-800 font-bold flex items-center gap-1">
+                                    {groupName} <span className="text-stone-600 text-[11px] font-normal">({data.unit})</span>
+                                  </span>
+                                  <div className="flex items-center gap-2">
+                                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                      isElevating
+                                        ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                                        : isInhibiting
+                                        ? 'bg-blue-100 text-blue-900 border border-blue-300'
+                                        : 'bg-stone-100 text-stone-600'
+                                    }`}>
+                                      {isElevating ? `+${netVal.toFixed(4)} (Elevates Risk)` : isInhibiting ? `${netVal.toFixed(4)} (Inhibits Risk)` : '0.0000 (Neutral)'}
+                                    </span>
+                                    <span className="text-stone-700 font-bold min-w-[40px] text-right text-[11px]">
+                                      {pct}% imp.
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="space-y-0.5">
+                                  <div className="h-1.5 w-full bg-stone-100 rounded-full overflow-hidden flex">
+                                    <div
+                                      className={`h-full transition-all duration-500 rounded-full ${
+                                        isElevating ? 'bg-amber-500' : isInhibiting ? 'bg-blue-500' : 'bg-stone-300'
+                                      }`}
+                                      style={{ width: `${Math.min(100, Math.max(3, pct))}%` }}
+                                    />
+                                  </div>
+                                  <div className="flex justify-between text-[10px] text-stone-600">
+                                    <span>Net signed SHAP: {netVal >= 0 ? `+${netVal.toFixed(4)}` : netVal.toFixed(4)}</span>
+                                    <span>Aggregated magnitude: {pct}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+
+                        {/* Non-causal scientific notice */}
+                        <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-stone-700 space-y-1">
+                          <p className="font-bold flex items-center gap-1 text-emerald-900 text-[11px]">
+                            <Info className="w-3.5 h-3.5 shrink-0" />
+                            Scientific Explainability Notice (Non-Causal)
+                          </p>
+                          <p className="text-[10px] text-stone-600 leading-normal">
+                            SHAP attributions quantify model sensitivity to 7-day meteorological features compared to an empirical multi-crop baseline. Positive values indicate conditions that increased model confidence in this diagnosis; negative values decreased confidence. <strong>SHAP explains model inference behavior, not biological causation.</strong>
+                          </p>
+                        </div>
+                      </div>
+                    )
+                  })()}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -1023,7 +1136,7 @@ export function DiagnosisResultPage({
           </button>
           <button
             type="button"
-            onClick={() => navigate('/assistant')}
+            onClick={() => navigate('/assistant', { state: { prediction, diagnosisId } })}
             className="btn btn-primary min-h-[48px] flex items-center justify-center gap-2 text-sm font-semibold cursor-pointer"
             id="result-ask-doctor-btn"
           >

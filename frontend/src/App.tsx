@@ -51,7 +51,15 @@ function AppContent() {
       return prev
     })
   }, [lang, t])
-  const [history, setHistory] = useState<HistoryItem[]>([])
+  const [history, setHistory] = useState<HistoryItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('flora_diagnosis_history')
+      if (saved) return JSON.parse(saved)
+    } catch {
+      // ignore
+    }
+    return []
+  })
   const [plants, setPlants] = useState<Plant[]>(() => {
     try {
       const saved = localStorage.getItem('flora_scanned_plants')
@@ -202,7 +210,7 @@ function AppContent() {
     setIsLocating(true)
     setError(null)
 
-    // Respect saved manual weather unless explicitly resetting
+    // Respect saved manual/geocoded weather unless explicitly resetting
     const savedManual = localStorage.getItem('flora_ai_manual_weather')
     if (savedManual) {
       try {
@@ -213,38 +221,42 @@ function AppContent() {
         // ignore
       }
     }
-    const fallback = async () => {
-      try {
-        const response = await fetch(`${API_BASE}/api/location/fetch`)
-        if (response.ok) {
-          const data = await response.json()
-          setLocationData(data as LocationContextData)
-        }
-      } catch {
-        setLocationData({
-          location: { city: 'Mumbai', state: 'Maharashtra', country: 'India', latitude: 19.08, longitude: 72.88 },
-          weather: { temperature_c: 31.2, humidity_percent: 88, rainfall_mm: 18.6, wind_kmh: 22.5, condition: 'Overcast with Rain' },
-          risk_level: 'High',
-          risk_reason: 'High humidity and rainfall support elevated disease progression risk.',
-        })
-      }
-    }
 
     try {
-      if (!navigator.geolocation) { await fallback(); return }
+      if (!navigator.geolocation) {
+        setLocationData(null)
+        addToast('info', 'Location Required', 'GPS is not supported in this browser. Please search for your farm location.')
+        return
+      }
+
       const position = await new Promise<GeolocationPosition>((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 8000 })
       })
+
       const { latitude, longitude } = position.coords
+      // Validate coordinate bounds
+      if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+        throw new Error('Coordinates outside valid geographic bounds.')
+      }
+
       const res = await fetch(`${API_BASE}/api/location/fetch?latitude=${latitude}&longitude=${longitude}`)
       if (res.ok) {
         const data = await res.json()
-        setLocationData(data as LocationContextData)
+        setLocationData({
+          ...data,
+          location: {
+            ...data.location,
+            source: 'browser_gps',
+          },
+        } as LocationContextData)
       } else {
-        await fallback()
+        setLocationData(null)
+        addToast('info', 'Weather Unavailable', 'Could not retrieve live GPS weather. Please search for your farm location.')
       }
     } catch {
-      await fallback()
+      // Never silently substitute Mumbai/Ahmedabad when GPS is rejected or fails
+      setLocationData(null)
+      addToast('info', 'GPS Inactive', 'Could not obtain GPS coordinates. Please select or search for your farm location.')
     } finally {
       setIsLocating(false)
     }
@@ -265,13 +277,17 @@ function AppContent() {
       formData.append('crop', selectedCrop)
       formData.append('lang', lang)
 
-      if (weatherProfileOverride && weatherProfileOverride !== 'auto') {
-        formData.append('weather_profile', weatherProfileOverride)
+      const activeWeatherProfile = weatherProfileOverride || localStorage.getItem('flora_weather_profile_override') || 'auto'
+      if (activeWeatherProfile && activeWeatherProfile !== 'auto') {
+        formData.append('weather_profile', activeWeatherProfile)
       }
 
-      if (locationData?.location?.latitude && locationData?.location?.longitude) {
+      if (locationData?.location?.latitude !== undefined && locationData?.location?.latitude !== null &&
+          locationData?.location?.longitude !== undefined && locationData?.location?.longitude !== null) {
         formData.append('latitude', String(locationData.location.latitude))
         formData.append('longitude', String(locationData.location.longitude))
+      } else if (locationData?.location?.city) {
+        formData.append('city', locationData.location.city)
       }
 
       const response = await fetch(`${API_BASE}/api/predict`, {
@@ -287,6 +303,45 @@ function AppContent() {
       const predData = (await response.json()) as PredictionResponse
       setPrediction(predData)
 
+      if (predData.diagnosis_id) {
+        setDiagnosisId(predData.diagnosis_id)
+      }
+
+      // Pre-populate chat with comprehensive agronomic intelligence for the detected crop disease
+      const cropCap = predData.crop.charAt(0).toUpperCase() + predData.crop.slice(1)
+      const initialDiagnosisMsg: ChatMessage = {
+        role: 'assistant',
+        text: `**Diagnosis for ${cropCap}**: **${predData.predicted_class}** (${predData.confidence_percent.toFixed(1)}% confidence)
+
+${predData.analysis_summary || predData.disease_info?.description || ''}
+
+**Recommended Immediate Actions:**
+${predData.disease_info?.treatment ? predData.disease_info.treatment : 'Inspect crop foliage, isolate severely infected leaves, and monitor weather.'}
+
+**Environmental Risk:** ${predData.weather_context?.risk_level || 'Moderate'} risk based on 7-day Open-Meteo observations (${predData.weather_context?.risk_reason || 'Recent meteorological patterns evaluated'}).
+
+How can I help you manage this condition? You can ask about exact spray dosages, organic home remedies, long-term prevention, or how weather influenced this infection.`,
+        structured: {
+          diagnosis_summary: predData.analysis_summary,
+          why_detected: [
+            `Multimodal model identified visual lesion patterns characteristic of ${predData.predicted_class}.`,
+            `Environmental analysis based on 7-day past Open-Meteo observations (${predData.weather_context?.risk_level || 'Moderate'} risk).`
+          ],
+          environmental_factors: Object.entries(predData.weather_context?.feature_importance || {}).map(([factor, weight]) => ({
+            factor,
+            importance_pct: weight > 1.0 ? weight : Math.round(weight * 100),
+            explanation: `Measured influence of ${factor} from 7-day Open-Meteo observations.`,
+          })),
+          recommended_actions: predData.disease_info?.treatment?.split('\n').filter(Boolean) || [],
+          prevention: predData.disease_info?.prevention?.split('\n').filter(Boolean) || [],
+          disclaimer: 'FloraAI agro-climatic recommendations are for advisory decision support.',
+        }
+      }
+      setChat([
+        { role: 'assistant', text: defaultAssistantMsg },
+        initialDiagnosisMsg,
+      ])
+
       // Start diagnosis chat session in background so it never blocks viewing results
       startDiagnosisSession(predData).catch((err) => {
         console.warn('Background assistant session init:', err)
@@ -300,15 +355,19 @@ function AppContent() {
         health_score: predData.health_score,
         timestamp: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         image_url: predData.original_image || previewUrl || '',
-      }
-      setHistory((prev) => [newHistoryItem, ...prev])
+        full_prediction: predData,
+      } as HistoryItem
+      setHistory((prev) => {
+        const next = [newHistoryItem, ...prev]
+        try { localStorage.setItem('flora_diagnosis_history', JSON.stringify(next)) } catch {}
+        return next
+      })
 
       const plantStatus: 'Healthy' | 'Needs Attention' | 'At Risk' | 'Critical' =
         predData.health_score >= 80 ? 'Healthy' :
         predData.health_score >= 60 ? 'Needs Attention' :
         predData.health_score >= 40 ? 'At Risk' : 'Critical'
 
-      const cropCap = predData.crop.charAt(0).toUpperCase() + predData.crop.slice(1)
       const sciName = predData.scientific_name ||
         (predData.crop.toLowerCase().includes('rice') ? 'Oryza sativa' :
          predData.crop.toLowerCase().includes('wheat') ? 'Triticum aestivum' :
@@ -353,10 +412,8 @@ function AppContent() {
    * Sends the full context once — all subsequent chat calls only send diagnosis_id + message.
    */
   async function startDiagnosisSession(predData: PredictionResponse) {
-    const newId = `dgn_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`
+    const newId = predData.diagnosis_id || `dgn_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`
 
-    // Reset chat to welcome message only
-    setChat([{ role: 'assistant', text: defaultAssistantMsg }])
     setDiagnosisId(newId)
     sessionStartedRef.current = newId
 
@@ -523,6 +580,7 @@ function AppContent() {
                       prediction={prediction}
                       locationData={locationData}
                       onFetchLocation={fetchLocation}
+                      onUpdateLocationData={handleUpdateManualWeather}
                       isLocating={isLocating}
                       error={error}
                       onReset={handleResetScanner}
@@ -576,6 +634,7 @@ function AppContent() {
                         <DiagnosisResultPage
                           prediction={effectivePrediction}
                           locationData={locationData}
+                          diagnosisId={diagnosisId}
                           onReset={handleResetScanner}
                           onSaveToPlants={() => addToast('success', 'Plant saved!', 'Added to My Plants.')}
                         />
@@ -593,6 +652,7 @@ function AppContent() {
                           prediction={prediction}
                           locationData={locationData}
                           onFetchLocation={fetchLocation}
+                          onUpdateLocationData={handleUpdateManualWeather}
                           isLocating={isLocating}
                           error={error}
                           onReset={handleResetScanner}
@@ -622,8 +682,28 @@ function AppContent() {
                 <Route path="/library/:diseaseId" element={<LibraryPage />} />
                 <Route path="/plants" element={<MyPlantsPage plants={plants} />} />
                 <Route path="/plants/:id" element={<PlantDetailPage plants={plants} />} />
-                <Route path="/profile" element={<ProfilePage locationData={locationData} onUpdateLocationData={handleUpdateManualWeather} />} />
-                <Route path="/tools" element={<ProfilePage locationData={locationData} onUpdateLocationData={handleUpdateManualWeather} />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProfilePage
+                      locationData={locationData}
+                      onUpdateLocationData={handleUpdateManualWeather}
+                      onFetchLocation={fetchLocation}
+                      isLocating={isLocating}
+                    />
+                  }
+                />
+                <Route
+                  path="/tools"
+                  element={
+                    <ProfilePage
+                      locationData={locationData}
+                      onUpdateLocationData={handleUpdateManualWeather}
+                      onFetchLocation={fetchLocation}
+                      isLocating={isLocating}
+                    />
+                  }
+                />
               </Routes>
             </AppLayout>
           }

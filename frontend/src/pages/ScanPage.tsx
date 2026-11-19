@@ -1,6 +1,10 @@
 // ScanPage.tsx — FloraAI two-column plant diagnostic scanner
-import { useEffect, useState } from 'react'
-import { AlertTriangle, CheckCircle2, CloudSun, RotateCcw, Scan, Sparkles, X } from 'lucide-react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import {
+  AlertTriangle, CheckCircle2,
+  MessageSquare, RotateCcw, Scan, Sparkles, X
+} from 'lucide-react'
 import { CropSelector } from '../components/CropSelector'
 import { ImageUploader } from '../components/ImageUploader'
 import { CameraScanner } from '../components/CameraScanner'
@@ -11,9 +15,7 @@ import { TreatmentCard } from '../components/TreatmentCard'
 import { MOCK_CROPS } from '../data/mockData'
 import { useLang } from '../contexts/LanguageContext'
 import { localizeDiseaseName } from '../i18n/translations'
-import type { Crop, DiseaseWeatherProfile, PredictionResponse } from '../types'
-
-const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
+import type { Crop, LocationContextData, PredictionResponse } from '../types'
 
 export type { Crop, PredictionResponse }
 
@@ -28,9 +30,10 @@ interface ScanPageProps {
   onAnalyzePlant: (weatherProfile?: string) => void
   isPredicting: boolean
   prediction: PredictionResponse | null
-  locationData: unknown
-  onFetchLocation: () => void
-  isLocating: boolean
+  locationData?: LocationContextData | null | unknown
+  onFetchLocation?: () => void
+  onUpdateLocationData?: (data: LocationContextData | null) => void
+  isLocating?: boolean
   error: string | null
   onReset: () => void
 }
@@ -50,37 +53,13 @@ export function ScanPage({
   error,
   onReset,
 }: ScanPageProps) {
+  const navigate = useNavigate()
   const { t, lang } = useLang()
   const [showCamera, setShowCamera] = useState(false)
   const [tab, setTab] = useState<Tab>('overview')
 
-  // Weather profiles
-  const [selectedWeatherProfile, setSelectedWeatherProfile] = useState<string>('auto')
-  const [profiles, setProfiles] = useState<DiseaseWeatherProfile[]>([])
-  const [loadingProfiles, setLoadingProfiles] = useState<boolean>(false)
-
   const cropNameKey = `crop.${selectedCrop.toLowerCase()}`
   const cropLabel = t(cropNameKey) !== cropNameKey ? t(cropNameKey) : (crops.find(c => c.name === selectedCrop)?.label ?? selectedCrop)
-
-  useEffect(() => {
-    let active = true
-    setLoadingProfiles(true)
-    fetch(`${API_BASE}/api/weather/disease-profiles?crop=${encodeURIComponent(selectedCrop)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (active && data.profiles) {
-          setProfiles(data.profiles)
-          setSelectedWeatherProfile('auto')
-        }
-      })
-      .catch(() => {
-        if (active) setProfiles([])
-      })
-      .finally(() => {
-        if (active) setLoadingProfiles(false)
-      })
-    return () => { active = false }
-  }, [selectedCrop])
 
   function handleCameraCapture(file: File) {
     setShowCamera(false)
@@ -91,7 +70,7 @@ export function ScanPage({
     if (!selectedFile && !previewUrl) {
       return
     }
-    onAnalyzePlant(selectedWeatherProfile)
+    onAnalyzePlant()
   }
 
   const tabs: { id: Tab; label: string }[] = [
@@ -147,67 +126,6 @@ export function ScanPage({
                 selectedCrop={selectedCrop}
                 onSelect={setSelectedCrop}
               />
-            </div>
-
-            {/* Environmental Profile Card */}
-            <div className="bg-white rounded-2xl border border-[#E4E7E2] p-5 space-y-3.5 shadow-sm text-center">
-              <div className="flex items-center justify-center gap-2 flex-wrap">
-                <CloudSun className="w-4 h-4 shrink-0 text-[var(--color-green-700)]" />
-                <label htmlFor="weather-profile-select" className="text-sm font-bold text-[var(--color-ink)]">
-                  Environmental Profile
-                </label>
-                {selectedWeatherProfile !== 'auto' ? (
-                  <span className="badge badge-green text-xs font-semibold">
-                    Dataset Override
-                  </span>
-                ) : (
-                  <span className="badge badge-slate text-xs font-medium">
-                    Auto GPS
-                  </span>
-                )}
-              </div>
-
-              <p className="text-sm text-[var(--color-ink-2)] leading-relaxed max-w-md mx-auto">
-                Live GPS weather is automatically detected. You may optionally select a research weather profile.
-              </p>
-
-              <select
-                id="weather-profile-select"
-                value={selectedWeatherProfile}
-                onChange={(e) => setSelectedWeatherProfile(e.target.value)}
-                disabled={loadingProfiles}
-                className="input !min-h-[46px] text-sm py-2.5 cursor-pointer"
-              >
-                <option value="auto">Live GPS Weather (Automatic)</option>
-                {profiles.map((p) => (
-                  <option key={p.key} value={p.key}>
-                    {p.disease} (~{p.avg_temp_c}°C, {p.avg_humidity_pct}% RH, {p.total_rainfall_mm}mm rain)
-                  </option>
-                ))}
-              </select>
-
-              {/* Selected Profile Details Preview */}
-              {selectedWeatherProfile !== 'auto' && (() => {
-                const activeP = profiles.find(p => p.key === selectedWeatherProfile)
-                if (!activeP) return null
-                return (
-                  <div className="p-3.5 rounded-xl bg-[#F2F4F0] border border-[#E4E7E2] text-sm space-y-1.5 animate-fade-in">
-                    <div className="flex items-center justify-between text-[var(--color-ink)] font-bold">
-                      <span>{activeP.display_name}</span>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedWeatherProfile('auto')}
-                        className="text-sm text-[var(--color-green-700)] hover:underline font-semibold cursor-pointer bg-transparent border-none"
-                      >
-                        Reset to Auto
-                      </button>
-                    </div>
-                    <p className="text-sm text-[var(--color-ink-2)]">
-                      {activeP.condition_summary} • ~{activeP.avg_temp_c}°C • ~{activeP.avg_humidity_pct}% RH • {activeP.total_rainfall_mm}mm rain
-                    </p>
-                  </div>
-                )
-              })()}
             </div>
 
             {/* Image Uploader Card */}
@@ -318,7 +236,8 @@ export function ScanPage({
                   <HeatmapViewer
                     originalImage={prediction.original_image}
                     highlightedImage={prediction.highlighted_image}
-                    affectedAreaPercent={prediction.affected_area_percent ?? 18}
+                    gradcamHeatmap={prediction.gradcam_heatmap}
+                    activationCoveragePercent={prediction.activation_coverage_percent ?? prediction.affected_area_percent}
                   />
                 </div>
 
@@ -394,9 +313,13 @@ export function ScanPage({
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3">
-                  <button type="button" className="btn btn-primary flex-1 min-w-[200px] flex items-center justify-center gap-2">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span>{t('scan.saveToPlants')}</span>
+                  <button
+                    type="button"
+                    onClick={() => navigate('/assistant', { state: { prediction, diagnosisId: prediction.diagnosis_id } })}
+                    className="btn btn-primary flex-1 min-w-[160px] flex items-center justify-center gap-2"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Ask AI About This</span>
                   </button>
                   <button type="button" onClick={onReset} className="btn btn-secondary flex items-center justify-center gap-2">
                     <Scan className="w-4 h-4" />

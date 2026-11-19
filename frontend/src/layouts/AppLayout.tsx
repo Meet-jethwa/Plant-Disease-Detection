@@ -9,7 +9,7 @@ import { Footer } from '../components/Footer'
 interface AppLayoutProps {
   children: ReactNode
   locationData: {
-    location?: { city: string; state: string }
+    location?: { city: string; state?: string }
     weather?: { temperature_c: number; condition: string }
     risk_level?: string
   } | null

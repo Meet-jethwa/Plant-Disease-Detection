@@ -56,8 +56,8 @@
 ## 2. Executive Quality Assurance Dashboard
 
 ```mermaid
-pie title Full Automated Pytest Suite Status (96 / 96 Standalone Tests Passed)
-    "Unit Tests Passed (71)" : 71
+pie title Full Automated Pytest Suite Status (97 / 97 Standalone Tests Passed)
+    "Unit Tests Passed (72)" : 72
     "Data-Driven Tests Passed (15)" : 15
     "Keyword-Driven Tests Passed (4)" : 4
     "Security Tests Passed (6)" : 6
@@ -67,12 +67,12 @@ pie title Full Automated Pytest Suite Status (96 / 96 Standalone Tests Passed)
 
 | Testing Discipline | Test Suite Location | Target System Layer | Test Count | Passed | Standalone? | Pass Rate | Execution Duration |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Unit Testing** | `tests/unit/` | APIs, Knowledge Base, SHAP Attribution, Forecaster, Grad-CAM, Multimodal Loader | 71 | 71 | **Yes** | **100.0%** | ~26.2s |
+| **Unit Testing** | `tests/unit/` | APIs, Knowledge Base, Multimodal PyTorch SHAP, Forecaster, Grad-CAM, Multimodal Loader | 72 | 72 | **Yes** | **100.0%** | ~21.0s |
 | **Data-Driven Testing** | `tests/data_driven/` | REST Matrix (Crops, Weather, Locales) | 15 | 15 | **Yes** | **100.0%** | ~22.4s |
 | **Keyword-Driven Testing** | `tests/keyword_driven/` | Multi-step Workflow Engine | 4 | 4 | **Yes** | **100.0%** | ~11.5s |
 | **Security Penetration** | `tests/security/` | FastAPI Endpoints (OWASP Top 10) | 6 | 6 | **Yes** (Dual-mode) | **100.0%** | ~6.0s |
 | **End-to-End Browser UI** | `tests/e2e/` | React Single Page Application (Chrome) | 6 | 6 | When dev server live | **100.0%** | ~21.1s |
-| **Total Automated Pytest Suite** | **`tests/`** | **Complete Full-Stack Application** | **102** | **96+6** | **All 96 standalone** | **100.0%** | **~66s** |
+| **Total Automated Pytest Suite** | **`tests/`** | **Complete Full-Stack Application** | **103** | **97+6** | **All 97 standalone** | **100.0%** | **~60s** |
 | **Concurrency Load Benchmark** | `tests/performance/` | API Concurrency (50 Virtual Users) | 550 req | 550 | With backend live | **100.0%** | 65.4s |
 | **Mutation Testing Audit** | `tests/mutation/` | `backend/forecasting.py` Phytopathology Rules | 25 mutants | 25 killed | **Yes** | **100.00% MSI** | 12.8s |
 

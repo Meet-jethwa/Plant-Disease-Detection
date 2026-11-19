@@ -223,11 +223,8 @@ def generate_gradcam_overlay(
         if heatmap is None:
             return None, None, None, None
 
-        # Dynamic affected area percent (pixels with activation > 0.35)
-        affected_area_percent = round(float((heatmap > 0.35).mean() * 100), 1)
-        if affected_area_percent < 5.0:
-            affected_area_percent = round(float((heatmap > 0.2).mean() * 100), 1)
-        affected_area_percent = max(5.0, min(95.0, affected_area_percent))
+        # Honest activation coverage (pixels with normalized attention > 0.40)
+        activation_coverage_percent = round(float((heatmap > 0.40).mean() * 100), 1)
 
         heatmap_resized = cv2.resize(heatmap, (W, H), interpolation=cv2.INTER_LINEAR)
         heatmap_uint8 = np.uint8(255 * heatmap_resized)
@@ -242,7 +239,7 @@ def generate_gradcam_overlay(
         if difference <= 1.0:
             print("[GradCAM] WARNING: overlay is almost identical to original image.")
 
-        return orig_uint8, overlay, heatmap_rgb, affected_area_percent
+        return orig_uint8, overlay, heatmap_rgb, activation_coverage_percent
 
     except Exception as exc:
         print(f"[GradCAM overlay failed] {type(exc).__name__}: {exc}")

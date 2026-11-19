@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+from datetime import date, datetime, timedelta
 import io
 import json
 import re
@@ -61,45 +62,49 @@ app.add_middleware(
 
 # ── In-memory session store ───────────────────────────────────────────────────
 # Maps diagnosis_id → full diagnosis context + conversation history
-# In production this would be Redis/DB; for now in-memory is fine.
 _diagnosis_sessions: dict[str, dict] = {}
 
-DEFAULT_LOCATION_PROFILES = [
-    {
-        "location": {
-            "city": "Mumbai",
-            "state": "Maharashtra",
-            "country": "India",
-            "latitude": 19.08,
-            "longitude": 72.88,
-        },
-        "weather": {
-            "temperature_c": 31.2,
-            "humidity_percent": 88,
-            "rainfall_mm": 18.6,
-            "wind_kmh": 22.5,
-            "condition": "Overcast with Rain",
-        },
-    },
-    {
-        "location": {
-            "city": "Ahmedabad",
-            "state": "Gujarat",
-            "country": "India",
-            "latitude": 23.03,
-            "longitude": 72.58,
-        },
-        "weather": {
-            "temperature_c": 36.4,
-            "humidity_percent": 62,
-            "rainfall_mm": 2.1,
-            "wind_kmh": 14.2,
-            "condition": "Mostly Sunny",
-        },
-    },
-]
+MAX_UPLOAD_SIZE = 15 * 1024 * 1024  # 15 MB
+ALLOWED_MIME_TYPES = {"image/jpeg", "image/png", "image/webp", "image/jpg"}
+MAX_IMAGE_PIXELS = 4096 * 4096  # ~16.7 megapixels
 
-_location_cursor = 0
+
+def validate_image_upload(file_bytes: bytes, filename: str | None, content_type: str | None) -> Image.Image:
+    """
+    Validate upload size, MIME type, structure, and decompression bounds (Phase 10.2).
+    Prevents decompression bombs, malformed payloads, and server resource exhaustion.
+    """
+    if not file_bytes:
+        raise HTTPException(status_code=400, detail="The uploaded file is empty.")
+    if len(file_bytes) > MAX_UPLOAD_SIZE:
+        raise HTTPException(
+            status_code=413,
+            detail=f"Image file size ({len(file_bytes)/(1024*1024):.1f}MB) exceeds the maximum allowed limit of 15MB."
+        )
+
+    if content_type and content_type.lower() not in ALLOWED_MIME_TYPES and content_type != "application/octet-stream":
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported file format '{content_type}'. Please upload a JPEG, PNG, or WebP image."
+        )
+
+    try:
+        img = Image.open(io.BytesIO(file_bytes))
+        img.verify()
+    except Exception as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Corrupt or invalid image file. Decoding failed: {exc}"
+        )
+
+    img = Image.open(io.BytesIO(file_bytes))
+    w, h = img.size
+    if w * h > MAX_IMAGE_PIXELS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Image dimensions ({w}x{h} = {w*h} pixels) exceed the maximum safe threshold of 16 megapixels."
+        )
+    return img
 
 
 # ── Pydantic models ───────────────────────────────────────────────────────────
@@ -353,20 +358,10 @@ def weather_from_coordinates(
                 else:
                     condition = "Partly Cloudy"
     except Exception as exc:
-        print(f"[Open-Meteo] Live fetch failed ({exc}); using microclimatic estimation.")
-        seed = abs(latitude * 1.7 + longitude * 0.9)
-        humidity = int(max(35, min(92, round(45 + (seed % 50)))))
-        rainfall = round(max(0.0, min(22.0, (seed * 1.3) % 23)), 1)
-        temp_c = round(max(12.0, min(41.0, 18.0 + ((latitude + longitude) % 23))), 1)
-        wind_kmh = round(max(2.5, min(30.0, 6.0 + ((seed * 2.1) % 20))), 1)
-        if rainfall >= 12:
-            condition = "Rain Showers"
-        elif humidity >= 80:
-            condition = "Humid Cloud Cover"
-        elif temp_c >= 34:
-            condition = "Hot and Dry"
-        else:
-            condition = "Partly Cloudy"
+        raise HTTPException(
+            status_code=502,
+            detail=f"Open-Meteo meteorological service unavailable ({exc}). Real weather observations could not be retrieved."
+        )
 
     return {
         "location": {
@@ -387,6 +382,139 @@ def weather_from_coordinates(
             "weather_code": code,
             "surface_pressure_hpa": round(surface_pressure, 1) if surface_pressure else None,
             "cloud_cover_percent": cloud_cover,
+        },
+    }
+
+
+def fetch_real_past_weather_sequence(
+    latitude: float,
+    longitude: float,
+    capture_date: str | date | None = None,
+) -> dict:
+    """
+    Retrieve authentic 7-day past meteorological observations from Open-Meteo.
+    - If capture_date is specified and older than 5 days, queries Open-Meteo Historical Archive API.
+    - Otherwise, queries Open-Meteo Forecast API with past_days=7.
+    Extracts the 11 standardized features per day matching the multimodal training schema:
+      0: temp_max, 1: temp_min, 2: temp_mean, 3: rh_max, 4: rh_mean, 5: precip_sum,
+      6: dewpoint_mean, 7: wind_max, 8: soil_temp (0.0), 9: month_sin, 10: month_cos.
+    Returns:
+      features_7x11: list of 7 daily 11-feature vectors
+      dates: list of 7 ISO date strings
+      is_archive: bool
+      weather_summary: dict of aggregated conditions
+    """
+    from backend.multimodal_model import get_season_encoding
+    today = date.today()
+    target_d = None
+    is_archive = False
+
+    if capture_date:
+        try:
+            if isinstance(capture_date, str):
+                target_d = datetime.strptime(capture_date.strip()[:10], "%Y-%m-%d").date()
+            elif isinstance(capture_date, datetime):
+                target_d = capture_date.date()
+            elif isinstance(capture_date, date):
+                target_d = capture_date
+        except Exception:
+            target_d = None
+
+    if target_d and target_d < (today - timedelta(days=5)):
+        is_archive = True
+        start_d = target_d - timedelta(days=6)
+        end_d = target_d
+        url = (
+            f"https://archive-api.open-meteo.com/v1/archive?latitude={latitude}&longitude={longitude}"
+            f"&start_date={start_d.isoformat()}&end_date={end_d.isoformat()}"
+            "&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,relative_humidity_2m_max,relative_humidity_2m_mean,precipitation_sum,dew_point_2m_mean,wind_speed_10m_max"
+            "&timezone=auto"
+        )
+    else:
+        url = (
+            f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}"
+            "&past_days=7&forecast_days=1"
+            "&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,relative_humidity_2m_max,relative_humidity_2m_mean,precipitation_sum,dew_point_2m_mean,wind_speed_10m_max"
+            "&timezone=auto"
+        )
+
+    req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=4.5) as resp:
+            if resp.status != 200:
+                raise ValueError(f"Open-Meteo returned status {resp.status}")
+            raw = json.loads(resp.read().decode("utf-8"))
+    except Exception as exc:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Open-Meteo historical/past weather retrieval failed ({exc}). Genuine meteorological observations could not be retrieved."
+        )
+
+    daily = raw.get("daily", {})
+    times = daily.get("time", [])
+    if len(times) < 7:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Open-Meteo returned insufficient observation days ({len(times)} days, minimum 7 required)."
+        )
+
+    # Take the 7 incubation days preceding / ending on diagnosis date
+    indices = range(len(times) - 7, len(times))
+    features_7x11 = []
+    dates_list = []
+
+    for idx in indices:
+        t_max = float(daily["temperature_2m_max"][idx]) if daily.get("temperature_2m_max") and daily["temperature_2m_max"][idx] is not None else 28.0
+        t_min = float(daily["temperature_2m_min"][idx]) if daily.get("temperature_2m_min") and daily["temperature_2m_min"][idx] is not None else 20.0
+        t_mean = float(daily["temperature_2m_mean"][idx]) if daily.get("temperature_2m_mean") and daily["temperature_2m_mean"][idx] is not None else (t_max + t_min) / 2.0
+        rh_mean = float(daily["relative_humidity_2m_mean"][idx]) if daily.get("relative_humidity_2m_mean") and daily["relative_humidity_2m_mean"][idx] is not None else 70.0
+        rh_max = float(daily["relative_humidity_2m_max"][idx]) if daily.get("relative_humidity_2m_max") and daily["relative_humidity_2m_max"][idx] is not None else min(100.0, rh_mean + 12.0)
+        precip = float(daily["precipitation_sum"][idx]) if daily.get("precipitation_sum") and daily["precipitation_sum"][idx] is not None else 0.0
+        dewpoint = float(daily["dew_point_2m_mean"][idx]) if daily.get("dew_point_2m_mean") and daily["dew_point_2m_mean"][idx] is not None else (t_mean - ((100.0 - rh_mean) / 5.0))
+        wind_max = float(daily["wind_speed_10m_max"][idx]) if daily.get("wind_speed_10m_max") and daily["wind_speed_10m_max"][idx] is not None else 10.0
+        soil_temp = 0.0
+
+        try:
+            d_obj = datetime.strptime(times[idx], "%Y-%m-%d").date()
+        except Exception:
+            d_obj = today - timedelta(days=(len(times) - 1 - idx))
+
+        sin_m, cos_m = get_season_encoding(d_obj)
+        features_7x11.append([
+            t_max, t_min, t_mean, rh_max, rh_mean, precip,
+            dewpoint, wind_max, soil_temp, sin_m, cos_m
+        ])
+        dates_list.append(times[idx])
+
+    temps = [row[2] for row in features_7x11]
+    rhs = [row[4] for row in features_7x11]
+    rains = [row[5] for row in features_7x11]
+    winds = [row[7] for row in features_7x11]
+
+    avg_temp = round(sum(temps) / len(temps), 1)
+    avg_rh = int(round(sum(rhs) / len(rhs)))
+    total_rain = round(sum(rains), 1)
+    avg_wind = round(sum(winds) / len(winds), 1)
+
+    if total_rain >= 15.0:
+        cond = "Rainy / Prolonged Wetness"
+    elif avg_rh >= 80:
+        cond = "Humid Canopy Conditions"
+    elif avg_temp >= 33.0:
+        cond = "Hot & Dry"
+    else:
+        cond = "Moderate Foliar Environment"
+
+    return {
+        "features_7x11": features_7x11,
+        "dates": dates_list,
+        "is_archive": is_archive,
+        "weather_summary": {
+            "temperature_c": avg_temp,
+            "humidity_percent": avg_rh,
+            "rainfall_mm": total_rain,
+            "wind_kmh": avg_wind,
+            "condition": cond,
         },
     }
 
@@ -414,7 +542,7 @@ def _get_disease_weather_profiles() -> dict:
 def get_disease_weather_profiles(crop: str | None = None):
     """
     Returns pre-computed meteorological profiles from the Project v3 dataset
-    for demonstration and accurate model testing.
+    for demonstration and testing mode.
     """
     profiles = _get_disease_weather_profiles()
     result = []
@@ -444,20 +572,35 @@ def get_risk_forecast(
     humidity: float = 70.0,
     rainfall: float = 2.0,
     wind_speed: float = 10.0,
+    latitude: float | None = None,
+    longitude: float | None = None,
+    city: str | None = None,
 ):
     from backend.forecasting import forecast_7day_disease_progression, predict_disease_risk
+
+    lat = latitude
+    lon = longitude
+    if (lat is None or lon is None) and city and city.strip():
+        geo = geocode_location_open_meteo(city.strip())
+        if geo:
+            lat = geo["latitude"]
+            lon = geo["longitude"]
+
     wx = {
         "temperature_c": temperature,
         "humidity_percent": humidity,
         "rainfall_mm": rainfall,
         "wind_kmh": wind_speed,
+        "latitude": lat,
+        "longitude": lon,
     }
     current_risk = predict_disease_risk(wx, crop=crop)
-    outlook = forecast_7day_disease_progression(wx, crop=crop)
+    outlook = forecast_7day_disease_progression(wx, crop=crop, latitude=lat, longitude=lon)
     return {
         "crop": crop,
         "current_assessment": current_risk,
         "seven_day_outlook": outlook,
+        "coordinates": {"latitude": lat, "longitude": lon} if lat is not None and lon is not None else None,
     }
 
 
@@ -466,6 +609,43 @@ def get_risk_forecast(
 @app.get("/api/health")
 def health_check():
     return {"status": "ok", "service": "FloraAI backend"}
+
+
+@app.get("/api/model/status")
+def get_model_status():
+    """Verify presence, integrity, and compatibility of required ML model checkpoints (Phase 6)."""
+    from backend.multimodal_model import MODEL_PATH, CLASS_NAMES, get_weather_stats, load_multimodal_model
+    multimodal_ready = False
+    details = {}
+    try:
+        if MODEL_PATH.exists():
+            _ = load_multimodal_model()
+            mean, std = get_weather_stats()
+            multimodal_ready = (len(CLASS_NAMES) == 33 and len(mean) == 11 and len(std) == 11)
+            details["multimodal"] = {
+                "checkpoint": str(MODEL_PATH.name),
+                "classes": len(CLASS_NAMES),
+                "weather_features": len(mean),
+                "status": "ready" if multimodal_ready else "invalid_dimensions",
+            }
+        else:
+            details["multimodal"] = {"status": "missing_checkpoint", "path": str(MODEL_PATH)}
+    except Exception as exc:
+        details["multimodal"] = {"status": "error", "error": str(exc)}
+
+    crop_models = {}
+    for crop, files in MODEL_FILES.items():
+        m_path = MODELS_DIR / files["model_file"]
+        crop_models[crop] = {
+            "file": files["model_file"],
+            "exists": m_path.exists(),
+        }
+    details["crop_image_models"] = crop_models
+    return {
+        "status": "healthy" if multimodal_ready else "degraded",
+        "primary_engine": "multimodal_fusion" if multimodal_ready else "image_only_fallback",
+        "models": details,
+    }
 
 
 @app.get("/api/crops")
@@ -518,8 +698,6 @@ def fetch_location(
     city: str | None = None,
     query: str | None = None,
 ):
-    global _location_cursor
-
     target_lat = latitude if latitude is not None else lat
     target_lon = longitude if longitude is not None else lon
     search_term = city or query
@@ -537,20 +715,18 @@ def fetch_location(
             )
             source = "open_meteo_geocoding"
         else:
-            data = weather_from_coordinates(
-                28.65,
-                77.23,
-                city_hint=search_term.strip(),
-                state_hint="Agricultural Zone",
+            raise HTTPException(
+                status_code=404,
+                detail=f"Location '{search_term.strip()}' could not be resolved via Open-Meteo geocoding. Please check the spelling or provide GPS coordinates."
             )
-            source = "city_fallback"
     elif target_lat is not None and target_lon is not None:
         data = weather_from_coordinates(target_lat, target_lon)
         source = "coordinates"
     else:
-        data = DEFAULT_LOCATION_PROFILES[_location_cursor % len(DEFAULT_LOCATION_PROFILES)]
-        _location_cursor += 1
-        source = "demo_profile"
+        raise HTTPException(
+            status_code=400,
+            detail="Latitude and longitude coordinates or a valid city/village name are required. Location data not provided."
+        )
 
     risk_level, risk_reason = get_weather_risk(data["weather"])
     return {
@@ -575,6 +751,7 @@ async def predict_disease(
     model_type: str = Form("auto"),
     lang: str = Form("en"),
     weather_profile: str | None = Form(None),
+    capture_date: str | None = Form(None),
 ):
     crop_key = crop.lower()
     if crop_key not in SUPPORTED_CROPS:
@@ -584,23 +761,17 @@ async def predict_disease(
         raise HTTPException(status_code=400, detail="Please select an image file.")
 
     file_bytes = await file.read()
-    if not file_bytes:
-        raise HTTPException(status_code=400, detail="The uploaded file is empty.")
+    # Validate upload security: size, MIME type, PIL decode, decompression bounds (Phase 10.2)
+    validate_image_upload(file_bytes, file.filename, file.content_type)
 
-    # ── Fetch or build weather data ──────────────────────────────────────────
-    if latitude is not None and longitude is not None:
-        weather_payload = weather_from_coordinates(latitude, longitude)
-    else:
-        weather_payload = dict(DEFAULT_LOCATION_PROFILES[0])
-
-    weather_dict = dict(weather_payload["weather"])
-    loc_dict = dict(weather_payload["location"])
-
-    # ── Demonstration override: Project v3 Disease Weather Profile ──────────
+    # ── Fetch or build genuine weather data ──────────────────────────────────
     weather_features_7x11 = None
     is_manual_profile = False
     profile_info = None
+    observation_dates = None
+    is_historical_archive = False
 
+    # 1. Demonstration research testing profile override
     if weather_profile and weather_profile.strip() and weather_profile.strip().lower() != "auto":
         profiles = _get_disease_weather_profiles()
         profile_data = profiles.get(weather_profile.strip())
@@ -608,49 +779,119 @@ async def predict_disease(
             is_manual_profile = True
             profile_info = profile_data
             weather_features_7x11 = profile_data.get("features_7x11")
-            weather_dict["temperature_c"] = profile_data.get("avg_temp_c", weather_dict.get("temperature_c"))
-            weather_dict["humidity_percent"] = int(round(profile_data.get("avg_humidity_pct", weather_dict.get("humidity_percent"))))
-            weather_dict["rainfall_mm"] = profile_data.get("total_rainfall_mm", weather_dict.get("rainfall_mm"))
-            weather_dict["wind_kmh"] = profile_data.get("avg_wind_kmh", weather_dict.get("wind_kmh"))
-            weather_dict["condition"] = profile_data.get("condition_summary", weather_dict.get("condition"))
-            loc_dict["city"] = f"{profile_data.get('disease')} Profile"
-            loc_dict["state"] = f"Project v3 ({profile_data.get('crop', '').capitalize()})"
+            weather_dict = {
+                "temperature_c": float(profile_data.get("avg_temp_c", 28.0)),
+                "humidity_percent": int(round(profile_data.get("avg_humidity_pct", 70.0))),
+                "rainfall_mm": float(profile_data.get("total_rainfall_mm", 0.0)),
+                "wind_kmh": float(profile_data.get("avg_wind_kmh", 10.0)),
+                "condition": profile_data.get("condition_summary", "Demonstration Profile"),
+            }
+            loc_dict = {
+                "city": f"{profile_data.get('disease')} Profile",
+                "state": f"Project v3 ({profile_data.get('crop', '').capitalize()})",
+                "country": "Demonstration Dataset",
+                "latitude": 23.0,
+                "longitude": 72.0,
+            }
+            weather_payload = {
+                "location": loc_dict,
+                "weather": weather_dict,
+                "source": "demonstration_research_profile",
+                "is_manual_profile": True,
+                "profile_key": weather_profile,
+                "profile_display": profile_info.get("display_name"),
+            }
+        else:
+            raise HTTPException(status_code=400, detail=f"Research profile '{weather_profile}' not found.")
+    elif (latitude is not None and longitude is not None) or (city and city.strip()):
+        # 2. Genuine Open-Meteo farm location weather retrieval
+        lat = latitude
+        lon = longitude
+        city_hint = city.strip() if city and city.strip() else None
+        state_hint = None
+        country_hint = None
 
-    # Apply manual farmer overrides if provided
-    if temperature is not None:
-        weather_dict["temperature_c"] = float(temperature)
-    if humidity is not None:
-        weather_dict["humidity_percent"] = int(round(humidity))
-    if rainfall is not None:
-        weather_dict["rainfall_mm"] = float(rainfall)
-    if wind_speed is not None:
-        weather_dict["wind_kmh"] = float(wind_speed)
-    if city and city.strip():
-        loc_dict["city"] = city.strip()
+        if (lat is None or lon is None) and city_hint:
+            geo = geocode_location_open_meteo(city_hint)
+            if not geo:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Location '{city_hint}' could not be resolved via Open-Meteo geocoding. Please check spelling or provide GPS coordinates."
+                )
+            lat = geo["latitude"]
+            lon = geo["longitude"]
+            city_hint = geo["city"]
+            state_hint = geo["state"]
+            country_hint = geo["country"]
 
-    weather_payload = {
-        **weather_payload,
-        "location": loc_dict,
-        "weather": weather_dict,
-        "is_manual_profile": is_manual_profile,
-        "profile_key": weather_profile if is_manual_profile else None,
-        "profile_display": profile_info.get("display_name") if profile_info else None,
-    }
+        # Fetch authentic 7-day past observations sequence
+        past_wx = fetch_real_past_weather_sequence(lat, lon, capture_date=capture_date)
+        weather_features_7x11 = past_wx["features_7x11"]
+        observation_dates = past_wx["dates"]
+        is_historical_archive = past_wx["is_archive"]
+
+        # Fetch location metadata and current conditions
+        curr_payload = weather_from_coordinates(lat, lon, city_hint=city_hint, state_hint=state_hint, country_hint=country_hint)
+        loc_dict = curr_payload["location"]
+        weather_dict = curr_payload["weather"]
+        weather_dict["past_7day_rainfall_mm"] = past_wx["weather_summary"]["rainfall_mm"]
+
+        weather_payload = {
+            "location": loc_dict,
+            "weather": weather_dict,
+            "source": "open_meteo_historical_archive" if is_historical_archive else "open_meteo_live",
+            "observation_dates": observation_dates,
+            "is_manual_profile": False,
+            "is_historical_archive": is_historical_archive,
+        }
+    elif temperature is not None or humidity is not None or rainfall is not None or wind_speed is not None:
+        # 3. Manual farmer telemetry
+        t = float(temperature) if temperature is not None else 28.0
+        h = int(round(humidity)) if humidity is not None else 70
+        r = float(rainfall) if rainfall is not None else 0.0
+        w = float(wind_speed) if wind_speed is not None else 10.0
+        weather_dict = {
+            "temperature_c": t,
+            "humidity_percent": h,
+            "rainfall_mm": r,
+            "wind_kmh": w,
+            "condition": "Manual Sensor Observation",
+        }
+        loc_dict = {
+            "city": city.strip() if city and city.strip() else "Farmer Field Telemetry",
+            "state": "Local Microclimate",
+            "country": "India",
+            "latitude": 0.0,
+            "longitude": 0.0,
+        }
+        weather_payload = {
+            "location": loc_dict,
+            "weather": weather_dict,
+            "source": "manual_sensor_input",
+            "is_manual_profile": False,
+        }
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail="Farm location (latitude/longitude coordinates, or city name) or weather telemetry is required for multimodal diagnosis. Fake weather is not permitted."
+        )
 
     overlay_original = None
     overlay_highlight = None
     raw_heatmap = None
     affected_area_percent = 0.0
     weather_importance_days = None
+    mm_result = {}
 
     use_multimodal = (model_type in {"multimodal", "multimodal_only", "auto"})
     if use_multimodal:
         try:
             mm_result = predict_multimodal(
                 image=file_bytes,
-                weather=weather_dict,
+                weather=weather_dict if weather_features_7x11 is not None else None,
                 crop_hint=crop_key,
                 weather_features_7x11=weather_features_7x11,
+                allow_image_only=True,
             )
             predicted_label = mm_result["predicted_disease"]
             normalized_label = normalize_class_name(predicted_label)
@@ -666,11 +907,13 @@ async def predict_disease(
             affected_area_percent = float(mm_result["affected_area_pct"])
             weather_importance_days = mm_result.get("daily_attention")
             gradcam_enabled = True
+            if mm_result.get("model_mode") == "image_only_fallback":
+                use_multimodal = False
         except Exception as exc:
             print(f"[Predict] Multimodal model failed: {exc}. Trying Keras fallback.")
             use_multimodal = False
 
-    if not use_multimodal:
+    if not use_multimodal and not mm_result:
         try:
             model, label_map = load_crop_model(crop_key)
         except ValueError as exc:
@@ -726,20 +969,61 @@ async def predict_disease(
     gradcam_heatmap = image_to_data_url(raw_heatmap) if raw_heatmap is not None else None
 
     risk_level, risk_reason = get_weather_risk(weather_payload["weather"], crop=crop_key)
-    weather_importance = compute_weather_feature_importance(disease_info, weather_payload["weather"], crop=crop_key)
-    shap_details = compute_weather_shap_values(disease_info, weather_payload["weather"], crop=crop_key)
+
+    if use_multimodal:
+        if mm_result.get("shap_explanation"):
+            model_shap = mm_result["shap_explanation"]
+            weather_importance = model_shap.get("feature_importance", {})
+            shap_details = model_shap
+        else:
+            weather_importance = {}
+            shap_details = None
+    else:
+        # Phase 6: Image-only fallback must disable environmental SHAP and not claim multimodal fusion
+        weather_importance = None
+        shap_details = None
+        weather_payload["multimodal_fusion"] = False
+        weather_payload["note"] = "Image-only inference used; environmental SHAP is disabled."
 
     summary = (
         f"Detected {normalized_label} in {crop_key} with {round(confidence * 100, 2)}% confidence. "
         f"Likely cause: {disease_info.get('causes', 'Condition-specific causes unavailable.')}"
     )
 
+    diagnosis_id = f"dgn_{uuid.uuid4().hex[:12]}"
+    _diagnosis_sessions[diagnosis_id] = {
+        "crop": crop_key,
+        "predicted_class": normalized_label,
+        "disease": normalized_label,
+        "confidence": float(confidence),
+        "top3": top3,
+        "weather": weather_payload.get("weather"),
+        "feature_importance": weather_importance,
+        "gradcam_image_b64": highlighted_image,
+        "disease_info": disease_info,
+        "language": "en",
+        "conversation_history": [],
+    }
+
     return {
+        "diagnosis_id": diagnosis_id,
+        "model_mode": "multimodal_fusion" if use_multimodal else "image_only_fallback",
+        "multimodal_fusion": use_multimodal,
         "crop": crop_key,
         "predicted_class": normalized_label,
         "confidence": round(confidence, 4),
         "confidence_percent": round(confidence * 100, 2),
+        "confidence_type": mm_result.get("confidence_type", "crop_conditioned_softmax") if use_multimodal else "raw_softmax",
         "health_score": health_score,
+        "health_assessment": {
+            "score": health_score,
+            "metric_type": "proxy_non_infection_confidence_index",
+            "interpretation": (
+                "Proxy score reflecting model confidence in healthy tissue vs estimated disease burden. "
+                "It is an algorithmic decision-support indicator, not a clinical lab biomarker."
+            ),
+        },
+        "activation_coverage_percent": affected_area_percent,
         "affected_area_percent": affected_area_percent,
         "top3": top3,
         "disease_key": normalize_disease_key(normalized_label),
@@ -755,17 +1039,22 @@ async def predict_disease(
         "weather_risk": {
             "level": risk_level,
             "reason": risk_reason,
+            "indicator_type": "rule_based_risk_indicator",
         },
         "weather_context": {
             **weather_payload,
             "risk_level": risk_level,
             "risk_reason": risk_reason,
             "feature_importance": weather_importance,
-            "shap_values": shap_details.get("shap_values"),
+            "shap_values": shap_details.get("shap_values") if shap_details else None,
             "shap_explanation": shap_details,
             "weather_importance_days": weather_importance_days,
+            "observation_dates": observation_dates,
+            "is_historical_archive": is_historical_archive,
+            "demonstration_mode": is_manual_profile,
         },
         "analysis_summary": summary,
+        "summary": summary,
         "original_image": original_image,
         "highlighted_image": highlighted_image,
         "gradcam_heatmap": gradcam_heatmap,
@@ -801,11 +1090,17 @@ def start_diagnosis_session(payload: StartSessionRequest):
         "language": payload.language,
     }
 
-    # Store session (without huge base64 in every history entry — stored once here)
-    _diagnosis_sessions[payload.diagnosis_id] = {
-        **context,
-        "conversation_history": [],
-    }
+    # Store or update session (without huge base64 in every history entry — stored once here)
+    if payload.diagnosis_id in _diagnosis_sessions:
+        _diagnosis_sessions[payload.diagnosis_id].update({
+            **{k: v for k, v in context.items() if v is not None},
+            "language": payload.language or _diagnosis_sessions[payload.diagnosis_id].get("language", "en"),
+        })
+    else:
+        _diagnosis_sessions[payload.diagnosis_id] = {
+            **context,
+            "conversation_history": [],
+        }
 
     # Call Gemini Mode A
     gemini_response = ask_gemini_initial(context)

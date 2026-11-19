@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react'
 import {
   User, Camera, Bell, Globe, Shield,
   HelpCircle, LogOut, ChevronRight, ChevronDown, Leaf, ScanLine,
-  HeartPulse, BookMarked, Check, Zap,
-  CloudRain, Thermometer, Droplets, Wind, MapPin, RefreshCw,
-  Sliders,
+  HeartPulse, BookMarked, Check, CheckCircle, Zap,
+  CloudRain, CloudSun, Thermometer, Droplets, Wind, MapPin, RefreshCw,
+  Navigation, Search, FlaskConical, Sliders,
 } from 'lucide-react'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { useLang } from '../contexts/LanguageContext'
-import type { LocationContextData } from '../types'
+import { searchLocations, fetchLocationWeather, type LocationSearchResult } from '../services/api'
+import type { DiseaseWeatherProfile, LocationContextData } from '../types'
+
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
 
 interface SettingRowProps {
   icon: React.ElementType
@@ -74,27 +77,103 @@ function SettingRow({ icon: Icon, label, description, value, toggle, defaultOn =
 interface ProfilePageProps {
   locationData?: LocationContextData | null
   onUpdateLocationData?: (data: LocationContextData | null) => void
+  onFetchLocation?: () => void
+  isLocating?: boolean
 }
 
-export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageProps) {
+export function ProfilePage({
+  locationData,
+  onUpdateLocationData,
+  onFetchLocation,
+  isLocating = false,
+}: ProfilePageProps) {
   const { t } = useLang()
   const [isWeatherOpen, setIsWeatherOpen] = useState(false)
   const [isManualActive, setIsManualActive] = useState(false)
   const [savedFeedback, setSavedFeedback] = useState(false)
   const [resetFeedback, setResetFeedback] = useState(false)
 
+  // Weather profiles state
+  const [selectedWeatherProfile, setSelectedWeatherProfile] = useState<string>(() => {
+    return localStorage.getItem('flora_weather_profile_override') || 'auto'
+  })
+  const [profiles, setProfiles] = useState<DiseaseWeatherProfile[]>([])
+  const [loadingProfiles, setLoadingProfiles] = useState<boolean>(false)
+
+  useEffect(() => {
+    let active = true
+    setLoadingProfiles(true)
+    fetch(`${API_BASE}/api/weather/disease-profiles`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (active && data.profiles) {
+          setProfiles(data.profiles)
+        }
+      })
+      .catch(() => {
+        if (active) setProfiles([])
+      })
+      .finally(() => {
+        if (active) setLoadingProfiles(false)
+      })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  function handleSelectWeatherProfile(profileKey: string) {
+    setSelectedWeatherProfile(profileKey)
+    if (profileKey === 'auto') {
+      localStorage.removeItem('flora_weather_profile_override')
+    } else {
+      localStorage.setItem('flora_weather_profile_override', profileKey)
+    }
+    window.dispatchEvent(new Event('flora_weather_updated'))
+  }
+
   // Weather Form State
-  const [city, setCity] = useState(locationData?.location?.city || 'Mumbai')
-  const [stateName, setStateName] = useState(locationData?.location?.state || 'Maharashtra')
-  const [temperature, setTemperature] = useState(locationData?.weather?.temperature_c ?? 31.2)
-  const [humidity, setHumidity] = useState(locationData?.weather?.humidity_percent ?? 88)
-  const [rainfall, setRainfall] = useState(locationData?.weather?.rainfall_mm ?? 18.6)
-  const [wind, setWind] = useState(locationData?.weather?.wind_kmh ?? 22.5)
-  const [condition, setCondition] = useState(locationData?.weather?.condition || 'Overcast with Rain')
-  const [riskLevel, setRiskLevel] = useState(locationData?.risk_level || 'High')
+  const [city, setCity] = useState(locationData?.location?.city || '')
+  const [stateName, setStateName] = useState(locationData?.location?.state || '')
+  const [country, setCountry] = useState(locationData?.location?.country || 'India')
+  const [latitude, setLatitude] = useState<number>(locationData?.location?.latitude ?? 20.0)
+  const [longitude, setLongitude] = useState<number>(locationData?.location?.longitude ?? 73.8)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<LocationSearchResult[]>([])
+  const [isSearching, setIsSearching] = useState(false)
+
+  const [temperature, setTemperature] = useState(locationData?.weather?.temperature_c ?? 28.0)
+  const [humidity, setHumidity] = useState(locationData?.weather?.humidity_percent ?? 70)
+  const [rainfall, setRainfall] = useState(locationData?.weather?.rainfall_mm ?? 0.0)
+  const [wind, setWind] = useState(locationData?.weather?.wind_kmh ?? 12.0)
+  const [condition, setCondition] = useState(locationData?.weather?.condition || 'Partly Cloudy')
+  const [riskLevel, setRiskLevel] = useState(locationData?.risk_level || 'Moderate')
   const [riskReason, setRiskReason] = useState(
-    locationData?.risk_reason || 'High humidity and rainfall support elevated disease progression risk.'
+    locationData?.risk_reason || 'Ambient meteorological conditions recorded for agricultural diagnosis.'
   )
+
+  // Real-time Open-Meteo geocoding search
+  useEffect(() => {
+    if (!searchQuery || searchQuery.trim().length < 2) {
+      setSearchResults([])
+      return
+    }
+    let active = true
+    const timer = setTimeout(async () => {
+      setIsSearching(true)
+      try {
+        const results = await searchLocations(searchQuery.trim())
+        if (active) setSearchResults(results)
+      } catch {
+        if (active) setSearchResults([])
+      } finally {
+        if (active) setIsSearching(false)
+      }
+    }, 300)
+    return () => {
+      active = false
+      clearTimeout(timer)
+    }
+  }, [searchQuery])
 
   // Check on mount if manual weather is already active
   useEffect(() => {
@@ -105,6 +184,9 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
         setIsManualActive(true)
         if (parsed.location?.city) setCity(parsed.location.city)
         if (parsed.location?.state) setStateName(parsed.location.state)
+        if (parsed.location?.country) setCountry(parsed.location.country)
+        if (parsed.location?.latitude !== undefined) setLatitude(parsed.location.latitude)
+        if (parsed.location?.longitude !== undefined) setLongitude(parsed.location.longitude)
         if (parsed.weather?.temperature_c !== undefined) setTemperature(parsed.weather.temperature_c)
         if (parsed.weather?.humidity_percent !== undefined) setHumidity(parsed.weather.humidity_percent)
         if (parsed.weather?.rainfall_mm !== undefined) setRainfall(parsed.weather.rainfall_mm)
@@ -118,6 +200,9 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
     } else if (locationData) {
       if (locationData.location?.city) setCity(locationData.location.city)
       if (locationData.location?.state) setStateName(locationData.location.state)
+      if (locationData.location?.country) setCountry(locationData.location.country)
+      if (locationData.location?.latitude !== undefined) setLatitude(locationData.location.latitude)
+      if (locationData.location?.longitude !== undefined) setLongitude(locationData.location.longitude)
       if (locationData.weather?.temperature_c !== undefined) setTemperature(locationData.weather.temperature_c)
       if (locationData.weather?.humidity_percent !== undefined) setHumidity(locationData.weather.humidity_percent)
       if (locationData.weather?.rainfall_mm !== undefined) setRainfall(locationData.weather.rainfall_mm)
@@ -127,18 +212,63 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
     }
   }, [locationData])
 
+  async function handleSelectSearchResult(item: LocationSearchResult) {
+    setCity(item.name)
+    setStateName(item.state || '')
+    setCountry(item.country || 'India')
+    setLatitude(item.latitude)
+    setLongitude(item.longitude)
+    setSearchQuery('')
+    setSearchResults([])
+    setIsSearching(true)
+    try {
+      const data = await fetchLocationWeather({ latitude: item.latitude, longitude: item.longitude })
+      const resolvedData: LocationContextData = {
+        ...data,
+        location: {
+          ...data.location,
+          city: item.name,
+          state: item.state || data.location?.state,
+          country: item.country || data.location?.country,
+          source: 'open_meteo_geocoding',
+        },
+      }
+      localStorage.setItem('flora_ai_manual_weather', JSON.stringify(resolvedData))
+      window.dispatchEvent(new Event('flora_weather_updated'))
+      if (onUpdateLocationData) {
+        onUpdateLocationData(resolvedData)
+      }
+      if (data.weather) {
+        setTemperature(data.weather.temperature_c)
+        setHumidity(data.weather.humidity_percent)
+        setRainfall(data.weather.rainfall_mm)
+        setWind(data.weather.wind_kmh)
+        setCondition(data.weather.condition)
+      }
+      setIsManualActive(true)
+      setSavedFeedback(true)
+      setTimeout(() => setSavedFeedback(false), 3000)
+    } catch {
+      // Keep selected geocoded values in form
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
   function handleSaveManualWeather(e: React.FormEvent) {
     e.preventDefault()
     const autoReason =
       riskReason || `${condition} with ${humidity}% humidity and ${rainfall}mm rainfall.`
 
+    // Authentic coordinates from Open-Meteo geocoding or user input (No hardcoded Mumbai!)
     const newLocationData: LocationContextData = {
       location: {
-        city: city.trim() || 'Mumbai',
-        state: stateName.trim() || 'Maharashtra',
-        country: 'India',
-        latitude: 19.08,
-        longitude: 72.88,
+        city: city.trim() || 'Custom Farm Location',
+        state: stateName.trim(),
+        country: country.trim() || 'India',
+        latitude: Number(latitude),
+        longitude: Number(longitude),
+        source: 'open_meteo_geocoding',
       },
       weather: {
         temperature_c: Number(temperature),
@@ -256,6 +386,197 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
         {/* Units */}
         <SettingRow icon={Shield} label={t('profile.units')} value={t('profile.unitsVal')} id="pref-units" />
 
+        {/* ── Farm Location & Weather Station Card ── */}
+        <div className="border-t border-stone-100 pt-3 px-2 space-y-3">
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 shrink-0 text-emerald-700" />
+              <span className="text-sm font-bold text-[var(--color-ink)]">
+                Farm Location & Weather Station
+              </span>
+            </div>
+            {locationData?.location?.source === 'browser_gps' ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-900 border border-blue-200">
+                <Navigation className="w-3.5 h-3.5" />
+                Browser GPS
+              </span>
+            ) : locationData?.location?.city ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300">
+                <CheckCircle className="w-3.5 h-3.5" />
+                Geocoded Place
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-700 border border-stone-200">
+                Auto Open-Meteo
+              </span>
+            )}
+          </div>
+
+          <p className="text-xs text-[var(--color-ink-2)] leading-relaxed">
+            Select your village, town, taluka, or district to retrieve authentic 7-day past Open-Meteo agro-weather observations.
+          </p>
+
+          {/* Location Search Bar & GPS Button */}
+          <div className="flex gap-2 relative">
+            <div className="relative flex-1">
+              <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search village, city, taluka, district…"
+                className="w-full pl-9 pr-8 text-xs py-2 bg-white rounded-xl border border-stone-200 outline-none min-h-[40px] focus:border-emerald-600"
+              />
+              {isSearching && (
+                <RefreshCw className="w-3.5 h-3.5 animate-spin text-stone-400 absolute right-3 top-1/2 -translate-y-1/2" />
+              )}
+            </div>
+            {onFetchLocation && (
+              <button
+                type="button"
+                onClick={onFetchLocation}
+                disabled={isLocating}
+                className="btn btn-secondary text-xs !min-h-[40px] px-3 flex items-center gap-1.5 shrink-0 cursor-pointer"
+                title="Detect GPS location from device"
+              >
+                <Navigation className={`w-3.5 h-3.5 ${isLocating ? 'animate-spin' : ''}`} />
+                <span className="hidden sm:inline">{isLocating ? 'Locating…' : 'Use GPS'}</span>
+              </button>
+            )}
+          </div>
+
+          {/* Autocomplete Dropdown */}
+          {searchResults.length > 0 && (
+            <div className="p-1 rounded-xl bg-white border border-[#E4E7E2] shadow-lg space-y-1 max-h-56 overflow-y-auto z-20 relative">
+              {searchResults.map((res, idx) => (
+                <button
+                  key={res.id ?? idx}
+                  type="button"
+                  onClick={() => handleSelectSearchResult(res)}
+                  className="w-full text-left p-2.5 rounded-lg hover:bg-emerald-50 transition-colors text-xs space-y-0.5 border-none bg-transparent cursor-pointer"
+                >
+                  <div className="font-bold text-[var(--color-ink)] flex items-center justify-between">
+                    <span>{res.name}</span>
+                    <span className="text-[10px] text-stone-500 font-normal">{res.latitude.toFixed(2)}°N, {res.longitude.toFixed(2)}°E</span>
+                  </div>
+                  <div className="text-[11px] text-stone-500">
+                    {[res.state, res.country].filter(Boolean).join(', ')}
+                    {res.elevation != null && ` • Elev: ${res.elevation}m`}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Active Resolved Location Display */}
+          {locationData?.location && (
+            <div className="p-3 rounded-xl bg-[#F2F4F0] border border-[#E4E7E2] text-xs flex items-center justify-between gap-2">
+              <div className="space-y-0.5">
+                <p className="font-bold text-[var(--color-ink)] flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-700" />
+                  {locationData.location.city || 'Custom Location'}
+                  {locationData.location.state && <span className="text-stone-500 font-normal">, {locationData.location.state}</span>}
+                </p>
+                <p className="text-[11px] text-stone-500">
+                  Coordinates: {locationData.location.latitude.toFixed(4)}°N, {locationData.location.longitude.toFixed(4)}°E
+                  {locationData.location.elevation != null && ` • Elev: ${locationData.location.elevation}m`}
+                </p>
+              </div>
+              {locationData.weather && (
+                <div className="text-right shrink-0">
+                  <span className="font-bold text-emerald-900">{locationData.weather.temperature_c.toFixed(1)}°C</span>
+                  <p className="text-[10px] text-stone-500">{locationData.weather.humidity_percent}% RH</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* ── Meteorological Input Card ── */}
+        <div className="border-t border-stone-100 pt-3 px-2 space-y-3">
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              <CloudSun className="w-5 h-5 shrink-0 text-emerald-700" />
+              <span className="text-sm font-bold text-[var(--color-ink)]">
+                Meteorological Input
+              </span>
+            </div>
+            {selectedWeatherProfile !== 'auto' ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 border border-amber-300">
+                <FlaskConical className="w-3.5 h-3.5" />
+                Demo Testing Override Active
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300">
+                <CheckCircle className="w-3.5 h-3.5" />
+                Live Open-Meteo Weather (Default)
+              </span>
+            )}
+          </div>
+
+          <p className="text-xs text-[var(--color-ink-2)] leading-relaxed">
+            By default, the multimodal model retrieves genuine 7-day past weather observations for your farm location via Open-Meteo.
+          </p>
+
+          {/* Demonstration & Testing Mode (Optional) */}
+          <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 space-y-2.5 text-left">
+            <div className="flex items-center justify-between">
+              <label htmlFor="pref-weather-profile-select" className="text-xs font-bold text-stone-700 flex items-center gap-1.5">
+                <FlaskConical className="w-3.5 h-3.5 text-stone-500" />
+                Demonstration & Testing Mode (Optional)
+              </label>
+              {selectedWeatherProfile !== 'auto' && (
+                <button
+                  type="button"
+                  onClick={() => handleSelectWeatherProfile('auto')}
+                  className="text-xs text-emerald-700 hover:underline font-semibold cursor-pointer bg-transparent border-none"
+                >
+                  Reset to Live Weather
+                </button>
+              )}
+            </div>
+
+            <p className="text-[11px] text-stone-500 leading-normal">
+              Testing profiles inject fixed historical sequences from the research dataset for controlled benchmarking. Keep set to "Live Farm Weather" for real field diagnosis.
+            </p>
+
+            <select
+              id="pref-weather-profile-select"
+              value={selectedWeatherProfile}
+              onChange={(e) => handleSelectWeatherProfile(e.target.value)}
+              disabled={loadingProfiles}
+              className="w-full px-3 py-2 text-xs text-stone-900 rounded-xl border border-stone-200 bg-white outline-none cursor-pointer min-h-[42px] focus:border-emerald-600"
+            >
+              <option value="auto">Live Farm Weather (Automatic Open-Meteo GPS — Recommended)</option>
+              {profiles.length > 0 && (
+                <optgroup label="── Demonstration / Testing Research Profiles (Overrides Live Weather) ──">
+                  {profiles.map((p) => (
+                    <option key={p.key} value={p.key}>
+                      [Test] {p.disease} (~{p.avg_temp_c}°C, {p.avg_humidity_pct}% RH, {p.total_rainfall_mm}mm rain)
+                    </option>
+                  ))}
+                </optgroup>
+              )}
+            </select>
+
+            {/* Selected Profile Details Preview */}
+            {selectedWeatherProfile !== 'auto' && (() => {
+              const activeP = profiles.find((p) => p.key === selectedWeatherProfile)
+              if (!activeP) return null
+              return (
+                <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-xs space-y-1 animate-fade-in text-amber-950">
+                  <div className="flex items-center justify-between font-bold">
+                    <span>Overriding live weather with: {activeP.display_name}</span>
+                  </div>
+                  <p className="text-[11px] text-amber-800">
+                    {activeP.condition_summary} • ~{activeP.avg_temp_c}°C • ~{activeP.avg_humidity_pct}% RH • {activeP.total_rainfall_mm}mm rain
+                  </p>
+                </div>
+              )
+            })()}
+          </div>
+        </div>
+
         {/* Manual Weather Data Setting Row */}
         <div className="border-t border-stone-100 pt-1">
           <button
@@ -310,6 +631,47 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
 
               {/* Form inputs */}
               <form onSubmit={handleSaveManualWeather} className="space-y-4">
+                {/* Location Search Bar (Open-Meteo Geocoding) */}
+                <div className="relative">
+                  <label className="text-xs font-semibold text-stone-700 block mb-1">
+                    Search Farm Location (Village, Taluka, City, or District)
+                  </label>
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-stone-200 bg-white min-h-[44px]">
+                    <MapPin className="w-4 h-4 text-emerald-700 shrink-0" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={e => setSearchQuery(e.target.value)}
+                      placeholder="Type village, city or district name to resolve coordinates..."
+                      className="w-full text-sm text-stone-900 bg-transparent outline-none"
+                    />
+                    {isSearching && <RefreshCw className="w-3.5 h-3.5 text-stone-400 animate-spin shrink-0" />}
+                  </div>
+
+                  {/* Dropdown search results */}
+                  {searchResults.length > 0 && (
+                    <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-lg z-20 max-h-48 overflow-y-auto divide-y divide-stone-100">
+                      {searchResults.map((item, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => handleSelectSearchResult(item)}
+                          className="w-full px-3 py-2.5 text-left text-xs hover:bg-emerald-50 transition-colors flex items-center justify-between"
+                        >
+                          <div>
+                            <span className="font-bold text-stone-900">{item.name}</span>
+                            {item.state && <span className="text-stone-500">, {item.state}</span>}
+                            {item.country && <span className="text-stone-400 text-[10px]"> ({item.country})</span>}
+                          </div>
+                          <span className="text-[10px] text-stone-400 font-mono">
+                            {item.latitude.toFixed(2)}°, {item.longitude.toFixed(2)}°
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {/* City */}
                   <div>
@@ -322,7 +684,7 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                         type="text"
                         value={city}
                         onChange={e => setCity(e.target.value)}
-                        placeholder="e.g. Mumbai, Nashik, Pune"
+                        placeholder="e.g. Nashik, Ludhiana, Baramati"
                         className="w-full text-sm text-stone-900 bg-transparent outline-none"
                       />
                     </div>
@@ -339,6 +701,34 @@ export function ProfilePage({ locationData, onUpdateLocationData }: ProfilePageP
                       onChange={e => setStateName(e.target.value)}
                       placeholder="e.g. Maharashtra, Punjab"
                       className="w-full px-3 py-2 text-sm text-stone-900 rounded-xl border border-stone-200 bg-white outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 min-h-[44px]"
+                    />
+                  </div>
+
+                  {/* Latitude */}
+                  <div>
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
+                      Latitude (°N)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.0001"
+                      value={latitude}
+                      onChange={e => setLatitude(parseFloat(e.target.value) || 0)}
+                      className="w-full px-3 py-2 text-sm text-stone-900 rounded-xl border border-stone-200 bg-white outline-none min-h-[44px]"
+                    />
+                  </div>
+
+                  {/* Longitude */}
+                  <div>
+                    <label className="text-xs font-semibold text-stone-700 block mb-1">
+                      Longitude (°E)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.0001"
+                      value={longitude}
+                      onChange={e => setLongitude(parseFloat(e.target.value) || 0)}
+                      className="w-full px-3 py-2 text-sm text-stone-900 rounded-xl border border-stone-200 bg-white outline-none min-h-[44px]"
                     />
                   </div>
 

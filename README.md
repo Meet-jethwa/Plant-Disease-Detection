@@ -12,7 +12,8 @@ An explainable, multimodal deep learning platform designed for Indian farmers an
   - Joint fusion classifier for robust in-field predictions even under early or ambiguous visual symptoms.
 - **Explainable AI (XAI)**:
   - **Grad-CAM Visual Heatmaps**: Reveals the exact leaf lesions and anatomical regions that triggered the model's prediction.
-  - **SHAP Feature Importance**: Exact Shapley value computation ($2^4 = 16$ coalitional subsets) quantifying the direct attribution of ambient temperature, relative humidity, leaf wetness duration, and rainfall to infection pressure.
+  - **PyTorch GradientExplainer SHAP**: Authentic model-based SHAP explainability computed against the multimodal neural network (`1D-CNN + Temporal Attention + Image Fusion`), quantifying the exact mathematical attribution of 7-day meteorological features (temperature, humidity, precipitation, wind speed) to the predicted disease output class against empirical background baselines.
+  - **Rule-Based Environmental Risk Indicators**: Clear, transparent agronomic risk indicators and progression outlooks based on classical epidemiological heuristics (distinguished from trained neural predictions).
 - **Farmer-Friendly Web Application**:
   - Built with **React 19**, **TypeScript**, **Vite**, and **Tailwind CSS**.
   - Live GPS location lookup + automatic weather risk radar via the Open-Meteo API.
@@ -44,11 +45,11 @@ FloraAI classifies **33 distinct crop health conditions**:
 ```
 Plant-Disease-Detection/
 ├── backend/
-│   ├── server.py                   # FastAPI application & REST endpoints
-│   ├── multimodal_model.py         # PyTorch multimodal inference pipeline
+│   ├── server.py                   # FastAPI application, REST endpoints & Open-Meteo integration
+│   ├── multimodal_model.py         # PyTorch multimodal inference pipeline & GradientExplainer SHAP
 │   ├── gemini_chat.py              # Contextual AI assistant using google-genai
-│   ├── disease_info.py             # Knowledge base & SHAP importance calculations
-│   ├── forecasting.py              # Phytopathological risk model & SHAP attribution
+│   ├── disease_info.py             # Knowledge base & rule-based environmental attribution heuristics
+│   ├── forecasting.py              # Phytopathological 7-day risk indicator & temporal progression
 │   ├── gradcam.py                  # Grad-CAM attention heatmap generator
 │   ├── data/
 │   │   └── treatments.json         # Language-independent treatments & dosages (Source of Truth)
@@ -82,7 +83,7 @@ Plant-Disease-Detection/
 ├── review/                         # Native-speaker in-field CSV review sheets
 │   └── {hi,gu,mr,ta,te,bn,pa}.csv
 ├── tests/                          # Comprehensive automated test suite
-│   ├── unit/                       # 37 pytest unit tests (API, Knowledge Base, Forecaster, XAI)
+│   ├── unit/                       # 72 pytest unit tests (API, Knowledge Base, Forecaster, Real SHAP, XAI)
 │   ├── data_driven/                # 15 DDT parameterized test cases
 │   ├── keyword_driven/             # 4 KDT workflow scenarios
 │   ├── security/                   # 6 OWASP penetration test suites
@@ -189,7 +190,7 @@ FloraAI includes an automated test framework covering all testing methodologies:
 
 | Test Category | Methodology & Framework | Scope & Test Count | Live Server Needed? | Run Command |
 | :--- | :--- | :--- | :--- | :--- |
-| **Unit Testing** | `pytest` + `TestClient` | 37 tests (API, Knowledge Base, SHAP Attribution, Forecaster, Grad-CAM, Multimodal) | **No** (Standalone) | `pytest tests/unit -v` |
+| **Unit Testing** | `pytest` + `TestClient` | 72 tests (API, Knowledge Base, Real SHAP Attribution, Forecaster, Grad-CAM, Multimodal) | **No** (Standalone) | `pytest tests/unit -v` |
 | **Data-Driven (DDT)** | `pytest` + JSON Matrix | 15 test cases (Multi-crop multi-weather matrix permutations) | **No** (Standalone) | `pytest tests/data_driven -v` |
 | **Keyword-Driven (KDT)** | Action-Word Engine | 4 scenarios / 24 steps (Navigation, Prediction, Health Check, Forecast) | **No** (Standalone) | `pytest tests/keyword_driven -v` |
 | **Security & Pen-Testing** | Custom OWASP ZAP Runner | 6 test suites (SQLi, XSS, Path Traversal, File Fuzzing, CORS, Headers) | **No** (Standalone) | `pytest tests/security -v` |
@@ -200,10 +201,10 @@ FloraAI includes an automated test framework covering all testing methodologies:
 ### Running the Test Suites
 
 ```powershell
-# 1. Run all 37 unit tests (standalone):
+# 1. Run all 72 unit tests (standalone):
 & ".\.venv\Scripts\python.exe" -m pytest tests/unit -v
 
-# 2. Run all 62 standalone automated tests (Unit + DDT + KDT + Security):
+# 2. Run all 97 standalone automated tests (Unit + DDT + KDT + Security):
 & ".\.venv\Scripts\python.exe" -m pytest tests/unit tests/data_driven tests/keyword_driven tests/security -v
 
 # 3. Run test coverage analysis across backend:

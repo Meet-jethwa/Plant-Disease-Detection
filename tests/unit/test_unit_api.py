@@ -65,10 +65,15 @@ def test_weather_risk_forecast_endpoint(client: TestClient):
 
 
 def test_location_fetch_endpoint(client: TestClient):
-    """Verify location/fetch returns valid weather telemetry."""
+    """Verify location/fetch rejects requests without coordinates or city (no silent fake profile cycling)."""
     res = client.get("/api/location/fetch")
-    assert res.status_code == 200
-    data = res.json()
+    assert res.status_code == 400
+    assert "required" in res.json()["detail"].lower()
+
+    # Verify providing coordinates returns authentic weather telemetry
+    res_coords = client.get("/api/location/fetch?lat=23.0225&lon=72.5714")
+    assert res_coords.status_code == 200
+    data = res_coords.json()
     assert "location" in data
     assert "weather" in data
     assert "temperature_c" in data["weather"]

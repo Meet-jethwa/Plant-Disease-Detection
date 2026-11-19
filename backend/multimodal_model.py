@@ -209,9 +209,19 @@ def extract_weather_tensor(
       8: soil_temp      (Surface soil temperature °C, 0.0 standard)
       9: month_sin      (Cyclic season sine component)
      10: month_cos      (Cyclic season cosine component)
+
+    Strict Data Provenance Requirement:
+      Must accept a genuine 7-day meteorological sequence with 11 features per day.
+      Synthetic weather curve generation from scalar single-day values is strictly prohibited.
     """
     mean, std = get_weather_stats()
     today = target_date or date.today()
+
+    if weather_input is None:
+        raise ValueError(
+            "Weather input cannot be None for multimodal inference. "
+            "A genuine 7-day meteorological sequence is required."
+        )
 
     # Case 1: Pre-computed or raw array/list [7, 11] or [1, 7, 11]
     if isinstance(weather_input, (np.ndarray, list)):
@@ -219,27 +229,66 @@ def extract_weather_tensor(
         if arr.shape == (7, 11):
             normalized = (arr - mean) / (std + 1e-8)
             return torch.tensor(normalized, dtype=torch.float32).unsqueeze(0)
+        else:
+            raise ValueError(
+                f"Invalid weather array shape: {arr.shape}. "
+                f"Expected exactly 7 daily observations with 11 features per day (shape [7, 11])."
+            )
 
-    # Case 2: Multi-day sequence from Open-Meteo daily archive (dict containing arrays)
+    # Case 2: Dict containing pre-parsed 'features_7x11' or 'daily_sequence'
+    if isinstance(weather_input, dict):
+        for seq_key in ("features_7x11", "daily_sequence"):
+            if seq_key in weather_input and isinstance(weather_input[seq_key], (list, tuple, np.ndarray)):
+                arr = np.array(weather_input[seq_key], dtype=np.float32).squeeze()
+                if arr.shape == (7, 11):
+                    normalized = (arr - mean) / (std + 1e-8)
+                    return torch.tensor(normalized, dtype=torch.float32).unsqueeze(0)
+                else:
+                    raise ValueError(
+                        f"Field '{seq_key}' has invalid shape {arr.shape}. Expected (7, 11)."
+                    )
+
+    # Case 3: Multi-day sequence from Open-Meteo daily archive (dict containing arrays)
     if isinstance(weather_input, dict) and "daily" in weather_input and isinstance(weather_input["daily"], dict):
         daily = weather_input["daily"]
         times = daily.get("time", [])
         if len(times) >= 7:
             matrix = np.zeros((7, 11), dtype=np.float32)
             for idx, d_idx in enumerate(range(len(times) - 7, len(times))):
-                t_max = float(daily.get("temperature_2m_max", [28.0] * len(times))[d_idx])
-                t_min = float(daily.get("temperature_2m_min", [20.0] * len(times))[d_idx])
-                t_mean = float(daily.get("temperature_2m_mean", [(t_max + t_min) / 2.0])[d_idx])
-                rh_max = float(daily.get("relative_humidity_2m_max", [90.0] * len(times))[d_idx])
-                rh_mean = float(daily.get("relative_humidity_2m_mean", [75.0] * len(times))[d_idx])
-                precip = float(daily.get("precipitation_sum", [0.0] * len(times))[d_idx])
-                dewpoint = float(daily.get("dew_point_2m_mean", [t_mean - ((100 - rh_mean) / 5)])[d_idx])
-                wind_max = float(daily.get("wind_speed_10m_max", [12.0] * len(times))[d_idx])
-                soil_t = float(daily.get("soil_temperature_0cm", [0.0] * len(times))[d_idx])
+                t_max_list = daily.get("temperature_2m_max")
+                t_max = float(t_max_list[d_idx]) if t_max_list and d_idx < len(t_max_list) and t_max_list[d_idx] is not None else 28.0
+
+                t_min_list = daily.get("temperature_2m_min")
+                t_min = float(t_min_list[d_idx]) if t_min_list and d_idx < len(t_min_list) and t_min_list[d_idx] is not None else 20.0
+
+                t_mean_list = daily.get("temperature_2m_mean")
+                t_mean = float(t_mean_list[d_idx]) if t_mean_list and d_idx < len(t_mean_list) and t_mean_list[d_idx] is not None else (t_max + t_min) / 2.0
+
+                rh_max_list = daily.get("relative_humidity_2m_max")
+                rh_max = float(rh_max_list[d_idx]) if rh_max_list and d_idx < len(rh_max_list) and rh_max_list[d_idx] is not None else 90.0
+
+                rh_mean_list = daily.get("relative_humidity_2m_mean")
+                rh_mean = float(rh_mean_list[d_idx]) if rh_mean_list and d_idx < len(rh_mean_list) and rh_mean_list[d_idx] is not None else 75.0
+
+                precip_list = daily.get("precipitation_sum")
+                precip = float(precip_list[d_idx]) if precip_list and d_idx < len(precip_list) and precip_list[d_idx] is not None else 0.0
+
+                dew_list = daily.get("dew_point_2m_mean")
+                dewpoint = float(dew_list[d_idx]) if dew_list and d_idx < len(dew_list) and dew_list[d_idx] is not None else (t_mean - ((100.0 - rh_mean) / 5.0))
+
+                wind_list = daily.get("wind_speed_10m_max")
+                wind_max = float(wind_list[d_idx]) if wind_list and d_idx < len(wind_list) and wind_list[d_idx] is not None else 12.0
+
+                # Feature 8: Soil temperature
+                # In the training dataset (15,290 samples), soil temperature was zero-standardized (mean 0.0, std 1e-8).
+                # To prevent numerical explosion (dividing by 1e-8), this feature is strictly maintained at 0.0.
+                soil_t = 0.0
+
                 try:
                     d_obj = datetime.strptime(times[d_idx], "%Y-%m-%d").date()
                 except Exception:
                     d_obj = today - timedelta(days=(6 - idx))
+
                 sin_m, cos_m = get_season_encoding(d_obj)
                 matrix[idx] = [
                     t_max, t_min, t_mean, rh_max, rh_mean, precip,
@@ -247,44 +296,18 @@ def extract_weather_tensor(
                 ]
             normalized = (matrix - mean) / (std + 1e-8)
             return torch.tensor(normalized, dtype=torch.float32).unsqueeze(0)
+        else:
+            raise ValueError(
+                f"Open-Meteo daily weather dictionary has insufficient days ({len(times)}). "
+                f"A minimum of 7 consecutive days is required."
+            )
 
-    # Case 3: Single-day sensor telemetry or manual farmer input
-    # Synthesize biologically authentic 7-day pre-symptomatic incubation sequence
-    w = weather_input if isinstance(weather_input, dict) else {}
-    base_temp = float(w.get("temperature_c", 28.0))
-    base_rh = float(w.get("humidity_percent", 70.0))
-    base_rain = float(w.get("rainfall_mm", 0.0))
-    base_wind = float(w.get("wind_kmh", 10.0))
-
-    matrix = np.zeros((7, 11), dtype=np.float32)
-    temp_offsets = [-0.8, -0.4, 0.2, 0.5, 0.0, -0.3, 0.0]
-    rh_offsets   = [ 3.0,  1.5, -2.0, -4.0,  1.0,  2.5, 0.0]
-    rain_factors = [0.1, 0.2, 0.8, 1.4, 1.0, 0.3, 0.2] if base_rain > 0 else [0.0] * 7
-    wind_factors = [0.9, 1.0, 1.2, 1.3, 1.1, 0.9, 1.0]
-
-    for day_i in range(7):
-        day_date = today - timedelta(days=(6 - day_i))
-        sin_m, cos_m = get_season_encoding(day_date)
-
-        t_mean = base_temp + temp_offsets[day_i]
-        t_max = t_mean + 4.5
-        t_min = t_mean - 4.5
-
-        rh_mean = min(98.0, max(20.0, base_rh + rh_offsets[day_i]))
-        rh_max = min(100.0, rh_mean + 12.0)
-
-        precip = max(0.0, base_rain * rain_factors[day_i])
-        dewpoint = t_mean - ((100.0 - rh_mean) / 5.0)
-        wind_max = max(4.0, base_wind * wind_factors[day_i])
-        soil_temp = 0.0
-
-        matrix[day_i] = [
-            t_max, t_min, t_mean, rh_max, rh_mean, precip,
-            dewpoint, wind_max, soil_temp, sin_m, cos_m
-        ]
-
-    normalized = (matrix - mean) / (std + 1e-8)
-    return torch.tensor(normalized, dtype=torch.float32).unsqueeze(0)
+    # Reject scalar single-day dictionaries without 7-day data
+    raise ValueError(
+        "Multimodal inference requires a genuine 7-day meteorological sequence with 11 features "
+        "per day (shape [7, 11]). Single-day scalar observations or incomplete weather sequences "
+        "cannot be converted into synthetic data."
+    )
 
 
 def preprocess_image_pytorch(image_input: Image.Image | bytes) -> torch.Tensor:
@@ -317,9 +340,12 @@ def generate_multimodal_gradcam(
     """
     Generate Grad-CAM visual heatmap overlay from image_encoder.conv_head.
     Returns:
-        overlay_rgb         : (H, W, 3) uint8 image with jet heatmap overlay
-        raw_heatmap_rgb     : (H, W, 3) uint8 jet colormap without original image
-        affected_area_pct   : float percentage of area with elevated activation
+        overlay_rgb                 : (H, W, 3) uint8 image with jet heatmap overlay
+        raw_heatmap_rgb             : (H, W, 3) uint8 jet colormap without original image
+        activation_coverage_percent : float percentage of image area where normalized attention
+                                      exceeds 0.40, indicating high-salience diagnostic regions.
+                                      Note: This represents model attention coverage, not true biological
+                                      percentage of infected plant tissue.
     """
     activations = []
     gradients = []
@@ -363,12 +389,184 @@ def generate_multimodal_gradcam(
     orig_bgr = cv2.cvtColor(original_rgb, cv2.COLOR_RGB2BGR)
     overlay_bgr = cv2.addWeighted(orig_bgr, 0.55, heatmap_jet_bgr, 0.45, 0)
 
-    affected_area_pct = round(float(np.mean(cam_resized > 0.40) * 100), 1)
+    activation_coverage_percent = round(float(np.mean(cam_resized > 0.40) * 100), 1)
 
     overlay_rgb = cv2.cvtColor(overlay_bgr, cv2.COLOR_BGR2RGB)
     heatmap_rgb = cv2.cvtColor(heatmap_jet_bgr, cv2.COLOR_BGR2RGB)
 
-    return overlay_rgb, heatmap_rgb, affected_area_pct
+    return overlay_rgb, heatmap_rgb, activation_coverage_percent
+
+
+class WeatherSubModel(nn.Module):
+    """
+    Submodel that holds the extracted visual feature embedding constant and evaluates
+    sensitivity of target class probability to variations in the 7-day meteorological sequence.
+    Used by PyTorch GradientExplainer.
+    """
+    def __init__(self, model: MultimodalClassifier, img_feat: torch.Tensor, target_class_idx: int):
+        super().__init__()
+        self.weather_encoder = model.weather_encoder
+        self.classifier = model.classifier
+        self.register_buffer("img_feat", img_feat.detach().clone())
+        self.target_class_idx = target_class_idx
+
+    def forward(self, weather_tensor: torch.Tensor) -> torch.Tensor:
+        batch_size = weather_tensor.shape[0]
+        wx_feat = self.weather_encoder(weather_tensor)
+        img_f = self.img_feat.expand(batch_size, -1)
+        fused = torch.cat([img_f, wx_feat], dim=1)
+        probs = torch.softmax(self.classifier(fused), dim=1)
+        return probs[:, self.target_class_idx:self.target_class_idx + 1]
+
+
+@lru_cache(maxsize=1)
+def load_weather_shap_background() -> torch.Tensor:
+    """
+    Load representative empirical background dataset from training disease weather profiles.
+    Returns normalized tensor of shape [N, 7, 11].
+    """
+    mean, std = get_weather_stats()
+    profiles_path = MODELS_DIR / "disease_weather_profiles.json"
+    if not profiles_path.exists():
+        return torch.zeros((16, 7, 11), dtype=torch.float32)
+
+    import json
+    try:
+        with open(profiles_path, "r", encoding="utf-8") as f:
+            profiles = json.load(f)
+    except Exception as exc:
+        print(f"[SHAP] Could not read {profiles_path}: {exc}")
+        return torch.zeros((16, 7, 11), dtype=torch.float32)
+
+    samples = []
+    for k, v in profiles.items():
+        if isinstance(v, dict) and "features_7x11" in v:
+            arr = np.array(v["features_7x11"], dtype=np.float32)
+            if arr.shape == (7, 11):
+                norm = (arr - mean) / (std + 1e-8)
+                samples.append(norm)
+
+    if not samples:
+        return torch.zeros((16, 7, 11), dtype=torch.float32)
+
+    return torch.tensor(np.array(samples), dtype=torch.float32)
+
+
+def compute_multimodal_weather_shap(
+    model: MultimodalClassifier,
+    img_tensor: torch.Tensor,
+    wx_tensor: torch.Tensor,
+    target_class_idx: int,
+    background_samples_count: int = 16,
+) -> Dict[str, Any]:
+    """
+    Compute genuine SHAP explainability for the environmental branch using PyTorch GradientExplainer.
+    Holds visual embedding fixed, varies the 7-day meteorological sequence against empirical background,
+    and calculates exact feature attributions for target_class_idx.
+    """
+    import shap
+
+    with torch.no_grad():
+        img_feat = model.image_fc(model.image_encoder(img_tensor))
+
+    submodel = WeatherSubModel(model, img_feat, target_class_idx)
+    submodel.eval()
+
+    full_bg = load_weather_shap_background()
+    bg_tensor = full_bg[:background_samples_count]
+
+    try:
+        explainer = shap.GradientExplainer(submodel, bg_tensor)
+        raw_shap = explainer.shap_values(wx_tensor)
+        if isinstance(raw_shap, list):
+            s_mat = np.array(raw_shap[0]).squeeze()
+        else:
+            s_mat = np.array(raw_shap).squeeze()
+
+        if s_mat.ndim == 3 and s_mat.shape[-1] == 1:
+            s_mat = s_mat.squeeze(-1)
+        if s_mat.shape != (7, 11):
+            s_mat = s_mat.reshape((7, 11))
+    except Exception as exc:
+        print(f"[SHAP] GradientExplainer failed: {exc}")
+        return {
+            "error": f"SHAP computation failed: {exc}",
+            "target_class": CLASS_NAMES[target_class_idx] if 0 <= target_class_idx < len(CLASS_NAMES) else str(target_class_idx),
+            "method": "SHAP (GradientExplainer on Multimodal Classifier)",
+        }
+
+    FEATURE_GROUPS = {
+        "Temperature": {"indices": [0, 1, 2], "unit": "°C"},
+        "Relative Humidity": {"indices": [3, 4], "unit": "%"},
+        "Rainfall / Precipitation": {"indices": [5], "unit": "mm"},
+        "Dew Point / Moisture": {"indices": [6], "unit": "°C"},
+        "Wind Speed": {"indices": [7], "unit": "km/h"},
+        "Soil Temperature": {"indices": [8], "unit": "°C"},
+        "Seasonality": {"indices": [9, 10], "unit": "cyclic"},
+    }
+
+    groups_summary = {}
+    total_abs_magnitude = 0.0
+
+    for group_name, meta in FEATURE_GROUPS.items():
+        indices = meta["indices"]
+        daily_shap_series = s_mat[:, indices].sum(axis=1)  # [7]
+        net_val = float(daily_shap_series.sum())
+        mean_abs = float(np.abs(daily_shap_series).mean())
+        total_abs_magnitude += mean_abs
+
+        if net_val > 0.0002:
+            impact = "Elevates Risk"
+        elif net_val < -0.0002:
+            impact = "Inhibits Risk"
+        else:
+            impact = "Neutral"
+
+        groups_summary[group_name] = {
+            "net_shap_value": round(net_val, 4),
+            "mean_abs_magnitude": round(mean_abs, 4),
+            "daily_shap": [round(float(v), 4) for v in daily_shap_series],
+            "unit": meta["unit"],
+            "impact": impact,
+        }
+
+    feature_importance_pct = {}
+    for group_name, g_data in groups_summary.items():
+        pct = round((g_data["mean_abs_magnitude"] / (total_abs_magnitude + 1e-8)) * 100.0, 1)
+        g_data["relative_importance_pct"] = pct
+        feature_importance_pct[group_name] = pct
+
+    # Ensure percentages sum cleanly to 100%
+    diff = 100.0 - sum(feature_importance_pct.values())
+    if abs(diff) > 0.0:
+        first_k = list(feature_importance_pct.keys())[0]
+        feature_importance_pct[first_k] = round(feature_importance_pct[first_k] + diff, 1)
+        groups_summary[first_k]["relative_importance_pct"] = feature_importance_pct[first_k]
+
+    target_label = CLASS_NAMES[target_class_idx]
+    disease_clean = target_label.split("_", 1)[1] if "_" in target_label else target_label
+
+    return {
+        "target_class": disease_clean,
+        "raw_class": target_label,
+        "target_class_idx": int(target_class_idx),
+        "method": "SHAP (GradientExplainer on Multimodal Classifier)",
+        "background_samples_count": len(bg_tensor),
+        "feature_groups": groups_summary,
+        "feature_importance": feature_importance_pct,
+        "shap_values": {k: v["net_shap_value"] for k, v in groups_summary.items()},
+        "raw_matrix_7x11": s_mat.tolist(),
+        "explanation_context": {
+            "image_held_constant": True,
+            "aggregation_method": "Temporal sum for signed attribution, mean absolute magnitude across days for relative importance %",
+            "interpretation_note": (
+                "SHAP values quantify the sensitivity of the multimodal neural network's disease prediction "
+                "to 7-day meteorological features compared to an empirical multi-crop training background. "
+                "Positive values indicate meteorological features that increased the model's confidence in this diagnosis; "
+                "negative values reduced confidence. SHAP explains model sensitivity, not biological causation."
+            ),
+        },
+    }
 
 
 def predict_multimodal(
@@ -376,6 +574,7 @@ def predict_multimodal(
     weather: dict | None = None,
     crop_hint: str | None = None,
     weather_features_7x11: list | np.ndarray | None = None,
+    allow_image_only: bool = False,
 ) -> Dict[str, Any]:
     """
     Run full multimodal inference.
@@ -401,22 +600,33 @@ def predict_multimodal(
     original_rgb = np.asarray(pil_img, dtype=np.uint8)
 
     img_tensor = preprocess_image_pytorch(pil_img)
+    is_fallback_image_only = False
     if weather_features_7x11 is not None:
         wx_tensor = extract_weather_tensor(weather_features_7x11)
     elif isinstance(weather, dict) and "features_7x11" in weather:
         wx_tensor = extract_weather_tensor(weather["features_7x11"])
     else:
-        wx_tensor = extract_weather_tensor(weather)
+        try:
+            wx_tensor = extract_weather_tensor(weather)
+        except ValueError:
+            if allow_image_only:
+                wx_tensor = torch.zeros((1, 7, 11), dtype=torch.float32)
+                is_fallback_image_only = True
+            else:
+                raise
 
     with torch.no_grad():
         logits, attn_weights = model(img_tensor, wx_tensor, return_attention=True)
         probs = torch.softmax(logits, dim=1)[0].cpu().numpy()
 
     # Extract 7-day temporal attention scores
-    attn_matrix = attn_weights[0].cpu().numpy()  # [7, 7]
-    daily_importance = np.sum(attn_matrix, axis=0)
-    norm_sum = float(np.sum(daily_importance)) or 1.0
-    daily_attention = [round(float(v / norm_sum) * 100.0, 1) for v in daily_importance]
+    if is_fallback_image_only:
+        daily_attention = None
+    else:
+        attn_matrix = attn_weights[0].cpu().numpy()  # [7, 7]
+        daily_importance = np.sum(attn_matrix, axis=0)
+        norm_sum = float(np.sum(daily_importance)) or 1.0
+        daily_attention = [round(float(v / norm_sum) * 100.0, 1) for v in daily_importance]
 
     top_indexes = np.argsort(probs)[::-1]
     top_global_idx = int(top_indexes[0])
@@ -439,31 +649,11 @@ def predict_multimodal(
             best_crop_idx = crop_indices[best_local_idx]
             selected_idx = best_crop_idx
 
-            # Conditioned probability distribution within selected crop:
+            # Honest crop-conditioned Softmax probability:
             # P(disease | crop) = P(disease) / sum_{c in crop} P(c)
-            # We scale by crop credibility factor so non-leaf/wrong-crop inputs still drop low
-            # If crop_sum >= 0.15, full confidence within crop. If crop_sum < 0.15, attenuated.
-            credibility = min(1.0, crop_sum / 0.15)
-            normalized_within_crop = float(crop_probs[best_local_idx] / (crop_sum + 1e-8))
-
-            # Crop-aware confidence calibration:
-            # Compensates for the class imbalance across crops: Wheat has 15 classes,
-            # Rice 6, Sugarcane 5, Cotton 7. For 15 classes, uniform baseline is 1/15 = 6.67%.
-            # A 20% prediction represents 3x random chance, which is a strong top candidate
-            # that belongs in Tier 2 ("Not sure yet / multiple matches") rather than being
-            # discarded as "unrecognized leaf".
-            K = len(crop_indices)
-            uniform_baseline = 1.0 / max(1, K)
-
-            def _calibrate_prob(p_val: float) -> float:
-                if p_val >= uniform_baseline:
-                    margin = (p_val - uniform_baseline) / max(1e-8, (1.0 - uniform_baseline))
-                    base = 0.35 + 0.65 * margin
-                else:
-                    base = 0.35 * (p_val / max(1e-8, uniform_baseline))
-                return round(float(base * credibility), 4)
-
-            confidence = _calibrate_prob(normalized_within_crop)
+            # Replaces uncalibrated handcrafted margin-over-uniform scaling
+            confidence = round(float(crop_probs[best_local_idx] / (crop_sum + 1e-8)), 4)
+            confidence_type = "crop_conditioned_softmax"
 
             # Top 3 within selected crop
             sorted_local = np.argsort(crop_probs)[::-1]
@@ -471,51 +661,31 @@ def predict_multimodal(
             for loc in sorted_local[:3]:
                 c_idx = crop_indices[loc]
                 d_name = CLASS_NAMES[c_idx].split("_", 1)[1]
-                cand_norm = float(crop_probs[loc] / (crop_sum + 1e-8))
+                cand_norm = round(float(crop_probs[loc] / (crop_sum + 1e-8)), 4)
                 top3.append({
                     "class": d_name,
                     "raw_class": CLASS_NAMES[c_idx],
-                    "confidence": _calibrate_prob(cand_norm),
+                    "confidence": cand_norm,
                 })
         else:
-            K = len(CLASS_NAMES)
-            uniform_baseline = 1.0 / max(1, K)
-
-            def _calibrate_global(p_val: float) -> float:
-                if p_val >= uniform_baseline:
-                    margin = (p_val - uniform_baseline) / max(1e-8, (1.0 - uniform_baseline))
-                    base = 0.35 + 0.65 * margin
-                else:
-                    base = 0.35 * (p_val / max(1e-8, uniform_baseline))
-                return round(float(base), 4)
-
-            confidence = _calibrate_global(float(probs[selected_idx]))
+            confidence = round(float(probs[selected_idx]), 4)
+            confidence_type = "raw_softmax"
             top3 = [
                 {
                     "class": CLASS_NAMES[i].split("_", 1)[1] if "_" in CLASS_NAMES[i] else CLASS_NAMES[i],
                     "raw_class": CLASS_NAMES[i],
-                    "confidence": _calibrate_global(float(probs[i])),
+                    "confidence": round(float(probs[i]), 4),
                 }
                 for i in top_indexes[:3]
             ]
     else:
-        K = len(CLASS_NAMES)
-        uniform_baseline = 1.0 / max(1, K)
-
-        def _calibrate_global(p_val: float) -> float:
-            if p_val >= uniform_baseline:
-                margin = (p_val - uniform_baseline) / max(1e-8, (1.0 - uniform_baseline))
-                base = 0.35 + 0.65 * margin
-            else:
-                base = 0.35 * (p_val / max(1e-8, uniform_baseline))
-            return round(float(base), 4)
-
-        confidence = _calibrate_global(float(probs[selected_idx]))
+        confidence = round(float(probs[selected_idx]), 4)
+        confidence_type = "raw_softmax"
         top3 = [
             {
                 "class": CLASS_NAMES[i].split("_", 1)[1] if "_" in CLASS_NAMES[i] else CLASS_NAMES[i],
                 "raw_class": CLASS_NAMES[i],
-                "confidence": _calibrate_global(float(probs[i])),
+                "confidence": round(float(probs[i]), 4),
             }
             for i in top_indexes[:3]
         ]
@@ -529,7 +699,7 @@ def predict_multimodal(
 
     # Generate PyTorch Grad-CAM on conv_head
     try:
-        overlay_rgb, heatmap_rgb, affected_area_pct = generate_multimodal_gradcam(
+        overlay_rgb, heatmap_rgb, activation_coverage_percent = generate_multimodal_gradcam(
             model=model,
             img_tensor=img_tensor,
             wx_tensor=wx_tensor,
@@ -538,19 +708,41 @@ def predict_multimodal(
         )
     except Exception as g_exc:
         print(f"[GradCAM] PyTorch Grad-CAM failed: {g_exc}")
-        overlay_rgb, heatmap_rgb, affected_area_pct = original_rgb, None, 0.0
+        overlay_rgb, heatmap_rgb, activation_coverage_percent = original_rgb, None, 0.0
+
+    # Compute genuine Model SHAP against trained PyTorch multimodal network
+    if is_fallback_image_only:
+        shap_explanation = None
+    else:
+        try:
+            shap_explanation = compute_multimodal_weather_shap(
+                model=model,
+                img_tensor=img_tensor,
+                wx_tensor=wx_tensor,
+                target_class_idx=selected_idx,
+            )
+        except Exception as s_exc:
+            print(f"[SHAP] PyTorch SHAP calculation failed: {s_exc}")
+            shap_explanation = None
 
     return {
+        "model_mode": "image_only_fallback" if is_fallback_image_only else "multimodal_fusion",
+        "multimodal_fusion": not is_fallback_image_only,
         "all_probs": probs,
         "selected_idx": selected_idx,
         "raw_label": final_label,
         "predicted_disease": disease_name,
         "crop": detected_crop.capitalize(),
         "confidence": confidence,
+        "confidence_type": confidence_type,
         "top3": top3,
         "daily_attention": daily_attention,
         "original_rgb": original_rgb,
         "overlay_rgb": overlay_rgb,
         "heatmap_rgb": heatmap_rgb,
-        "affected_area_pct": affected_area_pct,
+        "activation_coverage_percent": activation_coverage_percent,
+        "affected_area_pct": activation_coverage_percent,  # Backwards compatibility alias
+        "shap_explanation": shap_explanation,
+        "img_tensor": img_tensor,
+        "wx_tensor": wx_tensor,
     }
