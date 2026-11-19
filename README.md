@@ -12,7 +12,7 @@ An explainable, multimodal deep learning platform designed for Indian farmers an
   - Joint fusion classifier for robust in-field predictions even under early or ambiguous visual symptoms.
 - **Explainable AI (XAI)**:
   - **Grad-CAM Visual Heatmaps**: Reveals the exact leaf lesions and anatomical regions that triggered the model's prediction.
-  - **SHAP Feature Importance**: Quantifies the contribution of humidity, leaf wetness duration, and ambient temperature to the disease outbreak.
+  - **SHAP Feature Importance**: Exact Shapley value computation ($2^4 = 16$ coalitional subsets) quantifying the direct attribution of ambient temperature, relative humidity, leaf wetness duration, and rainfall to infection pressure.
 - **Farmer-Friendly Web Application**:
   - Built with **React 19**, **TypeScript**, **Vite**, and **Tailwind CSS**.
   - Live GPS location lookup + automatic weather risk radar via the Open-Meteo API.
@@ -28,7 +28,7 @@ An explainable, multimodal deep learning platform designed for Indian farmers an
 
 ## 🌾 Supported Crops & Diseases
 
-FloraAI classifies **31 distinct crop health conditions**:
+FloraAI classifies **33 distinct crop health conditions**:
 
 | Crop | Supported Conditions & Diseases |
 | :--- | :--- |
@@ -48,6 +48,7 @@ Plant-Disease-Detection/
 │   ├── multimodal_model.py         # PyTorch multimodal inference pipeline
 │   ├── gemini_chat.py              # Contextual AI assistant using google-genai
 │   ├── disease_info.py             # Knowledge base & SHAP importance calculations
+│   ├── forecasting.py              # Phytopathological risk model & SHAP attribution
 │   ├── gradcam.py                  # Grad-CAM attention heatmap generator
 │   ├── data/
 │   │   └── treatments.json         # Language-independent treatments & dosages (Source of Truth)
@@ -70,6 +71,9 @@ Plant-Disease-Detection/
 │       ├── i18n/                   # translations.ts, diseaseHelper.ts, languages.ts
 │       ├── pages/                  # ScanPage, DiagnosisResultPage, AssistantPage, etc.
 │       └── components/             # Reusable UI widgets, LeafVision, DiseaseCard
+├── models/
+│   ├── best_model_multimodal.pth   # PyTorch multimodal model weights
+│   └── class_indices*.json         # Class index dictionaries per crop
 ├── scripts/
 │   ├── translate-i18n.py           # Gemini build-time translation pipeline
 │   ├── check-i18n.py               # 100% key parity & dosage invariant test suite
@@ -77,6 +81,14 @@ Plant-Disease-Detection/
 │   └── spot_check.py               # Unicode glyph & tofu box validator
 ├── review/                         # Native-speaker in-field CSV review sheets
 │   └── {hi,gu,mr,ta,te,bn,pa}.csv
+├── tests/                          # Comprehensive automated test suite
+│   ├── unit/                       # 37 pytest unit tests (API, Knowledge Base, Forecaster, XAI)
+│   ├── data_driven/                # 15 DDT parameterized test cases
+│   ├── keyword_driven/             # 4 KDT workflow scenarios
+│   ├── security/                   # 6 OWASP penetration test suites
+│   ├── e2e/                        # 6 Selenium WebDriver browser scenarios
+│   ├── performance/                # Apache JMeter load simulation
+│   └── mutation/                   # mutmut AST mutation testing
 ├── REVIEW.md                       # Translation status & review priority guide
 ├── i18n-cache.json                 # SHA-256 hash cache for $0 rerun cost
 ├── locked.json                     # Human-approved keys protected from overwrite
@@ -177,7 +189,7 @@ FloraAI includes an automated test framework covering all testing methodologies:
 
 | Test Category | Methodology & Framework | Scope & Test Count | Live Server Needed? | Run Command |
 | :--- | :--- | :--- | :--- | :--- |
-| **Unit Testing** | `pytest` + `TestClient` | 69 tests (API, Knowledge Base, Grad-CAM, Forecaster, PyTorch Tensors, Gemini Chat) | **No** (Standalone) | `pytest tests/unit -v` |
+| **Unit Testing** | `pytest` + `TestClient` | 37 tests (API, Knowledge Base, SHAP Attribution, Forecaster, Grad-CAM, Multimodal) | **No** (Standalone) | `pytest tests/unit -v` |
 | **Data-Driven (DDT)** | `pytest` + JSON Matrix | 15 test cases (Multi-crop multi-weather matrix permutations) | **No** (Standalone) | `pytest tests/data_driven -v` |
 | **Keyword-Driven (KDT)** | Action-Word Engine | 4 scenarios / 24 steps (Navigation, Prediction, Health Check, Forecast) | **No** (Standalone) | `pytest tests/keyword_driven -v` |
 | **Security & Pen-Testing** | Custom OWASP ZAP Runner | 6 test suites (SQLi, XSS, Path Traversal, File Fuzzing, CORS, Headers) | **No** (Standalone) | `pytest tests/security -v` |
@@ -188,25 +200,44 @@ FloraAI includes an automated test framework covering all testing methodologies:
 ### Running the Test Suites
 
 ```powershell
-# 1. Run all 94 standalone automated tests (Unit + DDT + KDT + Security):
+# 1. Run all 37 unit tests (standalone):
+& ".\.venv\Scripts\python.exe" -m pytest tests/unit -v
+
+# 2. Run all 62 standalone automated tests (Unit + DDT + KDT + Security):
 & ".\.venv\Scripts\python.exe" -m pytest tests/unit tests/data_driven tests/keyword_driven tests/security -v
 
-# 2. Run test coverage analysis across backend:
+# 3. Run test coverage analysis across backend:
 & ".\.venv\Scripts\python.exe" -m pytest --cov=backend tests/
 
-# 3. Run AST mutation testing (100% score):
+# 4. Run AST mutation testing (100% score):
 & ".\.venv\Scripts\python.exe" tests/mutation/run_mutation_tests.py
 
-# 4. Run Selenium E2E browser tests (start backend on 8000 and frontend on 5173 first):
+# 5. Run Selenium E2E browser tests (start backend on 8000 and frontend on 5173 first):
 & ".\.venv\Scripts\python.exe" -m pytest tests/e2e -v
 
-# 5. Run JMeter multi-tier concurrency benchmark:
+# 6. Run JMeter multi-tier concurrency benchmark:
 & ".\.venv\Scripts\python.exe" tests/performance/run_jmeter_simulation.py
 ```
 
 ### Complete Testing Documentation
-- **[Comprehensive Software Testing & Results Report](test_result.md)**: Master testing report containing the full 94-test execution breakdown, 100% mutation analysis, code coverage, OWASP ZAP security audits, Apache JMeter load benchmarks, and step-by-step hands-on execution guide.
+- **[Comprehensive Software Testing & Results Report](test_result.md)**: Master testing report containing the full test execution breakdown, SHAP analysis, mutation analysis, code coverage, OWASP ZAP security audits, Apache JMeter load benchmarks, and step-by-step hands-on execution guide.
 - **[Methodology & Documentation Directory](docs/)**: Complete testing architecture, tool exploration, feature inventory, test cases, and execution logs.
+
+---
+
+## 🌍 REST API Reference
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/health` | Health check — returns `{"status": "ok"}` |
+| `GET` | `/api/crops` | Returns list of supported crops |
+| `POST` | `/api/predict` | Multimodal disease prediction (image + weather → diagnosis + SHAP values) |
+| `GET` | `/api/weather/forecast-risk` | 7-day phytopathological risk forecast |
+| `GET` | `/api/weather/disease-profiles` | Pre-computed disease-weather risk profiles |
+| `GET` | `/api/location/fetch` | Fetch weather for current GPS coordinates or city via Open-Meteo |
+| `GET` | `/api/location/search?query=` | Forward geocode city name via Open-Meteo Geocoding API |
+| `POST` | `/api/assistant/start` | Start a Gemini-powered agronomic advisory session |
+| `POST` | `/api/assistant/ask` | Ask a follow-up question in an advisory session |
 
 ---
 

@@ -4,7 +4,7 @@
 
 **FloraAI** is an AI-augmented phytopathological diagnostic and agricultural risk forecasting web application. The platform integrates:
 - **Computer Vision (CNN / EfficientNetV2-S):** Multimodal deep learning for leaf disease classification across Rice, Wheat, Sugarcane, and Cotton.
-- **Predictive Microclimate Forecaster:** Scikit-learn Random Forest model trained on synthetic phytopathological weather datasets evaluating disease risk and 7-day progression.
+- **Predictive Microclimate Forecaster:** Phytopathological infection pressure equations coupled with exact SHAP (SHapley Additive exPlanations) attribution evaluating disease risk and 7-day progression using live Open-Meteo telemetry.
 - **Grad-CAM Explainability:** Class Activation Mapping rendering heatmaps to localize pathological lesions on crop foliage.
 - **Interactive Agronomic Assistant:** Mode A (diagnostic summary) and Mode B (follow-up interactive chat) powered by Gemini and rule-based agronomic knowledge bases.
 - **Multilingual Progressive Web App:** React frontend supporting English and 7 Indic languages (Hindi, Gujarati, Marathi, Tamil, Telugu, Bengali, Punjabi).
@@ -49,12 +49,12 @@ flowchart TD
 
 ## 3. Testing Levels & Strategies
 
-### 3.1 Unit Testing (White-Box Testing — 69 Test Cases)
+### 3.1 Unit Testing (White-Box Testing — 71 Test Cases)
 - **Framework:** `pytest` with `pytest-cov`.
 - **Target Components (8 Modules):**
-  - `backend/server.py`: REST endpoint routing, request validation schemas, and assistant session lifecycle (13 tests).
-  - `backend/disease_info.py`: Disease catalog lookup, Indic script translation mappings (`hi`, `gu`, `mr`, `ta`, `te`, `bn`, `pa`), feature importance normalization, and crop disambiguation (15 tests).
-  - `backend/forecasting.py`: Microclimate synthetic equation generator, Random Forest classifier, 7-day progression math, and `@lru_cache` memory persistence (7 tests).
+  - `backend/server.py`: REST endpoint routing, Open-Meteo geocoding search, request validation schemas, and assistant session lifecycle (15 tests).
+  - `backend/disease_info.py`: Disease catalog lookup, Indic script translation mappings (`hi`, `gu`, `mr`, `ta`, `te`, `bn`, `pa`), SHAP feature attribution calculation, and crop disambiguation (16 tests).
+  - `backend/forecasting.py`: Phytopathological infection pressure equations, exact SHAP attribution, 7-day progression math, and `@lru_cache` memory persistence (6 tests).
   - `backend/gemini_chat.py`: 9-intent detection matrix, base64 data URL stripping, multilingual mapping, and Mode A/B fallback handlers (11 tests).
   - `backend/gradcam.py`: Layer traversal, nested EfficientNet detection, RGB heatmap overlays, and affected canopy percentage calculation (6 tests).
   - `backend/multimodal_model.py`: 33-class taxonomy bounds, tensor preprocessing, weather vector shapes (7x11) (4 tests).

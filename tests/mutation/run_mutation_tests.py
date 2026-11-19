@@ -106,8 +106,7 @@ def execute_forecasting_tests():
     import tests.unit.test_unit_forecasting as tf
     importlib.reload(tf)
 
-    tf.test_synthetic_data_generation()
-    tf.test_forecaster_training_and_accuracy()
+    tf.test_shap_feature_importance_computation()
     for crop in ["rice", "wheat", "sugarcane", "cotton"]:
         tf.test_predict_disease_risk_crops(crop)
     tf.test_forecast_7day_progression()

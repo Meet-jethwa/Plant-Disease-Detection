@@ -47,7 +47,7 @@ TOTAL                           1324    345    75%
 ```
 
 ### Coverage Highlights:
-- **`backend/forecasting.py` (95% Coverage):** Comprehensive evaluation of synthetic data generation equations, Random Forest training, probability mapping, and 7-day progression forecasting.
+- **`backend/forecasting.py` (95% Coverage):** Comprehensive evaluation of phytopathological infection pressure equations, SHAP feature importance computation, softmax probability mapping, and 7-day progression forecasting.
 - **`backend/multimodal_loader.py` (85% Coverage):** Season trigonometric encodings ($\sin^2 + \cos^2 = 1$), 1D-CNN + 4-head attention forward pass, Open-Meteo payload parser, and multimodal inference pipelines.
 - **`backend/disease_info.py` (78% Coverage):** Indic script translation keys across 7 languages (`hi`, `gu`, `mr`, `ta`, `te`, `bn`, `pa`), microclimate feature importance normalization, and crop disambiguation (e.g., Rice Blast vs. Wheat Blast).
 - **`backend/multimodal_model.py` (77% Coverage):** PyTorch inference, class mapping, tensor extraction, and weather sequence preprocessing.

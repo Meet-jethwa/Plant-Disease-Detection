@@ -9,6 +9,7 @@ from __future__ import annotations
 import pytest
 from backend.disease_info import (
     compute_weather_feature_importance,
+    compute_weather_shap_values,
     get_disease_info,
 )
 from backend.server import get_weather_risk, normalize_disease_key
@@ -80,6 +81,24 @@ def test_compute_weather_feature_importance():
     assert "temperature" in lower_keys
     assert "rainfall" in lower_keys
     total = sum(importance.values())
+    assert pytest.approx(total, abs=1.0) == 100.0
+
+
+def test_compute_weather_shap_values():
+    """Verify SHAP game-theoretic decomposition satisfies attribution properties."""
+    disease_info = get_disease_info("Brown Spot")
+    weather = {"temperature_c": 28.0, "humidity_percent": 88.0, "rainfall_mm": 15.0, "wind_kmh": 12.0}
+    shap_res = compute_weather_shap_values(disease_info, weather, crop="rice")
+    assert "shap_values" in shap_res
+    assert "feature_importance" in shap_res
+    assert "base_value" in shap_res
+    assert "risk_score" in shap_res
+    assert shap_res["method"].startswith("SHAP")
+
+    # High humidity and rain should have positive risk-increasing SHAP attributions
+    assert shap_res["shap_values"]["Humidity"] > 0
+    assert shap_res["shap_values"]["Rainfall"] > 0
+    total = sum(shap_res["feature_importance"].values())
     assert pytest.approx(total, abs=1.0) == 100.0
 
 

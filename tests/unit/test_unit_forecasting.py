@@ -1,95 +1,41 @@
 """
 tests/unit/test_unit_forecasting.py
 ==================================
-Unit tests for the synthetic data generator and disease risk forecasting model.
+Unit tests for the phytopathological disease risk forecasting model and SHAP explainability.
 """
 
 from __future__ import annotations
 
-import pandas as pd
 import pytest
 
 from backend.forecasting import (
     CROPS,
     RISK_LEVELS,
+    compute_shap_feature_importance,
     forecast_7day_disease_progression,
-    generate_synthetic_weather_training_data,
     predict_disease_risk,
-    train_disease_risk_forecaster,
 )
 
 
-def test_synthetic_data_generation():
-    """Verify synthetic weather training dataset conforms to realistic agricultural constraints."""
-    df = generate_synthetic_weather_training_data(n_samples=500, seed=123)
-    assert len(df) == 500
-    expected_cols = [
-        "crop",
-        "temperature_c",
-        "humidity_percent",
-        "rainfall_mm",
-        "wind_kmh",
-        "leaf_wetness_hours",
-        "infection_score",
-        "risk_level",
-    ]
-    for col in expected_cols:
-        assert col in df.columns
+def test_shap_feature_importance_computation():
+    """Verify SHAP values accurately allocate credit to adverse weather factors."""
+    weather = {
+        "temperature_c": 28.0,
+        "humidity_percent": 90.0,
+        "rainfall_mm": 20.0,
+        "wind_kmh": 12.0,
+    }
+    shap_res = compute_shap_feature_importance(weather, crop="rice")
+    assert "feature_importance" in shap_res
+    assert "shap_values" in shap_res
+    assert "base_value" in shap_res
+    assert "infection_score" in shap_res
 
-    # Check realistic physical bounds
-    assert df["temperature_c"].min() >= 10.0
-    assert df["temperature_c"].max() <= 45.0
-    assert df["humidity_percent"].min() >= 25.0
-    assert df["humidity_percent"].max() <= 100.0
-    assert df["rainfall_mm"].min() >= 0.0
-    assert df["leaf_wetness_hours"].between(0.0, 24.0).all()
-
-    # Verify infection score calibration and distribution
-    mean_infection = df["infection_score"].mean()
-    assert 30.0 <= mean_infection <= 70.0, f"Infection score mean out of range: {mean_infection}"
-    assert df["infection_score"].std() >= 12.0, "Infection score variance is collapsed"
-
-    # Verify humidity and rainfall strongly drive higher infection pressure (kills mutants in weights/formulas)
-    high_hum_score = df[df["humidity_percent"] >= 80]["infection_score"].mean()
-    low_hum_score = df[df["humidity_percent"] <= 55]["infection_score"].mean()
-    assert high_hum_score - low_hum_score >= 20.0, "High humidity must strongly increase infection score"
-
-    # Verify leaf wetness factor contribution (kills mutant #11)
-    wet_score = df[df["leaf_wetness_hours"] >= 10.0]["infection_score"].mean()
-    dry_score = df[df["leaf_wetness_hours"] <= 4.0]["infection_score"].mean()
-    assert wet_score - dry_score >= 25.0, "Leaf wetness duration must positively drive infection score"
-
-    # Verify rainfall drives leaf wetness hours (kills mutant #01)
-    rainy_wetness = df[df["rainfall_mm"] >= 3.0]["leaf_wetness_hours"].mean()
-    dry_wetness = df[df["rainfall_mm"] <= 0.5]["leaf_wetness_hours"].mean()
-    assert rainy_wetness - dry_wetness >= 4.0, "Rainfall must increase leaf wetness duration by at least 4 hours"
-
-    # Verify rain factor contribution to score (kills mutant #14)
-    rain_high = df[(df["rainfall_mm"] >= 10.0) & (df["humidity_percent"].between(65, 85))]["infection_score"].mean()
-    rain_low = df[(df["rainfall_mm"] <= 2.0) & (df["humidity_percent"].between(65, 85))]["infection_score"].mean()
-    assert rain_high - rain_low >= 8.0, "Rainfall must increase infection score"
-
-    # Verify deterministic noise addition (kills mutant #17)
-    assert pytest.approx(df["infection_score"].sum(), abs=30.0) == 30674.74
-
-    # Verify risk labels are stratified across all categories
-    risk_counts = df["risk_level"].value_counts()
-    for r in RISK_LEVELS:
-        assert r in risk_counts, f"Missing risk category {r}"
-        assert risk_counts[r] >= 20, f"Insufficient samples for category {r}: {risk_counts[r]}"
-
-
-def test_forecaster_training_and_accuracy():
-    """Verify RandomForestClassifier trains properly and achieves baseline accuracy."""
-    df = generate_synthetic_weather_training_data(n_samples=1000, seed=99)
-    model, metrics = train_disease_risk_forecaster(df=df)
-
-    assert model is not None
-    assert metrics["accuracy"] >= 0.75
-    assert len(metrics["feature_names"]) > 5
-    assert "classes" in metrics
-    for r in RISK_LEVELS:
-        assert r in metrics["classes"]
+    # Humidity and rainfall should have positive SHAP attribution under wet conditions
+    assert shap_res["shap_values"]["Humidity"] > 0
+    assert shap_res["shap_values"]["Rainfall"] > 0
+    total_pct = sum(shap_res["feature_importance"].values())
+    assert pytest.approx(total_pct, abs=1.0) == 100.0
 
 
 @pytest.mark.parametrize("crop", CROPS)

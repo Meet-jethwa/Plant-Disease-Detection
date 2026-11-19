@@ -170,6 +170,24 @@ def test_location_fetch_with_coordinates(client: TestClient):
     assert "weather" in data
 
 
+def test_location_fetch_with_city_open_meteo(client: TestClient):
+    """Verify Open-Meteo geocoding resolution for city names."""
+    res = client.get("/api/location/fetch?city=Ludhiana")
+    assert res.status_code == 200
+    data = res.json()
+    assert "location" in data
+    assert "weather" in data
+    assert "Ludhiana" in data["location"]["city"] or "Ludhiana" in str(data)
+
+
+def test_location_search_open_meteo(client: TestClient):
+    """Verify Open-Meteo search endpoint returns autocompletion results."""
+    res = client.get("/api/location/search?query=Pune")
+    assert res.status_code == 200
+    data = res.json()
+    assert "results" in data
+
+
 def test_weather_profiles_filtered_by_crop(client: TestClient):
     """Verify disease profiles endpoint can be filtered strictly by crop."""
     res = client.get("/api/weather/disease-profiles?crop=wheat")

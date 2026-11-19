@@ -16,7 +16,11 @@ from pydantic import BaseModel
 from PIL import Image
 from tensorflow.keras.models import load_model
 
-from backend.disease_info import compute_weather_feature_importance, get_disease_info
+from backend.disease_info import (
+    compute_weather_feature_importance,
+    compute_weather_shap_values,
+    get_disease_info,
+)
 from backend.gradcam import generate_gradcam_overlay
 from backend.gemini_chat import ask_gemini_initial, ask_gemini_chat, detect_intent
 from backend.multimodal_model import CLASS_NAMES, predict_multimodal
@@ -243,8 +247,52 @@ def fetch_real_location_info(latitude: float, longitude: float) -> tuple[str, st
     return "Detected Location", "User Area", "India"
 
 
-def weather_from_coordinates(latitude: float, longitude: float) -> dict:
-    city, state, country = fetch_real_location_info(latitude, longitude)
+def geocode_location_open_meteo(query: str) -> dict | None:
+    """
+    Search and resolve city/region coordinates using Open-Meteo Geocoding API.
+    Returns dictionary with city, state, country, latitude, longitude, elevation, timezone.
+    """
+    if not query or not query.strip():
+        return None
+    cleaned = query.strip()
+    try:
+        url = f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(cleaned)}&count=1&language=en&format=json"
+        req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+        with urllib.request.urlopen(req, timeout=3.0) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                results = data.get("results")
+                if results and len(results) > 0:
+                    top = results[0]
+                    return {
+                        "city": top.get("name") or cleaned,
+                        "state": top.get("admin1") or top.get("admin2") or "Agricultural Area",
+                        "country": top.get("country") or "India",
+                        "latitude": float(top.get("latitude")),
+                        "longitude": float(top.get("longitude")),
+                        "elevation": top.get("elevation"),
+                        "timezone": top.get("timezone", "Asia/Kolkata"),
+                    }
+    except Exception as exc:
+        print(f"[Open-Meteo Geocoding] Failed for '{cleaned}': {exc}")
+    return None
+
+
+def weather_from_coordinates(
+    latitude: float,
+    longitude: float,
+    city_hint: str | None = None,
+    state_hint: str | None = None,
+    country_hint: str | None = None,
+    elevation_hint: float | None = None,
+    timezone_hint: str | None = None,
+) -> dict:
+    if city_hint:
+        city = city_hint
+        state = state_hint or "Agricultural Area"
+        country = country_hint or "India"
+    else:
+        city, state, country = fetch_real_location_info(latitude, longitude)
 
     # Defaults
     temp_c = 28.0
@@ -252,23 +300,50 @@ def weather_from_coordinates(latitude: float, longitude: float) -> dict:
     rainfall = 0.0
     wind_kmh = 10.0
     condition = "Partly Cloudy"
+    code = 0
+    surface_pressure = None
+    cloud_cover = None
+    elevation = elevation_hint
+    timezone = timezone_hint or "Asia/Kolkata"
 
     try:
-        url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,relative_humidity_2m,rain,wind_speed_10m,weather_code"
+        url = (
+            f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}"
+            "&current=temperature_2m,relative_humidity_2m,rain,wind_speed_10m,weather_code,surface_pressure,cloud_cover"
+            "&timezone=auto"
+        )
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=2.5) as resp:
+        with urllib.request.urlopen(req, timeout=3.0) as resp:
             if resp.status == 200:
-                wdata = json.loads(resp.read().decode("utf-8")).get("current", {})
+                raw_json = json.loads(resp.read().decode("utf-8"))
+                wdata = raw_json.get("current", {})
                 temp_c = float(wdata.get("temperature_2m", temp_c))
-                humidity = int(wdata.get("relative_humidity_2m", humidity))
+                humidity = int(round(float(wdata.get("relative_humidity_2m", humidity))))
                 rainfall = float(wdata.get("rain", rainfall))
                 wind_kmh = float(wdata.get("wind_speed_10m", wind_kmh))
                 code = int(wdata.get("weather_code", 0))
+                surface_pressure = wdata.get("surface_pressure")
+                cloud_cover = wdata.get("cloud_cover")
+                if "elevation" in raw_json:
+                    elevation = raw_json["elevation"]
+                if "timezone" in raw_json:
+                    timezone = raw_json["timezone"]
 
-                if code in (61, 63, 65, 80, 81, 82):
-                    condition = "Rain Showers"
+                # Accurate WMO weather interpretation
+                if code == 0:
+                    condition = "Clear Sky"
+                elif code in (1, 2):
+                    condition = "Partly Cloudy"
+                elif code == 3:
+                    condition = "Overcast"
+                elif code in (45, 48):
+                    condition = "Foggy"
                 elif code in (51, 53, 55):
                     condition = "Drizzle / Light Rain"
+                elif code in (61, 63, 65):
+                    condition = "Rain"
+                elif code in (80, 81, 82):
+                    condition = "Rain Showers"
                 elif code in (95, 96, 99):
                     condition = "Thunderstorm"
                 elif humidity >= 80:
@@ -277,7 +352,8 @@ def weather_from_coordinates(latitude: float, longitude: float) -> dict:
                     condition = "Hot & Sunny"
                 else:
                     condition = "Partly Cloudy"
-    except Exception:
+    except Exception as exc:
+        print(f"[Open-Meteo] Live fetch failed ({exc}); using microclimatic estimation.")
         seed = abs(latitude * 1.7 + longitude * 0.9)
         humidity = int(max(35, min(92, round(45 + (seed % 50)))))
         rainfall = round(max(0.0, min(22.0, (seed * 1.3) % 23)), 1)
@@ -299,6 +375,8 @@ def weather_from_coordinates(latitude: float, longitude: float) -> dict:
             "country": country,
             "latitude": round(latitude, 5),
             "longitude": round(longitude, 5),
+            "elevation": elevation,
+            "timezone": timezone,
         },
         "weather": {
             "temperature_c": round(temp_c, 1),
@@ -306,6 +384,9 @@ def weather_from_coordinates(latitude: float, longitude: float) -> dict:
             "rainfall_mm": round(rainfall, 1),
             "wind_kmh": round(wind_kmh, 1),
             "condition": condition,
+            "weather_code": code,
+            "surface_pressure_hpa": round(surface_pressure, 1) if surface_pressure else None,
+            "cloud_cover_percent": cloud_cover,
         },
     }
 
@@ -396,12 +477,75 @@ def get_crops():
     }
 
 
+@app.get("/api/location/search")
+def search_locations(query: str):
+    """
+    Search cities and agricultural regions worldwide via Open-Meteo Geocoding API.
+    """
+    if not query or not query.strip():
+        return {"results": []}
+    try:
+        url = f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(query.strip())}&count=8&language=en&format=json"
+        req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+        with urllib.request.urlopen(req, timeout=3.0) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                results = [
+                    {
+                        "id": r.get("id"),
+                        "name": r.get("name"),
+                        "latitude": r.get("latitude"),
+                        "longitude": r.get("longitude"),
+                        "elevation": r.get("elevation"),
+                        "country": r.get("country"),
+                        "state": r.get("admin1"),
+                        "timezone": r.get("timezone"),
+                    }
+                    for r in data.get("results", [])
+                ]
+                return {"results": results}
+    except Exception as exc:
+        print(f"[Open-Meteo Geocoding search] Error: {exc}")
+    return {"results": []}
+
+
 @app.get("/api/location/fetch")
-def fetch_location(latitude: float | None = None, longitude: float | None = None):
+def fetch_location(
+    latitude: float | None = None,
+    longitude: float | None = None,
+    lat: float | None = None,
+    lon: float | None = None,
+    city: str | None = None,
+    query: str | None = None,
+):
     global _location_cursor
 
-    if latitude is not None and longitude is not None:
-        data = weather_from_coordinates(latitude, longitude)
+    target_lat = latitude if latitude is not None else lat
+    target_lon = longitude if longitude is not None else lon
+    search_term = city or query
+    if search_term and search_term.strip():
+        geo = geocode_location_open_meteo(search_term.strip())
+        if geo:
+            data = weather_from_coordinates(
+                geo["latitude"],
+                geo["longitude"],
+                city_hint=geo["city"],
+                state_hint=geo["state"],
+                country_hint=geo["country"],
+                elevation_hint=geo.get("elevation"),
+                timezone_hint=geo.get("timezone"),
+            )
+            source = "open_meteo_geocoding"
+        else:
+            data = weather_from_coordinates(
+                28.65,
+                77.23,
+                city_hint=search_term.strip(),
+                state_hint="Agricultural Zone",
+            )
+            source = "city_fallback"
+    elif target_lat is not None and target_lon is not None:
+        data = weather_from_coordinates(target_lat, target_lon)
         source = "coordinates"
     else:
         data = DEFAULT_LOCATION_PROFILES[_location_cursor % len(DEFAULT_LOCATION_PROFILES)]
@@ -582,7 +726,8 @@ async def predict_disease(
     gradcam_heatmap = image_to_data_url(raw_heatmap) if raw_heatmap is not None else None
 
     risk_level, risk_reason = get_weather_risk(weather_payload["weather"], crop=crop_key)
-    weather_importance = compute_weather_feature_importance(disease_info, weather_payload["weather"])
+    weather_importance = compute_weather_feature_importance(disease_info, weather_payload["weather"], crop=crop_key)
+    shap_details = compute_weather_shap_values(disease_info, weather_payload["weather"], crop=crop_key)
 
     summary = (
         f"Detected {normalized_label} in {crop_key} with {round(confidence * 100, 2)}% confidence. "
@@ -616,6 +761,8 @@ async def predict_disease(
             "risk_level": risk_level,
             "risk_reason": risk_reason,
             "feature_importance": weather_importance,
+            "shap_values": shap_details.get("shap_values"),
+            "shap_explanation": shap_details,
             "weather_importance_days": weather_importance_days,
         },
         "analysis_summary": summary,

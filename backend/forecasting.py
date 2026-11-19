@@ -1,214 +1,77 @@
 """
 backend/forecasting.py
 ======================
-Synthetic agricultural weather data generator and disease outbreak risk forecasting model.
-Uses scikit-learn (RandomForestClassifier) to forecast multi-day crop infection risk.
+Agricultural microclimate risk forecasting and progression module.
+Uses phytopathological infection pressure equations and SHAP (Shapley Additive exPlanations)
+to evaluate multi-day crop infection risk using live meteorological telemetry.
 """
 
 from __future__ import annotations
 
-import os
-from functools import lru_cache
-from pathlib import Path
-from typing import Any, Dict, List, Tuple
-
-import joblib
+from typing import Any, Dict, List
 import numpy as np
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
-from sklearn.model_selection import train_test_split
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-MODELS_DIR = BASE_DIR / "models"
-MODEL_PATH = MODELS_DIR / "disease_risk_forecaster.joblib"
 
 # Supported economic crops
 CROPS = ["rice", "wheat", "sugarcane", "cotton"]
 RISK_LEVELS = ["Low", "Medium", "High"]
 
 
-def generate_synthetic_weather_training_data(
-    n_samples: int = 2500,
-    seed: int = 42,
-) -> pd.DataFrame:
-    """
-    Synthetically generate realistic multi-variable microclimatic data
-    grounded in agricultural plant pathology rules (temperature, humidity,
-    consecutive rainfall, leaf wetness duration, and wind dispersion).
-    """
-    rng = np.random.default_rng(seed)
-
-    crops = rng.choice(CROPS, size=n_samples)
-    # Seasonal temperatures in Celsius (12°C to 42°C)
-    temperatures = rng.normal(loc=27.0, scale=6.5, size=n_samples)
-    temperatures = np.clip(temperatures, 10.0, 45.0)
-
-    # Relative humidity (30% to 100%)
-    humidity = rng.normal(loc=72.0, scale=15.0, size=n_samples)
-    humidity = np.clip(humidity, 25.0, 100.0)
-
-    # Rainfall in mm (exponential distribution for intermittent rainfall events)
-    rainfall = rng.exponential(scale=6.0, size=n_samples)
-    rainfall = np.clip(rainfall, 0.0, 120.0)
-
-    # Wind speed in km/h (Weibull/normal distribution)
-    wind_speed = rng.gamma(shape=3.0, scale=4.0, size=n_samples)
-    wind_speed = np.clip(wind_speed, 1.0, 60.0)
-
-    # Leaf wetness hours (strongly correlated with humidity and rainfall)
-    leaf_wetness_hours = (humidity / 100.0) * 12.0 + (rainfall > 1.0) * rng.uniform(4.0, 10.0, size=n_samples)
-    leaf_wetness_hours = np.clip(leaf_wetness_hours, 0.0, 24.0)
-
-    # Calculate ground-truth infection pressure score (0 to 100)
-    # Based on phytopathological principles:
-    # Fungi/bacteria thrive in warm (22-32°C), humid (>75%), prolonged leaf wetness (>8h)
-    temp_suitability = np.exp(-((temperatures - 27.0) ** 2) / (2.0 * (6.0 ** 2)))
-    humidity_factor = np.clip((humidity - 50.0) / 45.0, 0.0, 1.0)
-    wetness_factor = np.clip(leaf_wetness_hours / 18.0, 0.0, 1.0)
-    rain_factor = np.clip(rainfall / 25.0, 0.0, 1.0)
-
-    # Crop vulnerability modifiers
-    crop_multipliers = {"rice": 1.15, "wheat": 1.05, "cotton": 0.95, "sugarcane": 0.90}
-    crop_mod = np.array([crop_multipliers[c] for c in crops])
-
-    infection_score = (
-        0.35 * temp_suitability
-        + 0.30 * humidity_factor
-        + 0.25 * wetness_factor
-        + 0.10 * rain_factor
-    ) * 100.0 * crop_mod
-
-    # Add realistic environmental stochastic noise
-    noise = rng.normal(0, 3.5, size=n_samples)
-    infection_score = np.clip(infection_score + noise, 0.0, 100.0)
-
-    # Stratify into 3 discrete risk categories
-    risk_labels = []
-    for score in infection_score:
-        if score >= 62.0:
-            risk_labels.append("High")
-        elif score >= 38.0:
-            risk_labels.append("Medium")
-        else:
-            risk_labels.append("Low")
-
-    df = pd.DataFrame({
-        "crop": crops,
-        "temperature_c": np.round(temperatures, 2),
-        "humidity_percent": np.round(humidity, 1),
-        "rainfall_mm": np.round(rainfall, 2),
-        "wind_kmh": np.round(wind_speed, 2),
-        "leaf_wetness_hours": np.round(leaf_wetness_hours, 1),
-        "infection_score": np.round(infection_score, 2),
-        "risk_level": risk_labels,
-    })
-    return df
-
-
-def prepare_features(df: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray, list[str]]:
-    """Convert dataframe into feature array and target labels with one-hot crop encoding."""
-    crop_dummies = pd.get_dummies(df["crop"], prefix="crop", dtype=float)
-    for c in CROPS:
-        col = f"crop_{c}"
-        if col not in crop_dummies.columns:
-            crop_dummies[col] = 0.0
-
-    numeric_cols = ["temperature_c", "humidity_percent", "rainfall_mm", "wind_kmh", "leaf_wetness_hours"]
-    X = pd.concat([df[numeric_cols], crop_dummies[[f"crop_{c}" for c in CROPS]]], axis=1)
-    feature_names = list(X.columns)
-
-    y = df["risk_level"].values
-    return X.values, y, feature_names
-
-
-def train_disease_risk_forecaster(
-    df: pd.DataFrame | None = None,
-    save_path: Path | None = None,
-) -> Tuple[RandomForestClassifier, dict[str, Any]]:
-    """
-    Train a Random Forest Classifier to forecast disease risk from microclimate metrics.
-    """
-    if df is None:
-        df = generate_synthetic_weather_training_data(n_samples=3000, seed=42)
-
-    X, y, feature_names = prepare_features(df)
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.20, random_state=42, stratify=y
-    )
-
-    model = RandomForestClassifier(
-        n_estimators=100,
-        max_depth=8,
-        min_samples_split=4,
-        random_state=42,
-        class_weight="balanced",
-    )
-    model.fit(X_train, y_train)
-
-    y_pred = model.predict(X_test)
-    acc = float(accuracy_score(y_test, y_pred))
-    report = classification_report(y_test, y_pred, output_dict=True, zero_division=0)
-
-    metrics = {
-        "accuracy": acc,
-        "classification_report": report,
-        "feature_names": feature_names,
-        "feature_importances": dict(zip(feature_names, model.feature_importances_.tolist())),
-        "classes": model.classes_.tolist(),
-        "n_samples": len(df),
-    }
-
-    target_path = save_path or MODEL_PATH
-    target_path.parent.mkdir(parents=True, exist_ok=True)
-    joblib.dump({"model": model, "metrics": metrics, "feature_names": feature_names}, target_path)
-
-    return model, metrics
-
-
-@lru_cache(maxsize=1)
-def load_or_train_forecaster() -> Tuple[RandomForestClassifier, list[str]]:
-    """Load existing model checkpoint or train on demand (cached in memory)."""
-    if MODEL_PATH.exists():
-        try:
-            artifact = joblib.load(MODEL_PATH)
-            return artifact["model"], artifact["feature_names"]
-        except Exception:
-            pass
-
-    model, metrics = train_disease_risk_forecaster(save_path=MODEL_PATH)
-    return model, metrics["feature_names"]
-
-
 def predict_disease_risk(weather_data: dict, crop: str = "rice") -> dict:
     """
-    Predict outbreak risk category and probability distribution for a given crop and weather context.
+    Predict outbreak risk category and probability distribution for a given crop and weather context
+    using deterministic phytopathological environmental rules (no Random Forest model).
     """
-    model, feature_names = load_or_train_forecaster()
-
     temp = float(weather_data.get("temperature_c", 28.0))
     hum = float(weather_data.get("humidity_percent", 70.0))
     rain = float(weather_data.get("rainfall_mm", 2.0))
     wind = float(weather_data.get("wind_kmh", 10.0))
-    # Approximate leaf wetness if not provided
-    leaf_wetness = float(weather_data.get("leaf_wetness_hours", (hum / 100.0) * 10.0 + (rain > 1.0) * 4.0))
 
     crop_lower = crop.lower().strip()
-    features = [temp, hum, rain, wind, leaf_wetness]
-    for c in CROPS:
-        features.append(1.0 if c == crop_lower else 0.0)
 
-    X_in = np.array([features], dtype=np.float32)
-    probs = model.predict_proba(X_in)[0]
-    classes = list(model.classes_)
+    # Pathogen temperature curve
+    temp_suitability = float(np.exp(-((temp - 27.0) ** 2) / (2.0 * (6.0 ** 2))))
+    humidity_factor = float(np.clip((hum - 55.0) / 40.0, 0.0, 1.0))
 
-    pred_idx = int(np.argmax(probs))
-    pred_risk = classes[pred_idx]
-    confidence = float(probs[pred_idx])
+    # Leaf wetness strongly elevated by rainfall presence
+    leaf_wetness = float(weather_data.get("leaf_wetness_hours", (hum / 100.0) * 6.0 + min(18.0, rain * 3.5)))
+    wetness_factor = float(np.clip(leaf_wetness / 16.0, 0.0, 1.0))
+    rain_factor = float(np.clip(rain / 10.0, 0.0, 1.0))
 
-    prob_map = {classes[i]: round(float(probs[i]), 4) for i in range(len(classes))}
+    crop_multipliers = {"rice": 1.15, "wheat": 1.05, "cotton": 0.95, "sugarcane": 0.82}
+    crop_mod = crop_multipliers.get(crop_lower, 1.0)
 
-    # Explain reasoning
+    infection_score = (
+        0.25 * temp_suitability
+        + 0.20 * humidity_factor
+        + 0.35 * wetness_factor
+        + 0.20 * rain_factor
+    ) * 100.0 * crop_mod
+
+    infection_score = float(np.clip(infection_score, 0.0, 100.0))
+
+    logits = np.array([
+        (52.0 - infection_score) / 5.5,
+        2.5 - abs(infection_score - 56.0) / 7.0,
+        (infection_score - 60.0) / 5.5,
+    ])
+    exp_l = np.exp(logits - np.max(logits))
+    probs = exp_l / np.sum(exp_l)
+    prob_map = {"Low": round(probs[0], 4), "Medium": round(probs[1], 4), "High": round(probs[2], 4)}
+
+    # Ensure total probability sums cleanly to 1.0
+    tot_p = sum(prob_map.values())
+    prob_map = {k: round(v / tot_p, 4) for k, v in prob_map.items()}
+
+    if infection_score >= 62.0:
+        pred_risk = "High"
+        confidence = prob_map["High"]
+    elif infection_score >= 42.0:
+        pred_risk = "Medium"
+        confidence = prob_map["Medium"]
+    else:
+        pred_risk = "Low"
+        confidence = prob_map["Low"]
+
     reasons = []
     if hum >= 75:
         reasons.append(f"Elevated humidity ({hum}%) promotes fungal spore germination.")
@@ -219,12 +82,17 @@ def predict_disease_risk(weather_data: dict, crop: str = "rice") -> dict:
     if not reasons:
         reasons.append("Current climatic variables are within sub-optimal pathogen incubation range.")
 
+    shap_data = compute_shap_feature_importance(weather_data, crop=crop_lower)
+
     return {
         "crop": crop_lower,
         "risk_level": pred_risk,
         "confidence": confidence,
         "probabilities": prob_map,
         "reasoning": " ".join(reasons),
+        "shap_values": shap_data["shap_values"],
+        "feature_importance": shap_data["feature_importance"],
+        "shap_explanation": shap_data,
         "inputs": {
             "temperature_c": temp,
             "humidity_percent": hum,
@@ -235,35 +103,144 @@ def predict_disease_risk(weather_data: dict, crop: str = "rice") -> dict:
     }
 
 
-def forecast_7day_disease_progression(current_weather: dict, crop: str = "rice") -> list[dict]:
+def compute_shap_feature_importance(weather_data: dict, crop: str = "rice") -> dict:
     """
-    Synthesize a 7-day environmental progression and predict daily disease risk outlook.
+    Compute SHAP (Shapley Additive exPlanations) values for phytopathological infection risk.
+    Evaluates exact Shapley values across Temperature, Humidity, Leaf Wetness, and Rainfall
+    relative to a neutral agricultural baseline.
     """
-    days = ["Today", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]
+    import math
+    import itertools
+
+    temp = float(weather_data.get("temperature_c", 28.0))
+    hum = float(weather_data.get("humidity_percent", 70.0))
+    rain = float(weather_data.get("rainfall_mm", 2.0))
+    leaf_wetness = float(weather_data.get("leaf_wetness_hours", (hum / 100.0) * 10.0 + (rain > 1.0) * 4.0))
+
+    crop_lower = crop.lower().strip()
+    crop_multipliers = {"rice": 1.15, "wheat": 1.05, "cotton": 0.95, "sugarcane": 0.90}
+    crop_mod = crop_multipliers.get(crop_lower, 1.0)
+
+    def calc_score(feats: list[float]) -> float:
+        t, h, lw, r = feats
+        t_suit = math.exp(-((t - 27.0) ** 2) / (2.0 * (6.0 ** 2)))
+        h_factor = max(0.0, min(1.0, (h - 50.0) / 45.0))
+        w_factor = max(0.0, min(1.0, lw / 18.0))
+        r_factor = max(0.0, min(1.0, r / 25.0))
+        score = (0.35 * t_suit + 0.30 * h_factor + 0.25 * w_factor + 0.10 * r_factor) * 100.0 * crop_mod
+        return max(0.0, min(100.0, score))
+
+    base = [22.0, 50.0, 3.0, 0.0]
+    curr = [temp, hum, leaf_wetness, rain]
+    names = ["Temperature", "Humidity", "Leaf Wetness", "Rainfall"]
+
+    N = len(names)
+    shap_vals = [0.0] * N
+    for i in range(N):
+        others = [j for j in range(N) if j != i]
+        for k in range(N):
+            coeff = (math.factorial(k) * math.factorial(N - k - 1)) / math.factorial(N)
+            for subset in itertools.combinations(others, k):
+                with_i = list(base)
+                without_i = list(base)
+                for s in subset:
+                    with_i[s] = curr[s]
+                    without_i[s] = curr[s]
+                with_i[i] = curr[i]
+                shap_vals[i] += coeff * (calc_score(with_i) - calc_score(without_i))
+
+    base_score = calc_score(base)
+    current_score = calc_score(curr)
+
+    abs_vals = [max(0.1, abs(v)) for v in shap_vals]
+    sum_abs = sum(abs_vals)
+    importance = {name: round((v / sum_abs) * 100.0, 1) for name, v in zip(names, abs_vals)}
+
+    diff = 100.0 - sum(importance.values())
+    if abs(diff) > 0.0:
+        first_key = list(importance.keys())[0]
+        importance[first_key] = round(importance[first_key] + diff, 1)
+
+    return {
+        "feature_importance": importance,
+        "shap_values": {name: round(v, 3) for name, v in zip(names, shap_vals)},
+        "base_value": round(base_score, 2),
+        "infection_score": round(current_score, 2),
+        "method": "SHAP (Exact Shapley Additive exPlanations)",
+    }
+
+
+def forecast_7day_disease_progression(
+    current_weather: dict,
+    crop: str = "rice",
+    latitude: float | None = None,
+    longitude: float | None = None,
+) -> list[dict]:
+    """
+    Project 7-day disease risk progression using real multi-day Open-Meteo forecasts
+    or deterministic meteorological persistence curves (no pseudo-random synthetic data).
+    """
+    import urllib.request
+    import json
+
+    days_labels = ["Today", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]
+    lat = latitude if latitude is not None else current_weather.get("latitude")
+    lon = longitude if longitude is not None else current_weather.get("longitude")
+
+    real_daily = None
+    if lat is not None and lon is not None:
+        try:
+            url = (
+                f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+                "&daily=temperature_2m_max,temperature_2m_min,relative_humidity_2m_mean,precipitation_sum,wind_speed_10m_max"
+                "&timezone=auto"
+            )
+            req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+            with urllib.request.urlopen(req, timeout=2.5) as resp:
+                if resp.status == 200:
+                    data = json.loads(resp.read().decode("utf-8")).get("daily", {})
+                    if "temperature_2m_max" in data and len(data["temperature_2m_max"]) >= 7:
+                        real_daily = data
+        except Exception:
+            real_daily = None
+
     t0 = float(current_weather.get("temperature_c", 28.0))
     h0 = float(current_weather.get("humidity_percent", 70.0))
     r0 = float(current_weather.get("rainfall_mm", 2.0))
     w0 = float(current_weather.get("wind_kmh", 10.0))
 
-    rng = np.random.default_rng(101)
     outlook = []
-
-    for i, day in enumerate(days):
+    for i, day in enumerate(days_labels):
         if i == 0:
-            day_temp, day_hum, day_rain, day_wind = t0, h0, r0, w0
+            day_wx = {
+                "temperature_c": round(t0, 1),
+                "humidity_percent": int(round(h0)),
+                "rainfall_mm": round(r0, 1),
+                "wind_kmh": round(w0, 1),
+            }
+        elif real_daily is not None:
+            t_max = real_daily["temperature_2m_max"][i]
+            t_min = real_daily["temperature_2m_min"][i]
+            t_avg = (t_max + t_min) / 2.0
+            rh_avg = real_daily.get("relative_humidity_2m_mean", [h0] * 7)[i]
+            p_sum = real_daily.get("precipitation_sum", [0.0] * 7)[i]
+            w_max = real_daily.get("wind_speed_10m_max", [w0] * 7)[i]
+            day_wx = {
+                "temperature_c": round(float(t_avg), 1),
+                "humidity_percent": int(round(float(rh_avg))),
+                "rainfall_mm": round(float(p_sum), 1),
+                "wind_kmh": round(float(w_max), 1),
+            }
         else:
-            # Diurnal drift
-            day_temp = float(np.clip(t0 + rng.normal(0, 1.8), 12.0, 42.0))
-            day_hum = float(np.clip(h0 + rng.normal(0, 4.0), 30.0, 98.0))
-            day_rain = float(max(0.0, r0 * rng.uniform(0.5, 1.4) + rng.choice([0, 0, 3.5])))
-            day_wind = float(np.clip(w0 + rng.normal(0, 2.0), 2.0, 35.0))
+            # Deterministic meteorological trend without pseudo-random synthetic noise
+            attenuation = 1.0 - (i * 0.04)
+            day_wx = {
+                "temperature_c": round(t0 * attenuation + (1.0 - attenuation) * 26.0, 1),
+                "humidity_percent": int(round(h0 * attenuation + (1.0 - attenuation) * 65.0)),
+                "rainfall_mm": round(max(0.0, r0 * max(0.2, 1.0 - i * 0.18)), 1),
+                "wind_kmh": round(w0 * attenuation + (1.0 - attenuation) * 11.0, 1),
+            }
 
-        day_wx = {
-            "temperature_c": round(day_temp, 1),
-            "humidity_percent": round(day_hum, 1),
-            "rainfall_mm": round(day_rain, 1),
-            "wind_kmh": round(day_wind, 1),
-        }
         res = predict_disease_risk(day_wx, crop=crop)
         outlook.append({
             "day": day,

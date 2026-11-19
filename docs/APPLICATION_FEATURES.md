@@ -21,9 +21,11 @@
   - **Inference Output:** Predicted disease class, top-3 confidence distribution, and lesion severity percentages.
 
 ### 2.2 Microclimate Epidemiological Risk Forecaster
-- **Synthetic Phytopathological Training Engine (`backend/forecasting.py`):**
+- **Phytopathological Infection Pressure Engine (`backend/forecasting.py`):**
   - Models phytopathological equations including temperature suitability curves ($\mu = 27^\circ\text{C}, \sigma = 6^\circ\text{C}$), relative humidity thresholds ($RH \ge 80\%$), leaf wetness duration, and rainfall factors.
-  - Trains an optimized Random Forest Classifier (100 estimators, max depth 8, balanced class weighting) achieving ~84% validation accuracy.
+  - Evaluates deterministic infection pressure scores and computes softmax probabilities across Low, Medium, and High risk tiers with crop-specific multipliers.
+- **SHAP (SHapley Additive exPlanations) Attribution:**
+  - Computes exact cooperative game theory Shapley values across $2^4 = 16$ atmospheric feature subsets (Temperature, Humidity, Leaf Wetness, Rainfall) satisfying the efficiency axiom $\sum \phi_i = f(\mathbf{x}) - f(\mathbf{x}_{\text{base}})$.
 - **7-Day Disease Progression Outlook:**
   - Projects rolling multi-day microclimate conditions and forecasts disease escalation risks (Low, Medium, High).
   - Outlines preventative spray windows and agronomic management advisories.

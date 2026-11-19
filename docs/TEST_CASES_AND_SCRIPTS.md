@@ -38,20 +38,20 @@ This catalog documents the complete automated testing suite developed and execut
 | `UT_DIS_10` | Indic Translation [Bengali] | `"Brown Spot"`, locale `bn` | Localized Bengali description and treatment |
 | `UT_DIS_11` | Indic Translation [Punjabi] | `"Brown Spot"`, locale `pa` | Localized Punjabi (Gurmukhi) description |
 | `UT_DIS_12` | Weather Risk Bands | High/Medium/Low boundary metrics | Maps meteorological factors to risk thresholds correctly |
-| `UT_DIS_13` | Feature Importance Calculation | Weather metric vectors | Computes feature relative weights summing to 1.0 |
+| `UT_DIS_13` | Feature Importance Calculation | Weather metric vectors | Computes feature relative weights summing to 1.0 via SHAP |
 | `UT_DIS_14` | Crop Disambiguation | `"Blast"` with `crop="wheat"` vs `"rice"` | Resolves distinct profiles: Wheat Blast vs. Rice Blast |
 | `UT_DIS_15` | Chatbot Response Rules | Crop symptom queries | Tailored agronomic advisory recommendations |
+| `UT_DIS_16` | SHAP Value Computation | Rice monsoon weather | Computes 4 SHAP values satisfying Shapley efficiency identity |
 
-### 1.3 Synthetic Forecaster & Disease Risk (`test_unit_forecasting.py` — 7 Tests)
+### 1.3 Phytopathological Forecaster & SHAP Attribution (`test_unit_forecasting.py` — 6 Tests)
 | Test ID | Target Function / Feature | Inputs / Conditions | Verification / Expected Result |
 | :--- | :--- | :--- | :--- |
-| `UT_FOR_01` | Synthetic Data Generation | `generate_synthetic_outbreak_data(n=2000)` | DataFrame of 2000 rows, 11 features, balanced `risk_level` |
-| `UT_FOR_02` | Model Training & Accuracy | `train_disease_risk_forecaster()` | Fits Random Forest, accuracy $> 90\%$, persists to `.joblib` |
-| `UT_FOR_03` | Crop Risk Prediction [Rice] | Rice monsoon conditions | Returns `risk_level: "High"`, reasoning string, probabilities dict |
-| `UT_FOR_04` | Crop Risk Prediction [Wheat] | Wheat cool dry conditions | Returns `risk_level: "Low"` with winter epidemiological profile |
-| `UT_FOR_05` | Crop Risk Prediction [Sugarcane] | Sugarcane tropical warm conditions | Returns calibrated risk profile matching sugarcane parameters |
-| `UT_FOR_06` | Crop Risk Prediction [Cotton] | Cotton semi-arid conditions | Returns calibrated risk profile matching cotton disease thresholds |
-| `UT_FOR_07` | 7-Day Progression Outlook | Multi-day weather trend | Returns list of exactly 7 items with day, risk, temp, humidity |
+| `UT_FOR_01` | SHAP Feature Attribution | Rice high-risk weather | Returns 4 Shapley values, sum matches model output delta |
+| `UT_FOR_02` | Crop Risk Prediction [Rice] | Rice monsoon conditions | Returns `risk_level: "High"`, reasoning string, probabilities dict |
+| `UT_FOR_03` | Crop Risk Prediction [Wheat] | Wheat cool dry conditions | Returns `risk_level: "Low"` with winter epidemiological profile |
+| `UT_FOR_04` | Crop Risk Prediction [Sugarcane] | Sugarcane tropical warm conditions | Returns calibrated risk profile matching sugarcane parameters |
+| `UT_FOR_05` | Crop Risk Prediction [Cotton] | Cotton semi-arid conditions | Returns calibrated risk profile matching cotton disease thresholds |
+| `UT_FOR_06` | 7-Day Progression Outlook | Multi-day weather trend | Returns list of exactly 7 items with day, risk, temp, humidity |
 
 ### 1.4 Gemini AI Chat & Agronomic Intent Matrix (`test_unit_gemini_chat.py` — 11 Tests)
 | Test ID | Target Function / Feature | Inputs / Conditions | Verification / Expected Result |

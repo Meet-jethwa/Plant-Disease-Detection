@@ -994,7 +994,7 @@ export function DiagnosisResultPage({
                         {Object.entries(prediction.weather_context.feature_importance).map(([factor, weight], idx) => (
                           <div key={idx} className="flex items-center justify-between text-sm">
                             <span className="text-stone-700 font-medium">{factor}</span>
-                            <span className="font-bold text-emerald-800">{(weight * 100).toFixed(0)}%</span>
+                            <span className="font-bold text-emerald-800">{(weight > 1.0 ? weight : weight * 100).toFixed(0)}%</span>
                           </div>
                         ))}
                       </div>

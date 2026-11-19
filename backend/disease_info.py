@@ -26,7 +26,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Heavy (storm/flooding)",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.50, "rainfall": 0.20},
     },
 
     "brown_spot": {
@@ -42,7 +41,6 @@ DISEASE_DB = {
             "humidity":    "75–90%",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.25, "humidity": 0.45, "rainfall": 0.30},
     },
 
     "healthy": {
@@ -58,7 +56,6 @@ DISEASE_DB = {
             "humidity":    "Any",
             "rainfall":    "Regular",
         },
-        "weather_weights": {"temperature": 0.33, "humidity": 0.33, "rainfall": 0.34},
     },
 
     "leaf_blast": {
@@ -74,7 +71,6 @@ DISEASE_DB = {
             "humidity":    ">90%",
             "rainfall":    "Frequent light rain/dew",
         },
-        "weather_weights": {"temperature": 0.20, "humidity": 0.55, "rainfall": 0.25},
     },
 
     "leaf_scald": {
@@ -90,7 +86,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Moderate to heavy",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.45, "rainfall": 0.25},
     },
 
     "sheath_blight": {
@@ -106,7 +101,6 @@ DISEASE_DB = {
             "humidity":    ">90%",
             "rainfall":    "Heavy flooding",
         },
-        "weather_weights": {"temperature": 0.25, "humidity": 0.50, "rainfall": 0.25},
     },
 
     # ── WHEAT DISEASES (15 classes) ────────────────────────────────────────────
@@ -123,7 +117,6 @@ DISEASE_DB = {
             "humidity":    "<60%",
             "rainfall":    "Low",
         },
-        "weather_weights": {"temperature": 0.40, "humidity": 0.35, "rainfall": 0.25},
     },
 
     "black_rust": {
@@ -139,7 +132,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Moderate with dew",
         },
-        "weather_weights": {"temperature": 0.35, "humidity": 0.45, "rainfall": 0.20},
     },
 
     "wheat_blast": {
@@ -155,7 +147,6 @@ DISEASE_DB = {
             "humidity":    ">70%",
             "rainfall":    "Rain during heading",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.45, "rainfall": 0.25},
     },
 
     "brown_rust": {
@@ -171,7 +162,6 @@ DISEASE_DB = {
             "humidity":    ">70%",
             "rainfall":    "Light rain/dew",
         },
-        "weather_weights": {"temperature": 0.35, "humidity": 0.45, "rainfall": 0.20},
     },
 
     "common_root_rot": {
@@ -187,7 +177,6 @@ DISEASE_DB = {
             "humidity":    "Low soil moisture",
             "rainfall":    "Insufficient",
         },
-        "weather_weights": {"temperature": 0.40, "humidity": 0.30, "rainfall": 0.30},
     },
 
     "fusarium_head_blight": {
@@ -203,7 +192,6 @@ DISEASE_DB = {
             "humidity":    ">90%",
             "rainfall":    "Rain during flowering",
         },
-        "weather_weights": {"temperature": 0.25, "humidity": 0.45, "rainfall": 0.30},
     },
 
     "leaf_blight": {
@@ -219,7 +207,6 @@ DISEASE_DB = {
             "humidity":    ">70%",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.40, "rainfall": 0.30},
     },
 
     "mildew": {
@@ -235,7 +222,6 @@ DISEASE_DB = {
             "humidity":    "60–80%",
             "rainfall":    "Low to moderate",
         },
-        "weather_weights": {"temperature": 0.40, "humidity": 0.40, "rainfall": 0.20},
     },
 
     "mite": {
@@ -251,7 +237,6 @@ DISEASE_DB = {
             "humidity":    "<50%",
             "rainfall":    "Very low",
         },
-        "weather_weights": {"temperature": 0.50, "humidity": 0.30, "rainfall": 0.20},
     },
 
     "septoria": {
@@ -267,7 +252,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Frequent rain",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.40, "rainfall": 0.30},
     },
 
     "smut": {
@@ -283,7 +267,6 @@ DISEASE_DB = {
             "humidity":    ">60%",
             "rainfall":    "Moderate during anthesis",
         },
-        "weather_weights": {"temperature": 0.35, "humidity": 0.40, "rainfall": 0.25},
     },
 
     "stem_fly": {
@@ -299,7 +282,6 @@ DISEASE_DB = {
             "humidity":    "Any",
             "rainfall":    "Low to moderate",
         },
-        "weather_weights": {"temperature": 0.50, "humidity": 0.25, "rainfall": 0.25},
     },
 
     "tan_spot": {
@@ -315,7 +297,6 @@ DISEASE_DB = {
             "humidity":    ">70%",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.35, "humidity": 0.40, "rainfall": 0.25},
     },
 
     "yellow_rust": {
@@ -331,7 +312,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Dew / light rain",
         },
-        "weather_weights": {"temperature": 0.35, "humidity": 0.45, "rainfall": 0.20},
     },
 
     # ── SUGARCANE DISEASES ─────────────────────────────────────────────────────
@@ -348,7 +328,6 @@ DISEASE_DB = {
             "humidity":    "Moderate",
             "rainfall":    "Any",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.35, "rainfall": 0.35},
     },
 
     "rust": {
@@ -364,7 +343,6 @@ DISEASE_DB = {
             "humidity":    ">75%",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.35, "humidity": 0.45, "rainfall": 0.20},
     },
 
     # ── COTTON DISEASES ────────────────────────────────────────────────────────
@@ -381,7 +359,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Heavy",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.45, "rainfall": 0.25},
     },
 
     "alternaria_leaf_spot": {
@@ -397,7 +374,6 @@ DISEASE_DB = {
             "humidity":    ">75%",
             "rainfall":    "Moderate to heavy",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.45, "rainfall": 0.25},
     },
 
     # ── RICE PADDY (10 classes) — additional classes ───────────────────────────
@@ -414,7 +390,6 @@ DISEASE_DB = {
             "humidity":    ">90%",
             "rainfall":    "Frequent dew/light rain",
         },
-        "weather_weights": {"temperature": 0.20, "humidity": 0.55, "rainfall": 0.25},
     },
 
     "blast": {  # default alias for rice blast
@@ -430,7 +405,6 @@ DISEASE_DB = {
             "humidity":    ">90%",
             "rainfall":    "Frequent dew/light rain",
         },
-        "weather_weights": {"temperature": 0.20, "humidity": 0.55, "rainfall": 0.25},
     },
 
     "hispa": {
@@ -446,7 +420,6 @@ DISEASE_DB = {
             "humidity":    ">75%",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.40, "humidity": 0.35, "rainfall": 0.25},
     },
 
     "tungro": {
@@ -462,7 +435,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.35, "humidity": 0.35, "rainfall": 0.30},
     },
 
     "dead_heart": {
@@ -478,7 +450,6 @@ DISEASE_DB = {
             "humidity":    "High",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.40, "humidity": 0.35, "rainfall": 0.25},
     },
 
     "downy_mildew": {
@@ -494,7 +465,6 @@ DISEASE_DB = {
             "humidity":    ">90%",
             "rainfall":    "Heavy flooding",
         },
-        "weather_weights": {"temperature": 0.25, "humidity": 0.50, "rainfall": 0.25},
     },
 
     "bacterial_leaf_streak": {
@@ -510,7 +480,6 @@ DISEASE_DB = {
             "humidity":    ">80%",
             "rainfall":    "Heavy",
         },
-        "weather_weights": {"temperature": 0.30, "humidity": 0.45, "rainfall": 0.25},
     },
 
     "bacterial_panicle_blight": {
@@ -526,7 +495,6 @@ DISEASE_DB = {
             "humidity":    ">85%",
             "rainfall":    "Moderate",
         },
-        "weather_weights": {"temperature": 0.40, "humidity": 0.40, "rainfall": 0.20},
     },
 
     "normal": {
@@ -542,7 +510,6 @@ DISEASE_DB = {
             "humidity":    "Any",
             "rainfall":    "Regular",
         },
-        "weather_weights": {"temperature": 0.33, "humidity": 0.33, "rainfall": 0.34},
     },
 
     # ── SUGARCANE & COTTON MULTIMODAL CLASSES ─────────────────────────────
@@ -555,7 +522,6 @@ DISEASE_DB = {
         "treatment":    "Provide adequate soil moisture and balanced micronutrients; plants usually recover with normal weather.",
         "prevention":   "Ensure adequate irrigation during dry spells and plant tolerant cultivars.",
         "favorable_conditions": {"temperature": "<15°C or >40°C", "humidity": "Variable", "rainfall": "Low"},
-        "weather_weights": {"temperature": 0.60, "humidity": 0.20, "rainfall": 0.20},
     },
 
     "dried_leaves": {
@@ -567,7 +533,6 @@ DISEASE_DB = {
         "treatment":    "Resume timely irrigation, apply mulch to conserve moisture, and check for root pests.",
         "prevention":   "Implement drip irrigation, maintain trash mulching, and avoid excessive water deficits.",
         "favorable_conditions": {"temperature": ">36°C", "humidity": "<40%", "rainfall": "None"},
-        "weather_weights": {"temperature": 0.45, "humidity": 0.35, "rainfall": 0.20},
     },
 
     "grassy_shoot": {
@@ -579,7 +544,6 @@ DISEASE_DB = {
         "treatment":    "Rogue out and destroy infected stools immediately to prevent field-wide vector spread.",
         "prevention":   "Hot water treatment of seed setts (50°C for 2 hours) and vector pest control.",
         "favorable_conditions": {"temperature": "26–34°C", "humidity": "60–85%", "rainfall": "Moderate"},
-        "weather_weights": {"temperature": 0.30, "humidity": 0.40, "rainfall": 0.30},
     },
 
     "mosaic": {
@@ -591,7 +555,6 @@ DISEASE_DB = {
         "treatment":    "No direct chemical control; remove infected plants and manage aphid vectors.",
         "prevention":   "Plant certified mosaic-resistant setts and maintain barrier crops.",
         "favorable_conditions": {"temperature": "22–32°C", "humidity": "65–85%", "rainfall": "Moderate"},
-        "weather_weights": {"temperature": 0.35, "humidity": 0.35, "rainfall": 0.30},
     },
 
     "pokkah_boeng": {
@@ -603,7 +566,6 @@ DISEASE_DB = {
         "treatment":    "Foliar spray with carbendazim or copper oxychloride at initial chlorotic leaf stage.",
         "prevention":   "Avoid susceptible varieties in high-humidity zones; ensure good canopy ventilation.",
         "favorable_conditions": {"temperature": "28–35°C", "humidity": ">80%", "rainfall": "Intermittent rain"},
-        "weather_weights": {"temperature": 0.35, "humidity": 0.45, "rainfall": 0.20},
     },
 
     "sett_rot": {
@@ -615,7 +577,6 @@ DISEASE_DB = {
         "treatment":    "Dip setts in carbendazim or benomyl solution before planting.",
         "prevention":   "Ensure well-drained planting beds and use healthy setts with protected cut ends.",
         "favorable_conditions": {"temperature": "18–26°C", "humidity": ">85%", "rainfall": "Waterlogged"},
-        "weather_weights": {"temperature": 0.25, "humidity": 0.45, "rainfall": 0.30},
     },
 
     "yellow": {
@@ -627,7 +588,6 @@ DISEASE_DB = {
         "treatment":    "Manage aphid populations with systemic insecticides; rogue severely affected plants.",
         "prevention":   "Use tissue-cultured disease-free planting setts and monitor vector activity.",
         "favorable_conditions": {"temperature": "25–34°C", "humidity": "50–80%", "rainfall": "Moderate"},
-        "weather_weights": {"temperature": 0.35, "humidity": 0.35, "rainfall": 0.30},
     },
 
     "alternaria": {
@@ -639,7 +599,6 @@ DISEASE_DB = {
         "treatment":    "Apply mancozeb, azoxystrobin, or copper hydroxide sprays at early symptom appearance.",
         "prevention":   "Balanced potash nutrition, crop debris destruction, and proper plant spacing.",
         "favorable_conditions": {"temperature": "25–32°C", "humidity": ">80%", "rainfall": "Moderate"},
-        "weather_weights": {"temperature": 0.30, "humidity": 0.50, "rainfall": 0.20},
     },
 
     "cercospora": {
@@ -651,7 +610,6 @@ DISEASE_DB = {
         "treatment":    "Spray chlorothalonil, propiconazole, or mancozeb fungicide.",
         "prevention":   "Maintain adequate soil nitrogen and potassium; avoid dense canopy overgrowth.",
         "favorable_conditions": {"temperature": "24–32°C", "humidity": ">75%", "rainfall": "Frequent showers"},
-        "weather_weights": {"temperature": 0.30, "humidity": 0.45, "rainfall": 0.25},
     },
 
     "grey_mildew": {
@@ -663,7 +621,6 @@ DISEASE_DB = {
         "treatment":    "Foliar spray of wettable sulfur or carbendazim at 15-day intervals.",
         "prevention":   "Wider crop spacing for aeration and avoiding excessive late-season irrigation.",
         "favorable_conditions": {"temperature": "20–28°C", "humidity": ">85%", "rainfall": "Heavy dew"},
-        "weather_weights": {"temperature": 0.25, "humidity": 0.55, "rainfall": 0.20},
     },
 
     "verticillium_wilt": {
@@ -675,7 +632,6 @@ DISEASE_DB = {
         "treatment":    "No curative chemical spray; drench soil with bioagents (Trichoderma viride).",
         "prevention":   "Crop rotation with non-hosts (sorghum, corn), deep summer ploughing, and resistant varieties.",
         "favorable_conditions": {"temperature": "20–26°C", "humidity": "High", "rainfall": "Wet soil"},
-        "weather_weights": {"temperature": 0.40, "humidity": 0.30, "rainfall": 0.30},
     },
 
     "curl_virus": {
@@ -687,7 +643,6 @@ DISEASE_DB = {
         "treatment":    "Spray systemic insecticides (acetamiprid, diafenthiuron, or neem oil) to manage whiteflies.",
         "prevention":   "Cultivate CLCuV-resistant hybrid varieties and eradicate weed hosts like Abutilon.",
         "favorable_conditions": {"temperature": "28–38°C", "humidity": "50–75%", "rainfall": "Low to moderate"},
-        "weather_weights": {"temperature": 0.40, "humidity": 0.35, "rainfall": 0.25},
     },
 
     "redrot": {
@@ -699,7 +654,6 @@ DISEASE_DB = {
         "treatment":    "Remove and burn infected clumps. Treat seed setts with carbendazim or hot water therapy (52°C for 30 min). Avoid water stagnation.",
         "prevention":   "Plant redrot-resistant sugarcane varieties, practice 2–3 year crop rotation, and ensure deep field drainage.",
         "favorable_conditions": {"temperature": "24–35°C", "humidity": ">75%", "rainfall": "Heavy monsoon showers"},
-        "weather_weights": {"temperature": 0.35, "humidity": 0.45, "rainfall": 0.20},
     },
 
     "yellow_disease": {
@@ -711,7 +665,6 @@ DISEASE_DB = {
         "treatment":    "Manage aphid populations with systemic insecticides or neem formulation; rogue out severely stunted plants.",
         "prevention":   "Use tissue-cultured disease-free planting material, clean harvesting equipment, and balanced potash application.",
         "favorable_conditions": {"temperature": "16–22°C", "humidity": "60–80%", "rainfall": "Moderate"},
-        "weather_weights": {"temperature": 0.45, "humidity": 0.35, "rainfall": 0.20},
     },
 
     "healthy_rice_leaf": {
@@ -723,7 +676,6 @@ DISEASE_DB = {
         "treatment":    "Continue regular field scouting and prophylactic organic bio-fertilizer application.",
         "prevention":   "Maintain recommended water level and avoid excessive chemical nitrogen application.",
         "favorable_conditions": {"temperature": "20–35°C", "humidity": "50–85%", "rainfall": "Adequate irrigation"},
-        "weather_weights": {"temperature": 0.33, "humidity": 0.33, "rainfall": 0.34},
     },
 
     "healthy_leaf": {
@@ -735,7 +687,6 @@ DISEASE_DB = {
         "treatment":    "Maintain integrated pest management (IPM) practices and periodic leaf inspections.",
         "prevention":   "Deploy yellow sticky traps for sucking pests and maintain balanced micro-nutrients (boron and zinc).",
         "favorable_conditions": {"temperature": "22–35°C", "humidity": "40–70%", "rainfall": "Normal"},
-        "weather_weights": {"temperature": 0.33, "humidity": 0.33, "rainfall": 0.34},
     },
 
     "herbicide_damage": {
@@ -747,7 +698,6 @@ DISEASE_DB = {
         "treatment":    "Irrigate immediately to leach residues; apply foliar spray of bio-stimulants, amino acids, or 1% urea + DAP to encourage recovery.",
         "prevention":   "Use dedicated sprayers for cotton; avoid spraying on windy days (>10 km/h) and install drift-reduction nozzles.",
         "favorable_conditions": {"temperature": "25–38°C", "humidity": "Variable", "rainfall": "Dry with wind drift"},
-        "weather_weights": {"temperature": 0.30, "humidity": 0.20, "rainfall": 0.50},
     },
 
     "leaf_hopper_jassids": {
@@ -759,7 +709,6 @@ DISEASE_DB = {
         "treatment":    "Spray flonicamid 50 WG, thiamethoxam 25 WG, or neem oil (10,000 ppm) when hopper population exceeds economic threshold (2 nymphs/leaf).",
         "prevention":   "Sow jassid-tolerant hairy-leaf cultivars; install yellow sticky traps and conserve natural predators (ladybird beetles).",
         "favorable_conditions": {"temperature": "24–37°C", "humidity": "<72%", "rainfall": "Dry spell"},
-        "weather_weights": {"temperature": 0.40, "humidity": 0.45, "rainfall": 0.15},
     },
 
     "leaf_reddening": {
@@ -771,7 +720,6 @@ DISEASE_DB = {
         "treatment":    "Foliar spray of 1% magnesium sulphate (MgSO4) + 1% urea at flowering and boll formation stages.",
         "prevention":   "Ensure adequate soil magnesium and potash; avoid water stagnation in root zones during late vegetative stage.",
         "favorable_conditions": {"temperature": ">=32°C day with cold night shock", "humidity": "Low to medium", "rainfall": "Moisture deficit"},
-        "weather_weights": {"temperature": 0.50, "humidity": 0.30, "rainfall": 0.20},
     },
 
     "leaf_variegation": {
@@ -783,7 +731,6 @@ DISEASE_DB = {
         "treatment":    "Apply balanced micro-nutrient foliar spray (zinc and iron chelate) to promote chlorophyll recovery.",
         "prevention":   "Use certified hybrid seeds from reputable breeders; avoid heat-shock during early seedling development.",
         "favorable_conditions": {"temperature": "20–35°C", "humidity": "Moderate", "rainfall": "Normal"},
-        "weather_weights": {"temperature": 0.40, "humidity": 0.30, "rainfall": 0.30},
     },
 }
 
@@ -892,7 +839,6 @@ def get_disease_info(disease_name: str, lang: str = "en", crop: str | None = Non
                 "humidity":    "Variable",
                 "rainfall":    "Variable",
             },
-            "weather_weights": {"temperature": 0.33, "humidity": 0.33, "rainfall": 0.34},
         }
 
     # If non-English language requested, overlay localized fields from backend/locales/{lang}/diseases.json
@@ -917,29 +863,98 @@ def get_disease_info(disease_name: str, lang: str = "en", crop: str | None = Non
     return info
 
 
-def compute_weather_feature_importance(disease_info: dict, weather: dict) -> dict:
+def compute_weather_shap_values(disease_info: dict, weather: dict, crop: str = "rice") -> dict:
     """
-    Calculate weighted feature importance based on disease-specific weights
-    and the current weather values. Returns a dict with display-ready % values.
+    Compute SHAP (SHapley Additive exPlanations) values for environmental disease risk.
+    Uses cooperative game theory to allocate credit/blame across microclimatic variables
+    (Temperature, Humidity, Rainfall, Wind Speed) against a neutral agricultural baseline.
     """
-    weights = disease_info.get("weather_weights", {
-        "temperature": 0.33,
-        "humidity": 0.33,
-        "rainfall": 0.34,
-    })
+    import math
+    import itertools
 
-    # Severity multipliers based on current conditions vs favorable conditions
-    fav = disease_info.get("favorable_conditions", {})
+    temp = float(weather.get("temperature_c", 25.0))
+    hum = float(weather.get("humidity_percent", 50.0))
+    rain = float(weather.get("rainfall_mm", 0.0))
+    wind = float(weather.get("wind_kmh", 10.0))
 
-    raw = {
-        "Temperature": weights.get("temperature", 0.33),
-        "Humidity":    weights.get("humidity", 0.33),
-        "Rainfall":    weights.get("rainfall", 0.34),
+    crop_str = (crop or (disease_info or {}).get("crop") or "rice").lower().strip()
+
+    # Crop/disease optimal pathogen incubation parameters
+    if "wheat" in crop_str:
+        opt_temp, half_width = 20.0, 4.5
+        crop_vuln = 0.95
+    elif "cotton" in crop_str:
+        opt_temp, half_width = 28.5, 4.0
+        crop_vuln = 1.00
+    elif "sugarcane" in crop_str:
+        opt_temp, half_width = 29.0, 4.0
+        crop_vuln = 0.90
+    else:  # rice default
+        opt_temp, half_width = 26.5, 4.0
+        crop_vuln = 1.10
+
+    def risk_function(feats: list[float]) -> float:
+        t, h, r, w = feats
+        t_suit = math.exp(-0.5 * ((t - opt_temp) / half_width) ** 2)
+        h_suit = max(0.0, min(1.0, (h - 45.0) / 45.0))
+        r_suit = max(0.0, min(1.0, r / 12.0))
+        w_suit = max(0.0, min(1.0, w / 25.0))
+        score = (0.35 * t_suit + 0.35 * h_suit + 0.20 * r_suit + 0.10 * w_suit) * 100.0 * crop_vuln
+        return max(0.0, min(100.0, score))
+
+    base_features = [22.0, 55.0, 1.0, 8.0]
+    curr_features = [temp, hum, rain, wind]
+    feature_names = ["Temperature", "Humidity", "Rainfall", "Wind Speed"]
+
+    # Exact Shapley attribution: phi_i = sum_S [|S|!(|N|-|S|-1)! / |N|!] * (f(S U {i}) - f(S))
+    N = 4
+    shap_vals = [0.0] * N
+    for i in range(N):
+        others = [j for j in range(N) if j != i]
+        for k in range(N):
+            coeff = (math.factorial(k) * math.factorial(N - k - 1)) / math.factorial(N)
+            for subset in itertools.combinations(others, k):
+                with_i = list(base_features)
+                without_i = list(base_features)
+                for s in subset:
+                    with_i[s] = curr_features[s]
+                    without_i[s] = curr_features[s]
+                with_i[i] = curr_features[i]
+                shap_vals[i] += coeff * (risk_function(with_i) - risk_function(without_i))
+
+    base_score = risk_function(base_features)
+    current_score = risk_function(curr_features)
+
+    # Relative attribution for UI feature importance
+    abs_shaps = [max(0.1, abs(v)) for v in shap_vals]
+    sum_abs = sum(abs_shaps)
+    normalized = {
+        name: round((val / sum_abs) * 100.0, 1)
+        for name, val in zip(feature_names, abs_shaps)
     }
 
-    total = sum(raw.values())
-    normalized = {k: round((v / total) * 100, 1) for k, v in raw.items()}
-    return normalized
+    # Ensure sum of percentages equals exactly 100.0%
+    diff = 100.0 - sum(normalized.values())
+    if abs(diff) > 0.0:
+        first_key = list(normalized.keys())[0]
+        normalized[first_key] = round(normalized[first_key] + diff, 1)
+
+    return {
+        "feature_importance": normalized,
+        "shap_values": {name: round(val, 3) for name, val in zip(feature_names, shap_vals)},
+        "base_value": round(base_score, 2),
+        "risk_score": round(current_score, 2),
+        "method": "SHAP (Exact Shapley Additive exPlanations)",
+    }
+
+
+def compute_weather_feature_importance(disease_info: dict, weather: dict, crop: str = "rice") -> dict:
+    """
+    Calculate environmental factor importance using SHAP (Shapley Additive exPlanations).
+    Replaces static profile weights with true cooperative game-theoretic feature attribution.
+    """
+    shap_data = compute_weather_shap_values(disease_info, weather, crop=crop)
+    return shap_data["feature_importance"]
 
 
 def chatbot_response(user_input: str) -> str:
