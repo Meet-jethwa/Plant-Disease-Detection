@@ -6,6 +6,11 @@ Covers Rice (6 + 10 classes), Wheat (15), Sugarcane (3), Cotton (3).
 Provides: description, causes, treatment, favorable weather conditions, chatbot answers.
 """
 
+from functools import lru_cache
+import itertools
+import json
+import math
+from pathlib import Path
 import re
 
 # ── Knowledge Base ─────────────────────────────────────────────────────────────
@@ -759,10 +764,6 @@ CHATBOT_KB = {
 }
 
 
-import json
-from pathlib import Path
-from functools import lru_cache
-
 LOCALES_DIR = Path(__file__).resolve().parent / "locales"
 
 @lru_cache(maxsize=16)
@@ -871,9 +872,6 @@ def compute_rule_based_weather_attribution(disease_info: dict, weather: dict, cr
     NOTE: This is a heuristic risk indicator; for trained multimodal neural network explainability,
     see compute_multimodal_weather_shap in backend/multimodal_model.py.
     """
-    import math
-    import itertools
-
     temp = float(weather.get("temperature_c", 25.0))
     hum = float(weather.get("humidity_percent", 50.0))
     rain = float(weather.get("rainfall_mm", 0.0))

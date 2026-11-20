@@ -7,9 +7,7 @@ paddy-disease-classification.zip
 # ─── Trained model weights (large .keras files) ───
 models/*.keras
 models/*.h5
-models/*.pth
-.env
-models/
+!models/best_model_multimodal.pth
 
 # ─── Python / Virtual Environment ───
 __pycache__/

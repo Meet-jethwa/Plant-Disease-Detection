@@ -4,6 +4,7 @@ import base64
 from datetime import date, datetime, timedelta
 import io
 import json
+import os
 import re
 import urllib.request
 import uuid
@@ -22,9 +23,20 @@ from backend.disease_info import (
     compute_weather_shap_values,
     get_disease_info,
 )
+from backend.forecasting import (
+    forecast_7day_disease_progression,
+    predict_disease_risk,
+)
 from backend.gradcam import generate_gradcam_overlay
 from backend.gemini_chat import ask_gemini_initial, ask_gemini_chat, detect_intent
-from backend.multimodal_model import CLASS_NAMES, predict_multimodal
+from backend.multimodal_model import (
+    CLASS_NAMES,
+    MODEL_PATH,
+    get_season_encoding,
+    get_weather_stats,
+    load_multimodal_model,
+    predict_multimodal,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODELS_DIR = BASE_DIR / "models"
@@ -50,11 +62,20 @@ MODEL_FILES = {
 
 SUPPORTED_CROPS = set(MODEL_FILES.keys())
 
+_CORS_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+]
+_ENV_CORS = os.getenv("CORS_ORIGINS")
+if _ENV_CORS:
+    _CORS_ORIGINS.extend([o.strip() for o in _ENV_CORS.split(",") if o.strip()])
+
 app = FastAPI(title="FloraAI Plant Disease API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
+    allow_origins=_CORS_ORIGINS,
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$|^https://.*\.vercel\.app$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -204,7 +225,6 @@ def image_to_data_url(image_array: np.ndarray) -> str:
 
 def get_weather_risk(weather: dict, crop: str = "rice") -> tuple[str, str]:
     try:
-        from backend.forecasting import predict_disease_risk
         res = predict_disease_risk(weather, crop=crop)
         return res["risk_level"], res["reasoning"]
     except Exception:
@@ -404,7 +424,6 @@ def fetch_real_past_weather_sequence(
       is_archive: bool
       weather_summary: dict of aggregated conditions
     """
-    from backend.multimodal_model import get_season_encoding
     today = date.today()
     target_d = None
     is_archive = False
@@ -576,8 +595,6 @@ def get_risk_forecast(
     longitude: float | None = None,
     city: str | None = None,
 ):
-    from backend.forecasting import forecast_7day_disease_progression, predict_disease_risk
-
     lat = latitude
     lon = longitude
     if (lat is None or lon is None) and city and city.strip():
@@ -614,7 +631,6 @@ def health_check():
 @app.get("/api/model/status")
 def get_model_status():
     """Verify presence, integrity, and compatibility of required ML model checkpoints (Phase 6)."""
-    from backend.multimodal_model import MODEL_PATH, CLASS_NAMES, get_weather_stats, load_multimodal_model
     multimodal_ready = False
     details = {}
     try:

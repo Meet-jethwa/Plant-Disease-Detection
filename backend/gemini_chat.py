@@ -39,6 +39,7 @@ import base64
 import json
 import os
 import re
+import time
 from pathlib import Path
 from typing import Any
 
@@ -372,7 +373,6 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
 
     parts: list[Any] = [user_message]
 
-    import time
     last_error = None
     for model_name in _FALLBACK_MODELS:
         for attempt in range(2):
@@ -580,7 +580,6 @@ def ask_gemini_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
 
     follow_ups = FOLLOW_UP_BY_INTENT.get(intent, FOLLOW_UP_BY_INTENT["general"])
 
-    import time
     last_error = None
     for model_name in _FALLBACK_MODELS:
         for attempt in range(2):

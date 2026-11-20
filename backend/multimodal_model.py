@@ -11,6 +11,7 @@ Fuses:
 from __future__ import annotations
 
 import io
+import json
 import math
 from datetime import date, datetime, timedelta
 from functools import lru_cache
@@ -430,7 +431,6 @@ def load_weather_shap_background() -> torch.Tensor:
     if not profiles_path.exists():
         return torch.zeros((16, 7, 11), dtype=torch.float32)
 
-    import json
     try:
         with open(profiles_path, "r", encoding="utf-8") as f:
             profiles = json.load(f)

@@ -8,7 +8,12 @@ to evaluate multi-day crop infection risk using live meteorological telemetry.
 
 from __future__ import annotations
 
+import itertools
+import json
+import math
 from typing import Any, Dict, List
+import urllib.request
+
 import numpy as np
 
 # Supported economic crops
@@ -112,9 +117,6 @@ def compute_rule_based_risk_breakdown(weather_data: dict, crop: str = "rice") ->
     NOTE: This is a rule-based risk heuristic; genuine model SHAP on the trained multimodal
     classifier is computed in backend/multimodal_model.py.
     """
-    import math
-    import itertools
-
     temp = float(weather_data.get("temperature_c", 28.0))
     hum = float(weather_data.get("humidity_percent", 70.0))
     rain = float(weather_data.get("rainfall_mm", 2.0))
@@ -188,9 +190,6 @@ def forecast_7day_disease_progression(
     Project 7-day disease risk progression using real multi-day Open-Meteo forecasts
     or deterministic meteorological persistence curves (no pseudo-random synthetic data).
     """
-    import urllib.request
-    import json
-
     days_labels = ["Today", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]
     lat = latitude if latitude is not None else current_weather.get("latitude")
     lon = longitude if longitude is not None else current_weather.get("longitude")
