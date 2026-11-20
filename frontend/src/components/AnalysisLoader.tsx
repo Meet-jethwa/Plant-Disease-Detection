@@ -92,9 +92,9 @@ export function AnalysisLoader({
     return () => clearTimeout(timer)
   }, [isPredicting, onComplete])
 
-  // Determine stage & messaging
-  const isTimeoutError = elapsed >= 45 && !hasTriggeredCompleteRef.current && isPredicting
-  const isTakingLonger = elapsed >= 15 && !isTimeoutError && !hasTriggeredCompleteRef.current
+  // Determine stage & messaging: Render free tier cold-boots can take up to 45-50s, so allow 75s before timing out
+  const isTimeoutError = elapsed >= 75 && !hasTriggeredCompleteRef.current && isPredicting
+  const isTakingLonger = elapsed >= 12 && !isTimeoutError && !hasTriggeredCompleteRef.current
   const isIndeterminate = isTakingLonger
 
   const displaySentence = isTimeoutError

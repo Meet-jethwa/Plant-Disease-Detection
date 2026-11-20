@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import concurrent.futures
 from datetime import date, datetime, timedelta
 import io
 import json
@@ -270,7 +271,7 @@ def fetch_real_location_info(latitude: float, longitude: float) -> tuple[str, st
     try:
         url = f"https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={latitude}&longitude={longitude}&localityLanguage=en"
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=2.5) as resp:
+        with urllib.request.urlopen(req, timeout=1.8) as resp:
             if resp.status == 200:
                 data = json.loads(resp.read().decode("utf-8"))
                 city = data.get("city") or data.get("locality") or "Detected Location"
@@ -354,7 +355,7 @@ def geocode_location_open_meteo(query: str) -> dict | None:
             f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(cleaned)}&count=1&language=en&format=json"
         )
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=3.0) as resp:
+        with urllib.request.urlopen(req, timeout=2.5) as resp:
             if resp.status == 200:
                 data = json.loads(resp.read().decode("utf-8"))
                 results = data.get("results")
@@ -422,7 +423,7 @@ def weather_from_coordinates(
             "&timezone=auto"
         )
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=3.0) as resp:
+        with urllib.request.urlopen(req, timeout=2.5) as resp:
             if resp.status == 200:
                 raw_json = json.loads(resp.read().decode("utf-8"))
                 wdata = raw_json.get("current", {})
@@ -571,7 +572,7 @@ def fetch_real_past_weather_sequence(
     raw = None
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=4.5) as resp:
+        with urllib.request.urlopen(req, timeout=3.0) as resp:
             if resp.status == 200:
                 raw = json.loads(resp.read().decode("utf-8"))
     except Exception as exc:
@@ -650,8 +651,44 @@ def fetch_real_past_weather_sequence(
     }
     _PAST_WEATHER_CACHE[cache_key] = (now, result)
     return result
-    _PAST_WEATHER_CACHE[cache_key] = (now, result)
-    return result
+
+
+def fetch_location_weather_bundle(
+    latitude: float,
+    longitude: float,
+    city_hint: str | None = None,
+    state_hint: str | None = None,
+    country_hint: str | None = None,
+    capture_date: str | None = None,
+) -> tuple[dict | None, dict | None]:
+    """
+    Concurrently retrieve 7-day past observations sequence and current conditions in parallel
+    threads to minimize request latency. If Open-Meteo is rate limited or slow, timeouts ensure
+    fast graceful fallback to image-only computer vision without synthetic distortion.
+    """
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        f_past = executor.submit(fetch_real_past_weather_sequence, latitude, longitude, capture_date)
+        f_curr = executor.submit(
+            weather_from_coordinates,
+            latitude,
+            longitude,
+            city_hint=city_hint,
+            state_hint=state_hint,
+            country_hint=country_hint,
+        )
+        try:
+            past_wx = f_past.result()
+        except Exception as exc:
+            print(f"[Weather Bundle] Past weather thread failed: {exc}")
+            past_wx = None
+
+        try:
+            curr_payload = f_curr.result()
+        except Exception as exc:
+            print(f"[Weather Bundle] Current weather thread failed: {exc}")
+            curr_payload = None
+
+    return past_wx, curr_payload
 
 
 # ── Disease Weather Profiles (Project v3 Dataset) ───────────────────────────
@@ -803,7 +840,7 @@ def search_locations(query: str):
             f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(q)}&count=8&language=en&format=json"
         )
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-        with urllib.request.urlopen(req, timeout=3.0) as resp:
+        with urllib.request.urlopen(req, timeout=2.5) as resp:
             if resp.status == 200:
                 data = json.loads(resp.read().decode("utf-8"))
                 results = [
@@ -977,9 +1014,15 @@ async def predict_disease(
             state_hint = geo["state"]
             country_hint = geo["country"]
 
-        # Fetch authentic 7-day past observations sequence
-        past_wx = fetch_real_past_weather_sequence(lat, lon, capture_date=capture_date)
-        curr_payload = weather_from_coordinates(lat, lon, city_hint=city_hint, state_hint=state_hint, country_hint=country_hint)
+        # Concurrently fetch authentic 7-day past observations sequence and current weather
+        past_wx, curr_payload = fetch_location_weather_bundle(
+            lat,
+            lon,
+            city_hint=city_hint,
+            state_hint=state_hint,
+            country_hint=country_hint,
+            capture_date=capture_date,
+        )
 
         if past_wx is not None:
             weather_features_7x11 = past_wx["features_7x11"]
@@ -1046,13 +1089,13 @@ async def predict_disease(
         # 4. Graceful default: retrieve real Open-Meteo observations for Central Agricultural Zone
         # Ensures diagnosis never aborts with 400 Bad Request when browser GPS is blocked/offline
         default_lat, default_lon = 28.6139, 77.2090
-        past_wx = fetch_real_past_weather_sequence(default_lat, default_lon, capture_date=capture_date)
-        curr_payload = weather_from_coordinates(
+        past_wx, curr_payload = fetch_location_weather_bundle(
             default_lat,
             default_lon,
             city_hint="Central Agricultural Zone",
             state_hint="Delhi NCR",
             country_hint="India",
+            capture_date=capture_date,
         )
         if past_wx is not None:
             weather_features_7x11 = past_wx["features_7x11"]

@@ -451,9 +451,21 @@ def load_weather_shap_background() -> torch.Tensor:
                 samples.append(norm)
 
     if not samples:
-        return torch.zeros((16, 7, 11), dtype=torch.float32)
+        return torch.zeros((4, 7, 11), dtype=torch.float32)
 
-    return torch.tensor(np.array(samples), dtype=torch.float32)
+    # Order samples so the first 4 span distinct crop types: Cotton, Rice, Sugarcane, Wheat
+    # Profile keys: Cotton (0..5), Rice (6..14), Sugarcane (15..20), Wheat (21..32)
+    # Using stride [0, 8, 16, 24] guarantees multi-crop empirical diversity in the top-4 baseline
+    reordered = []
+    stride_indices = [0, 8, 16, 24]
+    for idx in stride_indices:
+        if idx < len(samples):
+            reordered.append(samples[idx])
+    for idx, s in enumerate(samples):
+        if idx not in stride_indices:
+            reordered.append(s)
+
+    return torch.tensor(np.array(reordered), dtype=torch.float32)
 
 
 def compute_multimodal_weather_shap(
@@ -461,7 +473,7 @@ def compute_multimodal_weather_shap(
     img_tensor: torch.Tensor,
     wx_tensor: torch.Tensor,
     target_class_idx: int,
-    background_samples_count: int = 16,
+    background_samples_count: int = 4,
 ) -> Dict[str, Any]:
     """
     Compute genuine SHAP explainability for the environmental branch using PyTorch GradientExplainer.
@@ -724,6 +736,7 @@ def predict_multimodal(
                 img_tensor=img_tensor,
                 wx_tensor=wx_tensor,
                 target_class_idx=selected_idx,
+                background_samples_count=4,
             )
         except Exception as s_exc:
             print(f"[SHAP] PyTorch SHAP calculation failed: {s_exc}")
