@@ -232,7 +232,9 @@ def image_to_data_url(image_array: np.ndarray) -> str:
     return f"data:image/jpeg;base64,{encoded}"
 
 
-def get_weather_risk(weather: dict, crop: str = "rice") -> tuple[str, str]:
+def get_weather_risk(weather: dict | None, crop: str = "rice") -> tuple[str, str]:
+    if not weather:
+        return "Low", "Live meteorological telemetry unavailable; environmental risk calculation omitted."
     try:
         res = predict_disease_risk(weather, crop=crop)
         return res["risk_level"], res["reasoning"]
@@ -325,95 +327,6 @@ _KNOWN_GEO_LOCATIONS: dict[str, dict] = {
 }
 
 
-def generate_agro_seasonal_baseline(
-    latitude: float,
-    longitude: float,
-    target_d: date | None = None,
-) -> dict:
-    """
-    Synthesize an authentic agro-climatic 7-day meteorological sequence based on
-    latitude and seasonal calendar normals. Used as a resilient safety net when
-    external meteorological APIs (Open-Meteo) encounter rate limits (HTTP 429)
-    or network partitions, guaranteeing diagnosis never fails with HTTP 502.
-    """
-    d_end = target_d or date.today()
-    month = d_end.month
-
-    # Seasonal baseline for sub-tropical agricultural zones (8° - 35° N)
-    if month in (12, 1, 2):
-        # Winter / Cold dry season
-        base_tmax, base_tmin, base_rh, base_rain, base_wind = 26.0, 13.5, 62.0, 0.0, 8.5
-    elif month in (3, 4, 5):
-        # Summer / Hot dry pre-monsoon
-        base_tmax, base_tmin, base_rh, base_rain, base_wind = 37.5, 23.5, 48.0, 0.5, 12.0
-    elif month in (6, 7, 8, 9):
-        # Monsoon / Kharif wet season
-        base_tmax, base_tmin, base_rh, base_rain, base_wind = 30.5, 24.0, 84.0, 12.0, 13.5
-    else:
-        # Months 10, 11: Post-Monsoon / Autumn / Rabi sowing
-        base_tmax, base_tmin, base_rh, base_rain, base_wind = 29.0, 18.0, 66.0, 1.0, 9.0
-
-    # Latitude adjustment for non-tropical or temperate latitudes
-    lat_adj = max(-15.0, min(10.0, (25.0 - abs(latitude)) * 0.35))
-    base_tmax = round(base_tmax + lat_adj, 1)
-    base_tmin = round(base_tmin + lat_adj, 1)
-
-    features_7x11 = []
-    dates_list = []
-    for idx in range(7):
-        day_date = d_end - timedelta(days=(6 - idx))
-        sin_m, cos_m = get_season_encoding(day_date)
-        var_factor = math.sin((idx / 6.0) * math.pi)
-        t_max = round(base_tmax + (idx - 3) * 0.35 + var_factor * 0.5, 1)
-        t_min = round(base_tmin + (idx - 3) * 0.25, 1)
-        t_mean = round((t_max + t_min) / 2.0, 1)
-        rh_mean = round(min(98.0, max(25.0, base_rh + (idx - 3) * 1.2)), 1)
-        rh_max = round(min(100.0, rh_mean + 12.0), 1)
-        precip = round(max(0.0, base_rain * (0.8 + 0.1 * idx)), 1)
-        dewpoint = round(t_mean - ((100.0 - rh_mean) / 5.0), 1)
-        wind_max = round(max(2.0, base_wind + (idx % 3) * 0.6), 1)
-        soil_temp = 0.0
-
-        features_7x11.append([
-            t_max, t_min, t_mean, rh_max, rh_mean, precip,
-            dewpoint, wind_max, soil_temp, sin_m, cos_m
-        ])
-        dates_list.append(day_date.isoformat())
-
-    temps = [row[2] for row in features_7x11]
-    rhs = [row[4] for row in features_7x11]
-    rains = [row[5] for row in features_7x11]
-    winds = [row[7] for row in features_7x11]
-
-    avg_temp = round(sum(temps) / len(temps), 1)
-    avg_rh = int(round(sum(rhs) / len(rhs)))
-    total_rain = round(sum(rains), 1)
-    avg_wind = round(sum(winds) / len(winds), 1)
-
-    if total_rain >= 15.0:
-        cond = "Rainy / Prolonged Wetness"
-    elif avg_rh >= 80:
-        cond = "Humid Canopy Conditions"
-    elif avg_temp >= 33.0:
-        cond = "Hot & Dry"
-    else:
-        cond = "Moderate Foliar Environment"
-
-    return {
-        "features_7x11": features_7x11,
-        "dates": dates_list,
-        "is_archive": False,
-        "source": "agro_seasonal_baseline",
-        "weather_summary": {
-            "temperature_c": avg_temp,
-            "humidity_percent": avg_rh,
-            "rainfall_mm": total_rain,
-            "wind_kmh": avg_wind,
-            "condition": cond,
-        },
-    }
-
-
 def geocode_location_open_meteo(query: str) -> dict | None:
     """
     Search and resolve city/region coordinates using Open-Meteo Geocoding API with
@@ -501,19 +414,7 @@ def weather_from_coordinates(
                 }
             return result
 
-    # Defaults
-    temp_c = 28.0
-    humidity = 70
-    rainfall = 0.0
-    wind_kmh = 10.0
-    condition = "Partly Cloudy"
-    code = 0
-    surface_pressure = None
-    cloud_cover = None
-    elevation = elevation_hint
-    timezone = timezone_hint or "Asia/Kolkata"
-    success = False
-
+    # Query Open-Meteo for authentic observations
     try:
         url = _append_api_key(
             f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}"
@@ -525,17 +426,15 @@ def weather_from_coordinates(
             if resp.status == 200:
                 raw_json = json.loads(resp.read().decode("utf-8"))
                 wdata = raw_json.get("current", {})
-                temp_c = float(wdata.get("temperature_2m", temp_c))
-                humidity = int(round(float(wdata.get("relative_humidity_2m", humidity))))
-                rainfall = float(wdata.get("rain", rainfall))
-                wind_kmh = float(wdata.get("wind_speed_10m", wind_kmh))
+                temp_c = float(wdata.get("temperature_2m", 28.0))
+                humidity = int(round(float(wdata.get("relative_humidity_2m", 70.0))))
+                rainfall = float(wdata.get("rain", 0.0))
+                wind_kmh = float(wdata.get("wind_speed_10m", 10.0))
                 code = int(wdata.get("weather_code", 0))
                 surface_pressure = wdata.get("surface_pressure")
                 cloud_cover = wdata.get("cloud_cover")
-                if "elevation" in raw_json:
-                    elevation = raw_json["elevation"]
-                if "timezone" in raw_json:
-                    timezone = raw_json["timezone"]
+                elevation = raw_json.get("elevation", elevation_hint)
+                timezone = raw_json.get("timezone", timezone_hint or "Asia/Kolkata")
 
                 # Accurate WMO weather interpretation
                 if code == 0:
@@ -560,53 +459,58 @@ def weather_from_coordinates(
                     condition = "Hot & Sunny"
                 else:
                     condition = "Partly Cloudy"
-                success = True
+
+                result = {
+                    "location": {
+                        "city": city,
+                        "state": state,
+                        "country": country,
+                        "latitude": round(latitude, 5),
+                        "longitude": round(longitude, 5),
+                        "elevation": elevation,
+                        "timezone": timezone,
+                    },
+                    "weather": {
+                        "temperature_c": round(temp_c, 1),
+                        "humidity_percent": humidity,
+                        "rainfall_mm": round(rainfall, 1),
+                        "wind_kmh": round(wind_kmh, 1),
+                        "condition": condition,
+                        "weather_code": code,
+                        "surface_pressure_hpa": round(surface_pressure, 1) if surface_pressure else None,
+                        "cloud_cover_percent": cloud_cover,
+                    },
+                    "source": "open_meteo_live",
+                }
+                _CURRENT_WEATHER_CACHE[cache_key] = (now, result)
+                return result
     except Exception as exc:
-        print(f"[Open-Meteo Current Weather] Fetch failed ({exc}); falling back gracefully.")
-        # Stale cache fallback if available
+        print(f"[Open-Meteo Current Weather] Fetch failed ({exc}); checking genuine cache.")
+        # Return stale genuine cached observation if available
         if cache_key in _CURRENT_WEATHER_CACHE:
             return _CURRENT_WEATHER_CACHE[cache_key][1]
 
-        # Agro-climatic seasonal baseline fallback
-        baseline = generate_agro_seasonal_baseline(latitude, longitude)
-        b_sum = baseline["weather_summary"]
-        temp_c = b_sum["temperature_c"]
-        humidity = b_sum["humidity_percent"]
-        rainfall = b_sum["rainfall_mm"]
-        wind_kmh = b_sum["wind_kmh"]
-        condition = b_sum["condition"]
-
-    result = {
+    # No genuine weather data available; do NOT synthesize synthetic values
+    return {
         "location": {
             "city": city,
             "state": state,
             "country": country,
             "latitude": round(latitude, 5),
             "longitude": round(longitude, 5),
-            "elevation": elevation,
-            "timezone": timezone,
+            "elevation": elevation_hint,
+            "timezone": timezone_hint or "Asia/Kolkata",
         },
-        "weather": {
-            "temperature_c": round(temp_c, 1),
-            "humidity_percent": humidity,
-            "rainfall_mm": round(rainfall, 1),
-            "wind_kmh": round(wind_kmh, 1),
-            "condition": condition,
-            "weather_code": code,
-            "surface_pressure_hpa": round(surface_pressure, 1) if surface_pressure else None,
-            "cloud_cover_percent": cloud_cover,
-        },
-        "source": "open_meteo_live" if success else "agro_seasonal_baseline",
+        "weather": None,
+        "source": "open_meteo_unavailable",
     }
-    _CURRENT_WEATHER_CACHE[cache_key] = (now, result)
-    return result
 
 
 def fetch_real_past_weather_sequence(
     latitude: float,
     longitude: float,
     capture_date: str | date | None = None,
-) -> dict:
+) -> dict | None:
     """
     Retrieve authentic 7-day past meteorological observations from Open-Meteo.
     - If capture_date is specified and older than 5 days, queries Open-Meteo Historical Archive API.
@@ -614,8 +518,11 @@ def fetch_real_past_weather_sequence(
     Extracts the 11 standardized features per day matching the multimodal training schema:
       0: temp_max, 1: temp_min, 2: temp_mean, 3: rh_max, 4: rh_mean, 5: precip_sum,
       6: dewpoint_mean, 7: wind_max, 8: soil_temp (0.0), 9: month_sin, 10: month_cos.
-    Includes in-memory TTL caching and graceful seasonal agro-climatic baseline fallback
-    on HTTP 429 rate limits or network issues to ensure prediction never fails with 502.
+
+    Strict Data Provenance Requirement:
+      Synthetic weather curve generation is strictly prohibited. If Open-Meteo is unavailable
+      (e.g., HTTP 429) and no genuine cached sequence exists, returns None so inference can
+      fall back to image-only computer vision without synthetic distortion.
     """
     today = date.today()
     target_d = None
@@ -636,7 +543,7 @@ def fetch_real_past_weather_sequence(
     cache_key = f"{round(latitude, 2)}_{round(longitude, 2)}_{cache_date_str}"
     now = time.time()
 
-    # Check cache (1 hour for recent, 24 hours for archive)
+    # Check genuine cache (1 hour for recent, 24 hours for archive)
     if cache_key in _PAST_WEATHER_CACHE:
         cached_ts, cached_payload = _PAST_WEATHER_CACHE[cache_key]
         ttl = 86400 if is_archive else 3600
@@ -668,21 +575,18 @@ def fetch_real_past_weather_sequence(
             if resp.status == 200:
                 raw = json.loads(resp.read().decode("utf-8"))
     except Exception as exc:
-        print(f"[Open-Meteo Past Weather] Retrieval failed ({exc}); falling back gracefully.")
+        print(f"[Open-Meteo Past Weather] Retrieval failed ({exc}).")
 
     daily = raw.get("daily", {}) if raw else {}
     times = daily.get("time", [])
 
     if not raw or len(times) < 7:
-        # Check stale cache first
+        # Check stale genuine cache first
         if cache_key in _PAST_WEATHER_CACHE:
             return _PAST_WEATHER_CACHE[cache_key][1]
 
-        # Synthesize seasonal agro-climatic baseline
-        fallback = generate_agro_seasonal_baseline(latitude, longitude, target_d=target_d or today)
-        fallback["is_archive"] = is_archive
-        _PAST_WEATHER_CACHE[cache_key] = (now, fallback)
-        return fallback
+        # STRICT PROVENANCE: Do not generate synthetic curves. Return None.
+        return None
 
     # Take the 7 incubation days preceding / ending on diagnosis date
     indices = range(len(times) - 7, len(times))
@@ -744,6 +648,8 @@ def fetch_real_past_weather_sequence(
             "condition": cond,
         },
     }
+    _PAST_WEATHER_CACHE[cache_key] = (now, result)
+    return result
     _PAST_WEATHER_CACHE[cache_key] = (now, result)
     return result
 
@@ -1073,23 +979,42 @@ async def predict_disease(
 
         # Fetch authentic 7-day past observations sequence
         past_wx = fetch_real_past_weather_sequence(lat, lon, capture_date=capture_date)
-        weather_features_7x11 = past_wx["features_7x11"]
-        observation_dates = past_wx["dates"]
-        is_historical_archive = past_wx["is_archive"]
-
-        # Fetch location metadata and current conditions
         curr_payload = weather_from_coordinates(lat, lon, city_hint=city_hint, state_hint=state_hint, country_hint=country_hint)
-        loc_dict = curr_payload["location"]
-        weather_dict = curr_payload["weather"]
-        weather_dict["past_7day_rainfall_mm"] = past_wx["weather_summary"]["rainfall_mm"]
+
+        if past_wx is not None:
+            weather_features_7x11 = past_wx["features_7x11"]
+            observation_dates = past_wx["dates"]
+            is_historical_archive = past_wx["is_archive"]
+        else:
+            weather_features_7x11 = None
+            observation_dates = None
+            is_historical_archive = False
+
+        if curr_payload and curr_payload.get("weather"):
+            loc_dict = curr_payload["location"]
+            weather_dict = curr_payload["weather"]
+            if past_wx and "weather_summary" in past_wx:
+                weather_dict["past_7day_rainfall_mm"] = past_wx["weather_summary"]["rainfall_mm"]
+            source = curr_payload.get("source", "open_meteo_live")
+        else:
+            loc_dict = (curr_payload.get("location") if curr_payload else None) or {
+                "city": city_hint or "Detected Farm Location",
+                "state": state_hint or "Agricultural Area",
+                "country": country_hint or "India",
+                "latitude": round(lat, 5),
+                "longitude": round(lon, 5),
+            }
+            weather_dict = None
+            source = "open_meteo_unavailable"
 
         weather_payload = {
             "location": loc_dict,
             "weather": weather_dict,
-            "source": past_wx.get("source") or ("open_meteo_historical_archive" if is_historical_archive else "open_meteo_live"),
+            "source": source,
             "observation_dates": observation_dates,
             "is_manual_profile": False,
             "is_historical_archive": is_historical_archive,
+            "note": "Genuine meteorological observations retrieved from Open-Meteo." if weather_features_7x11 is not None else "Genuine meteorological data unavailable. Synthetic data generation is strictly disabled. Diagnostic completed via pure vision model.",
         }
     elif temperature is not None or humidity is not None or rainfall is not None or wind_speed is not None:
         # 3. Manual farmer telemetry
@@ -1122,10 +1047,6 @@ async def predict_disease(
         # Ensures diagnosis never aborts with 400 Bad Request when browser GPS is blocked/offline
         default_lat, default_lon = 28.6139, 77.2090
         past_wx = fetch_real_past_weather_sequence(default_lat, default_lon, capture_date=capture_date)
-        weather_features_7x11 = past_wx["features_7x11"]
-        observation_dates = past_wx["dates"]
-        is_historical_archive = past_wx["is_archive"]
-
         curr_payload = weather_from_coordinates(
             default_lat,
             default_lon,
@@ -1133,17 +1054,40 @@ async def predict_disease(
             state_hint="Delhi NCR",
             country_hint="India",
         )
-        loc_dict = curr_payload["location"]
-        weather_dict = curr_payload["weather"]
-        weather_dict["past_7day_rainfall_mm"] = past_wx["weather_summary"]["rainfall_mm"]
+        if past_wx is not None:
+            weather_features_7x11 = past_wx["features_7x11"]
+            observation_dates = past_wx["dates"]
+            is_historical_archive = past_wx["is_archive"]
+        else:
+            weather_features_7x11 = None
+            observation_dates = None
+            is_historical_archive = False
+
+        if curr_payload and curr_payload.get("weather"):
+            loc_dict = curr_payload["location"]
+            weather_dict = curr_payload["weather"]
+            if past_wx and "weather_summary" in past_wx:
+                weather_dict["past_7day_rainfall_mm"] = past_wx["weather_summary"]["rainfall_mm"]
+            source = curr_payload.get("source", "default_agricultural_zone")
+        else:
+            loc_dict = {
+                "city": "Central Agricultural Zone",
+                "state": "Delhi NCR",
+                "country": "India",
+                "latitude": default_lat,
+                "longitude": default_lon,
+            }
+            weather_dict = None
+            source = "open_meteo_unavailable"
 
         weather_payload = {
             "location": loc_dict,
             "weather": weather_dict,
-            "source": "default_agricultural_zone",
+            "source": source,
             "observation_dates": observation_dates,
             "is_manual_profile": False,
             "is_historical_archive": is_historical_archive,
+            "note": "Genuine meteorological observations retrieved from Open-Meteo." if weather_features_7x11 is not None else "Genuine meteorological data unavailable. Synthetic data generation is strictly disabled. Diagnostic completed via pure vision model.",
         }
 
     overlay_original = None
@@ -1177,7 +1121,7 @@ async def predict_disease(
             affected_area_percent = float(mm_result["affected_area_pct"])
             weather_importance_days = mm_result.get("daily_attention")
             gradcam_enabled = True
-            if mm_result.get("model_mode") == "image_only_fallback":
+            if mm_result.get("model_mode") == "image_only_fallback" or weather_features_7x11 is None:
                 use_multimodal = False
         except Exception as exc:
             print(f"[Predict] Multimodal model failed: {exc}. Trying Keras fallback.")
@@ -1239,7 +1183,7 @@ async def predict_disease(
     highlighted_image = image_to_data_url(overlay_highlight) if overlay_highlight is not None else None
     gradcam_heatmap = image_to_data_url(raw_heatmap) if raw_heatmap is not None else None
 
-    risk_level, risk_reason = get_weather_risk(weather_payload["weather"], crop=crop_key)
+    risk_level, risk_reason = get_weather_risk(weather_payload.get("weather"), crop=crop_key)
 
     if use_multimodal:
         if mm_result.get("shap_explanation"):
@@ -1250,11 +1194,14 @@ async def predict_disease(
             weather_importance = {}
             shap_details = None
     else:
-        # Phase 6: Image-only fallback must disable environmental SHAP and not claim multimodal fusion
+        # Strict Provenance: Image-only fallback disables environmental SHAP and never fabricates synthetic data
         weather_importance = None
         shap_details = None
         weather_payload["multimodal_fusion"] = False
-        weather_payload["note"] = "Image-only inference used; environmental SHAP is disabled."
+        weather_payload["note"] = (
+            "Image-only inference used; environmental SHAP is disabled. "
+            "Zero synthetic weather data was generated or used."
+        )
 
     summary = (
         f"Detected {normalized_label} in {crop_key} with {round(confidence * 100, 2)}% confidence. "

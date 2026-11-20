@@ -261,13 +261,12 @@ def forecast_7day_disease_progression(
                 "wind_kmh": round(float(w_max), 1),
             }
         else:
-            # Deterministic meteorological trend without pseudo-random synthetic noise
-            attenuation = 1.0 - (i * 0.04)
+            # Constant telemetry persistence without synthetic curve generation
             day_wx = {
-                "temperature_c": round(t0 * attenuation + (1.0 - attenuation) * 26.0, 1),
-                "humidity_percent": int(round(h0 * attenuation + (1.0 - attenuation) * 65.0)),
-                "rainfall_mm": round(max(0.0, r0 * max(0.2, 1.0 - i * 0.18)), 1),
-                "wind_kmh": round(w0 * attenuation + (1.0 - attenuation) * 11.0, 1),
+                "temperature_c": round(t0, 1),
+                "humidity_percent": int(round(h0)),
+                "rainfall_mm": round(r0, 1),
+                "wind_kmh": round(w0, 1),
             }
 
         res = predict_disease_risk(day_wx, crop=crop)

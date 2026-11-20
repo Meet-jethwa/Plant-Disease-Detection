@@ -203,7 +203,7 @@ def test_weather_profiles_filtered_by_crop(client: TestClient):
 
 
 def test_open_meteo_429_weather_fallback(monkeypatch, client: TestClient):
-    """Verify system falls back gracefully to agro-climatic baseline on Open-Meteo 429 rate limit."""
+    """Verify system strictly disables synthetic generation when Open-Meteo returns 429."""
     import urllib.request
     from urllib.error import HTTPError
 
@@ -218,21 +218,18 @@ def test_open_meteo_429_weather_fallback(monkeypatch, client: TestClient):
     _CURRENT_WEATHER_CACHE.clear()
     _PAST_WEATHER_CACHE.clear()
 
-    # Weather from coordinates must not raise 502
+    # Weather from coordinates must return None weather without synthesizing fake data
     res = weather_from_coordinates(28.6139, 77.2090)
-    assert res["weather"]["temperature_c"] > 0
-    assert res["weather"]["humidity_percent"] > 0
-    assert res["source"] == "agro_seasonal_baseline"
+    assert res["weather"] is None
+    assert res["source"] == "open_meteo_unavailable"
 
-    # Past weather sequence must return 7x11 array and not raise 502
+    # Past weather sequence must return None without generating synthetic curves
     past = fetch_real_past_weather_sequence(28.6139, 77.2090)
-    assert len(past["features_7x11"]) == 7
-    assert len(past["features_7x11"][0]) == 11
-    assert past["source"] == "agro_seasonal_baseline"
+    assert past is None
 
 
 def test_open_meteo_429_predict_endpoint_success(monkeypatch, client: TestClient, sample_leaf_bytes: bytes):
-    """Verify POST /api/predict succeeds with 200 OK when Open-Meteo is rate-limited (HTTP 429)."""
+    """Verify POST /api/predict succeeds with 200 OK via image-only fallback without synthetic weather."""
     import urllib.request
     from urllib.error import HTTPError
 
@@ -256,6 +253,9 @@ def test_open_meteo_429_predict_endpoint_success(monkeypatch, client: TestClient
     json_data = res.json()
     assert json_data["crop"] == "rice"
     assert "predicted_class" in json_data
+    assert json_data["model_mode"] == "image_only_fallback"
+    assert json_data["multimodal_fusion"] is False
     assert "weather_context" in json_data
-    assert json_data["weather_context"]["source"] == "agro_seasonal_baseline"
+    assert json_data["weather_context"]["weather"] is None
+    assert "zero synthetic" in json_data["weather_context"]["note"].lower()
 
