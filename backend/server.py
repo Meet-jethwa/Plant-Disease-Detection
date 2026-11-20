@@ -79,6 +79,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def clean_path_middleware(request, call_next):
+    """Normalize accidental double or redundant slashes in incoming request paths."""
+    if "//" in request.scope.get("path", ""):
+        request.scope["path"] = re.sub(r"/+", "/", request.scope["path"])
+    return await call_next(request)
+
 # ── In-memory session store ───────────────────────────────────────────────────
 # Maps diagnosis_id → full diagnosis context + conversation history
 _diagnosis_sessions: dict[str, dict] = {}
