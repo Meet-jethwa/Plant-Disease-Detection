@@ -9,10 +9,8 @@ import {
 } from 'lucide-react'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { useLang } from '../contexts/LanguageContext'
-import { searchLocations, fetchLocationWeather, type LocationSearchResult } from '../services/api'
+import { searchLocations, fetchLocationWeather, API_BASE, type LocationSearchResult } from '../services/api'
 import type { DiseaseWeatherProfile, LocationContextData } from '../types'
-
-const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
 
 interface SettingRowProps {
   icon: React.ElementType

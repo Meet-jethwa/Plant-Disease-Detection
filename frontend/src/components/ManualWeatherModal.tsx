@@ -10,7 +10,7 @@ interface ManualWeatherModalProps {
   onResetToLive: () => void
 }
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000'
+import { API_BASE } from '../services/api'
 
 export function ManualWeatherModal({
   isOpen,
