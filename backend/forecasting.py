@@ -11,6 +11,8 @@ from __future__ import annotations
 import itertools
 import json
 import math
+import os
+import time
 from typing import Any, Dict, List
 import urllib.request
 
@@ -180,6 +182,9 @@ def compute_rule_based_risk_breakdown(weather_data: dict, crop: str = "rice") ->
 compute_shap_feature_importance = compute_rule_based_risk_breakdown
 
 
+_FORECAST_CACHE: dict[str, tuple[float, dict]] = {}
+
+
 def forecast_7day_disease_progression(
     current_weather: dict,
     crop: str = "rice",
@@ -189,6 +194,7 @@ def forecast_7day_disease_progression(
     """
     Project 7-day disease risk progression using real multi-day Open-Meteo forecasts
     or deterministic meteorological persistence curves (no pseudo-random synthetic data).
+    Includes in-memory TTL caching to avoid rate limit throttling.
     """
     days_labels = ["Today", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]
     lat = latitude if latitude is not None else current_weather.get("latitude")
@@ -196,20 +202,36 @@ def forecast_7day_disease_progression(
 
     real_daily = None
     if lat is not None and lon is not None:
-        try:
-            url = (
-                f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
-                "&daily=temperature_2m_max,temperature_2m_min,relative_humidity_2m_mean,precipitation_sum,wind_speed_10m_max"
-                "&timezone=auto"
-            )
-            req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
-            with urllib.request.urlopen(req, timeout=2.5) as resp:
-                if resp.status == 200:
-                    data = json.loads(resp.read().decode("utf-8")).get("daily", {})
-                    if "temperature_2m_max" in data and len(data["temperature_2m_max"]) >= 7:
-                        real_daily = data
-        except Exception:
-            real_daily = None
+        cache_key = f"{round(lat, 2)}_{round(lon, 2)}"
+        now = time.time()
+        if cache_key in _FORECAST_CACHE:
+            cached_ts, cached_data = _FORECAST_CACHE[cache_key]
+            if now - cached_ts < 1800:  # 30 minutes
+                real_daily = cached_data
+
+        if real_daily is None:
+            try:
+                api_key = os.getenv("OPEN_METEO_API_KEY", "").strip()
+                url = (
+                    f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+                    "&daily=temperature_2m_max,temperature_2m_min,relative_humidity_2m_mean,precipitation_sum,wind_speed_10m_max"
+                    "&timezone=auto"
+                )
+                if api_key:
+                    url += f"&apikey={api_key}"
+                req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+                with urllib.request.urlopen(req, timeout=2.5) as resp:
+                    if resp.status == 200:
+                        data = json.loads(resp.read().decode("utf-8")).get("daily", {})
+                        if "temperature_2m_max" in data and len(data["temperature_2m_max"]) >= 7:
+                            real_daily = data
+                            _FORECAST_CACHE[cache_key] = (now, data)
+            except Exception:
+                # Fallback to stale cache if available
+                if cache_key in _FORECAST_CACHE:
+                    real_daily = _FORECAST_CACHE[cache_key][1]
+                else:
+                    real_daily = None
 
     t0 = float(current_weather.get("temperature_c", 28.0))
     h0 = float(current_weather.get("humidity_percent", 70.0))

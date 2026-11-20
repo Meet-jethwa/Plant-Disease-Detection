@@ -201,3 +201,61 @@ def test_weather_profiles_filtered_by_crop(client: TestClient):
     for p in profiles:
         assert p["crop"].lower() == "wheat"
 
+
+def test_open_meteo_429_weather_fallback(monkeypatch, client: TestClient):
+    """Verify system falls back gracefully to agro-climatic baseline on Open-Meteo 429 rate limit."""
+    import urllib.request
+    from urllib.error import HTTPError
+
+    def mock_urlopen_429(*args, **kwargs):
+        raise HTTPError("https://api.open-meteo.com/...", 429, "Too Many Requests", {}, None)
+
+    monkeypatch.setattr(urllib.request, "urlopen", mock_urlopen_429)
+
+    from backend.server import weather_from_coordinates, fetch_real_past_weather_sequence
+    # Clear caches to simulate fresh rate-limited environment
+    from backend.server import _CURRENT_WEATHER_CACHE, _PAST_WEATHER_CACHE
+    _CURRENT_WEATHER_CACHE.clear()
+    _PAST_WEATHER_CACHE.clear()
+
+    # Weather from coordinates must not raise 502
+    res = weather_from_coordinates(28.6139, 77.2090)
+    assert res["weather"]["temperature_c"] > 0
+    assert res["weather"]["humidity_percent"] > 0
+    assert res["source"] == "agro_seasonal_baseline"
+
+    # Past weather sequence must return 7x11 array and not raise 502
+    past = fetch_real_past_weather_sequence(28.6139, 77.2090)
+    assert len(past["features_7x11"]) == 7
+    assert len(past["features_7x11"][0]) == 11
+    assert past["source"] == "agro_seasonal_baseline"
+
+
+def test_open_meteo_429_predict_endpoint_success(monkeypatch, client: TestClient, sample_leaf_bytes: bytes):
+    """Verify POST /api/predict succeeds with 200 OK when Open-Meteo is rate-limited (HTTP 429)."""
+    import urllib.request
+    from urllib.error import HTTPError
+
+    def mock_urlopen_429(*args, **kwargs):
+        raise HTTPError("https://api.open-meteo.com/...", 429, "Too Many Requests", {}, None)
+
+    monkeypatch.setattr(urllib.request, "urlopen", mock_urlopen_429)
+
+    from backend.server import _CURRENT_WEATHER_CACHE, _PAST_WEATHER_CACHE
+    _CURRENT_WEATHER_CACHE.clear()
+    _PAST_WEATHER_CACHE.clear()
+
+    files = {"file": ("leaf.jpg", sample_leaf_bytes, "image/jpeg")}
+    data = {
+        "crop": "rice",
+        "latitude": 28.6139,
+        "longitude": 77.2090,
+    }
+    res = client.post("/api/predict", files=files, data=data)
+    assert res.status_code == 200
+    json_data = res.json()
+    assert json_data["crop"] == "rice"
+    assert "predicted_class" in json_data
+    assert "weather_context" in json_data
+    assert json_data["weather_context"]["source"] == "agro_seasonal_baseline"
+

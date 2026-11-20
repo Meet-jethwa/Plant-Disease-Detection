@@ -4,8 +4,11 @@ import base64
 from datetime import date, datetime, timedelta
 import io
 import json
+import math
 import os
 import re
+import time
+import urllib.parse
 import urllib.request
 import uuid
 from functools import lru_cache
@@ -278,16 +281,165 @@ def fetch_real_location_info(latitude: float, longitude: float) -> tuple[str, st
     return "Detected Location", "User Area", "India"
 
 
+# ── Open-Meteo Integration with Caching & Agro-Climatic Fallbacks ───────────
+OPEN_METEO_API_KEY = os.getenv("OPEN_METEO_API_KEY", "").strip()
+
+
+def _append_api_key(url: str) -> str:
+    """Append optional Open-Meteo API key if configured in environment."""
+    if OPEN_METEO_API_KEY:
+        sep = "&" if "?" in url else "?"
+        return f"{url}{sep}apikey={OPEN_METEO_API_KEY}"
+    return url
+
+
+# In-memory TTL caches: key -> (timestamp, data)
+# Drastically slashes outbound requests and avoids shared datacenter IP rate limits (HTTP 429)
+_GEOCODE_CACHE: dict[str, tuple[float, dict]] = {}
+_CURRENT_WEATHER_CACHE: dict[str, tuple[float, dict]] = {}
+_PAST_WEATHER_CACHE: dict[str, tuple[float, dict]] = {}
+
+# Well-known agricultural and major city hubs for instant offline resolution
+_KNOWN_GEO_LOCATIONS: dict[str, dict] = {
+    "delhi": {"city": "New Delhi", "state": "Delhi", "country": "India", "latitude": 28.6139, "longitude": 77.2090, "elevation": 216.0, "timezone": "Asia/Kolkata"},
+    "new delhi": {"city": "New Delhi", "state": "Delhi", "country": "India", "latitude": 28.6139, "longitude": 77.2090, "elevation": 216.0, "timezone": "Asia/Kolkata"},
+    "mumbai": {"city": "Mumbai", "state": "Maharashtra", "country": "India", "latitude": 19.0760, "longitude": 72.8777, "elevation": 14.0, "timezone": "Asia/Kolkata"},
+    "pune": {"city": "Pune", "state": "Maharashtra", "country": "India", "latitude": 18.5204, "longitude": 73.8567, "elevation": 560.0, "timezone": "Asia/Kolkata"},
+    "nagpur": {"city": "Nagpur", "state": "Maharashtra", "country": "India", "latitude": 21.1458, "longitude": 79.0882, "elevation": 310.0, "timezone": "Asia/Kolkata"},
+    "ahmedabad": {"city": "Ahmedabad", "state": "Gujarat", "country": "India", "latitude": 23.0225, "longitude": 72.5714, "elevation": 53.0, "timezone": "Asia/Kolkata"},
+    "surat": {"city": "Surat", "state": "Gujarat", "country": "India", "latitude": 21.1702, "longitude": 72.8311, "elevation": 13.0, "timezone": "Asia/Kolkata"},
+    "rajkot": {"city": "Rajkot", "state": "Gujarat", "country": "India", "latitude": 22.3039, "longitude": 70.8022, "elevation": 128.0, "timezone": "Asia/Kolkata"},
+    "bengaluru": {"city": "Bengaluru", "state": "Karnataka", "country": "India", "latitude": 12.9716, "longitude": 77.5946, "elevation": 920.0, "timezone": "Asia/Kolkata"},
+    "bangalore": {"city": "Bengaluru", "state": "Karnataka", "country": "India", "latitude": 12.9716, "longitude": 77.5946, "elevation": 920.0, "timezone": "Asia/Kolkata"},
+    "hyderabad": {"city": "Hyderabad", "state": "Telangana", "country": "India", "latitude": 17.3850, "longitude": 78.4867, "elevation": 542.0, "timezone": "Asia/Kolkata"},
+    "chennai": {"city": "Chennai", "state": "Tamil Nadu", "country": "India", "latitude": 13.0827, "longitude": 80.2707, "elevation": 6.0, "timezone": "Asia/Kolkata"},
+    "kolkata": {"city": "Kolkata", "state": "West Bengal", "country": "India", "latitude": 22.5726, "longitude": 88.3639, "elevation": 9.0, "timezone": "Asia/Kolkata"},
+    "lucknow": {"city": "Lucknow", "state": "Uttar Pradesh", "country": "India", "latitude": 26.8467, "longitude": 80.9462, "elevation": 123.0, "timezone": "Asia/Kolkata"},
+    "kanpur": {"city": "Kanpur", "state": "Uttar Pradesh", "country": "India", "latitude": 26.4499, "longitude": 80.3319, "elevation": 126.0, "timezone": "Asia/Kolkata"},
+    "ludhiana": {"city": "Ludhiana", "state": "Punjab", "country": "India", "latitude": 30.9010, "longitude": 75.8573, "elevation": 244.0, "timezone": "Asia/Kolkata"},
+    "chandigarh": {"city": "Chandigarh", "state": "Punjab", "country": "India", "latitude": 30.7333, "longitude": 76.7794, "elevation": 321.0, "timezone": "Asia/Kolkata"},
+    "jaipur": {"city": "Jaipur", "state": "Rajasthan", "country": "India", "latitude": 26.9124, "longitude": 75.7873, "elevation": 431.0, "timezone": "Asia/Kolkata"},
+    "bhopal": {"city": "Bhopal", "state": "Madhya Pradesh", "country": "India", "latitude": 23.2599, "longitude": 77.4126, "elevation": 527.0, "timezone": "Asia/Kolkata"},
+    "indore": {"city": "Indore", "state": "Madhya Pradesh", "country": "India", "latitude": 22.7196, "longitude": 75.8577, "elevation": 553.0, "timezone": "Asia/Kolkata"},
+    "patna": {"city": "Patna", "state": "Bihar", "country": "India", "latitude": 25.5941, "longitude": 85.1376, "elevation": 53.0, "timezone": "Asia/Kolkata"},
+}
+
+
+def generate_agro_seasonal_baseline(
+    latitude: float,
+    longitude: float,
+    target_d: date | None = None,
+) -> dict:
+    """
+    Synthesize an authentic agro-climatic 7-day meteorological sequence based on
+    latitude and seasonal calendar normals. Used as a resilient safety net when
+    external meteorological APIs (Open-Meteo) encounter rate limits (HTTP 429)
+    or network partitions, guaranteeing diagnosis never fails with HTTP 502.
+    """
+    d_end = target_d or date.today()
+    month = d_end.month
+
+    # Seasonal baseline for sub-tropical agricultural zones (8° - 35° N)
+    if month in (12, 1, 2):
+        # Winter / Cold dry season
+        base_tmax, base_tmin, base_rh, base_rain, base_wind = 26.0, 13.5, 62.0, 0.0, 8.5
+    elif month in (3, 4, 5):
+        # Summer / Hot dry pre-monsoon
+        base_tmax, base_tmin, base_rh, base_rain, base_wind = 37.5, 23.5, 48.0, 0.5, 12.0
+    elif month in (6, 7, 8, 9):
+        # Monsoon / Kharif wet season
+        base_tmax, base_tmin, base_rh, base_rain, base_wind = 30.5, 24.0, 84.0, 12.0, 13.5
+    else:
+        # Months 10, 11: Post-Monsoon / Autumn / Rabi sowing
+        base_tmax, base_tmin, base_rh, base_rain, base_wind = 29.0, 18.0, 66.0, 1.0, 9.0
+
+    # Latitude adjustment for non-tropical or temperate latitudes
+    lat_adj = max(-15.0, min(10.0, (25.0 - abs(latitude)) * 0.35))
+    base_tmax = round(base_tmax + lat_adj, 1)
+    base_tmin = round(base_tmin + lat_adj, 1)
+
+    features_7x11 = []
+    dates_list = []
+    for idx in range(7):
+        day_date = d_end - timedelta(days=(6 - idx))
+        sin_m, cos_m = get_season_encoding(day_date)
+        var_factor = math.sin((idx / 6.0) * math.pi)
+        t_max = round(base_tmax + (idx - 3) * 0.35 + var_factor * 0.5, 1)
+        t_min = round(base_tmin + (idx - 3) * 0.25, 1)
+        t_mean = round((t_max + t_min) / 2.0, 1)
+        rh_mean = round(min(98.0, max(25.0, base_rh + (idx - 3) * 1.2)), 1)
+        rh_max = round(min(100.0, rh_mean + 12.0), 1)
+        precip = round(max(0.0, base_rain * (0.8 + 0.1 * idx)), 1)
+        dewpoint = round(t_mean - ((100.0 - rh_mean) / 5.0), 1)
+        wind_max = round(max(2.0, base_wind + (idx % 3) * 0.6), 1)
+        soil_temp = 0.0
+
+        features_7x11.append([
+            t_max, t_min, t_mean, rh_max, rh_mean, precip,
+            dewpoint, wind_max, soil_temp, sin_m, cos_m
+        ])
+        dates_list.append(day_date.isoformat())
+
+    temps = [row[2] for row in features_7x11]
+    rhs = [row[4] for row in features_7x11]
+    rains = [row[5] for row in features_7x11]
+    winds = [row[7] for row in features_7x11]
+
+    avg_temp = round(sum(temps) / len(temps), 1)
+    avg_rh = int(round(sum(rhs) / len(rhs)))
+    total_rain = round(sum(rains), 1)
+    avg_wind = round(sum(winds) / len(winds), 1)
+
+    if total_rain >= 15.0:
+        cond = "Rainy / Prolonged Wetness"
+    elif avg_rh >= 80:
+        cond = "Humid Canopy Conditions"
+    elif avg_temp >= 33.0:
+        cond = "Hot & Dry"
+    else:
+        cond = "Moderate Foliar Environment"
+
+    return {
+        "features_7x11": features_7x11,
+        "dates": dates_list,
+        "is_archive": False,
+        "source": "agro_seasonal_baseline",
+        "weather_summary": {
+            "temperature_c": avg_temp,
+            "humidity_percent": avg_rh,
+            "rainfall_mm": total_rain,
+            "wind_kmh": avg_wind,
+            "condition": cond,
+        },
+    }
+
+
 def geocode_location_open_meteo(query: str) -> dict | None:
     """
-    Search and resolve city/region coordinates using Open-Meteo Geocoding API.
-    Returns dictionary with city, state, country, latitude, longitude, elevation, timezone.
+    Search and resolve city/region coordinates using Open-Meteo Geocoding API with
+    in-memory caching and fallback to known agricultural hub coordinates.
     """
     if not query or not query.strip():
         return None
     cleaned = query.strip()
+    cache_key = cleaned.lower()
+
+    # Check cache (24 hours TTL)
+    if cache_key in _GEOCODE_CACHE:
+        cached_ts, cached_data = _GEOCODE_CACHE[cache_key]
+        if time.time() - cached_ts < 86400:
+            return cached_data
+
+    # Check known agricultural locations first for instant zero-latency match
+    if cache_key in _KNOWN_GEO_LOCATIONS:
+        match = _KNOWN_GEO_LOCATIONS[cache_key]
+        _GEOCODE_CACHE[cache_key] = (time.time(), match)
+        return match
+
     try:
-        url = f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(cleaned)}&count=1&language=en&format=json"
+        url = _append_api_key(
+            f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(cleaned)}&count=1&language=en&format=json"
+        )
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
         with urllib.request.urlopen(req, timeout=3.0) as resp:
             if resp.status == 200:
@@ -295,7 +447,7 @@ def geocode_location_open_meteo(query: str) -> dict | None:
                 results = data.get("results")
                 if results and len(results) > 0:
                     top = results[0]
-                    return {
+                    res = {
                         "city": top.get("name") or cleaned,
                         "state": top.get("admin1") or top.get("admin2") or "Agricultural Area",
                         "country": top.get("country") or "India",
@@ -304,8 +456,17 @@ def geocode_location_open_meteo(query: str) -> dict | None:
                         "elevation": top.get("elevation"),
                         "timezone": top.get("timezone", "Asia/Kolkata"),
                     }
+                    _GEOCODE_CACHE[cache_key] = (time.time(), res)
+                    return res
     except Exception as exc:
         print(f"[Open-Meteo Geocoding] Failed for '{cleaned}': {exc}")
+
+    # Fallback: check if any known location is a substring
+    for known_key, known_val in _KNOWN_GEO_LOCATIONS.items():
+        if known_key in cache_key or cache_key in known_key:
+            _GEOCODE_CACHE[cache_key] = (time.time(), known_val)
+            return known_val
+
     return None
 
 
@@ -325,6 +486,21 @@ def weather_from_coordinates(
     else:
         city, state, country = fetch_real_location_info(latitude, longitude)
 
+    cache_key = f"{round(latitude, 2)}_{round(longitude, 2)}"
+    now = time.time()
+    if cache_key in _CURRENT_WEATHER_CACHE:
+        cached_ts, cached_payload = _CURRENT_WEATHER_CACHE[cache_key]
+        if now - cached_ts < 1800:  # 30 minutes TTL
+            result = dict(cached_payload)
+            if city_hint:
+                result["location"] = {
+                    **result["location"],
+                    "city": city,
+                    "state": state,
+                    "country": country,
+                }
+            return result
+
     # Defaults
     temp_c = 28.0
     humidity = 70
@@ -336,9 +512,10 @@ def weather_from_coordinates(
     cloud_cover = None
     elevation = elevation_hint
     timezone = timezone_hint or "Asia/Kolkata"
+    success = False
 
     try:
-        url = (
+        url = _append_api_key(
             f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}"
             "&current=temperature_2m,relative_humidity_2m,rain,wind_speed_10m,weather_code,surface_pressure,cloud_cover"
             "&timezone=auto"
@@ -383,13 +560,23 @@ def weather_from_coordinates(
                     condition = "Hot & Sunny"
                 else:
                     condition = "Partly Cloudy"
+                success = True
     except Exception as exc:
-        raise HTTPException(
-            status_code=502,
-            detail=f"Open-Meteo meteorological service unavailable ({exc}). Real weather observations could not be retrieved."
-        )
+        print(f"[Open-Meteo Current Weather] Fetch failed ({exc}); falling back gracefully.")
+        # Stale cache fallback if available
+        if cache_key in _CURRENT_WEATHER_CACHE:
+            return _CURRENT_WEATHER_CACHE[cache_key][1]
 
-    return {
+        # Agro-climatic seasonal baseline fallback
+        baseline = generate_agro_seasonal_baseline(latitude, longitude)
+        b_sum = baseline["weather_summary"]
+        temp_c = b_sum["temperature_c"]
+        humidity = b_sum["humidity_percent"]
+        rainfall = b_sum["rainfall_mm"]
+        wind_kmh = b_sum["wind_kmh"]
+        condition = b_sum["condition"]
+
+    result = {
         "location": {
             "city": city,
             "state": state,
@@ -409,7 +596,10 @@ def weather_from_coordinates(
             "surface_pressure_hpa": round(surface_pressure, 1) if surface_pressure else None,
             "cloud_cover_percent": cloud_cover,
         },
+        "source": "open_meteo_live" if success else "agro_seasonal_baseline",
     }
+    _CURRENT_WEATHER_CACHE[cache_key] = (now, result)
+    return result
 
 
 def fetch_real_past_weather_sequence(
@@ -424,11 +614,8 @@ def fetch_real_past_weather_sequence(
     Extracts the 11 standardized features per day matching the multimodal training schema:
       0: temp_max, 1: temp_min, 2: temp_mean, 3: rh_max, 4: rh_mean, 5: precip_sum,
       6: dewpoint_mean, 7: wind_max, 8: soil_temp (0.0), 9: month_sin, 10: month_cos.
-    Returns:
-      features_7x11: list of 7 daily 11-feature vectors
-      dates: list of 7 ISO date strings
-      is_archive: bool
-      weather_summary: dict of aggregated conditions
+    Includes in-memory TTL caching and graceful seasonal agro-climatic baseline fallback
+    on HTTP 429 rate limits or network issues to ensure prediction never fails with 502.
     """
     today = date.today()
     target_d = None
@@ -445,43 +632,57 @@ def fetch_real_past_weather_sequence(
         except Exception:
             target_d = None
 
+    cache_date_str = target_d.isoformat() if target_d else today.isoformat()
+    cache_key = f"{round(latitude, 2)}_{round(longitude, 2)}_{cache_date_str}"
+    now = time.time()
+
+    # Check cache (1 hour for recent, 24 hours for archive)
+    if cache_key in _PAST_WEATHER_CACHE:
+        cached_ts, cached_payload = _PAST_WEATHER_CACHE[cache_key]
+        ttl = 86400 if is_archive else 3600
+        if now - cached_ts < ttl:
+            return cached_payload
+
     if target_d and target_d < (today - timedelta(days=5)):
         is_archive = True
         start_d = target_d - timedelta(days=6)
         end_d = target_d
-        url = (
+        url = _append_api_key(
             f"https://archive-api.open-meteo.com/v1/archive?latitude={latitude}&longitude={longitude}"
             f"&start_date={start_d.isoformat()}&end_date={end_d.isoformat()}"
             "&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,relative_humidity_2m_max,relative_humidity_2m_mean,precipitation_sum,dew_point_2m_mean,wind_speed_10m_max"
             "&timezone=auto"
         )
     else:
-        url = (
+        url = _append_api_key(
             f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}"
             "&past_days=7&forecast_days=1"
             "&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,relative_humidity_2m_max,relative_humidity_2m_mean,precipitation_sum,dew_point_2m_mean,wind_speed_10m_max"
             "&timezone=auto"
         )
 
-    req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
+    raw = None
     try:
+        req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
         with urllib.request.urlopen(req, timeout=4.5) as resp:
-            if resp.status != 200:
-                raise ValueError(f"Open-Meteo returned status {resp.status}")
-            raw = json.loads(resp.read().decode("utf-8"))
+            if resp.status == 200:
+                raw = json.loads(resp.read().decode("utf-8"))
     except Exception as exc:
-        raise HTTPException(
-            status_code=502,
-            detail=f"Open-Meteo historical/past weather retrieval failed ({exc}). Genuine meteorological observations could not be retrieved."
-        )
+        print(f"[Open-Meteo Past Weather] Retrieval failed ({exc}); falling back gracefully.")
 
-    daily = raw.get("daily", {})
+    daily = raw.get("daily", {}) if raw else {}
     times = daily.get("time", [])
-    if len(times) < 7:
-        raise HTTPException(
-            status_code=502,
-            detail=f"Open-Meteo returned insufficient observation days ({len(times)} days, minimum 7 required)."
-        )
+
+    if not raw or len(times) < 7:
+        # Check stale cache first
+        if cache_key in _PAST_WEATHER_CACHE:
+            return _PAST_WEATHER_CACHE[cache_key][1]
+
+        # Synthesize seasonal agro-climatic baseline
+        fallback = generate_agro_seasonal_baseline(latitude, longitude, target_d=target_d or today)
+        fallback["is_archive"] = is_archive
+        _PAST_WEATHER_CACHE[cache_key] = (now, fallback)
+        return fallback
 
     # Take the 7 incubation days preceding / ending on diagnosis date
     indices = range(len(times) - 7, len(times))
@@ -530,10 +731,11 @@ def fetch_real_past_weather_sequence(
     else:
         cond = "Moderate Foliar Environment"
 
-    return {
+    result = {
         "features_7x11": features_7x11,
         "dates": dates_list,
         "is_archive": is_archive,
+        "source": "open_meteo_historical_archive" if is_archive else "open_meteo_live",
         "weather_summary": {
             "temperature_c": avg_temp,
             "humidity_percent": avg_rh,
@@ -542,6 +744,8 @@ def fetch_real_past_weather_sequence(
             "condition": cond,
         },
     }
+    _PAST_WEATHER_CACHE[cache_key] = (now, result)
+    return result
 
 
 # ── Disease Weather Profiles (Project v3 Dataset) ───────────────────────────
@@ -682,12 +886,16 @@ def get_crops():
 @app.get("/api/location/search")
 def search_locations(query: str):
     """
-    Search cities and agricultural regions worldwide via Open-Meteo Geocoding API.
+    Search cities and agricultural regions worldwide via Open-Meteo Geocoding API,
+    with fallback to known agricultural hub coordinates if API is rate-limited.
     """
     if not query or not query.strip():
         return {"results": []}
+    q = query.strip()
     try:
-        url = f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(query.strip())}&count=8&language=en&format=json"
+        url = _append_api_key(
+            f"https://geocoding-api.open-meteo.com/v1/search?name={urllib.parse.quote(q)}&count=8&language=en&format=json"
+        )
         req = urllib.request.Request(url, headers={"User-Agent": "FloraAI/1.0"})
         with urllib.request.urlopen(req, timeout=3.0) as resp:
             if resp.status == 200:
@@ -705,10 +913,27 @@ def search_locations(query: str):
                     }
                     for r in data.get("results", [])
                 ]
-                return {"results": results}
+                if results:
+                    return {"results": results}
     except Exception as exc:
         print(f"[Open-Meteo Geocoding search] Error: {exc}")
-    return {"results": []}
+
+    # Fallback: search known agricultural hubs if external API is rate-limited
+    q_low = q.lower()
+    local_matches = []
+    for k, v in _KNOWN_GEO_LOCATIONS.items():
+        if q_low in k or k in q_low:
+            local_matches.append({
+                "id": abs(hash(k)) % 100000,
+                "name": v["city"],
+                "latitude": v["latitude"],
+                "longitude": v["longitude"],
+                "elevation": v.get("elevation", 100.0),
+                "country": v["country"],
+                "state": v["state"],
+                "timezone": v.get("timezone", "Asia/Kolkata"),
+            })
+    return {"results": local_matches}
 
 
 @app.get("/api/location/fetch")
@@ -861,7 +1086,7 @@ async def predict_disease(
         weather_payload = {
             "location": loc_dict,
             "weather": weather_dict,
-            "source": "open_meteo_historical_archive" if is_historical_archive else "open_meteo_live",
+            "source": past_wx.get("source") or ("open_meteo_historical_archive" if is_historical_archive else "open_meteo_live"),
             "observation_dates": observation_dates,
             "is_manual_profile": False,
             "is_historical_archive": is_historical_archive,
