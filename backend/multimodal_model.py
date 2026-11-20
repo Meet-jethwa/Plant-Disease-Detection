@@ -25,6 +25,9 @@ import torch
 import torch.nn as nn
 from PIL import Image
 
+if not torch.cuda.is_available():
+    torch.set_num_threads(2)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODELS_DIR = BASE_DIR / "models"
 MODEL_PATH = MODELS_DIR / "best_model_multimodal.pth"
@@ -180,6 +183,7 @@ def load_multimodal_model() -> MultimodalClassifier:
     model = MultimodalClassifier(num_classes=len(CLASS_NAMES))
     checkpoint = torch.load(MODEL_PATH, map_location="cpu")
     model.load_state_dict(checkpoint, strict=True)
+    del checkpoint
     model.eval()
     return model
 

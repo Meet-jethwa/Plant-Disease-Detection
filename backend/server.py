@@ -16,7 +16,6 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from PIL import Image
-from tensorflow.keras.models import load_model
 
 from backend.disease_info import (
     compute_weather_feature_importance,
@@ -27,7 +26,6 @@ from backend.forecasting import (
     forecast_7day_disease_progression,
     predict_disease_risk,
 )
-from backend.gradcam import generate_gradcam_overlay
 from backend.gemini_chat import ask_gemini_initial, ask_gemini_chat, detect_intent
 from backend.multimodal_model import (
     CLASS_NAMES,
@@ -199,6 +197,7 @@ def load_crop_model(crop: str):
     if not model_path.exists() or not labels_path.exists():
         raise FileNotFoundError(f"Model files not found for crop '{crop_key}'")
 
+    from tensorflow.keras.models import load_model
     model = load_model(str(model_path), compile=False)
     with open(labels_path, "r", encoding="utf-8") as handle:
         raw_labels = json.load(handle)
@@ -960,6 +959,7 @@ async def predict_disease(
         normalized_label = normalize_class_name(predicted_label)
 
         try:
+            from backend.gradcam import generate_gradcam_overlay
             overlay_original, overlay_highlight, raw_heatmap, affected_area_percent = generate_gradcam_overlay(
                 original_rgb, model, alpha=0.55
             )
