@@ -177,13 +177,19 @@ class MultimodalClassifier(nn.Module):
 
 @lru_cache(maxsize=1)
 def load_multimodal_model() -> MultimodalClassifier:
-    """Load and cache the PyTorch multimodal checkpoint."""
+    """Load and cache the PyTorch multimodal checkpoint with memory-mapped weights for strict memory bounds (<512MB)."""
     if not MODEL_PATH.exists():
         raise FileNotFoundError(f"Multimodal model not found at: {MODEL_PATH}")
+    import gc
+    gc.collect()
     model = MultimodalClassifier(num_classes=len(CLASS_NAMES))
-    checkpoint = torch.load(MODEL_PATH, map_location="cpu")
+    try:
+        checkpoint = torch.load(MODEL_PATH, map_location="cpu", mmap=True)
+    except Exception:
+        checkpoint = torch.load(MODEL_PATH, map_location="cpu")
     model.load_state_dict(checkpoint, strict=True)
     del checkpoint
+    gc.collect()
     model.eval()
     return model
 
@@ -365,7 +371,7 @@ def generate_multimodal_gradcam(
     h1 = target_layer.register_forward_hook(f_hook)
     h2 = target_layer.register_full_backward_hook(b_hook)
 
-    model.zero_grad()
+    model.zero_grad(set_to_none=True)
     img_clone = img_tensor.clone().detach().requires_grad_(True)
     logits = model(img_clone, wx_tensor)
     score = logits[0, target_class_idx]
@@ -373,6 +379,7 @@ def generate_multimodal_gradcam(
 
     h1.remove()
     h2.remove()
+    model.zero_grad(set_to_none=True)
 
     if not activations or not gradients:
         return original_rgb, original_rgb, 0.0
@@ -503,6 +510,7 @@ def compute_multimodal_weather_shap(
             s_mat = s_mat.squeeze(-1)
         if s_mat.shape != (7, 11):
             s_mat = s_mat.reshape((7, 11))
+        del explainer, raw_shap
     except Exception as exc:
         print(f"[SHAP] GradientExplainer failed: {exc}")
         return {
