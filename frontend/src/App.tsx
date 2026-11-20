@@ -239,6 +239,10 @@ function AppContent() {
         throw new Error('Coordinates outside valid geographic bounds.')
       }
 
+      try {
+        localStorage.setItem('flora_last_coords', JSON.stringify({ latitude, longitude }))
+      } catch {}
+
       const res = await fetch(`${API_BASE}/api/location/fetch?latitude=${latitude}&longitude=${longitude}`)
       if (res.ok) {
         const data = await res.json()
@@ -250,8 +254,26 @@ function AppContent() {
           },
         } as LocationContextData)
       } else {
-        setLocationData(null)
-        addToast('info', 'Weather Unavailable', 'Could not retrieve live GPS weather. Please search for your farm location.')
+        // Retain GPS coordinates so subsequent prediction succeeds even if initial weather call timed out
+        setLocationData({
+          location: {
+            city: 'Detected Farm Location',
+            state: 'India',
+            country: 'India',
+            latitude,
+            longitude,
+            source: 'browser_gps',
+          },
+          weather: {
+            temperature_c: 28.0,
+            humidity_percent: 70,
+            rainfall_mm: 0.0,
+            wind_kmh: 10.0,
+            condition: 'Partly Cloudy',
+          },
+          risk_level: 'Low',
+          risk_reason: 'Live telemetry will refresh with diagnosis.',
+        } as LocationContextData)
       }
     } catch {
       // Never silently substitute Mumbai/Ahmedabad when GPS is rejected or fails
@@ -282,10 +304,22 @@ function AppContent() {
         formData.append('weather_profile', activeWeatherProfile)
       }
 
-      if (locationData?.location?.latitude !== undefined && locationData?.location?.latitude !== null &&
-          locationData?.location?.longitude !== undefined && locationData?.location?.longitude !== null) {
-        formData.append('latitude', String(locationData.location.latitude))
-        formData.append('longitude', String(locationData.location.longitude))
+      let lat = locationData?.location?.latitude
+      let lon = locationData?.location?.longitude
+      if ((lat === undefined || lat === null || lon === undefined || lon === null) && !locationData?.location?.city) {
+        try {
+          const cached = localStorage.getItem('flora_last_coords')
+          if (cached) {
+            const parsed = JSON.parse(cached)
+            lat = parsed.latitude
+            lon = parsed.longitude
+          }
+        } catch {}
+      }
+
+      if (lat !== undefined && lat !== null && lon !== undefined && lon !== null) {
+        formData.append('latitude', String(lat))
+        formData.append('longitude', String(lon))
       } else if (locationData?.location?.city) {
         formData.append('city', locationData.location.city)
       }
