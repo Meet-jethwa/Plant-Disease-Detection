@@ -271,6 +271,38 @@ _MODE_A_SCHEMA = json.dumps({
 }, indent=2)
 
 
+def _safe_parse_json(text: str) -> dict[str, Any]:
+    """Parse JSON string from Gemini, handling markdown code fences and repairing minor truncation."""
+    cleaned = (text or "").strip()
+    if cleaned.startswith("```"):
+        lines = cleaned.splitlines()
+        if lines and lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].startswith("```"):
+            lines = lines[:-1]
+        cleaned = "\n".join(lines).strip()
+
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        # If output was truncated at token limit, attempt closing open structures
+        for suffix in ['"}', '"]}', '"]}}', '"]}}}', '"} }']:
+            try:
+                return json.loads(cleaned + suffix)
+            except json.JSONDecodeError:
+                pass
+        # Try finding last valid comma
+        last_comma = cleaned.rfind(",")
+        if last_comma > 0:
+            truncated = cleaned[:last_comma]
+            for suffix in ['}', ']}', ']}}', ']}}}']:
+                try:
+                    return json.loads(truncated + suffix)
+                except json.JSONDecodeError:
+                    pass
+        raise
+
+
 def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
     """
     Mode A — Initial diagnosis explanation.
@@ -385,10 +417,10 @@ def ask_gemini_initial(context: dict[str, Any]) -> dict[str, Any]:
                         system_instruction=system_instruction,
                         response_mime_type="application/json",
                         temperature=0.25,
-                        max_output_tokens=750,
+                        max_output_tokens=2048,
                     ),
                 )
-                result = json.loads(response.text)
+                result = _safe_parse_json(response.text)
 
                 # Ensure all required fields exist
                 result.setdefault("diagnosis_summary", "")
@@ -591,7 +623,7 @@ def ask_gemini_chat(context: dict[str, Any], intent: str) -> dict[str, Any]:
                     config=types.GenerateContentConfig(
                         system_instruction=system_instruction,
                         temperature=0.3,
-                        max_output_tokens=500,
+                        max_output_tokens=1500,
                     ),
                 )
                 chat_answer = (response.text or "").strip()

@@ -33,52 +33,162 @@ export function MessageBubble({
   const isUser = message.role === 'user'
   const [feedback, setFeedback] = useState<'up' | 'down' | null>(null)
 
-  // Parse markdown-lite into structured elements
-  function renderFormattedText(text: string) {
-    const paragraphs = text.split(/\n\n+/)
-    return paragraphs.map((para, pi) => {
-      const lines = para.split('\n')
-
-      // Numbered list block
-      if (lines.length > 1 && lines.every(l => /^\d+\./.test(l.trim()) || l.trim() === '')) {
+  // Parse inline markdown: **bold**, *italic*, `code`
+  function renderInline(str: string): React.ReactNode[] {
+    const regex = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g
+    const parts = str.split(regex)
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
         return (
-          <ol key={pi} className="space-y-2.5 my-3 pl-1">
-            {lines.filter(l => l.trim()).map((line, li) => (
+          <strong key={i} className="font-semibold text-emerald-950">
+            {part.slice(2, -2)}
+          </strong>
+        )
+      }
+      if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+        return (
+          <em key={i} className="italic text-emerald-900">
+            {part.slice(1, -1)}
+          </em>
+        )
+      }
+      if (part.startsWith('`') && part.endsWith('`') && part.length > 2) {
+        return (
+          <code key={i} className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 text-sm font-mono border border-emerald-100">
+            {part.slice(1, -1)}
+          </code>
+        )
+      }
+      return part
+    })
+  }
+
+  // Parse markdown text into structured elements (headers, lists, bold/inline styles, paragraphs)
+  function renderFormattedText(text: string): React.ReactNode[] {
+    const lines = text.split('\n')
+    const blocks: React.ReactNode[] = []
+    let currentList: { type: 'ul' | 'ol'; items: string[] } | null = null
+    let currentPara: string[] = []
+
+    function flushPara() {
+      if (currentPara.length > 0) {
+        const content = currentPara.join('\n')
+        blocks.push(
+          <p key={`p-${blocks.length}`} className="text-base leading-relaxed my-2 first:mt-0 last:mb-0">
+            {renderInline(content)}
+          </p>
+        )
+        currentPara = []
+      }
+    }
+
+    function flushList() {
+      if (!currentList) return
+      const listType = currentList.type
+      const items = currentList.items
+      const key = `list-${blocks.length}`
+
+      if (listType === 'ol') {
+        blocks.push(
+          <ol key={key} className="space-y-2.5 my-3 pl-1">
+            {items.map((item, li) => (
               <li key={li} className="flex gap-3 items-start">
                 <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 text-sm font-bold flex items-center justify-center shrink-0 mt-0.5">
                   {li + 1}
                 </span>
                 <span className="text-base text-emerald-950 leading-relaxed flex-1">
-                  {line.replace(/^\d+\.\s*/, '')}
+                  {renderInline(item)}
                 </span>
               </li>
             ))}
           </ol>
         )
-      }
-
-      // Bullet list block
-      if (lines.length > 1 && lines.every(l => /^[-*•]/.test(l.trim()) || l.trim() === '')) {
-        return (
-          <ul key={pi} className="space-y-2 my-2.5 pl-1">
-            {lines.filter(l => l.trim()).map((line, li) => (
+      } else {
+        blocks.push(
+          <ul key={key} className="space-y-2 my-2.5 pl-1">
+            {items.map((item, li) => (
               <li key={li} className="flex gap-2.5 items-start">
                 <div className="w-2 h-2 rounded-full bg-emerald-700 mt-2 shrink-0" />
                 <span className="text-base text-emerald-950 leading-relaxed flex-1">
-                  {line.replace(/^[-*•]\s*/, '')}
+                  {renderInline(item)}
                 </span>
               </li>
             ))}
           </ul>
         )
       }
+      currentList = null
+    }
 
-      return (
-        <p key={pi} className="text-base leading-relaxed my-2 first:mt-0 last:mb-0">
-          {para}
-        </p>
-      )
-    })
+    for (let i = 0; i < lines.length; i++) {
+      const rawLine = lines[i]
+      const trimmed = rawLine.trim()
+
+      if (!trimmed) {
+        flushPara()
+        flushList()
+        continue
+      }
+
+      // Headings (###, ##, #)
+      if (/^#{1,3}\s+/.test(trimmed)) {
+        flushPara()
+        flushList()
+        const level = trimmed.match(/^(#{1,3})\s+/)?.[1].length || 3
+        const headingText = trimmed.replace(/^#{1,3}\s+/, '')
+        if (level === 1) {
+          blocks.push(<h2 key={`h1-${blocks.length}`} className="text-xl font-bold text-emerald-950 mt-4 mb-2">{renderInline(headingText)}</h2>)
+        } else if (level === 2) {
+          blocks.push(<h3 key={`h2-${blocks.length}`} className="text-lg font-bold text-emerald-950 mt-3.5 mb-2">{renderInline(headingText)}</h3>)
+        } else {
+          blocks.push(<h4 key={`h3-${blocks.length}`} className="text-base font-bold text-emerald-950 mt-3 mb-1.5">{renderInline(headingText)}</h4>)
+        }
+        continue
+      }
+
+      // Numbered list item: 1. Item
+      const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/)
+      if (numMatch) {
+        flushPara()
+        if (!currentList || currentList.type !== 'ol') {
+          flushList()
+          currentList = { type: 'ol', items: [] }
+        }
+        currentList.items.push(numMatch[2])
+        continue
+      }
+
+      // Bullet list item: * Item or - Item or • Item
+      const bulletMatch = trimmed.match(/^[-*•]\s+(.*)$/)
+      if (bulletMatch) {
+        flushPara()
+        if (!currentList || currentList.type !== 'ul') {
+          flushList()
+          currentList = { type: 'ul', items: [] }
+        }
+        currentList.items.push(bulletMatch[1])
+        continue
+      }
+
+      // Continuation line for list item
+      if (currentList) {
+        if (/^\s{2,}/.test(rawLine)) {
+          const lastIdx = currentList.items.length - 1
+          if (lastIdx >= 0) {
+            currentList.items[lastIdx] += ' ' + trimmed
+            continue
+          }
+        }
+        flushList()
+      }
+
+      currentPara.push(trimmed)
+    }
+
+    flushPara()
+    flushList()
+
+    return blocks
   }
 
   if (isUser) {
